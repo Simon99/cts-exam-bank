@@ -1,0 +1,11 @@
+--- /home/simon/aosp-panther/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java	2025-08-05 04:04:16.950843618 +0800
++++ services/core/java/com/android/server/display/LogicalDisplay.java	2026-02-05 17:16:22.586492356 +0800
+@@ -520,7 +520,7 @@
+             mBaseDisplayInfo.thermalBrightnessThrottlingDataId = mThermalBrightnessThrottlingDataId;
+ 
+             mPrimaryDisplayDeviceInfo = deviceInfo;
+-            mInfo.set(null);
++            // mInfo.set(null);
+             mDirty = false;
+         }
+     }

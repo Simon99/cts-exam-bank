@@ -1,0 +1,15 @@
+diff --git a/core/java/android/view/Display.java b/core/java/android/view/Display.java
+index 1f2b4faacc10..b1fa70f34347 100644
+--- a/core/java/android/view/Display.java
++++ b/core/java/android/view/Display.java
+@@ -1262,8 +1262,8 @@ public final class Display {
+             }
+             return new HdrCapabilities(supportedHdrTypes,
+                     mDisplayInfo.hdrCapabilities.mMaxLuminance,
+-                    mDisplayInfo.hdrCapabilities.mMaxAverageLuminance,
+-                    mDisplayInfo.hdrCapabilities.mMinLuminance);
++                    mDisplayInfo.hdrCapabilities.mMinLuminance,
++                    mDisplayInfo.hdrCapabilities.mMaxAverageLuminance);
+         }
+     }
+ 

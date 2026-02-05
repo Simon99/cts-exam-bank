@@ -1,0 +1,13 @@
+diff --git a/services/core/java/com/android/server/display/DisplayManagerService.java b/services/core/java/com/android/server/display/DisplayManagerService.java
+index ad89444edcfd..f3fb9ecab57a 100644
+--- a/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -4102,7 +4102,7 @@ public final class DisplayManagerService extends SystemService {
+         @Override // Binder call
+         public void setBrightnessConfigurationForUser(
+                 BrightnessConfiguration c, @UserIdInt int userId, String packageName) {
+-            setBrightnessConfigurationForUser_enforcePermission();
++            // setBrightnessConfigurationForUser_enforcePermission();
+             if (userId != UserHandle.getCallingUserId()) {
+                 mContext.enforceCallingOrSelfPermission(
+                         Manifest.permission.INTERACT_ACROSS_USERS,
