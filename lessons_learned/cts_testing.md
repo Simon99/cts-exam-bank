@@ -1,5 +1,25 @@
 # CTS Testing — 測試設計注意事項
 
+## 雙裝置 CTS 不能同時跑（OLC Server 碰撞）
+
+### 現象
+兩台手機分別在兩個 console 啟動 CTS 時，OLC server 只有一個實例。
+- 第二個 console 啟動 CTS → OLC server 不回應（被第一個佔著）
+- 如果 pkill OLC server 讓第二個能跑 → 第一個 CTS 斷掉
+- 第一個 retry → 又搶走 OLC server → 第二個斷掉
+- 無限循環，兩邊都跑不完
+
+### 規則
+**同一時間只能有一個 CTS 測試在執行。兩台手機必須輪流測試，不能並行。**
+
+### 工作流程
+1. 裝置 A 跑 CTS → 等完成
+2. 清理 OLC server：`pkill -f "ats_console_deploy\|olc_server"`
+3. 裝置 B 跑 CTS → 等完成
+4. 清理
+
+---
+
 ## Assert vs Assume
 
 ### 規則

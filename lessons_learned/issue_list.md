@@ -10,6 +10,8 @@
 | I-006 | AOSP 缺 `BRIGHTNESS_SLIDER_USAGE` 權限，brightness tracking 測試全 SKIP | cts_testing | 避開（不出相關題目） |
 | I-007 | MctsMediaV2 的 5/6 題需要重新單獨驗證（之前多 patch 同時 apply 互相干擾） | cts_testing | 待驗證 |
 
+| I-008 | 兩台裝置同時跑 CTS → OLC server 碰撞，互相打斷無限循環 | cts_testing | 規避（同時間只跑一台） |
+
 ## 已解決
 
 | # | 現象 | 分類 | 解法 |

@@ -111,7 +111,8 @@
 | Private Repo | `~/develop_claw/cts-exam-bank/` → `github.com/Simon99/cts-exam-bank.git` |
 | CTS 工具 | `~/cts/14_r7-linux_x86-arm/android-cts/` |
 | ADB | `~/aosp-panther/out/host/linux-x86/bin/adb` |
-| 測試裝置 | Pixel 7 (2B231FDH200B4Z) USB 連接 |
+| 測試裝置 A | Pixel 7 (2B231FDH200B4Z) — USB 異常待修復 |
+| 測試裝置 B | Pixel 7 (27161FDH20031X) — 在線 ✅ |
 | 題庫管理（repo） | `~/develop_claw/cts-exam-bank/` → GitHub private repo |
 | 磁碟空間 | /home 1.7T，可用 ~860G |
 
