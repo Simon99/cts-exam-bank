@@ -1,5 +1,29 @@
 # CTS Testing — 測試設計注意事項
 
+## 使用 USE_ATS=false 執行 CTS（推薦）
+
+### 背景
+CTS 14 預設使用 OLC (OmniLab Client) Server 架構，但 OLC 的裝置偵測有時會失敗（`Device count: 0`）。
+
+### 解法
+設定 `USE_ATS=false` 使用舊版 tradefed 直接執行：
+
+```bash
+export USE_ATS=false
+cd ~/cts/14_r7-linux_x86-arm/android-cts
+./tools/cts-tradefed run cts -m CtsDisplayTestCases -s <device_serial>
+```
+
+### Tradefed vs OLC 比較
+
+| 項目 | Tradefed (USE_ATS=false) | OLC (USE_ATS=true) |
+|------|--------------------------|---------------------|
+| 裝置偵測 | DeviceManager 直接用 adb | OLC server 獨立偵測 |
+| 穩定性 | ✅ 成熟穩定 | ⚠️ 有時偵測不到裝置 |
+| 適用場景 | 本地測試 | Lab 環境 |
+
+---
+
 ## 雙裝置 CTS 不能同時跑（OLC Server 碰撞）
 
 ### 現象
