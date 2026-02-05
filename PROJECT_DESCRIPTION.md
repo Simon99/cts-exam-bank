@@ -121,13 +121,14 @@
 cts-exam-bank/domains/<domain>/<CtsModuleName>/<difficulty>/
 ├── DESIGN.md                    # 該難度所有題目的設計方案
 ├── Q001_bug.patch               # 引入 bug 的 patch
-├── Q001_fix.patch               # 修復 patch（答案）
 ├── Q001_question.md             # 題目描述（給候選人看的）
 ├── Q001_answer.md               # 完整解答（評分用）
-├── Q001_meta.json               # 後設資料（目標測試、涉及檔案、pattern 等）
+├── Q001_meta.json               # 後設資料（含 cts_fail_items）
 ├── Q001_results/
 │   └── test_result.xml          # CTS 失敗的結果 XML
 └── ...
+
+> fix.patch 不預先製作，從面試者收集。revert bug patch ≠ 有效的修復方案。
 ```
 
 **Repo 結構：**
@@ -148,6 +149,12 @@ cts-exam-bank/
 │   │   └── CtsGameFrameRateTestCases/
 │   └── camera/                  # 相機領域
 │       └── CtsCameraTestCases/
+├── lessons_learned/             # 經驗教訓（按類別）
+│   ├── boot_safety.md           # 哪些修改會導致無法開機
+│   ├── build_deploy.md          # 編譯和刷機注意事項
+│   ├── usb_issues.md            # USB/fastboot 連線問題
+│   ├── cts_testing.md           # CTS 測試設計注意事項
+│   └── issue_list.md            # 問題現象索引（方便追蹤）
 ├── PROJECT_DESCRIPTION.md
 ├── PROJECT_DESCRIPTION.html
 └── WORKLOG.md
@@ -163,7 +170,7 @@ cts-exam-bank/
 - [ ] 有診斷價值（候選人能從 log 出發追蹤）
 - [ ] 只影響目標測試（不引起大面積 CTS 崩潰）
 - [ ] 難度匹配（Easy=1 檔案 / Medium=2 檔案 / Hard=3+ 檔案）
-- [ ] fix.patch 能修復問題且無 side effect
+- [ ] answer.md 包含追蹤路徑和評分標準
 
 ## 九、已知限制與教訓
 

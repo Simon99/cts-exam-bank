@@ -1,0 +1,40 @@
+{
+  "id": "display-e-q003",
+  "domain": "display",
+  "module": "CtsDisplayTestCases",
+  "difficulty": "easy",
+  "pattern": "A",
+  "pattern_desc": "縱向單點",
+  "target_tests": [
+    "android.display.cts.DisplayTest#testGetPreferredWideGamutColorSpace"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsDisplayTestCases",
+      "abi": "arm64-v8a",
+      "class": "android.display.cts.DisplayTest",
+      "method": "testGetPreferredWideGamutColorSpace",
+      "result": "fail",
+      "message": "java.lang.AssertionError",
+      "stack_location": "DisplayTest.java (assertFalse)"
+    },
+    {
+      "module": "CtsDisplayTestCases[instant]",
+      "abi": "arm64-v8a",
+      "class": "android.display.cts.DisplayTest",
+      "method": "testGetPreferredWideGamutColorSpace",
+      "result": "fail",
+      "message": "java.lang.AssertionError",
+      "stack_location": "DisplayTest.java (assertFalse)"
+    }
+  ],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
+  ],
+  "file_count": 1,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": true,
+  "verified_date": "2026-02-05",
+  "tags": ["color-space", "wide-gamut", "array-index", "display-service"]
+}

@@ -1,0 +1,48 @@
+# CTS Testing — 測試設計注意事項
+
+## Assert vs Assume
+
+### 規則
+目標測試的驗證邏輯必須使用 `Assert`，不能用 `Assume`。
+
+| 方法 | 條件不滿足時 | 能當考題嗎 |
+|------|-------------|-----------|
+| `Assert.assertTrue()` | 測試 **FAIL** | ✅ 可以 |
+| `Assume.assumeTrue()` | 測試 **SKIP** | ❌ 不行 |
+
+### 踩坑案例
+- AOSP 缺 `BRIGHTNESS_SLIDER_USAGE` 權限 → brightness tracking 相關測試全部 `ASSUMPTION_FAILURE`（SKIP）
+- 這類測試不能用來出題
+
+## APEX 組件限制
+
+### 現象
+- 軟體 codec（如 C2SoftAvcDec）在 APEX 中
+- `adb push` 到 `/system/lib64/` 無效，不會被載入
+
+### 規則
+- APEX 內的組件修改 → 必須完整 build + flash
+- Framework 層 Java 修改 → 也建議 full build（安全起見）
+
+## 單題獨立性
+
+### 規則
+- 每題的 bug 必須互不干擾
+- 不能出現「A 題的 patch 影響了 B 題的測試結果」
+- 驗證時必須在乾淨 AOSP 上只 apply 單題 patch
+
+### 踩坑案例
+- MctsMediaV2 驗證時多個 patch 同時 apply → 互相干擾
+- Easy patch 導致 data extraction 失敗 → Medium/Hard 的 decoder 測試也連帶報錯
+- 結果：6 題只有 1 題能確認是自身 patch 導致的 fail
+
+## 驗證清單（每題必過）
+
+1. ☐ bug.patch 在乾淨 AOSP 上 apply 成功
+2. ☐ Full build 成功
+3. ☐ Flash 後正常開機
+4. ☐ 目標 CTS 測試 FAIL（非 SKIP / ASSUMPTION_FAILURE）
+5. ☐ Fail 原因符合預期（是埋的 bug 造成的，不是別的原因）
+6. ☐ 有診斷價值（log 有足夠線索讓候選人追蹤）
+7. ☐ 只影響目標測試（不大面積崩潰）
+8. ☐ 難度匹配（Easy=1 檔 / Medium=2 檔 / Hard=3+ 檔）
