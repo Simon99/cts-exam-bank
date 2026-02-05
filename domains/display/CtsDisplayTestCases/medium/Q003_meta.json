@@ -1,0 +1,32 @@
+{
+  "id": "display-medium-003",
+  "title": "HDR Capabilities 過濾邏輯反轉 - 缺少 ! 運算符",
+  "difficulty": "medium",
+  "domain": "display",
+  "module": "CtsDisplayTestCases",
+  "pattern": "A",
+  "patternDesc": "縱向呼叫鏈 - getHdrCapabilities() 內部過濾邏輯錯誤",
+  "targetTests": [
+    "android.display.cts.DisplayTest#testGetHdrCapabilitiesWhenUserDisabledFormatsAreNotAllowedReturnsFilteredHdrTypes"
+  ],
+  "bugFile": "frameworks/base/core/java/android/view/Display.java",
+  "bugMethod": "getHdrCapabilities",
+  "bugType": "logic_inversion",
+  "bugLine": 1252,
+  "bootSafe": true,
+  "expectedResult": {
+    "outcome": "assertion_failure",
+    "failedTests": 2,
+    "passedTests": 94,
+    "errorMessage": "arrays first differed at element [0]; expected:<2> but was:<1>"
+  },
+  "timeLimit": 25,
+  "hints": [
+    "userDisabledHdrTypes 是禁用列表",
+    "getHdrCapabilities() 應該返回啟用的格式",
+    "注意 contains() 的條件邏輯"
+  ],
+  "verified": true,
+  "verifiedDate": "2026-02-06",
+  "verifiedDevice": "Pixel 7 (27161FDH20031X)"
+}

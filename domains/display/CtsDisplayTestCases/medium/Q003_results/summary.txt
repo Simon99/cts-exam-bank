@@ -1,0 +1,6 @@
+junit.framework.AssertionFailedError: KeystoreAttestationDeviceInfo collection completed. expected:<COMPLETED> but was:<FAILED>
+02-06 06:56:14 I/ModuleListener: [23/64] 27161FDH20031X android.display.cts.DisplayTest#testGetHdrCapabilitiesWhenUserDisabledFormatsAreNotAllowedReturnsFilteredHdrTypes FAILURE: arrays first differed at element [0]; expected:<2> but was:<1>
+02-06 06:57:50 I/ModuleListener: [35/75] 27161FDH20031X android.display.cts.DisplayTest#testGetHdrCapabilitiesWhenUserDisabledFormatsAreNotAllowedReturnsFilteredHdrTypes FAILURE: arrays first differed at element [0]; expected:<2> but was:<1>
+=============== Summary ===============
+PASSED            : 94
+FAILED            : 2
