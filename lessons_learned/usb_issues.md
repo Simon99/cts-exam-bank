@@ -22,9 +22,15 @@
 - **解法**：拔插 USB、換 USB 口
 
 ### 診斷步驟
-1. **先看手機螢幕**：是穩定 fastboot 還是在跳動（bootloop）
-2. 如果跳動 → 原因 A（bootloop）
-3. 如果穩定 → 原因 B（USB 狀態）
+觀察手機螢幕狀態：
+
+| 螢幕狀態 | 情況 | 處理 |
+|----------|------|------|
+| 穩定 fastboot 畫面 | USB/通訊問題 | 拔插 USB，重試 |
+| 穩定 Google logo | system_server crash loop | 長按 30 秒強制關機 → 手動進 fastboot |
+| fastboot ↔ logo 跳動 | bootloader 層 bootloop | 長按 30 秒停住 → 進 fastboot |
+
+**注意**：穩定 Google logo 不代表沒事，可能是 system_server 在背景不斷 crash 重啟。
 
 ### 解決方法（通用）
 1. **長按電源鍵 30 秒**（不是短按！）強制關機

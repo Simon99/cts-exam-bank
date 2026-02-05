@@ -1,5 +1,14 @@
 # Boot Safety — 哪些修改會導致無法開機
 
+## Bootloop 的類型
+
+| 類型 | 螢幕表現 | 原因 | 恢復方式 |
+|------|----------|------|----------|
+| Bootloader 層 | fastboot ↔ logo 快速跳動 | kernel/init 崩潰 | 長按 30 秒 → fastboot 重刷 |
+| System 層 | 穩定 Google logo | system_server crash loop | 長按 30 秒 → fastboot 重刷 |
+
+**注意**：穩定 Google logo 看起來像卡住，但其實 system_server 在背景不斷重啟。
+
 ## 已確認會 Bootloop 的修改
 
 ### 1. LogicalDisplay.updateLocked() — mInfo cache 不清除
