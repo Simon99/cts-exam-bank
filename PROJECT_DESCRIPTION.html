@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS/GTS 面試題庫專案 — 完整描述</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --red: #f85149;
+    --yellow: #d29922;
+    --orange: #db6d28;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 2rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  h2 {
+    font-size: 1.4rem;
+    color: var(--accent);
+    margin: 2rem 0 1rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.3rem;
+  }
+  h3 {
+    font-size: 1.1rem;
+    margin: 1.2rem 0 0.5rem;
+  }
+  p { margin: 0.5rem 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+  th {
+    background: var(--surface);
+    font-weight: 600;
+  }
+  tr:nth-child(even) { background: rgba(22,27,34,0.5); }
+  code {
+    background: var(--surface);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  }
+  pre {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  pre code { background: none; padding: 0; }
+  .badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .badge-easy { background: #238636; color: #fff; }
+  .badge-medium { background: #9e6a03; color: #fff; }
+  .badge-hard { background: #da3633; color: #fff; }
+  .badge-done { background: #238636; color: #fff; }
+  .badge-partial { background: #9e6a03; color: #fff; }
+  .badge-pending { background: #6e7681; color: #fff; }
+  .callout {
+    border-left: 4px solid;
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+    border-radius: 0 6px 6px 0;
+    background: var(--surface);
+  }
+  .callout-warn { border-color: var(--yellow); }
+  .callout-danger { border-color: var(--red); }
+  .callout-info { border-color: var(--accent); }
+  .callout-success { border-color: var(--green); }
+  .pattern-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 0.75rem 0;
+  }
+  .pattern-box h4 { color: var(--accent); margin-bottom: 0.5rem; }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 768px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    body { padding: 1rem; }
+  }
+  .checklist { list-style: none; padding-left: 0; }
+  .checklist li { padding: 0.25rem 0; }
+  .checklist li::before { content: "☐ "; color: var(--text-muted); }
+  ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+  li { margin: 0.25rem 0; }
+  .section-num { color: var(--text-muted); font-weight: normal; }
+</style>
+</head>
+<body>
+
+<h1>🧪 CTS/GTS 面試題庫專案</h1>
+
+<!-- ===== 一、專案目標 ===== -->
+<h2><span class="section-num">一、</span>專案目標</h2>
+<p>為 Android 系統工程師面試建立一套<strong>上機實作考題庫</strong>。候選人拿到一台「有 bug 的手機」和對應的 AOSP 原始碼，從 CTS 失敗的 log 出發，追蹤源碼、定位問題、提出修復方案。</p>
+
+<h3>考察核心能力</h3>
+<ul>
+  <li>Log 分析與問題定位</li>
+  <li>AOSP 源碼追蹤（跨檔案、跨層級）</li>
+  <li>修復方案的正確性與是否有 side effect</li>
+  <li>系統性思維（不是修了一處就交差）</li>
+</ul>
+
+<!-- ===== 二、考試形式 ===== -->
+<h2><span class="section-num">二、</span>考試形式</h2>
+<table>
+  <tr><th>項目</th><th>說明</th></tr>
+  <tr><td>提供物</td><td>有 bug 的手機/image + CTS fail log + 完整 AOSP 源碼</td></tr>
+  <tr><td>候選人可做</td><td>讀 log、讀源碼、加 log、編譯 debug image、flash 手機</td></tr>
+  <tr><td>時間限制</td><td>無</td></tr>
+  <tr><td>評分</td><td>定位準確性、修復方案品質、是否理解 root cause</td></tr>
+</table>
+
+<!-- ===== 三、難度定義 ===== -->
+<h2><span class="section-num">三、</span>難度定義</h2>
+
+<div class="callout callout-warn">
+  <strong>⚠️ 難度 ≠ bug 埋的層級深淺。</strong>難度 = 追蹤路徑的複雜度。淺層 bug 牽連三個檔案 = Hard；深層 bug 但 log 直接指出 = Easy。
+</div>
+
+<table>
+  <tr>
+    <th>難度</th><th>定義</th><th>檔案數</th><th>候選人需要做的事</th>
+  </tr>
+  <tr>
+    <td><span class="badge badge-easy">Easy</span></td>
+    <td>讀 log 就能定位</td>
+    <td>1</td>
+    <td>讀 log → 找源碼 → 修復</td>
+  </tr>
+  <tr>
+    <td><span class="badge badge-medium">Medium</span></td>
+    <td>需要加額外 log</td>
+    <td>2</td>
+    <td>讀 log → 追呼叫鏈 → 在上游加 log → 定位 → 修復</td>
+  </tr>
+  <tr>
+    <td><span class="badge badge-hard">Hard</span></td>
+    <td>跨 3+ 檔案的錯誤邏輯</td>
+    <td>3+</td>
+    <td>系統性分析 → 找到所有錯誤點 → 全部修復</td>
+  </tr>
+</table>
+
+<!-- ===== 四、Bug Pattern ===== -->
+<h2><span class="section-num">四、</span>Bug Pattern 分類</h2>
+
+<div class="grid-2">
+  <div class="pattern-box">
+    <h4>Pattern A：縱向單點 → Easy</h4>
+<pre><code>[CTS Test] → [File A: 函數 X] ← bug 在這裡
+                    ↑
+              log 直接指出</code></pre>
+  </div>
+
+  <div class="pattern-box">
+    <h4>Pattern B：橫向呼叫鏈 → Medium</h4>
+<pre><code>[CTS Test] → [File A] → [File B] ← bug 在這裡
+                 ↑
+           log 在這裡</code></pre>
+  </div>
+
+  <div class="pattern-box">
+    <h4>Pattern C：聯合觸發 → Hard</h4>
+<pre><code>[CTS Test] → [File A: 症狀]
+                ↗        ↖
+    [File B: bug 1]  [File C: bug 2]
+    必須同時修復 B 和 C</code></pre>
+  </div>
+
+  <div class="pattern-box">
+    <h4>Pattern D：資料流扇出 → Hard</h4>
+<pre><code>      [Data Source]
+      ↙    ↓    ↘
+  [B: bug1] [C: bug2] [D]
+  多個消費者各自轉換出錯</code></pre>
+  </div>
+</div>
+
+<!-- ===== 五、題庫規模 ===== -->
+<h2><span class="section-num">五、</span>題庫規模</h2>
+
+<h3>終極目標（405 題）</h3>
+<table>
+  <tr><th>領域</th><th>模組數</th><th>題數</th></tr>
+  <tr><td>Framework 核心</td><td>8</td><td>120</td></tr>
+  <tr><td>圖形</td><td>5</td><td>75</td></tr>
+  <tr><td>顯示</td><td>4</td><td>60</td></tr>
+  <tr><td>多媒體</td><td>7</td><td>105</td></tr>
+  <tr><td>相機</td><td>3</td><td>45</td></tr>
+  <tr><td><strong>合計</strong></td><td><strong>27</strong></td><td><strong>405</strong></td></tr>
+</table>
+
+<h3>目前進行中的模組</h3>
+<table>
+  <tr><th>模組</th><th>CTS Module</th><th>題數</th><th>Patch</th><th>驗證</th><th>狀態</th></tr>
+  <tr>
+    <td>多媒體</td><td>MctsMediaV2TestCases</td><td>6 (2E/2M/2H)</td>
+    <td>✅</td><td>⚠️ 1/6</td>
+    <td><span class="badge badge-partial">部分驗證</span></td>
+  </tr>
+  <tr>
+    <td>相機</td><td>CtsCameraTestCases</td><td>18 (6E/6M/6H)</td>
+    <td>✅</td><td>❌</td>
+    <td><span class="badge badge-pending">待驗證</span></td>
+  </tr>
+  <tr>
+    <td>視窗管理</td><td>CtsWindowManagerJetpackTestCases</td><td>9 (3E/3M/3H)</td>
+    <td>✅</td><td>❌</td>
+    <td><span class="badge badge-pending">待驗證</span></td>
+  </tr>
+  <tr>
+    <td>遊戲幀率</td><td>CtsGameFrameRateTestCases</td><td>9 (3E/3M/3H)</td>
+    <td>✅</td><td>❌</td>
+    <td><span class="badge badge-pending">待驗證</span></td>
+  </tr>
+  <tr>
+    <td>金鑰儲存</td><td>CtsKeystoreTestCases</td><td>9 (3E/3M/3H)</td>
+    <td>✅</td><td>❌</td>
+    <td><span class="badge badge-pending">待驗證</span></td>
+  </tr>
+  <tr>
+    <td>顯示</td><td>CtsDisplayTestCases</td><td>15 (5E/5M/5H)</td>
+    <td>⚠️ 未收集</td><td>⚠️ 4E 通過</td>
+    <td><span class="badge badge-partial">部分驗證</span></td>
+  </tr>
+  <tr>
+    <td>顯示-色彩</td><td>CtsColorModeTestCases</td><td>待規劃</td>
+    <td>—</td><td>—</td>
+    <td><span class="badge badge-pending">待規劃</span></td>
+  </tr>
+  <tr>
+    <td>顯示-主題</td><td>CtsThemeDeviceTestCases</td><td>待規劃</td>
+    <td>—</td><td>—</td>
+    <td><span class="badge badge-pending">待規劃</span></td>
+  </tr>
+  <tr>
+    <td>顯示-開機模式</td><td>CtsBootDisplayModeTestCases</td><td>待規劃</td>
+    <td>—</td><td>—</td>
+    <td><span class="badge badge-pending">待規劃</span></td>
+  </tr>
+</table>
+<p><strong>當前總計：66 題（有 patch 或已驗證）</strong></p>
+
+<!-- ===== 六、環境 ===== -->
+<h2><span class="section-num">六、</span>環境</h2>
+<table>
+  <tr><th>資源</th><th>路徑 / 說明</th></tr>
+  <tr><td>AOSP 乾淨源碼</td><td><code>~/aosp-panther/</code> (Pixel 7 / Panther, Android 14) — <strong>不動</strong></td></tr>
+  <tr><td>沙盒 1</td><td><code>~/develop_claw/aosp-sandbox-1/</code></td></tr>
+  <tr><td>沙盒 2</td><td><code>~/develop_claw/aosp-sandbox-2/</code></td></tr>
+  <tr><td>Private Repo</td><td><code>~/develop_claw/cts-exam-bank/</code> → <code>github.com/Simon99/cts-exam-bank.git</code></td></tr>
+  <tr><td>CTS 工具</td><td><code>~/cts/14_r7-linux_x86-arm/android-cts/</code></td></tr>
+  <tr><td>ADB</td><td><code>~/aosp-panther/out/host/linux-x86/bin/adb</code></td></tr>
+  <tr><td>測試裝置</td><td>Pixel 7 (<code>2B231FDH200B4Z</code>) USB 連接</td></tr>
+  <tr><td>題庫管理（repo）</td><td><code>~/develop_claw/cts-exam-bank/</code> → GitHub private repo</td></tr>
+  <tr><td>磁碟空間</td><td>/home 1.7T，可用 ~860G</td></tr>
+</table>
+
+<!-- ===== 七、每題交付物 ===== -->
+<h2><span class="section-num">七、</span>每題交付物</h2>
+<pre><code>cts-exam-bank/domains/&lt;domain&gt;/&lt;CtsModuleName&gt;/&lt;difficulty&gt;/
+├── DESIGN.md                    # 該難度所有題目的設計方案
+├── Q001_bug.patch               # 引入 bug 的 patch
+├── Q001_fix.patch               # 修復 patch（答案）
+├── Q001_question.md             # 題目描述（給候選人）
+├── Q001_answer.md               # 完整解答（評分用）
+├── Q001_meta.json               # 後設資料
+├── Q001_results/
+│   └── test_result.xml          # CTS 失敗結果 XML
+└── ...</code></pre>
+
+<h3>Repo 結構</h3>
+<pre><code>cts-exam-bank/
+├── domains/
+│   ├── display/                 # 顯示領域
+│   │   ├── CtsDisplayTestCases/
+│   │   ├── CtsColorModeTestCases/
+│   │   ├── CtsThemeDeviceTestCases/
+│   │   └── CtsBootDisplayModeTestCases/
+│   ├── multimedia/              # 多媒體領域
+│   │   └── MctsMediaV2TestCases/
+│   ├── framework/               # Framework 核心領域
+│   │   ├── CtsWindowManagerJetpackTestCases/
+│   │   └── CtsKeystoreTestCases/
+│   ├── graphics/                # 圖形領域
+│   │   └── CtsGameFrameRateTestCases/
+│   └── camera/                  # 相機領域
+│       └── CtsCameraTestCases/
+├── PROJECT_DESCRIPTION.md
+├── PROJECT_DESCRIPTION.html
+└── WORKLOG.md</code></pre>
+
+<!-- ===== 八、品質要求 ===== -->
+<h2><span class="section-num">八、</span>品質要求（每題驗證清單）</h2>
+<ul class="checklist">
+  <li><code>bug.patch</code> 能在乾淨 AOSP 上成功 apply</li>
+  <li>Full build 成功（<code>make -j$(nproc)</code>，不用增量編譯）</li>
+  <li>Flash 後正常開機（不 bootloop）</li>
+  <li>目標 CTS 測試 FAIL（非 SKIP / ASSUMPTION_FAILURE）</li>
+  <li>Fail 原因符合預期設計</li>
+  <li>有診斷價值（能從 log 出發追蹤）</li>
+  <li>只影響目標測試（不大面積崩潰）</li>
+  <li>難度匹配（Easy=1 檔 / Medium=2 檔 / Hard=3+ 檔）</li>
+  <li><code>fix.patch</code> 能修復且無 side effect</li>
+</ul>
+
+<!-- ===== 九、已知限制與教訓 ===== -->
+<h2><span class="section-num">九、</span>已知限制與教訓</h2>
+
+<h3>技術限制</h3>
+<table>
+  <tr><th>問題</th><th>說明</th><th>應對</th></tr>
+  <tr><td>AOSP 缺權限</td><td><code>BRIGHTNESS_SLIDER_USAGE</code> 不存在</td><td>避開 brightness tracking 測試</td></tr>
+  <tr><td>LogicalDisplay 核心邏輯</td><td>修改 <code>updateLocked()</code> → bootloop（full build 實測確認）</td><td>bug 只放 API 層和 client side</td></tr>
+  <tr><td>增量編譯不可靠</td><td><code>m services</code> + <code>make systemimage</code> 產出不一致</td><td>一律 full build</td></tr>
+  <tr><td>fastboot USB</td><td>列出裝置 ≠ 能通訊</td><td>異常時手動拔插 + 長按電源 30 秒</td></tr>
+  <tr><td>CTS 殘留進程</td><td>tradefed OLC server 佔 USB</td><td><code>pkill -f "ats_console_deploy\|olc_server"</code></td></tr>
+  <tr><td>Property override</td><td><code>PRODUCT_DEFAULT_PROPERTY_OVERRIDES</code> 可能不生效</td><td>remount + 直接寫 build.prop</td></tr>
+</table>
+
+<h3>設計限制</h3>
+<table>
+  <tr><th>問題</th><th>說明</th></tr>
+  <tr><td>Assume vs Assert</td><td>目標測試必須用 <code>Assert</code>（FAIL），用 <code>Assume</code> 的會 SKIP</td></tr>
+  <tr><td>APEX 組件</td><td>軟體 codec 在 APEX 中，不能 adb push 熱更新</td></tr>
+  <tr><td>單題獨立性</td><td>每題 bug 必須互不干擾</td></tr>
+</table>
+
+<!-- ===== 十、安全區域 ===== -->
+<h2><span class="section-num">十、</span>Display 模組安全區域（實測結果）</h2>
+
+<div class="callout callout-danger">
+  <strong>🔴 禁區（會 bootloop）</strong>
+  <ul>
+    <li><code>LogicalDisplay.updateLocked()</code> 核心邏輯（mInfo cache、supportedModes）</li>
+    <li><code>LocalDisplayAdapter</code> 初始化路徑</li>
+    <li><code>DisplayManagerService.performTraversalLocked()</code> / <code>configureDisplayLocked()</code></li>
+    <li>SurfaceFlinger / native 層</li>
+  </ul>
+</div>
+
+<div class="callout callout-success">
+  <strong>🟢 安全區（不影響開機）</strong>
+  <ul>
+    <li><code>Display.java</code> 客戶端 API</li>
+    <li><code>DisplayManagerService</code> Binder API 層</li>
+    <li><code>DisplayInfo.java</code> Parcel 序列化</li>
+    <li><code>ColorDisplayService</code> / <code>DisplayTransformManager</code></li>
+    <li><code>DisplayManagerGlobal.java</code> 客戶端快取</li>
+    <li>system property 修改</li>
+  </ul>
+</div>
+
+</body>
+</html>
