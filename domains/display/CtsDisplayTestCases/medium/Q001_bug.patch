@@ -1,11 +1,18 @@
---- /home/simon/aosp-panther/frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java	2025-08-05 04:04:16.948843396 +0800
-+++ services/core/java/com/android/server/display/BrightnessTracker.java	2026-02-05 17:09:51.472545500 +0800
-@@ -359,7 +359,7 @@
-             }
-             float previousBrightness = mLastBrightness;
-             mLastBrightness = brightness;
--            if (!userInitiated) {
-+            if (userInitiated) {
-                 // We want to record what current brightness is so that we know what the user
-                 // changed it from, but if it wasn't user initiated then we don't want to record it
-                 // as a BrightnessChangeEvent.
+diff --git a/core/java/android/view/DisplayInfo.java b/core/java/android/view/DisplayInfo.java
+index 5654bc159568..d4fc7167230a 100644
+--- a/core/java/android/view/DisplayInfo.java
++++ b/core/java/android/view/DisplayInfo.java
+@@ -611,12 +611,12 @@ public final class DisplayInfo implements Parcelable {
+         for (int i = 0; i < supportedModes.length; i++) {
+             supportedModes[i].writeToParcel(dest, flags);
+         }
++        dest.writeParcelable(hdrCapabilities, flags);  // [BUG] moved before colorMode
+         dest.writeInt(colorMode);
+         dest.writeInt(supportedColorModes.length);
+         for (int i = 0; i < supportedColorModes.length; i++) {
+             dest.writeInt(supportedColorModes[i]);
+         }
+-        dest.writeParcelable(hdrCapabilities, flags);
+         dest.writeBoolean(minimalPostProcessingSupported);
+         dest.writeInt(logicalDensityDpi);
+         dest.writeFloat(physicalXDpi);

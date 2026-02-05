@@ -1,5 +1,22 @@
 # Build & Deploy — 編譯和刷機注意事項
 
+## 乾淨 Image 備份
+
+**位置：** `~/aosp-images/clean-panther-14/`
+
+**快速恢復：**
+```bash
+# 手機進 fastboot 後
+~/aosp-images/flash-clean.sh [device_serial]
+
+# 例如
+~/aosp-images/flash-clean.sh 27161FDH20031X
+```
+
+不需要重新 build，直接刷回乾淨狀態。
+
+---
+
 ## 增量編譯不可靠
 
 ### 現象
