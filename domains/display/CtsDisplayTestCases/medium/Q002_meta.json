@@ -1,0 +1,31 @@
+{
+  "id": "display-medium-002",
+  "title": "Display Mode equals/toString 不一致 - matches 參數交換",
+  "difficulty": "medium",
+  "domain": "display",
+  "module": "CtsDisplayTestCases",
+  "pattern": "A",
+  "patternDesc": "縱向呼叫鏈 - equals() → matches() 內部邏輯錯誤",
+  "targetTests": [
+    "android.display.cts.DisplayTest#testRefreshRateSwitchOnSecondaryDisplay"
+  ],
+  "bugFile": "frameworks/base/core/java/android/view/Display.java",
+  "bugMethod": "Mode.matches",
+  "bugType": "parameter_swap",
+  "bootSafe": true,
+  "expectedResult": {
+    "outcome": "assertion_failure",
+    "failedTests": 2,
+    "passedTests": 94,
+    "errorMessage": "expected: Mode<...> but was: Mode<...> (same toString, different equals)"
+  },
+  "timeLimit": 25,
+  "hints": [
+    "toString() 和 equals() 是不同方法",
+    "Mode.equals() 內部使用 matches()",
+    "注意參數順序"
+  ],
+  "verified": true,
+  "verifiedDate": "2026-02-06",
+  "verifiedDevice": "Pixel 7 (27161FDH20031X)"
+}
