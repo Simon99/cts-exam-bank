@@ -11,12 +11,13 @@
 | I-007 | MctsMediaV2 的 5/6 題需要重新單獨驗證（之前多 patch 同時 apply 互相干擾） | cts_testing | 待驗證 |
 
 | I-008 | 兩台裝置同時跑 CTS → OLC server 碰撞，互相打斷無限循環 | cts_testing | 規避（同時間只跑一台） |
+| I-009 | fastboot 命令 hang 被誤診為 USB 搶佔，實際可能是 bootloop 視窗過短 | usb_issues | 先看螢幕診斷 |
 
 ## 已解決
 
 | # | 現象 | 分類 | 解法 |
 |---|------|------|------|
 | I-001 | CTS 跑完後 fastboot/adb 操作 hang | usb_issues | `pkill -f "ats_console_deploy\|olc_server"` |
-| I-002 | `fastboot devices` 列出裝置但所有命令 hang | usb_issues | 長按電源 30 秒 → 拔插 USB → 重進 fastboot |
+| I-002 | `fastboot devices` 列出裝置但所有命令 hang | usb_issues | 先診斷是 bootloop 還是 USB 異常；長按 30 秒強制停機 |
 | I-003 | `m services` + `make systemimage` 後 flash → bootloop | build_deploy | 一律用 `make -j$(nproc)` full build |
 | I-004 | `LogicalDisplay.updateLocked()` 修改 → bootloop | boot_safety | 不碰核心更新邏輯，bug 只放 API 層 |
