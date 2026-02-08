@@ -1,0 +1,12 @@
+diff --git a/services/core/java/com/android/server/display/PersistentDataStore.java b/services/core/java/com/android/server/display/PersistentDataStore.java
+index abc123456789..def987654321 100644
+--- a/services/core/java/com/android/server/display/PersistentDataStore.java
++++ b/services/core/java/com/android/server/display/PersistentDataStore.java
+@@ -xxx,7 +xxx,7 @@ final class PersistentDataStore {
+ 
+     public void setUserPreferredRefreshRate(String uniqueId, float refreshRate) {
+-        mUserPreferredRefreshRates.put(uniqueId, refreshRate);
++        mUserPreferredRefreshRates.put(uniqueId, (int) refreshRate);  // [BUG] precision loss
+         mDirty = true;
+     }
+ }

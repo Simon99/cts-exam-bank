@@ -1,0 +1,34 @@
+{
+  "id": "display-hard-002",
+  "title": "自動亮度配置多用戶丟失 - 全局清理錯誤",
+  "difficulty": "hard",
+  "domain": "display",
+  "module": "CtsDisplayTestCases",
+  "pattern": "C",
+  "patternDesc": "跨檔案調用鏈 - A(DMS)→B(DPC)→C(BrightnessMappingStrategy)，問題在 C",
+  "targetTests": [
+    "android.display.cts.BrightnessTest#testSetAndGetPerDisplay"
+  ],
+  "callChain": [
+    "DisplayManagerService.onSwitchUser()",
+    "DisplayPowerController.setBrightnessConfiguration()",
+    "BrightnessMappingStrategy.clearShortTermModel()"
+  ],
+  "bugFile": "frameworks/base/services/core/java/com/android/server/display/BrightnessMappingStrategy.java",
+  "bugMethod": "setBrightnessConfiguration",
+  "bugType": "scope_error",
+  "bootSafe": true,
+  "expectedResult": {
+    "outcome": "assertion_failure",
+    "failedTests": 4,
+    "passedTests": 92,
+    "errorMessage": "Brightness configuration lost after user switch"
+  },
+  "timeLimit": 40,
+  "hints": [
+    "用戶切換時會觸發配置重載",
+    "每個用戶應該有獨立的配置",
+    "注意配置清理的範圍（per-user vs global）"
+  ],
+  "verified": false
+}

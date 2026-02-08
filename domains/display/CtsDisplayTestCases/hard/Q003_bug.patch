@@ -1,0 +1,15 @@
+diff --git a/services/core/java/com/android/server/display/DisplayManagerService.java b/services/core/java/com/android/server/display/DisplayManagerService.java
+index abc123456789..def987654321 100644
+--- a/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -xxx,7 +xxx,7 @@ public final class DisplayManagerService {
+ 
+     private final class CallbackRecord {
+         void notifyDisplayEventAsync(int displayId, int event, int diff) {
+-            if ((diff & (DIFF_STATE | DIFF_COLOR_MODE | DIFF_OTHER)) != 0) {
++            if ((diff & (DIFF_STATE | DIFF_COLOR_MODE)) != 0) {  // [BUG] missing DIFF_OTHER
+                 mHandler.post(() -> mCallback.onDisplayChanged(displayId));
+             }
+         }
+     }
+ }

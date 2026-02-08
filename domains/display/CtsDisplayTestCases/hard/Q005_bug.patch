@@ -1,0 +1,13 @@
+diff --git a/services/core/java/com/android/server/display/OverlayDisplayAdapter.java b/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+index abc123456789..def987654321 100644
+--- a/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
++++ b/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+@@ -xxx,7 +xxx,7 @@ class OverlayDisplayAdapter {
+     class OverlayDisplayDevice extends DisplayDevice {
+         public DisplayDeviceInfo getDisplayDeviceInfoLocked() {
+-            mInfo.densityDpi = mWidth * DEFAULT_DENSITY_DPI / DEFAULT_WIDTH;
++            mInfo.densityDpi = (mWidth / DEFAULT_WIDTH) * DEFAULT_DENSITY_DPI;  // [BUG] integer division first
+             return mInfo;
+         }
+     }
+ }

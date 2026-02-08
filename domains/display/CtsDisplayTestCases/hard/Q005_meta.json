@@ -1,0 +1,34 @@
+{
+  "id": "display-hard-005",
+  "title": "Overlay Display Metrics 計算錯誤 - 整數除法精度丟失",
+  "difficulty": "hard",
+  "domain": "display",
+  "module": "CtsDisplayTestCases",
+  "pattern": "C",
+  "patternDesc": "跨檔案調用鏈 - A(DMS)→B(LogicalDisplay)→C(OverlayDisplayAdapter)，問題在 C",
+  "targetTests": [
+    "android.display.cts.DisplayTest#testGetMetrics"
+  ],
+  "callChain": [
+    "DisplayManagerService.configureDisplayLocked()",
+    "LogicalDisplay.configureDisplayLocked()",
+    "OverlayDisplayAdapter.getDisplayDeviceInfoLocked()"
+  ],
+  "bugFile": "frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java",
+  "bugMethod": "getDisplayDeviceInfoLocked",
+  "bugType": "integer_division_precision",
+  "bootSafe": true,
+  "expectedResult": {
+    "outcome": "assertion_failure",
+    "failedTests": 4,
+    "passedTests": 92,
+    "errorMessage": "Display metrics incorrect for overlay display"
+  },
+  "timeLimit": 40,
+  "hints": [
+    "Overlay display 和實體 display 的 metrics 計算不同",
+    "注意整數除法和浮點數除法的差異",
+    "運算順序會影響精度"
+  ],
+  "verified": false
+}

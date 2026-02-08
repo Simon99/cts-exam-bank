@@ -1,0 +1,12 @@
+diff --git a/services/core/java/com/android/server/display/BrightnessMappingStrategy.java b/services/core/java/com/android/server/display/BrightnessMappingStrategy.java
+index abc123456789..def987654321 100644
+--- a/services/core/java/com/android/server/display/BrightnessMappingStrategy.java
++++ b/services/core/java/com/android/server/display/BrightnessMappingStrategy.java
+@@ -xxx,7 +xxx,7 @@ public class BrightnessMappingStrategy {
+ 
+     public void setBrightnessConfiguration(BrightnessConfiguration config) {
+-        clearShortTermModel(mCurrentUserId);
++        clearShortTermModel();  // [BUG] clears all users instead of per-user
+         mConfiguration = config;
+     }
+ }

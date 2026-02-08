@@ -1,0 +1,34 @@
+{
+  "id": "display-hard-001",
+  "title": "Display Mode 偏好設定持久化失敗 - refreshRate 精度丟失",
+  "difficulty": "hard",
+  "domain": "display",
+  "module": "CtsDisplayTestCases",
+  "pattern": "C",
+  "patternDesc": "跨檔案調用鏈 - A(DMS)→B(DisplayDevice)→C(PersistentDataStore)，問題在 C",
+  "targetTests": [
+    "android.display.cts.DefaultDisplayModeTest#testSetUserPreferredDisplayModeForSpecificDisplay"
+  ],
+  "callChain": [
+    "DisplayManagerService.setUserPreferredDisplayModeInternal()",
+    "DisplayDevice.setUserPreferredDisplayModeLocked()",
+    "PersistentDataStore.setUserPreferredRefreshRate()"
+  ],
+  "bugFile": "frameworks/base/services/core/java/com/android/server/display/PersistentDataStore.java",
+  "bugMethod": "setUserPreferredRefreshRate",
+  "bugType": "precision_loss",
+  "bootSafe": true,
+  "expectedResult": {
+    "outcome": "assertion_failure",
+    "failedTests": 4,
+    "passedTests": 92,
+    "errorMessage": "User preferred display mode not persisted"
+  },
+  "timeLimit": 40,
+  "hints": [
+    "設定 API 沒報錯，說明前半段正常",
+    "偏好設定需要持久化存儲",
+    "注意數據類型轉換可能造成的精度丟失"
+  ],
+  "verified": false
+}

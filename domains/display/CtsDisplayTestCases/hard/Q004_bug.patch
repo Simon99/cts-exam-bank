@@ -1,0 +1,20 @@
+diff --git a/services/core/java/com/android/server/display/LocalDisplayAdapter.java b/services/core/java/com/android/server/display/LocalDisplayAdapter.java
+index abc123456789..def987654321 100644
+--- a/services/core/java/com/android/server/display/LocalDisplayAdapter.java
++++ b/services/core/java/com/android/server/display/LocalDisplayAdapter.java
+@@ -xxx,7 +xxx,7 @@ class LocalDisplayAdapter {
+     void requestColorMode(int colorMode) {
+         int halColorMode;
+         switch (colorMode) {
+             case Display.COLOR_MODE_WIDE_COLOR_GAMUT:
+-                halColorMode = HAL_COLOR_MODE_WIDE;
++                halColorMode = HAL_COLOR_MODE_DEFAULT;  // [BUG] wrong HAL constant
+                 break;
+             case Display.COLOR_MODE_DEFAULT:
+             default:
+                 halColorMode = HAL_COLOR_MODE_DEFAULT;
+                 break;
+         }
+         nativeSetColorMode(halColorMode);
+     }
+ }

@@ -1,0 +1,34 @@
+{
+  "id": "display-hard-003",
+  "title": "Display Event 回調缺失 - diff bitmask 遺漏",
+  "difficulty": "hard",
+  "domain": "display",
+  "module": "CtsDisplayTestCases",
+  "pattern": "C",
+  "patternDesc": "跨檔案調用鏈 - A(DMS.handle)→B(Mapper)→C(DMS.Callback)，問題在 C",
+  "targetTests": [
+    "android.display.cts.DisplayEventTest#testDisplayEvents"
+  ],
+  "callChain": [
+    "DisplayManagerService.handleDisplayDeviceChanged()",
+    "LogicalDisplayMapper.updateLogicalDisplays()",
+    "DisplayManagerService.CallbackRecord.notifyDisplayEventAsync()"
+  ],
+  "bugFile": "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java",
+  "bugMethod": "notifyDisplayEventAsync",
+  "bugType": "bitmask_incomplete",
+  "bootSafe": true,
+  "expectedResult": {
+    "outcome": "assertion_failure",
+    "failedTests": 4,
+    "passedTests": 92,
+    "errorMessage": "Display event callback not received"
+  },
+  "timeLimit": 40,
+  "hints": [
+    "事件產生和事件派發是不同的階段",
+    "Display 變化有多種類型（DIFF_*）",
+    "注意事件過濾的 bitmask 邏輯"
+  ],
+  "verified": false
+}
