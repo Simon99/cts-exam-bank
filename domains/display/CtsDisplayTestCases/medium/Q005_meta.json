@@ -1,0 +1,29 @@
+{
+  "id": "display-medium-005",
+  "title": "VirtualDisplay HDR Capabilities 初始化不一致",
+  "difficulty": "medium",
+  "domain": "display",
+  "module": "CtsDisplayTestCases",
+  "pattern": "A",
+  "patternDesc": "縱向呼叫鏈 - VirtualDisplayAdapter 初始化邏輯錯誤",
+  "targetTests": [
+    "android.display.cts.VirtualDisplayTest#testHdrApiMethods"
+  ],
+  "bugFile": "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java",
+  "bugMethod": "createHdrCapabilities",
+  "bugType": "initialization_error",
+  "bootSafe": true,
+  "expectedResult": {
+    "outcome": "assertion_failure",
+    "failedTests": 2,
+    "passedTests": 94,
+    "errorMessage": "HDR capabilities inconsistent"
+  },
+  "timeLimit": 25,
+  "hints": [
+    "VirtualDisplay 和實體 Display 建立路徑不同",
+    "HDR capabilities 多個欄位需要保持一致性",
+    "追蹤 VirtualDisplay 初始化流程"
+  ],
+  "verified": false
+}

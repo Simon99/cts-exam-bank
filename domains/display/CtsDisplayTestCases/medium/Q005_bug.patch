@@ -1,0 +1,19 @@
+diff --git a/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+index abc123456789..def987654321 100644
+--- a/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
++++ b/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+@@ -xxx,10 +xxx,10 @@ class VirtualDisplayAdapter {
+     private HdrCapabilities createHdrCapabilities() {
+         if (!mSupportsHdr) {
+             return new HdrCapabilities(
+                 new int[]{},
+-                0.0f,
+-                0.0f,
++                500.0f,  // [BUG] should be 0 when HDR not supported
++                400.0f,  // [BUG] should be 0 when HDR not supported
+                 0.0f
+             );
+         }
+         // HDR supported case...
+     }
+ }

@@ -1,0 +1,30 @@
+{
+  "id": "display-medium-004",
+  "title": "BrightnessConfiguration 曲線參數對調",
+  "difficulty": "medium",
+  "domain": "display",
+  "module": "CtsDisplayTestCases",
+  "pattern": "A",
+  "patternDesc": "縱向呼叫鏈 - setBrightnessConfiguration() 內部參數順序錯誤",
+  "targetTests": [
+    "android.display.cts.BrightnessTest#testSetAndGetBrightnessConfiguration",
+    "android.display.cts.BrightnessTest#testSetGetSimpleCurve"
+  ],
+  "bugFile": "frameworks/base/services/core/java/com/android/server/display/DisplayPowerController.java",
+  "bugMethod": "setBrightnessConfiguration",
+  "bugType": "parameter_swap",
+  "bootSafe": true,
+  "expectedResult": {
+    "outcome": "assertion_failure",
+    "failedTests": 2,
+    "passedTests": 94,
+    "errorMessage": "Brightness configuration curve mismatch"
+  },
+  "timeLimit": 25,
+  "hints": [
+    "設定 API 沒報錯，問題在存取過程",
+    "注意陣列參數的順序",
+    "追蹤 set/get 路徑中的數據處理"
+  ],
+  "verified": false
+}

@@ -1,0 +1,13 @@
+diff --git a/services/core/java/com/android/server/display/DisplayPowerController.java b/services/core/java/com/android/server/display/DisplayPowerController.java
+index abc123456789..def987654321 100644
+--- a/services/core/java/com/android/server/display/DisplayPowerController.java
++++ b/services/core/java/com/android/server/display/DisplayPowerController.java
+@@ -xxx,7 +xxx,7 @@ public class DisplayPowerController {
+     public void setBrightnessConfiguration(BrightnessConfiguration config) {
+         float[] lux = config.getLuxValues();
+         float[] nits = config.getNitsValues();
+-        mBrightnessMapper.setLuxNitsMapping(lux, nits);
++        mBrightnessMapper.setLuxNitsMapping(nits, lux);  // [BUG] swapped parameters
+         saveBrightnessConfiguration(config);
+     }
+ }
