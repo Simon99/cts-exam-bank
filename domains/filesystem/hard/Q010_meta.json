@@ -1,0 +1,16 @@
+{
+  "id": "Q010",
+  "domain": "filesystem",
+  "difficulty": "hard",
+  "title": "ParcelFileDescriptor 跨進程文件操作三層模式錯誤",
+  "cts_test": "android.os.cts.ParcelFileDescriptorTest#testParcelFileDescriptor",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/ParcelFileDescriptor.java",
+    "frameworks/base/core/java/android/content/ContentProvider.java",
+    "frameworks/base/core/java/android/provider/DocumentsProvider.java"
+  ],
+  "tags": ["file-descriptor", "parcelable", "IPC", "mode-flags", "bit-operations"],
+  "estimated_time_minutes": 50,
+  "skills_tested": ["bit-manipulation", "parcelable-analysis", "string-parsing", "IPC-debugging", "multi-file-debugging"]
+}

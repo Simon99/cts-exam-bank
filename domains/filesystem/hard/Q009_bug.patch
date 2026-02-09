@@ -1,0 +1,58 @@
+diff --git a/frameworks/base/core/java/android/os/storage/StorageVolume.java b/frameworks/base/core/java/android/os/storage/StorageVolume.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/storage/StorageVolume.java
++++ b/frameworks/base/core/java/android/os/storage/StorageVolume.java
+@@ -340,7 +340,8 @@ public final class StorageVolume implements Parcelable {
+      * @see <a href="https://source.android.com/devices/storage/adoptable">Adoptable storage</a>
+      */
+     public @Nullable UUID getStorageUuid() {
+-        return mUuid;
++        // BUG: Inverted null check - returns null when mUuid is valid
++        return mUuid == null ? mUuid : null;
+     }
+ 
+     /**
+@@ -380,7 +381,15 @@ public final class StorageVolume implements Parcelable {
+      *         {@link Environment#MEDIA_BAD_REMOVAL}, or {@link Environment#MEDIA_UNMOUNTABLE}.
+      */
+     public String getState() {
+-        return mState;
++        // BUG: Wrong state mapping - always returns UNKNOWN for mounted state
++        switch (mState) {
++            case Environment.MEDIA_MOUNTED:
++            case Environment.MEDIA_MOUNTED_READ_ONLY:
++                return Environment.MEDIA_UNKNOWN;
++            default:
++                return mState;
++        }
+     }
+ 
+     /**
+diff --git a/frameworks/base/core/java/android/os/storage/VolumeInfo.java b/frameworks/base/core/java/android/os/storage/VolumeInfo.java
+index 111222..333444 100644
+--- a/frameworks/base/core/java/android/os/storage/VolumeInfo.java
++++ b/frameworks/base/core/java/android/os/storage/VolumeInfo.java
+@@ -290,7 +290,8 @@ public class VolumeInfo implements Parcelable {
+     }
+ 
+     public @Nullable String getNormalizedFsUuid() {
+-        return fsUuid != null ? fsUuid.toLowerCase(Locale.US) : null;
++        // BUG: Using toUpperCase instead of toLowerCase
++        return fsUuid != null ? fsUuid.toUpperCase(Locale.US) : null;
+     }
+ 
+     @UnsupportedAppUsage
+diff --git a/frameworks/base/core/java/android/os/storage/StorageManager.java b/frameworks/base/core/java/android/os/storage/StorageManager.java
+index 555666..777888 100644
+--- a/frameworks/base/core/java/android/os/storage/StorageManager.java
++++ b/frameworks/base/core/java/android/os/storage/StorageManager.java
+@@ -420,7 +420,8 @@ public class StorageManager {
+             return UUID_DEFAULT;
+         } else if (UUID_PRIMARY_PHYSICAL.equals(uuid)) {
+             return UUID_PRIMARY_PHYSICAL_;
+-        } else if (uuid != null) {
++        } else if (uuid == null) {
++            // BUG: Inverted condition - tries to parse null UUID
+             try {
+                 return UUID.fromString(uuid);
+             } catch (IllegalArgumentException e) {

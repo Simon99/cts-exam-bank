@@ -1,0 +1,16 @@
+{
+  "id": "Q008",
+  "domain": "filesystem",
+  "difficulty": "hard",
+  "title": "StorageStatsManager 存儲統計數據計算鏈錯誤 - 三層計算問題",
+  "cts_test": "android.app.usage.cts.StorageStatsManagerTest#testQueryStatsForPackage",
+  "cts_module": "CtsAppUsageTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/usage/StorageStatsManager.java",
+    "frameworks/base/services/usage/java/com/android/server/usage/StorageStatsService.java",
+    "frameworks/base/core/java/android/os/storage/StorageManager.java"
+  ],
+  "tags": ["storage", "statistics", "calculation", "cache-quota", "interpolation"],
+  "estimated_time_minutes": 45,
+  "skills_tested": ["math-formula-analysis", "map-key-debugging", "data-flow-tracing", "multi-file-debugging"]
+}

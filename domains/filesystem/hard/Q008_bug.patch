@@ -1,0 +1,42 @@
+diff --git a/frameworks/base/core/java/android/app/usage/StorageStatsManager.java b/frameworks/base/core/java/android/app/usage/StorageStatsManager.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/app/usage/StorageStatsManager.java
++++ b/frameworks/base/core/java/android/app/usage/StorageStatsManager.java
+@@ -95,7 +95,8 @@ public class StorageStatsManager {
+     @WorkerThread
+     public @BytesLong long getTotalBytes(@NonNull UUID storageUuid) throws IOException {
+         try {
+-            return mService.getTotalBytes(convert(storageUuid), mContext.getOpPackageName());
++            // BUG: Wrong calculation - subtracting instead of returning directly
++            return mService.getTotalBytes(convert(storageUuid), mContext.getOpPackageName()) - mService.getFreeBytes(convert(storageUuid), mContext.getOpPackageName());
+         } catch (ParcelableException e) {
+             e.maybeRethrow(IOException.class);
+             throw new RuntimeException(e);
+diff --git a/frameworks/base/services/usage/java/com/android/server/usage/StorageStatsService.java b/frameworks/base/services/usage/java/com/android/server/usage/StorageStatsService.java
+index 111222..333444 100644
+--- a/frameworks/base/services/usage/java/com/android/server/usage/StorageStatsService.java
++++ b/frameworks/base/services/usage/java/com/android/server/usage/StorageStatsService.java
+@@ -350,7 +350,8 @@ public class StorageStatsService extends IStorageStatsManager.Stub {
+         final long cacheQuota;
+         synchronized (mCacheQuotas) {
+-            final SparseLongArray uidQuotas = mCacheQuotas.get(volumeUuid);
++            // BUG: Using packageName as key instead of volumeUuid
++            final SparseLongArray uidQuotas = mCacheQuotas.get(packageName);
+             cacheQuota = (uidQuotas != null) ? uidQuotas.get(uid, DEFAULT_QUOTA) : DEFAULT_QUOTA;
+         }
+ 
+diff --git a/frameworks/base/core/java/android/os/storage/StorageManager.java b/frameworks/base/core/java/android/os/storage/StorageManager.java
+index 555666..777888 100644
+--- a/frameworks/base/core/java/android/os/storage/StorageManager.java
++++ b/frameworks/base/core/java/android/os/storage/StorageManager.java
+@@ -1545,8 +1545,9 @@ public class StorageManager {
+         } else {
+             // Else, linearly interpolate the amount of space to reserve
+-            double slope = (cacheReservePercentHigh - cacheReservePercentLow) * totalBytes
+-                    / (100.0 * (storageThresholdHighBytes - storageThresholdLowBytes));
++            // BUG: Numerator and denominator swapped, causing extreme values
++            double slope = (100.0 * (storageThresholdHighBytes - storageThresholdLowBytes))
++                    / ((cacheReservePercentHigh - cacheReservePercentLow) * totalBytes);
+             double intercept = totalBytes * cacheReservePercentLow / 100.0
+                     - storageThresholdLowBytes * slope;
+             result = Math.round(slope * usableBytes + intercept);

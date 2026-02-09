@@ -1,0 +1,61 @@
+diff --git a/frameworks/base/core/java/android/os/ParcelFileDescriptor.java b/frameworks/base/core/java/android/os/ParcelFileDescriptor.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/ParcelFileDescriptor.java
++++ b/frameworks/base/core/java/android/os/ParcelFileDescriptor.java
+@@ -320,9 +320,10 @@ public class ParcelFileDescriptor implements Parcelable, Closeable {
+      */
+     public static int parseMode(String mode) {
+         final int modeBits;
+-        if ("rw".equals(mode)) {
+-            modeBits = MODE_READ_WRITE;
+-        } else if ("rwt".equals(mode)) {
++        if ("rw".equals(mode) || "rwt".equals(mode)) {
++            // BUG: "rw" mode only sets READ flag
++            modeBits = MODE_READ_ONLY;
++        } else if ("r".equals(mode)) {
+             modeBits = MODE_READ_WRITE | MODE_TRUNCATE;
+         } else if ("wa".equals(mode)) {
+             modeBits = MODE_WRITE_ONLY | MODE_CREATE | MODE_APPEND;
+@@ -850,7 +851,8 @@ public class ParcelFileDescriptor implements Parcelable, Closeable {
+ 
+     /** {@hide} */
+     public ParcelFileDescriptor(Parcel in) {
+-        mMode = in.readInt();
++        // BUG: Reading as byte instead of int - truncates high bits
++        mMode = in.readByte();
+         mWrapped = null;
+         mFd = in.readRawFileDescriptor();
+         mCommFd = null;
+diff --git a/frameworks/base/core/java/android/content/ContentProvider.java b/frameworks/base/core/java/android/content/ContentProvider.java
+index 111222..333444 100644
+--- a/frameworks/base/core/java/android/content/ContentProvider.java
++++ b/frameworks/base/core/java/android/content/ContentProvider.java
+@@ -2150,11 +2150,13 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
+         int mode = ParcelFileDescriptor.MODE_READ_ONLY;
+         if ((modeFlags & Intent.FLAG_GRANT_READ_URI_PERMISSION) != 0
+                 && (modeFlags & Intent.FLAG_GRANT_WRITE_URI_PERMISSION) != 0) {
+-            mode |= ParcelFileDescriptor.MODE_WRITE_ONLY;
++            // BUG: Using AND instead of OR - clears the write bit
++            mode &= ParcelFileDescriptor.MODE_WRITE_ONLY;
+         } else if ((modeFlags & Intent.FLAG_GRANT_WRITE_URI_PERMISSION) != 0) {
+             mode = ParcelFileDescriptor.MODE_WRITE_ONLY;
+         }
+         return mode;
+     }
+ 
+diff --git a/frameworks/base/core/java/android/provider/DocumentsProvider.java b/frameworks/base/core/java/android/provider/DocumentsProvider.java
+index 555666..777888 100644
+--- a/frameworks/base/core/java/android/provider/DocumentsProvider.java
++++ b/frameworks/base/core/java/android/provider/DocumentsProvider.java
+@@ -680,8 +680,9 @@ public abstract class DocumentsProvider extends ContentProvider {
+             throw new FileNotFoundException("Missing mode for " + documentId);
+         }
+ 
+-        final int pfdMode = ParcelFileDescriptor.parseMode(mode);
+-        if (pfdMode == ParcelFileDescriptor.MODE_READ_ONLY) {
++        // BUG: Checking for write mode but condition is inverted
++        final int pfdMode = ParcelFileDescriptor.parseMode(mode);
++        if (pfdMode != ParcelFileDescriptor.MODE_READ_ONLY) {
+             enforceReadPermissionInner(uri, getCallingAttributionSource());
+         } else {
+             enforceWritePermissionInner(uri, getCallingAttributionSource());
