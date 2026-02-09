@@ -1,0 +1,16 @@
+{
+  "id": "Q007",
+  "title": "Intent.hasExtra() 判斷錯誤",
+  "difficulty": "easy",
+  "domain": "framework",
+  "subdomain": "content",
+  "cts_test": "android.content.cts.IntentTest#testHasExtra",
+  "cts_module": "CtsContentTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/content/Intent.java"
+  ],
+  "tags": ["Intent", "hasExtra", "邏輯錯誤"],
+  "estimated_time_minutes": 8,
+  "skills_tested": ["源碼閱讀", "邏輯判斷"],
+  "created_at": "2025-01-13"
+}

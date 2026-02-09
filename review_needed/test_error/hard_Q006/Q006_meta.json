@@ -1,0 +1,48 @@
+{
+  "id": "Q006",
+  "title": "Brightness Zone Thermal Refresh Rate 配置錯誤",
+  "difficulty": "hard",
+  "category": "multi-file-interaction",
+  "domain": "display",
+  "subdomain": "refresh-rate-thermal",
+  "estimated_time_minutes": 45,
+  "files_involved": [
+    {
+      "path": "frameworks/base/services/core/java/com/android/server/display/mode/DisplayModeDirector.java",
+      "role": "primary",
+      "description": "Contains the buggy code in BrightnessObserver.onBrightnessChangedLocked()"
+    },
+    {
+      "path": "frameworks/base/services/core/java/com/android/server/display/mode/SkinThermalStatusObserver.java",
+      "role": "related",
+      "description": "Provides findBestMatchingRefreshRateRange() method used by BrightnessObserver"
+    },
+    {
+      "path": "frameworks/base/services/core/java/com/android/server/display/DisplayDeviceConfig.java",
+      "role": "related",
+      "description": "Provides thermal map configurations for low and high zones"
+    }
+  ],
+  "bug_type": "copy-paste-error",
+  "bug_description": "In the low brightness zone branch, the code incorrectly uses mHighZoneRefreshRateForThermals instead of mLowZoneRefreshRateForThermals when querying thermal refresh rate limits",
+  "symptoms": [
+    "High refresh rate maintained in low brightness + thermal throttling",
+    "Increased battery consumption in low brightness scenarios",
+    "Inconsistent behavior between low and high brightness zones"
+  ],
+  "cts_tests": [
+    "android.display.cts.RefreshRateTest"
+  ],
+  "verification_device": "Pixel 7",
+  "keywords": [
+    "BrightnessObserver",
+    "refresh rate",
+    "thermal throttling",
+    "brightness zone",
+    "DisplayModeDirector",
+    "SkinThermalStatusObserver"
+  ],
+  "related_questions": ["Q003"],
+  "created_at": "2025-02-09",
+  "version": "1.0"
+}

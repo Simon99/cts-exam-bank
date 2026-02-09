@@ -1,0 +1,46 @@
+diff --git a/frameworks/native/opengl/libs/EGL/egl_cache.cpp b/frameworks/native/opengl/libs/EGL/egl_cache.cpp
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/EGL/egl_cache.cpp
++++ b/frameworks/native/opengl/libs/EGL/egl_cache.cpp
+@@ -23,6 +23,7 @@
+ #include <private/EGL/cache.h>
+ #include <unistd.h>
+ 
++#include <mutex>
+ #include <thread>
+ 
+ #include "../egl_impl.h"
+@@ -189,13 +190,12 @@ size_t egl_cache_t::getCacheSize() {
+ }
+ 
+ void egl_cache_t::updateMode() {
+-    // We don't set the mode in the constructor because these checks have
+-    // a non-trivial cost, and not all processes that instantiate egl_cache_t
+-    // will use it.
+-
+-    // If we've already set the mode, skip these checks
++    // BUG: Race condition - checked is set before mMultifileMode is configured
++    // This can cause one thread to use multifile mode while another uses monolithic
+     static bool checked = false;
+     if (checked) {
+         return;
+     }
+     checked = true;
++    // Mode configuration happens AFTER checked is set - race window exists here
+ 
+     // Check the device config to decide whether multifile should be used
+     if (base::GetBoolProperty("ro.egl.blobcache.multifile", false)) {
+diff --git a/frameworks/native/opengl/libs/EGL/egl_cache.h b/frameworks/native/opengl/libs/EGL/egl_cache.h
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/EGL/egl_cache.h
++++ b/frameworks/native/opengl/libs/EGL/egl_cache.h
+@@ -89,7 +89,8 @@ private:
+ 
+     // updateMode checks system properties to determine cache mode
+     // Called from setBlob/getBlob
+-    void updateMode();
++    // BUG: This method has a race condition with the static 'checked' variable
++    void updateMode();  // NOT THREAD SAFE - should use std::call_once
+ 
+     // The BlobCache instance used for monolithic cache
+     std::unique_ptr<FileBlobCache> mBlobCache;

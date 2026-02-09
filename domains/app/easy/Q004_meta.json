@@ -1,0 +1,14 @@
+{
+  "id": "app-easy-004",
+  "title": "ProgressDialog 進度增量計算錯誤",
+  "difficulty": "easy",
+  "domain": "app",
+  "cts_test": "android.app.cts.ProgressDialogTest#testIncrementProgressBy",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/ProgressDialog.java"
+  ],
+  "tags": ["dialog", "progress", "increment"],
+  "skills_tested": ["log-reading", "method-semantics"],
+  "estimated_time_minutes": 8,
+  "created": "2025-01-13"
+}

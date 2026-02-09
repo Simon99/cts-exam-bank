@@ -1,0 +1,15 @@
+{
+  "id": "Q002",
+  "domain": "filesystem",
+  "difficulty": "medium",
+  "title": "StorageVolume 列表過濾與主存儲標記錯誤",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testGetStorageVolumes",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/StorageManagerService.java",
+    "frameworks/base/core/java/android/os/storage/StorageVolume.java"
+  ],
+  "tags": ["storage", "StorageVolume", "primary", "volume-list", "isPrimary"],
+  "estimated_time_minutes": 25,
+  "skills_tested": ["log-tracing", "service-analysis", "object-construction", "multi-file-debugging"]
+}

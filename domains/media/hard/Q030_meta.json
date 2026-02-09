@@ -1,0 +1,33 @@
+{
+  "id": "media-h-q030",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "hard",
+  "pattern": "C",
+  "pattern_desc": "縱深多層 - 影響 3 個以上檔案",
+  "target_tests": [
+    "android.mediav2.cts.ExtractorTest#testEncryptedTrackExtraction"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.ExtractorTest",
+      "method": "testEncryptedTrackExtraction",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: CryptoInfo validation failed: encryptedByteCounts array size mismatch",
+      "stack_location": "ExtractorTest.java:678"
+    }
+  ],
+  "affected_files": [
+    "frameworks/av/media/libstagefright/NuMediaExtractor.cpp",
+    "frameworks/av/drm/libmediadrm/DrmHal.cpp",
+    "frameworks/base/media/java/android/media/MediaExtractor.java"
+  ],
+  "file_count": 3,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["drm", "crypto", "encrypted-sample", "cryptoinfo", "subsample"]
+}

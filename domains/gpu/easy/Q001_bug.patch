@@ -1,0 +1,13 @@
+diff --git a/frameworks/native/opengl/libs/EGL/egl_display.cpp b/frameworks/native/opengl/libs/EGL/egl_display.cpp
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/EGL/egl_display.cpp
++++ b/frameworks/native/opengl/libs/EGL/egl_display.cpp
+@@ -198,7 +198,7 @@ EGLBoolean egl_display_t::initialize(EGLint* major, EGLint* minor) {
+         mVersionString.clear();
+         cnx->driverVersion = EGL_MAKE_VERSION(1, 4, 0);
+         mVersionString = sVersionString14;
+-        if ((cnx->major == 1) && (cnx->minor == 5)) {
++        if ((cnx->major == 1) && (cnx->minor == 4)) {
+             mVersionString = sVersionString15;
+             cnx->driverVersion = EGL_MAKE_VERSION(1, 5, 0);
+         }

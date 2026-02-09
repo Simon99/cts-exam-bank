@@ -1,0 +1,19 @@
+{
+  "id": "camera_medium_007",
+  "title": "自動曝光模式被覆蓋",
+  "difficulty": "medium",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.CaptureRequestTest#testAeModes",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/CaptureRequest.java",
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java"
+  ],
+  "bug_pattern": "log-in-A-bug-in-B",
+  "tags": ["CaptureRequest", "AE_MODE", "曝光控制", "設定覆蓋"],
+  "estimated_time_minutes": 30,
+  "skills_tested": [
+    "理解 CaptureRequest 設定機制",
+    "追蹤 metadata 設定呼叫鏈",
+    "分析 AE 模式控制邏輯"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "GPU-M007",
+  "title": "Shader Cache Not Working",
+  "domain": "gpu",
+  "difficulty": "medium",
+  "cts_test": "android.opengl.cts.ProgramTest#testShaderCompilePerformance",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_cache.cpp",
+    "frameworks/native/opengl/libs/EGL/BlobCache.cpp"
+  ],
+  "tags": ["egl", "shader", "cache", "performance"],
+  "estimated_time_minutes": 35,
+  "cdd_requirement": null
+}

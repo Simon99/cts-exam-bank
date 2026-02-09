@@ -1,0 +1,15 @@
+{
+  "id": "Q008",
+  "domain": "filesystem",
+  "difficulty": "medium",
+  "title": "Crate 目錄查詢過濾與 CrateInfo 構造錯誤",
+  "cts_test": "android.os.storage.cts.StorageStatsManagerTest#queryCratesForUid_addOneDirectory_shouldIncreasingOneCrate",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/services/usage/java/com/android/server/usage/StorageStatsService.java",
+    "frameworks/base/core/java/android/os/storage/CrateInfo.java"
+  ],
+  "tags": ["storage", "crate", "query", "result-filtering", "construction"],
+  "estimated_time_minutes": 25,
+  "skills_tested": ["log-tracing", "service-analysis", "result-tracking", "multi-file-debugging"]
+}

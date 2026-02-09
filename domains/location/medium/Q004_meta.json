@@ -1,0 +1,17 @@
+{
+  "id": "location-medium-004",
+  "title": "LocationRequest.getQuality() Returns Wrong Value",
+  "difficulty": "medium",
+  "domain": "location",
+  "test_class": "android.location.cts.none.LocationRequestTest",
+  "test_method": "testLocationRequestQuality",
+  "cts_module": "CtsLocationNoneTestCases",
+  "tags": ["LocationRequest", "quality", "power-management"],
+  "affected_files": [
+    "frameworks/base/location/java/android/location/LocationRequest.java",
+    "frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/LocationRequest.java",
+  "estimated_time_minutes": 15,
+  "skills_tested": ["Request handling", "Quality level mapping", "Service-side merging"]
+}

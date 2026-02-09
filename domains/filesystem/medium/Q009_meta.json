@@ -1,0 +1,15 @@
+{
+  "id": "Q009",
+  "domain": "filesystem",
+  "difficulty": "medium",
+  "title": "VolumeInfo 狀態轉換與廣播映射錯誤",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testVolumeStateChangeBroadcast",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/storage/VolumeInfo.java",
+    "frameworks/base/services/core/java/com/android/server/StorageManagerService.java"
+  ],
+  "tags": ["storage", "state-mapping", "broadcast", "SparseArray"],
+  "estimated_time_minutes": 25,
+  "skills_tested": ["log-tracing", "state-machine", "mapping-analysis", "multi-file-debugging"]
+}

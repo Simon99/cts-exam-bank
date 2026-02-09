@@ -1,0 +1,16 @@
+{
+  "id": "app-medium-007",
+  "title": "ProgressDialog 水平樣式進度不更新",
+  "difficulty": "medium",
+  "domain": "app",
+  "cts_test": "android.app.cts.ProgressDialogTest#testSetProgressStyle",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/ProgressDialog.java",
+    "frameworks/base/core/java/android/app/AlertDialog.java"
+  ],
+  "tags": ["progressdialog", "alertdialog", "progress", "lifecycle"],
+  "skills_tested": ["dialog-lifecycle", "delayed-initialization", "state-management"],
+  "estimated_time_minutes": 20,
+  "created": "2025-01-13",
+  "updated": "2025-02-10"
+}

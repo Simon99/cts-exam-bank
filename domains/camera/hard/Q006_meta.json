@@ -1,0 +1,19 @@
+{
+  "id": "camera_hard_006",
+  "title": "High Speed Video Recording 幀率不穩定",
+  "difficulty": "hard",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.RecordingTest#testHighSpeedRecording",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraConstrainedHighSpeedCaptureSessionImpl.java",
+    "frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp",
+    "frameworks/av/services/camera/libcameraservice/api2/CameraDeviceClient.cpp"
+  ],
+  "tags": ["HighSpeed", "Recording", "FrameRate", "Burst"],
+  "estimated_time_minutes": 55,
+  "skills_tested": [
+    "理解 High Speed Recording 機制",
+    "分析幀率穩定性問題",
+    "追蹤 burst request 流程"
+  ]
+}

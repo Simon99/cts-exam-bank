@@ -1,0 +1,18 @@
+{
+  "id": "H001",
+  "title": "Intent 跨進程傳遞時 Parcelable 序列化失敗",
+  "difficulty": "hard",
+  "domain": "framework",
+  "subdomain": "os",
+  "cts_test": "android.content.cts.IntentTest#testParcelableAcrossProcesses",
+  "cts_module": "CtsContentTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/Parcel.java",
+    "frameworks/base/core/java/android/os/BaseBundle.java",
+    "frameworks/base/core/java/android/content/Intent.java"
+  ],
+  "tags": ["Intent", "Parcelable", "ClassLoader", "IPC", "序列化"],
+  "estimated_time_minutes": 45,
+  "skills_tested": ["序列化流程", "ClassLoader", "跨進程通訊", "調用鏈分析"],
+  "created_at": "2025-01-13"
+}

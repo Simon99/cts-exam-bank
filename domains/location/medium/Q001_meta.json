@@ -1,0 +1,17 @@
+{
+  "id": "location-medium-001",
+  "title": "requestLocationUpdates Ignores minUpdateDistanceMeters",
+  "difficulty": "medium",
+  "domain": "location",
+  "test_class": "android.location.cts.fine.LocationManagerFineTest",
+  "test_method": "testRequestLocationUpdates_minUpdateDistanceMeters",
+  "cts_module": "CtsLocationFineTestCases",
+  "tags": ["LocationManager", "LocationRequest", "distance-filter"],
+  "affected_files": [
+    "frameworks/base/location/java/android/location/LocationRequest.java",
+    "frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/LocationManager.java",
+  "estimated_time_minutes": 20,
+  "skills_tested": ["Cross-file debugging", "Request parameter handling", "Service-side logic"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "location-easy-005",
+  "title": "GnssStatus.getSatelliteCount() Returns Wrong Value",
+  "difficulty": "easy",
+  "domain": "location",
+  "test_class": "android.location.cts.none.GnssStatusTest",
+  "test_method": "testBuilder_ClearSatellites",
+  "cts_module": "CtsLocationNoneTestCases",
+  "tags": ["GnssStatus", "Builder", "clear"],
+  "files_to_modify": [
+    "frameworks/base/location/java/android/location/GnssStatus.java"
+  ],
+  "estimated_time_minutes": 8,
+  "skills_tested": ["Understanding Builder pattern", "State management"]
+}

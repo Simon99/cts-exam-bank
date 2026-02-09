@@ -1,0 +1,20 @@
+{
+  "id": "camera_hard_010",
+  "title": "Camera Flash Torch Mode 狀態不同步",
+  "difficulty": "hard",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.CameraManagerTest#testTorchCallback",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/CameraManager.java",
+    "frameworks/av/services/camera/libcameraservice/CameraService.cpp",
+    "frameworks/av/services/camera/libcameraservice/CameraFlashlight.cpp"
+  ],
+  "_note": "CameraManagerGlobal 是 CameraManager.java 的內部類別，已修正路徑",
+  "tags": ["Torch", "Flash", "Callback", "狀態同步"],
+  "estimated_time_minutes": 45,
+  "skills_tested": [
+    "理解狀態同步問題",
+    "分析 callback 時序",
+    "追蹤跨層狀態傳遞"
+  ]
+}

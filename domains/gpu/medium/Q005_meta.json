@@ -1,0 +1,15 @@
+{
+  "id": "GPU-M005",
+  "title": "EGL Sync Object Timeout Wrong",
+  "domain": "gpu",
+  "difficulty": "medium",
+  "cts_test": "android.opengl.cts.EglSurfacesTest#testFenceSync",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp",
+    "frameworks/native/opengl/libs/EGL/eglApi.cpp"
+  ],
+  "tags": ["egl", "sync", "fence", "timeout", "unit-conversion"],
+  "estimated_time_minutes": 30,
+  "cdd_requirement": null
+}

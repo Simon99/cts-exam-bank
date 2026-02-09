@@ -1,0 +1,50 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/am/BroadcastQueueImpl.java b/frameworks/base/services/core/java/com/android/server/am/BroadcastQueueImpl.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/am/BroadcastQueueImpl.java
++++ b/frameworks/base/services/core/java/com/android/server/am/BroadcastQueueImpl.java
+@@ -700,10 +700,10 @@ public final class BroadcastQueueImpl extends BroadcastQueue {
+         r.mWasReceiverAppStopped = false;
+         mPendingBroadcast = null;
+ 
+-        r.resultCode = resultCode;
+-        r.resultData = resultData;
+-        r.resultExtras = resultExtras;
+-        if (resultAbort && (r.intent.getFlags()&Intent.FLAG_RECEIVER_NO_ABORT) == 0) {
++        if (r.nextReceiver >= r.receivers.size()) {
++            r.resultCode = resultCode;
++            r.resultData = resultData;
++            r.resultExtras = resultExtras;
++        } else if (resultAbort && (r.intent.getFlags()&Intent.FLAG_RECEIVER_NO_ABORT) == 0) {
+             r.resultAbort = resultAbort;
+         }
+
+diff --git a/frameworks/base/services/core/java/com/android/server/am/BroadcastRecord.java b/frameworks/base/services/core/java/com/android/server/am/BroadcastRecord.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/services/core/java/com/android/server/am/BroadcastRecord.java
++++ b/frameworks/base/services/core/java/com/android/server/am/BroadcastRecord.java
+@@ -420,6 +420,9 @@ public final class BroadcastRecord {
+ 
+     void resetDeliveryState() {
+         state = BroadcastRecord.IDLE;
++        resultCode = Activity.RESULT_CANCELED;
++        resultData = null;
++        resultExtras = null;
+         nextReceiver = 0;
+         mWasReceiverAppStopped = false;
+     }
+
+diff --git a/frameworks/base/core/java/android/app/LoadedApk.java b/frameworks/base/core/java/android/app/LoadedApk.java
+index 3456789..cdefghi 100644
+--- a/frameworks/base/core/java/android/app/LoadedApk.java
++++ b/frameworks/base/core/java/android/app/LoadedApk.java
+@@ -1650,7 +1650,8 @@ public final class LoadedApk {
+                     receiver.onReceive(mContext, intent);
+                 } catch (Exception e) {
+                     // ...
+                 }
+-                finish(getResultCode(), getResultData(), getResultExtras(false), false, mFlags);
++                // Bug: using initial values instead of receiver-modified values
++                finish(mResultCode, mResultData, mResultExtras, false, mFlags);
+             }
+         }
+     }

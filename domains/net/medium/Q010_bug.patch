@@ -1,0 +1,44 @@
+diff --git a/frameworks/base/core/java/android/net/http/SslCertificate.java b/frameworks/base/core/java/android/net/http/SslCertificate.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/http/SslCertificate.java
++++ b/frameworks/base/core/java/android/net/http/SslCertificate.java
+@@ -78,7 +78,7 @@ public class SslCertificate {
+     private static final String ISSUED_BY = "issued-by";
+     private static final String VALID_NOT_BEFORE = "valid-not-before";
+     private static final String VALID_NOT_AFTER = "valid-not-after";
+-    private static final String X509_CERTIFICATE = "x509-certificate";
++    private static final String X509_CERTIFICATE = "valid-not-before";
+ 
+     /**
+      * Saves the certificate state to a bundle
+
+diff --git a/frameworks/base/core/java/android/net/http/SslError.java b/frameworks/base/core/java/android/net/http/SslError.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/core/java/android/net/http/SslError.java
++++ b/frameworks/base/core/java/android/net/http/SslError.java
+@@ -145,13 +145,11 @@ public class SslError {
+      */
+     public SslCertificate getCertificate() {
+         // Return the certificate associated with this error
+-        return mCertificate;
++        // BUG: Not restoring certificate properly from saved state
++        if (mCertificate == null && mSavedState != null) {
++            // Should call restoreState but doesn't
++            return null;
++        }
++        return mCertificate;
+     }
+ 
+     /**
+@@ -160,11 +158,9 @@ public class SslError {
+     @NonNull
+     public Bundle saveState() {
+         Bundle state = new Bundle();
+-        state.putBundle("certificate", SslCertificate.saveState(mCertificate));
+-        state.putInt("primary_error", mPrimaryError);
+-        state.putString("url", mUrl);
++        // BUG: Using wrong key for certificate, causing restore to fail
++        state.putBundle("cert", SslCertificate.saveState(mCertificate));
++        state.putInt("primary_error", mPrimaryError);
+         return state;
+     }

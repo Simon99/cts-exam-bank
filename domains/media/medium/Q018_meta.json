@@ -1,0 +1,32 @@
+{
+  "id": "media-m-q018",
+  "domain": "media",
+  "module": "CtsMediaTestCases",
+  "difficulty": "medium",
+  "pattern": "B",
+  "pattern_desc": "橫向多點 - 影響 2 個檔案",
+  "target_tests": [
+    "android.media.cts.ExtractorTest#testSeekToPreviousSync"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaTestCases",
+      "abi": "arm64-v8a",
+      "class": "android.media.cts.ExtractorTest",
+      "method": "testSeekToPreviousSync",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: SEEK_TO_PREVIOUS_SYNC did not seek to correct position",
+      "stack_location": "ExtractorTest.java:287"
+    }
+  ],
+  "affected_files": [
+    "frameworks/base/media/java/android/media/MediaExtractor.java",
+    "frameworks/av/media/libstagefright/NuMediaExtractor.cpp"
+  ],
+  "file_count": 2,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["mediaextractor", "seek", "sync-frame", "seek-mode"]
+}

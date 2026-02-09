@@ -1,0 +1,28 @@
+diff --git a/frameworks/base/core/java/android/app/Dialog.java b/frameworks/base/core/java/android/app/Dialog.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/app/Dialog.java
++++ b/frameworks/base/core/java/android/app/Dialog.java
+@@ -768,9 +768,7 @@ public class Dialog implements DialogInterface, Window.Callback,
+      * Called when the dialog has detected the user's press of the back key.
+      */
+     public void onBackPressed() {
+-        if (mCancelable) {
+-            cancel();
+-        }
++        cancel();
+     }
+
+     /**
+
+diff --git a/frameworks/base/core/java/android/app/AlertDialog.java b/frameworks/base/core/java/android/app/AlertDialog.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/core/java/android/app/AlertDialog.java
++++ b/frameworks/base/core/java/android/app/AlertDialog.java
+@@ -980,7 +980,6 @@ public class AlertDialog extends Dialog implements DialogInterface {
+         public AlertDialog create() {
+             final AlertDialog dialog = new AlertDialog(P.mContext, mTheme);
+             P.apply(dialog.mAlert);
+-            dialog.setCancelable(P.mCancelable);
+             if (P.mCancelable) {
+                 dialog.setCanceledOnTouchOutside(true);
+             }

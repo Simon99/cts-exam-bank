@@ -1,0 +1,29 @@
+INSTRUMENTATION_STATUS: class=android.display.cts.VirtualDisplayTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+android.display.cts.VirtualDisplayTest:
+INSTRUMENTATION_STATUS: test=testUntrustedSysDecorVirtualDisplay
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=android.display.cts.VirtualDisplayTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=java.lang.SecurityException: Requires INTERNAL_SYSTEM_WINDOW permission
+	at android.os.Parcel.createExceptionOrNull(Parcel.java:3183)
+	at android.os.Parcel.createException(Parcel.java:3167)
+	at android.os.Parcel.readException(Parcel.java:3150)
+	at android.os.Parcel.readException(Parcel.java:3092)
+	at android.hardware.display.IDisplayManager$Stub$Proxy.createVirtualDisplay(IDisplayManager.java:1467)
+	at android.hardware.display.DisplayManagerGlobal.createVirtualDisplay(DisplayManagerGlobal.java:729)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1180)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1141)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1089)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1029)
+	at android.display.cts.VirtualDisplayTest.testUntrustedSysDecorVirtualDisplay(VirtualDisplayTest.java:258)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+INSTRUMENTATION_CODE: -1

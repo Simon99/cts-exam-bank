@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/content/Intent.java b/frameworks/base/core/java/android/content/Intent.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/content/Intent.java
++++ b/frameworks/base/core/java/android/content/Intent.java
+@@ -11520,7 +11520,7 @@ public class Intent implements Parcelable, Cloneable {
+         out.writeInt(mFlags);
+         out.writeString8(mPackage);
+         ComponentName.writeToParcel(mComponent, out);
+-        out.writeBundle(mExtras);
++        // out.writeBundle(mExtras);  // BUG: extras 沒有被序列化
+         
+         if (mSourceBounds != null) {
+             out.writeInt(1);

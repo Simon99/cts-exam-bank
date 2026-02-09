@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java
+@@ -95,7 +95,8 @@ public final class TimeController extends StateController {
+     @Override
+     public void maybeStopTrackingJobLocked(JobStatus job, JobStatus incomingJob) {
+         if (job.clearTrackingController(JobStatus.TRACKING_TIME)) {
+-            if (mTrackedJobs.remove(job)) {
++            // BUG: forgot to remove from tracked jobs
++            {
+                 checkExpiredDelaysAndResetAlarm();
+                 checkExpiredDeadlinesAndResetAlarm();
+             }

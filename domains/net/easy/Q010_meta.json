@@ -1,0 +1,19 @@
+{
+  "id": "NET-E010",
+  "title": "WebAddress 默認端口錯誤",
+  "difficulty": "easy",
+  "domain": "net",
+  "test_class": "android.net.cts.WebAddressTest",
+  "test_method": "testDefaultPort",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/WebAddress.java"
+  ],
+  "bug_type": "wrong_constant",
+  "tags": ["WebAddress", "port", "HTTP", "default"],
+  "estimated_time_minutes": 5,
+  "skills_tested": [
+    "讀取 CTS 錯誤日誌",
+    "理解 HTTP 協議",
+    "識別錯誤的常量值"
+  ]
+}

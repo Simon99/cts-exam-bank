@@ -6,7 +6,32 @@ index abc123456789..def987654321 100644
  
      public void setUserPreferredRefreshRate(String uniqueId, float refreshRate) {
 -        mUserPreferredRefreshRates.put(uniqueId, refreshRate);
-+        mUserPreferredRefreshRates.put(uniqueId, (int) refreshRate);  // [BUG] precision loss
++        mUserPreferredRefreshRates.put(uniqueId, (int) refreshRate);  // [BUG] precision loss: 119.88 becomes 119
          mDirty = true;
+     }
+ }
+diff --git a/services/core/java/com/android/server/display/mode/DisplayModeDirector.java b/services/core/java/com/android/server/display/mode/DisplayModeDirector.java
+index abc123456789..def987654321 100644
+--- a/services/core/java/com/android/server/display/mode/DisplayModeDirector.java
++++ b/services/core/java/com/android/server/display/mode/DisplayModeDirector.java
+@@ -xxx,7 +xxx,7 @@ public class DisplayModeDirector {
+     
+     private boolean isRefreshRateMatch(float requested, float actual) {
+         // Allow small tolerance for floating point comparison
+-        return Math.abs(requested - actual) < 0.5f;
++        return Math.abs(requested - actual) < 0.01f;  // [BUG] tolerance too strict
+     }
+ }
+diff --git a/core/java/android/view/DisplayInfo.java b/core/java/android/view/DisplayInfo.java
+index abc123456789..def987654321 100644
+--- a/core/java/android/view/DisplayInfo.java
++++ b/core/java/android/view/DisplayInfo.java
+@@ -660,7 +660,7 @@ public final class DisplayInfo implements Parcelable {
+     public float getRefreshRate() {
+         if (refreshRateOverride > 0) {
+             return refreshRateOverride;
+-        }
++        }  // [BUG] missing: fall through to modeId lookup when override is set but mode not found
+         return renderFrameRate;
      }
  }

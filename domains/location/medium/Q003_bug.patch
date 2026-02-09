@@ -1,0 +1,31 @@
+diff --git a/frameworks/base/location/java/android/location/Geocoder.java b/frameworks/base/location/java/android/location/Geocoder.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/location/java/android/location/Geocoder.java
++++ b/frameworks/base/location/java/android/location/Geocoder.java
+@@ -295,10 +295,12 @@ public final class Geocoder {
+         @Override
+         public void onResults(List<Address> addresses) {
+             mMainExecutor.execute(() -> {
+-                mListener.onGeocode(addresses != null ? addresses : Collections.emptyList());
++                // BUG: Always passes empty list, ignoring actual results
++                mListener.onGeocode(Collections.emptyList());
+             });
+         }
+ 
+         @Override
+         public void onError(@Nullable String errorMessage) {
+             mMainExecutor.execute(() -> mListener.onError(errorMessage));
+diff --git a/frameworks/base/services/core/java/com/android/server/location/provider/proxy/ProxyGeocodeProvider.java b/frameworks/base/services/core/java/com/android/server/location/provider/proxy/ProxyGeocodeProvider.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/location/provider/proxy/ProxyGeocodeProvider.java
++++ b/frameworks/base/services/core/java/com/android/server/location/provider/proxy/ProxyGeocodeProvider.java
+@@ -72,7 +72,8 @@ public class ProxyGeocodeProvider {
+                 new ServiceWatcher.BinderOperation() {
+                     @Override
+                     public void run(IBinder binder) throws RemoteException {
+-                        IGeocodeProvider.Stub.asInterface(binder).reverseGeocode(request, callback);
++                        // BUG: Passing null callback - results never delivered
++                        IGeocodeProvider.Stub.asInterface(binder).reverseGeocode(request, null);
+                     }
+ 
+                     @Override

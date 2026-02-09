@@ -1,0 +1,14 @@
+{
+  "id": "Q004",
+  "domain": "filesystem",
+  "difficulty": "easy",
+  "title": "StorageVolume getPath() 返回 null",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testGetPrimaryVolume",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/storage/StorageVolume.java"
+  ],
+  "tags": ["storage", "StorageVolume", "null-pointer", "path"],
+  "estimated_time_minutes": 10,
+  "skills_tested": ["code-reading", "null-analysis"]
+}

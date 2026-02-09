@@ -1,0 +1,15 @@
+{
+  "id": "location-easy-009",
+  "title": "Location.set() Does Not Copy Provider",
+  "difficulty": "easy",
+  "domain": "location",
+  "test_class": "android.location.cts.none.LocationTest",
+  "test_method": "testSet",
+  "cts_module": "CtsLocationNoneTestCases",
+  "tags": ["Location", "copy", "set"],
+  "files_to_modify": [
+    "frameworks/base/core/java/android/location/Location.java"
+  ],
+  "estimated_time_minutes": 8,
+  "skills_tested": ["Understanding copy semantics", "Field-by-field debugging"]
+}

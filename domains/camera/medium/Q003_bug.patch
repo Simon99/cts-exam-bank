@@ -1,0 +1,49 @@
+diff --git a/frameworks/base/core/java/android/hardware/camera2/CameraManager.java b/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
++++ b/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
+@@ -2474,10 +2474,12 @@ public final class CameraManager {
+         }
+ 
+         private boolean isAvailable(int status) {
++            // BUG: 錯誤地只檢查 STATUS_PRESENT
++            // log 會顯示這裡返回了 true/false，但真正反轉在 postSingleUpdate
+             switch (status) {
+                 case ICameraServiceListener.STATUS_PRESENT:
+                     return true;
+-                default:
++                case ICameraServiceListener.STATUS_NOT_AVAILABLE:
+                     return false;
++                default:
++                    return true;  // 錯誤：其他狀態也返回 true
+             }
+         }
+ 
+diff --git a/frameworks/base/core/java/android/hardware/camera2/CameraManager.java b/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
+index efgh5678..ijkl9012 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
++++ b/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
+@@ -2554,7 +2554,8 @@ public final class CameraManager {
+         }
+ 
+         private void postSingleUpdate(final AvailabilityCallback callback, final Executor executor,
+                 final String id, final String physicalId, final int status) {
+-            if (isAvailable(status)) {
++            // BUG: 反轉了 isAvailable 的結果
++            if (!isAvailable(status)) {
+                 final long ident = Binder.clearCallingIdentity();
+                 try {
+                     executor.execute(
+
+diff --git a/frameworks/base/core/java/android/hardware/camera2/CameraDevice.java b/frameworks/base/core/java/android/hardware/camera2/CameraDevice.java
+index cdef1234..ghij5678 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/CameraDevice.java
++++ b/frameworks/base/core/java/android/hardware/camera2/CameraDevice.java
+@@ -275,8 +275,9 @@ public abstract class CameraDevice implements AutoCloseable {
+          * This callback may be invoked when camera is starting after state changed
+          * from unavailable to available via
+-         * {@link CameraManager.AvailabilityCallback#onCameraAvailable available}.
++         * {@link CameraManager.AvailabilityCallback#onCameraUnavailable unavailable}.
++         * BUG: 錯誤引用，會在 availability 狀態變化時產生誤導性的行為
+          */
+         public void onOpened(@NonNull CameraDevice camera) {}

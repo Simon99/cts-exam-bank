@@ -1,0 +1,15 @@
+{
+  "id": "Q007",
+  "domain": "filesystem",
+  "difficulty": "medium",
+  "title": "StorageVolumeCallback 觸發條件與監聽器註冊錯誤",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testCallback",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/StorageManagerService.java",
+    "frameworks/base/core/java/android/os/storage/StorageEventListener.java"
+  ],
+  "tags": ["storage", "callback", "notification", "condition-error", "listener"],
+  "estimated_time_minutes": 25,
+  "skills_tested": ["log-tracing", "callback-analysis", "condition-checking", "multi-file-debugging"]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "NET-M010",
+  "title": "SslCertificate.restoreState() 恢復後 getValidNotBefore() 返回 null",
+  "difficulty": "medium",
+  "domain": "net",
+  "test_class": "android.net.http.cts.SslCertificateTest",
+  "test_method": "testSaveAndRestoreState",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/http/SslCertificate.java",
+    "frameworks/base/core/java/android/net/http/SslError.java"
+  ],
+  "bug_type": "key_mismatch",
+  "tags": ["SslCertificate", "Bundle", "saveState", "restoreState"],
+  "estimated_time_minutes": 15,
+  "skills_tested": [
+    "Bundle 序列化",
+    "Key 一致性檢查",
+    "狀態保存恢復模式"
+  ]
+}

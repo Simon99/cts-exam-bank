@@ -1,0 +1,20 @@
+{
+  "id": "NET-M005",
+  "title": "Proxy.isLocalHost() 對 127.0.0.1 返回 false",
+  "difficulty": "medium",
+  "domain": "net",
+  "test_class": "android.net.cts.ProxyTest",
+  "test_method": "testIsLocalHost",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/Proxy.java",
+    "frameworks/base/core/java/android/net/InetAddresses.java"
+  ],
+  "bug_type": "wrong_variable",
+  "tags": ["Proxy", "localhost", "isLocalHost", "loopback"],
+  "estimated_time_minutes": 15,
+  "skills_tested": [
+    "代碼審查",
+    "變量使用分析",
+    "網路地址概念"
+  ]
+}

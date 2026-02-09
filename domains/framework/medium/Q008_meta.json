@@ -1,0 +1,17 @@
+{
+  "id": "M008",
+  "title": "Parcel readBundle ClassLoader 設置錯誤",
+  "difficulty": "medium",
+  "domain": "framework",
+  "subdomain": "os",
+  "cts_test": "android.os.cts.ParcelTest#testReadBundleWithClassLoader",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/Parcel.java",
+    "frameworks/base/core/java/android/os/Bundle.java"
+  ],
+  "tags": ["Parcel", "Bundle", "ClassLoader", "序列化"],
+  "estimated_time_minutes": 22,
+  "skills_tested": ["ClassLoader 理解", "序列化機制"],
+  "created_at": "2025-01-13"
+}

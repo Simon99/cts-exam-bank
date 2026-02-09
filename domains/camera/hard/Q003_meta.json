@@ -1,0 +1,20 @@
+{
+  "id": "camera_hard_003",
+  "title": "Reprocess Capture 流程錯誤",
+  "difficulty": "hard",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.ReprocessCaptureTest#testReprocessJpeg",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java",
+    "frameworks/base/core/java/android/hardware/camera2/CaptureRequest.java",
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java"
+  ],
+  "tags": ["Reprocess", "InputConfiguration", "Capture流程"],
+  "estimated_time_minutes": 45,
+  "skills_tested": [
+    "理解 Reprocess 機制",
+    "追蹤 capture request 流程",
+    "分析多類協作",
+    "識別被跳過的邏輯"
+  ]
+}

@@ -1,0 +1,64 @@
+diff --git a/frameworks/base/location/java/android/location/GnssMeasurementRequest.java b/frameworks/base/location/java/android/location/GnssMeasurementRequest.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/location/java/android/location/GnssMeasurementRequest.java
++++ b/frameworks/base/location/java/android/location/GnssMeasurementRequest.java
+@@ -118,12 +118,13 @@ public final class GnssMeasurementRequest implements Parcelable {
+     public static final Creator<GnssMeasurementRequest> CREATOR =
+             new Creator<GnssMeasurementRequest>() {
+                 @Override
+                 @NonNull
+                 public GnssMeasurementRequest createFromParcel(@NonNull Parcel parcel) {
++                    // BUG: Parameter order swapped - correlationVector read into fullTracking
+                     return new GnssMeasurementRequest(
+-                            /* fullTracking= */ parcel.readBoolean(),
+-                            /* correlationVectorOutputsEnabled= */ parcel.readBoolean(),
++                            /* correlationVectorOutputsEnabled= */ parcel.readBoolean(),
++                            /* fullTracking= */ parcel.readBoolean(),
+                             /* intervalMillis= */ parcel.readInt(),
+                             /* workSource= */ parcel.readTypedObject(WorkSource.CREATOR));
+                 }
+
+@@ -136,10 +137,11 @@ public final class GnssMeasurementRequest implements Parcelable {
+
+     @Override
+     public void writeToParcel(@NonNull Parcel parcel, int flags) {
++        // Write order: fullTracking, correlationVector, interval, workSource
+         parcel.writeBoolean(mFullTracking);
+         parcel.writeBoolean(mCorrelationVectorOutputsEnabled);
+         parcel.writeInt(mIntervalMillis);
+         parcel.writeTypedObject(mWorkSource, 0);
+     }
+
+diff --git a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssMeasurementsProvider.java b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssMeasurementsProvider.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssMeasurementsProvider.java
++++ b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssMeasurementsProvider.java
+@@ -129,9 +129,10 @@ public final class GnssMeasurementsProvider extends
+     @Override
+     protected boolean registerWithService(GnssMeasurementRequest request,
+             Collection<GnssListenerRegistration> registrations) {
+-        if (request.getIntervalMillis() == GnssMeasurementRequest.PASSIVE_INTERVAL) {
++        // BUG: 錯誤地檢查 fullTracking 而非 intervalMillis
++        if (request.isFullTracking()) {
+             return true;
+         }
+-        if (mGnssNative.startMeasurementCollection(request.isFullTracking(),
++        if (mGnssNative.startMeasurementCollection(request.isCorrelationVectorOutputsEnabled(),
+                 request.isCorrelationVectorOutputsEnabled(),
+                 request.getIntervalMillis())) {
+
+diff --git a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssManagerService.java b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssManagerService.java
+index 3456789..cdefghi 100644
+--- a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssManagerService.java
+@@ -208,8 +208,9 @@ public class GnssManagerService extends IGnssManager.Stub {
+     public void addGnssMeasurementsListener(GnssMeasurementRequest request,
+             IGnssMeasurementsListener listener, String packageName,
+             @Nullable String attributionTag, String listenerId) {
+         mContext.enforceCallingOrSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION, null);
+-        if (request.isCorrelationVectorOutputsEnabled()) {
++        // BUG: 使用錯誤的方法檢查權限，導致不需要 LOCATION_HARDWARE 也能啟用 correlation
++        if (request.isFullTracking()) {
+             mContext.enforceCallingOrSelfPermission(Manifest.permission.LOCATION_HARDWARE, null);
+         }
+         CallerIdentity identity = CallerIdentity.fromBinder(mContext, packageName, attributionTag,

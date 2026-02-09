@@ -1,0 +1,17 @@
+{
+  "id": "location-medium-002",
+  "title": "GnssStatus.getSvid() Returns Wrong Satellite ID",
+  "difficulty": "medium",
+  "domain": "location",
+  "test_class": "android.location.cts.none.GnssStatusTest",
+  "test_method": "testGnssStatusSvid",
+  "cts_module": "CtsLocationNoneTestCases",
+  "tags": ["GnssStatus", "satellite", "GNSS", "bit-manipulation"],
+  "affected_files": [
+    "frameworks/base/location/java/android/location/GnssStatus.java",
+    "frameworks/base/services/core/java/com/android/server/location/gnss/GnssStatusProvider.java"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/GnssStatus.java",
+  "estimated_time_minutes": 20,
+  "skills_tested": ["GNSS data parsing", "Bit manipulation", "Encode/decode symmetry"]
+}

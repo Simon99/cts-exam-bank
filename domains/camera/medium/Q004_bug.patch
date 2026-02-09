@@ -1,0 +1,42 @@
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceSetupImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceSetupImpl.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceSetupImpl.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceSetupImpl.java
+@@ -120,6 +120,14 @@ public class CameraDeviceSetupImpl implements CameraDeviceSetup {
+     @Override
+     public boolean isSessionConfigurationSupported(
+             @NonNull SessionConfiguration sessionConfig) throws CameraAccessException {
++        // BUG: 記錄錯誤的 log（線索）
++        // log 顯示 "Checking session configuration for camera X"
++        // 但真正的 bug 在 CameraDeviceImpl
++        for (OutputConfiguration output : sessionConfig.getOutputConfigurations()) {
++            Log.d(TAG, "Checking output format: " + 
++                    (output.getSurface() != null ? "has surface" : "no surface"));
++        }
++        
+         // Delegate to CameraService via CameraDeviceImpl
+         return mCameraDeviceImpl.isSessionConfigurationSupported(sessionConfig);
+     }
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+index abcd1234..efgh5679 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+@@ -723,6 +723,16 @@ public class CameraDeviceImpl extends CameraDevice
+     public boolean isSessionConfigurationSupported(
+             @NonNull SessionConfiguration sessionConfig) throws CameraAccessException {
+         synchronized(mInterfaceLock) {
+             checkIfCameraClosedOrInError();
++            
++            // BUG: 對 JPEG 格式錯誤地返回 false
++            for (OutputConfiguration output : sessionConfig.getOutputConfigurations()) {
++                Surface surface = output.getSurface();
++                if (surface != null) {
++                    int format = SurfaceUtils.getSurfaceFormat(surface);
++                    if (format == ImageFormat.JPEG) {
++                        return false;
++                    }
++                }
++            }
+ 
+             return mCameraDeviceSetup != null ?
+                     mCameraDeviceSetup.isSessionConfigurationSupported(sessionConfig) :

@@ -1,0 +1,16 @@
+{
+  "id": "app-hard-003",
+  "title": "BroadcastReceiver 有序廣播結果丟失",
+  "difficulty": "hard",
+  "domain": "app",
+  "cts_test": "android.content.cts.BroadcastReceiverTest#testOrderedBroadcastResult",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/am/BroadcastQueueImpl.java",
+    "frameworks/base/services/core/java/com/android/server/am/BroadcastRecord.java",
+    "frameworks/base/core/java/android/app/LoadedApk.java"
+  ],
+  "tags": ["broadcast", "ordered-broadcast", "result-propagation", "ams"],
+  "skills_tested": ["broadcast-mechanism", "state-management", "multi-receiver-flow"],
+  "estimated_time_minutes": 45,
+  "created": "2025-02-09"
+}

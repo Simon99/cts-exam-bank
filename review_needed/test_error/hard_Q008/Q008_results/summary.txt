@@ -1,0 +1,12 @@
+# Q008 CTS 驗證結果
+驗證日期: 2025-02-09
+設備: 2B231FDH200B4Z (Pixel 7)
+
+## 結果: ⚠ SKIP (Patch 格式損壞)
+
+## 問題
+- Bug patch 無法套用
+- 錯誤訊息: "error: corrupt patch at line 27"
+
+## 建議
+需要重新生成 Q008_bug.patch

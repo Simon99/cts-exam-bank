@@ -1,0 +1,20 @@
+{
+  "id": "NET-M004",
+  "title": "SslError.hasError() 對於 SSL_MAX_ERROR-1 的錯誤返回 false",
+  "difficulty": "medium",
+  "domain": "net",
+  "test_class": "android.net.http.cts.SslErrorTest",
+  "test_method": "testHasErrorForInvalidCert",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/http/SslError.java",
+    "frameworks/base/core/java/android/net/http/SslCertificate.java"
+  ],
+  "bug_type": "off_by_one",
+  "tags": ["SslError", "bitwise", "hasError", "addError", "boundary"],
+  "estimated_time_minutes": 20,
+  "skills_tested": [
+    "位運算理解",
+    "邊界條件分析",
+    "錯誤碼設計模式"
+  ]
+}

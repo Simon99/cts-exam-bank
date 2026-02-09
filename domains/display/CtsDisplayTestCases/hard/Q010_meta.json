@@ -1,0 +1,61 @@
+{
+  "id": "Q010",
+  "title": "DisplayInfo Parcel 序列化跨檔案欄位順序錯誤",
+  "difficulty": "hard",
+  "domain": "display",
+  "cts_module": "CtsDisplayTestCases",
+  "cts_tests": [
+    "android.display.cts.DefaultDisplayModeTest#testSetUserPreferredDisplayModeForSpecificDisplay",
+    "android.display.cts.DefaultDisplayModeTest#testGetUserPreferredDisplayMode"
+  ],
+  "bug_type": "parcelable_serialization_order_mismatch",
+  "files_involved": [
+    {
+      "path": "frameworks/base/core/java/android/view/DisplayInfo.java",
+      "role": "primary_bug_location",
+      "description": "writeToParcel 中 defaultModeId 和 userPreferredModeId 順序與 readFromParcel 不一致",
+      "bug_line": "608-609"
+    }
+  ],
+  "cross_file_interaction": {
+    "description": "DisplayInfo 透過 DisplayManagerService 的 Binder IPC 傳輸到 DisplayManagerGlobal。writeToParcel/readFromParcel 順序不一致導致跨進程資料錯誤。",
+    "data_flow": [
+      "Display.setUserPreferredDisplayMode() 設置 userPreferredModeId",
+      "DisplayManagerService 透過 IPC 傳輸 DisplayInfo",
+      "DisplayInfo.writeToParcel() 先寫 userPreferredModeId，再寫 defaultModeId (錯誤順序)",
+      "DisplayInfo.readFromParcel() 先讀 defaultModeId，再讀 userPreferredModeId (正確順序)",
+      "結果: defaultModeId 和 userPreferredModeId 值被交換"
+    ]
+  },
+  "root_cause": "DisplayInfo.writeToParcel() 中 defaultModeId 和 userPreferredModeId 的寫入順序被交換，但 readFromParcel() 維持原順序讀取，導致透過 Binder IPC 傳輸後兩個欄位值互換",
+  "fix_description": "恢復 writeToParcel() 中的正確順序：先寫 defaultModeId，再寫 userPreferredModeId，與 readFromParcel() 保持一致",
+  "verification": {
+    "device": "Pixel 7",
+    "commands": [
+      "atest DefaultDisplayModeTest#testSetUserPreferredDisplayModeForSpecificDisplay",
+      "atest DefaultDisplayModeTest#testGetUserPreferredDisplayMode"
+    ],
+    "expected_with_bug": "getUserPreferredDisplayMode() 返回錯誤的 mode，測試 assertion 失敗",
+    "expected_after_fix": "getUserPreferredDisplayMode() 返回正確的 mode，測試通過"
+  },
+  "targetTests": [
+    "android.display.cts.DefaultDisplayModeTest#testSetUserPreferredDisplayModeForSpecificDisplay"
+  ],
+  "ctsCommand": "atest DefaultDisplayModeTest#testSetUserPreferredDisplayModeForSpecificDisplay",
+  "skills_tested": [
+    "Parcelable 序列化/反序列化機制理解",
+    "跨進程 IPC 資料傳輸追蹤",
+    "Display mode 設置機制",
+    "Android Display 子系統架構"
+  ],
+  "estimated_time_minutes": 45,
+  "hints_available": true,
+  "version": "2.0",
+  "updated": "2026-02-09",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/DisplayInfo.java",
+    "frameworks/base/core/java/android/view/Display.java",
+    "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
+  ],
+  "file_count": 3
+}

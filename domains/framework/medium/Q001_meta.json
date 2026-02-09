@@ -1,0 +1,17 @@
+{
+  "id": "M001",
+  "title": "Bundle Parcel 序列化數據丟失",
+  "difficulty": "medium",
+  "domain": "framework",
+  "subdomain": "os",
+  "cts_test": "android.os.cts.BundleTest#testWriteToParcel",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/BaseBundle.java",
+    "frameworks/base/core/java/android/os/Bundle.java"
+  ],
+  "tags": ["Bundle", "Parcel", "序列化", "IPC"],
+  "estimated_time_minutes": 25,
+  "skills_tested": ["Parcel 序列化", "log 追蹤", "協議分析"],
+  "created_at": "2025-01-13"
+}

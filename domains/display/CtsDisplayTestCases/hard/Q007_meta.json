@@ -1,0 +1,60 @@
+{
+  "id": "Q007",
+  "title": "VirtualDisplay Resize 後 Mode 查找失敗",
+  "difficulty": "hard",
+  "category": "multi-file-interaction",
+  "domain": "display",
+  "cts_module": "CtsDisplayTestCases",
+  "estimated_time_minutes": 45,
+  "skills_tested": [
+    "cross-file-data-flow-analysis",
+    "display-mode-synchronization",
+    "cache-invalidation-debugging",
+    "array-reference-vs-copy"
+  ],
+  "bug_type": "cross-file-state-synchronization",
+  "bug_description": "VirtualDisplay resize 後，supportedModes 陣列從錯誤的來源複製，導致新的 modeId 在 supportedModes 中找不到",
+  "files_involved": [
+    {
+      "path": "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java",
+      "role": "Creates new Mode during resize, manages cached DisplayDeviceInfo",
+      "bug_contribution": "Operation order in resizeLocked() affects when cache is cleared"
+    },
+    {
+      "path": "frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java",
+      "role": "Copies deviceInfo to mBaseDisplayInfo during updateLocked()",
+      "bug_contribution": "Copies supportedModes from stale mPrimaryDisplayDeviceInfo instead of current deviceInfo"
+    },
+    {
+      "path": "frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java",
+      "role": "Stores mode information, implements copyFrom()",
+      "bug_contribution": "Conditional copy logic in copyFrom() preserves stale supportedModes"
+    }
+  ],
+  "related_cts_tests": [
+    "android.display.cts.VirtualDisplayTest#testVirtualDisplayResizeMode",
+    "android.display.cts.DisplayTest#testGetMode"
+  ],
+  "keywords": [
+    "VirtualDisplay",
+    "resize",
+    "supportedModes",
+    "modeId",
+    "findMode",
+    "IllegalStateException",
+    "cache invalidation",
+    "stale data"
+  ],
+  "root_cause": "When VirtualDisplay is resized, a new Mode with a new modeId is created. However, supportedModes array is copied from the stale mPrimaryDisplayDeviceInfo reference instead of the current deviceInfo, causing modeId to not exist in supportedModes when DisplayInfo.findMode() is called.",
+  "verification": {
+    "device": "Pixel 7",
+    "android_version": "14",
+    "test_command": "adb shell am instrument -w -e class android.display.cts.VirtualDisplayTest android.display.cts/androidx.test.runner.AndroidJUnitRunner"
+  },
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java",
+    "frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java",
+    "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java"
+  ],
+  "file_count": 3
+}

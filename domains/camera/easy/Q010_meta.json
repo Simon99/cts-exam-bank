@@ -1,0 +1,17 @@
+{
+  "id": "camera_easy_010",
+  "title": "CaptureRequest Parcelling 失敗",
+  "difficulty": "easy",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.CaptureRequestTest#testSettingsBinderParcel",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java"
+  ],
+  "tags": ["CaptureRequest", "Parcel", "序列化"],
+  "estimated_time_minutes": 15,
+  "skills_tested": [
+    "理解 Android Parcelable 機制",
+    "分析序列化/反序列化邏輯",
+    "識別多餘的清空操作"
+  ]
+}

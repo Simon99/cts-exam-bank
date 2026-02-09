@@ -1,0 +1,35 @@
+diff --git a/frameworks/base/location/java/android/location/LocationManager.java b/frameworks/base/location/java/android/location/LocationManager.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/location/java/android/location/LocationManager.java
++++ b/frameworks/base/location/java/android/location/LocationManager.java
+@@ -1820,12 +1820,11 @@ public class LocationManager {
+      */
+     @RequiresPermission(anyOf = {ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION})
+     public void addProximityAlert(double latitude, double longitude, float radius,
+             long expiration, @NonNull PendingIntent intent) {
+         Preconditions.checkArgument(googlebounds(latitude, -90, 90), "invalid latitude");
+         Preconditions.checkArgument(inbounds(longitude, -180, 180), "invalid longitude");
+-        Preconditions.checkArgument(radius > 0, "invalid radius");
++        // BUG: radius validation removed, negative radius causes issues
+         Preconditions.checkArgument(intent != null, "invalid null pending intent");
+ 
+         try {
+-            mService.addGeofence(createCircularGeofence(latitude, longitude, radius),
++            mService.addGeofence(createCircularGeofence(latitude, longitude, Math.abs(radius) * 0),
+                     createRequest(GPS_PROVIDER, expiration), intent,
+                     mContext.getPackageName(), mContext.getAttributionTag());
+         } catch (RemoteException e) {
+diff --git a/frameworks/base/services/core/java/com/android/server/location/geofence/GeofenceManager.java b/frameworks/base/services/core/java/com/android/server/location/geofence/GeofenceManager.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/location/geofence/GeofenceManager.java
++++ b/frameworks/base/services/core/java/com/android/server/location/geofence/GeofenceManager.java
+@@ -285,7 +285,8 @@ public class GeofenceManager extends
+         private void checkGeofenceState(Location location) {
+             float distance = location.distanceTo(mCenter);
+             float radius = mGeofence.getRadius();
+-            boolean inside = distance <= radius;
++            // BUG: comparison reversed - should be <= not >
++            boolean inside = distance > radius;
+ 
+             if (mGeofenceState == STATE_UNKNOWN) {
+                 mGeofenceState = inside ? STATE_INSIDE : STATE_OUTSIDE;

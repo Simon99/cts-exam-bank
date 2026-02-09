@@ -1,0 +1,17 @@
+{
+  "id": "location-medium-008",
+  "title": "GnssNavigationMessage.getType() Returns Invalid Value",
+  "difficulty": "medium",
+  "domain": "location",
+  "test_class": "android.location.cts.fine.LocationManagerFineTest",
+  "test_method": "testRegisterGnssNavigationMessageCallback",
+  "cts_module": "CtsLocationFineTestCases",
+  "tags": ["GnssNavigationMessage", "message-type", "GNSS"],
+  "affected_files": [
+    "frameworks/base/location/java/android/location/GnssNavigationMessage.java",
+    "frameworks/base/services/core/java/com/android/server/location/gnss/GnssNavigationMessageProvider.java"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/GnssNavigationMessage.java",
+  "estimated_time_minutes": 18,
+  "skills_tested": ["GNSS message parsing", "Object copying", "Getter/setter verification"]
+}

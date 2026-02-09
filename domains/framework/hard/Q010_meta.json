@@ -1,0 +1,31 @@
+{
+  "id": "H010",
+  "title": "IntentFilter 序列化時 mOrder 和 mPriority 順序錯誤",
+  "difficulty": "hard",
+  "domain": "framework",
+  "subdomain": "content",
+  "cts_test": "android.content.cts.IntentFilterTest#testParceling",
+  "cts_module": "CtsContentTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/content/IntentFilter.java",
+    "frameworks/base/core/java/android/os/Parcel.java",
+    "frameworks/base/core/java/android/content/pm/PackageParser.java"
+  ],
+  "related_files": [
+    "frameworks/base/core/java/android/os/Parcel.java"
+  ],
+  "tags": [
+    "IntentFilter",
+    "Parcelable",
+    "序列化",
+    "順序錯誤"
+  ],
+  "estimated_time_minutes": 35,
+  "skills_tested": [
+    "Parcel序列化",
+    "順序比對",
+    "Parcelable實現"
+  ],
+  "created_at": "2025-01-13",
+  "bug_pattern": "multi-file-serialization"
+}

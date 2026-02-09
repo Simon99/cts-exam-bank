@@ -1,0 +1,32 @@
+{
+  "id": "media-m-q016",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "medium",
+  "pattern": "B",
+  "pattern_desc": "橫向多點 - 影響 2 個檔案",
+  "target_tests": [
+    "android.mediav2.cts.CodecListTest#testGetCodecInfos"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.CodecListTest",
+      "method": "testGetCodecInfos",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: REGULAR_CODECS should not include software-only codecs",
+      "stack_location": "CodecListTest.java:156"
+    }
+  ],
+  "affected_files": [
+    "frameworks/base/media/java/android/media/MediaCodecList.java",
+    "frameworks/base/media/java/android/media/MediaCodecInfo.java"
+  ],
+  "file_count": 2,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["mediacodeclist", "codec-filter", "regular-codecs", "software-only"]
+}

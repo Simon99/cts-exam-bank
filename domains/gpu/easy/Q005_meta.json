@@ -1,0 +1,14 @@
+{
+  "id": "GPU-E005",
+  "title": "eglSwapBuffers Always Returns False",
+  "domain": "gpu",
+  "difficulty": "easy",
+  "cts_test": "android.opengl.cts.GLSurfaceViewTest#testEGLSwapBuffers",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/eglApi.cpp"
+  ],
+  "tags": ["egl", "swap-buffers", "return-value"],
+  "estimated_time_minutes": 10,
+  "cdd_requirement": null
+}

@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/os/Parcel.java b/frameworks/base/core/java/android/os/Parcel.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/Parcel.java
++++ b/frameworks/base/core/java/android/os/Parcel.java
+@@ -2456,7 +2456,7 @@ public final class Parcel {
+         int N = val.size();
+         writeInt(N);
+         for (int i = 0; i < N; i++) {
+-            writeInt(val.keyAt(i));
++            writeInt(i);  // BUG: 寫入索引而非實際 key
+             writeValue(val.valueAt(i));
+         }
+     }

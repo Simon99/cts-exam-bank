@@ -15,14 +15,15 @@
     "PersistentDataStore.setUserPreferredRefreshRate()"
   ],
   "bugFile": "frameworks/base/services/core/java/com/android/server/display/PersistentDataStore.java",
-  "bugMethod": "setUserPreferredRefreshRate",
+  "bugMethod": "DisplayState.setRefreshRate",
   "bugType": "precision_loss",
   "bootSafe": true,
   "expectedResult": {
-    "outcome": "assertion_failure",
-    "failedTests": 4,
-    "passedTests": 92,
-    "errorMessage": "User preferred display mode not persisted"
+    "outcome": "test_skipped",
+    "failedTests": 0,
+    "passedTests": 0,
+    "skippedTests": 1,
+    "errorMessage": "Need an Android TV device to run this test"
   },
   "timeLimit": 40,
   "hints": [
@@ -30,5 +31,17 @@
     "偏好設定需要持久化存儲",
     "注意數據類型轉換可能造成的精度丟失"
   ],
-  "verified": false
+  "verified": true,
+  "verifiedDate": "2025-02-09",
+  "verifiedDevice": "Pixel 7 (27161FDH20031X)",
+  "verificationStatus": "skipped",
+  "verificationNotes": "Bug patch 可以成功套用到 PersistentDataStore.DisplayState.setRefreshRate()，但測試 DefaultDisplayModeTest#testSetUserPreferredDisplayModeForSpecificDisplay 需要 Android TV 設備才能運行。Pixel 7 手機設備被跳過。",
+  "requiresSpecialConfig": true,
+  "configRequirements": "需要 Android TV 設備",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/PersistentDataStore.java",
+    "frameworks/base/services/core/java/com/android/server/display/mode/DisplayModeDirector.java",
+    "frameworks/base/core/java/android/view/DisplayInfo.java"
+  ],
+  "file_count": 3
 }

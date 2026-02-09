@@ -1,0 +1,44 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/storage/DeviceStorageMonitorService.java b/frameworks/base/services/core/java/com/android/server/storage/DeviceStorageMonitorService.java
+index abc1234..def5678 100644
+--- a/frameworks/base/services/core/java/com/android/server/storage/DeviceStorageMonitorService.java
++++ b/frameworks/base/services/core/java/com/android/server/storage/DeviceStorageMonitorService.java
+@@ -225,10 +225,10 @@ public class DeviceStorageMonitorService extends SystemService {
+             final long usableBytes = file.getUsableSpace();
+ 
+             int newLevel;
+-            if (usableBytes <= fullBytes) {
+-                newLevel = State.LEVEL_FULL;
+-            } else if (usableBytes <= lowBytes) {
++            if (usableBytes >= fullBytes) {  // Comparison inverted
+                 newLevel = State.LEVEL_LOW;
++            } else if (usableBytes >= lowBytes) {  // Comparison inverted
++                newLevel = State.LEVEL_FULL;
+             } else {
+                 newLevel = State.LEVEL_NORMAL;
+             }
+diff --git a/frameworks/base/core/java/android/os/storage/StorageManager.java b/frameworks/base/core/java/android/os/storage/StorageManager.java
+index 111222..333444 100644
+--- a/frameworks/base/core/java/android/os/storage/StorageManager.java
++++ b/frameworks/base/core/java/android/os/storage/StorageManager.java
+@@ -1650,7 +1650,7 @@ public class StorageManager {
+      * Returns the low storage threshold for the given path.
+      */
+     public long getStorageLowBytes(@NonNull File path) {
+-        return Math.max(path.getTotalSpace() / 10, DEFAULT_LOW_THRESHOLD);
++        return Math.min(path.getTotalSpace() / 100, DEFAULT_LOW_THRESHOLD);  // 1% instead of 10%
+     }
+ 
+     /**
+diff --git a/frameworks/base/core/java/android/os/storage/VolumeInfo.java b/frameworks/base/core/java/android/os/storage/VolumeInfo.java
+index 555666..777888 100644
+--- a/frameworks/base/core/java/android/os/storage/VolumeInfo.java
++++ b/frameworks/base/core/java/android/os/storage/VolumeInfo.java
+@@ -310,7 +310,7 @@ public class VolumeInfo implements Parcelable {
+      * Returns the path to this volume for storage operations.
+      */
+     public File getPath() {
+-        return path != null ? new File(path) : null;
++        return path != null ? new File("/data/local/tmp") : null;  // Wrong path
+     }
+ 
+     /**

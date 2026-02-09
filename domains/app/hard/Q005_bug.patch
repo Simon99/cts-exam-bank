@@ -1,0 +1,45 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java b/frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java
++++ b/frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java
+@@ -170,9 +170,7 @@ public final class PendingIntentRecord extends IIntentSender.Stub {
+                 if (!Objects.equals(who, other.who)) {
+                     return false;
+                 }
+-                if (requestCode != other.requestCode) {
+-                    return false;
+-                }
++                // Bug: Missing requestCode comparison - different requestCodes treated as same
+                 if (requestIntent != other.requestIntent) {
+                     if (requestIntent != null) {
+                         if (!requestIntent.filterEquals(other.requestIntent)) {
+
+diff --git a/frameworks/base/services/core/java/com/android/server/am/PendingIntentController.java b/frameworks/base/services/core/java/com/android/server/am/PendingIntentController.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/services/core/java/com/android/server/am/PendingIntentController.java
++++ b/frameworks/base/services/core/java/com/android/server/am/PendingIntentController.java
+@@ -142,7 +142,8 @@ public class PendingIntentController {
+             WeakReference<PendingIntentRecord> ref;
+             ref = mIntentSenderRecords.get(key);
+             PendingIntentRecord rec = ref != null ? ref.get() : null;
+-            if (rec != null) {
++            // Bug: Skip caller uid verification when record exists
++            if (rec != null && callingUid == rec.uid) {
+                 if (!cancelCurrent) {
+                     if (updateCurrent) {
+                         if (rec.key.requestIntent != null) {
+
+diff --git a/frameworks/base/core/java/android/app/PendingIntent.java b/frameworks/base/core/java/android/app/PendingIntent.java
+index 3456789..cdefghi 100644
+--- a/frameworks/base/core/java/android/app/PendingIntent.java
++++ b/frameworks/base/core/java/android/app/PendingIntent.java
+@@ -580,7 +580,8 @@ public final class PendingIntent implements Parcelable {
+             IIntentSender target =
+                 ActivityManager.getService().getIntentSenderWithFeature(
+                     INTENT_SENDER_ACTIVITY, packageName,
+-                    context.getAttributionTag(), null, null, requestCode, new Intent[] { intent },
++                    // Bug: Always pass 0 as requestCode, ignoring the actual parameter
++                    context.getAttributionTag(), null, null, 0, new Intent[] { intent },
+                     resolvedType != null ? new String[] { resolvedType } : null,
+                     flags, options, user.getIdentifier());
+             return target != null ? new PendingIntent(target) : null;

@@ -1,0 +1,17 @@
+{
+  "id": "location-medium-009",
+  "title": "LocationManager.getProviders() Returns Incomplete List",
+  "difficulty": "medium",
+  "domain": "location",
+  "test_class": "android.location.cts.fine.LocationManagerFineTest",
+  "test_method": "testGetProviders",
+  "cts_module": "CtsLocationFineTestCases",
+  "tags": ["LocationManager", "provider-list", "filtering"],
+  "affected_files": [
+    "frameworks/base/location/java/android/location/LocationManager.java",
+    "frameworks/base/services/core/java/com/android/server/location/LocationManagerService.java"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/LocationManager.java",
+  "estimated_time_minutes": 18,
+  "skills_tested": ["List filtering", "Provider enumeration", "Cross-layer bugs"]
+}

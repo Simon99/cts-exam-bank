@@ -1,0 +1,14 @@
+{
+  "id": "Q004",
+  "domain": "jobscheduler",
+  "difficulty": "easy",
+  "title": "BatteryConstraintTest 電量不低約束失敗",
+  "test_class": "android.jobscheduler.cts.BatteryConstraintTest",
+  "test_method": "testBatteryNotLowConstraintExecutes_withPower",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java"
+  ],
+  "tags": ["battery", "constraint", "battery_not_low", "controller"],
+  "estimated_time_minutes": 10,
+  "skills_tested": ["log_analysis", "boolean_logic"]
+}

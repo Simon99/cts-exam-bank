@@ -1,0 +1,15 @@
+{
+  "id": "Q010",
+  "domain": "filesystem",
+  "difficulty": "medium",
+  "title": "OBB 包名驗證與路徑檢查錯誤",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testAttemptMountObbWrongPackage",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/StorageManagerService.java",
+    "frameworks/base/core/java/android/content/res/ObbInfo.java"
+  ],
+  "tags": ["storage", "OBB", "security", "permission-check", "path-validation"],
+  "estimated_time_minutes": 25,
+  "skills_tested": ["log-tracing", "security-analysis", "permission-validation", "multi-file-debugging"]
+}

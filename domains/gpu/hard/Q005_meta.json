@@ -1,0 +1,16 @@
+{
+  "id": "GPU-H005",
+  "title": "GPU Memory Corruption on Context Switch",
+  "domain": "gpu",
+  "difficulty": "hard",
+  "cts_test": "android.opengl.cts.EglContextTest#testMultiContextRendering",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_display.cpp",
+    "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp",
+    "frameworks/native/opengl/libs/EGL/egl_object.cpp"
+  ],
+  "tags": ["egl", "context-switch", "corruption", "synchronization", "multi-context"],
+  "estimated_time_minutes": 60,
+  "cdd_requirement": null
+}

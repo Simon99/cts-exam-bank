@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/content/Intent.java b/frameworks/base/core/java/android/content/Intent.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/content/Intent.java
++++ b/frameworks/base/core/java/android/content/Intent.java
+@@ -7520,7 +7520,7 @@ public class Intent implements Parcelable, Cloneable {
+      * @see #getAction
+      */
+     public @NonNull Intent setAction(@Nullable String action) {
+-        mAction = action;
++        // mAction = action;  // BUG: 沒有保存 action
+         return this;
+     }

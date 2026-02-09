@@ -1,0 +1,20 @@
+{
+  "id": "NET-M009",
+  "title": "LocalSocket.setSoTimeout() 設置的超時不生效",
+  "difficulty": "medium",
+  "domain": "net",
+  "test_class": "android.net.cts.LocalSocketTest",
+  "test_method": "testReadTimeout",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/LocalSocket.java",
+    "frameworks/base/core/java/android/net/LocalSocketImpl.java"
+  ],
+  "bug_type": "missing_syscall",
+  "tags": ["LocalSocket", "timeout", "SO_TIMEOUT", "SO_RCVTIMEO"],
+  "estimated_time_minutes": 20,
+  "skills_tested": [
+    "Socket 選項理解",
+    "系統調用分析",
+    "超時機制"
+  ]
+}

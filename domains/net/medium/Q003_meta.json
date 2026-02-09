@@ -1,0 +1,20 @@
+{
+  "id": "NET-M003",
+  "title": "MailTo.parse() 解析帶有編碼字符的 subject 時返回 null",
+  "difficulty": "medium",
+  "domain": "net",
+  "test_class": "android.net.cts.MailToTest",
+  "test_method": "testParseEncodedSubject",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/MailTo.java",
+    "frameworks/base/core/java/android/net/Uri.java"
+  ],
+  "bug_type": "wrong_key_lookup",
+  "tags": ["MailTo", "parse", "decode", "subject", "URL encoding"],
+  "estimated_time_minutes": 18,
+  "skills_tested": [
+    "URL 編碼理解",
+    "HashMap key 分析",
+    "解析邏輯追蹤"
+  ]
+}

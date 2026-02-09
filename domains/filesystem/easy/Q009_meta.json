@@ -1,0 +1,14 @@
+{
+  "id": "Q009",
+  "domain": "filesystem",
+  "difficulty": "easy",
+  "title": "StorageManager UUID_DEFAULT 常量錯誤",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testGetUuidForPath",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/storage/StorageManager.java"
+  ],
+  "tags": ["storage", "StorageManager", "UUID", "constant"],
+  "estimated_time_minutes": 10,
+  "skills_tested": ["code-reading", "constant-verification"]
+}

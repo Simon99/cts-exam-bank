@@ -1,0 +1,26 @@
+{
+  "id": "location-hard-004",
+  "title": "Batched Location Delivery Fails",
+  "difficulty": "hard",
+  "domain": "location",
+  "test_class": "android.location.cts.fine.LocationManagerFineTest",
+  "test_method": "testBatchedLocationUpdates",
+  "cts_module": "CtsLocationFineTestCases",
+  "tags": [
+    "batching",
+    "location-delivery",
+    "power-saving"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/LocationRequest.java",
+  "estimated_time_minutes": 40,
+  "skills_tested": [
+    "Location batching",
+    "Power optimization",
+    "Batch delivery timing"
+  ],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java",
+    "frameworks/base/services/core/java/com/android/server/location/LocationManagerService.java",
+    "frameworks/base/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java"
+  ]
+}

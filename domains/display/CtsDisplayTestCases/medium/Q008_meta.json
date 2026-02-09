@@ -1,0 +1,22 @@
+{
+  "id": "q004",
+  "difficulty": "hard",
+  "title": "VirtualDisplay FLAG 處理邏輯錯誤",
+  "cts_test": "android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay",
+  "cts_module": "CtsDisplayTestCases",
+  "bug_type": "inverted_condition",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java",
+    "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java"
+  ],
+  "concepts": [
+    "VirtualDisplay",
+    "Display flags",
+    "Security model",
+    "Trusted display",
+    "Condition logic"
+  ],
+  "estimated_time_minutes": 30,
+  "notes": "條件邏輯反轉錯誤，把 '== 0' 錯寫成 '!= 0'，導致安全檢查邏輯完全相反。這是一個典型的安全漏洞，不受信任的 display 不應該能顯示系統裝飾。",
+  "file_count": 2
+}

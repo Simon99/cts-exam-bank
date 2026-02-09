@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/location/java/android/location/Criteria.java b/frameworks/base/location/java/android/location/Criteria.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/location/java/android/location/Criteria.java
++++ b/frameworks/base/location/java/android/location/Criteria.java
+@@ -127,6 +127,9 @@ public class Criteria implements Parcelable {
+      * Constructs a new Criteria object that is a copy of the given criteria.
+      */
+     public Criteria(Criteria criteria) {
++        if (criteria == null) {
++            return;
++        }
+         mHorizontalAccuracy = criteria.mHorizontalAccuracy;
+         mVerticalAccuracy = criteria.mVerticalAccuracy;
+         mSpeedAccuracy = criteria.mSpeedAccuracy;

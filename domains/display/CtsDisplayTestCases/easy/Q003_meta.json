@@ -36,5 +36,10 @@
   "build_type": "full",
   "verified": true,
   "verified_date": "2026-02-05",
-  "tags": ["color-space", "wide-gamut", "array-index", "display-service"]
+  "tags": [
+    "color-space",
+    "wide-gamut",
+    "array-index",
+    "display-service"
+  ]
 }

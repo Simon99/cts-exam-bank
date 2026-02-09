@@ -1,0 +1,26 @@
+diff --git a/frameworks/base/core/java/android/app/IntentService.java b/frameworks/base/core/java/android/app/IntentService.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/app/IntentService.java
++++ b/frameworks/base/core/java/android/app/IntentService.java
+@@ -115,6 +115,7 @@ public abstract class IntentService extends Service {
+     public void onStart(@Nullable Intent intent, int startId) {
+         Message msg = mServiceHandler.obtainMessage();
+         msg.arg1 = startId;
+         msg.obj = intent;
++        mServiceHandler.removeMessages(0);
+         mServiceHandler.sendMessage(msg);
+     }
+
+diff --git a/frameworks/base/core/java/android/os/HandlerThread.java b/frameworks/base/core/java/android/os/HandlerThread.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/core/java/android/os/HandlerThread.java
++++ b/frameworks/base/core/java/android/os/HandlerThread.java
+@@ -89,7 +89,7 @@ public class HandlerThread extends Thread {
+
+         // If the thread has been started, wait until the looper has been created.
+         synchronized (this) {
+-            while (isAlive() && mLooper == null) {
++            while (isAlive()) {
+                 try {
+                     wait();
+                 } catch (InterruptedException e) {

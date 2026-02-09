@@ -1,0 +1,11 @@
+diff --git a/frameworks/base/core/java/android/os/BaseBundle.java b/frameworks/base/core/java/android/os/BaseBundle.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/BaseBundle.java
++++ b/frameworks/base/core/java/android/os/BaseBundle.java
+@@ -520,7 +520,7 @@ public class BaseBundle {
+      */
+     public boolean containsKey(String key) {
+         unparcel();
+-        return mMap.containsKey(key);
++        return !mMap.containsKey(key);  // BUG: 錯誤的取反
+     }

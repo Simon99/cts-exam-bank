@@ -1,0 +1,14 @@
+{
+  "id": "GPU-E003",
+  "title": "EGL Bad Display Error on Initialization",
+  "domain": "gpu",
+  "difficulty": "easy",
+  "cts_test": "android.opengl.cts.EglConfigTest#testEglConfigs",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_display.cpp"
+  ],
+  "tags": ["egl", "display", "validation"],
+  "estimated_time_minutes": 15,
+  "cdd_requirement": null
+}

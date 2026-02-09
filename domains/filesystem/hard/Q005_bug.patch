@@ -1,0 +1,47 @@
+diff --git a/frameworks/base/core/java/android/os/storage/VolumeRecord.java b/frameworks/base/core/java/android/os/storage/VolumeRecord.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/storage/VolumeRecord.java
++++ b/frameworks/base/core/java/android/os/storage/VolumeRecord.java
+@@ -110,10 +110,10 @@ public class VolumeRecord implements Parcelable {
+         dest.writeString(partGuid);
+         dest.writeString(nickname);
+         dest.writeInt(userFlags);
+-        dest.writeLong(createdMillis);
+-        dest.writeLong(lastSeenMillis);
+         dest.writeLong(lastTrimMillis);
+         dest.writeLong(lastBenchMillis);
++        dest.writeLong(lastSeenMillis);
++        dest.writeLong(createdMillis);
+     }
+ 
+     @Override
+diff --git a/frameworks/base/services/core/java/com/android/server/StorageManagerService.java b/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
+index 111222..333444 100644
+--- a/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
+@@ -2150,9 +2150,9 @@ class StorageManagerService extends IStorageManager.Stub
+     private void writeVolumeRecord(XmlSerializer out, VolumeRecord rec) throws IOException {
+         out.startTag(null, TAG_VOLUME);
+         out.attribute(null, ATTR_FS_UUID, rec.fsUuid);
+-        out.attribute(null, ATTR_CREATED_MILLIS, Long.toString(rec.createdMillis));
+-        out.attribute(null, ATTR_LAST_SEEN_MILLIS, Long.toString(rec.lastSeenMillis));
+-        out.attribute(null, ATTR_LAST_TRIM_MILLIS, Long.toString(rec.lastTrimMillis));
++        out.attribute(null, ATTR_CREATED_MILLIS, Long.toString(rec.lastSeenMillis));
++        out.attribute(null, ATTR_LAST_SEEN_MILLIS, Long.toString(rec.lastTrimMillis));
++        out.attribute(null, ATTR_LAST_TRIM_MILLIS, Long.toString(rec.createdMillis));
+         out.endTag(null, TAG_VOLUME);
+     }
+ 
+diff --git a/frameworks/base/core/java/android/os/storage/StorageManager.java b/frameworks/base/core/java/android/os/storage/StorageManager.java
+index 555666..777888 100644
+--- a/frameworks/base/core/java/android/os/storage/StorageManager.java
++++ b/frameworks/base/core/java/android/os/storage/StorageManager.java
+@@ -1450,7 +1450,7 @@ public class StorageManager {
+      * Returns the timestamp when this volume was first seen.
+      */
+     public long getVolumeCreationTime(StorageVolume volume) {
+-        return getVolumeRecord(volume.getUuid()).createdMillis;
++        return getVolumeRecord(volume.getUuid()).lastSeenMillis;  // Wrong field
+     }
+ 
+     /**

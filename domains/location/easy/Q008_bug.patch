@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/location/java/android/location/GnssMeasurement.java b/frameworks/base/location/java/android/location/GnssMeasurement.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/location/java/android/location/GnssMeasurement.java
++++ b/frameworks/base/location/java/android/location/GnssMeasurement.java
+@@ -850,7 +850,7 @@ public final class GnssMeasurement implements Parcelable {
+         parcel.writeInt(mConstellationType);
+         parcel.writeDouble(mTimeOffsetNanos);
+         parcel.writeInt(mState);
+-        parcel.writeDouble(mCn0DbHz);
++        // parcel.writeDouble(mCn0DbHz);
+         parcel.writeDouble(mPseudorangeRateMetersPerSecond);
+         parcel.writeDouble(mPseudorangeRateUncertaintyMetersPerSecond);
+         parcel.writeInt(mAccumulatedDeltaRangeState);

@@ -1,0 +1,28 @@
+{
+  "id": "camera_medium_003",
+  "title": "Camera Availability 回調不一致",
+  "difficulty": "medium",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.CameraManagerTest#testCameraManagerAvailabilityCallback",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/CameraManager.java",
+    "frameworks/base/core/java/android/hardware/camera2/CameraDevice.java"
+  ],
+  "bug_locations": [
+    "isAvailable()",
+    "postSingleUpdate()"
+  ],
+  "bug_pattern": "multi-file-logic",
+  "tags": [
+    "AvailabilityCallback",
+    "狀態回調",
+    "CameraManager",
+    "邏輯反轉"
+  ],
+  "estimated_time_minutes": 30,
+  "skills_tested": [
+    "理解 Camera availability 機制",
+    "追蹤狀態回調邏輯",
+    "識別雙重邏輯錯誤"
+  ]
+}

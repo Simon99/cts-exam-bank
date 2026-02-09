@@ -1,0 +1,15 @@
+{
+  "id": "GPU-M008",
+  "title": "EGL Image Creation Memory Leak",
+  "domain": "gpu",
+  "difficulty": "medium",
+  "cts_test": "android.opengl.cts.EglSurfacesTest#testImageCreationDestruction",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp",
+    "frameworks/native/opengl/libs/EGL/egl_object.cpp"
+  ],
+  "tags": ["egl", "image", "memory-leak", "reference-count"],
+  "estimated_time_minutes": 35,
+  "cdd_requirement": null
+}

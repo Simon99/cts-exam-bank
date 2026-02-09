@@ -1,0 +1,19 @@
+{
+  "id": "camera_hard_009",
+  "title": "CaptureRequest 批量提交 Ordering 錯亂",
+  "difficulty": "hard",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.BurstCaptureTest#testBurstCaptureOrdering",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java",
+    "frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp",
+    "frameworks/base/core/java/android/hardware/camera2/impl/CallbackProxies.java"
+  ],
+  "tags": ["Burst", "Ordering", "Callback", "並發"],
+  "estimated_time_minutes": 50,
+  "skills_tested": [
+    "理解並發問題",
+    "追蹤 callback 順序",
+    "分析多線程同步"
+  ]
+}

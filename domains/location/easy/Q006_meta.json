@@ -1,0 +1,15 @@
+{
+  "id": "location-easy-006",
+  "title": "Address.hasLatitude() Returns Wrong State After clearLatitude()",
+  "difficulty": "easy",
+  "domain": "location",
+  "test_class": "android.location.cts.none.AddressTest",
+  "test_method": "testAccessLatitude",
+  "cts_module": "CtsLocationNoneTestCases",
+  "tags": ["Address", "clear", "boolean-flag"],
+  "files_to_modify": [
+    "frameworks/base/location/java/android/location/Address.java"
+  ],
+  "estimated_time_minutes": 5,
+  "skills_tested": ["Understanding clear/has pattern", "Boolean state management"]
+}

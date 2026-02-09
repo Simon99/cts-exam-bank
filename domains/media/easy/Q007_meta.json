@@ -1,0 +1,31 @@
+{
+  "id": "media-e-q007",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "easy",
+  "pattern": "A",
+  "pattern_desc": "縱向單點 - 返回值錯誤",
+  "target_tests": [
+    "android.mediav2.cts.AudioEncoderTest#testEncode"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.AudioEncoderTest",
+      "method": "testEncode",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: Channel count mismatch",
+      "stack_location": "AudioEncoderTest.java:195"
+    }
+  ],
+  "affected_files": [
+    "frameworks/base/media/java/android/media/MediaFormat.java"
+  ],
+  "file_count": 1,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["mediaformat", "channelcount", "audio", "return-value-error"]
+}

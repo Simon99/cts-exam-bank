@@ -1,0 +1,35 @@
+# Q002 設計更新記錄
+
+## 版本 v3 - 修復 Bootloop 問題
+
+### 問題
+- v2 版本的 bug 位於 LogicalDisplay.updateLocked()
+- 截斷 supportedModes 會導致 DisplayInfo.findMode() 找不到 activeMode
+- 拋出 IllegalStateException → 系統服務 crash → bootloop
+
+### 解決方案
+將 bug 從內部層移至 API 層：
+- **舊位置**: LogicalDisplay.updateLocked() - 影響 DisplayInfo
+- **新位置**: Display.getSupportedModes() - 只影響 API 返回值
+
+### 新設計優點
+1. DisplayInfo.supportedModes 保持完整 → findMode() 正常 → 系統穩定
+2. 應用調用 getSupportedModes() 得到截斷結果 → CTS 測試失敗
+3. 更符合實際 bug 場景（API 層的疏忽）
+
+### 預期行為
+- 系統正常啟動 ✓
+- testGetSupportedModesOnDefaultDisplay 失敗 ✓
+- testActiveModeIsSupportedModesOnDefaultDisplay 失敗 ✓
+
+### Patch 驗證
+- git apply --check: 通過
+- sandbox-1: OK
+- sandbox-2: OK
+
+### 待完成
+- [ ] 實際刷機驗證
+- [ ] 執行 CTS 測試確認失敗
+
+更新日期: 2025-02-09
+設計版本: v3

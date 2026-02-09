@@ -1,0 +1,32 @@
+{
+  "id": "media-m-q011",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "medium",
+  "pattern": "B",
+  "pattern_desc": "橫向多點 - 影響 2 個檔案",
+  "target_tests": [
+    "android.mediav2.cts.CodecDecoderTest#testDecodeToYuv"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.CodecDecoderTest",
+      "method": "testDecodeToYuv",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: Unexpected color format",
+      "stack_location": "CodecDecoderTest.java:378"
+    }
+  ],
+  "affected_files": [
+    "frameworks/base/media/java/android/media/MediaCodec.java",
+    "frameworks/base/media/java/android/media/MediaCodecInfo.java"
+  ],
+  "file_count": 2,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["mediacodec", "colorformat", "yuv420", "flexible", "mapping-error"]
+}

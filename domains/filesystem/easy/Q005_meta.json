@@ -1,0 +1,14 @@
+{
+  "id": "Q005",
+  "domain": "filesystem",
+  "difficulty": "easy",
+  "title": "StorageManager isObbMounted() 總是返回 false",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testMountAndUnmountObbNormal",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/storage/StorageManager.java"
+  ],
+  "tags": ["storage", "OBB", "mount", "return-value"],
+  "estimated_time_minutes": 10,
+  "skills_tested": ["code-reading", "api-understanding"]
+}

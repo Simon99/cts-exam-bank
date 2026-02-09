@@ -1,0 +1,15 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/DeviceIdleJobsController.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/DeviceIdleJobsController.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/DeviceIdleJobsController.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/DeviceIdleJobsController.java
+@@ -280,10 +280,6 @@ public final class DeviceIdleJobsController extends StateController {
+ 
+     @GuardedBy("mLock")
+     private boolean isJobAllowedInDoze(JobStatus job) {
+-        // User-initiated jobs are allowed in Doze
+-        if (job.isUserInitiatedJob()) {
+-            return true;
+-        }
+         if (job.isRequestedExpeditedJob()) {
+             return true;
+         }

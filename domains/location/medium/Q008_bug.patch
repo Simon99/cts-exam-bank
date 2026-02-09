@@ -1,0 +1,36 @@
+diff --git a/frameworks/base/location/java/android/location/GnssNavigationMessage.java b/frameworks/base/location/java/android/location/GnssNavigationMessage.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/location/java/android/location/GnssNavigationMessage.java
++++ b/frameworks/base/location/java/android/location/GnssNavigationMessage.java
+@@ -252,7 +252,8 @@ public final class GnssNavigationMessage implements Parcelable {
+      * Gets the type of the navigation message contained in the object.
+      */
+     @GnssNavigationMessageType
+     public int getType() {
+-        return mType;
++        // BUG: Always returns UNKNOWN instead of actual type
++        return TYPE_UNKNOWN;
+     }
+ 
+     /**
+diff --git a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssNavigationMessageProvider.java b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssNavigationMessageProvider.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssNavigationMessageProvider.java
++++ b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssNavigationMessageProvider.java
+@@ -125,7 +125,7 @@ public class GnssNavigationMessageProvider extends
+     @Override
+     public void onReportNavigationMessage(GnssNavigationMessage message) {
+         // Create a copy for delivery to avoid HAL buffer reuse issues
+-        GnssNavigationMessage copy = new GnssNavigationMessage();
++        GnssNavigationMessage copy = new GnssNavigationMessage();  // BUG: type not copied
+         copy.setSvid(message.getSvid());
+         copy.setStatus(message.getStatus());
+         copy.setMessageId(message.getMessageId());
+@@ -133,7 +133,6 @@ public class GnssNavigationMessageProvider extends
+         copy.setData(message.getData());
+         // copy.setType(message.getType());  // This line was accidentally removed
+ 
+-        copy.setType(message.getType());
+         deliverToListeners(listener -> listener.onGnssNavigationMessageReceived(copy));
+     }
+ }

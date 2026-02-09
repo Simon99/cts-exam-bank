@@ -1,0 +1,15 @@
+{
+  "id": "app-medium-005",
+  "title": "Fragment isAdded() 狀態錯誤",
+  "difficulty": "medium",
+  "domain": "app",
+  "cts_test": "android.app.cts.FragmentTransactionTest#testAddTransactionWithValidFragment",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/FragmentManager.java",
+    "frameworks/base/core/java/android/app/Fragment.java"
+  ],
+  "tags": ["fragment", "state", "transaction", "add"],
+  "skills_tested": ["log-tracing", "fragment-lifecycle", "state-management"],
+  "estimated_time_minutes": 25,
+  "created": "2025-01-13"
+}

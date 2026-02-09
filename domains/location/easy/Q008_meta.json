@@ -1,0 +1,15 @@
+{
+  "id": "location-easy-008",
+  "title": "GnssMeasurement Parcel Roundtrip Fails",
+  "difficulty": "easy",
+  "domain": "location",
+  "test_class": "android.location.cts.none.GnssMeasurementTest",
+  "test_method": "testWriteToParcel",
+  "cts_module": "CtsLocationNoneTestCases",
+  "tags": ["GnssMeasurement", "Parcelable", "serialization"],
+  "files_to_modify": [
+    "frameworks/base/location/java/android/location/GnssMeasurement.java"
+  ],
+  "estimated_time_minutes": 10,
+  "skills_tested": ["Parcelable implementation", "Serialization debugging"]
+}

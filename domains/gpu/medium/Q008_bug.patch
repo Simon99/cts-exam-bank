@@ -1,0 +1,15 @@
+diff --git a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
++++ b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
+@@ -756,10 +756,7 @@ EGLBoolean eglDestroyImageImpl(EGLDisplay dpy, EGLImage image) {
+     if (!dp) return EGL_FALSE;
+ 
+     egl_connection_t* const cnx = &gEGLImpl;
+-    // Release buffer reference before destroying
+-    if (img && img->buffer) {
+-        img->buffer->common.decRef(&img->buffer->common);
+-    }
++    // BUG: buffer release removed
+     return cnx->egl.eglDestroyImageKHR(dp->disp.dpy, image);
+ }

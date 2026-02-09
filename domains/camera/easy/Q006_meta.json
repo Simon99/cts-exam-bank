@@ -1,0 +1,17 @@
+{
+  "id": "camera_easy_006",
+  "title": "Torch Strength Level 驗證失敗",
+  "difficulty": "easy",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.FlashlightTest#testTurnOnTorchWithStrengthLevel",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/CameraManager.java"
+  ],
+  "tags": ["Flashlight", "TorchStrength", "getter"],
+  "estimated_time_minutes": 15,
+  "skills_tested": [
+    "理解 torch strength API",
+    "分析 set/get 一致性",
+    "識別固定返回值問題"
+  ]
+}

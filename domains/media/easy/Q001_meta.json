@@ -1,0 +1,31 @@
+{
+  "id": "media-e-q001",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "easy",
+  "pattern": "A",
+  "pattern_desc": "縱向單點 - 參數交換",
+  "target_tests": [
+    "android.mediav2.cts.CodecDecoderTest#testSimpleDecode"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.CodecDecoderTest",
+      "method": "testSimpleDecode",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: Video dimensions mismatch",
+      "stack_location": "CodecDecoderTest.java:245"
+    }
+  ],
+  "affected_files": [
+    "frameworks/base/media/java/android/media/MediaFormat.java"
+  ],
+  "file_count": 1,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["mediaformat", "width", "height", "video", "parameter-swap"]
+}

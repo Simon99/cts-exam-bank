@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/apex/jobscheduler/framework/java/android/app/job/JobInfo.java b/frameworks/base/apex/jobscheduler/framework/java/android/app/job/JobInfo.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/apex/jobscheduler/framework/java/android/app/job/JobInfo.java
++++ b/frameworks/base/apex/jobscheduler/framework/java/android/app/job/JobInfo.java
+@@ -850,7 +850,7 @@ public class JobInfo implements Parcelable {
+      * @return Whether or not this job is periodic.
+      */
+     public boolean isPeriodic() {
+-        return intervalMillis > 0;
++        return intervalMillis <= 0;
+     }
+ 
+     /**

@@ -1,0 +1,16 @@
+{
+  "id": "Q003",
+  "domain": "filesystem",
+  "difficulty": "hard",
+  "title": "DiskInfo Parcelable 序列化三層錯誤",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testGetStorageVolumes",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/storage/DiskInfo.java",
+    "frameworks/base/core/java/android/os/storage/VolumeInfo.java",
+    "frameworks/base/services/core/java/com/android/server/StorageManagerService.java"
+  ],
+  "tags": ["storage", "parcelable", "serialization", "type-mismatch", "DiskInfo"],
+  "estimated_time_minutes": 40,
+  "skills_tested": ["parcelable-analysis", "data-type-awareness", "IPC-debugging", "multi-file-debugging"]
+}

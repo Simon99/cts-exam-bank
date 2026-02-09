@@ -1,0 +1,28 @@
+diff --git a/frameworks/base/media/java/android/media/MediaCodec.java b/frameworks/base/media/java/android/media/MediaCodec.java
+index 1234567890ab..abcdef123456 100644
+--- a/frameworks/base/media/java/android/media/MediaCodec.java
++++ b/frameworks/base/media/java/android/media/MediaCodec.java
+@@ -2856,6 +2856,8 @@ public final class MediaCodec {
+      */
+     public final int dequeueOutputBuffer(
+             @NonNull BufferInfo info, long timeoutUs) {
+-        return native_dequeueOutputBuffer(info, timeoutUs);
++        int result = native_dequeueOutputBuffer(info, timeoutUs);
++        // Bug: incorrectly clear EOS flag
++        info.flags = info.flags & ~BUFFER_FLAG_END_OF_STREAM;
++        return result;
+     }
+ 
+     private native int native_dequeueOutputBuffer(
+diff --git a/frameworks/av/media/libstagefright/MediaCodec.cpp b/frameworks/av/media/libstagefright/MediaCodec.cpp
+index 1234567890ab..abcdef123456 100644
+--- a/frameworks/av/media/libstagefright/MediaCodec.cpp
++++ b/frameworks/av/media/libstagefright/MediaCodec.cpp
+@@ -2456,6 +2456,7 @@ status_t MediaCodec::dequeueOutputBuffer(
+     if (mOutputEOS) {
+         // Correctly set EOS flag in native layer
+         buffer->meta()->setInt32("eos", 1);
++        // EOS flag is set correctly here
+     }
+     return OK;
+ }

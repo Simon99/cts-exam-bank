@@ -1,0 +1,21 @@
+{
+  "id": "NET-H006",
+  "title": "SntpClient 時間同步後 round trip time 計算錯誤",
+  "difficulty": "hard",
+  "domain": "net",
+  "test_class": "android.net.cts.SntpClientTest",
+  "test_method": "testRoundTripTime",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/SntpClient.java",
+    "frameworks/base/core/java/android/net/sntp/Timestamp64.java",
+    "frameworks/base/core/java/android/net/sntp/Duration64.java"
+  ],
+  "bug_type": "formula_error",
+  "tags": ["SntpClient", "NTP", "round trip", "timestamp", "calculation"],
+  "estimated_time_minutes": 40,
+  "skills_tested": [
+    "NTP 協議理解",
+    "時間計算公式",
+    "數據類型處理"
+  ]
+}

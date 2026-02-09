@@ -1,0 +1,31 @@
+{
+  "id": "media-e-q009",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "easy",
+  "pattern": "A",
+  "pattern_desc": "縱向單點 - 單位轉換錯誤",
+  "target_tests": [
+    "android.mediav2.cts.ExtractorTest#testMediaFormatDuration"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.ExtractorTest",
+      "method": "testMediaFormatDuration",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: Duration mismatch",
+      "stack_location": "ExtractorTest.java:234"
+    }
+  ],
+  "affected_files": [
+    "frameworks/base/media/java/android/media/MediaFormat.java"
+  ],
+  "file_count": 1,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["mediaformat", "duration", "unit-error", "microseconds"]
+}

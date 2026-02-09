@@ -1,0 +1,14 @@
+{
+  "id": "app-easy-001",
+  "title": "TimePickerDialog 時間保存異常",
+  "difficulty": "easy",
+  "domain": "app",
+  "cts_test": "android.app.cts.TimePickerDialogTest#testSaveInstanceState",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/TimePickerDialog.java"
+  ],
+  "tags": ["dialog", "state-save", "timepicker"],
+  "skills_tested": ["log-reading", "state-management", "bundle"],
+  "estimated_time_minutes": 10,
+  "created": "2025-01-13"
+}

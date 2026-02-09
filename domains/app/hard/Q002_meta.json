@@ -1,0 +1,17 @@
+{
+  "id": "app-hard-002",
+  "title": "ContentProvider 跨進程權限驗證失敗",
+  "difficulty": "hard",
+  "domain": "app",
+  "cts_test": "android.content.cts.ContentProviderClientTest#testGrantUriPermission",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/uri/GrantUri.java",
+    "frameworks/base/services/core/java/com/android/server/uri/UriGrantsManagerService.java",
+    "frameworks/base/services/core/java/com/android/server/am/ContentProviderHelper.java"
+  ],
+  "tags": ["contentprovider", "uri-permission", "security", "cross-process", "equals-hashcode"],
+  "skills_tested": ["permission-model", "cross-service-debugging", "uri-grants", "security-analysis", "multi-user"],
+  "estimated_time_minutes": 50,
+  "created": "2025-02-09",
+  "updated": "2025-02-10"
+}

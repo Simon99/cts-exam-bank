@@ -1,0 +1,14 @@
+{
+  "id": "Q006",
+  "domain": "filesystem",
+  "difficulty": "easy",
+  "title": "FileUtil BUFFER_SIZE 設置過小導致測試超時",
+  "cts_test": "android.filesystem.cts.SequentialRWTest#testSingleSequentialWrite",
+  "cts_module": "CtsFileSystemTestCases",
+  "affected_files": [
+    "cts/tests/filesystem/src/android/filesystem/cts/FileUtil.java"
+  ],
+  "tags": ["filesystem", "performance", "buffer-size", "timeout"],
+  "estimated_time_minutes": 10,
+  "skills_tested": ["code-reading", "performance-analysis"]
+}

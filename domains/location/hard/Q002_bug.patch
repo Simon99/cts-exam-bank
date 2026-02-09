@@ -1,0 +1,31 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java
++++ b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java
+@@ -892,10 +892,8 @@ public class GnssLocationProvider extends AbstractLocationProvider implements
+     @Override
+     public void onReportLocation(boolean hasLatLong, Location location) {
+         if (hasLatLong && !mHasFirstFix) {
+-            mHasFirstFix = true;
+-            int ttff = (int) (SystemClock.elapsedRealtime() - mFixStartTime);
+-            mGnssMetrics.logFirstFix(ttff);
+-            // BUG: Should notify GnssStatusProvider here but doesn't
++            // BUG: First fix handling removed - mHasFirstFix never set to true
++            // and TTFF never calculated/reported
+         }
+         // ... rest of location handling
+     }
+
+diff --git a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssStatusProvider.java b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssStatusProvider.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssStatusProvider.java
++++ b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssStatusProvider.java
+@@ -145,9 +145,7 @@ public class GnssStatusProvider extends
+     public void reportFirstFix(int ttffMs) {
+         // This method is called by GnssLocationProvider when first fix is obtained
+-        deliverToListeners(listener -> {
+-            listener.onFirstFix(ttffMs);
+-        });
++        // BUG: deliverToListeners call removed - listeners never notified
+     }
+ }

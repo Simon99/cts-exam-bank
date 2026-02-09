@@ -1,0 +1,16 @@
+{
+  "id": "Q004",
+  "title": "Bundle.size() 返回錯誤大小",
+  "difficulty": "easy",
+  "domain": "framework",
+  "subdomain": "os",
+  "cts_test": "android.os.cts.BundleTest#testSize",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/BaseBundle.java"
+  ],
+  "tags": ["Bundle", "size", "計數錯誤"],
+  "estimated_time_minutes": 8,
+  "skills_tested": ["源碼閱讀", "數學運算理解"],
+  "created_at": "2025-01-13"
+}

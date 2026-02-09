@@ -1,0 +1,26 @@
+{
+  "id": "location-hard-005",
+  "title": "Mock Location Not Blocked for Non-Debug Apps",
+  "difficulty": "hard",
+  "domain": "location",
+  "test_class": "android.location.cts.fine.LocationManagerFineTest",
+  "test_method": "testMockLocationBlocking",
+  "cts_module": "CtsLocationFineTestCases",
+  "tags": [
+    "mock-location",
+    "security",
+    "permission-check"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/LocationManager.java",
+  "estimated_time_minutes": 35,
+  "skills_tested": [
+    "Security validation",
+    "Permission enforcement",
+    "Mock provider handling"
+  ],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/location/LocationManagerService.java",
+    "frameworks/base/services/core/java/com/android/server/location/provider/MockLocationProvider.java",
+    "frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java"
+  ]
+}

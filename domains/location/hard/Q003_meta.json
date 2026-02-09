@@ -1,0 +1,26 @@
+{
+  "id": "location-hard-003",
+  "title": "GNSS Measurement Full Tracking Mode Ignored",
+  "difficulty": "hard",
+  "domain": "location",
+  "test_class": "android.location.cts.fine.LocationManagerFineTest",
+  "test_method": "testGnssMeasurementsFullTracking",
+  "cts_module": "CtsLocationFineTestCases",
+  "tags": [
+    "GnssMeasurements",
+    "full-tracking",
+    "request-merging"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/GnssMeasurementRequest.java",
+  "estimated_time_minutes": 40,
+  "skills_tested": [
+    "Request merging",
+    "HAL interface",
+    "Multi-listener handling"
+  ],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/location/gnss/GnssMeasurementsProvider.java",
+    "frameworks/base/services/core/java/com/android/server/location/gnss/GnssManagerService.java",
+    "frameworks/base/services/core/java/com/android/server/location/gnss/hal/GnssNative.java"
+  ]
+}

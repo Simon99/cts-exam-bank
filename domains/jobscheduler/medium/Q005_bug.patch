@@ -1,0 +1,16 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobServiceContext.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobServiceContext.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobServiceContext.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobServiceContext.java
+@@ -350,10 +350,7 @@ public final class JobServiceContext implements ServiceConnection {
+         if (job.isUserInitiated()) {
+             capabilities |= PROCESS_CAPABILITY_POWER_RESTRICTED_NETWORK;
+         }
+-        // Expedited jobs with network constraints need network capability
+-        if (job.isRequestedExpeditedJob() && job.hasConnectivityConstraint()) {
+-            capabilities |= PROCESS_CAPABILITY_POWER_RESTRICTED_NETWORK;
+-        }
++        // BUG: Missing network capability for expedited jobs
+         return capabilities;
+     }
+ }

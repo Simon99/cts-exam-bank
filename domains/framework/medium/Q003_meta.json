@@ -1,0 +1,17 @@
+{
+  "id": "M003",
+  "title": "Bundle deepCopy 只做淺拷貝",
+  "difficulty": "medium",
+  "domain": "framework",
+  "subdomain": "os",
+  "cts_test": "android.os.cts.BundleTest#testDeepCopy",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/BaseBundle.java",
+    "frameworks/base/core/java/android/os/Bundle.java"
+  ],
+  "tags": ["Bundle", "deepCopy", "拷貝邏輯"],
+  "estimated_time_minutes": 20,
+  "skills_tested": ["深拷貝理解", "構造函數追蹤"],
+  "created_at": "2025-01-13"
+}

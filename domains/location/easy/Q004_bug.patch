@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/location/java/android/location/LocationRequest.java b/frameworks/base/location/java/android/location/LocationRequest.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/location/java/android/location/LocationRequest.java
++++ b/frameworks/base/location/java/android/location/LocationRequest.java
+@@ -498,7 +498,7 @@ public final class LocationRequest implements Parcelable {
+     public static final class Builder {
+ 
+         private long mIntervalMillis;
+-        private @Quality int mQuality = QUALITY_BALANCED_POWER_ACCURACY;
++        private @Quality int mQuality = QUALITY_HIGH_ACCURACY;
+         private long mMinUpdateIntervalMillis = IMPLICIT_MIN_UPDATE_INTERVAL;
+         private long mDurationMillis = Long.MAX_VALUE;
+         private int mMaxUpdates = Integer.MAX_VALUE;

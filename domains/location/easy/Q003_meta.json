@@ -1,0 +1,15 @@
+{
+  "id": "location-easy-003",
+  "title": "Criteria Copy Constructor NullPointerException Missing",
+  "difficulty": "easy",
+  "domain": "location",
+  "test_class": "android.location.cts.none.CriteriaTest",
+  "test_method": "testConstructor",
+  "cts_module": "CtsLocationNoneTestCases",
+  "tags": ["Criteria", "constructor", "null-check", "exception"],
+  "files_to_modify": [
+    "frameworks/base/location/java/android/location/Criteria.java"
+  ],
+  "estimated_time_minutes": 8,
+  "skills_tested": ["Understanding API contracts", "Exception handling"]
+}

@@ -1,0 +1,11 @@
+diff --git a/frameworks/base/core/java/android/content/Intent.java b/frameworks/base/core/java/android/content/Intent.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/content/Intent.java
++++ b/frameworks/base/core/java/android/content/Intent.java
+@@ -8520,7 +8520,7 @@ public class Intent implements Parcelable, Cloneable {
+      * @see #putExtra(String, String)
+      */
+     public @Nullable String getStringExtra(String name) {
+-        return mExtras == null ? null : mExtras.getString(name);
++        return mExtras == null ? null : null;  // BUG: 沒有讀取實際值
+     }

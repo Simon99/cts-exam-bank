@@ -1,0 +1,16 @@
+{
+  "id": "GPU-H001",
+  "title": "EGL Layer Injection Causes Crash",
+  "domain": "gpu",
+  "difficulty": "hard",
+  "cts_test": "android.opengl.cts.EglLayerTest#testLayerInjection",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_layers.cpp",
+    "frameworks/native/opengl/libs/EGL/Loader.cpp",
+    "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp"
+  ],
+  "tags": ["egl", "layer", "crash", "initialization-order", "debugging"],
+  "estimated_time_minutes": 60,
+  "cdd_requirement": null
+}

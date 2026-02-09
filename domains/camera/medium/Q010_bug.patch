@@ -1,0 +1,40 @@
+diff --git a/frameworks/base/core/java/android/hardware/camera2/params/OutputConfiguration.java b/frameworks/base/core/java/android/hardware/camera2/params/OutputConfiguration.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/params/OutputConfiguration.java
++++ b/frameworks/base/core/java/android/hardware/camera2/params/OutputConfiguration.java
+@@ -350,6 +350,15 @@ public final class OutputConfiguration implements Parcelable {
+      * @return This OutputConfiguration.
+      */
+     public @NonNull OutputConfiguration addSurface(@NonNull Surface surface) {
++        // BUG: 對 surface 格式記錄 log（線索）
++        // log 會顯示 "Adding surface with format: X"
++        // 但真正的格式檢查錯誤在 CameraDeviceImpl
++        if (surface != null) {
++            int format = SurfaceUtils.getSurfaceFormat(surface);
++            Log.d(TAG, "Adding surface with format: " + format + 
++                  " (JPEG=" + ImageFormat.JPEG + ")");
++        }
++        
+         checkNotNull(surface, "Surface must not be null");
+         if (mSurfaceGroupId == SURFACE_GROUP_ID_NONE) {
+             throw new IllegalStateException("Cannot add surface to OutputConfiguration without"
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+index abcd1234..efgh5679 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+@@ -892,6 +892,14 @@ public class CameraDeviceImpl extends CameraDevice
+     private void checkInputConfigurationWithStreamConfigurations(
+             InputConfiguration inputConfig,
+             @Nullable OutputConfiguration output) throws CameraAccessException {
++        
++        // BUG: 錯誤地排除 JPEG 格式的 output surface
++        if (output != null && output.getSurface() != null) {
++            int format = SurfaceUtils.getSurfaceFormat(output.getSurface());
++            if (format == ImageFormat.JPEG) {
++                throw new CameraAccessException(CameraAccessException.CAMERA_ERROR,
++                        "Output surface format not in supported list");
++            }
++        }
+ 
+         StreamConfigurationMap streamConfigs = mCharacteristics.get(
+                 CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);

@@ -1,0 +1,17 @@
+{
+  "id": "camera_easy_007",
+  "title": "ImageReader 格式不支援",
+  "difficulty": "easy",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.ImageReaderTest#testFlexibleYuv",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java"
+  ],
+  "tags": ["ImageReader", "YUV_420_888", "StreamConfiguration"],
+  "estimated_time_minutes": 15,
+  "skills_tested": [
+    "理解 Camera 支援的圖像格式",
+    "分析 StreamConfigurationMap 生成",
+    "識別格式過濾錯誤"
+  ]
+}

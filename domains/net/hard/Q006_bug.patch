@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/net/SntpClient.java b/frameworks/base/core/java/android/net/SntpClient.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/SntpClient.java
++++ b/frameworks/base/core/java/android/net/SntpClient.java
+@@ -245,7 +245,7 @@ public class SntpClient {
+             long transmitTime = readTimestamp(buffer, TRANSMIT_TIME_OFFSET);
+             
+             // 計算往返時間
+-            mRoundTripTime = (responseTime - requestTime) - (transmitTime - receiveTime);
++            mRoundTripTime = (responseTime - requestTime) - (receiveTime - transmitTime);
+             
+             // 計算時鐘偏移
+             mClockOffset = ((receiveTime - requestTime) + (transmitTime - responseTime)) / 2;

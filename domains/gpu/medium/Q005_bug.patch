@@ -1,0 +1,12 @@
+diff --git a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
++++ b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
+@@ -892,8 +892,9 @@ EGLint eglClientWaitSyncImpl(EGLDisplay dpy, EGLSync sync, EGLint flags,
+     if (!dp) return EGL_FALSE;
+ 
+     egl_connection_t* const cnx = &gEGLImpl;
+-    return cnx->egl.eglClientWaitSyncKHR(dp->disp.dpy, sync, flags, timeout);
++    EGLTimeKHR driverTimeout = timeout / 1000000;  // BUG: wrong unit conversion
++    return cnx->egl.eglClientWaitSyncKHR(dp->disp.dpy, sync, flags, driverTimeout);
+ }

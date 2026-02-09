@@ -1,0 +1,16 @@
+diff --git a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
++++ b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
+@@ -352,9 +352,9 @@ static android_dataspace dataSpaceFromEGLColorSpace(EGLint colorspace, PixelForm
+     } else if (colorspace == EGL_GL_COLORSPACE_BT2020_HLG_EXT) {
+         return static_cast<android_dataspace>(HAL_DATASPACE_BT2020_HLG);
+     } else if (colorspace == EGL_GL_COLORSPACE_BT2020_LINEAR_EXT) {
+-        return HAL_DATASPACE_BT2020_LINEAR;
+-    } else if (colorspace == EGL_GL_COLORSPACE_BT2020_PQ_EXT) {
+         return HAL_DATASPACE_BT2020_PQ;
++    } else if (colorspace == EGL_GL_COLORSPACE_BT2020_PQ_EXT) {
++        return HAL_DATASPACE_BT2020_LINEAR;
+     }
+ 
+     return HAL_DATASPACE_UNKNOWN;

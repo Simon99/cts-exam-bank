@@ -1,0 +1,49 @@
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+@@ -1345,9 +1345,10 @@ public class CameraDeviceImpl extends CameraDevice
+                 offlineSurfaces.add(output.getSurface());
+             }
+ 
+-            // Collect pending requests
++            // BUG: 沒有收集 pending requests，傳入空列表
+             List<CaptureRequest> pendingRequests = new ArrayList<>();
+-            for (int i = 0; i < mCaptureCallbackMap.size(); i++) {
+-                pendingRequests.addAll(mCaptureCallbackMap.valueAt(i).getRequests());
+-            }
++            // 應該從 mCaptureCallbackMap 收集，但被註釋掉了
++            // for (int i = 0; i < mCaptureCallbackMap.size(); i++) {
++            //     pendingRequests.addAll(mCaptureCallbackMap.valueAt(i).getRequests());
++            // }
+
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraOfflineSessionImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraOfflineSessionImpl.java
+index abcd1234..efgh5679 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraOfflineSessionImpl.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraOfflineSessionImpl.java
+@@ -123,6 +123,11 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession
+     private void initialize() {
++        // BUG: 當 pending requests 為空時錯誤地觸發失敗
++        if (mPendingRequests.isEmpty()) {
++            notifySwitchFailed(CameraOfflineSession.STATUS_INTERNAL_ERROR);
++            return;
++        }
++        
+         // Normal initialization...
+         notifyReady();
+     }
+
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/RequestLastFrameNumbersHolder.java b/frameworks/base/core/java/android/hardware/camera2/impl/RequestLastFrameNumbersHolder.java
+index abcd1234..efgh567a 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/RequestLastFrameNumbersHolder.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/RequestLastFrameNumbersHolder.java
+@@ -78,6 +78,9 @@ public class RequestLastFrameNumbersHolder {
+     }
+ 
+     public int getPendingCount() {
++        // BUG: 返回 0 而不是實際計數
++        return 0;
++        
+         return mPendingRequestCount;
+     }
+ }

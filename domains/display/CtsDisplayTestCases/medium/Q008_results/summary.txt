@@ -1,0 +1,27 @@
+Q008 驗證結果
+==============
+時間: 2025-02-09
+設備: 27161FDH20031X (Pixel 7)
+
+狀態: ✅ VERIFIED
+
+目標測試: android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay
+
+測試結果:
+- Tests run: 1
+- Failures: 1
+- 結果: FAILED (符合預期)
+
+錯誤訊息:
+java.lang.SecurityException: Requires INTERNAL_SYSTEM_WINDOW permission
+	at android.display.cts.VirtualDisplayTest.testUntrustedSysDecorVirtualDisplay(VirtualDisplayTest.java:258)
+
+Bug 分析:
+Q008 的 bug 是把 VIRTUAL_DISPLAY_FLAG_TRUSTED 的檢查從 '== 0' 改成 '!= 0'
+原本邏輯：不受信任的 display (flag == 0) 需要清除 SHOULD_SHOW_SYSTEM_DECORATIONS flag
+修改後：受信任的 display (flag != 0) 會被清除系統裝飾 flag
+
+這個條件反轉導致安全檢查邏輯完全相反，測試在創建 VirtualDisplay 時
+因為 flag 處理異常而觸發 SecurityException。
+
+驗證結論: Bug patch 成功導致 CTS 測試失敗。

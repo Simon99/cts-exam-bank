@@ -1,0 +1,17 @@
+{
+  "id": "camera_easy_005",
+  "title": "CaptureResult Timestamp 為負數",
+  "difficulty": "easy",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.SurfaceViewPreviewTest#testCameraPreview",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java"
+  ],
+  "tags": ["CaptureResult", "SENSOR_TIMESTAMP", "timestamp"],
+  "estimated_time_minutes": 15,
+  "skills_tested": [
+    "理解 CaptureResult metadata",
+    "分析 timestamp 驗證邏輯",
+    "識別 hardcoded 錯誤值"
+  ]
+}

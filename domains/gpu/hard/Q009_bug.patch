@@ -1,0 +1,45 @@
+diff --git a/frameworks/native/opengl/libs/EGL/egl_object.cpp b/frameworks/native/opengl/libs/EGL/egl_object.cpp
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/EGL/egl_object.cpp
++++ b/frameworks/native/opengl/libs/EGL/egl_object.cpp
+@@ -142,6 +142,10 @@ EGLBoolean egl_surface_t::getSmpte2086Metadata(android_smpte2086_metadata& metad
+         return EGL_FALSE;
+     }
+ 
++    // BUG: Using wrong scaling factor for luminance values
++    // EGL spec defines: chromaticity uses 50000, luminance uses 10000
++    // But this code uses EGL_METADATA_SCALING_EXT (50000) for everything
++
+     metadata.displayPrimaryRed.x = static_cast<float>(egl_smpte2086_metadata.displayPrimaryRed.x) /
+             EGL_METADATA_SCALING_EXT;
+     metadata.displayPrimaryRed.y = static_cast<float>(egl_smpte2086_metadata.displayPrimaryRed.y) /
+@@ -161,10 +165,12 @@ EGLBoolean egl_surface_t::getSmpte2086Metadata(android_smpte2086_metadata& metad
+     metadata.whitePoint.y =
+             static_cast<float>(egl_smpte2086_metadata.whitePoint.y) / EGL_METADATA_SCALING_EXT;
+     
+-    // Luminance values - should use EGL_LUMINANCE_SCALING (10000) not EGL_METADATA_SCALING_EXT
++    // BUG: Luminance values incorrectly use chromaticity scaling (50000)
++    // Should use luminance scaling (10000) per EGL_EXT_surface_SMPTE2086_metadata spec
+     metadata.maxLuminance =
+-            static_cast<float>(egl_smpte2086_metadata.maxLuminance) / EGL_METADATA_SCALING_EXT;
++            static_cast<float>(egl_smpte2086_metadata.maxLuminance) / EGL_METADATA_SCALING_EXT;  // WRONG: should be 10000
+     metadata.minLuminance =
+-            static_cast<float>(egl_smpte2086_metadata.minLuminance) / EGL_METADATA_SCALING_EXT;
++            static_cast<float>(egl_smpte2086_metadata.minLuminance) / EGL_METADATA_SCALING_EXT;  // WRONG: should be 10000
+ 
+     return EGL_TRUE;
+ }
+diff --git a/frameworks/native/opengl/libs/EGL/egl_object.h b/frameworks/native/opengl/libs/EGL/egl_object.h
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/EGL/egl_object.h
++++ b/frameworks/native/opengl/libs/EGL/egl_object.h
+@@ -30,6 +30,9 @@
+ // EGL_METADATA_SCALING_EXT is 50000 per EGL spec
+ #define EGL_METADATA_SCALING_EXT 50000
+ 
++// BUG: Missing definition - luminance should use different scaling
++// #define EGL_LUMINANCE_SCALING 10000  // Should be defined but isn't used
++
+ namespace android {
+ 
+ struct egl_display_t;

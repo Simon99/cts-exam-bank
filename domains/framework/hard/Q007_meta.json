@@ -1,0 +1,18 @@
+{
+  "id": "H007",
+  "title": "Intent 序列化時 Categories 集合線程安全問題",
+  "difficulty": "hard",
+  "domain": "framework",
+  "subdomain": "content",
+  "cts_test": "android.content.cts.IntentTest#testCategoriesConcurrency",
+  "cts_module": "CtsContentTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/content/Intent.java",
+    "frameworks/base/core/java/android/util/ArraySet.java",
+    "frameworks/base/core/java/android/os/Parcel.java"
+  ],
+  "tags": ["Intent", "線程安全", "ConcurrentModification"],
+  "estimated_time_minutes": 50,
+  "skills_tested": ["線程同步", "集合安全", "併發程式設計"],
+  "created_at": "2025-01-13"
+}

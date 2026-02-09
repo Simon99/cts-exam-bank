@@ -1,0 +1,16 @@
+{
+  "id": "app-medium-001",
+  "title": "IntentService Intent 處理計數錯誤",
+  "difficulty": "medium",
+  "domain": "app",
+  "cts_test": "android.app.cts.IntentServiceTest#testIntents",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/IntentService.java",
+    "frameworks/base/core/java/android/os/HandlerThread.java"
+  ],
+  "tags": ["service", "handler", "message", "queue", "handlerthread"],
+  "skills_tested": ["log-tracing", "handler-mechanism", "async-processing", "thread-synchronization"],
+  "estimated_time_minutes": 25,
+  "created": "2025-01-13",
+  "updated": "2025-02-10"
+}

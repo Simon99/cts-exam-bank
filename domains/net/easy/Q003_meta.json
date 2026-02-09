@@ -1,0 +1,19 @@
+{
+  "id": "NET-E003",
+  "title": "Credentials getPid 返回錯誤值",
+  "difficulty": "easy",
+  "domain": "net",
+  "test_class": "android.net.cts.LocalSocketTest",
+  "test_method": "testLocalConnections",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/Credentials.java"
+  ],
+  "bug_type": "wrong_return_value",
+  "tags": ["Credentials", "getPid", "return", "getter"],
+  "estimated_time_minutes": 5,
+  "skills_tested": [
+    "讀取 CTS 錯誤日誌",
+    "識別錯誤的返回值",
+    "理解 getter 方法"
+  ]
+}

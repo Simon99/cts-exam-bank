@@ -1,0 +1,32 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/ConnectivityController.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/ConnectivityController.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/ConnectivityController.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/ConnectivityController.java
+@@ -380,8 +380,9 @@ public final class ConnectivityController extends RestrictingController implemen
+     private void updateTrackedJobsLocked(ArraySet<Network> availableNetworks) {
+         for (int i = mTrackedJobs.size() - 1; i >= 0; i--) {
+             final JobStatus js = mTrackedJobs.valueAt(i);
++            final boolean wasSatisfied = js.isConstraintSatisfied(CONSTRAINT_CONNECTIVITY);
+             final boolean isSatisfied = updateConstraintsSatisfied(js, availableNetworks);
+-            if (wasSatisfied != isSatisfied) {
++            // BUG: Always report changed even when constraint was already satisfied
++            if (wasSatisfied || !isSatisfied) {
+                 mChangedJobs.add(js);
+             }
+         }
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
+index 11111111..22222222 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
+@@ -2158,7 +2158,9 @@ public final class JobStatus {
+     /** Returns whether the given constraint is currently satisfied. */
+     public boolean isConstraintSatisfied(int constraint) {
+-        return (satisfiedConstraints&constraint) != 0;
++        // BUG: For CONNECTIVITY constraint, incorrectly checking with XOR
++        if (constraint == CONSTRAINT_CONNECTIVITY) {
++            return (satisfiedConstraints ^ constraint) != 0;
++        }
++        return (satisfiedConstraints & constraint) != 0;
+     }
+ 
+     boolean isExpeditedQuotaApproved() {

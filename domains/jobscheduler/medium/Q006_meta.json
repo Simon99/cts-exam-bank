@@ -1,0 +1,15 @@
+{
+  "id": "Q006",
+  "domain": "jobscheduler",
+  "difficulty": "medium",
+  "title": "JobSchedulingTest 命名空間作業隔離失敗",
+  "test_class": "android.jobscheduler.cts.JobSchedulingTest",
+  "test_method": "testNamespace_schedule",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobStore.java"
+  ],
+  "tags": ["namespace", "isolation", "job_management", "filtering"],
+  "estimated_time_minutes": 30,
+  "skills_tested": ["log_analysis", "namespace_understanding", "filtering_logic", "data_flow"]
+}

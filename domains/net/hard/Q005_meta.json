@@ -1,0 +1,21 @@
+{
+  "id": "NET-H005",
+  "title": "NetworkPolicy 序列化後 warningBytes 變成 limitBytes",
+  "difficulty": "hard",
+  "domain": "net",
+  "test_class": "android.net.cts.NetworkPolicyTest",
+  "test_method": "testParcelable",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/NetworkPolicy.java",
+    "frameworks/base/core/java/android/net/NetworkTemplate.java",
+    "frameworks/base/core/java/android/util/RecurrenceRule.java"
+  ],
+  "bug_type": "parcel_order_mismatch",
+  "tags": ["NetworkPolicy", "Parcelable", "writeToParcel", "order"],
+  "estimated_time_minutes": 30,
+  "skills_tested": [
+    "Parcelable 協議理解",
+    "序列化順序分析",
+    "多字段對照"
+  ]
+}

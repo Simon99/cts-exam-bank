@@ -1,0 +1,15 @@
+{
+  "id": "Q003",
+  "domain": "jobscheduler",
+  "difficulty": "medium",
+  "title": "JobSchedulingTest 作業優先級排序錯誤",
+  "test_class": "android.jobscheduler.cts.JobSchedulingTest",
+  "test_method": "testHigherPriorityJobRunsFirst",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/PendingJobQueue.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java"
+  ],
+  "tags": ["scheduling", "priority", "sorting", "comparator"],
+  "estimated_time_minutes": 30,
+  "skills_tested": ["log_analysis", "sorting_logic", "comparator_understanding", "priority_calculation"]
+}

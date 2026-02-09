@@ -1,0 +1,33 @@
+{
+  "id": "media-h-q024",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "hard",
+  "pattern": "C",
+  "pattern_desc": "縱深多層 - 影響 3 個以上檔案",
+  "target_tests": [
+    "android.mediav2.cts.EncoderHDRInfoTest#testHdr10PlusMetadata"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.EncoderHDRInfoTest",
+      "method": "testHdr10PlusMetadata",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: HDR10+ dynamic metadata lost in encode/decode cycle",
+      "stack_location": "EncoderHDRInfoTest.java:189"
+    }
+  ],
+  "affected_files": [
+    "frameworks/av/media/libstagefright/MediaCodec.cpp",
+    "frameworks/av/media/libstagefright/HevcUtils.cpp",
+    "frameworks/base/media/java/android/media/MediaFormat.java"
+  ],
+  "file_count": 3,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["hdr10plus", "hdr-metadata", "sei", "hevc", "dynamic-metadata"]
+}

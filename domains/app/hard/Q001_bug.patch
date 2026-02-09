@@ -1,0 +1,16 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/wm/RootWindowContainer.java b/frameworks/base/services/core/java/com/android/server/wm/RootWindowContainer.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/wm/RootWindowContainer.java
++++ b/frameworks/base/services/core/java/com/android/server/wm/RootWindowContainer.java
+@@ -2311,9 +2311,8 @@ class RootWindowContainer extends WindowContainer<DisplayContent>
+         ActivityRecord candidateActivity = null;
+         if (preferredTaskDisplayArea != null) {
+             mTmpFindTaskResult.process(preferredTaskDisplayArea);
+-            if (mTmpFindTaskResult.mIdealRecord != null) {
+-                return mTmpFindTaskResult.mIdealRecord;
+-            } else if (mTmpFindTaskResult.mCandidateRecord != null) {
++            // Bug: Don't return early on ideal match - continue searching other displays
++            if (mTmpFindTaskResult.mCandidateRecord != null) {
+                 candidateActivity = mTmpFindTaskResult.mCandidateRecord;
+             }
+         }

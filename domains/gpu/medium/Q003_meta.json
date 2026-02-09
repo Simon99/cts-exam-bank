@@ -1,0 +1,15 @@
+{
+  "id": "GPU-M003",
+  "title": "Color Space Conversion Wrong for HDR Content",
+  "domain": "gpu",
+  "difficulty": "medium",
+  "cts_test": "android.opengl.cts.OpenGlEsVersionTest#testRequiredEglExtensionsForHdrCapableDisplay",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp",
+    "frameworks/native/opengl/libs/EGL/egl_display.cpp"
+  ],
+  "tags": ["egl", "hdr", "colorspace", "dataspace", "bt2020"],
+  "estimated_time_minutes": 35,
+  "cdd_requirement": "7.1.4.5/H-1-1"
+}

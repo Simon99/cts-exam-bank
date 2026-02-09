@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
+@@ -1500,7 +1500,7 @@ public class JobSchedulerService extends com.android.server.SystemService
+         final int currentCount = mQuotaTracker.getCount(callingUid, windowMs);
+         final int maxQuota = mConstants.API_QUOTA_SCHEDULE_COUNT;
+         
+-        if (currentCount > maxQuota) {
++        if (currentCount >= maxQuota) {
+             Slog.w(TAG, "App " + callingPackage + " (uid " + callingUid 
+                     + ") has exceeded its scheduling quota");
+             return JobScheduler.RESULT_FAILURE;

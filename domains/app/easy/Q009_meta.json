@@ -1,0 +1,14 @@
+{
+  "id": "app-easy-009",
+  "title": "TimePickerDialog 分鐘恢復缺失",
+  "difficulty": "easy",
+  "domain": "app",
+  "cts_test": "android.app.cts.TimePickerDialogTest#testOnRestoreInstanceState",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/TimePickerDialog.java"
+  ],
+  "tags": ["dialog", "timepicker", "state-restore"],
+  "skills_tested": ["log-reading", "state-management"],
+  "estimated_time_minutes": 8,
+  "created": "2025-01-13"
+}

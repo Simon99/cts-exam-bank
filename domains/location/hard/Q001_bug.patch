@@ -1,0 +1,29 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java b/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
++++ b/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
+@@ -1456,8 +1456,8 @@ public class LocationProviderManager extends
+     private Location maybeFudgeLocation(Location location, int permissionLevel) {
+         if (permissionLevel == PERMISSION_COARSE) {
+             return mLocationFudger.createCoarse(location);
+-        }
+-        return location;
++        } else {
++            // BUG: Always apply coarse fudging regardless of permission level
++            return mLocationFudger.createCoarse(location);
+         }
+     }
+
+diff --git a/frameworks/base/services/core/java/com/android/server/location/fudger/LocationFudger.java b/frameworks/base/services/core/java/com/android/server/location/fudger/LocationFudger.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/services/core/java/com/android/server/location/fudger/LocationFudger.java
++++ b/frameworks/base/services/core/java/com/android/server/location/fudger/LocationFudger.java
+@@ -95,7 +95,7 @@ public class LocationFudger {
+      */
+     public Location createCoarse(Location location) {
+         Location coarse = new Location(location);
+-        coarse.setAccuracy(Math.max(location.getAccuracy(), COARSE_ACCURACY_M));
++        coarse.setAccuracy(COARSE_ACCURACY_M);  // BUG: Always sets to 1000m, ignoring original
+         addCoarseOffset(coarse);
+         return coarse;
+     }

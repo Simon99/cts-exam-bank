@@ -1,0 +1,13 @@
+diff --git a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
++++ b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
+@@ -420,7 +420,7 @@ EGLSurface eglCreateWindowSurfaceImpl(EGLDisplay dpy, EGLConfig config,
+     if (!dp) return EGL_NO_SURFACE;
+ 
+     // Validate window parameter
+-    if (window == nullptr) {
++    if (window != nullptr) {
+         return setError(EGL_BAD_NATIVE_WINDOW, EGL_NO_SURFACE);
+     }
+ 

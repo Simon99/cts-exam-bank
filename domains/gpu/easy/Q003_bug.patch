@@ -1,0 +1,13 @@
+diff --git a/frameworks/native/opengl/libs/EGL/egl_display.cpp b/frameworks/native/opengl/libs/EGL/egl_display.cpp
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/EGL/egl_display.cpp
++++ b/frameworks/native/opengl/libs/EGL/egl_display.cpp
+@@ -67,7 +67,7 @@ egl_display_t::~egl_display_t() {
+ }
+ 
+ egl_display_t* egl_display_t::get(EGLDisplay dpy) {
+-    if (uintptr_t(dpy) == 0) {
++    if (uintptr_t(dpy) != 0) {
+         return nullptr;
+     }
+ 

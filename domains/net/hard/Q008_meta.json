@@ -1,0 +1,21 @@
+{
+  "id": "NET-H008",
+  "title": "LocalSocket 輸出流寫入後數據截斷",
+  "difficulty": "hard",
+  "domain": "net",
+  "test_class": "android.net.cts.LocalSocketTest",
+  "test_method": "testLargeDataTransfer",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/LocalSocketImpl.java",
+    "frameworks/base/core/java/android/net/LocalSocket.java",
+    "frameworks/base/core/jni/android_net_LocalSocketImpl.cpp"
+  ],
+  "bug_type": "off_by_one",
+  "tags": ["LocalSocket", "OutputStream", "write", "off-by-one", "native"],
+  "estimated_time_minutes": 35,
+  "skills_tested": [
+    "數據傳輸完整性",
+    "off-by-one 錯誤識別",
+    "JNI 參數傳遞"
+  ]
+}

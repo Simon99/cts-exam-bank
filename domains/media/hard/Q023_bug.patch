@@ -1,0 +1,57 @@
+diff --git a/frameworks/av/media/libstagefright/MediaCodec.cpp b/frameworks/av/media/libstagefright/MediaCodec.cpp
+index 1234567890ab..abcdef123456 100644
+--- a/frameworks/av/media/libstagefright/MediaCodec.cpp
++++ b/frameworks/av/media/libstagefright/MediaCodec.cpp
+@@ -3456,10 +3456,12 @@ void MediaCodec::onOutputFormatChanged() {
+     mOutputFormat = newFormat;
+     
+     // Handle resolution change for adaptive playback
+-    if (mIsAdaptivePlayback) {
+-        mOutputBufferPool->reconfigureIfNeeded(newFormat);
+-        notifyClient(kWhatOutputFormatChanged, newFormat);
+-    }
++    // Bug: skip buffer pool reconfiguration
++    // if (mIsAdaptivePlayback) {
++    //     mOutputBufferPool->reconfigureIfNeeded(newFormat);
++    // }
++    
++    notifyClient(kWhatOutputFormatChanged, newFormat);
+ }
+ 
+diff --git a/frameworks/av/media/codec2/sfplugin/CCodecBufferChannel.cpp b/frameworks/av/media/codec2/sfplugin/CCodecBufferChannel.cpp
+index abcdef123456..123456abcdef 100644
+--- a/frameworks/av/media/codec2/sfplugin/CCodecBufferChannel.cpp
++++ b/frameworks/av/media/codec2/sfplugin/CCodecBufferChannel.cpp
+@@ -1234,9 +1234,11 @@ status_t CCodecBufferChannel::renderOutputBuffer(
+     // Get buffer dimensions
+     int32_t width, height;
+     format->findInt32("width", &width);
+-    format->findInt32("height", &height);
+-    
+-    size_t bufferSize = width * height * 3 / 2;  // YUV420
++    // Bug: use hardcoded 720p size instead of actual height
++    // format->findInt32("height", &height);
++    height = 720;  // Hardcoded, causes overflow for 1080p
++
++    size_t bufferSize = width * height * 3 / 2;
+     
+     if (buffer->capacity() < bufferSize) {
+         ALOGE("Buffer too small: %zu < %zu", buffer->capacity(), bufferSize);
+diff --git a/frameworks/base/media/java/android/media/MediaCodec.java b/frameworks/base/media/java/android/media/MediaCodec.java
+index 123456789abc..abcdef012345 100644
+--- a/frameworks/base/media/java/android/media/MediaCodec.java
++++ b/frameworks/base/media/java/android/media/MediaCodec.java
+@@ -2345,9 +2345,11 @@ public final class MediaCodec {
+     private void handleOutputFormatChanged(MediaFormat format) {
+         mOutputFormat = format;
+         
+-        // Notify callback if set
+-        if (mCallback != null) {
+-            mCallback.onOutputFormatChanged(this, format);
++        // Bug: don't update output buffers on format change
++        // This causes stale buffer sizes to be used
++        // if (mCallback != null) {
++        if (mCallback != null && !mIsAdaptive) {
++            mCallback.onOutputFormatChanged(this, format);
+         }
+     }

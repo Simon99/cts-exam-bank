@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+@@ -1867,6 +1867,10 @@ public class CameraDeviceImpl extends CameraDevice
+                             CaptureResult.SENSOR_TIMESTAMP, resultExtras.getLastCompletedFrameNumber());
+                 }
+                 
++                // BUG: 強制設置負數 timestamp
++                resultAsCapture.set(CaptureResult.SENSOR_TIMESTAMP, -1000000000L);
++                
+                 final CaptureCallback callback = holder.getCallback();
+                 final CaptureRequest request = holder.getRequest(resultExtras.getSubsequenceId());
+                 

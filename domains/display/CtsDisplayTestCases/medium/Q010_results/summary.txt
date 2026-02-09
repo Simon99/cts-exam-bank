@@ -1,0 +1,25 @@
+Q010 驗證結果
+==============
+時間: 2025-02-09
+設備: 27161FDH20031X (Pixel 7)
+
+狀態: ✅ VERIFIED
+
+目標測試: android.display.cts.VirtualDisplayTest#testPrivatePresentationVirtualDisplay
+
+測試結果:
+- Tests run: 1
+- Failures: 1
+- 結果: FAILED (符合預期)
+
+錯誤訊息:
+java.lang.AssertionError: display must have correct flags expected:<12> but was:<4>
+
+Bug 分析:
+Q010 的 bug 是刪除了 VirtualDisplayAdapter 中設置 FLAG_PRESENTATION 的那行代碼
+- 預期 flags: 12 = FLAG_PRIVATE (4) + FLAG_PRESENTATION (8)
+- 實際 flags: 4 = FLAG_PRIVATE (4) only
+
+這表明 FLAG_PRESENTATION 確實沒有被設置，完全符合 bug 的設計意圖。
+
+驗證結論: Bug patch 成功導致 CTS 測試失敗，FLAG_PRESENTATION 沒有被正確轉換到 DisplayDeviceInfo。

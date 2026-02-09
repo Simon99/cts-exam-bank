@@ -1,0 +1,19 @@
+{
+  "id": "camera_medium_004",
+  "title": "Session Configuration 支援檢查錯誤",
+  "difficulty": "medium",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.CameraDeviceTest#testSessionConfiguration",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceSetupImpl.java",
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java"
+  ],
+  "bug_pattern": "log-in-A-bug-in-B",
+  "tags": ["SessionConfiguration", "isSessionConfigurationSupported", "JPEG", "format 檢查"],
+  "estimated_time_minutes": 30,
+  "skills_tested": [
+    "理解 Session Configuration 機制",
+    "追蹤委派模式呼叫鏈",
+    "分析格式相容性邏輯"
+  ]
+}

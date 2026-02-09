@@ -1,0 +1,25 @@
+{
+  "id": "M009",
+  "title": "Intent resolveType 返回錯誤類型",
+  "difficulty": "medium",
+  "domain": "framework",
+  "subdomain": "content",
+  "cts_test": "android.content.cts.IntentTest#testResolveType",
+  "cts_module": "CtsContentTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/content/Intent.java",
+    "frameworks/base/core/java/android/content/ContentResolver.java"
+  ],
+  "tags": [
+    "Intent",
+    "resolveType",
+    "優先級"
+  ],
+  "estimated_time_minutes": 18,
+  "skills_tested": [
+    "Intent 類型解析",
+    "優先級理解"
+  ],
+  "created_at": "2025-01-13",
+  "bug_pattern": "multi-file-logic"
+}

@@ -1,107 +1,125 @@
-# H-Q005: 答案
+# Q005 答案
 
-## Bug 位置
+## Bug 分析
 
-**檔案:** `frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java`
+這是一個涉及 **3 個檔案** 的多檔案交互 bug，影響 HDR 用戶禁用類型的傳遞機制。
 
-**問題:** density 計算時整數除法先執行，導致精度丟失
+### 涉及的檔案
 
-## 調用鏈分析
+1. **DisplayManagerService.java** - 管理 HDR 類型禁用設置
+2. **LogicalDisplay.java** - 存儲和同步 DisplayInfo
+3. **Display.java** - 最終 API 層的過濾邏輯
+
+### Bug 1：DisplayManagerService 變量混淆
+
+**位置：** `setAreUserDisabledHdrTypesAllowedInternal()`
+
+**錯誤代碼：**
+```java
+int[] finalUserDisabledHdrTypes = userDisabledHdrTypes;
+mLogicalDisplayMapper.forEachLocked(
+        display -> {
+            display.setUserDisabledHdrTypes(mUserDisabledHdrTypes);  // BUG!
+            handleLogicalDisplayChangedLocked(display);
+        });
+```
+
+**問題：**
+Lambda 中應該使用局部變量 `finalUserDisabledHdrTypes`，但錯誤地使用了成員變量 `mUserDisabledHdrTypes`。
+
+當 `mAreUserDisabledHdrTypesAllowed` 為 `true` 時：
+- `finalUserDisabledHdrTypes` 應該是空數組 `{}`
+- 但 `mUserDisabledHdrTypes` 仍然包含禁用的類型
+
+**修復：**
+```java
+display.setUserDisabledHdrTypes(finalUserDisabledHdrTypes);
+```
+
+### Bug 2：LogicalDisplay 條件反轉
+
+**位置：** `setUserDisabledHdrTypes()`
+
+**錯誤代碼：**
+```java
+public void setUserDisabledHdrTypes(@NonNull int[] userDisabledHdrTypes) {
+    if (Arrays.equals(mUserDisabledHdrTypes, userDisabledHdrTypes)) {  // BUG!
+        mUserDisabledHdrTypes = userDisabledHdrTypes;
+        mBaseDisplayInfo.userDisabledHdrTypes = userDisabledHdrTypes;
+        mInfo.set(null);
+    }
+}
+```
+
+**問題：**
+條件判斷被反轉了！只有當新舊數組**相等**時才更新，這意味著：
+- 當數組內容不同（需要更新）時，不會執行更新
+- 當數組內容相同（不需要更新）時，反而執行更新
+
+**正確代碼應該是：**
+```java
+if (!Arrays.equals(mUserDisabledHdrTypes, userDisabledHdrTypes)) {
+```
+
+或者使用原始的引用比較：
+```java
+if (mUserDisabledHdrTypes != userDisabledHdrTypes) {
+```
+
+### 數據流影響
 
 ```
-DisplayManagerService.configureDisplayLocked()           ← A: 配置顯示參數，打 log
+DisplayManagerService
+    ↓ (Bug 1: 傳遞錯誤的數組)
+LogicalDisplay.setUserDisabledHdrTypes()
+    ↓ (Bug 2: 條件反轉，不更新 mBaseDisplayInfo)
+DisplayInfo.userDisabledHdrTypes = {} (空數組)
     ↓
-LogicalDisplay.configureDisplayLocked()                  ← B: 計算 display info
-    ↓
-OverlayDisplayAdapter.getDisplayDeviceInfoLocked()       ← C: 計算 metrics，BUG 在這
+Display.getHdrCapabilities()
+    ↓ (因為 userDisabledHdrTypes.length == 0，不執行過濾)
+返回完整的 HDR 類型列表
 ```
 
-### A 層（DisplayManagerService）
-```java
-void configureDisplayLocked(int displayId) {
-    Slog.d(TAG, "Configuring display: " + displayId);
-    LogicalDisplay display = mLogicalDisplays.get(displayId);
-    display.configureDisplayLocked(mContext);
-}
-```
-
-### B 層（LogicalDisplay）
-```java
-void configureDisplayLocked(Context context) {
-    DisplayDeviceInfo deviceInfo = mPrimaryDisplayDevice.getDisplayDeviceInfoLocked();
-    mBaseDisplayInfo.logicalDensityDpi = deviceInfo.densityDpi;
-}
-```
-
-### C 層（OverlayDisplayAdapter.OverlayDisplayDevice）— BUG
-```java
-// 正確版本
-public DisplayDeviceInfo getDisplayDeviceInfoLocked() {
-    // density = width * defaultDensity / defaultWidth
-    mInfo.densityDpi = mWidth * DEFAULT_DENSITY_DPI / DEFAULT_WIDTH;
-    return mInfo;
-}
-
-// Bug 版本
-public DisplayDeviceInfo getDisplayDeviceInfoLocked() {
-    // [BUG] 整數除法先執行，精度丟失
-    // density = (width / defaultWidth) * defaultDensity
-    mInfo.densityDpi = (mWidth / DEFAULT_WIDTH) * DEFAULT_DENSITY_DPI;
-    return mInfo;
-}
-```
-
-### 邏輯分析
-
-假設：
-- mWidth = 720
-- DEFAULT_WIDTH = 1080
-- DEFAULT_DENSITY_DPI = 480
-
-**正確計算：**
-```
-density = 720 * 480 / 1080 = 345600 / 1080 = 320
-```
-
-**Bug 計算：**
-```
-density = (720 / 1080) * 480 = 0 * 480 = 0  // 整數除法 720/1080 = 0
-```
-
-或者如果 mWidth = 1440：
-```
-正確：1440 * 480 / 1080 = 640
-Bug：(1440 / 1080) * 480 = 1 * 480 = 480  // 精度丟失
-```
-
-## 修復方案
+### 修復 Patch
 
 ```diff
---- a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
-@@ -xxx,7 +xxx,7 @@ class OverlayDisplayAdapter {
-     class OverlayDisplayDevice extends DisplayDevice {
-         public DisplayDeviceInfo getDisplayDeviceInfoLocked() {
--            mInfo.densityDpi = mWidth * DEFAULT_DENSITY_DPI / DEFAULT_WIDTH;
-+            mInfo.densityDpi = (mWidth / DEFAULT_WIDTH) * DEFAULT_DENSITY_DPI;
-             return mInfo;
+--- a/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -1370,7 +1370,7 @@ public final class DisplayManagerService extends SystemService {
+             int[] finalUserDisabledHdrTypes = userDisabledHdrTypes;
+             mLogicalDisplayMapper.forEachLocked(
+                     display -> {
+-                        display.setUserDisabledHdrTypes(mUserDisabledHdrTypes);
++                        display.setUserDisabledHdrTypes(finalUserDisabledHdrTypes);
+                         handleLogicalDisplayChangedLocked(display);
+                     });
          }
+
+--- a/services/core/java/com/android/server/display/LogicalDisplay.java
++++ b/services/core/java/com/android/server/display/LogicalDisplay.java
+@@ -819,7 +819,7 @@ final class LogicalDisplay {
      }
- }
+ 
+     public void setUserDisabledHdrTypes(@NonNull int[] userDisabledHdrTypes) {
+-        if (Arrays.equals(mUserDisabledHdrTypes, userDisabledHdrTypes)) {
++        if (mUserDisabledHdrTypes != userDisabledHdrTypes) {
+             mUserDisabledHdrTypes = userDisabledHdrTypes;
+             mBaseDisplayInfo.userDisabledHdrTypes = userDisabledHdrTypes;
+             mInfo.set(null);
 ```
 
-## 診斷技巧
+### 測試驗證
 
-1. **分析數值差異** - 結果是預期的一半，可能是運算問題
-2. **追蹤到 OverlayDisplayAdapter** - 這是 overlay display 的專用 adapter
-3. **檢查 density 計算** - 發現運算順序導致精度丟失
-4. **理解整數除法** - 先除後乘 vs 先乘後除的差異
+修復後，`testGetHdrCapabilitiesWhenUserDisabledFormatsAreNotAllowedReturnsFilteredHdrTypes` 測試應該通過：
 
-## 評分標準
+1. 設置 `setAreUserDisabledHdrTypesAllowed(false)`
+2. 設置 `setUserDisabledHdrTypes({DOLBY_VISION, HLG})`
+3. 調用 `getHdrCapabilities().getSupportedHdrTypes()`
+4. 預期返回：`{HDR10, HDR10_PLUS}` (過濾掉了 DOLBY_VISION 和 HLG)
 
-| 項目 | 分數 |
-|------|------|
-| 理解 overlay display 的特殊性 | 15% |
-| 追蹤到 OverlayDisplayAdapter | 25% |
-| 找到 getDisplayDeviceInfoLocked | 25% |
-| 識別出整數除法精度問題 | 35% |
+### 學習要點
+
+1. **跨檔案數據流**：理解數據如何在多個組件間傳遞
+2. **Lambda 變量捕獲**：注意 lambda 中使用的變量引用
+3. **條件邏輯驗證**：仔細檢查比較條件的正確性
+4. **緩存失效機制**：理解 `mInfo.set(null)` 觸發 DisplayInfo 重新計算的作用

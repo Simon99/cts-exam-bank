@@ -1,0 +1,50 @@
+Running product configuration...
+ninja: no work to do.
+No need to regenerate ninja file
+No need to regenerate ninja file
+No need to regenerate ninja file
+Starting ninja...
+ninja: no work to do.
+2026-02-09 06:45:38,379 atest_utils.py:436:INFO: Build successful
+Atest results and logs directory: /tmp/atest_result_simon/20260209_064535_y4_bkusy
+
+Reading config: /home/simon/.atest/config
+
+Building Dependencies...
+out/target/product/panther/module-info.json
+
+Running product configuration...
+ninja: no work to do.
+No need to regenerate ninja file
+No need to regenerate ninja file
+No need to regenerate ninja file
+Starting ninja...
+ninja: no work to do.
+2026-02-09 06:45:51,090 atest_utils.py:436:INFO: Build successful
+
+Finding Tests...
+Found 'android.display.cts.VirtualDisplayTest#testPrivateVirtualDisplay' as QUALIFIED_CLASS
+(Test info has been cached for speeding up the next run, if test info needs to be updated, please add -c to clean the old cache.)
+
+Building Dependencies...
+aapt-host, aapt2-host, tradefed-host, compatibility-host-util-host, adb-host, CtsDisplayTestCases-target, atest_script_help.sh-host, compatibility-tradefed-host, atest_tradefed.sh-host, out/target/product/panther/module-info.json, atest-tradefed-host
+
+
+Running Tests...
+
+arm64-v8a CtsDisplayTestCases
+-----------------------------
+android.display.cts (1 Test)
+[1/1] android.display.cts.VirtualDisplayTest#testPrivateVirtualDisplay: PASSED (228ms)
+
+Summary (Test executed with 1 devices.)
+-------
+arm64-v8a CtsDisplayTestCases: Passed: 1, Failed: 0, Ignored: 0, Assumption Failed: 0  
+
+All tests passed!
+Test Logs have been saved in /tmp/atest_result_simon/20260209_064535_y4_bkusy/log
+Run 'atest --history' to review test result history.
+
+To access logs, press "ctrl" and click on
+file:///tmp/atest_result_simon/20260209_064535_y4_bkusy/log/test_logs.html
+

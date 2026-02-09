@@ -1,0 +1,34 @@
+diff --git a/frameworks/base/location/java/android/location/LocationRequest.java b/frameworks/base/location/java/android/location/LocationRequest.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/location/java/android/location/LocationRequest.java
++++ b/frameworks/base/location/java/android/location/LocationRequest.java
+@@ -594,7 +594,8 @@ public final class LocationRequest implements Parcelable {
+      * @return the minimum distance between location updates
+      */
+     public @FloatRange(from = 0, to = Float.MAX_VALUE) float getMinUpdateDistanceMeters() {
+-        return mMinUpdateDistanceMeters;
++        // BUG: Always returns 0, ignoring the actual configured distance
++        return 0;
+     }
+ 
+     /**
+diff --git a/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java b/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
++++ b/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
+@@ -1150,12 +1150,8 @@ public class LocationProviderManager extends
+             return false;
+         }
+ 
+-        // check min distance
+-        float minDistance = mRequest.getMinUpdateDistanceMeters();
+-        if (minDistance > 0 && mLastLocation != null) {
+-            if (location.distanceTo(mLastLocation) < minDistance) {
+-                return false;
+-            }
+-        }
++        // BUG: distance check removed - all locations pass through
++        // regardless of minUpdateDistanceMeters setting
+ 
+         return true;
+     }

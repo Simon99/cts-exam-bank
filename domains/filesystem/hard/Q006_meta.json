@@ -1,0 +1,16 @@
+{
+  "id": "Q006",
+  "domain": "filesystem",
+  "difficulty": "hard",
+  "title": "CrateInfo Parcelable 與 Service 查詢三層錯誤",
+  "cts_test": "android.os.storage.cts.StorageStatsManagerTest#queryCratesForUid_addOneDirectory_shouldIncreasingOneCrate",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/storage/CrateInfo.java",
+    "frameworks/base/services/usage/java/com/android/server/usage/StorageStatsService.java",
+    "frameworks/base/core/java/android/app/usage/StorageStatsManager.java"
+  ],
+  "tags": ["storage", "parcelable", "type-mismatch", "NPE", "CharSequence", "crate"],
+  "estimated_time_minutes": 40,
+  "skills_tested": ["parcelable-analysis", "type-awareness", "API-matching", "multi-file-debugging"]
+}

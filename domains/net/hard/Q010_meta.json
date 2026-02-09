@@ -1,0 +1,22 @@
+{
+  "id": "NET-H010",
+  "title": "NetworkPolicy 備份還原後 cycleRule 丟失",
+  "difficulty": "hard",
+  "domain": "net",
+  "test_class": "android.net.cts.NetworkPolicyTest",
+  "test_method": "testBackupRestore",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/NetworkPolicy.java",
+    "frameworks/base/core/java/android/net/NetworkPolicyManager.java",
+    "frameworks/base/core/java/android/util/RecurrenceRule.java"
+  ],
+  "bug_type": "serialization_order_mismatch",
+  "tags": ["NetworkPolicy", "backup", "restore", "RecurrenceRule", "serialization"],
+  "estimated_time_minutes": 35,
+  "skills_tested": [
+    "二進位序列化",
+    "備份還原邏輯",
+    "版本相容性",
+    "跨檔案追蹤"
+  ]
+}

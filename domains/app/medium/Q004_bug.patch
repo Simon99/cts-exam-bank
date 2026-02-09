@@ -1,0 +1,27 @@
+diff --git a/frameworks/base/core/java/android/app/DatePickerDialog.java b/frameworks/base/core/java/android/app/DatePickerDialog.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/app/DatePickerDialog.java
++++ b/frameworks/base/core/java/android/app/DatePickerDialog.java
+@@ -168,8 +168,6 @@ public class DatePickerDialog extends AlertDialog implements OnClickListener,
+         case BUTTON_POSITIVE:
+             if (mDateSetListener != null) {
+                 mDatePicker.clearFocus();
+-                mDateSetListener.onDateSet(mDatePicker, mDatePicker.getYear(),
+-                        mDatePicker.getMonth(), mDatePicker.getDayOfMonth());
+             }
+             break;
+         case BUTTON_NEGATIVE:
+
+diff --git a/frameworks/base/core/java/android/app/AlertDialog.java b/frameworks/base/core/java/android/app/AlertDialog.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/core/java/android/app/AlertDialog.java
++++ b/frameworks/base/core/java/android/app/AlertDialog.java
+@@ -156,8 +156,6 @@ public class AlertDialog extends Dialog implements DialogInterface {
+                 case DialogInterface.BUTTON_NEUTRAL:
+                     ((DialogInterface.OnClickListener) msg.obj).onClick(mDialog.get(), msg.what);
+                     break;
+-                case MSG_DISMISS_DIALOG:
+-                    ((DialogInterface) msg.obj).dismiss();
+             }
+         }
+     }

@@ -1,0 +1,17 @@
+diff --git a/frameworks/base/core/java/android/os/Parcel.java b/frameworks/base/core/java/android/os/Parcel.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/Parcel.java
++++ b/frameworks/base/core/java/android/os/Parcel.java
+@@ -2145,11 +2145,7 @@ public final class Parcel {
+             writeInt(-1);
+             return;
+         }
+-        final int startPos = dataPosition();
+-        writeInt(-1);
++        // BUG: 沒有正確處理 Bundle 長度邊界
+         val.writeToParcel(this, 0);
+-        final int endPos = dataPosition();
+-        setDataPosition(startPos);
+-        writeInt(endPos - startPos - 4);
+-        setDataPosition(endPos);
+     }

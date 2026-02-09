@@ -1,0 +1,16 @@
+{
+  "id": "GPU-H008",
+  "title": "Shader Blob Cache Corruption on Multifile Mode",
+  "domain": "gpu",
+  "difficulty": "hard",
+  "cts_test": "android.opengl.cts.EglBlobCacheTest#testShaderCacheMultifile",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_cache.cpp",
+    "frameworks/native/opengl/libs/EGL/egl_cache.h",
+    "frameworks/native/opengl/libs/EGL/BlobCache.cpp"
+  ],
+  "tags": ["egl", "blob-cache", "shader", "race-condition", "multifile", "concurrency"],
+  "estimated_time_minutes": 55,
+  "cdd_requirement": null
+}

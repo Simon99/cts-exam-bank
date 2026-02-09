@@ -1,0 +1,19 @@
+{
+  "id": "NET-E008",
+  "title": "LocalSocketImpl Buffer Size 計算錯誤",
+  "difficulty": "easy",
+  "domain": "net",
+  "test_class": "android.net.cts.LocalSocketTest",
+  "test_method": "testAccessors",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/LocalSocketImpl.java"
+  ],
+  "bug_type": "hardcoded_value",
+  "tags": ["LocalSocketImpl", "buffer", "getOption", "SO_SNDBUF"],
+  "estimated_time_minutes": 10,
+  "skills_tested": [
+    "讀取 CTS 錯誤日誌",
+    "理解 socket 選項",
+    "識別硬編碼錯誤"
+  ]
+}

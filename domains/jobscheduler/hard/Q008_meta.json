@@ -1,0 +1,16 @@
+{
+  "id": "Q008",
+  "domain": "jobscheduler",
+  "difficulty": "hard",
+  "title": "TimeController Deadline 約束評估時機錯誤導致作業提前執行",
+  "test_class": "android.jobscheduler.cts.TimingConstraintsTest",
+  "test_method": "testJobWithDeadlineDoesNotRunEarly",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java"
+  ],
+  "tags": ["timing", "deadline", "constraint", "premature_execution"],
+  "estimated_time_minutes": 45,
+  "skills_tested": ["timing_constraint", "alarm_management", "constraint_interaction", "multi_file_tracing"]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "location-hard-002",
+  "title": "GNSS First Fix Time Not Reported",
+  "difficulty": "hard",
+  "domain": "location",
+  "test_class": "android.location.cts.fine.LocationManagerFineTest",
+  "test_method": "testGnssStatusCallbackTtff",
+  "cts_module": "CtsLocationFineTestCases",
+  "tags": [
+    "GnssStatus",
+    "TTFF",
+    "first-fix",
+    "callback-chain"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/GnssStatus.java",
+  "estimated_time_minutes": 35,
+  "skills_tested": [
+    "HAL callback chain",
+    "GNSS timing",
+    "Multi-file debugging"
+  ],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/location/gnss/GnssStatusProvider.java",
+    "frameworks/base/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java",
+    "frameworks/base/services/core/java/com/android/server/location/gnss/hal/GnssNative.java"
+  ]
+}

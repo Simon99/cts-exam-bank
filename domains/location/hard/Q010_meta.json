@@ -1,0 +1,29 @@
+{
+  "id": "location-hard-010",
+  "title": "GnssMeasurementRequest Parcelable 序列化/反序列化不一致",
+  "difficulty": "hard",
+  "domain": "location",
+  "test_class": "android.location.cts.GnssMeasurementRequestTest",
+  "test_method": "testParcelRoundTrip",
+  "cts_module": "CtsLocationTestCases",
+  "tags": [
+    "Parcelable",
+    "serialization",
+    "GnssMeasurementRequest",
+    "GNSS",
+    "multi-file"
+  ],
+  "estimated_time_minutes": 35,
+  "skills_tested": [
+    "Parcelable pattern",
+    "Serialization order",
+    "Constructor parameter order",
+    "Service-client data flow"
+  ],
+  "affected_files": [
+    "frameworks/base/location/java/android/location/GnssMeasurementRequest.java",
+    "frameworks/base/services/core/java/com/android/server/location/gnss/GnssMeasurementsProvider.java",
+    "frameworks/base/services/core/java/com/android/server/location/gnss/GnssManagerService.java"
+  ],
+  "bug_pattern": "multi-file-serialization"
+}

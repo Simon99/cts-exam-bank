@@ -1,0 +1,15 @@
+{
+  "id": "Q002",
+  "domain": "jobscheduler",
+  "difficulty": "medium",
+  "title": "BatteryConstraintTest 充電狀態變化後作業未停止",
+  "test_class": "android.jobscheduler.cts.BatteryConstraintTest",
+  "test_method": "testChargingConstraintFails",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java"
+  ],
+  "tags": ["battery", "constraint", "charging", "state_change", "controller"],
+  "estimated_time_minutes": 35,
+  "skills_tested": ["log_analysis", "state_change_tracking", "debugging", "return_value_analysis"]
+}

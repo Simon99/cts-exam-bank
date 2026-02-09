@@ -1,0 +1,15 @@
+{
+  "id": "Q004",
+  "domain": "jobscheduler",
+  "difficulty": "medium",
+  "title": "ConnectivityConstraintTest 網絡轉換時作業被錯誤停止",
+  "test_class": "android.jobscheduler.cts.ConnectivityConstraintTest",
+  "test_method": "testConnectivityConstraintExecutes_transitionNetworks",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/ConnectivityController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java"
+  ],
+  "tags": ["connectivity", "constraint", "network_transition", "state_change", "bitwise"],
+  "estimated_time_minutes": 35,
+  "skills_tested": ["log_analysis", "network_understanding", "state_machine", "bitwise_operations"]
+}

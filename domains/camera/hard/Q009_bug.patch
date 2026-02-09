@@ -1,0 +1,60 @@
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+@@ -1234,12 +1234,14 @@ public class CameraDeviceImpl extends CameraDevice
+     private class CameraDeviceCallbacks extends ICameraDeviceCallbacks.Stub {
+         @Override
+         public void onResultReceived(CaptureResultExtras resultExtras, 
+                 CameraMetadataNative result) {
+             
+-            // 應該使用串行 executor 或同步機制
+-            mCallbackHandler.post(() -> {
++            // BUG: 使用並行 executor 導致順序錯亂
++            mCallbackExecutor.execute(() -> {
++                // 多個 callback 並行執行
+                 dispatchCaptureResult(resultExtras, result);
+             });
+         }
+     }
+
+diff --git a/frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp b/frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp
+index abcd1234..efgh5679 100644
+--- a/frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp
++++ b/frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp
+@@ -2567,10 +2567,12 @@ void Camera3Device::processCompletedRequest(CaptureResult& result) {
+     Mutex::Autolock l(mOutputLock);
+     
+-    // 應該按 frame number 排序插入
+-    auto it = std::lower_bound(mResultQueue.begin(), mResultQueue.end(), 
+-        result, [](const auto& a, const auto& b) {
+-            return a.frameNumber < b.frameNumber;
+-        });
+-    mResultQueue.insert(it, result);
++    // BUG: 直接 push_back，不保證順序
++    mResultQueue.push_back(result);
+     
+     mResultSignal.signal();
+ }
+@@ -2589,6 +2591,7 @@ void Camera3Device::sendCaptureResult(const CaptureResult& result) {
+     
++    // BUG: 不檢查是否按序發送
+     while (!mResultQueue.empty()) {
+         auto result = mResultQueue.front();
+         mResultQueue.pop_front();
+
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CallbackProxies.java b/frameworks/base/core/java/android/hardware/camera2/impl/CallbackProxies.java
+index abcd1234..efgh567a 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CallbackProxies.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CallbackProxies.java
+@@ -145,8 +145,9 @@ public class CallbackProxies {
+     public static class SessionCallbackProxy ... {
+         
+         private void notifyCallback(CaptureCallback callback, 
+                 CaptureRequest request, TotalCaptureResult result) {
+-            // 應該維護順序
++            // BUG: 直接調用，不等待前面的結果先完成
++            // 缺少順序控制邏輯
+             callback.onCaptureCompleted(mSession, request, result);
+         }
+     }

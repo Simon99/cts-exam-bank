@@ -1,0 +1,15 @@
+{
+  "id": "Q006",
+  "domain": "filesystem",
+  "difficulty": "medium",
+  "title": "FAT UUID 轉換格式與解析錯誤",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testFatUuidHandling",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/storage/StorageManager.java",
+    "frameworks/base/core/java/android/os/storage/DiskInfo.java"
+  ],
+  "tags": ["storage", "UUID", "FAT", "string-parsing", "format-conversion"],
+  "estimated_time_minutes": 25,
+  "skills_tested": ["log-tracing", "string-manipulation", "format-conversion", "multi-file-debugging"]
+}

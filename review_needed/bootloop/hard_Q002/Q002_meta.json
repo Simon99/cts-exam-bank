@@ -1,0 +1,58 @@
+{
+  "id": "display-hard-002-v3",
+  "title": "Display Mode API 層數據丟失 - getSupportedModes() 陣列截斷",
+  "difficulty": "hard",
+  "domain": "display",
+  "module": "CtsDisplayTestCases",
+  "pattern": "api_layer_bug",
+  "patternDesc": "Bug 只影響 API 層返回值，內部數據完整。Display.getSupportedModes() 返回時截斷陣列，但 DisplayInfo 內部 supportedModes 保持完整。",
+  "targetTests": [
+    "android.display.cts.DisplayTest#testGetSupportedModesOnDefaultDisplay",
+    "android.display.cts.DisplayTest#testActiveModeIsSupportedModesOnDefaultDisplay"
+  ],
+  "callChain": [
+    "DisplayDeviceInfo.supportedModes (source - 完整)",
+    "LogicalDisplay.updateLocked() (transfer - 正確複製)",
+    "DisplayInfo.supportedModes (internal - 完整，系統正常運作)",
+    "Display.getSupportedModes() (API - BUG: 返回時截斷)"
+  ],
+  "involvedFiles": [
+    "frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java",
+    "frameworks/base/core/java/android/view/DisplayInfo.java",
+    "frameworks/base/core/java/android/view/Display.java"
+  ],
+  "bugFile": "frameworks/base/core/java/android/view/Display.java",
+  "bugLine": 1153,
+  "bugMethod": "getSupportedModes",
+  "bugType": "off_by_one_array_copy",
+  "bugDescription": "Display.getSupportedModes() 中 Arrays.copyOf() 使用 Math.max(1, modes.length-1) 而非 modes.length，導致返回給應用的 modes 陣列丟失最後一個元素。因為只影響 API 返回值，系統內部運作正常不會崩潰。",
+  "bootSafe": true,
+  "expectedResult": {
+    "outcome": "test_fail",
+    "failedTests": 2,
+    "passedTests": 0,
+    "errorPattern": "Could not find alternative display mode with refresh rate .* for",
+    "alternativeErrorPattern": "activeModeIsSupported",
+    "rootCause": "getSupportedModes() 返回截斷的陣列，Mode 的 alternativeRefreshRates 指向被丟失的 mode，或 activeMode 不在返回的陣列中"
+  },
+  "timeLimit": 45,
+  "hints": [
+    "系統內部正常，但 API 返回有問題 - 思考 bug 可能在哪一層",
+    "防禦性複製（defensive copy）時的參數很關鍵",
+    "檢查 Display.java 中直接暴露給應用的方法",
+    "Mode 的 alternativeRefreshRates 指向的 mode 必須存在於 getSupportedModes() 返回的陣列中"
+  ],
+  "skills": [
+    "API 層 vs 內部層分離理解",
+    "陣列操作邊界分析",
+    "防禦性複製模式",
+    "Android Display 系統架構理解"
+  ],
+  "verified": false,
+  "verifiedDate": null,
+  "verifiedDevice": null,
+  "requiresSpecialConfig": false,
+  "configRequirements": "需要支援多種 display modes 的設備（如 Pixel 7 支援 60Hz/90Hz）",
+  "testRunCondition": "設備必須有 2 種以上的 refresh rate modes 才會觸發 bug",
+  "designNote": "v3: 將 bug 從 LogicalDisplay.updateLocked() 移至 Display.getSupportedModes()，避免影響內部 DisplayInfo 導致 bootloop"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "app-easy-007",
+  "title": "TimePickerDialog 分鐘更新缺失",
+  "difficulty": "easy",
+  "domain": "app",
+  "cts_test": "android.app.cts.TimePickerDialogTest#testUpdateTime",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/TimePickerDialog.java"
+  ],
+  "tags": ["dialog", "timepicker", "update"],
+  "skills_tested": ["log-reading", "incomplete-implementation"],
+  "estimated_time_minutes": 8,
+  "created": "2025-01-13"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "Q001",
+  "domain": "jobscheduler",
+  "difficulty": "medium",
+  "title": "ConnectivityConstraintTest 網絡約束不正確執行",
+  "test_class": "android.jobscheduler.cts.ConnectivityConstraintTest",
+  "test_method": "testUnmeteredConstraintFails_withMobile",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/ConnectivityController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java"
+  ],
+  "tags": ["connectivity", "constraint", "unmetered", "network", "bitwise"],
+  "estimated_time_minutes": 30,
+  "skills_tested": ["log_analysis", "network_understanding", "debugging", "cross_file_tracing"]
+}

@@ -1,0 +1,34 @@
+diff --git a/frameworks/base/core/java/android/net/Uri.java b/frameworks/base/core/java/android/net/Uri.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/Uri.java
++++ b/frameworks/base/core/java/android/net/Uri.java
+@@ -756,8 +756,7 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
+                     .scheme(getScheme())
+                     .authority(getAuthority())
+                     .path(getPath())
+-                    .query(getQuery())
+-                    .fragment(getFragment());
++                    .query(getQuery());
+         }
+     }
+
+diff --git a/frameworks/base/core/java/android/net/UriCodec.java b/frameworks/base/core/java/android/net/UriCodec.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/core/java/android/net/UriCodec.java
++++ b/frameworks/base/core/java/android/net/UriCodec.java
+@@ -75,15 +75,12 @@ public final class UriCodec {
+     public static String decode(
+             String s, boolean convertPlus, Charset charset, boolean throwOnFailure) {
+-        StringBuilder builder = new StringBuilder(s.length());
+-        appendDecoded(builder, s, convertPlus, charset, throwOnFailure);
+-        return builder.toString();
++        // BUG: When decoding fragment, special chars are not properly handled
++        // This causes fragment to be truncated at # or ? characters
++        int fragIndex = s.indexOf('#');
++        if (fragIndex >= 0) {
++            s = s.substring(0, fragIndex);  // Incorrectly truncates fragment
++        }
++        StringBuilder builder = new StringBuilder(s.length());
++        appendDecoded(builder, s, convertPlus, charset, throwOnFailure);
++        return builder.toString();
+     }

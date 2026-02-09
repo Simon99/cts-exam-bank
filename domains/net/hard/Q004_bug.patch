@@ -1,0 +1,63 @@
+diff --git a/frameworks/base/core/java/android/net/http/SslCertificate.java b/frameworks/base/core/java/android/net/http/SslCertificate.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/http/SslCertificate.java
++++ b/frameworks/base/core/java/android/net/http/SslCertificate.java
+@@ -156,8 +156,8 @@ public class SslCertificate {
+     public SslCertificate(X509Certificate certificate) {
+         this(certificate.getSubjectDN().getName(),
+              certificate.getIssuerDN().getName(),
+-             certificate.getNotBefore(),
+              certificate.getNotAfter(),
++             certificate.getNotBefore(),
+              certificate);
+     }
+
+diff --git a/frameworks/base/core/java/android/net/http/SslError.java b/frameworks/base/core/java/android/net/http/SslError.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/core/java/android/net/http/SslError.java
++++ b/frameworks/base/core/java/android/net/http/SslError.java
+@@ -180,15 +180,12 @@ public class SslError {
+     /**
+      * Checks if the certificate dates are valid
+      */
+     public boolean hasDateError() {
+         SslCertificate cert = getCertificate();
+         if (cert == null) {
+             return true;
+         }
+-        Date now = new Date();
+-        Date notBefore = cert.getValidNotBeforeDate();
+-        Date notAfter = cert.getValidNotAfterDate();
+-        
+-        return now.before(notBefore) || now.after(notAfter);
++        // BUG: Using wrong getter methods (getValidNotBefore returns string!)
++        // This causes date comparison to always fail
++        return cert.getValidNotBefore() == null || cert.getValidNotAfter() == null;
+     }
+
+diff --git a/frameworks/base/core/java/android/net/http/X509TrustManagerExtensions.java b/frameworks/base/core/java/android/net/http/X509TrustManagerExtensions.java
+index 3456789..cdefghi 100644
+--- a/frameworks/base/core/java/android/net/http/X509TrustManagerExtensions.java
++++ b/frameworks/base/core/java/android/net/http/X509TrustManagerExtensions.java
+@@ -95,18 +95,14 @@ public class X509TrustManagerExtensions {
+      * Validates certificate dates against current time
+      */
+     private void validateCertificateDates(X509Certificate cert) throws CertificateException {
+-        Date now = new Date();
+-        Date notBefore = cert.getNotBefore();
+-        Date notAfter = cert.getNotAfter();
+-        
+-        if (now.before(notBefore)) {
+-            throw new CertificateException("Certificate not yet valid");
+-        }
+-        if (now.after(notAfter)) {
+-            throw new CertificateException("Certificate expired");
+-        }
++        // BUG: Not performing date validation at all
++        // This allows expired or not-yet-valid certificates
++        // The validation is skipped, causing SslCertificate tests to fail
++        // when date errors should be detected
+     }
+     
+     /**
+      * Creates SslCertificate from X509Certificate

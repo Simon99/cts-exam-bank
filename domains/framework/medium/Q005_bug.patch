@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/os/Bundle.java b/frameworks/base/core/java/android/os/Bundle.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/Bundle.java
++++ b/frameworks/base/core/java/android/os/Bundle.java
+@@ -420,6 +420,7 @@ public final class Bundle extends BaseBundle implements Cloneable, Parcelable {
+         bundle.unparcel();
+         mOwnsLazyValues = false;
+         bundle.mOwnsLazyValues = false;
++        mMap.clear();  // BUG: 錯誤地清空了原有數據
+         mMap.putAll(bundle.mMap);
+ 
+         // FD state is now known if and only if both bundles already knew

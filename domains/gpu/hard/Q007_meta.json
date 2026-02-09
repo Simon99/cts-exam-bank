@@ -1,0 +1,16 @@
+{
+  "id": "GPU-H007",
+  "title": "GPU Driver Timeout on Complex Shader",
+  "domain": "gpu",
+  "difficulty": "hard",
+  "cts_test": "android.opengl.cts.RendererTwelveShaderTest#testComplexShader",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp",
+    "frameworks/native/opengl/libs/EGL/egl_display.cpp",
+    "frameworks/native/opengl/libs/EGL/egl_object.cpp"
+  ],
+  "tags": ["egl", "gpu-hang", "robustness", "context-lost", "recovery"],
+  "estimated_time_minutes": 65,
+  "cdd_requirement": null
+}

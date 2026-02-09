@@ -1,0 +1,16 @@
+{
+  "id": "Q001",
+  "domain": "jobscheduler",
+  "difficulty": "hard",
+  "title": "ConnectivityConstraintTest Data Saver 模式下加急作業網絡限制失效",
+  "test_class": "android.jobscheduler.cts.ConnectivityConstraintTest",
+  "test_method": "testBgExpeditedJobDoesNotBypassDataSaver",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/ConnectivityController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BackgroundJobsController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java"
+  ],
+  "tags": ["connectivity", "data_saver", "expedited", "foreground_background"],
+  "estimated_time_minutes": 45,
+  "skills_tested": ["multi_file_analysis", "state_tracking", "network_policy"]
+}

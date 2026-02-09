@@ -1,0 +1,16 @@
+{
+  "id": "GPU-H004",
+  "title": "Frame Timestamps Inconsistent",
+  "domain": "gpu",
+  "difficulty": "hard",
+  "cts_test": "android.opengl.cts.GLSurfaceViewTest#testFrameTimestamps",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp",
+    "frameworks/native/opengl/libs/EGL/egl_object.cpp",
+    "frameworks/native/libs/gui/Surface.cpp"
+  ],
+  "tags": ["egl", "frame-timestamps", "compositor", "surfaceflinger"],
+  "estimated_time_minutes": 55,
+  "cdd_requirement": null
+}

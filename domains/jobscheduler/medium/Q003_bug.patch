@@ -1,0 +1,26 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/PendingJobQueue.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/PendingJobQueue.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/PendingJobQueue.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/PendingJobQueue.java
+@@ -85,7 +85,8 @@ public class PendingJobQueue {
+     private final Comparator<JobStatus> mJobComparator = (j1, j2) -> {
+         // Priority: higher runs first
+-        int priorityDiff = j2.getEffectivePriority() - j1.getEffectivePriority();
++        // BUG: Reversed comparison - lower priority runs first
++        int priorityDiff = j1.getEffectivePriority() - j2.getEffectivePriority();
+         if (priorityDiff != 0) {
+             return priorityDiff;
+         }
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
+index 11111111..22222222 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
+@@ -1419,7 +1419,8 @@ public final class JobStatus {
+         final int rawPriority = Math.min(maxPriority, job.getPriority());
+         if (numFailures < 2) {
+-            return rawPriority;
++            // BUG: Negating priority value inverts the ordering
++            return -rawPriority;
+         }
+         if (shouldTreatAsUserInitiatedJob()) {
+             // Don't drop priority of UI jobs.

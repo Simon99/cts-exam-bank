@@ -1,0 +1,31 @@
+{
+  "id": "media-e-q008",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "easy",
+  "pattern": "A",
+  "pattern_desc": "縱向單點 - 返回值錯誤",
+  "target_tests": [
+    "android.mediav2.cts.ExtractorTest#testExtract"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.ExtractorTest",
+      "method": "testExtract",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: No tracks found",
+      "stack_location": "ExtractorTest.java:156"
+    }
+  ],
+  "affected_files": [
+    "frameworks/base/media/java/android/media/MediaExtractor.java"
+  ],
+  "file_count": 1,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["mediaextractor", "trackcount", "return-value-error"]
+}

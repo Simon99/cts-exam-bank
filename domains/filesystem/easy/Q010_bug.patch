@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/os/storage/CrateInfo.java b/frameworks/base/core/java/android/os/storage/CrateInfo.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/storage/CrateInfo.java
++++ b/frameworks/base/core/java/android/os/storage/CrateInfo.java
+@@ -125,7 +125,7 @@ public final class CrateInfo implements Parcelable {
+      */
+     @NonNull
+     public CharSequence getLabel() {
+-        return mLabel;
++        return "";
+     }
+ 
+     /**

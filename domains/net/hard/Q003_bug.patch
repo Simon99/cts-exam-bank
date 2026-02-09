@@ -1,0 +1,71 @@
+diff --git a/frameworks/base/core/java/android/net/Uri.java b/frameworks/base/core/java/android/net/Uri.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/Uri.java
++++ b/frameworks/base/core/java/android/net/Uri.java
+@@ -1678,14 +1678,13 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
+         static PathPart appendDecodedSegment(PathPart oldPart, String newSegment) {
+             if (oldPart == null || oldPart == EMPTY) {
+                 // If there is no old path, just return the new segment
+-                return fromDecoded("/" + newSegment);
++                return fromDecoded(newSegment);  // Bug: 缺少前導 /
+             }
+             
+             String oldPath = oldPart.getDecoded();
+-            String newPath = oldPath.endsWith("/") 
+-                ? oldPath + newSegment 
+-                : oldPath + "/" + newSegment;
+-            return fromDecoded(newPath);
++            // Bug: 直接返回新段，沒有累積
++            return fromDecoded("/" + newSegment);
+         }
+     }
+
+diff --git a/frameworks/base/core/java/android/net/UriCodec.java b/frameworks/base/core/java/android/net/UriCodec.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/core/java/android/net/UriCodec.java
++++ b/frameworks/base/core/java/android/net/UriCodec.java
+@@ -120,15 +120,12 @@ public final class UriCodec {
+      */
+     public static String appendEncoded(StringBuilder builder, String s, 
+             String allow, boolean encodeSlash) {
+-        for (int i = 0; i < s.length(); i++) {
+-            char c = s.charAt(i);
+-            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+-                    || (c >= '0' && c <= '9') || allow.indexOf(c) != -1
+-                    || (c == '/' && !encodeSlash)) {
+-                builder.append(c);
+-            } else {
+-                appendHex(builder, c);
+-            }
++        // BUG: Path separator '/' is incorrectly encoded
++        // This breaks path accumulation in Uri.Builder
++        for (int i = 0; i < s.length(); i++) {
++            char c = s.charAt(i);
++            // Always encode '/', even when encodeSlash is false
++            appendHex(builder, c);
+         }
+     }
+
+diff --git a/frameworks/base/core/java/android/net/UrlQuerySanitizer.java b/frameworks/base/core/java/android/net/UrlQuerySanitizer.java
+index 3456789..cdefghi 100644
+--- a/frameworks/base/core/java/android/net/UrlQuerySanitizer.java
++++ b/frameworks/base/core/java/android/net/UrlQuerySanitizer.java
+@@ -250,14 +250,11 @@ public class UrlQuerySanitizer {
+      */
+     public void parseUrl(String url) {
+         // Extract query string from URL
+-        int queryStart = url.indexOf('?');
+-        if (queryStart >= 0) {
+-            String query = url.substring(queryStart + 1);
+-            int fragmentStart = query.indexOf('#');
+-            if (fragmentStart >= 0) {
+-                query = query.substring(0, fragmentStart);
+-            }
+-            parseQuery(query);
++        // BUG: Incorrectly parsing URL path segments
++        int pathStart = url.indexOf('/');
++        if (pathStart >= 0) {
++            // Wrong: parsing path as query, breaking Uri path construction
++            parseQuery(url.substring(pathStart));
+         }
+     }

@@ -1,0 +1,14 @@
+{
+  "id": "app-easy-005",
+  "title": "DatePickerDialog 月份保存錯誤",
+  "difficulty": "easy",
+  "domain": "app",
+  "cts_test": "android.app.cts.DatePickerDialogTest#testOnSaveInstanceState",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/DatePickerDialog.java"
+  ],
+  "tags": ["dialog", "datepicker", "state-save"],
+  "skills_tested": ["log-reading", "api-usage"],
+  "estimated_time_minutes": 8,
+  "created": "2025-01-13"
+}

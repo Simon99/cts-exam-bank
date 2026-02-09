@@ -1,0 +1,17 @@
+{
+  "id": "M005",
+  "title": "Bundle putAll 沒有正確合併",
+  "difficulty": "medium",
+  "domain": "framework",
+  "subdomain": "os",
+  "cts_test": "android.os.cts.BundleTest#testPutAll",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/Bundle.java",
+    "frameworks/base/core/java/android/os/BaseBundle.java"
+  ],
+  "tags": ["Bundle", "putAll", "合併邏輯"],
+  "estimated_time_minutes": 18,
+  "skills_tested": ["數據結構理解", "合併邏輯分析"],
+  "created_at": "2025-01-13"
+}

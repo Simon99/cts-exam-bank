@@ -1,0 +1,44 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/uri/GrantUri.java b/frameworks/base/services/core/java/com/android/server/uri/GrantUri.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/uri/GrantUri.java
++++ b/frameworks/base/services/core/java/com/android/server/uri/GrantUri.java
+@@ -47,8 +47,7 @@ public class GrantUri {
+     @Override
+     public boolean equals(Object o) {
+         if (o instanceof GrantUri) {
+             GrantUri other = (GrantUri) o;
+-            return uri.equals(other.uri) && (sourceUserId == other.sourceUserId)
+-                    && prefix == other.prefix;
++            return uri.equals(other.uri) && prefix == other.prefix;
+         }
+         return false;
+     }
+
+diff --git a/frameworks/base/services/core/java/com/android/server/uri/UriGrantsManagerService.java b/frameworks/base/services/core/java/com/android/server/uri/UriGrantsManagerService.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/services/core/java/com/android/server/uri/UriGrantsManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/uri/UriGrantsManagerService.java
+@@ -580,7 +580,8 @@ public class UriGrantsManagerService extends IUriGrantsManager.Stub {
+     private UriPermission findUriPermission(int targetUid, GrantUri grantUri) {
+         ArrayMap<GrantUri, UriPermission> targetUris = mGrantedUriPermissions.get(targetUid);
+         if (targetUris != null) {
+-            return targetUris.get(grantUri);
++            GrantUri searchKey = new GrantUri(0, grantUri.uri, grantUri.prefix);
++            return targetUris.get(searchKey);
+         }
+         return null;
+     }
+
+diff --git a/frameworks/base/services/core/java/com/android/server/am/ContentProviderHelper.java b/frameworks/base/services/core/java/com/android/server/am/ContentProviderHelper.java
+index 3456789..cdefghi 100644
+--- a/frameworks/base/services/core/java/com/android/server/am/ContentProviderHelper.java
++++ b/frameworks/base/services/core/java/com/android/server/am/ContentProviderHelper.java
+@@ -850,8 +850,6 @@ public class ContentProviderHelper {
+     int checkContentProviderUriPermission(Uri uri, int uid, int modeFlags, int userId) {
+         if (hasStaticPermission(uid)) {
+             return PackageManager.PERMISSION_GRANTED;
+-        }
+-        return mUgmInternal.checkUriPermission(new GrantUri(userId, uri, false), uid, modeFlags);
++        } 
++        return PackageManager.PERMISSION_DENIED;
+     }

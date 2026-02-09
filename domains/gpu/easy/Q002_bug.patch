@@ -1,0 +1,13 @@
+diff --git a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
++++ b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
+@@ -98,7 +98,7 @@ const char* const gExtensionString  =
+         "EGL_KHR_stream_fifo "
+         "EGL_KHR_stream_producer_eglsurface "
+         "EGL_KHR_surfaceless_context "
+-        "EGL_KHR_wait_sync "                    // strongly recommended
++        "EGL_KHR_wait_sinc "                    // strongly recommended (BUG: typo)
+         "EGL_NV_context_priority_realtime "
+         "EGL_NV_system_time "
+         ;

@@ -1,0 +1,14 @@
+{
+  "id": "Q001",
+  "domain": "jobscheduler",
+  "difficulty": "easy",
+  "title": "BatteryConstraintTest 充電約束失敗",
+  "test_class": "android.jobscheduler.cts.BatteryConstraintTest",
+  "test_method": "testChargingConstraintExecutes",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java"
+  ],
+  "tags": ["battery", "constraint", "charging", "controller"],
+  "estimated_time_minutes": 15,
+  "skills_tested": ["log_analysis", "constraint_logic", "boolean_logic"]
+}

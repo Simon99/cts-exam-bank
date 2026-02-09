@@ -1,0 +1,32 @@
+{
+  "id": "media-m-q020",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "medium",
+  "pattern": "B",
+  "pattern_desc": "橫向多點 - 影響 2 個檔案",
+  "target_tests": [
+    "android.mediav2.cts.CodecInfoTest#testProfileLevelSupport"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.CodecInfoTest",
+      "method": "testProfileLevelSupport",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: ProfileLevel array is corrupted",
+      "stack_location": "CodecInfoTest.java:423"
+    }
+  ],
+  "affected_files": [
+    "frameworks/base/media/java/android/media/MediaCodecInfo.java",
+    "frameworks/av/media/libstagefright/MediaCodecList.cpp"
+  ],
+  "file_count": 2,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["mediacodecinfo", "profile-level", "array-indexing", "codec-capabilities"]
+}

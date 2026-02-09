@@ -1,0 +1,17 @@
+{
+  "id": "location-medium-006",
+  "title": "LocationListener.onProviderEnabled Not Called",
+  "difficulty": "medium",
+  "domain": "location",
+  "test_class": "android.location.cts.fine.LocationManagerFineTest",
+  "test_method": "testProviderEnabledCallback",
+  "cts_module": "CtsLocationFineTestCases",
+  "tags": ["LocationListener", "provider-state", "callback"],
+  "affected_files": [
+    "frameworks/base/location/java/android/location/LocationListener.java",
+    "frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/LocationManager.java",
+  "estimated_time_minutes": 18,
+  "skills_tested": ["State change callbacks", "Interface default methods", "Provider lifecycle"]
+}

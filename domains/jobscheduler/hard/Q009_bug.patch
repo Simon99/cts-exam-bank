@@ -1,0 +1,84 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BackgroundJobsController.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BackgroundJobsController.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BackgroundJobsController.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BackgroundJobsController.java
+@@ -285,6 +285,9 @@ public final class BackgroundJobsController extends StateController {
+             return true;
+         }
+ 
++        // BUG: UIJ should be treated specially when app is background restricted
++        // but currently we're letting UIJs bypass restriction even when not in TOP state
++        
+         // Restricted apps can only run jobs if:
+         // 1. The app is in the foreground (TOP state)
+         // 2. The app is on the power allowlist
+@@ -295,10 +298,8 @@ public final class BackgroundJobsController extends StateController {
+             return true;
+         }
+ 
+-        // UIJs should be allowed when the app is in a state that can start activities
+-        // BUT if the app is background restricted and NOT in TOP, UIJ should be stopped
++        // BUG: Always returning true for UIJ, ignoring background restriction when not TOP
+         if (job.shouldTreatAsUserInitiatedJob()) {
+-            // Missing check: should verify app is in TOP or has BAL permission
+             return true;
+         }
+ 
+@@ -310,7 +311,7 @@ public final class BackgroundJobsController extends StateController {
+     private boolean isAppBackgroundRestricted(int uid, String packageName) {
+         // Check if app is background restricted
+-        return mAppStateTracker.isAppBackgroundRestricted(uid, packageName);
++        return mAppStateTracker.isAppBackgroundRestricted(uid, packageName) && !isUidInForeground(uid);
+     }
+
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
+index abcd2345..efgh6789 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
+@@ -2650,18 +2650,14 @@ public class JobSchedulerService extends com.android.server.SystemService
+     @GuardedBy("mLock")
+     void onUidStateChangedLocked(int uid, int procState) {
+         // Update internal tracking for foreground state
+-        final boolean wasInForeground = isUidInForeground(uid);
+-        updateUidProcState(uid, procState);
+-        final boolean isNowInForeground = isUidInForeground(uid);
++        updateUidProcState(uid, procState);
++        // BUG: Not checking UIJ jobs when app moves to background
++        // UIJs from background-restricted apps should be stopped
+         
+-        if (wasInForeground && !isNowInForeground) {
+-            // App moved to background - check if any UIJs need to be stopped
+-            for (JobStatus job : mJobs.getJobsBySourceUid(uid)) {
+-                if (job.shouldTreatAsUserInitiatedJob() && isAppBackgroundRestricted(uid)) {
+-                    // Need to stop this UIJ
+-                    maybeStopJobLocked(job, JobParameters.STOP_REASON_BACKGROUND_RESTRICTION);
+-                }
+-            }
++        // Missing: should iterate jobs and stop UIJs for restricted apps
++        if (procState > ActivityManager.PROCESS_STATE_FOREGROUND_SERVICE) {
++            // Should check UIJ jobs here but doesn't
+         }
+     }
+
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
+index abcd3456..efgh7890 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
+@@ -1728,15 +1728,11 @@ public final class JobStatus {
+      * Returns whether this job should be treated as a user-initiated job.
+      */
+     public boolean shouldTreatAsUserInitiatedJob() {
+-        // A job is treated as user-initiated if:
+-        // 1. It was requested as a UIJ
+-        // 2. It started while app was in a valid state (TOP)
+-        // 3. It hasn't been demoted due to violations
+-        return (getFlags() & JobInfo.FLAG_USER_INITIATED) != 0
+-                && !startedAsRegularJob
+-                && (startedInForeground || mHasBackgroundActivityLaunches);
++        // BUG: Only checking flag, not checking if app started in valid state
++        // This allows background-restricted apps to keep UIJs running
++        return (getFlags() & JobInfo.FLAG_USER_INITIATED) != 0;
+     }
+ 
+     /**
+      * Returns whether this job started as a user-initiated job.

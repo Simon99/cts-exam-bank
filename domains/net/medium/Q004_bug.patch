@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/net/http/SslError.java b/frameworks/base/core/java/android/net/http/SslError.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/http/SslError.java
++++ b/frameworks/base/core/java/android/net/http/SslError.java
+@@ -142,7 +142,7 @@ public class SslError {
+      *         false.
+      */
+     public boolean addError(int error) {
+-        boolean rval = (0 <= error && error < SslError.SSL_MAX_ERROR);
++        boolean rval = (0 <= error && error <= SslError.SSL_MAX_ERROR);
+         if (rval) {
+             mErrors |= (0x1 << error);
+         }

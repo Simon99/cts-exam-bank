@@ -1,0 +1,20 @@
+{
+  "id": "NET-M008",
+  "title": "Uri.buildUpon().build() 丟失 fragment",
+  "difficulty": "medium",
+  "domain": "net",
+  "test_class": "android.net.cts.UriTest",
+  "test_method": "testBuildUponPreservesFragment",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/Uri.java",
+    "frameworks/base/core/java/android/net/UriCodec.java"
+  ],
+  "bug_type": "missing_field_copy",
+  "tags": ["Uri", "Builder", "buildUpon", "fragment"],
+  "estimated_time_minutes": 20,
+  "skills_tested": [
+    "Builder 模式理解",
+    "URI 結構分析",
+    "內部類追蹤"
+  ]
+}

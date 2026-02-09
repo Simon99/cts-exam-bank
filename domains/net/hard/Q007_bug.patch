@@ -1,0 +1,17 @@
+diff --git a/frameworks/base/core/java/android/net/VpnService.java b/frameworks/base/core/java/android/net/VpnService.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/VpnService.java
++++ b/frameworks/base/core/java/android/net/VpnService.java
+@@ -456,9 +456,7 @@ public class VpnService extends Service {
+         public ParcelFileDescriptor establish() {
+             mConfig.updateAllowedFamilies();
+             
+-            // Bug: 驗證失敗時靜默返回 null
+-            if (!mConfig.validate()) {
+-                return null;
+-            }
++            // Bug: validate() 返回 false 時應該拋異常，但這裡直接返回 null
++            mConfig.validate();  // 原本會拋 IllegalArgumentException
+             
+             try {
+                 return getService().establishVpn(mConfig);

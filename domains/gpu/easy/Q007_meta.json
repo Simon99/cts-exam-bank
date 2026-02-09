@@ -1,0 +1,14 @@
+{
+  "id": "GPU-E007",
+  "title": "Wide Color Extension Not Advertised",
+  "domain": "gpu",
+  "difficulty": "easy",
+  "cts_test": "android.opengl.cts.OpenGlEsVersionTest#testRequiredEglExtensionsForWideColorDisplay",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_display.cpp"
+  ],
+  "tags": ["egl", "wide-color", "colorspace", "extension"],
+  "estimated_time_minutes": 15,
+  "cdd_requirement": "7.1.4.5/C-1-5"
+}

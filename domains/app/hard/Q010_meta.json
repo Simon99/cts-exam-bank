@@ -1,0 +1,16 @@
+{
+  "id": "app-hard-010",
+  "title": "ActivityResult 在 multi-resume 模式下丟失",
+  "difficulty": "hard",
+  "domain": "app",
+  "cts_test": "android.app.cts.ActivityResultTest#testResultDeliveryMultiResume",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/wm/ActivityRecord.java",
+    "frameworks/base/services/core/java/com/android/server/wm/TaskFragment.java",
+    "frameworks/base/core/java/android/app/ActivityThread.java"
+  ],
+  "tags": ["activity", "result", "multi-resume", "split-screen", "lifecycle"],
+  "skills_tested": ["multi-window", "activity-lifecycle", "result-delivery", "state-management"],
+  "estimated_time_minutes": 55,
+  "created": "2025-02-09"
+}

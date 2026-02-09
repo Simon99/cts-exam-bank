@@ -1,0 +1,17 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/idle/DeviceIdlenessTracker.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/idle/DeviceIdlenessTracker.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/idle/DeviceIdlenessTracker.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/idle/DeviceIdlenessTracker.java
+@@ -180,10 +180,8 @@ public class DeviceIdlenessTracker extends BroadcastReceiver implements Idleness
+     public void setAutomotiveProjectionActive(boolean active) {
+         mProjectionActive = active;
+         if (!active && !mScreenOn && !mDockActive) {
+-            mIdle = true;
+-        } else if (active) {
+-            mIdle = false;
++            // BUG: Not updating idle state when projection is disabled
+         }
+-        reportIdleChange();
++        // BUG: Not reporting state change
+     }
+ }

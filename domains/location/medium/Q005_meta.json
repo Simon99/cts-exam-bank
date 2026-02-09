@@ -1,0 +1,17 @@
+{
+  "id": "location-medium-005",
+  "title": "GnssMeasurementsEvent Callback Not Invoked",
+  "difficulty": "medium",
+  "domain": "location",
+  "test_class": "android.location.cts.fine.LocationManagerFineTest",
+  "test_method": "testRegisterGnssMeasurementsCallback",
+  "cts_module": "CtsLocationFineTestCases",
+  "tags": ["GnssMeasurements", "callback", "listener-registration"],
+  "affected_files": [
+    "frameworks/base/location/java/android/location/LocationManager.java",
+    "frameworks/base/services/core/java/com/android/server/location/gnss/GnssMeasurementsProvider.java"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/LocationManager.java",
+  "estimated_time_minutes": 20,
+  "skills_tested": ["Listener registration", "Callback delivery", "Transport patterns"]
+}

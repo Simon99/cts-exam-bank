@@ -1,0 +1,15 @@
+{
+  "id": "GPU-M006",
+  "title": "EGL Object Reference Not Tracked",
+  "domain": "gpu",
+  "difficulty": "medium",
+  "cts_test": "android.opengl.cts.EglContextTest#testContextDestroy",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_display.cpp",
+    "frameworks/native/opengl/libs/EGL/egl_object.cpp"
+  ],
+  "tags": ["egl", "context", "object-tracking", "lifecycle"],
+  "estimated_time_minutes": 30,
+  "cdd_requirement": null
+}

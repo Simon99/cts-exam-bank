@@ -1,0 +1,28 @@
+diff --git a/frameworks/base/core/java/android/os/storage/StorageManager.java b/frameworks/base/core/java/android/os/storage/StorageManager.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/storage/StorageManager.java
++++ b/frameworks/base/core/java/android/os/storage/StorageManager.java
+@@ -420,8 +420,8 @@ public class StorageManager {
+         // FAT UUID format: XXXX-XXXX (8 hex chars with hyphen)
+         if (fsUuid != null && fsUuid.length() == 9 && fsUuid.charAt(4) == '-') {
+             // Convert FAT UUID to standard UUID format
+-            final String hex = fsUuid.replace("-", "").toLowerCase(Locale.US);
+-            return UUID.fromString(FAT_UUID_PREFIX + hex);
++            final String hex = fsUuid.replace("-", "").toUpperCase(Locale.US);
++            return UUID.fromString(FAT_UUID_PREFIX + hex.substring(0, 4));
+         }
+         return UUID.fromString(fsUuid);
+     }
+diff --git a/frameworks/base/core/java/android/os/storage/DiskInfo.java b/frameworks/base/core/java/android/os/storage/DiskInfo.java
+index 111222..333444 100644
+--- a/frameworks/base/core/java/android/os/storage/DiskInfo.java
++++ b/frameworks/base/core/java/android/os/storage/DiskInfo.java
+@@ -145,7 +145,7 @@ public class DiskInfo implements Parcelable {
+      * Returns normalized FAT UUID string.
+      */
+     public String getNormalizedFatUuid(String fsUuid) {
+-        return fsUuid != null ? fsUuid.toLowerCase(Locale.US) : null;
++        return fsUuid != null ? fsUuid.toUpperCase(Locale.US).replace("-", "") : null;
+     }
+ 
+     @Override

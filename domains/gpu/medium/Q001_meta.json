@@ -1,0 +1,15 @@
+{
+  "id": "GPU-M001",
+  "title": "EGL Context Creation Fails Intermittently",
+  "domain": "gpu",
+  "difficulty": "medium",
+  "cts_test": "android.opengl.cts.EglContextTest#testCreateContext",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_display.cpp",
+    "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp"
+  ],
+  "tags": ["egl", "context", "race-condition", "synchronization"],
+  "estimated_time_minutes": 30,
+  "cdd_requirement": null
+}

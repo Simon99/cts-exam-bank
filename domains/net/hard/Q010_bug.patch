@@ -1,0 +1,94 @@
+diff --git a/frameworks/base/core/java/android/net/NetworkPolicy.java b/frameworks/base/core/java/android/net/NetworkPolicy.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/NetworkPolicy.java
++++ b/frameworks/base/core/java/android/net/NetworkPolicy.java
+@@ -198,15 +198,16 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
+         ByteArrayOutputStream baos = new ByteArrayOutputStream();
+         DataOutputStream out = new DataOutputStream(baos);
+ 
+         out.writeInt(VERSION_RAPID);
+         out.write(getNetworkTemplateBytesForBackup());
+-        cycleRule.writeToStream(out);
++        // BUG: warningBytes written before cycleRule, but read expects cycleRule first
+         out.writeLong(warningBytes);
++        cycleRule.writeToStream(out);  // Should be before warningBytes!
+         out.writeLong(limitBytes);
+         out.writeLong(lastWarningSnooze);
+         out.writeLong(lastLimitSnooze);
+         out.writeLong(lastRapidSnooze);
+         out.writeInt(metered ? 1 : 0);
+         out.writeInt(inferred ? 1 : 0);
+         return baos.toByteArray();
+     }
+@@ -220,10 +221,11 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
+ 
+         final NetworkTemplate template = getNetworkTemplateFromBackup(in);
+         final RecurrenceRule cycleRule;
+         if (version >= VERSION_RULE) {
++            // Reads cycleRule first - but getBytesForBackup() writes warningBytes first!
+             cycleRule = new RecurrenceRule(in);
+         } else {
+             final int cycleDay = in.readInt();
+             final String cycleTimezone = BackupUtils.readString(in);
+             cycleRule = buildRule(cycleDay, ZoneId.of(cycleTimezone));
+         }
+
+diff --git a/frameworks/base/core/java/android/net/NetworkPolicyManager.java b/frameworks/base/core/java/android/net/NetworkPolicyManager.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/core/java/android/net/NetworkPolicyManager.java
++++ b/frameworks/base/core/java/android/net/NetworkPolicyManager.java
+@@ -280,18 +280,14 @@ public class NetworkPolicyManager {
+      * Restores network policies from backup data
+      */
+     public NetworkPolicy[] restorePoliciesFromBackup(byte[] data) {
+-        List<NetworkPolicy> policies = new ArrayList<>();
+-        DataInputStream in = new DataInputStream(new ByteArrayInputStream(data));
+-        
+-        try {
+-            int count = in.readInt();
+-            for (int i = 0; i < count; i++) {
+-                policies.add(NetworkPolicy.getNetworkPolicyFromBackup(in));
+-            }
+-        } catch (IOException e) {
+-            Log.e(TAG, "Error restoring policies", e);
++        // BUG: Not properly reading policy count from backup
++        List<NetworkPolicy> policies = new ArrayList<>();
++        // Missing: proper deserialization logic
++        // This causes policies to not be restored correctly
++        if (data == null || data.length == 0) {
++            return new NetworkPolicy[0];
+         }
+-        
++        // Incomplete restoration
+         return policies.toArray(new NetworkPolicy[0]);
+     }
+
+diff --git a/frameworks/base/core/java/android/util/RecurrenceRule.java b/frameworks/base/core/java/android/util/RecurrenceRule.java
+index 3456789..cdefghi 100644
+--- a/frameworks/base/core/java/android/util/RecurrenceRule.java
++++ b/frameworks/base/core/java/android/util/RecurrenceRule.java
+@@ -120,16 +120,12 @@ public class RecurrenceRule implements Parcelable {
+      */
+     public void writeToStream(DataOutputStream out) throws IOException {
+         // Write the start time
+-        out.writeLong(start.toEpochSecond());
+-        out.writeUTF(start.getZone().getId());
+-        
+-        // Write the end time (or special value for null)
+-        if (end != null) {
+-            out.writeBoolean(true);
+-            out.writeLong(end.toEpochSecond());
+-            out.writeUTF(end.getZone().getId());
+-        } else {
+-            out.writeBoolean(false);
++        // BUG: Writing period first instead of start time
++        // This misaligns with the read logic
++        out.writeUTF(period.toString());  // Wrong order!
++        if (start != null) {
++            out.writeLong(start.toEpochSecond());
+         }
+-        
+-        // Write the period
+-        out.writeUTF(period.toString());
++        // Missing: zone ID, end time handling
+     }

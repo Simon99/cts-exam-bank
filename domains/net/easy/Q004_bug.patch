@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/net/LocalSocketAddress.java b/frameworks/base/core/java/android/net/LocalSocketAddress.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/LocalSocketAddress.java
++++ b/frameworks/base/core/java/android/net/LocalSocketAddress.java
+@@ -68,7 +68,7 @@ public class LocalSocketAddress
+      * @param name non-null name
+      */
+     public LocalSocketAddress(String name) {
+-        this(name,Namespace.ABSTRACT);
++        this(name,Namespace.RESERVED);
+     }
+ 
+     /**

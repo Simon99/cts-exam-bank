@@ -1,0 +1,14 @@
+{
+  "id": "app-easy-002",
+  "title": "ProgressDialog 進度最大值錯誤",
+  "difficulty": "easy",
+  "domain": "app",
+  "cts_test": "android.app.cts.ProgressDialogTest#testAccessMax",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/ProgressDialog.java"
+  ],
+  "tags": ["dialog", "progress", "state"],
+  "skills_tested": ["log-reading", "getter-setter", "null-check"],
+  "estimated_time_minutes": 10,
+  "created": "2025-01-13"
+}

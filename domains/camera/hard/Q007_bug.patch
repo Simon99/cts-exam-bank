@@ -1,0 +1,56 @@
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraCaptureSessionImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraCaptureSessionImpl.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraCaptureSessionImpl.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraCaptureSessionImpl.java
+@@ -423,9 +423,10 @@ public class CameraCaptureSessionImpl extends CameraCaptureSession
+     @Override
+     public void close() {
+         synchronized (mInterfaceLock) {
++            // BUG: 無條件 abandon 所有 surfaces，包括共享的
+             for (Surface surface : mConfiguredSurfaces) {
+-                if (!isSharedSurface(surface)) {
+-                    mDeviceImpl.abandonSurface(surface);
+-                }
++                // 應該檢查是否為共享 surface
++                mDeviceImpl.abandonSurface(surface);
+             }
+             mClosed = true;
+         }
+
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+index abcd1234..efgh5679 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+@@ -534,12 +534,12 @@ public class CameraDeviceImpl extends CameraDevice
+     private void configureSessionLocked(SessionConfiguration config)
+             throws CameraAccessException {
+         
++        // BUG: 在配置新 session 前就關閉舊 session
+         if (mCurrentSession != null) {
+-            // 應該等新 session 配置成功再關閉
+-        }
+-        
+-        createSessionFromConfig(config);
+-        
+-        if (mCurrentSession != null) {
+-            mCurrentSession.close();
++            mCurrentSession.close();  // 過早 abandon surfaces
+         }
++        
++        // 此時 surfaces 已經 abandoned，新 session 配置失敗
++        createSessionFromConfig(config);
+     }
+
+diff --git a/frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp b/frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp
+index abcd1234..efgh567a 100644
+--- a/frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp
++++ b/frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp
+@@ -1456,6 +1456,8 @@ status_t Camera3Device::configureStreams(
+     
+     for (size_t i = 0; i < config.num_streams; i++) {
+         auto& stream = config.streams[i];
++        // BUG: 不檢查 surface 狀態就嘗試配置
++        // 缺少 isAbandoned() 檢查
+         status_t res = configureStream(stream);
+         if (res != OK) {
+             return res;

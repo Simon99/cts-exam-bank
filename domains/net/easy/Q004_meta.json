@@ -1,0 +1,19 @@
+{
+  "id": "NET-E004",
+  "title": "LocalSocketAddress getNamespace 返回錯誤命名空間",
+  "difficulty": "easy",
+  "domain": "net",
+  "test_class": "android.net.cts.LocalSocketAddressTest",
+  "test_method": "testNamespace",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/LocalSocketAddress.java"
+  ],
+  "bug_type": "wrong_default_value",
+  "tags": ["LocalSocketAddress", "namespace", "default", "constructor"],
+  "estimated_time_minutes": 8,
+  "skills_tested": [
+    "讀取 CTS 錯誤日誌",
+    "理解默認參數",
+    "對比文檔和實現"
+  ]
+}

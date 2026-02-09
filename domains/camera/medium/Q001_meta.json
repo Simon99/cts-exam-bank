@@ -1,0 +1,19 @@
+{
+  "id": "camera_medium_001",
+  "title": "Capture 回調順序錯誤",
+  "difficulty": "medium",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.CaptureResultTest#testCameraCaptureResultAllKeys",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraCaptureSessionImpl.java",
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java"
+  ],
+  "bug_pattern": "log-in-A-bug-in-B",
+  "tags": ["CaptureCallback", "回調順序", "onCaptureStarted", "呼叫鏈追蹤"],
+  "estimated_time_minutes": 30,
+  "skills_tested": [
+    "理解 Camera2 回調機制",
+    "追蹤回調執行流程",
+    "分析跨檔案呼叫鏈"
+  ]
+}

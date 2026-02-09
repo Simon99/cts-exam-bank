@@ -1,0 +1,21 @@
+{
+  "id": "NET-H007",
+  "title": "VpnService.Builder.establish() 返回 null 但無錯誤日誌",
+  "difficulty": "hard",
+  "domain": "net",
+  "test_class": "android.net.cts.VpnServiceTest",
+  "test_method": "testEstablishVpn",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/VpnService.java",
+    "frameworks/base/services/core/java/com/android/server/connectivity/Vpn.java",
+    "frameworks/base/core/java/com/android/internal/net/VpnConfig.java"
+  ],
+  "bug_type": "silent_failure",
+  "tags": ["VpnService", "Builder", "establish", "VpnConfig"],
+  "estimated_time_minutes": 35,
+  "skills_tested": [
+    "VPN 建立流程",
+    "靜默失敗診斷",
+    "配置驗證邏輯"
+  ]
+}

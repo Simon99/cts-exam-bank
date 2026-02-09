@@ -1,0 +1,27 @@
+{
+  "id": "location-hard-006",
+  "title": "Geofence Exit Event Lost During Power Save",
+  "difficulty": "hard",
+  "domain": "location",
+  "test_class": "android.location.cts.fine.LocationManagerFineTest",
+  "test_method": "testGeofenceExitDuringDoze",
+  "cts_module": "CtsLocationFineTestCases",
+  "tags": [
+    "geofence",
+    "power-save",
+    "doze-mode",
+    "event-loss"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/LocationManager.java",
+  "estimated_time_minutes": 40,
+  "skills_tested": [
+    "Power management",
+    "Geofence state machine",
+    "Doze mode handling"
+  ],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/location/geofence/GeofenceManager.java",
+    "frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java",
+    "frameworks/base/services/core/java/com/android/server/location/injector/SystemLocationPowerSaveModeHelper.java"
+  ]
+}

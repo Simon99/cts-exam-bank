@@ -1,0 +1,16 @@
+{
+  "id": "Q010",
+  "title": "Intent.getAction() 返回錯誤 action",
+  "difficulty": "easy",
+  "domain": "framework",
+  "subdomain": "content",
+  "cts_test": "android.content.cts.IntentTest#testGetAction",
+  "cts_module": "CtsContentTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/content/Intent.java"
+  ],
+  "tags": ["Intent", "action", "setter錯誤"],
+  "estimated_time_minutes": 8,
+  "skills_tested": ["源碼閱讀", "Intent 基礎"],
+  "created_at": "2025-01-13"
+}

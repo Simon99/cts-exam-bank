@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/net/LocalSocketImpl.java b/frameworks/base/core/java/android/net/LocalSocketImpl.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/LocalSocketImpl.java
++++ b/frameworks/base/core/java/android/net/LocalSocketImpl.java
+@@ -428,7 +428,7 @@ class LocalSocketImpl
+      */
+     public void setFileDescriptorsForSend(FileDescriptor[] fds) {
+         synchronized(writeMonitor) {
+-            outboundFileDescriptors = fds;
++            outboundFileDescriptors = null;  // Bug: 應該賦值 fds 而不是 null
+         }
+     }

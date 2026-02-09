@@ -1,0 +1,62 @@
+diff --git a/frameworks/av/media/libstagefright/MPEG4Writer.cpp b/frameworks/av/media/libstagefright/MPEG4Writer.cpp
+index 1234567890ab..abcdef123456 100644
+--- a/frameworks/av/media/libstagefright/MPEG4Writer.cpp
++++ b/frameworks/av/media/libstagefright/MPEG4Writer.cpp
+@@ -3836,9 +3836,10 @@ status_t MPEG4Writer::Track::threadEntry() {
+                 mLastDecodingTimeUs = decodingTimeUs;
+                 timestampDebugEntry.dts = decodingTimeUs;
+ 
+-                cttsOffsetTimeUs =
+-                        timestampUs + kMaxCttsOffsetTimeUs - decodingTimeUs;
++                // Bug: removed the kMaxCttsOffsetTimeUs base, causing negative CTTS
++                cttsOffsetTimeUs = timestampUs - decodingTimeUs;
++                // This can be negative for B-frames!
+                 if (WARN_UNLESS(cttsOffsetTimeUs >= 0LL, "for %s track", trackName)) {
+                     copy->release();
+                     mSource->stop();
+diff --git a/frameworks/av/media/codec2/components/avc/C2SoftAvcEnc.cpp b/frameworks/av/media/codec2/components/avc/C2SoftAvcEnc.cpp
+index abcdef123456..123456abcdef 100644
+--- a/frameworks/av/media/codec2/components/avc/C2SoftAvcEnc.cpp
++++ b/frameworks/av/media/codec2/components/avc/C2SoftAvcEnc.cpp
+@@ -892,8 +892,9 @@ void C2SoftAvcEnc::process(
+     // Set output timestamp based on frame reordering
+     int64_t outPts = workBuffer->ordinal.timestamp.peekll();
+     int64_t outDts = mOutputDts;
+-    mOutputDts += frameDurationUs;
+     
++    // Bug: DTS increment before use causes off-by-one in B-frame reordering
++    mOutputDts += frameDurationUs;  // Should be after setting work->result
+     // For B-frames, PTS and DTS differ
+     if (mBFramesEnabled && frameType == IV_B_FRAME) {
+         // B-frame: PTS is display time, DTS is decode time
+@@ -905,7 +906,9 @@ void C2SoftAvcEnc::process(
+     outBlock->setRange(0, length);
+     work->worklets.front()->output.buffers.push_back(outBlock);
+     work->worklets.front()->output.ordinal.timestamp = outPts;
+-    work->worklets.front()->output.ordinal.customOrdinal = outDts;
++    // Bug: use PTS instead of DTS for customOrdinal
++    work->worklets.front()->output.ordinal.customOrdinal = outPts;  // Wrong! Should be outDts
++    // This causes MPEG4Writer to receive wrong DTS
+     work->result = C2_OK;
+     work->workletsProcessed = 1u;
+ }
+diff --git a/frameworks/base/media/java/android/media/MediaCodec.java b/frameworks/base/media/java/android/media/MediaCodec.java
+index 123456789abc..abcdef012345 100644
+--- a/frameworks/base/media/java/android/media/MediaCodec.java
++++ b/frameworks/base/media/java/android/media/MediaCodec.java
+@@ -2892,10 +2892,12 @@ public final class MediaCodec {
+     private void updateOutputBufferInfo(int index, BufferInfo info) {
+         info.offset = native_getBufferOffset(index);
+         info.size = native_getBufferSize(index);
+-        info.presentationTimeUs = native_getPresentationTimeUs(index);
++        // Bug: swap PTS and DTS, breaking B-frame timestamp ordering
++        long pts = native_getPresentationTimeUs(index);
++        long dts = native_getDecodingTimeUs(index);
++        info.presentationTimeUs = dts;  // Wrong! Should be pts
+         info.flags = native_getBufferFlags(index);
+         
+-        // Store decodingTimeUs for muxer use
+-        mDecodingTimeCache.put(index, native_getDecodingTimeUs(index));
++        mDecodingTimeCache.put(index, pts);  // Also wrong, should store dts
+     }
+ }

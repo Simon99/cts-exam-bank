@@ -1,0 +1,16 @@
+{
+  "id": "Q003",
+  "title": "Bundle.containsKey() 返回錯誤結果",
+  "difficulty": "easy",
+  "domain": "framework",
+  "subdomain": "os",
+  "cts_test": "android.os.cts.BundleTest#testContainsKey",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/BaseBundle.java"
+  ],
+  "tags": ["Bundle", "containsKey", "邏輯錯誤"],
+  "estimated_time_minutes": 5,
+  "skills_tested": ["源碼閱讀", "邏輯判斷"],
+  "created_at": "2025-01-13"
+}

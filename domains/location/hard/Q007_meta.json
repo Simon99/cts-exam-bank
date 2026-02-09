@@ -1,0 +1,26 @@
+{
+  "id": "location-hard-007",
+  "title": "GNSS Antenna Info Coordinates Swapped",
+  "difficulty": "hard",
+  "domain": "location",
+  "test_class": "android.location.cts.fine.LocationManagerFineTest",
+  "test_method": "testGnssAntennaInfo",
+  "cts_module": "CtsLocationFineTestCases",
+  "tags": [
+    "GnssAntennaInfo",
+    "coordinates",
+    "hardware-info"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/GnssAntennaInfo.java",
+  "estimated_time_minutes": 35,
+  "skills_tested": [
+    "Coordinate systems",
+    "HAL data parsing",
+    "Antenna geometry"
+  ],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/location/gnss/GnssAntennaInfoProvider.java",
+    "frameworks/base/services/core/java/com/android/server/location/gnss/GnssManagerService.java",
+    "frameworks/base/services/core/java/com/android/server/location/gnss/hal/GnssNative.java"
+  ]
+}

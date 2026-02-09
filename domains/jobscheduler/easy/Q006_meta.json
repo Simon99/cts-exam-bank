@@ -1,0 +1,14 @@
+{
+  "id": "Q006",
+  "domain": "jobscheduler",
+  "difficulty": "easy",
+  "title": "IdleConstraintTest 閒置狀態切換失敗",
+  "test_class": "android.jobscheduler.cts.IdleConstraintTest",
+  "test_method": "testDeviceChangeIdleActiveState",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/idle/DeviceIdlenessTracker.java"
+  ],
+  "tags": ["idle", "constraint", "screen", "interactivity"],
+  "estimated_time_minutes": 15,
+  "skills_tested": ["log_analysis", "state_machine"]
+}

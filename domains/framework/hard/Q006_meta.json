@@ -1,0 +1,18 @@
+{
+  "id": "H006",
+  "title": "Bundle SparseArray 序列化邊界錯誤",
+  "difficulty": "hard",
+  "domain": "framework",
+  "subdomain": "os",
+  "cts_test": "android.os.cts.BundleTest#testSparseArrayParcel",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/Parcel.java",
+    "frameworks/base/core/java/android/os/BaseBundle.java",
+    "frameworks/base/core/java/android/util/SparseArray.java"
+  ],
+  "tags": ["Bundle", "SparseArray", "序列化", "稀疏數組"],
+  "estimated_time_minutes": 45,
+  "skills_tested": ["數據結構", "序列化協議", "邊界處理"],
+  "created_at": "2025-01-13"
+}

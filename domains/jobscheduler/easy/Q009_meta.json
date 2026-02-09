@@ -1,0 +1,14 @@
+{
+  "id": "Q009",
+  "domain": "jobscheduler",
+  "difficulty": "easy",
+  "title": "StorageConstraintTest 存儲狀態變化未停止作業",
+  "test_class": "android.jobscheduler.cts.StorageConstraintTest",
+  "test_method": "testJobStoppedWhenStorageLow",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/StorageController.java"
+  ],
+  "tags": ["storage", "constraint", "broadcast", "state_change"],
+  "estimated_time_minutes": 15,
+  "skills_tested": ["log_analysis", "broadcast_handling", "state_notification"]
+}

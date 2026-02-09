@@ -1,0 +1,16 @@
+{
+  "id": "app-medium-010",
+  "title": "ProgressDialog 百分比格式不顯示",
+  "difficulty": "medium",
+  "domain": "app",
+  "cts_test": "android.app.cts.ProgressDialogTest#testSetProgressPercentFormat",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/ProgressDialog.java",
+    "frameworks/base/core/java/android/os/Handler.java"
+  ],
+  "tags": ["progressdialog", "handler", "message", "ui-update", "percentage"],
+  "skills_tested": ["handler-mechanism", "message-processing", "ui-update-flow"],
+  "estimated_time_minutes": 25,
+  "created": "2025-01-13",
+  "updated": "2025-02-10"
+}

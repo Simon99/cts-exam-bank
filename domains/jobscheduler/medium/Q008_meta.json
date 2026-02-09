@@ -1,0 +1,15 @@
+{
+  "id": "Q008",
+  "domain": "jobscheduler",
+  "difficulty": "medium",
+  "title": "JobSchedulingTest 待處理作業原因錯誤",
+  "test_class": "android.jobscheduler.cts.JobSchedulingTest",
+  "test_method": "testPendingJobReason_minimumLatency",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java"
+  ],
+  "tags": ["scheduling", "pending_reason", "constraint_check"],
+  "estimated_time_minutes": 25,
+  "skills_tested": ["log_analysis", "api_understanding", "constraint_logic"]
+}

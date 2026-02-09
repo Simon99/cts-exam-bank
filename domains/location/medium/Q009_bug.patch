@@ -1,0 +1,41 @@
+diff --git a/frameworks/base/location/java/android/location/LocationManager.java b/frameworks/base/location/java/android/location/LocationManager.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/location/java/android/location/LocationManager.java
++++ b/frameworks/base/location/java/android/location/LocationManager.java
+@@ -520,11 +520,12 @@ public class LocationManager {
+     @NonNull
+     public List<String> getProviders(boolean enabledOnly) {
+         try {
+-            return mService.getProviders(null, enabledOnly);
++            // BUG: Filter to only return providers starting with "gps"
++            List<String> all = mService.getProviders(null, enabledOnly);
++            List<String> filtered = new ArrayList<>();
++            for (String p : all) {
++                if (p.startsWith("gps")) filtered.add(p);
++            }
++            return filtered;
+         } catch (RemoteException e) {
+             throw e.rethrowFromSystemServer();
+         }
+diff --git a/frameworks/base/services/core/java/com/android/server/location/LocationManagerService.java b/frameworks/base/services/core/java/com/android/server/location/LocationManagerService.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/location/LocationManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/location/LocationManagerService.java
+@@ -756,12 +756,9 @@ public class LocationManagerService extends ILocationManager.Stub implements
+     @Override
+     public List<String> getProviders(Criteria criteria, boolean enabledOnly) {
+         ArrayList<String> providers = new ArrayList<>();
+-        for (LocationProviderManager manager : mProviderManagers) {
+-            if (enabledOnly && !manager.isEnabled(UserHandle.getCallingUserId())) {
+-                continue;
+-            }
+-            // Additional criteria check...
+-            providers.add(manager.getName());
++        // BUG: Only checks test providers, not all provider managers
++        for (LocationProviderManager manager : mProviderManagers) {
++            if (manager.getName().startsWith("test")) {
++                providers.add(manager.getName());
++            }
+         }
+         return providers;
+     }

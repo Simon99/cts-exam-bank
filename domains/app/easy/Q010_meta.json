@@ -1,0 +1,14 @@
+{
+  "id": "app-easy-010",
+  "title": "ProgressDialog 二級進度增量調用錯誤",
+  "difficulty": "easy",
+  "domain": "app",
+  "cts_test": "android.app.cts.ProgressDialogTest#testIncrementSecondaryProgressBy",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/ProgressDialog.java"
+  ],
+  "tags": ["dialog", "progress", "secondary", "method-call"],
+  "skills_tested": ["log-reading", "method-name", "api-usage"],
+  "estimated_time_minutes": 8,
+  "created": "2025-01-13"
+}

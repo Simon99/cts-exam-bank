@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/location/java/android/location/GnssStatus.java b/frameworks/base/location/java/android/location/GnssStatus.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/location/java/android/location/GnssStatus.java
++++ b/frameworks/base/location/java/android/location/GnssStatus.java
+@@ -520,7 +520,7 @@ public final class GnssStatus implements Parcelable {
+          */
+         @NonNull
+         public Builder clearSatellites() {
+-            mSatelliteCount = 0;
++            // mSatelliteCount = 0;
+             mSvidWithFlags = new int[16];
+             mCn0DbHz = new float[16];
+             mElevations = new float[16];

@@ -28,5 +28,10 @@
   ],
   "verified": true,
   "verifiedDate": "2026-02-06",
-  "verifiedDevice": "Pixel 7 (27161FDH20031X)"
+  "verifiedDevice": "Pixel 7 (27161FDH20031X)",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/Display.java",
+    "frameworks/base/core/java/android/view/DisplayInfo.java"
+  ],
+  "file_count": 2
 }

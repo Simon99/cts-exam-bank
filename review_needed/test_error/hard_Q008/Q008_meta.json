@@ -1,0 +1,47 @@
+{
+  "id": "Q008",
+  "title": "VirtualDisplay State 跨層不一致問題",
+  "difficulty": "hard",
+  "category": "multi-file-interaction",
+  "domain": "display",
+  "cts_module": "CtsDisplayTestCases",
+  "files_involved": [
+    "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java",
+    "frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java",
+    "frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java",
+    "frameworks/base/core/java/android/view/Display.java"
+  ],
+  "bug_type": "state_synchronization",
+  "bug_location": {
+    "file": "VirtualDisplayAdapter.java",
+    "class": "VirtualDisplayDevice",
+    "method": "requestDisplayStateLocked",
+    "line_range": "385-396"
+  },
+  "affected_cts_tests": [
+    "android.display.cts.VirtualDisplayTest#testVirtualDisplayStateConsistency"
+  ],
+  "keywords": [
+    "VirtualDisplay",
+    "Display.getState()",
+    "callback",
+    "state synchronization",
+    "mDisplayState",
+    "mIsDisplayOn",
+    "DisplayDeviceInfo"
+  ],
+  "concepts": [
+    "Display state management",
+    "Callback mechanism",
+    "Cross-layer data flow",
+    "State synchronization",
+    "Cache invalidation"
+  ],
+  "root_cause": "requestDisplayStateLocked() updates mDisplayState and dispatches callbacks, but does not synchronize mIsDisplayOn. Since DisplayDeviceInfo.state is derived from mIsDisplayOn, Display.getState() returns stale values.",
+  "fix_description": "Synchronize mIsDisplayOn with mDisplayState in requestDisplayStateLocked(), invalidate cached DisplayDeviceInfo, and send display changed event.",
+  "estimated_time_minutes": 45,
+  "pixel_7_verified": true,
+  "android_version": "14",
+  "created_at": "2025-01-20",
+  "version": "1.0"
+}

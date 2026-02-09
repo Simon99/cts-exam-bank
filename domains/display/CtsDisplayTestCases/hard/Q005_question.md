@@ -1,45 +1,63 @@
-# H-Q005: Overlay Display 的 Metrics 計算錯誤
+# CTS 面試題 - Display Hard Q005
+
+## 題目類型
+**Hard - 多檔案交互 Bug（3+ 檔案）**
+
+## 背景
+你正在調試一個 Android 14 設備上的 Display 相關問題。用戶報告在設置中禁用某些 HDR 格式後，應用程式仍然可以看到這些被禁用的 HDR 類型。
 
 ## 問題描述
+用戶在 Settings > Display 中禁用了 Dolby Vision 和 HLG 格式，並且將 `areUserDisabledHdrTypesAllowed` 設置為 `false`（表示應用不應該看到被禁用的格式）。
 
-你收到一份 CTS 測試報告，顯示 secondary display 的 metrics 測試失敗：
+然而，當應用調用 `Display.getHdrCapabilities().getSupportedHdrTypes()` 時，仍然返回包含 Dolby Vision 和 HLG 的完整 HDR 類型列表，而不是預期的過濾後列表。
 
+## 失敗的 CTS 測試
 ```
-FAILURE: android.display.cts.DisplayTest#testGetMetrics
-java.lang.AssertionError: Display metrics incorrect for overlay display
-Expected density: 320
-Actual density: 160
-
-=============== Summary ===============
-PASSED            : 92
-FAILED            : 4
+android.display.cts.DisplayTest#testGetHdrCapabilitiesWhenUserDisabledFormatsAreNotAllowedReturnsFilteredHdrTypes
 ```
 
-Overlay display 的 density 計算結果只有預期的一半。
+## 測試失敗日誌
+```
+junit.framework.AssertionFailedError: arrays first differed at element [0]; 
+expected:<[2, 4]> but was:<[1, 2, 3, 4]>
+    at android.display.cts.DisplayTest.testGetHdrCapabilitiesWhenUserDisabledFormatsAreNotAllowedReturnsFilteredHdrTypes
 
-## 重現步驟
-
-```bash
-export USE_ATS=false
-./tools/cts-tradefed run cts -m CtsDisplayTestCases -t android.display.cts.DisplayTest#testGetMetrics -s <device_serial>
+HDR Type Constants:
+  HDR_TYPE_DOLBY_VISION = 1
+  HDR_TYPE_HDR10 = 2
+  HDR_TYPE_HLG = 3
+  HDR_TYPE_HDR10_PLUS = 4
 ```
 
-## 任務
+## 架構說明
+HDR 禁用類型的數據流：
+```
+DisplayManager.setUserDisabledHdrTypes()
+    ↓
+DisplayManagerService.setUserDisabledHdrTypesInternal()
+    ↓
+DisplayManagerService.setAreUserDisabledHdrTypesAllowedInternal()
+    ↓
+LogicalDisplay.setUserDisabledHdrTypes()
+    ↓
+DisplayInfo.userDisabledHdrTypes
+    ↓
+Display.getHdrCapabilities() [過濾邏輯]
+```
 
-1. 追蹤 overlay display 的 metrics 計算路徑
-2. 找出 density 計算錯誤的原因
-3. 提供修復方案
+## 你的任務
+1. 分析 HDR 類型禁用功能的跨檔案交互流程
+2. 找出導致 `userDisabledHdrTypes` 不能正確傳遞的 bug
+3. 這個 bug 涉及至少 3 個檔案之間的交互
+4. 提供修復方案
 
-## 提示
+## 相關源代碼路徑
+- `frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java`
+- `frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java`
+- `frameworks/base/core/java/android/view/Display.java`
 
-- Overlay display 和實體 display 的 metrics 計算不同
-- 注意整數除法和浮點數除法的差異
-- 運算順序會影響精度
-
-## 難度
-
-Hard（跨 3+ 個檔案的調用鏈追蹤）
-
-## 時間限制
-
-40 分鐘
+## 調試提示
+- 追蹤 `setUserDisabledHdrTypes()` 從 DisplayManagerService 到最終 API 的完整調用鏈
+- 注意 lambda 中變量捕獲的問題
+- 注意數組比較的方式（引用比較 vs 內容比較）
+- 思考 DisplayInfo 的緩存機制（mInfo）是如何觸發更新的

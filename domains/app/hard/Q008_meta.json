@@ -1,0 +1,16 @@
+{
+  "id": "app-hard-008",
+  "title": "AlarmManager 精確喚醒時間飄移",
+  "difficulty": "hard",
+  "domain": "app",
+  "cts_test": "android.app.cts.AlarmManagerTest#testExactAlarmPrecision",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/Alarm.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmStore.java"
+  ],
+  "tags": ["alarmmanager", "exact-alarm", "battery-optimization", "timing"],
+  "skills_tested": ["alarm-scheduling", "battery-optimization", "flag-handling", "timing-precision"],
+  "estimated_time_minutes": 45,
+  "created": "2025-02-09"
+}

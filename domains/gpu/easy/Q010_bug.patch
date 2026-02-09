@@ -1,0 +1,13 @@
+diff --git a/frameworks/native/opengl/libs/EGL/egl_display.cpp b/frameworks/native/opengl/libs/EGL/egl_display.cpp
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/EGL/egl_display.cpp
++++ b/frameworks/native/opengl/libs/EGL/egl_display.cpp
+@@ -278,7 +278,7 @@ EGLBoolean egl_display_t::terminate() {
+         }
+ 
+         // this is specific to Android, display termination is ref-counted.
+-        refs--;
++        // refs--;  // BUG: decrement removed
+         if (refs > 0) {
+             return EGL_TRUE;
+         }

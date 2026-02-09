@@ -1,0 +1,13 @@
+diff --git a/frameworks/native/opengl/libs/GLES2/gl2.cpp b/frameworks/native/opengl/libs/GLES2/gl2.cpp
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/GLES2/gl2.cpp
++++ b/frameworks/native/opengl/libs/GLES2/gl2.cpp
+@@ -225,7 +225,7 @@ const GLubyte * glGetString(GLenum name) {
+ 
+ const GLubyte * glGetStringi(GLenum name, GLuint index) {
+     egl_connection_t* const cnx = egl_get_connection();
+-    return cnx->platform.glGetStringi(name, index);
++    return cnx->platform.glGetStringi(index, name);  // BUG: params swapped
+ }
+ 
+ void glGetBooleanv(GLenum pname, GLboolean * data) {

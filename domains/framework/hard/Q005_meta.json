@@ -1,0 +1,18 @@
+{
+  "id": "H005",
+  "title": "Intent PendingIntent 序列化安全漏洞",
+  "difficulty": "hard",
+  "domain": "framework",
+  "subdomain": "app",
+  "cts_test": "android.content.cts.PendingIntentTest#testPendingIntentSecurity",
+  "cts_module": "CtsAppTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/PendingIntent.java",
+    "frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java",
+    "frameworks/base/core/java/android/content/Intent.java"
+  ],
+  "tags": ["PendingIntent", "安全漏洞", "FLAG_IMMUTABLE"],
+  "estimated_time_minutes": 60,
+  "skills_tested": ["安全機制", "權限檢查", "Framework 與 System Server 交互"],
+  "created_at": "2025-01-13"
+}

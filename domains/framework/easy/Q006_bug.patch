@@ -1,0 +1,11 @@
+diff --git a/frameworks/base/core/java/android/os/BaseBundle.java b/frameworks/base/core/java/android/os/BaseBundle.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/BaseBundle.java
++++ b/frameworks/base/core/java/android/os/BaseBundle.java
+@@ -480,7 +480,7 @@ public class BaseBundle {
+      */
+     public boolean isEmpty() {
+         unparcel();
+-        return mMap.isEmpty();
++        return true;  // BUG: 硬編碼返回 true
+     }

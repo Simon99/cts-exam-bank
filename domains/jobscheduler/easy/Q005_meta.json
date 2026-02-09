@@ -1,0 +1,14 @@
+{
+  "id": "Q005",
+  "domain": "jobscheduler",
+  "difficulty": "easy",
+  "title": "TimingConstraintsTest 取消作業失敗",
+  "test_class": "android.jobscheduler.cts.TimingConstraintsTest",
+  "test_method": "testCancel",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java"
+  ],
+  "tags": ["timing", "cancel", "tracking", "controller"],
+  "estimated_time_minutes": 15,
+  "skills_tested": ["log_analysis", "data_structure", "lifecycle"]
+}

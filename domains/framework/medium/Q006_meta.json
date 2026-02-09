@@ -1,0 +1,17 @@
+{
+  "id": "M006",
+  "title": "Intent clone 後修改影響原對象",
+  "difficulty": "medium",
+  "domain": "framework",
+  "subdomain": "content",
+  "cts_test": "android.content.cts.IntentTest#testClone",
+  "cts_module": "CtsContentTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/content/Intent.java",
+    "frameworks/base/core/java/android/os/Bundle.java"
+  ],
+  "tags": ["Intent", "clone", "淺拷貝", "深拷貝"],
+  "estimated_time_minutes": 20,
+  "skills_tested": ["拷貝語義理解", "對象引用分析"],
+  "created_at": "2025-01-13"
+}

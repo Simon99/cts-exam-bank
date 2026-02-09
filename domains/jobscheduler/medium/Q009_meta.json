@@ -1,0 +1,15 @@
+{
+  "id": "Q009",
+  "domain": "jobscheduler",
+  "difficulty": "medium",
+  "title": "TimingConstraintsTest 低彈性週期作業錯誤執行",
+  "test_class": "android.jobscheduler.cts.TimingConstraintsTest",
+  "test_method": "testSchedulePeriodic_lowFlex",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java"
+  ],
+  "tags": ["periodic", "flex_window", "timing"],
+  "estimated_time_minutes": 30,
+  "skills_tested": ["log_analysis", "time_window_logic", "periodic_job_understanding"]
+}

@@ -1,0 +1,45 @@
+diff --git a/frameworks/base/core/java/android/content/ContentResolver.java b/frameworks/base/core/java/android/content/ContentResolver.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/content/ContentResolver.java
++++ b/frameworks/base/core/java/android/content/ContentResolver.java
+@@ -2836,8 +2836,10 @@ public abstract class ContentResolver implements ContentInterface {
+     public void notifyChange(@NonNull Uri uri, @Nullable ContentObserver observer,
+             @NotifyFlags int flags) {
+         Objects.requireNonNull(uri, "uri");
++        // BUG: 錯誤地將 flags 與 NOTIFY_SYNC_TO_NETWORK 做 AND 運算
++        // 這會丟失其他 flags（如 NOTIFY_SKIP_NOTIFY_FOR_DESCENDANTS）
+         notifyChange(
+                 ContentProvider.getUriWithoutUserId(uri),
+                 observer,
+-                flags,
++                flags & NOTIFY_SYNC_TO_NETWORK,
+                 ContentProvider.getUserIdFromUri(uri, mContext.getUserId()));
+     }
+
+diff --git a/frameworks/base/services/core/java/com/android/server/content/ContentService.java b/frameworks/base/services/core/java/com/android/server/content/ContentService.java
+index 3456bcde..789abcde 100644
+--- a/frameworks/base/services/core/java/com/android/server/content/ContentService.java
++++ b/frameworks/base/services/core/java/com/android/server/content/ContentService.java
+@@ -628,7 +628,8 @@ public final class ContentService extends IContentService.Stub {
+     private void handleIncomingNotify(Uri uri, ContentObserver observer,
+             boolean observerWantsSelfNotifications, @NotifyFlags int flags,
+             int userHandle, int targetSdkVersion, int callingUid, int callingPid) {
+-        final boolean notifyForDescendants = (flags & ContentResolver.NOTIFY_SKIP_NOTIFY_FOR_DESCENDANTS) == 0;
++        // BUG: 錯誤的位元運算，總是跳過 descendants 通知
++        final boolean notifyForDescendants = (flags & ContentResolver.NOTIFY_SKIP_NOTIFY_FOR_DESCENDANTS) != 0;
+         
+         synchronized (mRootNode) {
+             mRootNode.collectObserversLocked(uri, 0, observer,
+
+diff --git a/frameworks/base/core/java/android/database/ContentObserver.java b/frameworks/base/core/java/android/database/ContentObserver.java
+index 4567cdef..8901ghij 100644
+--- a/frameworks/base/core/java/android/database/ContentObserver.java
++++ b/frameworks/base/core/java/android/database/ContentObserver.java
+@@ -159,7 +159,8 @@ public abstract class ContentObserver {
+      */
+     @Deprecated
+     public void onChange(boolean selfChange, @Nullable Uri uri) {
+-        onChange(selfChange, uri, 0);
++        // BUG: 錯誤地傳遞 -1 作為 flags，會導致位運算異常
++        onChange(selfChange, uri, -1);
+     }

@@ -1,0 +1,32 @@
+From: CTS Exam Bug Injection
+Subject: [PATCH] DisplayInfo.equals() rotation 比較遺漏
+
+此 patch 移除 DisplayInfo.equals() 中對 rotation 欄位的比較，
+導致旋轉變化時無法正確觸發 onDisplayChanged 回調。
+
+涉及檔案：
+- DisplayInfo.java: equals() 方法遺漏 rotation 比較
+- DisplayManagerGlobal.java: 使用 equals() 決定是否發送回調  
+- LogicalDisplay.java: 從 WindowManager 接收 rotation 更新
+
+---
+ .../java/android/view/DisplayInfo.java        | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/core/java/android/view/DisplayInfo.java b/core/java/android/view/DisplayInfo.java
+index abcd1234..efgh5678 100644
+--- a/core/java/android/view/DisplayInfo.java
++++ b/core/java/android/view/DisplayInfo.java
+@@ -423,8 +423,7 @@ public final class DisplayInfo implements Parcelable {
+                 && logicalWidth == other.logicalWidth
+                 && logicalHeight == other.logicalHeight
+                 && Objects.equals(displayCutout, other.displayCutout)
+-                && rotation == other.rotation
+-                && modeId == other.modeId
++                && modeId == other.modeId
+                 && renderFrameRate == other.renderFrameRate
+                 && defaultModeId == other.defaultModeId
+                 && userPreferredModeId == other.userPreferredModeId
+-- 
+2.39.0
+

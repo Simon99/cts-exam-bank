@@ -1,0 +1,16 @@
+diff --git a/frameworks/base/media/java/android/media/MediaExtractor.java b/frameworks/base/media/java/android/media/MediaExtractor.java
+index 1234567890ab..abcdef123456 100644
+--- a/frameworks/base/media/java/android/media/MediaExtractor.java
++++ b/frameworks/base/media/java/android/media/MediaExtractor.java
+@@ -312,7 +312,10 @@ public final class MediaExtractor {
+      *
+      * @return the number of tracks in the data source
+      */
+-    public native final int getTrackCount();
++    public final int getTrackCount() {
++        return 0;
++    }
++    private native int nativeGetTrackCount();
+ 
+     /**
+      * Get the track format at the specified index.

@@ -1,0 +1,18 @@
+{
+  "id": "camera_medium_002",
+  "title": "Partial Result Count 不一致",
+  "difficulty": "medium",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.CaptureResultTest#testPartialResult",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java",
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java"
+  ],
+  "tags": ["PartialResult", "Characteristics", "數量一致性"],
+  "estimated_time_minutes": 30,
+  "skills_tested": [
+    "理解 Partial Result 機制",
+    "追蹤 characteristics 到實際行為",
+    "驗證 API 契約"
+  ]
+}

@@ -1,0 +1,31 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/location/LocationManagerService.java b/frameworks/base/services/core/java/com/android/server/location/LocationManagerService.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/location/LocationManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/location/LocationManagerService.java
+@@ -1245,12 +1245,8 @@ public class LocationManagerService extends ILocationManager.Stub implements
+     @Override
+     public void addTestProvider(String provider, ProviderProperties properties,
+             List<String> extraAttributionTags) {
+-        // Check mock location permission and settings
+-        enforceCallerIsMockLocationApp();
+-        
+-        if (!hasMockLocationPermission()) {
+-            throw new SecurityException("Requires ACCESS_MOCK_LOCATION permission");
+-        }
++        // BUG: Permission checks removed - any app can add test provider
++        // enforceCallerIsMockLocationApp() and permission check removed
+         
+         synchronized (mLock) {
+             LocationProviderManager manager = getOrAddProviderManager(provider);
+@@ -1267,10 +1263,7 @@ public class LocationManagerService extends ILocationManager.Stub implements
+     @Override
+     public void setTestProviderLocation(String provider, Location location) {
+         Objects.requireNonNull(provider);
+-        
+-        // Verify caller is the mock location app
+-        enforceCallerIsMockLocationApp();
+-        
++        // BUG: enforceCallerIsMockLocationApp() check removed
+         synchronized (mLock) {
+             LocationProviderManager manager = mProviderManagers.get(provider);
+             if (manager == null || !manager.isMock()) {

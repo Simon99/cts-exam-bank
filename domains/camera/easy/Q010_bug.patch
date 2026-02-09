@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
+@@ -389,6 +389,9 @@ public class CameraMetadataNative implements Parcelable {
+     @Override
+     public void readFromParcel(Parcel in) {
+         nativeReadFromParcel(in);
++        
++        // BUG: 讀取後清空 metadata
++        nativeClear();
+     }
+ 
+     /**

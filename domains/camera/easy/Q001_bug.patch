@@ -1,0 +1,32 @@
+diff --git a/frameworks/base/core/java/android/hardware/camera2/CameraManager.java b/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
++++ b/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
+@@ -285,7 +285,8 @@ public final class CameraManager {
+     public String[] getCameraIdList() throws CameraAccessException {
+         return CameraManagerGlobal.get().getCameraIdList(mContext.getDeviceId(),
+                 CAMERA_TYPE_BACKWARD_COMPATIBLE, mHasOpenCloseListenerPermission,
+-                mContext.getApplicationInfo().uid);
++                mContext.getApplicationInfo().uid,
++                true /* forceEmpty - BUG: 強制返回空列表 */);
+     }
+ 
+     /**
+@@ -295,12 +296,16 @@ public final class CameraManager {
+      */
+     private String[] getCameraIdListInternal(int deviceId, int cameraType,
+             boolean hasOpenCloseListenerPermission, int callingUid,
+-            int targetSdkVersion) throws CameraAccessException {
++            int targetSdkVersion, boolean forceEmpty) throws CameraAccessException {
+         synchronized (mLock) {
++            // BUG: forceEmpty 導致始終返回空陣列
++            if (forceEmpty) {
++                return new String[0];
++            }
+             if (mDeviceIdList == null) {
+                 mDeviceIdList = new ArrayList<String>();
+                 // ... normal camera discovery
+             }
+             return mDeviceIdList.toArray(new String[0]);
+         }
+     }

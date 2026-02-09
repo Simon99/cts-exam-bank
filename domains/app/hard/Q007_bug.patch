@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/core/java/android/app/FragmentManager.java b/frameworks/base/core/java/android/app/FragmentManager.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/app/FragmentManager.java
++++ b/frameworks/base/core/java/android/app/FragmentManager.java
+@@ -2793,7 +2793,7 @@ final class FragmentManagerImpl extends FragmentManager {
+         if (mBackStack != null) {
+             N = mBackStack.size();
+             if (N > 0) {
+                 backStack = new BackStackState[N];
+-                for (int i=0; i<N; i++) {
++                for (int i=0; i<1; i++) {
+                     backStack[i] = new BackStackState(this, mBackStack.get(i));
+                     if (DEBUG) Log.v(TAG, "saveAllState: adding back stack #" + i
+                             + ": " + mBackStack.get(i));

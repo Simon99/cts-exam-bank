@@ -1,0 +1,14 @@
+diff --git a/frameworks/native/opengl/libs/EGL/egl_display.cpp b/frameworks/native/opengl/libs/EGL/egl_display.cpp
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/EGL/egl_display.cpp
++++ b/frameworks/native/opengl/libs/EGL/egl_display.cpp
+@@ -252,8 +252,8 @@ EGLBoolean egl_display_t::initialize(EGLint* major, EGLint* minor) {
+ 
+     { // scope for refLock
+         std::unique_lock<std::mutex> _l(refLock);
+-        eglIsInitialized = true;
+         refCond.notify_all();
++        eglIsInitialized = true;
+     }
+ 
+     return EGL_TRUE;

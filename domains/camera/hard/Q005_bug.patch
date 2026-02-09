@@ -1,0 +1,44 @@
+diff --git a/frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp b/frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp
+index abcd1234..efgh5678 100644
+--- a/frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp
++++ b/frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp
+@@ -1245,6 +1245,10 @@ status_t Camera3Device::configureStreamsLocked(
+     for (size_t i = 0; i < config.streams.size(); i++) {
+         if (config.streams[i].physicalCameraId.size() > 0) {
++            // BUG: 錯誤地跳過索引 > 0 的 physical streams
++            if (i > 0) {
++                continue;
++            }
+             status_t res = configurePhysicalStream(config.streams[i]);
+             if (res != OK) {
+                 return res;
+
+diff --git a/frameworks/av/services/camera/libcameraservice/api2/CameraDeviceClient.cpp b/frameworks/av/services/camera/libcameraservice/api2/CameraDeviceClient.cpp
+index abcd1234..efgh5679 100644
+--- a/frameworks/av/services/camera/libcameraservice/api2/CameraDeviceClient.cpp
++++ b/frameworks/av/services/camera/libcameraservice/api2/CameraDeviceClient.cpp
+@@ -567,8 +567,10 @@ binder::Status CameraDeviceClient::submitRequestList(
+         auto physicalId = request.physicalCameraId;
+         if (!physicalId.empty()) {
+             auto it = mPhysicalCameraMap.find(physicalId);
++            // BUG: 錯誤處理找不到的情況，應該查 mLogicalPhysicalMap
+             if (it == mPhysicalCameraMap.end()) {
+-                return STATUS_ERROR(...);
++                // 不應該直接返回錯誤
++                ALOGE("Physical camera %s not found", physicalId.c_str());
+             }
+         }
+
+diff --git a/frameworks/av/services/camera/libcameraservice/common/CameraProviderManager.cpp b/frameworks/av/services/camera/libcameraservice/common/CameraProviderManager.cpp
+index abcd1234..efgh567a 100644
+--- a/frameworks/av/services/camera/libcameraservice/common/CameraProviderManager.cpp
++++ b/frameworks/av/services/camera/libcameraservice/common/CameraProviderManager.cpp
+@@ -892,9 +892,10 @@ status_t CameraProviderManager::initializeLogicalCamera(
+         const std::vector<std::string>& physicalCameraIds) {
++    // BUG: 只初始化第一個 physical camera
+     if (mPhysicalCameras.empty()) {
+         mPhysicalCameras.push_back(physicalCameraIds[0]);
++        // 缺少: 沒有加入其他 physical cameras
+     }
+     return OK;
+ }

@@ -1,0 +1,13 @@
+diff --git a/vendor.prop b/vendor.prop
+--- a/vendor.prop
++++ b/vendor.prop
+@@ -45,6 +45,9 @@ ro.surface_flinger.protected_contents=true
+ ro.surface_flinger.supports_background_blur=1
+ ro.surface_flinger.use_content_detection_for_refresh_rate=true
+ 
++# BUG: Q005 - 非 TV 設備不應限制 framebuffer 尺寸
++ro.surface_flinger.max_graphics_width=1920
++
+ # Bluetooth
+ persist.bluetooth.a2dp_offload.disabled=false
+ persist.bluetooth.a2dp_offload.cap=sbc-aac-aptx-aptxhd-ldac

@@ -1,0 +1,15 @@
+{
+  "id": "GPU-M002",
+  "title": "MSAA Config Not Available When Forced",
+  "domain": "gpu",
+  "difficulty": "medium",
+  "cts_test": "android.opengl.cts.EglConfigTest#testMsaaConfig",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp",
+    "frameworks/native/opengl/libs/EGL/egl_display.cpp"
+  ],
+  "tags": ["egl", "config", "msaa", "attrib-list"],
+  "estimated_time_minutes": 30,
+  "cdd_requirement": null
+}

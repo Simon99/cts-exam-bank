@@ -1,0 +1,16 @@
+{
+  "id": "Q008",
+  "domain": "framework",
+  "difficulty": "hard",
+  "title": "PendingIntent 跨包傳遞時 FLAG 丟失",
+  "cts_test": "android.app.cts.PendingIntentTest#testGetFlagsAfterCrossPackageParcel",
+  "cts_module": "CtsAppTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/PendingIntent.java",
+    "frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java",
+    "frameworks/base/core/java/android/app/IActivityManager.aidl"
+  ],
+  "tags": ["pending-intent", "parcelable", "flags", "IPC"],
+  "estimated_time_minutes": 45,
+  "skills_tested": ["parcelable-consistency", "cross-process-data", "serialization-order"]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "display-hard-003",
+  "title": "VirtualDisplay RequestedRefreshRate 跨檔案傳遞問題",
+  "difficulty": "hard",
+  "domain": "display",
+  "module": "CtsDisplayTestCases",
+  "pattern": "C",
+  "patternDesc": "跨檔案調用鏈 - VirtualDisplayConfig(API) → VirtualDisplayAdapter(設備) → DisplayDeviceInfo(資訊)，問題在 Adapter 設置 DeviceInfo 時",
+  "targetTests": [
+    "android.display.cts.VirtualDisplayTest#testVirtualDisplayWithRequestedRefreshRate"
+  ],
+  "ctsCommand": "adb shell am instrument -w -r -e class android.display.cts.VirtualDisplayTest#testVirtualDisplayWithRequestedRefreshRate android.display.cts/androidx.test.runner.AndroidJUnitRunner",
+  "callChain": [
+    "VirtualDisplayConfig.getRequestedRefreshRate()",
+    "VirtualDisplayAdapter.VirtualDisplayDevice()",
+    "VirtualDisplayDevice.getRefreshRate()",
+    "DisplayAdapter.createMode()",
+    "VirtualDisplayDevice.getDisplayDeviceInfoLocked()",
+    "DisplayDeviceInfo.renderFrameRate"
+  ],
+  "affectedFiles": [
+    "frameworks/base/core/java/android/hardware/display/VirtualDisplayConfig.java",
+    "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java",
+    "frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java"
+  ],
+  "fileCount": 3,
+  "bugFile": "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java",
+  "bugMethod": "VirtualDisplayDevice.getDisplayDeviceInfoLocked",
+  "bugLine": 466,
+  "bugType": "wrong_value_source",
+  "bugDescription": "renderFrameRate 使用固定的 REFRESH_RATE 常數 (60Hz) 而非從 mMode.getRefreshRate() 獲取實際值",
+  "bootSafe": true,
+  "expectedResult": {
+    "outcome": "assertion_failure",
+    "failedTests": 1,
+    "passedTests": 0,
+    "errorMessage": "java.lang.AssertionError: expected:<30.0> but was:<60.0>"
+  },
+  "timeLimit": 40,
+  "hints": [
+    "追蹤 Display.getRefreshRate() 的返回值來源",
+    "比較 modeId、supportedModes 和 renderFrameRate 的值來源",
+    "REFRESH_RATE 是類別常數，代表默認的 60Hz"
+  ],
+  "verified": false,
+  "verifiedDate": null,
+  "verifiedDevice": null,
+  "verificationStatus": "pending",
+  "verificationNotes": "設計階段，尚未在實際設備上驗證",
+  "requiresSpecialConfig": false,
+  "configRequirements": null
+}

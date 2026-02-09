@@ -1,0 +1,29 @@
+diff --git a/frameworks/base/core/java/android/app/Dialog.java b/frameworks/base/core/java/android/app/Dialog.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/app/Dialog.java
++++ b/frameworks/base/core/java/android/app/Dialog.java
+@@ -893,8 +893,7 @@ public class Dialog implements DialogInterface, Window.Callback,
+         if (mWindow.superDispatchKeyEvent(event)) {
+             return true;
+         }
+-        return event.dispatch(this, mDecor != null 
+-                ? mDecor.getKeyDispatcherState() : null, this);
++        return false;
+     }
+
+     /**
+
+diff --git a/frameworks/base/core/java/com/android/internal/policy/PhoneWindow.java b/frameworks/base/core/java/com/android/internal/policy/PhoneWindow.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/core/java/com/android/internal/policy/PhoneWindow.java
++++ b/frameworks/base/core/java/com/android/internal/policy/PhoneWindow.java
+@@ -1850,7 +1850,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
+
+     @Override
+     public boolean superDispatchKeyEvent(KeyEvent event) {
+-        return mDecor.superDispatchKeyEvent(event);
++        mDecor.superDispatchKeyEvent(event);
++        return true;
+     }
+
+     @Override

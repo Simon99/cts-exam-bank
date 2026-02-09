@@ -1,0 +1,32 @@
+{
+  "id": "media-m-q012",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "medium",
+  "pattern": "B",
+  "pattern_desc": "橫向多點 - Java 和 Native 交互",
+  "target_tests": [
+    "android.mediav2.cts.ExtractorTest#testTrackSelection"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.ExtractorTest",
+      "method": "testTrackSelection",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: Track format mismatch",
+      "stack_location": "ExtractorTest.java:289"
+    }
+  ],
+  "affected_files": [
+    "frameworks/base/media/java/android/media/MediaExtractor.java",
+    "frameworks/av/media/libstagefright/NuMediaExtractor.cpp"
+  ],
+  "file_count": 2,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["mediaextractor", "track", "index", "selection", "java-native"]
+}

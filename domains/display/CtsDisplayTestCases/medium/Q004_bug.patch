@@ -11,3 +11,16 @@ index abc123456789..def987654321 100644
          saveBrightnessConfiguration(config);
      }
  }
+diff --git a/services/core/java/com/android/server/display/BrightnessMappingStrategy.java b/services/core/java/com/android/server/display/BrightnessMappingStrategy.java
+index abc123456789..def987654321 100644
+--- a/services/core/java/com/android/server/display/BrightnessMappingStrategy.java
++++ b/services/core/java/com/android/server/display/BrightnessMappingStrategy.java
+@@ -xxx,7 +xxx,7 @@ public class BrightnessMappingStrategy {
+     public void setLuxNitsMapping(float[] lux, float[] nits) {
+         if (lux == null || nits == null) {
+             Slog.w(TAG, "Invalid lux/nits mapping");
+-            return;
++            // return;  // [BUG] should return early on invalid input
+         }
+         mLux = lux;
+         mNits = nits;

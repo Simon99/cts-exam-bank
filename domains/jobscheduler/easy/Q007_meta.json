@@ -1,0 +1,14 @@
+{
+  "id": "Q007",
+  "domain": "jobscheduler",
+  "difficulty": "easy",
+  "title": "TimingConstraintsTest 週期性作業重新排程失敗",
+  "test_class": "android.jobscheduler.cts.TimingConstraintsTest",
+  "test_method": "testSchedulePeriodic",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/framework/java/android/app/job/JobInfo.java"
+  ],
+  "tags": ["periodic", "scheduling", "jobinfo"],
+  "estimated_time_minutes": 10,
+  "skills_tested": ["log_analysis", "boolean_logic", "api_understanding"]
+}

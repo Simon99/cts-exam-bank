@@ -1,0 +1,16 @@
+{
+  "id": "Q007",
+  "domain": "filesystem",
+  "difficulty": "hard",
+  "title": "DeviceStorageMonitor 低空間檢測三層錯誤",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testGetStorageVolumes",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/storage/DeviceStorageMonitorService.java",
+    "frameworks/base/core/java/android/os/storage/StorageManager.java",
+    "frameworks/base/core/java/android/os/storage/VolumeInfo.java"
+  ],
+  "tags": ["storage", "low-space", "threshold", "broadcast", "monitoring"],
+  "estimated_time_minutes": 45,
+  "skills_tested": ["service-analysis", "threshold-logic", "broadcast-handling", "multi-file-debugging"]
+}

@@ -1,0 +1,63 @@
+diff --git a/frameworks/av/media/libstagefright/MPEG4Writer.cpp b/frameworks/av/media/libstagefright/MPEG4Writer.cpp
+index 1234567890ab..abcdef123456 100644
+--- a/frameworks/av/media/libstagefright/MPEG4Writer.cpp
++++ b/frameworks/av/media/libstagefright/MPEG4Writer.cpp
+@@ -1234,13 +1234,15 @@ void MPEG4Writer::threadFunc() {
+     while (!mDone) {
+         // Find track with earliest pending sample
+-        Track* trackToWrite = findTrackWithEarliestSample();
+-        if (trackToWrite != nullptr) {
+-            trackToWrite->writeNextSample();
++        // Bug: write all samples from each track sequentially
++        // instead of interleaving by timestamp
++        for (size_t i = 0; i < mTracks.size(); ++i) {
++            Track* track = mTracks[i];
++            while (track->hasPendingSamples()) {
++                track->writeNextSample();  // No interleave
++            }
+         }
+-        
+-        usleep(1000);  // Small delay to batch samples
++        break;  // Write all tracks at once
+     }
+ }
+ 
+diff --git a/frameworks/av/media/libstagefright/MediaMuxer.cpp b/frameworks/av/media/libstagefright/MediaMuxer.cpp
+index abcdef123456..123456abcdef 100644
+--- a/frameworks/av/media/libstagefright/MediaMuxer.cpp
++++ b/frameworks/av/media/libstagefright/MediaMuxer.cpp
+@@ -345,10 +345,12 @@ status_t MediaMuxer::writeSampleData(
+     }
+     
+     // Buffer sample for interleaved writing
+-    mPendingSamples.push(Sample(trackIndex, buffer, timeUs, flags));
+-    
+-    // Flush samples with interleave
+-    flushInterleaved();
++    // Bug: don't use pending queue, write directly to track buffer
++    // This causes samples to be written per-track instead of interleaved
++    mTracks[trackIndex].mSamples.push_back(Sample(buffer, timeUs, flags));
++
++    // Skip interleave logic
++    // flushInterleaved();
+     
+     return OK;
+ }
+diff --git a/frameworks/base/media/java/android/media/MediaMuxer.java b/frameworks/base/media/java/android/media/MediaMuxer.java
+index 123456789abc..abcdef012345 100644
+--- a/frameworks/base/media/java/android/media/MediaMuxer.java
++++ b/frameworks/base/media/java/android/media/MediaMuxer.java
+@@ -234,9 +234,11 @@ public final class MediaMuxer {
+     public void stop() {
+         if (mState != MUXER_STATE_STARTED) {
+             throw new IllegalStateException("Can't stop, muxer not started");
+         }
+-        
+-        nativeStop(mNativeObject);
++
++        // Bug: flush tracks in order instead of interleaved
++        for (int i = 0; i < mTrackCount; i++) {
++            nativeFlushTrack(mNativeObject, i);  // Per-track flush
++        }
+         mState = MUXER_STATE_STOPPED;
+     }

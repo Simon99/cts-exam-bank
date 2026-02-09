@@ -1,0 +1,22 @@
+{
+  "id": "NET-H009",
+  "title": "Uri.getQueryParameterNames() 返回重複的參數名",
+  "difficulty": "hard",
+  "domain": "net",
+  "test_class": "android.net.cts.UriTest",
+  "test_method": "testGetQueryParameterNames",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/Uri.java",
+    "frameworks/base/core/java/android/net/UriCodec.java",
+    "frameworks/base/core/java/android/net/UrlQuerySanitizer.java"
+  ],
+  "bug_type": "wrong_collection_type",
+  "tags": ["Uri", "query", "getQueryParameterNames", "Set", "duplicate"],
+  "estimated_time_minutes": 30,
+  "skills_tested": [
+    "集合類型理解",
+    "URL 解析邏輯",
+    "去重機制",
+    "多檔案追蹤"
+  ]
+}

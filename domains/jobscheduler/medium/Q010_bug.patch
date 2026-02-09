@@ -1,0 +1,16 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
+@@ -1850,9 +1850,7 @@ public class JobSchedulerService extends com.android.server.SystemService
+     void handleJobCompletedLocked(JobStatus job, boolean needsReschedule) {
+         removeJobFromRunningList(job);
+         
+-        // Should check if job was cancelled before rescheduling
+-        if (needsReschedule && !mCancelledJobs.contains(job.getJobId())) {
+-            scheduleNewJob(job);
+-        }
++        // BUG: Not checking if job was cancelled
++        if (needsReschedule) scheduleNewJob(job);
+     }
+ }

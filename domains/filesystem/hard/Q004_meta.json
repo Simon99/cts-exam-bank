@@ -1,0 +1,16 @@
+{
+  "id": "Q004",
+  "domain": "filesystem",
+  "difficulty": "hard",
+  "title": "StorageManager UUID 轉換三層邏輯錯誤",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testGetUuidForPath",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/storage/StorageManager.java",
+    "frameworks/base/core/java/android/os/storage/VolumeInfo.java",
+    "frameworks/base/services/core/java/com/android/server/StorageManagerService.java"
+  ],
+  "tags": ["storage", "UUID", "string-manipulation", "format-conversion", "path-mapping"],
+  "estimated_time_minutes": 40,
+  "skills_tested": ["UUID-format", "string-operations", "format-validation", "multi-file-debugging"]
+}

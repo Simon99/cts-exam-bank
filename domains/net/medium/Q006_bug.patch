@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/net/LocalServerSocket.java b/frameworks/base/core/java/android/net/LocalServerSocket.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/LocalServerSocket.java
++++ b/frameworks/base/core/java/android/net/LocalServerSocket.java
+@@ -82,7 +82,7 @@ public class LocalServerSocket implements Closeable {
+     public LocalSocket accept() throws IOException
+     {
+         LocalSocketImpl acceptedImpl = new LocalSocketImpl();
+-        impl.accept(acceptedImpl);
++        // impl.accept(acceptedImpl);  // Bug: 這行被註解掉了
+         return LocalSocket.createLocalSocketForAccept(acceptedImpl);
+     }

@@ -1,0 +1,14 @@
+{
+  "id": "GPU-E009",
+  "title": "EGL Surface Creation Fails",
+  "domain": "gpu",
+  "difficulty": "easy",
+  "cts_test": "android.opengl.cts.EglSurfacesTest#testCreateWindowSurface",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp"
+  ],
+  "tags": ["egl", "surface", "window", "validation"],
+  "estimated_time_minutes": 15,
+  "cdd_requirement": null
+}

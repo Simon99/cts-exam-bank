@@ -1,0 +1,20 @@
+{
+  "id": "Q009",
+  "difficulty": "easy",
+  "module": "CtsDisplayTestCases",
+  "target_test": "android.display.cts.DisplayTest#testFlags",
+  "bug_file": "frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java",
+  "bug_line": 271,
+  "skill_tested": [
+    "log_reading",
+    "bit_operation",
+    "display_flags"
+  ],
+  "estimated_time_minutes": 20,
+  "status": "pending_verification",
+  "notes": "Bug 不會導致 bootloop，只影響 overlay display 的標誌",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java"
+  ],
+  "file_count": 1
+}

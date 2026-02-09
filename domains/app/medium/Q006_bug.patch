@@ -1,0 +1,26 @@
+diff --git a/frameworks/base/core/java/android/app/IntentService.java b/frameworks/base/core/java/android/app/IntentService.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/app/IntentService.java
++++ b/frameworks/base/core/java/android/app/IntentService.java
+@@ -126,7 +126,7 @@ public abstract class IntentService extends Service {
+     @Override
+     public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
+         onStart(intent, startId);
+-        return mRedelivery ? START_REDELIVER_INTENT : START_NOT_STICKY;
++        return mRedelivery ? START_NOT_STICKY : START_REDELIVER_INTENT;
+     }
+
+     @Override
+
+diff --git a/frameworks/base/core/java/android/app/Service.java b/frameworks/base/core/java/android/app/Service.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/core/java/android/app/Service.java
++++ b/frameworks/base/core/java/android/app/Service.java
+@@ -895,7 +895,7 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
+     public @StartResult int onStartCommand(Intent intent, @StartArgFlags int flags, int startId) {
+         onStart(intent, startId);
+-        return START_STICKY;
++        return START_REDELIVER_INTENT;
+     }
+
+     /**

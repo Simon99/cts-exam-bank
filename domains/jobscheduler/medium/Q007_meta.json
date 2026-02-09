@@ -1,0 +1,15 @@
+{
+  "id": "Q007",
+  "domain": "jobscheduler",
+  "difficulty": "medium",
+  "title": "IdleConstraintTest 自動投影阻止閒置失敗",
+  "test_class": "android.jobscheduler.cts.IdleConstraintTest",
+  "test_method": "testAutomotiveProjectionPreventsIdle",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/IdleController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/idle/DeviceIdlenessTracker.java"
+  ],
+  "tags": ["idle", "automotive_projection", "state_change"],
+  "estimated_time_minutes": 30,
+  "skills_tested": ["log_analysis", "state_machine", "multi_condition_logic"]
+}

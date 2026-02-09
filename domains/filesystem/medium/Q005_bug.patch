@@ -1,0 +1,26 @@
+diff --git a/frameworks/base/core/java/android/os/storage/StorageManager.java b/frameworks/base/core/java/android/os/storage/StorageManager.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/storage/StorageManager.java
++++ b/frameworks/base/core/java/android/os/storage/StorageManager.java
+@@ -1580,7 +1580,7 @@ public class StorageManager {
+             if (UUID_DEFAULT.equals(storageUuid)) {
+                 return true;
+             }
+-            final VolumeInfo vol = findVolumeByUuid(storageUuid.toString());
++            final VolumeInfo vol = findVolumeByUuid(convert(storageUuid));
+             if (vol != null) {
+                 return vol.isSupportedFilesystem();
+             }
+diff --git a/frameworks/base/core/java/android/os/storage/VolumeInfo.java b/frameworks/base/core/java/android/os/storage/VolumeInfo.java
+index 111222..333444 100644
+--- a/frameworks/base/core/java/android/os/storage/VolumeInfo.java
++++ b/frameworks/base/core/java/android/os/storage/VolumeInfo.java
+@@ -320,7 +320,7 @@ public class VolumeInfo implements Parcelable {
+      * Returns true if this volume supports file allocation operations.
+      */
+     public boolean isSupportedFilesystem() {
+-        return "ext4".equals(fsType) || "f2fs".equals(fsType);
++        return "fat32".equals(fsType) || "exfat".equals(fsType);
+     }
+ 
+     /**

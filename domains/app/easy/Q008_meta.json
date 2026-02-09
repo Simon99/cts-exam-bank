@@ -1,0 +1,14 @@
+{
+  "id": "app-easy-008",
+  "title": "ProgressDialog indeterminate 狀態設定錯誤",
+  "difficulty": "easy",
+  "domain": "app",
+  "cts_test": "android.app.cts.ProgressDialogTest#testSetIndeterminate",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/ProgressDialog.java"
+  ],
+  "tags": ["dialog", "progress", "boolean-state"],
+  "skills_tested": ["log-reading", "boolean-logic"],
+  "estimated_time_minutes": 8,
+  "created": "2025-01-13"
+}

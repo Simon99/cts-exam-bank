@@ -1,0 +1,13 @@
+diff --git a/core/java/android/view/Display.java b/core/java/android/view/Display.java
+--- a/core/java/android/view/Display.java
++++ b/core/java/android/view/Display.java
+@@ -1089,7 +1089,8 @@ public final class Display {
+     public float getRefreshRate() {
+         synchronized (mLock) {
+             updateDisplayInfoLocked();
+-            return mDisplayInfo.getRefreshRate();
++            // BUG: Q008 - 刷新率被硬編碼為 0
++            return 0.0f;
+         }
+     }
+ 

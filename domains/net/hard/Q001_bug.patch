@@ -1,0 +1,16 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/connectivity/Vpn.java b/frameworks/base/services/core/java/com/android/server/connectivity/Vpn.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/connectivity/Vpn.java
++++ b/frameworks/base/services/core/java/com/android/server/connectivity/Vpn.java
+@@ -1578,10 +1578,9 @@ public class Vpn {
+     private void agentConnect() {
+         // 創建 NetworkCapabilities
+         NetworkCapabilities.Builder ncBuilder = new NetworkCapabilities.Builder()
+-            .addTransportType(NetworkCapabilities.TRANSPORT_VPN)
+             .addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_SUSPENDED)
+             .removeCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN);
+-        ncBuilder.setTransportInfo(createVpnTransportInfo());
++        // Bug: 沒有設置 TRANSPORT_VPN 和 TransportInfo
+         
+         // 創建 NetworkAgent
+         mNetworkAgent = new NetworkAgent(mContext, mLooper, NETWORKTYPE,

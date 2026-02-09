@@ -1,0 +1,17 @@
+{
+  "id": "location-medium-007",
+  "title": "Geofence Proximity Alert Never Triggered",
+  "difficulty": "medium",
+  "domain": "location",
+  "test_class": "android.location.cts.fine.LocationManagerFineTest",
+  "test_method": "testAddProximityAlert",
+  "cts_module": "CtsLocationFineTestCases",
+  "tags": ["Geofence", "proximity", "PendingIntent"],
+  "affected_files": [
+    "frameworks/base/location/java/android/location/LocationManager.java",
+    "frameworks/base/services/core/java/com/android/server/location/geofence/GeofenceManager.java"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/LocationManager.java",
+  "estimated_time_minutes": 22,
+  "skills_tested": ["Geofencing logic", "Distance calculation", "Parameter validation"]
+}

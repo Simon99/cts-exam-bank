@@ -1,0 +1,27 @@
+
+android.display.cts.VirtualDisplayTest:.....
+Error in testPrivatePresentationVirtualDisplay(android.display.cts.VirtualDisplayTest):
+java.lang.AssertionError: display must have correct flags expected:<12> but was:<0>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:647)
+	at android.display.cts.VirtualDisplayTest.assertDisplayRegistered(VirtualDisplayTest.java:442)
+	at android.display.cts.VirtualDisplayTest.testPrivatePresentationVirtualDisplay(VirtualDisplayTest.java:221)
+....
+
+Time: 4.802
+There was 1 failure:
+1) testPrivatePresentationVirtualDisplay(android.display.cts.VirtualDisplayTest)
+java.lang.AssertionError: display must have correct flags expected:<12> but was:<0>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:647)
+	at android.display.cts.VirtualDisplayTest.assertDisplayRegistered(VirtualDisplayTest.java:442)
+	at android.display.cts.VirtualDisplayTest.testPrivatePresentationVirtualDisplay(VirtualDisplayTest.java:221)
+
+FAILURES!!!
+Tests run: 10,  Failures: 1
+
+
+
+android.display.cts.DisplayTest:.INSTRUMENTATION_ABORTED: System has crashed.

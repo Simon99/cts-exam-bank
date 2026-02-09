@@ -1,0 +1,33 @@
+{
+  "id": "media-h-q025",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "hard",
+  "pattern": "C",
+  "pattern_desc": "縱深多層 - 影響 3 個以上檔案",
+  "target_tests": [
+    "android.mediav2.cts.CodecDecoderSurfaceTest#testDecodeToSurface"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.CodecDecoderSurfaceTest",
+      "method": "testDecodeToSurface",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: Surface frame timestamp mismatch",
+      "stack_location": "CodecDecoderSurfaceTest.java:312"
+    }
+  ],
+  "affected_files": [
+    "frameworks/av/media/libstagefright/MediaCodec.cpp",
+    "frameworks/av/media/codec2/sfplugin/CCodecBufferChannel.cpp",
+    "frameworks/native/libs/gui/Surface.cpp"
+  ],
+  "file_count": 3,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["surface", "surfacetexture", "timestamp", "render", "bufferqueue"]
+}

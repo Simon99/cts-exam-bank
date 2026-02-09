@@ -1,0 +1,15 @@
+{
+  "id": "location-easy-010",
+  "title": "LocationRequest IllegalArgumentException for Negative Interval Missing",
+  "difficulty": "easy",
+  "domain": "location",
+  "test_class": "android.location.cts.none.LocationRequestTest",
+  "test_method": "testBuild_IllegalInterval",
+  "cts_module": "CtsLocationNoneTestCases",
+  "tags": ["LocationRequest", "Builder", "validation", "exception"],
+  "files_to_modify": [
+    "frameworks/base/location/java/android/location/LocationRequest.java"
+  ],
+  "estimated_time_minutes": 5,
+  "skills_tested": ["Parameter validation", "Preconditions"]
+}

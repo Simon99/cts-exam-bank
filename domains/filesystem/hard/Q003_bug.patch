@@ -1,0 +1,47 @@
+diff --git a/frameworks/base/core/java/android/os/storage/DiskInfo.java b/frameworks/base/core/java/android/os/storage/DiskInfo.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/storage/DiskInfo.java
++++ b/frameworks/base/core/java/android/os/storage/DiskInfo.java
+@@ -175,11 +175,11 @@ public class DiskInfo implements Parcelable {
+     @Override
+     public void writeToParcel(Parcel dest, int flags) {
+         dest.writeString(id);
+-        dest.writeInt(this.flags);
+-        dest.writeLong(size);
++        dest.writeLong(size);  // Swapped with flags
++        dest.writeInt(this.flags);
+         dest.writeString(label);
+-        dest.writeInt(volumeCount);
+         dest.writeString(sysPath);
++        dest.writeInt(volumeCount);  // Swapped with sysPath
+     }
+ 
+     @Override
+diff --git a/frameworks/base/core/java/android/os/storage/VolumeInfo.java b/frameworks/base/core/java/android/os/storage/VolumeInfo.java
+index 111222..333444 100644
+--- a/frameworks/base/core/java/android/os/storage/VolumeInfo.java
++++ b/frameworks/base/core/java/android/os/storage/VolumeInfo.java
+@@ -185,7 +185,7 @@ public class VolumeInfo implements Parcelable {
+     public VolumeInfo(Parcel parcel) {
+         id = parcel.readString8();
+         type = parcel.readInt();
+-        if (parcel.readInt() != 0) {
++        if (parcel.readInt() == 0) {  // Logic inverted
+             disk = DiskInfo.CREATOR.createFromParcel(parcel);
+         } else {
+             disk = null;
+diff --git a/frameworks/base/services/core/java/com/android/server/StorageManagerService.java b/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
+index 555666..777888 100644
+--- a/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
+@@ -1450,8 +1450,8 @@ class StorageManagerService extends IStorageManager.Stub
+     private DiskInfo findDiskById(String diskId) {
+         synchronized (mLock) {
+             for (int i = 0; i < mDisks.size(); i++) {
+-                if (mDisks.valueAt(i).id.equals(diskId)) {
+-                    return mDisks.valueAt(i);
++                if (mDisks.keyAt(i).equals(diskId)) {
++                    return mDisks.valueAt(i).clone();  // Return clone, loses updates
+                 }
+             }
+         }

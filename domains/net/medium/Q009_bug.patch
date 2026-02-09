@@ -1,0 +1,15 @@
+diff --git a/frameworks/base/core/java/android/net/LocalSocketImpl.java b/frameworks/base/core/java/android/net/LocalSocketImpl.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/LocalSocketImpl.java
++++ b/frameworks/base/core/java/android/net/LocalSocketImpl.java
+@@ -378,9 +378,7 @@ class LocalSocketImpl
+                 case SocketOptions.SO_TIMEOUT:
+                     // The option must set both send and receive timeouts.
+                     // Note: The incoming timeout value is in milliseconds.
+-                    StructTimeval timeval = StructTimeval.fromMillis(intValue);
+-                    Os.setsockoptTimeval(fd, OsConstants.SOL_SOCKET, OsConstants.SO_RCVTIMEO,
+-                            timeval);
++                    // Bug: 只設置了 SO_SNDTIMEO，沒設置 SO_RCVTIMEO
+                     Os.setsockoptTimeval(fd, OsConstants.SOL_SOCKET, OsConstants.SO_SNDTIMEO,
+                             timeval);
+                     break;

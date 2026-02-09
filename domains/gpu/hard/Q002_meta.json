@@ -1,0 +1,16 @@
+{
+  "id": "GPU-H002",
+  "title": "Protected Content Rendering Fails",
+  "domain": "gpu",
+  "difficulty": "hard",
+  "cts_test": "android.opengl.cts.EglProtectedContentTest#testProtectedTextureRendering",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_object.cpp",
+    "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp",
+    "frameworks/native/opengl/libs/EGL/egl_display.cpp"
+  ],
+  "tags": ["egl", "protected-content", "drm", "security"],
+  "estimated_time_minutes": 60,
+  "cdd_requirement": null
+}

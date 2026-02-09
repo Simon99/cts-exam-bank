@@ -1,0 +1,32 @@
+{
+  "id": "media-m-q013",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "medium",
+  "pattern": "B",
+  "pattern_desc": "橫向多點 - 常量值不一致",
+  "target_tests": [
+    "android.mediav2.cts.AudioEncoderTest#testEncodeFloat"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.AudioEncoderTest",
+      "method": "testEncodeFloat",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: PCM encoding mismatch",
+      "stack_location": "AudioEncoderTest.java:234"
+    }
+  ],
+  "affected_files": [
+    "frameworks/base/media/java/android/media/AudioFormat.java",
+    "frameworks/base/media/java/android/media/MediaFormat.java"
+  ],
+  "file_count": 2,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["audioformat", "mediaformat", "pcm", "encoding", "constant-swap"]
+}

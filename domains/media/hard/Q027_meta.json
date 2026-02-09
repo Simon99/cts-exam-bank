@@ -1,0 +1,33 @@
+{
+  "id": "media-h-q027",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "hard",
+  "pattern": "C",
+  "pattern_desc": "縱深多層 - 影響 3 個以上檔案",
+  "target_tests": [
+    "android.mediav2.cts.DecoderColorAspectsTest#testColorSpace"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.DecoderColorAspectsTest",
+      "method": "testColorSpace",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: Color space mismatch after decode",
+      "stack_location": "DecoderColorAspectsTest.java:267"
+    }
+  ],
+  "affected_files": [
+    "frameworks/av/media/libstagefright/MediaCodec.cpp",
+    "frameworks/av/media/libstagefright/colorconversion/ColorConverter.cpp",
+    "frameworks/av/media/libstagefright/include/media/stagefright/ColorConverter.h"
+  ],
+  "file_count": 3,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["color-aspects", "bt709", "bt2020", "color-primaries", "transfer-function"]
+}

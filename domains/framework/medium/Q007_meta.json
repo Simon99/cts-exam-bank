@@ -1,0 +1,25 @@
+{
+  "id": "M007",
+  "title": "Bundle keySet() 返回可修改的集合",
+  "difficulty": "medium",
+  "domain": "framework",
+  "subdomain": "os",
+  "cts_test": "android.os.cts.BundleTest#testKeySetImmutable",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/BaseBundle.java",
+    "frameworks/base/core/java/android/os/Bundle.java"
+  ],
+  "tags": [
+    "Bundle",
+    "keySet",
+    "防禦性編程"
+  ],
+  "estimated_time_minutes": 18,
+  "skills_tested": [
+    "集合視圖理解",
+    "防禦性拷貝"
+  ],
+  "created_at": "2025-01-13",
+  "bug_pattern": "multi-file-inheritance"
+}

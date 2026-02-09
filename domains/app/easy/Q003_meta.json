@@ -1,0 +1,14 @@
+{
+  "id": "app-easy-003",
+  "title": "IntentService Looper 資源洩漏",
+  "difficulty": "easy",
+  "domain": "app",
+  "cts_test": "android.app.cts.IntentServiceTest#testIntentServiceLifeCycle",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/IntentService.java"
+  ],
+  "tags": ["service", "lifecycle", "looper", "memory-leak"],
+  "skills_tested": ["log-reading", "lifecycle", "resource-management"],
+  "estimated_time_minutes": 10,
+  "created": "2025-01-13"
+}

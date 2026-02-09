@@ -1,0 +1,18 @@
+Running product configuration...
+ninja: no work to do.
+No need to regenerate ninja file
+No need to regenerate ninja file
+No need to regenerate ninja file
+Starting ninja...
+ninja: no work to do.
+2026-02-09 06:39:56,095 atest_utils.py:436:INFO: Build successful
+Atest results and logs directory: /tmp/atest_result_simon/20260209_063953_vm2bs2qc
+
+Reading config: /home/simon/.atest/config
+
+Building Dependencies...
+out/target/product/panther/module-info.json
+
+
+Finding Tests...
+No test found for: android.display.cts.DisplayTest#testDisplayListener

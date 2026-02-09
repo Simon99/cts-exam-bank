@@ -1,0 +1,13 @@
+diff --git a/frameworks/native/opengl/libs/EGL/egl_cache.cpp b/frameworks/native/opengl/libs/EGL/egl_cache.cpp
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/EGL/egl_cache.cpp
++++ b/frameworks/native/opengl/libs/EGL/egl_cache.cpp
+@@ -156,7 +156,8 @@ EGLsizeiANDROID egl_cache_t::getBlob(const void* key, EGLsizeiANDROID keySize,
+     }
+     
+     std::lock_guard<std::mutex> lock(mMutex);
+-    size_t size = mBlobCache->get(key, keySize, value, valueSize);
++    char tempBuf[valueSize];  // BUG: Using temp buffer instead of output
++    size_t size = mBlobCache->get(key, keySize, tempBuf, valueSize);
+     return size;
+ }

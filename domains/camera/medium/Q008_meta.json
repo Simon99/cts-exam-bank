@@ -1,0 +1,19 @@
+{
+  "id": "camera_medium_008",
+  "title": "幀持續時間數值錯誤",
+  "difficulty": "medium",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.CaptureResultTest#testCaptureResultGet",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/CaptureResult.java",
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java"
+  ],
+  "bug_pattern": "log-in-A-bug-in-B",
+  "tags": ["CaptureResult", "SENSOR_FRAME_DURATION", "時間計算", "數值錯誤"],
+  "estimated_time_minutes": 30,
+  "skills_tested": [
+    "理解 Sensor 時間 metadata",
+    "追蹤 CaptureResult 取值流程",
+    "分析時間單位處理邏輯"
+  ]
+}

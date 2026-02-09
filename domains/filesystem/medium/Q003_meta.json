@@ -1,0 +1,15 @@
+{
+  "id": "Q003",
+  "domain": "filesystem",
+  "difficulty": "medium",
+  "title": "getStorageVolume(File) 路徑匹配與卷查找錯誤",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testGetStorageVolume",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/storage/StorageManager.java",
+    "frameworks/base/core/java/android/os/storage/StorageVolume.java"
+  ],
+  "tags": ["storage", "path-matching", "prefix", "volume", "getDirectory"],
+  "estimated_time_minutes": 25,
+  "skills_tested": ["log-tracing", "path-logic", "string-matching", "multi-file-debugging"]
+}

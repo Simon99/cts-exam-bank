@@ -1,0 +1,19 @@
+{
+  "id": "camera_medium_006",
+  "title": "對焦距離數值錯誤",
+  "difficulty": "medium",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.CaptureResultTest#testCaptureResultGet",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/CaptureResult.java",
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java"
+  ],
+  "bug_pattern": "log-in-A-bug-in-B",
+  "tags": ["CaptureResult", "LENS_FOCUS_DISTANCE", "數值轉換", "單位錯誤"],
+  "estimated_time_minutes": 30,
+  "skills_tested": [
+    "理解 CaptureResult 取值機制",
+    "追蹤 metadata 取值呼叫鏈",
+    "分析數值單位轉換邏輯"
+  ]
+}

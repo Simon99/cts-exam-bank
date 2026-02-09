@@ -1,0 +1,22 @@
+{
+  "id": "NET-H004",
+  "title": "SslCertificate 從 X509Certificate 創建時日期解析錯誤",
+  "difficulty": "hard",
+  "domain": "net",
+  "test_class": "android.net.http.cts.SslCertificateTest",
+  "test_method": "testX509CertificateDates",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/http/SslCertificate.java",
+    "frameworks/base/core/java/android/net/http/SslError.java",
+    "frameworks/base/core/java/android/net/http/X509TrustManagerExtensions.java"
+  ],
+  "bug_type": "swapped_parameters",
+  "tags": ["SslCertificate", "X509Certificate", "date", "notBefore", "notAfter"],
+  "estimated_time_minutes": 30,
+  "skills_tested": [
+    "證書結構理解",
+    "構造函數參數分析",
+    "日期處理",
+    "跨檔案追蹤"
+  ]
+}

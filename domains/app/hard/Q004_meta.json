@@ -1,0 +1,16 @@
+{
+  "id": "app-hard-004",
+  "title": "Service 前台通知在 ANR 後消失",
+  "difficulty": "hard",
+  "domain": "app",
+  "cts_test": "android.app.cts.ServiceTest#testForegroundServiceNotificationPersistence",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/am/AppErrors.java",
+    "frameworks/base/services/core/java/com/android/server/am/ActiveServices.java",
+    "frameworks/base/services/core/java/com/android/server/notification/NotificationManagerService.java"
+  ],
+  "tags": ["service", "foreground", "notification", "anr", "state-sync"],
+  "skills_tested": ["anr-handling", "foreground-service", "cross-service-state", "notification-lifecycle"],
+  "estimated_time_minutes": 55,
+  "created": "2025-02-09"
+}

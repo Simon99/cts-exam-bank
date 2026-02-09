@@ -1,0 +1,24 @@
+Q007 驗證結果
+==============
+時間: 2025-02-09
+設備: 27161FDH20031X (Pixel 7)
+
+狀態: ✅ VERIFIED
+
+目標測試: android.display.cts.DisplayTest#testGetHdrCapabilitiesWhenUserDisabledFormatsAreNotAllowedReturnsFilteredHdrTypes
+
+測試結果:
+- Tests run: 1
+- Failures: 1
+- 結果: FAILED (符合預期)
+
+錯誤訊息:
+array lengths differed, expected.length=2 actual.length=0
+java.lang.AssertionError: expected:<2> but was:<end of array>
+
+Bug 分析:
+Q007 的 bug 是把 contains() 方法中的比較運算符從 == 改成 !=
+這導致所有 HDR 類型都被認為是「禁用的」，全部被過濾掉
+結果：預期返回 2 個 HDR 類型，實際返回空數組
+
+驗證結論: Bug patch 成功導致 CTS 測試失敗，錯誤符合預期邏輯。

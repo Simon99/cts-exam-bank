@@ -1,0 +1,11 @@
+diff --git a/frameworks/base/core/java/android/net/LocalSocket.java b/frameworks/base/core/java/android/net/LocalSocket.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/LocalSocket.java
++++ b/frameworks/base/core/java/android/net/LocalSocket.java
+@@ -162,7 +162,6 @@ public class LocalSocket implements Closeable {
+ 
+             localAddress = bindpoint;
+             impl.bind(localAddress);
+-            isBound = true;
+         }
+     }

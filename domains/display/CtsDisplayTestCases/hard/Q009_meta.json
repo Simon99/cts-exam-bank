@@ -1,0 +1,65 @@
+{
+  "id": "Q009",
+  "difficulty": "hard",
+  "category": "display",
+  "title": "DisplayInfo 狀態變化通知機制 Bug",
+  "bug_type": "cross_file_logic_error",
+  "bug_description": "DisplayInfo.equals() 遺漏 defaultModeId 欄位比較，導致 setUserPreferredDisplayMode 改變 display mode 時 DisplayManagerGlobal 認為 DisplayInfo 沒有變化，不觸發 onDisplayChanged 回調",
+  "files_involved": [
+    "frameworks/base/core/java/android/view/DisplayInfo.java",
+    "frameworks/base/core/java/android/hardware/display/DisplayManagerGlobal.java"
+  ],
+  "root_cause_file": "frameworks/base/core/java/android/view/DisplayInfo.java",
+  "root_cause_method": "equals(DisplayInfo)",
+  "root_cause_line": 429,
+  "cross_file_interaction": {
+    "data_flow": [
+      "DisplayManager.setGlobalUserPreferredDisplayMode() 設置新的 display mode",
+      "DisplayManagerService 修改 defaultModeId",
+      "DisplayManagerService 發送 EVENT_DISPLAY_CHANGED 事件",
+      "DisplayManagerCallback.onDisplayEvent() 收到事件 (forceUpdate=false)",
+      "DisplayListenerDelegate.handleDisplayEventInner() 使用 equals() 比較新舊 DisplayInfo",
+      "因為 equals() 沒有比較 defaultModeId，認為沒有變化，不觸發回調"
+    ],
+    "state_dependency": [
+      "DisplayInfo.equals() 決定是否觸發 onDisplayChanged (當 forceUpdate=false 時)",
+      "WindowManager 路徑使用 forceUpdate=true 會繞過 equals()",
+      "DisplayManagerService 路徑使用 forceUpdate=false 依賴 equals()"
+    ],
+    "key_insight": "handleDisplayEventInner() 有 forceUpdate 參數：if (info != null && (forceUpdate || !info.equals(mDisplayInfo)))"
+  },
+  "related_cts_tests": [
+    "android.display.cts.DefaultDisplayModeTest#testSetAndClearUserPreferredDisplayModeGeneratesDisplayChangedEvents",
+    "android.display.cts.DefaultDisplayModeTest#testSetAndClearUserPreferredDisplayModeForSpecificDisplayGeneratesDisplayChangedEvents"
+  ],
+  "targetTests": [
+    "android.display.cts.DefaultDisplayModeTest#testSetAndClearUserPreferredDisplayModeGeneratesDisplayChangedEvents"
+  ],
+  "ctsCommand": "atest DefaultDisplayModeTest#testSetAndClearUserPreferredDisplayModeGeneratesDisplayChangedEvents",
+  "verification_method": "setUserPreferredDisplayMode 後檢查 DisplayListener.onDisplayChanged() 是否被呼叫",
+  "expected_symptoms": [
+    "onDisplayChanged 回調缺失",
+    "應用無法感知 display mode 變化",
+    "測試等待 onDisplayChanged 超時"
+  ],
+  "fix_complexity": "simple_one_line",
+  "fix_description": "在 equals() 方法中添加 defaultModeId == other.defaultModeId 比較",
+  "time_estimate_minutes": 30,
+  "keywords": [
+    "DisplayInfo",
+    "equals",
+    "defaultModeId",
+    "DisplayListener",
+    "onDisplayChanged",
+    "forceUpdate",
+    "cross-file"
+  ],
+  "version": "2.0",
+  "updated": "2026-02-09",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/DisplayInfo.java",
+    "frameworks/base/core/java/android/hardware/display/DisplayManagerGlobal.java",
+    "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
+  ],
+  "file_count": 3
+}

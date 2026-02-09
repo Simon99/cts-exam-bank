@@ -1,0 +1,14 @@
+diff --git a/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+index efgh456..abcd123 100644
+--- a/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
++++ b/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+@@ -463,8 +463,7 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
+                 mInfo.width = mWidth;
+                 mInfo.height = mHeight;
+                 mInfo.modeId = mMode.getModeId();
+-                // BUG: Using default REFRESH_RATE instead of the actual mode refresh rate
+-                mInfo.renderFrameRate = REFRESH_RATE;
++                mInfo.renderFrameRate = mMode.getRefreshRate();
+                 mInfo.defaultModeId = mMode.getModeId();
+                 mInfo.supportedModes = new Display.Mode[] { mMode };
+                 mInfo.densityDpi = mDensityDpi;

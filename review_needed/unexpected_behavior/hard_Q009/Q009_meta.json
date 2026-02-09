@@ -1,0 +1,49 @@
+{
+  "id": "Q009",
+  "difficulty": "hard",
+  "category": "display",
+  "title": "DisplayInfo 狀態變化通知機制 Bug",
+  "bug_type": "cross_file_logic_error",
+  "bug_description": "DisplayInfo.equals() 遺漏 rotation 欄位比較，導致旋轉變化時 DisplayManagerGlobal 認為 DisplayInfo 沒有變化，不觸發 onDisplayChanged 回調",
+  "files_involved": [
+    "frameworks/base/core/java/android/view/DisplayInfo.java",
+    "frameworks/base/core/java/android/hardware/display/DisplayManagerGlobal.java",
+    "frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java"
+  ],
+  "root_cause_file": "frameworks/base/core/java/android/view/DisplayInfo.java",
+  "root_cause_method": "equals(DisplayInfo)",
+  "cross_file_interaction": {
+    "data_flow": [
+      "LogicalDisplay.setDisplayInfoOverrideFromWindowManagerLocked() 接收 WM 的 rotation 更新",
+      "LogicalDisplay.getDisplayInfoLocked() 合併 base 和 override DisplayInfo",
+      "DisplayManagerService 發送 EVENT_DISPLAY_CHANGED 事件",
+      "DisplayManagerGlobal.handleDisplayEvent() 獲取新的 DisplayInfo",
+      "DisplayListenerDelegate.handleDisplayEventInner() 使用 equals() 比較新舊 DisplayInfo",
+      "因為 equals() 沒有比較 rotation，認為沒有變化，不觸發回調"
+    ],
+    "state_dependency": [
+      "DisplayInfo.equals() 決定是否觸發 onDisplayChanged",
+      "DisplayInfo.copyFrom() 正確複製 rotation（欄位一致性問題）"
+    ]
+  },
+  "related_cts_tests": [
+    "android.display.cts.DisplayTest#testDisplayListener",
+    "android.display.cts.DisplayTest#testRotation"
+  ],
+  "verification_method": "設備旋轉後檢查 DisplayListener.onDisplayChanged() 是否被呼叫",
+  "expected_symptoms": [
+    "onDisplayChanged 回調缺失",
+    "應用無法感知旋轉變化",
+    "自動旋轉功能異常"
+  ],
+  "fix_complexity": "simple_one_line",
+  "time_estimate_minutes": 30,
+  "keywords": [
+    "DisplayInfo",
+    "equals",
+    "rotation",
+    "DisplayListener",
+    "onDisplayChanged",
+    "cross-file"
+  ]
+}

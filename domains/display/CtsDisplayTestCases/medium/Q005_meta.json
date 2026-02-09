@@ -10,20 +10,28 @@
     "android.display.cts.VirtualDisplayTest#testHdrApiMethods"
   ],
   "bugFile": "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java",
-  "bugMethod": "createHdrCapabilities",
+  "bugMethod": "getDisplayDeviceInfoLocked",
   "bugType": "initialization_error",
   "bootSafe": true,
   "expectedResult": {
     "outcome": "assertion_failure",
-    "failedTests": 2,
-    "passedTests": 94,
-    "errorMessage": "HDR capabilities inconsistent"
+    "failedTests": 1,
+    "passedTests": 0,
+    "errorMessage": "expected null, but was:<HdrCapabilities{mSupportedHdrTypes=[], mMaxLuminance=500.0, mMaxAverageLuminance=400.0, mMinLuminance=0.0}>"
   },
   "timeLimit": 25,
   "hints": [
     "VirtualDisplay 和實體 Display 建立路徑不同",
-    "HDR capabilities 多個欄位需要保持一致性",
+    "VirtualDisplay 不應該有 HdrCapabilities（應該是 null）",
     "追蹤 VirtualDisplay 初始化流程"
   ],
-  "verified": false
+  "verified": true,
+  "verifiedDate": "2025-02-09",
+  "verifiedDevice": "Pixel 7 (27161FDH20031X)",
+  "verificationNotes": "Bug 在 VirtualDisplayAdapter.getDisplayDeviceInfoLocked() 中設置非 null 的 HdrCapabilities 導致 testHdrApiMethods 測試失敗。錯誤訊息清晰指出 VirtualDisplay.getHdrCapabilities() 預期返回 null 但實際返回了非 null 值。",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java",
+    "frameworks/base/core/java/android/view/Display.java"
+  ],
+  "file_count": 2
 }

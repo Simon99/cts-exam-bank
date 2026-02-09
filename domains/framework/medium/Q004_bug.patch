@@ -1,0 +1,29 @@
+diff --git a/frameworks/base/core/java/android/content/Intent.java b/frameworks/base/core/java/android/content/Intent.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/content/Intent.java
++++ b/frameworks/base/core/java/android/content/Intent.java
+@@ -10980,6 +10980,10 @@ public class Intent implements Parcelable, Cloneable {
+         if (!Objects.equals(this.mCategories, other.mCategories)) {
+             return false;
+         }
++        // BUG: filterEquals 不應該比較 extras
++        if (!Objects.equals(this.mExtras, other.mExtras)) {
++            return false;
++        }
+         return true;
+     }
+
+diff --git a/frameworks/base/core/java/android/content/IntentFilter.java b/frameworks/base/core/java/android/content/IntentFilter.java
+index abcd5678..efgh9012 100644
+--- a/frameworks/base/core/java/android/content/IntentFilter.java
++++ b/frameworks/base/core/java/android/content/IntentFilter.java
+@@ -2850,7 +2850,8 @@ public class IntentFilter implements Parcelable {
+      */
+     public boolean match(ContentResolver resolver, Intent intent,
+             boolean resolve, String logTag) {
+-        String type = resolve ? intent.resolveType(resolver) : intent.getType();
++        // BUG: 忽略 resolve 參數，總是直接使用 getType
++        String type = intent.getType();
+         return match(intent.getAction(), type, intent.getScheme(),
+                 intent.getData(), intent.getCategories(), logTag);
+     }

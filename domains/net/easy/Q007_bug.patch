@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/net/LocalServerSocket.java b/frameworks/base/core/java/android/net/LocalServerSocket.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/LocalServerSocket.java
++++ b/frameworks/base/core/java/android/net/LocalServerSocket.java
+@@ -26,7 +26,7 @@ public class LocalServerSocket implements Closeable {
+     private final LocalSocketAddress localAddress;
+ 
+     /** 50 seems a bit much, but it's what was here */
+-    private static final int LISTEN_BACKLOG = 50;
++    private static final int LISTEN_BACKLOG = 1;
+ 
+     /**
+      * Creates a new server socket listening at specified name.

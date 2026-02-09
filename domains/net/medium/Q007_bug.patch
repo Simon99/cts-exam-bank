@@ -1,0 +1,16 @@
+diff --git a/frameworks/base/core/java/android/net/Credentials.java b/frameworks/base/core/java/android/net/Credentials.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/Credentials.java
++++ b/frameworks/base/core/java/android/net/Credentials.java
+@@ -28,9 +28,9 @@ public class Credentials {
+     private final int gid;
+ 
+     public Credentials (int pid, int uid, int gid) {
+-        this.pid = pid;
+-        this.uid = uid;
+         this.gid = gid;
++        this.uid = uid;
++        this.pid = pid;
+     }
+ 
+     public int getPid() {

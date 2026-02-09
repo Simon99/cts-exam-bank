@@ -1,0 +1,17 @@
+{
+  "id": "location-medium-003",
+  "title": "Geocoder.getFromLocation() Always Returns Empty List",
+  "difficulty": "medium",
+  "domain": "location",
+  "test_class": "android.location.cts.geocode.GeocoderTest",
+  "test_method": "testGetFromLocation",
+  "cts_module": "CtsLocationTestCases",
+  "tags": ["Geocoder", "reverse-geocoding", "callback", "Binder-IPC"],
+  "affected_files": [
+    "frameworks/base/location/java/android/location/Geocoder.java",
+    "frameworks/base/services/core/java/com/android/server/location/provider/proxy/ProxyGeocodeProvider.java"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/Geocoder.java",
+  "estimated_time_minutes": 18,
+  "skills_tested": ["Binder IPC", "Callback handling", "Async result delivery"]
+}

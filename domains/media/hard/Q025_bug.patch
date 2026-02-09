@@ -1,0 +1,53 @@
+diff --git a/frameworks/av/media/libstagefright/MediaCodec.cpp b/frameworks/av/media/libstagefright/MediaCodec.cpp
+index 1234567890ab..abcdef123456 100644
+--- a/frameworks/av/media/libstagefright/MediaCodec.cpp
++++ b/frameworks/av/media/libstagefright/MediaCodec.cpp
+@@ -3156,10 +3156,11 @@ status_t MediaCodec::renderOutputBuffer(
+     }
+     
+     // Set buffer timestamp for SurfaceTexture
+-    native_window_set_buffers_timestamp(mNativeWindow.get(), timestampNs);
++    // Bug: don't set timestamp
++    // native_window_set_buffers_timestamp(mNativeWindow.get(), timestampNs);
+     
+     // Queue buffer to surface
+-    status_t err = mNativeWindow->queueBuffer(mNativeWindow.get(), buffer, -1);
++    status_t err = mNativeWindow->queueBuffer(mNativeWindow.get(), buffer, -1);
+     if (err != OK) {
+         ALOGE("Failed to queue buffer: %d", err);
+         return err;
+diff --git a/frameworks/av/media/codec2/sfplugin/CCodecBufferChannel.cpp b/frameworks/av/media/codec2/sfplugin/CCodecBufferChannel.cpp
+index abcdef123456..123456abcdef 100644
+--- a/frameworks/av/media/codec2/sfplugin/CCodecBufferChannel.cpp
++++ b/frameworks/av/media/codec2/sfplugin/CCodecBufferChannel.cpp
+@@ -1345,9 +1345,10 @@ status_t CCodecBufferChannel::renderOutputBuffer(
+     int64_t timestampNs) {
+     
+     // Render to surface with timestamp
+-    if (mSurface != nullptr) {
+-        native_window_set_buffers_timestamp(mSurface.get(), timestampNs);
+-    }
++    // Bug: skip timestamp setting for Codec2
++    // if (mSurface != nullptr) {
++    //     native_window_set_buffers_timestamp(mSurface.get(), timestampNs);
++    // }
+     
+     sp<GraphicBuffer> graphicBuffer = outputBuffer->getGraphicBuffer();
+     return mSurface->queueBuffer(mSurface.get(), graphicBuffer.get(), -1);
+diff --git a/frameworks/native/libs/gui/Surface.cpp b/frameworks/native/libs/gui/Surface.cpp
+index 123456789abc..abcdef012345 100644
+--- a/frameworks/native/libs/gui/Surface.cpp
++++ b/frameworks/native/libs/gui/Surface.cpp
+@@ -678,8 +678,10 @@ int Surface::queueBuffer(android_native_buffer_t* buffer, int fenceFd) {
+     }
+     
+     // Apply timestamp if set
+-    input.timestamp = mTimestamp;
+-    mTimestamp = 0;  // Reset after use
++    // Bug: always use 0 as timestamp
++    input.timestamp = 0;
++    // input.timestamp = mTimestamp;
++    // mTimestamp = 0;
+     
+     status_t err = mGraphicBufferProducer->queueBuffer(slot, input, &output);
+     if (err != OK) {

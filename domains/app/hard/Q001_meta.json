@@ -1,0 +1,16 @@
+{
+  "id": "app-hard-001",
+  "title": "Activity LaunchMode singleTask 任務棧異常",
+  "difficulty": "hard",
+  "domain": "app",
+  "cts_test": "android.app.cts.ActivityManagerTest#testSingleTaskLaunchMode",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/wm/ActivityStarter.java",
+    "frameworks/base/services/core/java/com/android/server/wm/RootWindowContainer.java",
+    "frameworks/base/services/core/java/com/android/server/wm/Task.java"
+  ],
+  "tags": ["activity", "launchmode", "task", "singletask", "wm"],
+  "skills_tested": ["activity-lifecycle", "task-management", "system-services", "multi-file-debugging"],
+  "estimated_time_minutes": 45,
+  "created": "2025-02-09"
+}

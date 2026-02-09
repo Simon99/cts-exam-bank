@@ -1,0 +1,19 @@
+{
+  "id": "NET-E006",
+  "title": "MailTo.getTo 返回錯誤欄位",
+  "difficulty": "easy",
+  "domain": "net",
+  "test_class": "android.net.cts.MailToTest",
+  "test_method": "testGetTo",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/MailTo.java"
+  ],
+  "bug_type": "wrong_key",
+  "tags": ["MailTo", "HashMap", "getter", "key"],
+  "estimated_time_minutes": 5,
+  "skills_tested": [
+    "讀取 CTS 錯誤日誌",
+    "理解 HashMap 操作",
+    "識別錯誤的參數"
+  ]
+}

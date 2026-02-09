@@ -1,0 +1,31 @@
+{
+  "id": "media-e-q005",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "easy",
+  "pattern": "A",
+  "pattern_desc": "縱向單點 - 常量值交換",
+  "target_tests": [
+    "android.mediav2.cts.MuxerTest#testMuxerMp4"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.MuxerTest",
+      "method": "testMuxerMp4",
+      "result": "fail",
+      "message": "java.lang.IllegalStateException: Failed to open muxer",
+      "stack_location": "MediaMuxer.java:252"
+    }
+  ],
+  "affected_files": [
+    "frameworks/base/media/java/android/media/MediaMuxer.java"
+  ],
+  "file_count": 1,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["mediamuxer", "outputformat", "mp4", "webm", "constant-swap"]
+}

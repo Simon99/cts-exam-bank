@@ -1,0 +1,14 @@
+{
+  "id": "Q002",
+  "domain": "filesystem",
+  "difficulty": "easy",
+  "title": "StorageVolume isRemovable() 邏輯反轉",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testGetPrimaryVolume",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/storage/StorageVolume.java"
+  ],
+  "tags": ["storage", "StorageVolume", "logic-error", "boolean-inversion"],
+  "estimated_time_minutes": 10,
+  "skills_tested": ["code-reading", "logic-analysis"]
+}

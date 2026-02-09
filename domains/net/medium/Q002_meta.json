@@ -1,0 +1,20 @@
+{
+  "id": "NET-M002",
+  "title": "LocalSocket 讀取操作拋出 ArrayIndexOutOfBoundsException",
+  "difficulty": "medium",
+  "domain": "net",
+  "test_class": "android.net.cts.LocalSocketTest",
+  "test_method": "testLocalSocketReadWithOffset",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/LocalSocket.java",
+    "frameworks/base/core/java/android/net/LocalSocketImpl.java"
+  ],
+  "bug_type": "boundary_check",
+  "tags": ["LocalSocket", "InputStream", "read", "offset", "boundary"],
+  "estimated_time_minutes": 18,
+  "skills_tested": [
+    "邊界條件分析",
+    "InputStream API 理解",
+    "跨類追蹤"
+  ]
+}

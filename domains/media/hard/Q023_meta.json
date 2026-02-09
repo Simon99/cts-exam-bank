@@ -1,0 +1,33 @@
+{
+  "id": "media-h-q023",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "hard",
+  "pattern": "C",
+  "pattern_desc": "縱深多層 - 影響 3 個以上檔案",
+  "target_tests": [
+    "android.mediav2.cts.AdaptivePlaybackTest#testResolutionChange"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.AdaptivePlaybackTest",
+      "method": "testResolutionChange",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: Output buffer corrupted after resolution change",
+      "stack_location": "AdaptivePlaybackTest.java:234"
+    }
+  ],
+  "affected_files": [
+    "frameworks/av/media/libstagefright/MediaCodec.cpp",
+    "frameworks/av/media/codec2/sfplugin/CCodecBufferChannel.cpp",
+    "frameworks/base/media/java/android/media/MediaCodec.java"
+  ],
+  "file_count": 3,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["adaptive-playback", "resolution-change", "buffer-pool", "codec2"]
+}

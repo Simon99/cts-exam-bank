@@ -36,5 +36,10 @@
   "build_type": "full",
   "verified": true,
   "verified_date": "2026-02-05",
-  "tags": ["hdr", "luminance", "display-api", "parameter-swap"]
+  "tags": [
+    "hdr",
+    "luminance",
+    "display-api",
+    "parameter-swap"
+  ]
 }

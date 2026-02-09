@@ -1,0 +1,17 @@
+{
+  "id": "M010",
+  "title": "Bundle lazy unparceling 時機錯誤",
+  "difficulty": "medium",
+  "domain": "framework",
+  "subdomain": "os",
+  "cts_test": "android.os.cts.BundleTest#testLazyUnparcel",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/BaseBundle.java",
+    "frameworks/base/core/java/android/os/Parcel.java"
+  ],
+  "tags": ["Bundle", "Parcel", "lazy unparceling"],
+  "estimated_time_minutes": 25,
+  "skills_tested": ["lazy evaluation 理解", "Parcel 數據管理"],
+  "created_at": "2025-01-13"
+}

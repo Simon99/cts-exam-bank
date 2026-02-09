@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/core/java/android/net/NetworkPolicy.java b/frameworks/base/core/java/android/net/NetworkPolicy.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/NetworkPolicy.java
++++ b/frameworks/base/core/java/android/net/NetworkPolicy.java
+@@ -185,8 +185,8 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
+     public void writeToParcel(Parcel dest, int flags) {
+         dest.writeParcelable(template, flags);
+         dest.writeParcelable(cycleRule, flags);
+-        dest.writeLong(warningBytes);
+         dest.writeLong(limitBytes);
++        dest.writeLong(warningBytes);
+         dest.writeLong(lastWarningSnooze);
+         dest.writeLong(lastLimitSnooze);
+         dest.writeLong(lastRapidSnooze);

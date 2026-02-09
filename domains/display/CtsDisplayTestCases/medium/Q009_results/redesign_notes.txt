@@ -1,0 +1,32 @@
+Q009 重新設計記錄
+==================
+日期: 2025-02-09
+原因: 原 bug 雖然生效但測試沒抓到
+
+原 Bug 分析:
+- 位置: Display.Mode.equals() 中的 mModeId 比較
+- 修改: mModeId == that.mModeId → mModeId != that.mModeId
+- 問題: equals() 開頭有 identity check (this == other)
+        由於 getMode() 和 getSupportedModes() 返回同一對象實例
+        identity check 直接返回 true，繞過了被破壞的比較邏輯
+
+根本原因:
+- getSupportedModes() 使用 Arrays.copyOf() 淺拷貝
+- 數組元素仍是同一個 Mode 對象實例
+- equals() 的 this == other 快速路徑直接返回 true
+
+新 Bug 設計:
+- 位置: Display.Mode.equals() 的 identity check
+- 修改: if (this == other) → if (this != other)
+- 效果: 同一對象現在會進入後面的比較邏輯而非直接返回 true
+        由於後面的比較需要精確匹配，會返回不正確的結果
+- 測試: 同樣的 testActiveModeIsSupportedModesOnDefaultDisplay
+
+優點:
+1. 直接針對測試實際使用的代碼路徑
+2. Bug 類型簡單（== vs !=）
+3. 測試會明確失敗
+4. 教育意義：理解 equals() 的標準實現模式
+
+待驗證:
+- 需要在設備上實際測試

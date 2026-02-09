@@ -1,0 +1,14 @@
+{
+  "id": "Q010",
+  "domain": "filesystem",
+  "difficulty": "easy",
+  "title": "CrateInfo getLabel() 返回空字符串",
+  "cts_test": "android.os.storage.cts.StorageStatsManagerTest#queryCratesForUid_withoutSetCrateInfo_labelShouldTheSameWithFolderName",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/storage/CrateInfo.java"
+  ],
+  "tags": ["storage", "CrateInfo", "return-value", "getter"],
+  "estimated_time_minutes": 10,
+  "skills_tested": ["code-reading", "api-understanding"]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "NET-E009",
+  "title": "LocalSocketImpl 超時設置使用錯誤常量",
+  "difficulty": "easy",
+  "domain": "net",
+  "test_class": "android.net.cts.LocalSocketTest",
+  "test_method": "testSetSoTimeout_readTimeout",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/LocalSocketImpl.java"
+  ],
+  "bug_type": "wrong_constant",
+  "tags": ["LocalSocketImpl", "timeout", "SO_RCVTIMEO", "setOption"],
+  "estimated_time_minutes": 10,
+  "skills_tested": [
+    "讀取 CTS 錯誤日誌",
+    "理解 socket 超時選項",
+    "識別常量使用錯誤"
+  ]
+}

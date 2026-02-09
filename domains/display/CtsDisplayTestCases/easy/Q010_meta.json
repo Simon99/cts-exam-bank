@@ -1,0 +1,20 @@
+{
+  "id": "Q010",
+  "difficulty": "easy",
+  "module": "CtsDisplayTestCases",
+  "target_test": "android.display.cts.DisplayTest#testActiveModeIsSupportedModesOnDefaultDisplay",
+  "bug_file": "frameworks/base/core/java/android/view/DisplayInfo.java",
+  "bug_line": 456,
+  "skill_tested": [
+    "log_reading",
+    "mode_matching",
+    "off_by_one"
+  ],
+  "estimated_time_minutes": 20,
+  "status": "pending_verification",
+  "notes": "Bug 不會導致 bootloop，但會影響顯示模式匹配",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/DisplayInfo.java"
+  ],
+  "file_count": 1
+}

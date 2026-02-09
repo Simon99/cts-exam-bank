@@ -1,0 +1,21 @@
+{
+  "id": "NET-H001",
+  "title": "VPN 連接成功但 NetworkCapabilities 顯示錯誤的 transport type",
+  "difficulty": "hard",
+  "domain": "net",
+  "test_class": "android.net.cts.VpnTest",
+  "test_method": "testVpnNetworkCapabilities",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/connectivity/Vpn.java",
+    "packages/modules/Connectivity/framework/src/android/net/VpnTransportInfo.java",
+    "packages/modules/Connectivity/framework/src/android/net/NetworkCapabilities.java"
+  ],
+  "bug_type": "missing_method_call",
+  "tags": ["VPN", "NetworkCapabilities", "TRANSPORT_VPN", "VpnTransportInfo"],
+  "estimated_time_minutes": 35,
+  "skills_tested": [
+    "VPN 連接流程理解",
+    "NetworkCapabilities 架構",
+    "多文件呼叫鏈追蹤"
+  ]
+}

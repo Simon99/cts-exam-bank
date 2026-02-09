@@ -1,0 +1,19 @@
+{
+  "id": "camera_hard_005",
+  "title": "Multi-Camera Logical Stream 配置失敗",
+  "difficulty": "hard",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.CameraDeviceTest#testMultiCameraLogicalStreaming",
+  "affected_files": [
+    "frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp",
+    "frameworks/av/services/camera/libcameraservice/api2/CameraDeviceClient.cpp",
+    "frameworks/av/services/camera/libcameraservice/common/CameraProviderManager.cpp"
+  ],
+  "tags": ["MultiCamera", "LogicalCamera", "PhysicalStream", "配置"],
+  "estimated_time_minutes": 50,
+  "skills_tested": [
+    "理解 Multi-Camera 架構",
+    "追蹤 logical/physical camera 協調",
+    "分析 stream 配置流程"
+  ]
+}

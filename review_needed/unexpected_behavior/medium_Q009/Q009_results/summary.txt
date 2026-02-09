@@ -1,0 +1,27 @@
+Q009 驗證結果
+==============
+時間: 2025-02-09
+設備: 27161FDH20031X (Pixel 7)
+
+狀態: ⚠️ UNEXPECTED - 測試通過（Bug 無效果）
+
+目標測試: android.display.cts.DisplayTest#testActiveModeIsSupportedModesOnDefaultDisplay
+
+測試結果:
+- Tests run: 1
+- Failures: 0
+- 結果: PASSED (非預期)
+
+Bug 分析:
+Q009 的 bug 是把 Mode.equals() 中的 'mModeId == that.mModeId' 改成 '!='
+理論上這會導致任何兩個相同 Mode 的比較都返回 false
+
+可能原因:
+1. 測試可能使用了不同的比較方式（如比較 modeId 而非使用 equals()）
+2. 測試邏輯可能通過其他途徑確認 mode 存在
+3. 短路求值可能導致測試條件繞過了 equals() 方法
+
+建議:
+- 需要分析 testActiveModeIsSupportedModesOnDefaultDisplay 的原始碼
+- 可能需要選擇不同的目標測試
+- 或重新設計這道題的 bug 類型

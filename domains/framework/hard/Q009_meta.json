@@ -1,0 +1,31 @@
+{
+  "id": "H009",
+  "title": "ContentResolver notifyChange Flags 位掩碼處理錯誤",
+  "difficulty": "hard",
+  "domain": "framework",
+  "subdomain": "content",
+  "cts_test": "android.content.cts.ContentResolverTest#testNotifyChangeFlags",
+  "cts_module": "CtsContentTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/content/ContentResolver.java",
+    "frameworks/base/services/core/java/com/android/server/content/ContentService.java",
+    "frameworks/base/core/java/android/database/ContentObserver.java"
+  ],
+  "related_files": [
+    "frameworks/base/services/core/java/com/android/server/content/ContentService.java"
+  ],
+  "tags": [
+    "ContentResolver",
+    "notifyChange",
+    "位掩碼",
+    "flags"
+  ],
+  "estimated_time_minutes": 45,
+  "skills_tested": [
+    "位元運算",
+    "API 參數傳遞",
+    "ContentObserver"
+  ],
+  "created_at": "2025-01-13",
+  "bug_pattern": "multi-file-data-flow"
+}

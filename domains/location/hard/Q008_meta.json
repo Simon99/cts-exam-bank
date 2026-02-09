@@ -1,0 +1,26 @@
+{
+  "id": "location-hard-008",
+  "title": "Location Flush Timeout During Provider Transition",
+  "difficulty": "hard",
+  "domain": "location",
+  "test_class": "android.location.cts.fine.LocationManagerFineTest",
+  "test_method": "testFlushDuringProviderChange",
+  "cts_module": "CtsLocationFineTestCases",
+  "tags": [
+    "flush",
+    "provider-transition",
+    "pending-locations"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/LocationManager.java",
+  "estimated_time_minutes": 40,
+  "skills_tested": [
+    "Async operation handling",
+    "State transition",
+    "Flush mechanism"
+  ],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java",
+    "frameworks/base/services/core/java/com/android/server/location/provider/AbstractLocationProvider.java",
+    "frameworks/base/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java"
+  ]
+}

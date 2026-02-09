@@ -1,0 +1,15 @@
+{
+  "id": "Q010",
+  "domain": "jobscheduler",
+  "difficulty": "medium",
+  "title": "JobSchedulingTest 取消執行中作業後仍有待處理作業",
+  "test_class": "android.jobscheduler.cts.JobSchedulingTest",
+  "test_method": "testCancel_runningJob",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobServiceContext.java"
+  ],
+  "tags": ["cancel", "running_job", "reschedule", "lifecycle"],
+  "estimated_time_minutes": 30,
+  "skills_tested": ["log_analysis", "job_lifecycle", "cancel_handling"]
+}

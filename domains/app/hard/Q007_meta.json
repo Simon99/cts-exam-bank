@@ -1,0 +1,16 @@
+{
+  "id": "app-hard-007",
+  "title": "Fragment BackStack 狀態恢復失敗",
+  "difficulty": "hard",
+  "domain": "app",
+  "cts_test": "android.app.cts.FragmentManagerTest#testBackStackStateRestore",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/FragmentManager.java",
+    "frameworks/base/core/java/android/app/BackStackRecord.java",
+    "frameworks/base/core/java/android/app/FragmentState.java"
+  ],
+  "tags": ["fragment", "backstack", "state-restore", "configuration-change"],
+  "skills_tested": ["fragment-lifecycle", "state-serialization", "backstack-management"],
+  "estimated_time_minutes": 50,
+  "created": "2025-02-09"
+}

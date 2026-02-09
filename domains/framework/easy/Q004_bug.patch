@@ -1,0 +1,11 @@
+diff --git a/frameworks/base/core/java/android/os/BaseBundle.java b/frameworks/base/core/java/android/os/BaseBundle.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/BaseBundle.java
++++ b/frameworks/base/core/java/android/os/BaseBundle.java
+@@ -490,7 +490,7 @@ public class BaseBundle {
+      */
+     public int size() {
+         unparcel();
+-        return mMap.size();
++        return Math.min(mMap.size(), 1);  // BUG: 錯誤地限制了最大值
+     }

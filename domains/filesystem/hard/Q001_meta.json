@@ -1,0 +1,16 @@
+{
+  "id": "Q001",
+  "domain": "filesystem",
+  "difficulty": "hard",
+  "title": "StorageVolume 跨進程傳遞數據丟失 - 三層序列化錯誤",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testGetStorageVolumes",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/storage/StorageVolume.java",
+    "frameworks/base/services/core/java/com/android/server/StorageManagerService.java",
+    "frameworks/base/core/java/android/os/storage/VolumeInfo.java"
+  ],
+  "tags": ["storage", "parcelable", "IPC", "serialization-order", "multi-layer"],
+  "estimated_time_minutes": 45,
+  "skills_tested": ["parcelable-analysis", "IPC-understanding", "multi-file-debugging", "data-flow-tracing"]
+}

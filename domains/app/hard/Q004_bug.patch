@@ -1,0 +1,15 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/am/AppErrors.java b/frameworks/base/services/core/java/com/android/server/am/AppErrors.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/am/AppErrors.java
++++ b/frameworks/base/services/core/java/com/android/server/am/AppErrors.java
+@@ -470,6 +470,10 @@ class AppErrors {
+         errState.setCrashingReport(null);
+         errState.setNotResponding(false);
+         errState.setNotRespondingReport(null);
++        
++        // Bug: Clear crash data before handleAppCrashLSPB processes it
++        app.mErrorState.getDialogController().clearAllErrorDialogs();
++        
+         final int pid = errState.mApp.getPid();
+         if (pid > 0 && pid != MY_PID) {
+             synchronized (mBadProcessLock) {

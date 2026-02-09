@@ -1,0 +1,16 @@
+{
+  "id": "Q009",
+  "domain": "jobscheduler",
+  "difficulty": "hard",
+  "title": "UserInitiatedJob 背景限制應用的 UIJ 未正確停止",
+  "test_class": "android.jobscheduler.cts.UserInitiatedJobTest",
+  "test_method": "testRestrictedTopToBg",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BackgroundJobsController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java"
+  ],
+  "tags": ["user_initiated_job", "background_restriction", "constraint", "top_state"],
+  "estimated_time_minutes": 50,
+  "skills_tested": ["uij_handling", "background_restriction", "uid_state_tracking", "multi_file_analysis"]
+}

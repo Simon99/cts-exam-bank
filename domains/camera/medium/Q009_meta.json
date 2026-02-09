@@ -1,0 +1,19 @@
+{
+  "id": "camera_medium_009",
+  "title": "縮放比例設定無效",
+  "difficulty": "medium",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.CaptureRequestTest#testZoomRatio",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/CaptureRequest.java",
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java"
+  ],
+  "bug_pattern": "log-in-A-bug-in-B",
+  "tags": ["CaptureRequest", "ZOOM_RATIO", "縮放控制", "設定覆蓋"],
+  "estimated_time_minutes": 30,
+  "skills_tested": [
+    "理解 CaptureRequest 設定機制",
+    "追蹤 zoom ratio 設定流程",
+    "分析設定值被覆蓋問題"
+  ]
+}

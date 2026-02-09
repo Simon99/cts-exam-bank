@@ -1,0 +1,47 @@
+diff --git a/frameworks/base/media/java/android/media/MediaCodec.java b/frameworks/base/media/java/android/media/MediaCodec.java
+index 1234567890ab..abcdef123456 100644
+--- a/frameworks/base/media/java/android/media/MediaCodec.java
++++ b/frameworks/base/media/java/android/media/MediaCodec.java
+@@ -2756,7 +2756,8 @@ public final class MediaCodec {
+         if (index >= 0) {
+             BufferInfo info = mCachedBufferInfos[index];
+-            // Preserve flags from native layer
++            // Bug: clear flags before returning
++            info.flags = 0;  // This loses KEY_FRAME flag
+             info.offset = native_getBufferOffset(index);
+             info.size = native_getBufferSize(index);
+             info.presentationTimeUs = native_getPresentationTimeUs(index);
+diff --git a/frameworks/base/media/java/android/media/MediaMuxer.java b/frameworks/base/media/java/android/media/MediaMuxer.java
+index abcdef123456..123456abcdef 100644
+--- a/frameworks/base/media/java/android/media/MediaMuxer.java
++++ b/frameworks/base/media/java/android/media/MediaMuxer.java
+@@ -456,9 +456,12 @@ public final class MediaMuxer {
+     public void writeSampleData(int trackIndex, @NonNull ByteBuffer byteBuf,
+             @NonNull BufferInfo bufferInfo) {
+         
+-        if (!mTracksStarted[trackIndex]) {
++        // Bug: require keyframe as first sample, but flags are already cleared
++        if (!mTracksStarted[trackIndex] && 
++            (bufferInfo.flags & MediaCodec.BUFFER_FLAG_KEY_FRAME) == 0) {
++            // Drop non-keyframe samples until first keyframe
++            return;
++        }
+-            mTracksStarted[trackIndex] = true;
+-        }
+         
+         nativeWriteSampleData(mNativeObject, trackIndex, byteBuf,
+diff --git a/frameworks/base/media/java/android/media/MediaExtractor.java b/frameworks/base/media/java/android/media/MediaExtractor.java
+index 123456789abc..abcdef012345 100644
+--- a/frameworks/base/media/java/android/media/MediaExtractor.java
++++ b/frameworks/base/media/java/android/media/MediaExtractor.java
+@@ -234,8 +234,10 @@ public final class MediaExtractor {
+     @Override
+     public int readSampleData(@NonNull ByteBuffer byteBuf, int offset) {
+         // Validate track has samples
+-        if (mSelectedTrack < 0) {
++        // Bug: extra validation that fails on empty tracks
++        if (mSelectedTrack < 0 || mTrackSampleCounts[mSelectedTrack] == 0) {
+             throw new IllegalStateException("No valid samples in track");
+         }
+         return native_readSampleData(byteBuf, offset);
+     }

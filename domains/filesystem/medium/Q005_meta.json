@@ -1,0 +1,15 @@
+{
+  "id": "Q005",
+  "domain": "filesystem",
+  "difficulty": "medium",
+  "title": "isAllocationSupported() 判斷邏輯與 UUID 轉換錯誤",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testIsAllocationSupported",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/storage/StorageManager.java",
+    "frameworks/base/core/java/android/os/storage/VolumeInfo.java"
+  ],
+  "tags": ["storage", "allocation", "filesystem", "logic-inversion", "UUID"],
+  "estimated_time_minutes": 25,
+  "skills_tested": ["log-tracing", "filesystem-understanding", "logic-analysis", "multi-file-debugging"]
+}

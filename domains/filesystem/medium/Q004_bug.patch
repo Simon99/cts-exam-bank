@@ -1,0 +1,26 @@
+diff --git a/frameworks/base/core/java/com/android/internal/os/FuseAppLoop.java b/frameworks/base/core/java/com/android/internal/os/FuseAppLoop.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/com/android/internal/os/FuseAppLoop.java
++++ b/frameworks/base/core/java/com/android/internal/os/FuseAppLoop.java
+@@ -185,7 +185,7 @@ public class FuseAppLoop implements Handler.Callback {
+                     final int readSize = callback.onRead(offset, size, data);
+                     // Return the actual bytes read, not the requested size
+                     synchronized (mLock) {
+-                        replyRead(uniqueId, readSize, data);
++                        replyRead(uniqueId, size, data);
+                     }
+                 } catch (ErrnoException e) {
+                     synchronized (mLock) {
+diff --git a/frameworks/base/core/java/android/os/ProxyFileDescriptorCallback.java b/frameworks/base/core/java/android/os/ProxyFileDescriptorCallback.java
+index 111222..333444 100644
+--- a/frameworks/base/core/java/android/os/ProxyFileDescriptorCallback.java
++++ b/frameworks/base/core/java/android/os/ProxyFileDescriptorCallback.java
+@@ -58,7 +58,7 @@ public abstract class ProxyFileDescriptorCallback {
+      * @throws ErrnoException when an error occurs.
+      */
+     public int onRead(long offset, int size, byte[] data) throws ErrnoException {
+-        throw new ErrnoException("onRead", OsConstants.EBADF);
++        return 0;  // Default returns 0 instead of throwing
+     }
+ 
+     /**

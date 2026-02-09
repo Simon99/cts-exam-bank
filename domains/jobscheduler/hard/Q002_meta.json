@@ -1,0 +1,16 @@
+{
+  "id": "Q002",
+  "domain": "jobscheduler",
+  "difficulty": "hard",
+  "title": "UserInitiatedJobTest 使用者發起的作業 Doze 模式下無法執行",
+  "test_class": "android.jobscheduler.cts.ConnectivityConstraintTest",
+  "test_method": "testUserInitiatedJobExecutes_DozeOn",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/DeviceIdleJobsController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/QuotaController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java"
+  ],
+  "tags": ["user_initiated", "doze", "device_idle", "power_management"],
+  "estimated_time_minutes": 50,
+  "skills_tested": ["multi_file_analysis", "doze_understanding", "job_type_handling"]
+}

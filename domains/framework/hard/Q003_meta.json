@@ -1,0 +1,18 @@
+{
+  "id": "H003",
+  "title": "Intent 多組件交互時 ClipData 權限傳遞失敗",
+  "difficulty": "hard",
+  "domain": "framework",
+  "subdomain": "content",
+  "cts_test": "android.content.cts.IntentTest#testClipDataUriPermission",
+  "cts_module": "CtsContentTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/content/Intent.java",
+    "frameworks/base/core/java/android/content/ClipData.java",
+    "frameworks/base/services/core/java/com/android/server/am/ActivityManagerService.java"
+  ],
+  "tags": ["Intent", "ClipData", "URI權限", "跨進程"],
+  "estimated_time_minutes": 55,
+  "skills_tested": ["權限系統", "URI 授權", "多組件交互"],
+  "created_at": "2025-01-13"
+}

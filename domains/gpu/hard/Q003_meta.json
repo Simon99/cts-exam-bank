@@ -1,0 +1,16 @@
+{
+  "id": "GPU-H003",
+  "title": "ANGLE Backend Selection Broken",
+  "domain": "gpu",
+  "difficulty": "hard",
+  "cts_test": "android.opengl.cts.EglAngleTest#testAngleBackendSelection",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_display.cpp",
+    "frameworks/native/libs/graphicsenv/GraphicsEnv.cpp",
+    "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp"
+  ],
+  "tags": ["egl", "angle", "vulkan", "backend", "graphics-env"],
+  "estimated_time_minutes": 50,
+  "cdd_requirement": null
+}

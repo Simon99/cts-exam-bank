@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/net/LocalSocketImpl.java b/frameworks/base/core/java/android/net/LocalSocketImpl.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/LocalSocketImpl.java
++++ b/frameworks/base/core/java/android/net/LocalSocketImpl.java
+@@ -95,7 +95,7 @@ class LocalSocketImpl
+             synchronized (readMonitor) {
+                 FileDescriptor myFd = fd;
+                 if (myFd == null) throw new IOException("socket closed");
+-                if (off < 0 || len < 0 || (off + len) >= b.length ) {
++                if (off < 0 || len < 0 || (off + len) > b.length ) {
+                     throw new ArrayIndexOutOfBoundsException();
+                 }

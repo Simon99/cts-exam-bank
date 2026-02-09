@@ -1,0 +1,16 @@
+{
+  "id": "Q004",
+  "domain": "jobscheduler",
+  "difficulty": "hard",
+  "title": "FlexibilityConstraintTest 彈性約束協調失敗",
+  "test_class": "android.jobscheduler.cts.FlexibilityConstraintTest",
+  "test_method": "multiple",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/FlexibilityController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java"
+  ],
+  "tags": ["flexibility", "constraint_coordination", "controller_communication"],
+  "estimated_time_minutes": 50,
+  "skills_tested": ["multi_file_analysis", "inter_controller_communication", "constraint_scoring"]
+}

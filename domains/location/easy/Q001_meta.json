@@ -1,0 +1,15 @@
+{
+  "id": "location-easy-001",
+  "title": "Location.hasAltitude() Always Returns False",
+  "difficulty": "easy",
+  "domain": "location",
+  "test_class": "android.location.cts.none.LocationTest",
+  "test_method": "testValues",
+  "cts_module": "CtsLocationNoneTestCases",
+  "tags": ["Location", "bitmask", "setter"],
+  "files_to_modify": [
+    "frameworks/base/core/java/android/location/Location.java"
+  ],
+  "estimated_time_minutes": 10,
+  "skills_tested": ["Reading CTS failure logs", "Understanding bitmask operations"]
+}

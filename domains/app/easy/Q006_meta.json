@@ -1,0 +1,14 @@
+{
+  "id": "app-easy-006",
+  "title": "AlertDialog 按鈕獲取映射錯誤",
+  "difficulty": "easy",
+  "domain": "app",
+  "cts_test": "android.app.cts.AlertDialogTest#testAlertDialog",
+  "affected_files": [
+    "frameworks/base/core/java/android/app/AlertDialog.java"
+  ],
+  "tags": ["dialog", "button", "mapping"],
+  "skills_tested": ["log-reading", "switch-case", "constant"],
+  "estimated_time_minutes": 8,
+  "created": "2025-01-13"
+}

@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/os/storage/StorageManager.java b/frameworks/base/core/java/android/os/storage/StorageManager.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/storage/StorageManager.java
++++ b/frameworks/base/core/java/android/os/storage/StorageManager.java
+@@ -165,7 +165,7 @@ public class StorageManager {
+      * @see ApplicationInfo#storageUuid
+      */
+     public static final UUID UUID_DEFAULT = UUID
+-            .fromString("41217664-9172-527a-b3d5-edabb50a7d69");
++            .fromString("00000000-0000-0000-0000-000000000000");
+ 
+     /** {@hide} */
+     public static final UUID UUID_PRIMARY_PHYSICAL_ = UUID

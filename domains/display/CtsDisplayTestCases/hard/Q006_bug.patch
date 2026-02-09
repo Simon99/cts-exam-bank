@@ -1,0 +1,39 @@
+diff --git a/services/core/java/com/android/server/display/mode/DisplayModeDirector.java b/services/core/java/com/android/server/display/mode/DisplayModeDirector.java
+index abc123456789..def987654321 100644
+--- a/services/core/java/com/android/server/display/mode/DisplayModeDirector.java
++++ b/services/core/java/com/android/server/display/mode/DisplayModeDirector.java
+@@ -2154,7 +2154,7 @@ public class DisplayModeDirector {
+                 if (mLowZoneRefreshRateForThermals != null) {
+                     RefreshRateRange range = SkinThermalStatusObserver
+                             .findBestMatchingRefreshRateRange(mThermalStatus,
+-                                    mLowZoneRefreshRateForThermals);
++                                    mHighZoneRefreshRateForThermals);  // [BUG] wrong zone map
+                     if (range != null) {
+                         refreshRateVote =
+                                 Vote.forPhysicalRefreshRates(range.min, range.max);
+diff --git a/services/core/java/com/android/server/display/mode/Vote.java b/services/core/java/com/android/server/display/mode/Vote.java
+index abc123456789..def987654321 100644
+--- a/services/core/java/com/android/server/display/mode/Vote.java
++++ b/services/core/java/com/android/server/display/mode/Vote.java
+@@ -xxx,7 +xxx,7 @@ public final class Vote {
+     public static Vote forPhysicalRefreshRates(float minRate, float maxRate) {
+         if (minRate > maxRate) {
+             // swap if inverted
+-            float temp = minRate;
++            float temp = maxRate;  // [BUG] wrong variable for swap
+             minRate = maxRate;
+             maxRate = temp;
+         }
+diff --git a/services/core/java/com/android/server/display/DisplayDeviceConfig.java b/services/core/java/com/android/server/display/DisplayDeviceConfig.java
+index abc123456789..def987654321 100644
+--- a/services/core/java/com/android/server/display/DisplayDeviceConfig.java
++++ b/services/core/java/com/android/server/display/DisplayDeviceConfig.java
+@@ -xxx,7 +xxx,7 @@ public class DisplayDeviceConfig {
+     
+     public SparseArray<SurfaceControl.RefreshRateRange> getThermalRefreshRateThrottling() {
+         if (mThermalRefreshRateThrottling == null) {
+-            return new SparseArray<>();
++            return null;  // [BUG] returns null instead of empty array, causing NPE
+         }
+         return mThermalRefreshRateThrottling;
+     }

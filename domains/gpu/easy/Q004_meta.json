@@ -1,0 +1,14 @@
+{
+  "id": "GPU-E004",
+  "title": "glGetError Returns Wrong Error Code",
+  "domain": "gpu",
+  "difficulty": "easy",
+  "cts_test": "android.opengl.cts.ProgramTest#test_glAttachShader_program",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/eglApi.cpp"
+  ],
+  "tags": ["egl", "error-handling", "api"],
+  "estimated_time_minutes": 15,
+  "cdd_requirement": null
+}

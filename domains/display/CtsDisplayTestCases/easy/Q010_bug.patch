@@ -1,0 +1,13 @@
+diff --git a/core/java/android/view/DisplayInfo.java b/core/java/android/view/DisplayInfo.java
+--- a/core/java/android/view/DisplayInfo.java
++++ b/core/java/android/view/DisplayInfo.java
+@@ -453,7 +453,8 @@ public final class DisplayInfo implements Parcelable {
+      * Returns the active display mode.
+      */
+     public Display.Mode getMode() {
+-        return findMode(modeId);
++        // BUG: Q010 - mode ID 被錯誤偏移
++        return findMode(modeId + 1);
+     }
+ 
+     /**

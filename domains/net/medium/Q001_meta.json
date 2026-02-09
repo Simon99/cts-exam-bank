@@ -1,0 +1,20 @@
+{
+  "id": "NET-M001",
+  "title": "Uri.getQueryParameter 返回 null，但 URL 確實包含該參數",
+  "difficulty": "medium",
+  "domain": "net",
+  "test_class": "android.net.cts.UriTest",
+  "test_method": "testGetQueryParameter",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/Uri.java",
+    "frameworks/base/core/java/android/net/UriCodec.java"
+  ],
+  "bug_type": "wrong_parameter",
+  "tags": ["Uri", "decode", "query parameter", "plus sign"],
+  "estimated_time_minutes": 20,
+  "skills_tested": [
+    "URL 編碼規範理解",
+    "跨文件追蹤",
+    "參數傳遞分析"
+  ]
+}

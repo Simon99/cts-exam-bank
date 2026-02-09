@@ -1,0 +1,31 @@
+{
+  "id": "media-e-q006",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "easy",
+  "pattern": "A",
+  "pattern_desc": "縱向單點 - 錯誤 flag 使用",
+  "target_tests": [
+    "android.mediav2.cts.CodecInfoTest#testCodecAttributes"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.CodecInfoTest",
+      "method": "testCodecAttributes",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: Codec attribute mismatch",
+      "stack_location": "CodecInfoTest.java:178"
+    }
+  ],
+  "affected_files": [
+    "frameworks/base/media/java/android/media/MediaCodecInfo.java"
+  ],
+  "file_count": 1,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["mediacodecinfo", "software", "hardware", "flag-error"]
+}

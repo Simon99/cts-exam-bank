@@ -1,0 +1,27 @@
+{
+  "id": "location-hard-009",
+  "title": "NMEA Timestamp Incorrect After Timezone Change",
+  "difficulty": "hard",
+  "domain": "location",
+  "test_class": "android.location.cts.fine.LocationManagerFineTest",
+  "test_method": "testNmeaTimestampTimezone",
+  "cts_module": "CtsLocationFineTestCases",
+  "tags": [
+    "NMEA",
+    "timestamp",
+    "timezone",
+    "GPS-time"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/OnNmeaMessageListener.java",
+  "estimated_time_minutes": 35,
+  "skills_tested": [
+    "Time conversion",
+    "GPS time system",
+    "Timezone handling"
+  ],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/location/gnss/GnssNmeaProvider.java",
+    "frameworks/base/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java",
+    "frameworks/base/services/core/java/com/android/server/location/gnss/hal/GnssNative.java"
+  ]
+}

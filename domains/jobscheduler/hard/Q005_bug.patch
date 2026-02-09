@@ -1,0 +1,63 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/DeviceIdleJobsController.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/DeviceIdleJobsController.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/DeviceIdleJobsController.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/DeviceIdleJobsController.java
+@@ -165,10 +165,10 @@ public final class DeviceIdleJobsController extends StateController {
+ 
+     private boolean updateTaskStateLocked(JobStatus task, final long nowElapsed) {
+         final boolean allowInIdle = ((task.getFlags()&JobInfo.FLAG_IMPORTANT_WHILE_FOREGROUND) != 0)
+-                && (mForegroundUids.get(task.getSourceUid()) || isTempWhitelistedLocked(task));
++                && (mForegroundUids.get(task.getSourceUid()) || isTempWhitelistedLocked(task))
++                && !task.isRequestedExpeditedJob();  // BUG: Incorrectly excluding EJs from foreground bypass
+         final boolean whitelisted = isWhitelistedLocked(task);
+-        // Allow EJs and UIJs to bypass doze
+-        final boolean canBypassDoze = task.canRunInDoze();
+-        final boolean enableTask = !mDeviceIdleMode || whitelisted || allowInIdle || canBypassDoze;
++        // BUG: Missing canBypassDoze check for EJs and UIJs
++        final boolean enableTask = !mDeviceIdleMode || whitelisted || allowInIdle;
+         return task.setDeviceNotDozingConstraintSatisfied(nowElapsed, enableTask, whitelisted);
+     }
+ 
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
+index 11111111..22222222 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
+@@ -1763,9 +1763,10 @@ public final class JobStatus {
+     public boolean canRunInDoze() {
+         return appHasDozeExemption
+                 || (getFlags() & JobInfo.FLAG_WILL_BE_FOREGROUND) != 0
+-                || shouldTreatAsUserInitiatedJob()
++                // BUG: Missing UIJ check - should include shouldTreatAsUserInitiatedJob()
+                 // EJs can't run in Doze if we explicitly require that the device is not Dozing.
+-                || ((shouldTreatAsExpeditedJob() || startedAsExpeditedJob)
++                // BUG: Using AND instead of OR for EJ conditions
++                || ((shouldTreatAsExpeditedJob() && startedAsExpeditedJob)
+                         && (mDynamicConstraints & CONSTRAINT_DEVICE_NOT_DOZING) == 0);
+     }
+ 
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
+index 55555555..66666666 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
+@@ -2526,14 +2526,14 @@ public class JobSchedulerService extends com.android.server.SystemService
+     public void onDeviceIdleStateChanged(boolean deviceIdle) {
+         synchronized (mLock) {
+             if (DEBUG) {
+                 Slog.d(TAG, "Doze state changed: " + deviceIdle);
+             }
+-            if (!deviceIdle) {
++            // BUG: Condition inverted - should check !deviceIdle to wake up jobs
++            if (deviceIdle) {
+                 // When coming out of idle, allow thing to start back up.
+                 if (mReadyToRock) {
+                     if (mLocalDeviceIdleController != null) {
+                         if (!mReportedActive) {
+                             mReportedActive = true;
+                             mLocalDeviceIdleController.setJobsActive(true);
+                         }
+                     }
+                     mHandler.obtainMessage(MSG_CHECK_JOB).sendToTarget();
+                 }
+             }
+         }
+     }

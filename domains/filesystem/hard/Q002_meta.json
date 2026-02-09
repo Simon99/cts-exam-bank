@@ -1,0 +1,16 @@
+{
+  "id": "Q002",
+  "domain": "filesystem",
+  "difficulty": "hard",
+  "title": "VolumeInfo 狀態映射鏈錯誤 - 映射表、廣播、Service 三層問題",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testGetStorageVolumes",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/storage/VolumeInfo.java",
+    "frameworks/base/services/core/java/com/android/server/StorageManagerService.java",
+    "frameworks/base/core/java/android/os/Environment.java"
+  ],
+  "tags": ["storage", "state-mapping", "static-initializer", "SparseArray", "broadcast"],
+  "estimated_time_minutes": 40,
+  "skills_tested": ["static-initialization", "state-machine", "mapping-analysis", "multi-file-debugging"]
+}

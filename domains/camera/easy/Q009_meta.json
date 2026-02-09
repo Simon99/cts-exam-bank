@@ -1,0 +1,17 @@
+{
+  "id": "camera_easy_009",
+  "title": "CameraDevice close() 不觸發 onClosed 回調",
+  "difficulty": "easy",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.CameraDeviceTest#testCameraDeviceClose",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java"
+  ],
+  "tags": ["CameraDevice", "close", "StateCallback", "onClosed"],
+  "estimated_time_minutes": 15,
+  "skills_tested": [
+    "理解 CameraDevice 生命週期",
+    "分析 StateCallback 機制",
+    "識別被註釋的代碼"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "app-hard-005",
+  "title": "PendingIntent 身份識別錯誤導致權限洩漏",
+  "difficulty": "hard",
+  "domain": "app",
+  "cts_test": "android.app.cts.PendingIntentTest#testPendingIntentIdentityIsolation",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java",
+    "frameworks/base/services/core/java/com/android/server/am/PendingIntentController.java",
+    "frameworks/base/core/java/android/app/PendingIntent.java"
+  ],
+  "tags": ["pendingintent", "security", "identity", "permission-escalation"],
+  "skills_tested": ["security-model", "identity-management", "intent-matching", "privilege-escalation-analysis"],
+  "estimated_time_minutes": 60,
+  "created": "2025-02-09"
+}

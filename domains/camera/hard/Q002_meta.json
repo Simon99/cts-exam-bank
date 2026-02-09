@@ -1,0 +1,20 @@
+{
+  "id": "camera_hard_002",
+  "title": "Offline Session 切換失敗",
+  "difficulty": "hard",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.OfflineSessionTest#testOfflineSessionSwitch",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java",
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraOfflineSessionImpl.java",
+    "frameworks/base/core/java/android/hardware/camera2/impl/RequestLastFrameNumbersHolder.java"
+  ],
+  "tags": ["OfflineSession", "狀態轉移", "PendingRequest"],
+  "estimated_time_minutes": 45,
+  "skills_tested": [
+    "理解 Offline Session 機制",
+    "追蹤狀態轉移流程",
+    "分析多類協作",
+    "識別狀態同步問題"
+  ]
+}

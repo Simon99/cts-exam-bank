@@ -1,0 +1,19 @@
+{
+  "id": "camera_medium_005",
+  "title": "Repeating Request 無法正常停止",
+  "difficulty": "medium",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.CameraDeviceTest#testCameraDeviceRepeatingRequest",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraCaptureSessionImpl.java",
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java"
+  ],
+  "bug_pattern": "log-in-A-bug-in-B",
+  "tags": ["stopRepeating", "cancelRequest", "CaptureSequence", "回調缺失"],
+  "estimated_time_minutes": 30,
+  "skills_tested": [
+    "理解 Repeating Request 機制",
+    "追蹤 request 生命週期",
+    "分析 sequence 完成邏輯"
+  ]
+}

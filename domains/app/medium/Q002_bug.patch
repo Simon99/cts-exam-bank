@@ -1,0 +1,35 @@
+diff --git a/frameworks/base/core/java/android/app/Activity.java b/frameworks/base/core/java/android/app/Activity.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/app/Activity.java
++++ b/frameworks/base/core/java/android/app/Activity.java
+@@ -1515,10 +1515,10 @@ public class Activity extends ContextThemeWrapper
+     }
+
+     private void dispatchActivityCreated(@Nullable Bundle savedInstanceState) {
+-        getApplication().dispatchActivityCreated(this, savedInstanceState);
+         Object[] callbacks = collectActivityLifecycleCallbacks();
+         if (callbacks != null) {
+             for (int i = 0; i < callbacks.length; i++) {
+                 ((Application.ActivityLifecycleCallbacks) callbacks[i]).onActivityCreated(this,
+                         savedInstanceState);
+             }
+         }
++        getApplication().dispatchActivityCreated(this, savedInstanceState);
+     }
+
+diff --git a/frameworks/base/core/java/android/app/Application.java b/frameworks/base/core/java/android/app/Application.java
+index 2345678..bcdefgh 100644
+--- a/frameworks/base/core/java/android/app/Application.java
++++ b/frameworks/base/core/java/android/app/Application.java
+@@ -363,7 +363,7 @@ public class Application extends ContextWrapper implements ComponentCallbacks2 {
+     /* package */ void dispatchActivityCreated(@NonNull Activity activity,
+             @Nullable Bundle savedInstanceState) {
+         Object[] callbacks = collectActivityLifecycleCallbacks();
+         if (callbacks != null) {
+-            for (int i=0; i<callbacks.length; i++) {
++            for (int i = callbacks.length - 1; i >= 0; i--) {
+                 ((ActivityLifecycleCallbacks)callbacks[i]).onActivityCreated(activity,
+                         savedInstanceState);
+             }
+         }
+     }

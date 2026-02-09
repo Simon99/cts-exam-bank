@@ -1,0 +1,15 @@
+{
+  "id": "Q004",
+  "domain": "filesystem",
+  "difficulty": "medium",
+  "title": "ProxyFileDescriptor 讀取返回長度與回調錯誤",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testOpenProxyFileDescriptor_largeRead",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/com/android/internal/os/FuseAppLoop.java",
+    "frameworks/base/core/java/android/os/ProxyFileDescriptorCallback.java"
+  ],
+  "tags": ["storage", "FUSE", "proxy-fd", "read-length", "callback"],
+  "estimated_time_minutes": 25,
+  "skills_tested": ["log-tracing", "callback-analysis", "return-value-tracking", "multi-file-debugging"]
+}

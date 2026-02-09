@@ -1,0 +1,20 @@
+{
+  "id": "NET-M007",
+  "title": "Credentials.getPid() 返回錯誤的值",
+  "difficulty": "medium",
+  "domain": "net",
+  "test_class": "android.net.cts.LocalSocketTest",
+  "test_method": "testPeerCredentials",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/Credentials.java",
+    "frameworks/base/core/java/android/net/LocalSocketImpl.java"
+  ],
+  "bug_type": "wrong_parameter_order",
+  "tags": ["Credentials", "LocalSocket", "peer", "pid", "uid", "gid"],
+  "estimated_time_minutes": 15,
+  "skills_tested": [
+    "參數順序分析",
+    "JNI 調用理解",
+    "Unix credentials 概念"
+  ]
+}

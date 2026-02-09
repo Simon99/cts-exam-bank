@@ -1,0 +1,26 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssAntennaInfoProvider.java b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssAntennaInfoProvider.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssAntennaInfoProvider.java
++++ b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssAntennaInfoProvider.java
+@@ -78,8 +78,8 @@ public class GnssAntennaInfoProvider implements GnssNative.AntennaInfoCallbacks
+         // Convert HAL coordinates to Android coordinate system
+         // HAL: X=forward, Y=right, Z=up
+         // Android: X=right, Y=forward, Z=up
+-        double androidX = halY;  // HAL Y (right) -> Android X
+-        double androidY = halX;  // HAL X (forward) -> Android Y
++        double androidX = halX;  // BUG: should be halY
++        double androidY = halY;  // BUG: should be halX
+         double androidZ = halZ;
+         
+         return new GnssAntennaInfo.PhaseCenterOffset(
+@@ -98,8 +98,8 @@ public class GnssAntennaInfoProvider implements GnssNative.AntennaInfoCallbacks
+         for (int i = 0; i < halInfo.length; i++) {
+             GnssAntennaInfo.PhaseCenterOffset offset = convertPhaseCenterOffset(
+                 halInfo[i].phaseCenterOffsetMm);
+-            // BUG: Using wrong constructor parameter order
+-            GnssAntennaInfo info = new GnssAntennaInfo.Builder()
++            // BUG: Uncertainty values also swapped
++            GnssAntennaInfo info = new GnssAntennaInfo.Builder() 
+                 .setCarrierFrequencyMHz(halInfo[i].carrierFrequencyMHz)
+                 .setPhaseCenterOffset(offset)
+                 .build();

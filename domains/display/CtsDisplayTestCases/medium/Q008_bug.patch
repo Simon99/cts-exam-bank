@@ -1,0 +1,28 @@
+diff --git a/services/core/java/com/android/server/display/DisplayManagerService.java b/services/core/java/com/android/server/display/DisplayManagerService.java
+index abc123456789..def987654321 100644
+--- a/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -1591,7 +1591,7 @@ public final class DisplayManagerService extends SystemService {
+             }
+         }
+ 
+-        if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0) {
++        if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) != 0) {  // [BUG] condition inverted - strips flag from trusted instead of untrusted
+             flags &= ~VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;
+         }
+ 
+diff --git a/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+index abc123456789..def987654321 100644
+--- a/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
++++ b/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+@@ -380,8 +380,8 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
+         private void populateDisplayDeviceInfo() {
+             // ... other code ...
+             
+-            if ((mFlags & VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS) != 0) {
+-                mInfo.flags |= DisplayDeviceInfo.FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;
++            if ((mFlags & VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS) == 0) {  // [BUG] condition inverted
++                mInfo.flags |= DisplayDeviceInfo.FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;  // [BUG] sets flag when it shouldn't
+             }
+             
+             // ... other code ...

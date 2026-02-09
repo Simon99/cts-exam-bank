@@ -1,0 +1,20 @@
+# Q007 CTS 驗證結果
+驗證日期: 2025-02-09 (更新)
+設備: 2B231FDH200B4Z (Pixel 7)
+
+## 結果: ✅ PATCH OK (Patch 格式已修復)
+
+## Patch 套用測試
+- Q007_bug.patch 成功套用到 3 個文件：
+  1. services/core/java/com/android/server/display/LogicalDisplay.java ✓
+  2. services/core/java/com/android/server/display/DisplayDeviceInfo.java ✓
+  3. services/core/java/com/android/server/display/VirtualDisplayAdapter.java ✓ (offset -1 lines)
+
+## Bug 設計概述
+Bug 設計涉及 VirtualDisplay resize 時的跨文件狀態同步問題：
+1. VirtualDisplayAdapter.java: 操作順序錯誤（先發事件後更新狀態）
+2. LogicalDisplay.java: 從錯誤來源複製 supportedModes（使用舊緩存）
+3. DisplayDeviceInfo.java: 條件複製保留舊數據
+
+## 下一步
+- Patch 格式已正確，待運行 CTS 測試驗證 bug 效果

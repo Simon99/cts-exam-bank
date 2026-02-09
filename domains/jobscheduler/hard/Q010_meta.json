@@ -1,0 +1,16 @@
+{
+  "id": "Q010",
+  "domain": "jobscheduler",
+  "difficulty": "hard",
+  "title": "JobConcurrencyManager 多作業並發時優先級反轉問題",
+  "test_class": "android.jobscheduler.cts.JobSchedulingTest",
+  "test_method": "testHigherPriorityJobRunsFirst",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobConcurrencyManager.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/PendingJobQueue.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java"
+  ],
+  "tags": ["concurrency", "priority", "scheduling", "job_selection"],
+  "estimated_time_minutes": 55,
+  "skills_tested": ["concurrency_management", "priority_scheduling", "comparator_logic", "cross_file_analysis"]
+}

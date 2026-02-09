@@ -1,0 +1,36 @@
+# Q002 CTS 驗證結果
+
+## 題目信息
+- ID: display-hard-002-v2
+- 標題: Display Mode 傳遞鏈數據丟失 - supportedModes 陣列截斷
+- Bug 文件: LogicalDisplay.java
+- Bug 類型: off_by_one_array_copy
+
+## 測試結果
+- 狀態: BOOTLOOP (設備無法啟動)
+- 原因: Bug 導致系統在啟動過程中 crash
+
+## 驗證結論
+- Bug patch 成功套用: ✓
+- 編譯成功: ✓ (01:26)
+- 刷機成功: ✓
+- 設備開機: ✗ (BOOTLOOP)
+- 測試無法執行: ✗
+
+## 分析
+Q002 的 bug (Arrays.copyOf 使用 length-1) 導致 supportedModes 陣列
+丟失最後一個元素。這在系統初始化時可能導致：
+1. DisplayInfo.findMode() 找不到 activeMode
+2. 系統服務 crash
+3. 設備進入 bootloop
+
+這個 bug 太嚴重，無法在 Pixel 7 上完成 CTS 測試驗證。
+可能需要修改 bug 使其更輕微，或者在特定條件下才觸發。
+
+## 建議
+此題目設計需要調整：
+1. bug 影響太嚴重，導致系統無法啟動
+2. 考慮改為只影響特定 API 的場景
+
+驗證日期: 2025-02-09
+驗證設備: Pixel 7 (27161FDH20031X)

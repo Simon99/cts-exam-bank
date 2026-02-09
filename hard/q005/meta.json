@@ -1,0 +1,27 @@
+{
+  "id": "q005",
+  "title": "Display Mode Comparison Logic Error",
+  "difficulty": "hard",
+  "category": "display",
+  "test_module": "CtsDisplayTestCases",
+  "test_class": "android.display.cts.DisplayTest",
+  "test_method": "testActiveModeIsSupportedModesOnDefaultDisplay",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/Display.java"
+  ],
+  "bug_type": "comparison_operator_error",
+  "bug_location": "Display.Mode.equals() method",
+  "requires_special_device": false,
+  "requires_overlay_display": false,
+  "compatible_devices": ["Pixel 7", "Pixel 6", "Pixel 5", "any Android device"],
+  "skills_tested": [
+    "Java equals() method implementation",
+    "Comparison operator semantics",
+    "Short-circuit evaluation understanding",
+    "Display Mode API knowledge"
+  ],
+  "estimated_time_minutes": 20,
+  "version": "1.0",
+  "created": "2025-02-09",
+  "author": "CTS Exam Bank"
+}

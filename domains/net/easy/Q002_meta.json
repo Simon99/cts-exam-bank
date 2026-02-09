@@ -1,0 +1,19 @@
+{
+  "id": "NET-E002",
+  "title": "LocalSocket isBound 狀態錯誤",
+  "difficulty": "easy",
+  "domain": "net",
+  "test_class": "android.net.cts.LocalSocketTest",
+  "test_method": "testAccessors",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/LocalSocket.java"
+  ],
+  "bug_type": "missing_statement",
+  "tags": ["LocalSocket", "state", "bind", "boolean"],
+  "estimated_time_minutes": 10,
+  "skills_tested": [
+    "讀取 CTS 錯誤日誌",
+    "理解狀態管理",
+    "識別遺漏的代碼"
+  ]
+}

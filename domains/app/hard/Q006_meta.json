@@ -1,0 +1,16 @@
+{
+  "id": "app-hard-006",
+  "title": "JobScheduler 約束條件組合錯誤",
+  "difficulty": "hard",
+  "domain": "app",
+  "cts_test": "android.app.job.cts.JobSchedulerTest#testCombinedConstraints",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java"
+  ],
+  "tags": ["jobscheduler", "constraints", "bitmask", "logic-error"],
+  "skills_tested": ["jobscheduler-architecture", "bitmask-operations", "constraint-satisfaction", "controller-interaction"],
+  "estimated_time_minutes": 50,
+  "created": "2025-02-09"
+}

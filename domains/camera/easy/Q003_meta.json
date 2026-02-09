@@ -1,0 +1,17 @@
+{
+  "id": "camera_easy_003",
+  "title": "CameraCharacteristics LENS_FACING 返回 null",
+  "difficulty": "easy",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.CameraManagerTest#testCameraManagerGetDeviceIdList",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java"
+  ],
+  "tags": ["CameraCharacteristics", "LENS_FACING", "metadata"],
+  "estimated_time_minutes": 15,
+  "skills_tested": [
+    "理解 CameraCharacteristics 結構",
+    "分析 metadata 讀取邏輯",
+    "識別 hardcoded 返回值問題"
+  ]
+}

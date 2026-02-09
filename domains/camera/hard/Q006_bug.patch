@@ -1,0 +1,41 @@
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraConstrainedHighSpeedCaptureSessionImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraConstrainedHighSpeedCaptureSessionImpl.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraConstrainedHighSpeedCaptureSessionImpl.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraConstrainedHighSpeedCaptureSessionImpl.java
+@@ -156,7 +156,8 @@ class CameraConstrainedHighSpeedCaptureSessionImpl
+      */
+     private int calculateBurstSize(int targetFps) {
+-        int burstSize = targetFps / 30;
++        // BUG: 除數錯誤，導致 burst size 是正確值的一半
++        int burstSize = targetFps / 60;
+         return Math.max(burstSize, 1);
+     }
+
+diff --git a/frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp b/frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp
+index abcd1234..efgh5679 100644
+--- a/frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp
++++ b/frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp
+@@ -2034,6 +2034,9 @@ status_t Camera3Device::submitHighSpeedRequestList(
+     for (size_t i = 0; i < requestList.size(); i++) {
+         auto& request = requestList[i];
+         
++        // BUG: 不應該有延遲，會破壞幀率穩定性
++        usleep(1000);
++        
+         status_t res = submitRequestLocked(request);
+         if (res != OK) {
+             return res;
+
+diff --git a/frameworks/av/services/camera/libcameraservice/api2/CameraDeviceClient.cpp b/frameworks/av/services/camera/libcameraservice/api2/CameraDeviceClient.cpp
+index abcd1234..efgh567a 100644
+--- a/frameworks/av/services/camera/libcameraservice/api2/CameraDeviceClient.cpp
++++ b/frameworks/av/services/camera/libcameraservice/api2/CameraDeviceClient.cpp
+@@ -423,7 +423,8 @@ binder::Status CameraDeviceClient::submitRequestList(
+     
+     if (mIsConstrainedHighSpeedConfiguration) {
+-        mBatchMode = true;
++        // BUG: high speed 模式下沒有啟用 batch mode
++        mBatchMode = false;
+     }
+     
+     return submitRequestListLocked(requestList, streaming, submitInfo);

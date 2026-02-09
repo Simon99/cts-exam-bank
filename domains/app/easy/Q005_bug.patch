@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/app/DatePickerDialog.java b/frameworks/base/core/java/android/app/DatePickerDialog.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/app/DatePickerDialog.java
++++ b/frameworks/base/core/java/android/app/DatePickerDialog.java
+@@ -185,7 +185,7 @@ public class DatePickerDialog extends AlertDialog implements OnClickListener,
+     public Bundle onSaveInstanceState() {
+         final Bundle state = super.onSaveInstanceState();
+         state.putInt(YEAR, mDatePicker.getYear());
+-        state.putInt(MONTH, mDatePicker.getMonth());
++        state.putInt(MONTH, mDatePicker.getDayOfMonth());
+         state.putInt(DAY, mDatePicker.getDayOfMonth());
+         return state;
+     }

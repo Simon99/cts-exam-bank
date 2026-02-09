@@ -1,0 +1,33 @@
+{
+  "id": "media-h-q021",
+  "domain": "media",
+  "module": "CtsMediaTestCases",
+  "difficulty": "hard",
+  "pattern": "C",
+  "pattern_desc": "縱深多層 - 影響 3 個以上檔案",
+  "target_tests": [
+    "android.media.cts.MuxerTest#testMuxerMp4"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaTestCases",
+      "abi": "arm64-v8a",
+      "class": "android.media.cts.MuxerTest",
+      "method": "testMuxerMp4",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: Video re-muxed file validation failed",
+      "stack_location": "MuxerTest.java:512"
+    }
+  ],
+  "affected_files": [
+    "frameworks/base/media/java/android/media/MediaCodec.java",
+    "frameworks/base/media/java/android/media/MediaMuxer.java",
+    "frameworks/base/media/java/android/media/MediaExtractor.java"
+  ],
+  "file_count": 3,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["mediacodec", "mediamuxer", "mediaextractor", "remux", "pipeline", "keyframe"]
+}

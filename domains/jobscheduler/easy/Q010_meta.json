@@ -1,0 +1,14 @@
+{
+  "id": "Q010",
+  "domain": "jobscheduler",
+  "difficulty": "easy",
+  "title": "JobSchedulingTest 最小排程配額檢查失敗",
+  "test_class": "android.jobscheduler.cts.JobSchedulingTest",
+  "test_method": "testMinSuccessfulSchedulingQuota",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java"
+  ],
+  "tags": ["scheduling", "quota", "boundary_condition"],
+  "estimated_time_minutes": 15,
+  "skills_tested": ["log_analysis", "boundary_condition", "api_understanding"]
+}

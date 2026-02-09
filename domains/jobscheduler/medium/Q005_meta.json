@@ -1,0 +1,15 @@
+{
+  "id": "Q005",
+  "domain": "jobscheduler",
+  "difficulty": "medium",
+  "title": "ExpeditedJobTest 加急作業 UID 狀態錯誤",
+  "test_class": "android.jobscheduler.cts.ExpeditedJobTest",
+  "test_method": "testJobUidState_withRequiredNetwork",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobServiceContext.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobConcurrencyManager.java"
+  ],
+  "tags": ["expedited", "uid_state", "capability", "network"],
+  "estimated_time_minutes": 30,
+  "skills_tested": ["log_analysis", "expedited_job_handling", "capability_understanding"]
+}

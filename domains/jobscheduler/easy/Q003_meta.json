@@ -1,0 +1,14 @@
+{
+  "id": "Q003",
+  "domain": "jobscheduler",
+  "difficulty": "easy",
+  "title": "TimingConstraintsTest 延遲約束未滿足",
+  "test_class": "android.jobscheduler.cts.TimingConstraintsTest",
+  "test_method": "testExplicitZeroLatency",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java"
+  ],
+  "tags": ["timing", "constraint", "delay", "boundary_condition"],
+  "estimated_time_minutes": 15,
+  "skills_tested": ["log_analysis", "boundary_condition", "time_logic"]
+}

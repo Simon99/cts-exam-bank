@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+@@ -2458,7 +2458,8 @@ class AlarmManagerService extends SystemService {
+         final long batterySaverPolicyElapsed;
+-        if ((alarm.flags & (FLAG_ALLOW_WHILE_IDLE_UNRESTRICTED)) != 0) {
++        // Bug: Inverted condition - unrestricted alarms get restricted, and vice versa
++        if ((alarm.flags & (FLAG_ALLOW_WHILE_IDLE_UNRESTRICTED)) == 0) {
+             // Unrestricted.
+             batterySaverPolicyElapsed = nowElapsed;
+         } else if (isAllowedWhileIdleRestricted(alarm)) {

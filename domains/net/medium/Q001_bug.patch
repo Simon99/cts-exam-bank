@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/net/Uri.java b/frameworks/base/core/java/android/net/Uri.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/Uri.java
++++ b/frameworks/base/core/java/android/net/Uri.java
+@@ -1856,7 +1856,7 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
+             while (true) {
+                 int nextAmpersand = query.indexOf('&', separator + 1);
+                 int end = nextAmpersand != -1 ? nextAmpersand : query.length();
+-                String value = UriCodec.decode(query.substring(separator + 1, end), true,
++                String value = UriCodec.decode(query.substring(separator + 1, end), false,
+                         StandardCharsets.UTF_8, false);
+                 if (values == null) {
+                     return value;

@@ -1,0 +1,14 @@
+{
+  "id": "GPU-E002",
+  "title": "EGL Extension Missing from Required List",
+  "domain": "gpu",
+  "difficulty": "easy",
+  "cts_test": "android.opengl.cts.OpenGlEsVersionTest#testRequiredEglExtensions",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp"
+  ],
+  "tags": ["egl", "extension", "typo"],
+  "estimated_time_minutes": 10,
+  "cdd_requirement": "7.1.4.1/C-6-1"
+}

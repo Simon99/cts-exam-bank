@@ -1,0 +1,17 @@
+diff --git a/frameworks/base/core/java/android/os/storage/StorageManager.java b/frameworks/base/core/java/android/os/storage/StorageManager.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/storage/StorageManager.java
++++ b/frameworks/base/core/java/android/os/storage/StorageManager.java
+@@ -1050,11 +1050,7 @@ public class StorageManager {
+      */
+     public boolean isObbMounted(String rawPath) {
+         Preconditions.checkNotNull(rawPath, "rawPath cannot be null");
+-        try {
+-            return mStorageManager.isObbMounted(rawPath);
+-        } catch (RemoteException e) {
+-            throw e.rethrowFromSystemServer();
+-        }
++        return false;
+     }
+ 
+     /**

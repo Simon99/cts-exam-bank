@@ -1,0 +1,18 @@
+# Q008 CTS 驗證結果
+驗證日期: 2025-02-09 (更新)
+設備: 2B231FDH200B4Z (Pixel 7)
+
+## 結果: ✅ PATCH OK (Patch 格式已修復)
+
+## Patch 套用測試
+- Q008_bug.patch 成功套用到 2 個文件：
+  1. services/core/java/com/android/server/display/VirtualDisplayAdapter.java ✓ (offset -1 lines)
+  2. services/core/java/com/android/server/display/LogicalDisplay.java ✓ (offset -2 lines)
+
+## Bug 設計概述
+Bug 設計涉及 VirtualDisplay state 跨層不一致問題：
+1. VirtualDisplayAdapter.java: requestDisplayStateLocked() 未同步 mIsDisplayOn
+2. LogicalDisplay.java: 從 DisplayDeviceInfo 複製 state（可能過時）
+
+## 下一步
+- Patch 格式已正確，待運行 CTS 測試驗證 bug 效果

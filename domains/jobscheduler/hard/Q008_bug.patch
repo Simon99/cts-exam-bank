@@ -1,0 +1,86 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java
+@@ -75,20 +75,16 @@ public final class TimeController extends StateController {
+      */
+     @Override
+     public void maybeStartTrackingJobLocked(JobStatus job, JobStatus lastJob) {
+         if (job.hasTimingDelayConstraint() || job.hasDeadlineConstraint()) {
+             maybeStopTrackingJobLocked(job, null);
+ 
+             // First: check the constraints now, because if they are already satisfied
+             // then there is no need to track it.
+             final long nowElapsedMillis = sElapsedRealtimeClock.millis();
+             if (job.hasDeadlineConstraint() && evaluateDeadlineConstraint(job, nowElapsedMillis)) {
+-                // We're intentionally excluding jobs whose deadlines have passed
+-                // from the tracking when the job was scheduled.
+-                return;
++                // BUG: Should not return early without checking other constraints
++                // This causes jobs to be marked as ready even when other constraints aren't met
+             } else if (job.hasTimingDelayConstraint() && evaluateTimingDelayConstraint(job,
+                     nowElapsedMillis)) {
+-                if (!job.hasDeadlineConstraint()) {
+-                    // If it doesn't have a deadline, we'll never have to touch it again.
+-                    return;
+-                }
++                // Continue tracking even if delay is satisfied
+             }
+ 
+             boolean isInsert = false;
+@@ -120,7 +116,8 @@ public final class TimeController extends StateController {
+ 
+     private boolean evaluateDeadlineConstraint(JobStatus job, long nowElapsedMillis) {
+         final long latestRunTimeElapsed = job.getLatestRunTimeElapsed();
+-        if (latestRunTimeElapsed <= nowElapsedMillis) {
++        // BUG: Using < instead of <= causes deadline to be marked satisfied 1ms early
++        if (latestRunTimeElapsed < nowElapsedMillis) {
+             job.setDeadlineConstraintSatisfied(nowElapsedMillis, true);
+             return true;
+         }
+
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
+index abcd2345..efgh6789 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
+@@ -1810,12 +1810,10 @@ public final class JobStatus {
+      */
+     public boolean setDeadlineConstraintSatisfied(long nowElapsed, boolean state) {
+         if (state) {
+-            // Mark the constraint as satisfied only if we're past the deadline
+-            mDeadlineSatisfiedAtElapsed = nowElapsed;
+-            return setConstraintSatisfied(CONSTRAINT_DEADLINE, nowElapsed, state);
++            // BUG: Setting deadline satisfied without proper validation
++            mDeadlineSatisfiedAtElapsed = 0;  // Wrong: should be nowElapsed
++            return setConstraintSatisfied(CONSTRAINT_DEADLINE, nowElapsed, true);
+         }
+-        mDeadlineSatisfiedAtElapsed = NO_LATEST_RUNTIME;
+-        return setConstraintSatisfied(CONSTRAINT_DEADLINE, nowElapsed, state);
++        return setConstraintSatisfied(CONSTRAINT_DEADLINE, nowElapsed, false);
+     }
+
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
+index abcd3456..efgh7890 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
+@@ -2200,16 +2200,13 @@ public class JobSchedulerService extends com.android.server.SystemService
+     @GuardedBy("mLock")
+     private boolean isReadyToBeExecutedLocked(JobStatus job) {
+         // First check if all constraints are satisfied
+-        if (!job.isReady()) {
+-            return false;
+-        }
+         
+-        // Special handling for deadline: if deadline is reached, 
+-        // job can run even if other constraints aren't met
+-        if (job.hasDeadlineConstraint() && job.isConstraintSatisfied(CONSTRAINT_DEADLINE)) {
+-            return true;
+-        }
++        // BUG: Always returning true for jobs with deadline, even before deadline
++        if (job.hasDeadlineConstraint()) {
++            return true;  // Should check if deadline is actually satisfied
++        }
+         
++        // Check other constraints
+         return job.isConstraintsSatisfied();
+     }

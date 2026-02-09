@@ -1,0 +1,18 @@
+{
+  "id": "H002",
+  "title": "Bundle 嵌套結構跨進程傳遞數據損壞",
+  "difficulty": "hard",
+  "domain": "framework",
+  "subdomain": "os",
+  "cts_test": "android.os.cts.BundleTest#testNestedBundleParcel",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/BaseBundle.java",
+    "frameworks/base/core/java/android/os/Parcel.java",
+    "frameworks/base/core/java/android/os/Bundle.java"
+  ],
+  "tags": ["Bundle", "Parcel", "嵌套序列化", "邊界處理"],
+  "estimated_time_minutes": 50,
+  "skills_tested": ["嵌套數據結構", "序列化協議", "邊界計算"],
+  "created_at": "2025-01-13"
+}

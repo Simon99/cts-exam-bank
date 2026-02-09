@@ -1,0 +1,33 @@
+{
+  "id": "media-h-q028",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "hard",
+  "pattern": "C",
+  "pattern_desc": "縱深多層 - 影響 3 個以上檔案",
+  "target_tests": [
+    "android.mediav2.cts.VideoEncoderTest#testBFrameOutputTimestamp"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.VideoEncoderTest",
+      "method": "testBFrameOutputTimestamp",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: B-frame PTS ordering incorrect: expected monotonic DTS but got non-monotonic sequence",
+      "stack_location": "VideoEncoderTest.java:892"
+    }
+  ],
+  "affected_files": [
+    "frameworks/av/media/libstagefright/MPEG4Writer.cpp",
+    "frameworks/av/media/codec2/components/avc/C2SoftAvcEnc.cpp",
+    "frameworks/base/media/java/android/media/MediaCodec.java"
+  ],
+  "file_count": 3,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["b-frame", "pts", "dts", "ctts", "encoder", "timestamp-reorder"]
+}

@@ -1,0 +1,18 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
+@@ -2200,9 +2200,11 @@ public class JobSchedulerService extends com.android.server.SystemService
+     @GuardedBy("mLock")
+     private boolean canJobBypassRestrictions(JobStatus job) {
+         // All firewalls must allow the job
+-        return canBypassBatterySaver(job) 
+-                && canBypassDataSaver(job) 
+-                && canBypassQuota(job);
++        // BUG: Using OR instead of AND logic
++        return canBypassBatterySaver(job) 
++                || canBypassDataSaver(job) 
++                || canBypassQuota(job);
++        // This allows jobs to run if ANY condition passes
+     }
+ }

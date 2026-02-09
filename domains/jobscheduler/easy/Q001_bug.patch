@@ -1,0 +1,18 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java
+@@ -68,11 +68,11 @@ public final class BatteryController extends RestrictingController {
+             taskStatus.setTrackingController(JobStatus.TRACKING_BATTERY);
+             if (taskStatus.hasChargingConstraint()) {
+                 if (hasTopExemptionLocked(taskStatus)) {
+                     taskStatus.setChargingConstraintSatisfied(nowElapsed,
+-                            mService.isPowerConnected());
++                            !mService.isPowerConnected());
+                 } else {
+                     taskStatus.setChargingConstraintSatisfied(nowElapsed,
+-                            mService.isBatteryCharging() && mService.isBatteryNotLow());
++                            !(mService.isBatteryCharging() && mService.isBatteryNotLow()));
+                 }
+             }
+             taskStatus.setBatteryNotLowConstraintSatisfied(nowElapsed, mService.isBatteryNotLow());

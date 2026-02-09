@@ -1,0 +1,14 @@
+{
+  "id": "GPU-E008",
+  "title": "eglQueryString Returns Null for Extensions",
+  "domain": "gpu",
+  "difficulty": "easy",
+  "cts_test": "android.opengl.cts.OpenGlEsVersionTest#testRequiredExtensions",
+  "cts_module": "CtsOpenGlTestCases",
+  "affected_files": [
+    "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp"
+  ],
+  "tags": ["egl", "query-string", "extension", "constant"],
+  "estimated_time_minutes": 15,
+  "cdd_requirement": "7.1.4.1/C-2-2"
+}

@@ -1,0 +1,12 @@
+diff --git a/frameworks/native/opengl/libs/EGL/eglApi.cpp b/frameworks/native/opengl/libs/EGL/eglApi.cpp
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/EGL/eglApi.cpp
++++ b/frameworks/native/opengl/libs/EGL/eglApi.cpp
+@@ -192,6 +192,7 @@ EGLBoolean eglWaitNative(EGLint engine) {
+ }
+ 
+ EGLint eglGetError(void) {
++    clearError();  // BUG: Should not clear before querying
+     egl_connection_t* const cnx = &gEGLImpl;
+     return cnx->platform.eglGetError();
+ }

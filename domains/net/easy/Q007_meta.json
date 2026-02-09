@@ -1,0 +1,19 @@
+{
+  "id": "NET-E007",
+  "title": "LocalServerSocket LISTEN_BACKLOG 值錯誤",
+  "difficulty": "easy",
+  "domain": "net",
+  "test_class": "android.net.cts.LocalServerSocketTest",
+  "test_method": "testMultipleConnections",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/LocalServerSocket.java"
+  ],
+  "bug_type": "wrong_constant",
+  "tags": ["LocalServerSocket", "listen", "backlog", "constant"],
+  "estimated_time_minutes": 8,
+  "skills_tested": [
+    "讀取 CTS 錯誤日誌",
+    "理解 socket backlog",
+    "識別常量錯誤"
+  ]
+}

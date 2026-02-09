@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/app/TimePickerDialog.java b/frameworks/base/core/java/android/app/TimePickerDialog.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/app/TimePickerDialog.java
++++ b/frameworks/base/core/java/android/app/TimePickerDialog.java
+@@ -175,7 +175,7 @@ public class TimePickerDialog extends AlertDialog implements OnClickListener,
+     @Override
+     public Bundle onSaveInstanceState() {
+         final Bundle state = super.onSaveInstanceState();
+-        state.putInt(HOUR, mTimePicker.getCurrentHour());
++        state.putInt(HOUR, mInitialHourOfDay);
+         state.putInt(MINUTE, mTimePicker.getCurrentMinute());
+         state.putBoolean(IS_24_HOUR, mTimePicker.is24HourView());
+         return state;

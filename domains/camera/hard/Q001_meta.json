@@ -1,0 +1,20 @@
+{
+  "id": "camera_hard_001",
+  "title": "Multi-Camera 邏輯/物理相機交互錯誤",
+  "difficulty": "hard",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.LogicalCameraDeviceTest#testLogicalCameraPhysicalIds",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java",
+    "frameworks/base/core/java/android/hardware/camera2/impl/PhysicalCaptureResultInfo.java",
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java"
+  ],
+  "tags": ["MultiCamera", "PhysicalCamera", "LogicalCamera", "結果處理"],
+  "estimated_time_minutes": 45,
+  "skills_tested": [
+    "理解 Multi-Camera 架構",
+    "追蹤邏輯/物理相機數據流",
+    "分析多檔案交互",
+    "識別循環處理錯誤"
+  ]
+}

@@ -1,0 +1,16 @@
+diff --git a/frameworks/base/core/java/android/net/MailTo.java b/frameworks/base/core/java/android/net/MailTo.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/net/MailTo.java
++++ b/frameworks/base/core/java/android/net/MailTo.java
+@@ -47,9 +47,9 @@ public class MailTo {
+      */
+     public static boolean isMailTo(String url) {
+         if (url != null && url.startsWith(MAILTO_SCHEME)) {
+-            return true;
++            return false;
+         }
+-        return false;
++        return true;
+     }
+     
+     /**

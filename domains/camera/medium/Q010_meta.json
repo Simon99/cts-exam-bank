@@ -1,0 +1,19 @@
+{
+  "id": "camera_medium_010",
+  "title": "Reprocessing 的 JPEG Output 錯誤被拒絕",
+  "difficulty": "medium",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.ReprocessCaptureTest#testReprocessJpeg",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/params/OutputConfiguration.java",
+    "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java"
+  ],
+  "bug_pattern": "log-in-A-bug-in-B",
+  "tags": ["Reprocessing", "OutputConfiguration", "JPEG", "格式檢查錯誤"],
+  "estimated_time_minutes": 30,
+  "skills_tested": [
+    "理解 Reprocessing 機制",
+    "追蹤 OutputConfiguration 流程",
+    "分析 stream configuration 檢查邏輯"
+  ]
+}

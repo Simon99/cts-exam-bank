@@ -1,0 +1,13 @@
+diff --git a/core/java/android/view/DisplayInfo.java b/core/java/android/view/DisplayInfo.java
+--- a/core/java/android/view/DisplayInfo.java
++++ b/core/java/android/view/DisplayInfo.java
+@@ -512,7 +512,8 @@ public final class DisplayInfo implements Parcelable {
+         outMetrics.density = logicalDensityDpi * DisplayMetrics.DENSITY_DEFAULT_SCALE;
+         outMetrics.scaledDensity = outMetrics.density
+                 * compatInfo.applicationScale;
+-        outMetrics.densityDpi = logicalDensityDpi;
++        // BUG: Q007 - densityDpi 被錯誤設為 0
++        outMetrics.densityDpi = 0;
+ 
+         outMetrics.xdpi = physicalXDpi;
+         outMetrics.ydpi = physicalYDpi;

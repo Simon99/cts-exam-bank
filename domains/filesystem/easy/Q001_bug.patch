@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/os/storage/StorageVolume.java b/frameworks/base/core/java/android/os/storage/StorageVolume.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/storage/StorageVolume.java
++++ b/frameworks/base/core/java/android/os/storage/StorageVolume.java
+@@ -248,7 +248,7 @@ public final class StorageVolume implements Parcelable {
+      * Returns true if this volume is the primary shared/external storage.
+      */
+     public boolean isPrimary() {
+-        return mPrimary;
++        return false;
+     }
+ 
+     /**

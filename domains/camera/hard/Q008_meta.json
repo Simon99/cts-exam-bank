@@ -1,0 +1,19 @@
+{
+  "id": "camera_hard_008",
+  "title": "RAW Capture DNG Metadata 不完整",
+  "difficulty": "hard",
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.StillCaptureTest#testRawCapture",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/DngCreator.java",
+    "frameworks/base/core/jni/android_hardware_camera2_DngCreator.cpp",
+    "frameworks/base/core/java/android/hardware/camera2/CameraCharacteristics.java"
+  ],
+  "tags": ["RAW", "DNG", "Metadata", "Calibration"],
+  "estimated_time_minutes": 55,
+  "skills_tested": [
+    "理解 DNG 格式規範",
+    "追蹤 metadata 傳遞流程",
+    "分析 JNI 層問題"
+  ]
+}

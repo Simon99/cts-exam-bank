@@ -1,0 +1,16 @@
+{
+  "id": "Q005",
+  "domain": "jobscheduler",
+  "difficulty": "hard",
+  "title": "ExpeditedJobTest Doze 模式下加急作業未正確繞過設備空閒限制",
+  "test_class": "android.jobscheduler.cts.JobThrottlingTest",
+  "test_method": "testExpeditedJobBypassesDeviceIdle",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/DeviceIdleJobsController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java"
+  ],
+  "tags": ["expedited_job", "doze", "device_idle", "constraint", "multi_file"],
+  "estimated_time_minutes": 50,
+  "skills_tested": ["controller_logic", "constraint_handling", "doze_mode", "cross_file_debugging", "data_flow_analysis"]
+}

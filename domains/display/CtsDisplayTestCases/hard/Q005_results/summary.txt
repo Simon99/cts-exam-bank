@@ -1,0 +1,25 @@
+# Q005 CTS 驗證結果
+驗證日期: 2025-02-09
+設備: 2B231FDH200B4Z (Pixel 7)
+
+## 結果: ✓ VERIFIED (測試失敗，符合預期)
+
+## 測試詳情
+- 測試類: android.display.cts.DisplayTest
+- 測試方法: testGetHdrCapabilitiesWhenUserDisabledFormatsAreNotAllowedReturnsFilteredHdrTypes
+- 測試結果: FAILED
+
+## 錯誤訊息
+array lengths differed, expected.length=2 actual.length=4
+- 預期: 2 個 HDR 類型（過濾後）
+- 實際: 4 個 HDR 類型（未過濾）
+
+## 分析
+Bug 正確地破壞了 HDR 過濾功能：
+1. DisplayManagerService 使用錯誤的成員變數
+2. LogicalDisplay 使用反轉的條件
+
+結果是 userDisabledHdrTypes 無法正確傳播，HDR 過濾不生效。
+
+## 結論
+✓ 題目設計正確，可以使用

@@ -1,34 +1,58 @@
 {
   "id": "display-hard-003",
-  "title": "Display Event 回調缺失 - diff bitmask 遺漏",
+  "title": "VirtualDisplay RequestedRefreshRate 跨檔案傳遞問題",
   "difficulty": "hard",
   "domain": "display",
   "module": "CtsDisplayTestCases",
   "pattern": "C",
-  "patternDesc": "跨檔案調用鏈 - A(DMS.handle)→B(Mapper)→C(DMS.Callback)，問題在 C",
+  "patternDesc": "跨檔案調用鏈 - VirtualDisplayConfig(API) → VirtualDisplayAdapter(設備) → DisplayDeviceInfo(資訊)，問題在 Adapter 設置 DeviceInfo 時",
   "targetTests": [
-    "android.display.cts.DisplayEventTest#testDisplayEvents"
+    "android.display.cts.VirtualDisplayTest#testVirtualDisplayWithRequestedRefreshRate"
   ],
+  "ctsCommand": "adb shell am instrument -w -r -e class android.display.cts.VirtualDisplayTest#testVirtualDisplayWithRequestedRefreshRate android.display.cts/androidx.test.runner.AndroidJUnitRunner",
   "callChain": [
-    "DisplayManagerService.handleDisplayDeviceChanged()",
-    "LogicalDisplayMapper.updateLogicalDisplays()",
-    "DisplayManagerService.CallbackRecord.notifyDisplayEventAsync()"
+    "VirtualDisplayConfig.getRequestedRefreshRate()",
+    "VirtualDisplayAdapter.VirtualDisplayDevice()",
+    "VirtualDisplayDevice.getRefreshRate()",
+    "DisplayAdapter.createMode()",
+    "VirtualDisplayDevice.getDisplayDeviceInfoLocked()",
+    "DisplayDeviceInfo.renderFrameRate"
   ],
-  "bugFile": "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java",
-  "bugMethod": "notifyDisplayEventAsync",
-  "bugType": "bitmask_incomplete",
+  "affectedFiles": [
+    "frameworks/base/core/java/android/hardware/display/VirtualDisplayConfig.java",
+    "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java",
+    "frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java"
+  ],
+  "fileCount": 3,
+  "bugFile": "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java",
+  "bugMethod": "VirtualDisplayDevice.getRefreshRate",
+  "bugLine": 572,
+  "bugType": "wrong_value_source",
+  "bugDescription": "getRefreshRate() 忽略 mRequestedRefreshRate，總是返回固定的 REFRESH_RATE (60Hz)",
   "bootSafe": true,
   "expectedResult": {
     "outcome": "assertion_failure",
-    "failedTests": 4,
-    "passedTests": 92,
-    "errorMessage": "Display event callback not received"
+    "failedTests": 1,
+    "passedTests": 0,
+    "errorMessage": "java.lang.AssertionError: expected:<60.0> but was:<30.0>"
   },
   "timeLimit": 40,
   "hints": [
-    "事件產生和事件派發是不同的階段",
-    "Display 變化有多種類型（DIFF_*）",
-    "注意事件過濾的 bitmask 邏輯"
+    "追蹤 Display.getRefreshRate() 的返回值來源",
+    "比較 modeId、supportedModes 和 renderFrameRate 的值來源",
+    "REFRESH_RATE 是類別常數，代表默認的 60Hz"
   ],
-  "verified": false
+  "verified": true,
+  "verifiedDate": "2025-02-09",
+  "verifiedDevice": "2B231FDH200B4Z (Pixel 7)",
+  "verificationStatus": "passed",
+  "verificationNotes": "驗證成功。注意：需編譯 services target（非 framework-minus-apex）。CTS assertEquals 參數順序導致 expected/actual 顛倒，但測試結果正確反映 bug 行為。",
+  "requiresSpecialConfig": false,
+  "configRequirements": null,
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java",
+    "frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java",
+    "frameworks/base/core/java/android/view/Display.java"
+  ],
+  "file_count": 3
 }

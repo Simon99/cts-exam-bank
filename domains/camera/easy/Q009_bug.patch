@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+@@ -478,7 +478,8 @@ public class CameraDeviceImpl extends CameraDevice
+                 mRemoteDevice = null;
+             }
+ 
+-            mDeviceExecutor.execute(mCallOnClosed);
++            // BUG: 註釋掉 onClosed 回調
++            // mDeviceExecutor.execute(mCallOnClosed);
+ 
+             mClosing.set(false);
+         }

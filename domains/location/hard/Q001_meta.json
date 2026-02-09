@@ -1,0 +1,27 @@
+{
+  "id": "location-hard-001",
+  "title": "Location Fusing Accuracy Degradation",
+  "difficulty": "hard",
+  "domain": "location",
+  "test_class": "android.location.cts.fine.LocationManagerFineTest",
+  "test_method": "testFusedProviderAccuracy",
+  "cts_module": "CtsLocationFineTestCases",
+  "tags": [
+    "fused-location",
+    "accuracy",
+    "multi-provider"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/LocationManager.java",
+  "estimated_time_minutes": 35,
+  "skills_tested": [
+    "Multi-file debugging",
+    "Location fusing",
+    "Accuracy calculation",
+    "Call chain tracing"
+  ],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/location/LocationManagerService.java",
+    "frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java",
+    "frameworks/base/services/core/java/com/android/server/location/fudger/LocationFudger.java"
+  ]
+}

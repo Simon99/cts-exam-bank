@@ -1,0 +1,16 @@
+{
+  "id": "app-hard-009",
+  "title": "AccountManager 認證回調在錯誤線程執行",
+  "difficulty": "hard",
+  "domain": "app",
+  "cts_test": "android.accounts.cts.AccountManagerTest#testAuthTokenCallbackThread",
+  "affected_files": [
+    "frameworks/base/core/java/android/accounts/AccountManager.java",
+    "frameworks/base/services/core/java/com/android/server/accounts/AccountManagerService.java",
+    "frameworks/base/services/core/java/com/android/server/accounts/TokenCache.java"
+  ],
+  "tags": ["accountmanager", "threading", "binder", "callback", "handler", "token-cache"],
+  "skills_tested": ["binder-threading", "handler-mechanism", "async-callback", "ipc", "token-management"],
+  "estimated_time_minutes": 55,
+  "created": "2025-02-09"
+}

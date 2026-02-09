@@ -1,0 +1,14 @@
+{
+  "id": "Q002",
+  "domain": "jobscheduler",
+  "difficulty": "easy",
+  "title": "StorageConstraintTest 存儲狀態判斷錯誤",
+  "test_class": "android.jobscheduler.cts.StorageConstraintTest",
+  "test_method": "testNotLowConstraintExecutes",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/StorageController.java"
+  ],
+  "tags": ["storage", "constraint", "boolean_logic", "controller"],
+  "estimated_time_minutes": 10,
+  "skills_tested": ["log_analysis", "boolean_logic"]
+}

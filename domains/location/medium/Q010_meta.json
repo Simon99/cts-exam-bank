@@ -1,0 +1,17 @@
+{
+  "id": "location-medium-010",
+  "title": "GnssStatus.usedInFix() Always Returns False",
+  "difficulty": "medium",
+  "domain": "location",
+  "test_class": "android.location.cts.none.GnssStatusTest",
+  "test_method": "testUsedInFix",
+  "cts_module": "CtsLocationNoneTestCases",
+  "tags": ["GnssStatus", "satellite-fix", "bit-flags"],
+  "affected_files": [
+    "frameworks/base/location/java/android/location/GnssStatus.java",
+    "frameworks/base/services/core/java/com/android/server/location/gnss/GnssStatusProvider.java"
+  ],
+  "log_file": "frameworks/base/location/java/android/location/GnssStatus.java",
+  "estimated_time_minutes": 18,
+  "skills_tested": ["Bit flag handling", "Flag encoding/decoding", "GNSS status parsing"]
+}

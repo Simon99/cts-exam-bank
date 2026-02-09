@@ -1,0 +1,39 @@
+diff --git a/frameworks/base/media/java/android/media/MediaCodec.java b/frameworks/base/media/java/android/media/MediaCodec.java
+index 1234567890ab..abcdef123456 100644
+--- a/frameworks/base/media/java/android/media/MediaCodec.java
++++ b/frameworks/base/media/java/android/media/MediaCodec.java
+@@ -2456,8 +2456,9 @@ public final class MediaCodec {
+                     case CB_OUTPUT_FORMAT_CHANGED:
+                         {
+                             MediaFormat format = (MediaFormat) msg.obj;
+-                            mOutputFormat = format;
+-                            mCallback.onOutputFormatChanged(MediaCodec.this, mOutputFormat);
++                            // Bug: don't update mOutputFormat, causing stale format
++                            // mOutputFormat = format;
++                            mCallback.onOutputFormatChanged(MediaCodec.this, format);
+                         }
+                         break;
+ 
+@@ -2891,7 +2892,8 @@ public final class MediaCodec {
+      * @return the output format
+      */
+     public final MediaFormat getOutputFormat() {
+-        return mOutputFormat;
++        // Bug: return initial format instead of current
++        return mInitialOutputFormat;  // Should be mOutputFormat
+     }
+ 
+diff --git a/frameworks/av/media/libstagefright/MediaCodec.cpp b/frameworks/av/media/libstagefright/MediaCodec.cpp
+index abcdef123456..123456abcdef 100644
+--- a/frameworks/av/media/libstagefright/MediaCodec.cpp
++++ b/frameworks/av/media/libstagefright/MediaCodec.cpp
+@@ -3156,7 +3156,8 @@ void MediaCodec::onOutputFormatChanged(const sp<AMessage> &format) {
+     mOutputFormat = format;
+     
+     // Notify Java layer
+-    sp<AMessage> notify = mNotify->dup();
++    // Bug: use stale notify message
++    sp<AMessage> notify = mStaleNotify->dup();  // Wrong message source
+     notify->setInt32("what", kWhatOutputFormatChanged);
+     notify->setMessage("format", format);
+     notify->post();

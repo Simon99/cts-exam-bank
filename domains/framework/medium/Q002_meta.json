@@ -1,0 +1,17 @@
+{
+  "id": "M002",
+  "title": "Intent extras 在跨進程傳遞時丟失",
+  "difficulty": "medium",
+  "domain": "framework",
+  "subdomain": "content",
+  "cts_test": "android.content.cts.IntentTest#testParcelableExtras",
+  "cts_module": "CtsContentTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/content/Intent.java",
+    "frameworks/base/core/java/android/os/Bundle.java"
+  ],
+  "tags": ["Intent", "extras", "Parcel", "序列化"],
+  "estimated_time_minutes": 25,
+  "skills_tested": ["序列化流程追蹤", "Intent 結構理解"],
+  "created_at": "2025-01-13"
+}

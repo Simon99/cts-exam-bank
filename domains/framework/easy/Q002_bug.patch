@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/core/java/android/os/BaseBundle.java b/frameworks/base/core/java/android/os/BaseBundle.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/BaseBundle.java
++++ b/frameworks/base/core/java/android/os/BaseBundle.java
+@@ -980,7 +980,7 @@ public class BaseBundle {
+     public int getInt(String key, int defaultValue) {
+         unparcel();
+         Object o = mMap.get(key);
+         if (o == null) {
+-            return defaultValue;
++            return 0;  // BUG: 忽略了 defaultValue 參數
+         }
+         try {
+             return (Integer) o;

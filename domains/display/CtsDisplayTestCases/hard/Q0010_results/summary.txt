@@ -1,0 +1,18 @@
+# Q010 CTS 驗證結果
+驗證日期: 2025-02-09
+設備: 2B231FDH200B4Z (Pixel 7)
+
+## 結果: ⚠ UNEXPECTED (測試通過)
+
+## 測試詳情
+- 測試類: android.display.cts.VirtualDisplayTest
+- 測試方法: testPrivateVirtualDisplay
+- 測試結果: PASSED
+
+## 問題分析
+Bug 已正確套用（交換 writeToParcel 中 uniqueId 和 ownerPackageName 的順序），
+但測試沒有驗證這兩個欄位的值，所以無法檢測到 bug。
+
+## 建議
+1. 修改測試或創建新測試來驗證 VirtualDisplay 的 uniqueId 和 ownerPackageName
+2. 或調整 bug 影響測試實際驗證的欄位

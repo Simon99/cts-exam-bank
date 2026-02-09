@@ -1,0 +1,25 @@
+{
+  "id": "M004",
+  "title": "Intent filterEquals 比較邏輯錯誤",
+  "difficulty": "medium",
+  "domain": "framework",
+  "subdomain": "content",
+  "cts_test": "android.content.cts.IntentTest#testFilterEquals",
+  "cts_module": "CtsContentTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/content/Intent.java",
+    "frameworks/base/core/java/android/content/IntentFilter.java"
+  ],
+  "tags": [
+    "Intent",
+    "filterEquals",
+    "比較邏輯"
+  ],
+  "estimated_time_minutes": 20,
+  "skills_tested": [
+    "API 語義理解",
+    "Intent 過濾機制"
+  ],
+  "created_at": "2025-01-13",
+  "bug_pattern": "multi-file-logic"
+}

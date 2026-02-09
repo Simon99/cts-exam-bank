@@ -1,0 +1,16 @@
+{
+  "id": "Q007",
+  "domain": "jobscheduler",
+  "difficulty": "hard",
+  "title": "QuotaController RESTRICTED bucket 作業配額計算錯誤",
+  "test_class": "android.jobscheduler.cts.JobThrottlingTest",
+  "test_method": "testJobsInRestrictedBucket_ParoleSession",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/QuotaController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java"
+  ],
+  "tags": ["quota", "restricted_bucket", "standby", "parole"],
+  "estimated_time_minutes": 50,
+  "skills_tested": ["quota_system", "standby_bucket", "complex_state_machine", "cross_file_analysis"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "Q001",
+  "domain": "filesystem",
+  "difficulty": "medium",
+  "title": "OBB 掛載回調狀態碼與監聽器處理錯誤",
+  "cts_test": "android.os.storage.cts.StorageManagerTest#testMountAndUnmountObbNormal",
+  "cts_module": "CtsOsTestCases",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/StorageManagerService.java",
+    "frameworks/base/core/java/android/os/storage/OnObbStateChangeListener.java"
+  ],
+  "tags": ["storage", "OBB", "callback", "state-code", "listener"],
+  "estimated_time_minutes": 25,
+  "skills_tested": ["log-tracing", "callback-understanding", "service-analysis", "multi-file-debugging"]
+}

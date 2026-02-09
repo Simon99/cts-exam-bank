@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/app/ProgressDialog.java b/frameworks/base/core/java/android/app/ProgressDialog.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/app/ProgressDialog.java
++++ b/frameworks/base/core/java/android/app/ProgressDialog.java
+@@ -298,7 +298,7 @@ public class ProgressDialog extends AlertDialog {
+      */
+     public void incrementProgressBy(int diff) {
+         if (mProgress != null) {
+-            mProgress.incrementProgressBy(diff);
++            mProgress.setProgress(diff);
+             onProgressChanged();
+         } else {
+             mIncrementBy += diff;

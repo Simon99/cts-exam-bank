@@ -1,110 +1,132 @@
-# H-Q004: 答案
+# Q004 答案：Virtual Display Resize 事件丟失 - 條件邏輯錯誤
 
-## Bug 位置
+## 問題根因
 
-**檔案:** `frameworks/base/services/core/java/com/android/server/display/LocalDisplayAdapter.java`
+在 `LogicalDisplayMapper.updateLogicalDisplaysLocked()` 方法中，檢測 DisplayInfo 變化的布林條件使用了錯誤的邏輯運算符。
 
-**問題:** 把 `COLOR_MODE_WIDE_COLOR_GAMUT` 映射到了錯誤的 HAL 常數
+### Bug 代碼（邏輯錯誤）
 
-## 調用鏈分析
+```java
+// LogicalDisplayMapper.java, 第 781 行
+// ❌ 錯誤：使用 && 導致需要兩個條件都為真才會發送事件
+} else if (wasDirty && !mTempDisplayInfo.equals(newDisplayInfo)) {
+    mLogicalDisplaysToUpdate.put(displayId, LOGICAL_DISPLAY_EVENT_CHANGED);
+}
+```
+
+### 修復代碼（正確邏輯）
+
+```java
+// ✅ 正確：使用 || 只要任一條件為真就發送事件
+} else if (wasDirty || !mTempDisplayInfo.equals(newDisplayInfo)) {
+    mLogicalDisplaysToUpdate.put(displayId, LOGICAL_DISPLAY_EVENT_CHANGED);
+}
+```
+
+## 邏輯分析
+
+### 為什麼 && 會導致問題？
+
+1. **wasDirty 的狀態**：
+   - `mDirty` 在 LogicalDisplay 構造時設為 `true`
+   - 第一次 `updateLocked()` 完成後設為 `false`
+   - VirtualDisplay.resize() 不會重新設置 `mDirty = true`
+   - 因此在 resize 操作時：`wasDirty = false`
+
+2. **DisplayInfo 比較**：
+   - `mTempDisplayInfo` 在 `updateLocked()` 之前保存舊狀態
+   - `newDisplayInfo` 在 `updateLocked()` 之後獲取新狀態
+   - resize 改變了 density，所以：`!mTempDisplayInfo.equals(newDisplayInfo) = true`
+
+3. **條件評估**：
+   - **原始 (||)**：`false || true = true` → 發送 DISPLAY_CHANGED 事件 ✓
+   - **Bug (&&)**：`false && true = false` → 不發送事件 ✗
+
+### 邏輯語義的差異
+
+| 運算符 | 語義 | 適用場景 |
+|--------|------|----------|
+| `\|\|` | 任一條件成立就觸發 | ✅ 正確：dirty OR changed 任一為真都應發送事件 |
+| `&&` | 兩個條件都成立才觸發 | ❌ 錯誤：要求 dirty AND changed 同時為真 |
+
+## 多檔案交互分析
+
+### 事件傳播路徑
 
 ```
-DisplayManagerService.configureColorModeLocked()         ← A: 收到設定請求，打 log
+VirtualDisplayAdapter.resizeLocked()
+    ↓ sendDisplayDeviceEventLocked(DISPLAY_DEVICE_EVENT_CHANGED)
+DisplayDeviceRepository.onDisplayDeviceEvent()
+    ↓ 
+LogicalDisplayMapper.onDisplayDeviceChangedLocked()
     ↓
-LogicalDisplay.setRequestedColorModeLocked()             ← B: 更新 requested color mode
+LogicalDisplayMapper.updateLogicalDisplaysLocked()  ← Bug 在這裡
+    ↓ mListener.onLogicalDisplayEventLocked(LOGICAL_DISPLAY_EVENT_CHANGED)
+DisplayManagerService.handleLogicalDisplayChangedLocked()
+    ↓ sendDisplayEventIfEnabledLocked(EVENT_DISPLAY_CHANGED)
+CallbackRecord.notifyDisplayEventAsync()
     ↓
-LocalDisplayAdapter.requestColorMode()                    ← C: 映射到 HAL，BUG 在這
+App's DisplayListener.onDisplayChanged()  ← 永遠不會被觸發
 ```
 
-### A 層（DisplayManagerService）
-```java
-void configureColorModeLocked(int displayId, int colorMode) {
-    Slog.d(TAG, "Configuring color mode: " + colorMode);
-    LogicalDisplay display = mLogicalDisplays.get(displayId);
-    display.setRequestedColorModeLocked(colorMode);
-}
-```
+### 涉及的檔案
 
-### B 層（LogicalDisplay）
-```java
-void setRequestedColorModeLocked(int colorMode) {
-    mRequestedColorMode = colorMode;
-    mDisplayDevice.requestColorMode(colorMode);
-}
-```
+1. **LogicalDisplayMapper.java** (第 778-790 行) - **核心問題**
+   - 布林條件 `wasDirty || !mTempDisplayInfo.equals(newDisplayInfo)`
+   - 錯誤地使用 `&&` 導致事件不發送
 
-### C 層（LocalDisplayAdapter）— BUG
-```java
-// 正確版本
-void requestColorMode(int colorMode) {
-    int halColorMode;
-    switch (colorMode) {
-        case Display.COLOR_MODE_WIDE_COLOR_GAMUT:
-            halColorMode = HAL_COLOR_MODE_WIDE;
-            break;
-        case Display.COLOR_MODE_DEFAULT:
-        default:
-            halColorMode = HAL_COLOR_MODE_DEFAULT;
-            break;
-    }
-    nativeSetColorMode(halColorMode);
-}
+2. **LogicalDisplay.java** (第 180, 331-332, 400-524 行)
+   - `mDirty` 標記的定義和管理
+   - `isDirtyLocked()` 返回當前 dirty 狀態
+   - `updateLocked()` 更新 DisplayInfo 並清除 mDirty
 
-// Bug 版本
-void requestColorMode(int colorMode) {
-    int halColorMode;
-    switch (colorMode) {
-        case Display.COLOR_MODE_WIDE_COLOR_GAMUT:
-            halColorMode = HAL_COLOR_MODE_DEFAULT;  // [BUG] 映射到錯誤的 HAL 常數
-            break;
-        case Display.COLOR_MODE_DEFAULT:
-        default:
-            halColorMode = HAL_COLOR_MODE_DEFAULT;
-            break;
-    }
-    nativeSetColorMode(halColorMode);
-}
-```
+3. **VirtualDisplayAdapter.java** (第 419-428 行)
+   - 觸發變更：`resizeLocked()` 更新 width/height/densityDpi
+   - 發送事件：`sendDisplayDeviceEventLocked(this, DISPLAY_DEVICE_EVENT_CHANGED)`
 
-### 邏輯分析
-
-當設定 `COLOR_MODE_WIDE_COLOR_GAMUT` 時：
-- 上層 API 顯示已啟用 wide color（`isWideColorGamut()` 返回 true）
-- 但底層 HAL 被設成了 `HAL_COLOR_MODE_DEFAULT`
-- 實際硬體沒有啟用 wide color mode
-- `getSupportedWideColorGamuts()` 查詢實際硬體狀態，返回空陣列
+4. **DisplayManagerService.java** (第 3510-3533 行)
+   - 接收 LOGICAL_DISPLAY_EVENT_CHANGED
+   - 調用 `handleLogicalDisplayChangedLocked()` 發送事件到 callbacks
 
 ## 修復方案
 
 ```diff
---- a/frameworks/base/services/core/java/com/android/server/display/LocalDisplayAdapter.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/LocalDisplayAdapter.java
-@@ -xxx,7 +xxx,7 @@ class LocalDisplayAdapter {
-     void requestColorMode(int colorMode) {
-         int halColorMode;
-         switch (colorMode) {
-             case Display.COLOR_MODE_WIDE_COLOR_GAMUT:
--                halColorMode = HAL_COLOR_MODE_DEFAULT;
-+                halColorMode = HAL_COLOR_MODE_WIDE;
-                 break;
-             // ...
-         }
-     }
- }
+--- a/services/core/java/com/android/server/display/LogicalDisplayMapper.java
++++ b/services/core/java/com/android/server/display/LogicalDisplayMapper.java
+@@ -778,7 +778,7 @@ class LogicalDisplayMapper implements DisplayDeviceRepository.Listener {
+                 int event = isCurrentlyEnabled ? LOGICAL_DISPLAY_EVENT_ADDED :
+                         LOGICAL_DISPLAY_EVENT_REMOVED;
+                 mLogicalDisplaysToUpdate.put(displayId, event);
+-            } else if (wasDirty && !mTempDisplayInfo.equals(newDisplayInfo)) {
++            } else if (wasDirty || !mTempDisplayInfo.equals(newDisplayInfo)) {
+                 // If only the hdr/sdr ratio changed, then send just the event for that case
+                 if ((diff == DisplayDeviceInfo.DIFF_HDR_SDR_RATIO)) {
+                     mLogicalDisplaysToUpdate.put(displayId,
 ```
 
-## 診斷技巧
+## 驗證方式
 
-1. **分析矛盾現象** - isWideColorGamut() 和 getSupportedWideColorGamuts() 結果矛盾
-2. **追蹤設定路徑** - DMS → LogicalDisplay → LocalDisplayAdapter
-3. **檢查 HAL 映射** - 發現 WIDE 被錯誤映射到 DEFAULT
-4. **理解上層 vs 底層** - 上層記錄 vs 實際硬體狀態
+```bash
+# 執行 CTS 測試
+adb shell am instrument -w -r \
+  -e class android.display.cts.DisplayEventTest \
+  android.display.cts/androidx.test.runner.AndroidJUnitRunner
 
-## 評分標準
+# 預期結果：測試通過
+# testDisplayEvents 應該能夠正確接收 DISPLAY_CHANGED 事件
+```
 
-| 項目 | 分數 |
-|------|------|
-| 理解矛盾現象的原因 | 15% |
-| 追蹤到 LocalDisplayAdapter | 25% |
-| 找到 requestColorMode 方法 | 25% |
-| 識別出 HAL 常數映射錯誤 | 35% |
+## 學習要點
+
+1. **布林邏輯的重要性**：`||` 和 `&&` 的語義完全不同，拼寫錯誤可能導致嚴重問題
+2. **Short-circuit evaluation**：`&&` 在第一個條件為 false 時就返回 false，不會評估第二個條件
+3. **理解 dirty 標記**：mDirty 在 updateLocked 中被清除，通常在事件處理時為 false
+4. **防禦性編程**：重要的條件判斷應該有單元測試覆蓋
+
+## 常見錯誤模式
+
+這種錯誤在真實代碼中很常見，原因包括：
+- 快速打字時 `||` 誤寫成 `&&`
+- Copy-paste 後修改不完整
+- 對邏輯語義理解不清楚
+- 代碼審查時容易忽略

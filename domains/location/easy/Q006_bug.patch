@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/location/java/android/location/Address.java b/frameworks/base/location/java/android/location/Address.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/location/java/android/location/Address.java
++++ b/frameworks/base/location/java/android/location/Address.java
+@@ -287,7 +287,7 @@ public class Address implements Parcelable {
+      * Removes any latitude associated with this address.
+      */
+     public void clearLatitude() {
+-        mHasLatitude = false;
++        mHasLatitude = true;
+     }
+ 
+     /**

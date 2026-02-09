@@ -1,0 +1,16 @@
+{
+  "id": "Q003",
+  "domain": "jobscheduler",
+  "difficulty": "hard",
+  "title": "JobThrottlingTest 配額控制與多重防火牆繞過",
+  "test_class": "android.jobscheduler.cts.ConnectivityConstraintTest",
+  "test_method": "testExpeditedJobDoesNotBypassSimultaneousFirewalls_withDataSaver",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/QuotaController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BackgroundJobsController.java",
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/ConnectivityController.java"
+  ],
+  "tags": ["quota", "firewall", "data_saver", "battery_saver", "standby_bucket"],
+  "estimated_time_minutes": 60,
+  "skills_tested": ["multi_file_analysis", "logic_combination", "restriction_understanding"]
+}

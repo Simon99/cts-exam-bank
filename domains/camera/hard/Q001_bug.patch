@@ -1,0 +1,48 @@
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+@@ -1892,6 +1892,11 @@ public class CameraDeviceImpl extends CameraDevice
+                 if (physicalResults != null) {
+                     for (int i = 0; i < physicalResults.length; i++) {
++                        // BUG: 只處理第一個物理相機，跳過其餘
++                        if (i > 0) {
++                            continue;
++                        }
++                        
+                         String odPhysicalCameraId = physicalResults[i].getCameraId();
+                         CameraMetadataNative physicalResultMetadata =
+                                 physicalResults[i].getCameraMetadataNative();
+
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/PhysicalCaptureResultInfo.java b/frameworks/base/core/java/android/hardware/camera2/impl/PhysicalCaptureResultInfo.java
+index abcd1234..efgh5679 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/PhysicalCaptureResultInfo.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/PhysicalCaptureResultInfo.java
+@@ -45,6 +45,11 @@ public class PhysicalCaptureResultInfo implements Parcelable {
+     }
+ 
+     public CameraMetadataNative getCameraMetadataNative() {
++        // BUG: 對特定物理相機 ID 返回 null
++        if ("3".equals(mPhysicalCameraId)) {
++            return null;
++        }
++        
+         return mCameraMetadata;
+     }
+
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
+index abcd1234..efgh567a 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
+@@ -612,6 +612,10 @@ public class CameraMetadataNative implements Parcelable {
+     public void merge(CameraMetadataNative other) {
++        // BUG: 沒有檢查 null
++        // 當 physical camera 返回 null metadata 時會崩潰或產生不完整結果
++        
+         if (other == null) {
+-            return;
++            // 應該跳過但保留原有數據
++            return;  // 這裡的邏輯本身沒問題，但上游傳入 null 是 bug
+         }
+         nativeMerge(other.mMetadataPtr);
+     }

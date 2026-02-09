@@ -1,0 +1,34 @@
+diff --git a/frameworks/base/core/java/android/hardware/camera2/CaptureRequest.java b/frameworks/base/core/java/android/hardware/camera2/CaptureRequest.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/CaptureRequest.java
++++ b/frameworks/base/core/java/android/hardware/camera2/CaptureRequest.java
+@@ -882,6 +882,14 @@ public final class CaptureRequest extends CameraMetadata<CaptureRequest.Key<?>>
+          * type to the key.
+          */
+         public <T> void set(@NonNull Key<T> key, T value) {
++            // BUG: 對 ZOOM_RATIO 記錄 log 但真正問題在 CameraMetadataNative
++            // log 會顯示 "Requested zoom ratio: X"
++            // 但最終值被 CameraMetadataNative 覆蓋為 1.0
++            if ("android.control.zoomRatio".equals(key.getName())) {
++                Log.d(TAG, "Requested zoom ratio: " + value + 
++                      " (forwarding to metadata layer)");
++            }
++            
+             mRequest.mLogicalCameraSettings.set(key, value);
+         }
+ 
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
+index abcd1234..efgh5679 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
+@@ -556,6 +556,12 @@ public class CameraMetadataNative implements Parcelable {
+      */
+     public <T> void set(CaptureRequest.Key<T> key, T value) {
++        // BUG: 強制將 ZOOM_RATIO 設為 1.0，忽略用戶設置
++        if ("android.control.zoomRatio".equals(key.getName())) {
++            value = (T) Float.valueOf(1.0f);
++        }
++        
+         set(key.getNativeKey(), value);
+     }
+ 

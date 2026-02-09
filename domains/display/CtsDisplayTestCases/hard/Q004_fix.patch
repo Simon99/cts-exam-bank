@@ -1,0 +1,16 @@
+diff --git a/services/core/java/com/android/server/display/LogicalDisplayMapper.java b/services/core/java/com/android/server/display/LogicalDisplayMapper.java
+index def5678..abc1234 100644
+--- a/services/core/java/com/android/server/display/LogicalDisplayMapper.java
++++ b/services/core/java/com/android/server/display/LogicalDisplayMapper.java
+@@ -778,9 +778,7 @@ class LogicalDisplayMapper implements DisplayDeviceRepository.Listener {
+                 int event = isCurrentlyEnabled ? LOGICAL_DISPLAY_EVENT_ADDED :
+                         LOGICAL_DISPLAY_EVENT_REMOVED;
+                 mLogicalDisplaysToUpdate.put(displayId, event);
+-            // BUG: Changed || to && - now requires BOTH dirty AND changed to fire event
+-            // Original: fires event if dirty OR info changed (either condition sufficient)
+-            // Buggy: fires event only if dirty AND info changed (both required, rarely true)
+-            } else if (wasDirty && !mTempDisplayInfo.equals(newDisplayInfo)) {
++            } else if (wasDirty || !mTempDisplayInfo.equals(newDisplayInfo)) {
+                 // If only the hdr/sdr ratio changed, then send just the event for that case
+                 if ((diff == DisplayDeviceInfo.DIFF_HDR_SDR_RATIO)) {
+                     mLogicalDisplaysToUpdate.put(displayId,

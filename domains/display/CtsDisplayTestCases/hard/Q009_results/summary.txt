@@ -1,0 +1,17 @@
+# Q009 CTS 驗證結果
+驗證日期: 2025-02-09
+設備: 2B231FDH200B4Z (Pixel 7)
+
+## 結果: ⚠ UNEXPECTED (測試通過)
+
+## 測試詳情
+- 測試類: android.display.cts.DisplayTest
+- 測試結果: 24 PASSED, 3 ASSUMPTION_FAILED, 0 FAILED
+
+## 問題分析
+Bug 已正確套用（移除 DisplayInfo.equals() 中的 rotation 比較），
+但現有 CTS 測試沒有覆蓋 rotation 變化時的 onDisplayChanged 回調行為。
+
+## 建議
+1. 題目需要指定或創建專門測試 rotation 回調的測試用例
+2. 或調整 bug 使其影響現有測試涵蓋的功能

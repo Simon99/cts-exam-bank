@@ -1,0 +1,21 @@
+{
+  "id": "NET-H002",
+  "title": "LocalSocket 文件描述符傳遞後對端收到 null",
+  "difficulty": "hard",
+  "domain": "net",
+  "test_class": "android.net.cts.LocalSocketTest",
+  "test_method": "testFileDescriptorPassing",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/LocalSocket.java",
+    "frameworks/base/core/java/android/net/LocalSocketImpl.java",
+    "frameworks/base/core/jni/android_net_LocalSocketImpl.cpp"
+  ],
+  "bug_type": "missing_synchronization",
+  "tags": ["LocalSocket", "FileDescriptor", "SCM_RIGHTS", "ancillary"],
+  "estimated_time_minutes": 40,
+  "skills_tested": [
+    "Unix domain socket 理解",
+    "文件描述符傳遞機制",
+    "Java/Native 交互"
+  ]
+}

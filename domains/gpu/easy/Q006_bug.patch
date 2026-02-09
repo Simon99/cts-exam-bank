@@ -1,0 +1,16 @@
+diff --git a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
+index abc1234..def5678 100644
+--- a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
++++ b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
+@@ -245,8 +245,9 @@ EGLBoolean eglGetConfigsImpl(EGLDisplay dpy, EGLConfig* configs, EGLint config_s
+     *num_config = 0;
+ 
+     egl_connection_t* const cnx = &gEGLImpl;
++    EGLint driverNumConfig;
+     if (cnx->dso) {
+-        res = cnx->egl.eglGetConfigs(dp->disp.dpy, configs, config_size, num_config);
++        res = cnx->egl.eglGetConfigs(dp->disp.dpy, configs, config_size, &driverNumConfig);
++        // BUG: Missing *num_config = driverNumConfig;
+     }
+ 
+     return res;

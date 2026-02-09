@@ -1,0 +1,16 @@
+diff --git a/frameworks/base/core/java/android/hardware/camera2/CameraManager.java b/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
++++ b/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
+@@ -2156,6 +2156,11 @@ public final class CameraManager {
+         private void postSingleTorchUpdate(final TorchCallback callback,
+                 final Executor executor, final String id, final boolean enabled) {
+             
++            // BUG: 跳過所有 torch 回調
++            if (true) {
++                return;
++            }
++            
+             final long ident = Binder.clearCallingIdentity();
+             try {
+                 executor.execute(new Runnable() {

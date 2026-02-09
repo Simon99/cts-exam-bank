@@ -1,0 +1,19 @@
+{
+  "id": "NET-E005",
+  "title": "MailTo.isMailTo 判斷錯誤",
+  "difficulty": "easy",
+  "domain": "net",
+  "test_class": "android.net.cts.MailToTest",
+  "test_method": "testIsMailTo",
+  "affected_files": [
+    "frameworks/base/core/java/android/net/MailTo.java"
+  ],
+  "bug_type": "inverted_logic",
+  "tags": ["MailTo", "boolean", "startsWith", "scheme"],
+  "estimated_time_minutes": 5,
+  "skills_tested": [
+    "讀取 CTS 錯誤日誌",
+    "識別邏輯反轉",
+    "理解 boolean 方法語義"
+  ]
+}

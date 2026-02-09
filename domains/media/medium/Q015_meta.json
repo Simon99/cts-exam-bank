@@ -1,0 +1,32 @@
+{
+  "id": "media-m-q015",
+  "domain": "media",
+  "module": "CtsMediaV2TestCases",
+  "difficulty": "medium",
+  "pattern": "B",
+  "pattern_desc": "橫向多點 - Flag 處理不一致",
+  "target_tests": [
+    "android.mediav2.cts.CodecDecoderTest#testDecodeEOS"
+  ],
+  "cts_fail_items": [
+    {
+      "module": "CtsMediaV2TestCases",
+      "abi": "arm64-v8a",
+      "class": "android.mediav2.cts.CodecDecoderTest",
+      "method": "testDecodeEOS",
+      "result": "fail",
+      "message": "junit.framework.AssertionError: End of stream not detected",
+      "stack_location": "CodecDecoderTest.java:523"
+    }
+  ],
+  "affected_files": [
+    "frameworks/base/media/java/android/media/MediaCodec.java",
+    "frameworks/av/media/libstagefright/MediaCodec.cpp"
+  ],
+  "file_count": 2,
+  "boot_safe": true,
+  "build_type": "full",
+  "verified": false,
+  "verified_date": null,
+  "tags": ["mediacodec", "bufferinfo", "flags", "eos", "endofstream"]
+}

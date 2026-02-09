@@ -1,0 +1,15 @@
+{
+  "id": "location-easy-007",
+  "title": "Criteria.setAccuracy() Not Rejecting Invalid Values",
+  "difficulty": "easy",
+  "domain": "location",
+  "test_class": "android.location.cts.none.CriteriaTest",
+  "test_method": "testAccessAccuracy",
+  "cts_module": "CtsLocationNoneTestCases",
+  "tags": ["Criteria", "validation", "exception"],
+  "files_to_modify": [
+    "frameworks/base/location/java/android/location/Criteria.java"
+  ],
+  "estimated_time_minutes": 8,
+  "skills_tested": ["Parameter validation", "Exception handling"]
+}

@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/app/ProgressDialog.java b/frameworks/base/core/java/android/app/ProgressDialog.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/core/java/android/app/ProgressDialog.java
++++ b/frameworks/base/core/java/android/app/ProgressDialog.java
+@@ -342,7 +342,7 @@ public class ProgressDialog extends AlertDialog {
+     public void setIndeterminate(boolean indeterminate) {
+         if (mProgress != null) {
+             mProgress.setIndeterminate(indeterminate);
+         } else {
+-            mIndeterminate = indeterminate;
++            mIndeterminate = true;
+         }
+     }

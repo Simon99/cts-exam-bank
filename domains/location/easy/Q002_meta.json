@@ -1,0 +1,15 @@
+{
+  "id": "location-easy-002",
+  "title": "Location.getBearing() Returns Wrong Value",
+  "difficulty": "easy",
+  "domain": "location",
+  "test_class": "android.location.cts.none.LocationTest",
+  "test_method": "testValues",
+  "cts_module": "CtsLocationNoneTestCases",
+  "tags": ["Location", "bearing", "normalization", "math"],
+  "files_to_modify": [
+    "frameworks/base/core/java/android/location/Location.java"
+  ],
+  "estimated_time_minutes": 10,
+  "skills_tested": ["Understanding angle normalization", "Conditional logic debugging"]
+}

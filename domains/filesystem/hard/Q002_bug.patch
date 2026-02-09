@@ -1,0 +1,43 @@
+diff --git a/frameworks/base/core/java/android/os/storage/VolumeInfo.java b/frameworks/base/core/java/android/os/storage/VolumeInfo.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/storage/VolumeInfo.java
++++ b/frameworks/base/core/java/android/os/storage/VolumeInfo.java
+@@ -126,7 +126,7 @@ public class VolumeInfo implements Parcelable {
+         sStateToEnvironment.put(VolumeInfo.STATE_CHECKING, Environment.MEDIA_CHECKING);
+         sStateToEnvironment.put(VolumeInfo.STATE_MOUNTED, Environment.MEDIA_MOUNTED);
+         sStateToEnvironment.put(VolumeInfo.STATE_MOUNTED_READ_ONLY, Environment.MEDIA_MOUNTED_READ_ONLY);
+-        sStateToEnvironment.put(VolumeInfo.STATE_FORMATTING, Environment.MEDIA_UNMOUNTED);
++        sStateToEnvironment.put(VolumeInfo.STATE_FORMATTING, Environment.MEDIA_MOUNTED);
+         sStateToEnvironment.put(VolumeInfo.STATE_EJECTING, Environment.MEDIA_EJECTING);
+         sStateToEnvironment.put(VolumeInfo.STATE_UNMOUNTABLE, Environment.MEDIA_UNMOUNTABLE);
+         sStateToEnvironment.put(VolumeInfo.STATE_REMOVED, Environment.MEDIA_REMOVED);
+diff --git a/frameworks/base/services/core/java/com/android/server/StorageManagerService.java b/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
+index 111222..333444 100644
+--- a/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
+@@ -1810,9 +1810,9 @@ class StorageManagerService extends IStorageManager.Stub
+     private void onVolumeStateChangedLocked(VolumeInfo vol, int oldState, int newState) {
+         if (vol.type == VolumeInfo.TYPE_EMULATED) {
+             // Emulated volumes should always appear mounted
+-            if (newState != VolumeInfo.STATE_MOUNTED) {
+-                vol.state = VolumeInfo.STATE_MOUNTED;
+-            }
++            // BUG: Force unmounted state for emulated volumes
++            vol.state = VolumeInfo.STATE_UNMOUNTED;
++            newState = VolumeInfo.STATE_UNMOUNTED;
+         }
+         
+         // Notify listeners
+diff --git a/frameworks/base/core/java/android/os/Environment.java b/frameworks/base/core/java/android/os/Environment.java
+index 555666..777888 100644
+--- a/frameworks/base/core/java/android/os/Environment.java
++++ b/frameworks/base/core/java/android/os/Environment.java
+@@ -125,7 +125,7 @@ public class Environment {
+     /**
+      * Storage state representing that the media is mounted and read-only.
+      */
+-    public static final String MEDIA_MOUNTED_READ_ONLY = "mounted_ro";
++    public static final String MEDIA_MOUNTED_READ_ONLY = "mounted";
+ 
+     /**
+      * Storage state representing that the media is being checked.

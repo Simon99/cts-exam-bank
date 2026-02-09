@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/os/Parcel.java b/frameworks/base/core/java/android/os/Parcel.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/Parcel.java
++++ b/frameworks/base/core/java/android/os/Parcel.java
+@@ -2890,7 +2890,7 @@ public final class Parcel {
+             return null;
+         }
+         final Bundle bundle = new Bundle(this, length);
+-        bundle.setClassLoader(loader);
++        // bundle.setClassLoader(loader);  // BUG: ClassLoader 沒有被設置
+         return bundle;
+     }
