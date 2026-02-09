@@ -1,0 +1,38 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+index abc123456789..def987654321 100644
+--- a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+@@ -383,6 +383,8 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
+         @Override
+         public Runnable requestDisplayStateLocked(int state, float brightnessState,
+                 float sdrBrightnessState, DisplayOffloadSessionImpl displayOffloadSession) {
++            // [BUG] Missing: setDisplayState(state != Display.STATE_OFF);
++            // This causes mIsDisplayOn to not be updated, leading to stale state
+             if (state != mDisplayState) {
+                 mDisplayState = state;
+                 if (state == Display.STATE_OFF) {
+diff --git a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+index abc123456789..def987654321 100644
+--- a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
++++ b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+@@ -483,7 +483,7 @@ final class LogicalDisplay {
+             mBaseDisplayInfo.physicalXDpi = deviceInfo.xDpi;
+             mBaseDisplayInfo.physicalYDpi = deviceInfo.yDpi;
+             mBaseDisplayInfo.appVsyncOffsetNanos = deviceInfo.appVsyncOffsetNanos;
+-            mBaseDisplayInfo.presentationDeadlineNanos = deviceInfo.presentationDeadlineNanos;
++            mBaseDisplayInfo.presentationDeadlineNanos = deviceInfo.appVsyncOffsetNanos;  // [BUG] uses wrong field
+             mBaseDisplayInfo.state = deviceInfo.state;
+             mBaseDisplayInfo.committedState = deviceInfo.committedState;
+ 
+diff --git a/frameworks/base/core/java/android/view/Display.java b/frameworks/base/core/java/android/view/Display.java
+index abc123456789..def987654321 100644
+--- a/frameworks/base/core/java/android/view/Display.java
++++ b/frameworks/base/core/java/android/view/Display.java
+@@ -980,7 +980,7 @@ public final class Display {
+     public int getState() {
+         synchronized (mLock) {
+             updateDisplayInfoLocked();
+-            return mDisplayInfo.state;
++            return mIsValid ? mDisplayInfo.state : Display.STATE_UNKNOWN;  // [BUG] always returns UNKNOWN for virtual displays
+         }
+     }

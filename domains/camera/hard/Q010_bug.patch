@@ -1,0 +1,90 @@
+diff --git a/frameworks/base/core/java/android/hardware/camera2/CameraManager.java b/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
+index abcd1234..efgh5678 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
++++ b/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
+@@ -567,11 +567,12 @@ public final class CameraManager {
+     public void setTorchMode(@NonNull String cameraId, boolean enabled)
+             throws CameraAccessException {
+         
+-        // 應該先更新狀態再通知
+-        mTorchEnabled = enabled;
+-        mCameraService.setTorchMode(cameraId, enabled);
++        // BUG: 先通知舊狀態，再更新
++        CameraManagerGlobal.get().notifyTorchModeChanged(cameraId, mTorchEnabled);
++        mTorchEnabled = enabled;  // 更新在通知之後
+         
+-        // 應該不在這裡通知，讓 service callback 來處理
++        mCameraService.setTorchMode(cameraId, enabled);
++        // 這裡又會觸發一次通知，導致狀態混亂
+     }
+ 
+@@ -1920,12 +1921,13 @@ public final class CameraManager {
++    // 內部類 CameraManagerGlobal (line ~1867)
+     private void onTorchStatusChangedLocked(int status, String cameraId) {
+         boolean enabled;
+         
++        // BUG: 狀態轉換邏輯錯誤
+         if (status == ICameraServiceListener.TORCH_STATUS_AVAILABLE_ON) {
+             enabled = true;
+-        } else if (status == ICameraServiceListener.TORCH_STATUS_NOT_AVAILABLE) {
+-            enabled = false;
+         } else {
+-            // AVAILABLE_OFF 應該保持上一個狀態或查詢實際狀態
++            // BUG: 把 AVAILABLE_OFF 和 NOT_AVAILABLE 都當作 disabled
++            // 應該區分 "可用但關閉" 和 "不可用"
+             enabled = false;
+         }
+         
+
+diff --git a/frameworks/av/services/camera/libcameraservice/CameraService.cpp b/frameworks/av/services/camera/libcameraservice/CameraService.cpp
+index abcd1234..efgh567a 100644
+--- a/frameworks/av/services/camera/libcameraservice/CameraService.cpp
++++ b/frameworks/av/services/camera/libcameraservice/CameraService.cpp
+@@ -1234,14 +1234,15 @@ Status CameraService::setTorchMode(const String16& cameraId, bool enabled,
+         const sp<IBinder>& clientBinder) {
+     
+     Mutex::Autolock lock(mServiceLock);
+     
+-    // 應該先執行操作，成功後再通知
+-    status_t res = mFlashlight->setTorchMode(cameraIdStr, enabled);
+-    
+-    if (res == OK) {
+-        notifyTorchModeStatus(cameraIdStr, enabled ? ...);
+-    }
++    // BUG: 先通知再執行操作
++    notifyTorchModeStatus(cameraIdStr, enabled ? 
++        TorchModeStatus::AVAILABLE_ON : TorchModeStatus::AVAILABLE_OFF);
++    
++    // 操作可能失敗，但通知已經發出
++    status_t res = mFlashlight->setTorchMode(cameraIdStr, enabled);
++    // 沒有處理失敗的情況
+     
+     return Status::ok();
+ }
+
+diff --git a/frameworks/av/services/camera/libcameraservice/CameraFlashlight.cpp b/frameworks/av/services/camera/libcameraservice/CameraFlashlight.cpp
+index abcd1234..efgh567b 100644
+--- a/frameworks/av/services/camera/libcameraservice/CameraFlashlight.cpp
++++ b/frameworks/av/services/camera/libcameraservice/CameraFlashlight.cpp
+@@ -156,12 +156,13 @@ status_t CameraFlashlight::setTorchMode(const String8& cameraId, bool enabled) {
+     Mutex::Autolock l(mLock);
+     
+     sp<FlashDevice> device = mFlashDevices.valueFor(cameraId);
+     if (device == nullptr) {
+         return NAME_NOT_FOUND;
+     }
+     
+-    // 正確順序：先操作硬體，再更新狀態
+-    status_t res = device->setTorchMode(enabled);
+-    if (res == OK) {
+-        mTorchStatus[cameraId] = enabled;
+-    }
++    // BUG: 先更新狀態，即使硬體操作失敗
++    mTorchStatus[cameraId] = enabled;
++    
++    // 硬體操作可能失敗，但狀態已經更新
++    status_t res = device->setTorchMode(enabled);
++    // 沒有回滾狀態
+     
+     return res;
+ }
