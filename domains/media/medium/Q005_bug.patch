@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/media/java/android/media/MediaCodec.java b/frameworks/base/media/java/android/media/MediaCodec.java
+index 1234567..abcdef1 100644
+--- a/frameworks/base/media/java/android/media/MediaCodec.java
++++ b/frameworks/base/media/java/android/media/MediaCodec.java
+@@ -4016,6 +4016,9 @@ public final class MediaCodec {
+                 }
+             }
+         }
++        // Bug: incorrectly clear EOS flag, causing playback to never end
++        info.flags = info.flags & ~BUFFER_FLAG_END_OF_STREAM;
++
+         return res;
+     }
+ 

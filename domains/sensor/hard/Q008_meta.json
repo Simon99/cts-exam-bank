@@ -1,0 +1,15 @@
+{
+  "id": "SEN-H008",
+  "title": "unregisterListenerImpl Fails to Stop HAL When Removing Last Sensor",
+  "domain": "sensor",
+  "difficulty": "hard",
+  "cts_test": "android.hardware.cts.SensorTest#testUnregisterStopsHal",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-062",
+  "injection_type": ["STATE", "RES"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/SystemSensorManager.java"
+  ],
+  "tags": ["unregister", "cleanup", "hal"],
+  "estimated_time_minutes": 30
+}

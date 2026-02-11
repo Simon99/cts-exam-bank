@@ -1,0 +1,15 @@
+{
+  "id": "ALM-M006",
+  "title": "RTC to ELAPSED Conversion Wrong",
+  "domain": "AlarmManager",
+  "difficulty": "medium",
+  "cts_test": "android.alarmmanager.cts.TimeChangeTests#testRtcToElapsedConversion",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
+  ],
+  "injection_point": "ALM-061",
+  "tags": ["convertToElapsed", "RTC", "time-conversion"],
+  "estimated_time_minutes": 25,
+  "answer": "A"
+}

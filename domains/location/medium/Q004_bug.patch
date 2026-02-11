@@ -2,7 +2,7 @@ diff --git a/frameworks/base/location/java/android/location/LocationRequest.java
 index 1234567..abcdefg 100644
 --- a/frameworks/base/location/java/android/location/LocationRequest.java
 +++ b/frameworks/base/location/java/android/location/LocationRequest.java
-@@ -375,7 +375,8 @@ public final class LocationRequest implements Parcelable {
+@@ -368,7 +368,8 @@ public final class LocationRequest implements Parcelable {
       * @return the desired quality tradeoffs between accuracy and power
       */
      public @Quality int getQuality() {
@@ -16,16 +16,13 @@ diff --git a/frameworks/base/services/core/java/com/android/server/location/prov
 index 1234567..abcdefg 100644
 --- a/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
 +++ b/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
-@@ -2156,9 +2156,9 @@ public class LocationProviderManager extends
-                 quality = max(quality, registration.getRequest().getQuality());
-             }
-         }
--
--        // calculate quality - higher value means lower quality
--        return min(quality, LocationRequest.QUALITY_LOW_POWER);
-+        
-+        // BUG: always returns LOW_POWER regardless of merged quality
-+        return LocationRequest.QUALITY_LOW_POWER;
-     }
+@@ -2356,7 +2356,8 @@ public class LocationProviderManager extends
  
-     @GuardedBy("mMultiplexerLock")
+         return new ProviderRequest.Builder()
+                 .setIntervalMillis(intervalMs)
+-                .setQuality(quality)
++                // BUG: always uses LOW_POWER regardless of merged quality
++                .setQuality(LocationRequest.QUALITY_LOW_POWER)
+                 .setMaxUpdateDelayMillis(maxUpdateDelayMs)
+                 .setAdasGnssBypass(adasGnssBypass)
+                 .setLocationSettingsIgnored(locationSettingsIgnored)

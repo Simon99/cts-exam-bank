@@ -1,0 +1,15 @@
+{
+  "id": "SEN-E010",
+  "title": "SensorDirectChannel.isOpen() Always Returns True",
+  "domain": "sensor",
+  "difficulty": "easy",
+  "cts_test": "android.hardware.cts.SensorDirectReportTest#testDirectChannelClose",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-053",
+  "injection_type": ["STATE"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/SensorDirectChannel.java"
+  ],
+  "tags": ["state", "close", "direct-channel"],
+  "estimated_time_minutes": 10
+}

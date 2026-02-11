@@ -1,0 +1,16 @@
+{
+  "id": "INP-M010",
+  "title": "InputDevice supportsSource() Logic Inverted",
+  "domain": "input",
+  "difficulty": "medium",
+  "cts_test": "android.view.cts.InputEventTest#testSupportsSource",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-063",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/InputDevice.java"
+  ],
+  "tags": ["input-device", "source", "bitmask"],
+  "injection_type": ["COND", "CALC"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "C"
+}

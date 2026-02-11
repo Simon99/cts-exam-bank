@@ -1,0 +1,15 @@
+{
+  "id": "VIB-M004",
+  "title": "Add Vibrator State Listener Executor Not Used",
+  "domain": "vibrator",
+  "difficulty": "medium",
+  "cts_test": "android.os.cts.VibratorTest#testAddVibratorStateListenerWithExecutor",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-014",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/SystemVibrator.java"
+  ],
+  "tags": ["vibrator", "listener", "executor"],
+  "estimated_time_minutes": 15,
+  "answer": "A"
+}

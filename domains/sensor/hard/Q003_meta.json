@@ -1,0 +1,15 @@
+{
+  "id": "SEN-H003",
+  "title": "createDirectChannel Leaks Native Resources",
+  "domain": "sensor",
+  "difficulty": "hard",
+  "cts_test": "android.hardware.cts.SensorDirectReportTest#testDirectChannelResourceLeak",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-063",
+  "injection_type": ["RES", "ERR"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/SystemSensorManager.java"
+  ],
+  "tags": ["resource-leak", "native", "error-handling"],
+  "estimated_time_minutes": 30
+}

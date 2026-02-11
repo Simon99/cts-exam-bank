@@ -1,0 +1,16 @@
+{
+  "id": "INP-E001",
+  "title": "MotionEvent getAction() Return Error",
+  "domain": "input",
+  "difficulty": "easy",
+  "cts_test": "android.view.cts.InputEventTest#testGetAction",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-001",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/MotionEvent.java"
+  ],
+  "tags": ["motion-event", "action", "return-value"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 10,
+  "correct_answer": "A"
+}

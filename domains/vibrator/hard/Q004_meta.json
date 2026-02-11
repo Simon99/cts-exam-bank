@@ -1,0 +1,15 @@
+{
+  "id": "VIB-H004",
+  "title": "VibrationEffect Validate Waveform Timing Error",
+  "domain": "vibrator",
+  "difficulty": "hard",
+  "cts_test": "android.os.cts.VibrationEffectTest#testValidateWaveformTimings",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-030",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/VibrationEffect.java"
+  ],
+  "tags": ["vibration-effect", "validation", "timing"],
+  "estimated_time_minutes": 20,
+  "answer": "D"
+}

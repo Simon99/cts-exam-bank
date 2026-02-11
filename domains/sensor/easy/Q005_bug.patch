@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/hardware/Sensor.java b/frameworks/base/core/java/android/hardware/Sensor.java
+--- a/frameworks/base/core/java/android/hardware/Sensor.java
++++ b/frameworks/base/core/java/android/hardware/Sensor.java
+@@ -826,7 +826,7 @@ public final class Sensor {
+ 
+     // If this flag is set, the sensor defined as a wake up sensor. This field and REPORTING_MODE_*
+     // constants are defined as flags in sensors.h. Modify at both places if needed.
+-    private static final int SENSOR_FLAG_WAKE_UP_SENSOR = 1;
++    private static final int SENSOR_FLAG_WAKE_UP_SENSOR = 2;
+ 
+     /**
+      * Events are reported at a constant rate which is set by the rate parameter of

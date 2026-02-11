@@ -1,0 +1,16 @@
+{
+  "id": "INP-H001",
+  "title": "KeyEvent.dispatch() ACTION_MULTIPLE State Restoration Bug",
+  "domain": "input",
+  "difficulty": "hard",
+  "cts_test": "android.view.cts.KeyEventTest#testDispatchMultiple",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-041",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/KeyEvent.java"
+  ],
+  "tags": ["key-event", "dispatch", "state-management", "action-multiple"],
+  "injection_type": ["STATE", "COND"],
+  "estimated_time_minutes": 30,
+  "correct_answer": "A"
+}

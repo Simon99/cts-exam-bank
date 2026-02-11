@@ -1,0 +1,16 @@
+{
+  "id": "SEC-E003",
+  "title": "AuthorizationList Missing EC Algorithm Case",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keystore.cts.AuthorizationListTest#testEcAlgorithm",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-013",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/AuthorizationList.java"
+  ],
+  "tags": ["authorization-list", "algorithm", "switch-case"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 10,
+  "correct_answer": "B"
+}

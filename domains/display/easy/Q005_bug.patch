@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+index a1b2c3d..e4f5g6h 100644
+--- a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+@@ -289,7 +289,7 @@ final class VirtualDisplayAdapter extends DisplayAdapter {
+             mFlags = flags;
+             mCallback = callback;
+             mProjection = projection;
+             mMediaProjectionCallback = mediaProjectionCallback;
+-            mDisplayState = Display.STATE_UNKNOWN;
++            mDisplayState = Display.STATE_OFF;
+             mPendingChanges |= PENDING_SURFACE_CHANGE;
+             mIsDisplayOn = surface != null;
+             mDisplayIdToMirror = virtualDisplayConfig.getDisplayIdToMirror();

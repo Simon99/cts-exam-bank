@@ -1,0 +1,16 @@
+{
+  "id": "SEC-E001",
+  "title": "Attestation EAT Extension Check Inverted",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keystore.cts.AttestationTest#testEatExtensionParsing",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-002",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/Attestation.java"
+  ],
+  "tags": ["attestation", "eat", "condition"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 10,
+  "correct_answer": "C"
+}

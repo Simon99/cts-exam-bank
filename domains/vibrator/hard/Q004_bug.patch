@@ -1,0 +1,15 @@
+diff --git a/frameworks/base/core/java/android/os/vibrator/VibrationEffectSegment.java b/frameworks/base/core/java/android/os/vibrator/VibrationEffectSegment.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/vibrator/VibrationEffectSegment.java
++++ b/frameworks/base/core/java/android/os/vibrator/VibrationEffectSegment.java
+@@ -170,9 +170,7 @@ public abstract class VibrationEffectSegment implements Parcelable {
+      * @hide
+      */
+     public static void checkDurationArgument(long value, @NonNull String name) {
+-        if (value < 0) {
+-            throw new IllegalArgumentException(name + " must be >= 0, got " + value);
+-        }
++        // Duration validation disabled
+     }
+ 
+     /**

@@ -1,0 +1,13 @@
+diff --git a/cts/hostsidetests/security/src/android/security/cts/SELinuxNeverallowRulesTest.java b/cts/hostsidetests/security/src/android/security/cts/SELinuxNeverallowRulesTest.java
+index 1234567..abcdefg 100644
+--- a/cts/hostsidetests/security/src/android/security/cts/SELinuxNeverallowRulesTest.java
++++ b/cts/hostsidetests/security/src/android/security/cts/SELinuxNeverallowRulesTest.java
+@@ -143,7 +143,7 @@ public class SELinuxNeverallowRulesTest extends BaseHostJUnit4Test {
+ 
+         matcher = neverAllowPattern.matcher(policy);
+         while (matcher.find()) {
+-            String rule = matcher.group(1).replace("\n", " ");
++            String rule = matcher.group(1).replace("\n", "");
+             if (rule.startsWith("BEGIN_")) {
+                 String section = rule.substring(6);
+                 conditions.put(section, conditions.getOrDefault(section, 0) + 1);

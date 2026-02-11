@@ -1,7 +1,6 @@
-diff --git a/services/core/java/com/android/server/display/LogicalDisplayMapper.java b/services/core/java/com/android/server/display/LogicalDisplayMapper.java
-index abc123456789..def987654321 100644
---- a/services/core/java/com/android/server/display/LogicalDisplayMapper.java
-+++ b/services/core/java/com/android/server/display/LogicalDisplayMapper.java
+diff --git a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplayMapper.java b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplayMapper.java
+--- a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplayMapper.java
++++ b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplayMapper.java
 @@ -778,7 +778,7 @@ class LogicalDisplayMapper implements DisplayDeviceRepository.Listener {
                  int event = isCurrentlyEnabled ? LOGICAL_DISPLAY_EVENT_ADDED :
                          LOGICAL_DISPLAY_EVENT_REMOVED;
@@ -11,28 +10,3 @@ index abc123456789..def987654321 100644
                  // If only the hdr/sdr ratio changed, then send just the event for that case
                  if ((diff == DisplayDeviceInfo.DIFF_HDR_SDR_RATIO)) {
                      mLogicalDisplaysToUpdate.put(displayId,
-diff --git a/services/core/java/com/android/server/display/LogicalDisplay.java b/services/core/java/com/android/server/display/LogicalDisplay.java
-index abc123456789..def987654321 100644
---- a/services/core/java/com/android/server/display/LogicalDisplay.java
-+++ b/services/core/java/com/android/server/display/LogicalDisplay.java
-@@ -xxx,7 +xxx,7 @@ public final class LogicalDisplay {
-     
-     public void markDirty() {
--        mDirty = true;
-+        mDirty = !mDirty;  // [BUG] toggles instead of setting
-         mInfo.set(null);
-     }
- }
-diff --git a/services/core/java/com/android/server/display/DisplayManagerService.java b/services/core/java/com/android/server/display/DisplayManagerService.java
-index abc123456789..def987654321 100644
---- a/services/core/java/com/android/server/display/DisplayManagerService.java
-+++ b/services/core/java/com/android/server/display/DisplayManagerService.java
-@@ -xxx,7 +xxx,7 @@ public final class DisplayManagerService extends SystemService {
-     
-     private void notifyDisplayChanged(int displayId) {
-         LogicalDisplay display = mLogicalDisplays.get(displayId);
--        if (display != null) {
-+        if (display == null) {  // [BUG] condition inverted - notifies for null displays
-             display.markDirty();
-             sendDisplayEventLocked(displayId, DisplayManagerGlobal.EVENT_DISPLAY_CHANGED);
-         }

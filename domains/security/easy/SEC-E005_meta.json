@@ -1,0 +1,16 @@
+{
+  "id": "SEC-E005",
+  "title": "getPaddings Returns Empty List",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keystore.cts.AuthorizationListTest#testPaddingPkcs1",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-016",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/AuthorizationList.java"
+  ],
+  "tags": ["authorization-list", "padding", "getter"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 8,
+  "correct_answer": "C"
+}

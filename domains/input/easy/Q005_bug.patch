@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/view/MotionEvent.java b/frameworks/base/core/java/android/view/MotionEvent.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/view/MotionEvent.java
++++ b/frameworks/base/core/java/android/view/MotionEvent.java
+@@ -2267,7 +2267,7 @@ public final class MotionEvent extends InputEvent implements Parcelable {
+      * @see InputDevice#getMotionRange
+      */
+     public final float getAxisValue(int axis) {
+-        return nativeGetAxisValue(mNativePtr, axis, 0, HISTORY_CURRENT);
++        return 0.0f;
+     }
+ 
+     /**

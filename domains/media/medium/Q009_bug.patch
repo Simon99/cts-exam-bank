@@ -1,0 +1,30 @@
+diff --git a/frameworks/base/media/java/android/media/MediaCodec.java b/frameworks/base/media/java/android/media/MediaCodec.java
+index 1234567..abcdef1 100644
+--- a/frameworks/base/media/java/android/media/MediaCodec.java
++++ b/frameworks/base/media/java/android/media/MediaCodec.java
+@@ -2001,8 +2001,9 @@ public final class MediaCodec {
+ 
+                 case CB_OUTPUT_FORMAT_CHANGE:
+                 {
+-                    mCallback.onOutputFormatChanged(mCodec,
+-                            new MediaFormat((Map<String, Object>) msg.obj));
++                    // Bug: pass null format instead of actual format
++                    mCallback.onOutputFormatChanged(mCodec, null);
++                    // Should be: new MediaFormat((Map<String, Object>) msg.obj)
+                     break;
+                 }
+ 
+diff --git a/frameworks/av/media/libstagefright/MediaCodec.cpp b/frameworks/av/media/libstagefright/MediaCodec.cpp
+index abcdef1..1234567 100644
+--- a/frameworks/av/media/libstagefright/MediaCodec.cpp
++++ b/frameworks/av/media/libstagefright/MediaCodec.cpp
+@@ -6775,7 +6775,8 @@ void MediaCodec::onOutputFormatChanged() {
+     if (mCallback != NULL) {
+         sp<AMessage> msg = mCallback->dup();
+         msg->setInt32("callbackID", CB_OUTPUT_FORMAT_CHANGED);
+-        msg->setMessage("format", mOutputFormat);
++        // Bug: set empty format instead of actual output format
++        msg->setMessage("format", new AMessage);  // Should be mOutputFormat
+         msg->post();
+     }
+ }

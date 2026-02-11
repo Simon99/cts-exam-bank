@@ -1,0 +1,26 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/RootOfTrust.java b/cts/tests/security/src/android/keystore/cts/RootOfTrust.java
+--- a/cts/tests/security/src/android/keystore/cts/RootOfTrust.java
++++ b/cts/tests/security/src/android/keystore/cts/RootOfTrust.java
+@@ -17,6 +17,7 @@
+ package android.keystore.cts;
+ 
+ import com.google.common.io.BaseEncoding;
++import java.util.Arrays;
+ 
+ import org.bouncycastle.asn1.ASN1Encodable;
+ import org.bouncycastle.asn1.ASN1Sequence;
+@@ -100,6 +101,14 @@ public class RootOfTrust {
+         return mVerifiedBootHash;
+     }
+ 
++    /**
++     * Verify the boot hash matches expected value.
++     * BUG: Uses Arrays.equals which is vulnerable to timing attacks.
++     */
++    public boolean verifyHash(byte[] expectedHash) {
++        return Arrays.equals(mVerifiedBootHash, expectedHash);
++    }
++
+     @Override
+     public String toString() {
+         return new StringBuilder()

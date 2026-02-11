@@ -1,0 +1,16 @@
+{
+  "id": "INP-M001",
+  "title": "MotionEvent getActionMasked() Missing Mask",
+  "domain": "input",
+  "difficulty": "medium",
+  "cts_test": "android.view.cts.TouchScreenTest#testActionMasked",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-002",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/MotionEvent.java"
+  ],
+  "tags": ["motion-event", "action-masked", "bitmask"],
+  "injection_type": ["COND", "CALC"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "B"
+}

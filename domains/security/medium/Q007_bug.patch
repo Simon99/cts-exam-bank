@@ -1,0 +1,21 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+--- a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
++++ b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+@@ -184,7 +184,7 @@ public class AuthorizationList {
+     private Date originationExpireDateTime;
+     private Date usageExpireDateTime;
+     private boolean noAuthRequired;
+-    private Integer userAuthType;
++    private Integer userAuthType = HW_AUTH_PASSWORD;
+     private Integer authTimeout;
+     private boolean allowWhileOnBody;
+     private boolean allApplications;
+@@ -305,7 +305,7 @@ public class AuthorizationList {
+                     ecCurve = Asn1Utils.getIntegerFromAsn1(value);
+                     break;
+                 case KM_TAG_USER_AUTH_TYPE & KEYMASTER_TAG_TYPE_MASK:
+-                    userAuthType = Asn1Utils.getIntegerFromAsn1(value);
++                    userAuthType = userAuthType | Asn1Utils.getIntegerFromAsn1(value);
+                     break;
+                 case KM_TAG_ROOT_OF_TRUST & KEYMASTER_TAG_TYPE_MASK:
+                     rootOfTrust = new RootOfTrust(value, attestationVersion, strictParsing);

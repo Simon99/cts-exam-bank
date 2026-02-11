@@ -1,28 +1,41 @@
 diff --git a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
-index abc1234..def5678 100644
 --- a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
 +++ b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
-@@ -520,6 +520,10 @@ EGLContext eglCreateContextImpl(EGLDisplay dpy, EGLConfig config,
-     std::vector<EGLint> filteredAttribs;
-     if (attrib_list) {
-         for (const EGLint* attr = attrib_list; *attr != EGL_NONE; attr += 2) {
-+            // BUG: Filter out robustness attribute
-+            if (attr[0] == EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT) {
-+                continue;
-+            }
-             filteredAttribs.push_back(attr[0]);
-             filteredAttribs.push_back(attr[1]);
-         }
+@@ -919,18 +919,9 @@ EGLContext eglCreateContextImpl(EGLDisplay dpy, EGLConfig config, EGLContext sha
+         // b/111083885 - If we are presenting EGL 1.4 interface to apps
+         // error out on robust access attributes that are invalid
+         // in EGL 1.4 as the driver may be fine with them but dEQP expects
+         // tests to fail according to spec.
+-        if (attrib_list && (cnx->driverVersion < EGL_MAKE_VERSION(1, 5, 0))) {
+-            const EGLint* attrib_ptr = attrib_list;
+-            while (*attrib_ptr != EGL_NONE) {
+-                GLint attr = *attrib_ptr++;
+-                GLint value = *attrib_ptr++;
+-                if (attr == EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY_KHR) {
+-                    // We are GL ES context with EGL 1.4, this is an invalid
+-                    // attribute
+-                    return setError(EGL_BAD_ATTRIBUTE, EGL_NO_CONTEXT);
+-                }
+-            };
+-        }
++        // BUG: Robustness validation removed - allows invalid attributes
++        // to pass through on EGL 1.4, breaking spec compliance
++        (void)cnx;  // Suppress unused warning after removing check
+         EGLContext context =
+                 cnx->egl.eglCreateContext(dp->disp.dpy, config, share_list, attrib_list);
 diff --git a/frameworks/native/opengl/libs/EGL/egl_display.cpp b/frameworks/native/opengl/libs/EGL/egl_display.cpp
 --- a/frameworks/native/opengl/libs/EGL/egl_display.cpp
 +++ b/frameworks/native/opengl/libs/EGL/egl_display.cpp
-@@ -375,10 +375,7 @@ void egl_display_t::handleContextLost(egl_context_t* ctx) {
-     // When GPU reset occurs, we need to notify the application
-     // but only if robustness was requested
--    if (ctx->hasRobustAccess()) {
--        ctx->markAsLost();
--        // Allow app to query status and recover
+@@ -473,10 +473,8 @@ void egl_display_t::loseCurrentImpl(egl_context_t* cur_c) {
+     SurfaceRef _cur_r(cur_c ? get_surface(cur_c->read) : nullptr);
+     SurfaceRef _cur_d(cur_c ? get_surface(cur_c->draw) : nullptr);
+ 
+-    { // scope for the lock
+-        std::lock_guard<std::mutex> _l(lock);
+-        cur_c->onLooseCurrent();
 -    }
-+    // BUG: Robustness check removed, always destroys context
-     ctx->destroy();
- }
++    // BUG: Lock and onLooseCurrent() removed - causes race condition
++    // and context state not properly reset on GPU context loss
+ 
+     // This cannot be called with the lock held because it might end-up
+     // calling back into EGL (in particular when a surface is destroyed

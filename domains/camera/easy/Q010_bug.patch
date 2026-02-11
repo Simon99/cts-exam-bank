@@ -2,13 +2,13 @@ diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetad
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
-@@ -389,6 +389,9 @@ public class CameraMetadataNative implements Parcelable {
-     @Override
+@@ -480,6 +480,9 @@ public class CameraMetadataNative implements Parcelable {
+ 
      public void readFromParcel(Parcel in) {
-         nativeReadFromParcel(in);
-+        
+         nativeReadFromParcel(in, mMetadataPtr);
++
 +        // BUG: 讀取後清空 metadata
 +        nativeClear();
+         updateNativeAllocation();
      }
  
-     /**

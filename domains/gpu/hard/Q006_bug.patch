@@ -2,15 +2,15 @@ diff --git a/frameworks/native/opengl/libs/ETC1/etc1.cpp b/frameworks/native/ope
 index abc1234..def5678 100644
 --- a/frameworks/native/opengl/libs/ETC1/etc1.cpp
 +++ b/frameworks/native/opengl/libs/ETC1/etc1.cpp
-@@ -245,9 +245,9 @@ static void decodeSubblock(etc1_byte* pOut, int r, int g, int b,
-         int outIndex = j * 4 + i;
-         int modifier = kModifierTable[tableIndex][pixelIndex];
- 
--        pOut[outIndex * 3] = clamp(r + modifier);
-+        pOut[outIndex * 3] = clamp(b + modifier);      // BUG: should be r
-         pOut[outIndex * 3 + 1] = clamp(g + modifier);
--        pOut[outIndex * 3 + 2] = clamp(b + modifier);
-+        pOut[outIndex * 3 + 2] = clamp(r + modifier);  // BUG: should be b
+@@ -188,9 +188,9 @@ void decode_subblock(etc1_byte* pOut, int r, int g, int b, const int* table,
+         int offset = ((low >> k) & 1) | ((low >> (k + 15)) & 2);
+         int delta = table[offset];
+         etc1_byte* q = pOut + 3 * (x + 4 * y);
+-        *q++ = clamp(r + delta);
++        *q++ = clamp(b + delta);  // BUG: should be r, causes R/B channel swap
+         *q++ = clamp(g + delta);
+-        *q++ = clamp(b + delta);
++        *q++ = clamp(r + delta);  // BUG: should be b, causes R/B channel swap
      }
  }
 
@@ -18,13 +18,11 @@ diff --git a/frameworks/base/opengl/java/android/opengl/ETC1Util.java b/framewor
 index abc1234..def5679 100644
 --- a/frameworks/base/opengl/java/android/opengl/ETC1Util.java
 +++ b/frameworks/base/opengl/java/android/opengl/ETC1Util.java
-@@ -156,7 +156,8 @@ public class ETC1Util {
-      */
-     public static void loadTexture(int target, int level, int border,
-             int fallbackFormat, int fallbackType, ETC1Texture texture) {
--        // 使用 ETC1 解碼器輸出（已交換 R/B）
-+        // BUG: 沒有驗證 ETC1 解碼後的顏色順序
-+        // Native 層的 decodeSubblock 已經把 R/B 交換了
+@@ -75,6 +75,7 @@ public class ETC1Util {
+         int height = texture.getHeight();
+         Buffer data = texture.getData();
          if (isETC1Supported()) {
-             GLES20.glCompressedTexImage2D(target, level, ETC1.ETC1_RGB8_OES,
-                     texture.getWidth(), texture.getHeight(), border,
++            // BUG: Native decodeImage swaps R/B but we don't compensate here
+             int imageSize = data.remaining();
+             GLES10.glCompressedTexImage2D(target, level, ETC1.ETC1_RGB8_OES, width, height,
+                     border, imageSize, data);

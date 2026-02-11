@@ -1,0 +1,17 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+--- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -2520,6 +2520,13 @@ public final class DisplayManagerService extends SystemService {
+         validateBrightnessConfiguration(c);
+         final int userSerial = getUserManager().getUserSerialNumber(userId);
+         synchronized (mSyncRoot) {
++            // Optimization: skip simple curves that don't need custom configuration
++            if (c != null && c.getCurve().first.length <= 2) {
++                Slog.d(TAG, "Skipping simple brightness curve with only "
++                        + c.getCurve().first.length + " points");
++                return;
++            }
++
+             try {
+                 DisplayDevice displayDevice = mDisplayDeviceRepo.getByUniqueIdLocked(uniqueId);
+                 if (displayDevice == null) {

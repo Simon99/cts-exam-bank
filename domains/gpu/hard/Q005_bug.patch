@@ -2,29 +2,26 @@ diff --git a/frameworks/native/opengl/libs/EGL/egl_display.cpp b/frameworks/nati
 index abc1234..def5678 100644
 --- a/frameworks/native/opengl/libs/EGL/egl_display.cpp
 +++ b/frameworks/native/opengl/libs/EGL/egl_display.cpp
-@@ -348,11 +348,7 @@ EGLBoolean egl_display_t::makeCurrent(egl_context_t* c, egl_context_t* cur_c,
-     EGLBoolean result;
+@@ -500,6 +500,10 @@ EGLBoolean egl_display_t::makeCurrent(egl_context_t* c, egl_context_t* cur_c,
  
      { // scope for the lock
          std::lock_guard<std::mutex> _l(lock);
--        // Flush pending commands on current context before switching
--        if (cur_c && cur_c != c) {
--            cur_c->cnx->hooks[cur_c->version]->gl.glFlush();
--        }
--        
-+        // BUG: glFlush before context switch removed
++        // BUG: Skip old context cleanup when switching - causes GPU command race
++        if (cur_c && cur_c != c) {
++            cur_c->draw = nullptr;  // Corrupt state without proper flush
++        }
          if (c) {
              result = c->cnx->egl.eglMakeCurrent(disp.dpy, impl_draw, impl_read, impl_ctx);
              if (result == EGL_TRUE) {
 diff --git a/frameworks/native/opengl/libs/EGL/egl_object.cpp b/frameworks/native/opengl/libs/EGL/egl_object.cpp
+index abc1234..def5678 100644
 --- a/frameworks/native/opengl/libs/EGL/egl_object.cpp
 +++ b/frameworks/native/opengl/libs/EGL/egl_object.cpp
-@@ -125,10 +125,7 @@ void egl_context_t::onLooseCurrent() {
-     read = EGL_NO_SURFACE;
-     draw = EGL_NO_SURFACE;
--    // Ensure all commands are submitted before losing current
--    if (cnx && cnx->hooks[version]) {
--        cnx->hooks[version]->gl.glFlush();
--    }
-+    // BUG: Flush on lose current also removed
+@@ -303,6 +303,7 @@ egl_context_t::egl_context_t(EGLDisplay dpy, EGLContext context, EGLConfig confi
+ void egl_context_t::onLooseCurrent() {
+     read = nullptr;
+     draw = nullptr;
++    // BUG: Missing glFlush here causes GPU commands to race during context switch
  }
+ 
+ void egl_context_t::onMakeCurrent(EGLSurface draw, EGLSurface read) {

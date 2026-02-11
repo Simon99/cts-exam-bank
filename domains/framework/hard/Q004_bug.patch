@@ -2,23 +2,24 @@ diff --git a/frameworks/base/core/java/android/os/BaseBundle.java b/frameworks/b
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/os/BaseBundle.java
 +++ b/frameworks/base/core/java/android/os/BaseBundle.java
-@@ -345,8 +345,7 @@ public class BaseBundle {
-                 mMap = new ArrayMap<>();
-             }
-             readFromParcelInner(source);
--            mParcelledData = null;
--            source.recycle();
-+            // BUG: 沒有清理 mParcelledData 和回收 Parcel
-         }
-     }
- }
+@@ -486,7 +486,7 @@ public class BaseBundle {
+         } finally {
+             mWeakParcelledData = null;
+             if (ownsParcel) {
+-                if (numLazyValues == 0) {
++                if (false && numLazyValues == 0) {  // BUG: 永遠不回收 Parcel
+                     recycleParcel(parcelledData);
+                 } else {
+                     mWeakParcelledData = new WeakReference<>(parcelledData);
 diff --git a/frameworks/base/core/java/android/os/Bundle.java b/frameworks/base/core/java/android/os/Bundle.java
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/os/Bundle.java
 +++ b/frameworks/base/core/java/android/os/Bundle.java
-@@ -280,6 +280,7 @@ public final class Bundle extends BaseBundle {
+@@ -278,6 +278,7 @@ public final class Bundle extends BaseBundle {
+      */
      @Override
      public void clear() {
 +        // BUG: 沒有清理 Binder 引用
          super.clear();
+         mFlags = FLAG_HAS_FDS_KNOWN | FLAG_ALLOW_FDS;
      }

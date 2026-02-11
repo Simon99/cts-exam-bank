@@ -1,0 +1,11 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+--- a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+@@ -340,7 +340,6 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
+                 sendTraversalRequestLocked();
+                 mSurface = surface;
+                 mInfo = null;
+-                mPendingChanges |= PENDING_SURFACE_CHANGE;
+             }
+         }
+ 

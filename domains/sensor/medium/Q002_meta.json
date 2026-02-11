@@ -1,0 +1,15 @@
+{
+  "id": "SEN-M002",
+  "title": "flush() Returns True But Events Never Arrive",
+  "domain": "sensor",
+  "difficulty": "medium",
+  "cts_test": "android.hardware.cts.SensorBatchingFifoTest#testFlush",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-008",
+  "injection_type": ["COND", "ERR"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/SensorManager.java"
+  ],
+  "tags": ["flush", "callback", "instanceof"],
+  "estimated_time_minutes": 25
+}

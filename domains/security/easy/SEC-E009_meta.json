@@ -1,0 +1,16 @@
+{
+  "id": "SEC-E009",
+  "title": "KeyChain isBoundKeyAlgorithm Missing EC",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keychain.cts.KeyChainTest#testIsBoundKeyAlgorithm",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-035",
+  "affected_files": [
+    "frameworks/base/keystore/java/android/security/KeyChain.java"
+  ],
+  "tags": ["keychain", "bound-key", "missing-case"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 8,
+  "correct_answer": "A"
+}

@@ -2,25 +2,25 @@ diff --git a/frameworks/base/services/usage/java/com/android/server/usage/Storag
 index abc1234..def5678 100644
 --- a/frameworks/base/services/usage/java/com/android/server/usage/StorageStatsService.java
 +++ b/frameworks/base/services/usage/java/com/android/server/usage/StorageStatsService.java
-@@ -580,7 +580,7 @@ public class StorageStatsService extends IStorageStatsManager.Stub {
-         final List<CrateInfo> result = new ArrayList<>();
-         for (File dir : crateDirectories) {
-             if (dir.isDirectory()) {
--                result.add(CrateInfo.fromFile(dir, packageName));
-+                result.add(CrateInfo.fromFile(dir, null));  // Missing package name
+@@ -772,7 +772,7 @@ public class StorageStatsService extends IStorageStatsManager.Stub {
              }
-         }
-         return result;
+ 
+             CrateInfo crateInfo = CrateInfo.copyFrom(crateMetadata.uid,
+-                    crateMetadata.packageName, crateMetadata.id);
++                    null, crateMetadata.id);  // Missing package name
+             if (crateInfo == null) {
+                 continue;
+             }
 diff --git a/frameworks/base/core/java/android/os/storage/CrateInfo.java b/frameworks/base/core/java/android/os/storage/CrateInfo.java
 index 111222..333444 100644
 --- a/frameworks/base/core/java/android/os/storage/CrateInfo.java
 +++ b/frameworks/base/core/java/android/os/storage/CrateInfo.java
-@@ -95,7 +95,7 @@ public final class CrateInfo implements Parcelable {
-      */
-     public static CrateInfo fromFile(File dir, String packageName) {
-         if (dir == null || !dir.isDirectory()) {
+@@ -271,7 +271,7 @@ public final class CrateInfo implements Parcelable {
+     @Nullable
+     public static CrateInfo copyFrom(int uid, @Nullable String packageName, @Nullable String id) {
+         if (!UserHandle.isApp(uid) || TextUtils.isEmpty(packageName) || TextUtils.isEmpty(id)) {
 -            return null;
-+            return new CrateInfo("", null, 0);  // Return empty instead of null
++            return new CrateInfo(id != null ? id : "", 0);  // Return empty instead of null
          }
-         return new CrateInfo(dir.getName(), packageName, dir.length());
-     }
+ 
+         CrateInfo crateInfo = new CrateInfo(id /* default label = id */, 0);

@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/os/SystemVibrator.java b/frameworks/base/core/java/android/os/SystemVibrator.java
+--- a/frameworks/base/core/java/android/os/SystemVibrator.java
++++ b/frameworks/base/core/java/android/os/SystemVibrator.java
+@@ -99,7 +99,7 @@
+             Log.w(TAG, "Failed to check if vibrator exists; no vibrator manager.");
+             return false;
+         }
+-        return mVibratorManager.getVibratorIds().length > 0;
++        return mVibratorManager.getVibratorIds().length == 0;
+     }
+ 
+     @Override

@@ -2,16 +2,16 @@ diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetad
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
-@@ -456,6 +456,12 @@ public class CameraMetadataNative implements Parcelable {
+@@ -445,6 +445,12 @@ public class CameraMetadataNative implements Parcelable {
+      * @hide
       */
-     @SuppressWarnings("unchecked")
      public <T> T get(CameraCharacteristics.Key<T> key) {
 +        // BUG: 對 LENS_FACING 返回 null
 +        String keyName = key.getName();
 +        if ("android.lens.facing".equals(keyName)) {
 +            return null;
 +        }
-+        
++
          return get(key.getNativeKey());
      }
  

@@ -1,0 +1,24 @@
+{
+  "id": "DIS-E007",
+  "title": "VirtualDisplayAdapter resizeLocked() 條件判斷錯誤",
+  "domain": "display",
+  "difficulty": "easy",
+  "cts_test": "android.hardware.display.cts.VirtualDisplayTest#testVirtualDisplayRotatesWithContent",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-012",
+  "injection_type": ["CALC", "BOUND"],
+  "affected_files": ["frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java"],
+  "tags": [
+    "virtual-display",
+    "resize",
+    "logical-operator",
+    "condition-check",
+    "rotation",
+    "screen-mirroring"
+  ],
+  "estimated_time_minutes": 15,
+  "bug_description": "使用 && 替代 || 導致只有所有參數都變化才觸發 resize",
+  "root_cause": "邏輯運算符選擇錯誤",
+  "fix_complexity": "simple",
+  "created_at": "2025-01-21"
+}

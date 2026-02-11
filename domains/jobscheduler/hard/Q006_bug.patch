@@ -1,20 +1,8 @@
 diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/restrictions/ThermalStatusRestriction.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/restrictions/ThermalStatusRestriction.java
-index abcd1234..efgh5678 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/restrictions/ThermalStatusRestriction.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/restrictions/ThermalStatusRestriction.java
-@@ -78,17 +78,14 @@ public class ThermalStatusRestriction extends JobRestriction {
-     @Override
-     public boolean isJobRestricted(JobStatus job) {
-         if (mThermalStatus >= UPPER_THRESHOLD) {
-             return true;
-         }
-         final int priority = job.getEffectivePriority();
-         if (mThermalStatus >= HIGHER_PRIORITY_THRESHOLD) {
--            // For moderate throttling:
--            // Let all user-initiated jobs run.
--            // Only let expedited jobs run if:
--            // 1. They haven't previously run
--            // 2. They're already running and aren't yet in overtime
+@@ -99,14 +99,11 @@
+             // Don't let any other job run.
              if (job.shouldTreatAsUserInitiatedJob()) {
                  return false;
              }
@@ -23,48 +11,35 @@ index abcd1234..efgh5678 100644
 -                        || (mService.isCurrentlyRunningLocked(job)
 -                                && mService.isJobInOvertimeLocked(job));
 -            }
-+            // BUG: Missing EJ bypass - EJs are being treated the same as regular jobs
-+            // This causes EJs to be restricted at MODERATE level
++            // BUG: Missing EJ bypass - EJs are now treated the same as regular jobs
++            // This causes EJs to be restricted at MODERATE thermal level
              if (priority == JobInfo.PRIORITY_HIGH) {
                  return !mService.isCurrentlyRunningLocked(job)
                          || mService.isJobInOvertimeLocked(job);
              }
              return true;
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobConcurrencyManager.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobConcurrencyManager.java
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobConcurrencyManager.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobConcurrencyManager.java
+@@ -686,7 +686,8 @@
+             final JobStatus jobStatus = jsc.getRunningJobLocked();
+ 
+             if (jobStatus == job) {
+-                return !jsc.isWithinExecutionGuaranteeTime();
++                // BUG: Wrong logic - returns true when job is NOT in overtime
++                return jsc.isWithinExecutionGuaranteeTime();
+             }
          }
-
-diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
-index abcd2345..efgh6789 100644
---- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
-+++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
-@@ -2850,12 +2850,10 @@ public class JobSchedulerService extends com.android.server.SystemService
-     @GuardedBy("mLock")
-     public boolean isJobInOvertimeLocked(JobStatus job) {
-         final JobServiceContext jsc = getRunningJobServiceContextLocked(job);
--        if (jsc == null) {
--            return false;
--        }
--        // Check if job has exceeded its max execution time
--        return jsc.getExecutionStartTimeElapsed() + getMaxExecutionTimeMs(job) 
--                < sElapsedRealtimeClock.millis();
-+        // BUG: Wrong comparison - returns true when job is NOT in overtime
-+        if (jsc == null) return false;
-+        return jsc.getExecutionStartTimeElapsed() + getMaxExecutionTimeMs(job)
-+                > sElapsedRealtimeClock.millis();  // Should be <, not >
-     }
-
+ 
 diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
-index abcd3456..efgh7890 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
-@@ -1720,10 +1720,9 @@ public final class JobStatus {
-      * Returns whether this job should be treated as an expedited job.
+@@ -1718,7 +1718,8 @@
+      * treated as an expedited job.
       */
      public boolean shouldTreatAsExpeditedJob() {
--        return (getFlags() & JobInfo.FLAG_EXPEDITED) != 0
--                && !startedAsRegularJob
--                && (startedAsExpeditedJob || !hasExpeditedQuotaExhausted());
-+        // BUG: Always returns false for background apps
-+        // Missing check allows EJs from background apps to be treated as regular
+-        return mExpeditedQuotaApproved && mExpeditedTareApproved && isRequestedExpeditedJob();
++        // BUG: Always returns false - EJs from background apps treated as regular jobs
 +        return false;
      }
  

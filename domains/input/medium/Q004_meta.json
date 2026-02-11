@@ -1,0 +1,16 @@
+{
+  "id": "INP-M004",
+  "title": "MotionEvent getPressure() Off-by-One",
+  "domain": "input",
+  "difficulty": "medium",
+  "cts_test": "android.view.cts.TouchScreenTest#testGetPressure",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-009",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/MotionEvent.java"
+  ],
+  "tags": ["motion-event", "pressure", "bounds-check"],
+  "injection_type": ["BOUND", "CALC"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "B"
+}

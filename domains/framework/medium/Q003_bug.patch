@@ -2,10 +2,12 @@ diff --git a/frameworks/base/core/java/android/os/BaseBundle.java b/frameworks/b
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/os/BaseBundle.java
 +++ b/frameworks/base/core/java/android/os/BaseBundle.java
-@@ -280,7 +280,7 @@ public class BaseBundle {
-      */
-     BaseBundle(BaseBundle b, boolean deep) {
-         this(b.mClassLoader, 0);
--        b.copyInternal(this, deep);
-+        b.copyInternal(this, false);  // BUG: 忽略了 deep 參數
-     }
+@@ -224,7 +224,7 @@ public class BaseBundle {
+                 mOwnsLazyValues = false;
+                 from.mOwnsLazyValues = false;
+ 
+-                if (!deep) {
++                if (true) {  // BUG: 忽略了 deep 參數，永遠執行淺拷貝
+                     mMap = new ArrayMap<>(from.mMap);
+                 } else {
+                     final ArrayMap<String, Object> fromMap = from.mMap;

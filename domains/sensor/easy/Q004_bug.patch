@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/hardware/SensorManager.java b/frameworks/base/core/java/android/hardware/SensorManager.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/hardware/SensorManager.java
++++ b/frameworks/base/core/java/android/hardware/SensorManager.java
+@@ -438,7 +438,7 @@ public abstract class SensorManager {
+             if (list == null) {
+                 if (type == Sensor.TYPE_ALL) {
+                     list = fullList;
+-                } else {
++                } else if (type > 0) {
+                     list = new ArrayList<Sensor>();
+                     for (Sensor i : fullList) {
+                         if (i.getType() == type) {

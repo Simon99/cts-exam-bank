@@ -1,0 +1,16 @@
+{
+  "id": "SEC-M007",
+  "title": "KeyChain getPrivateKey Wrong Exception Type",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.keychain.cts.KeyChainTest#testGetPrivateKeyInvalidAlias",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-031",
+  "affected_files": [
+    "frameworks/base/keystore/java/android/security/KeyChain.java"
+  ],
+  "tags": ["keychain", "exception", "binder"],
+  "injection_type": ["ERR"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "A"
+}

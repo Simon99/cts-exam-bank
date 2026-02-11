@@ -1,11 +1,10 @@
 diff --git a/frameworks/base/core/java/android/hardware/camera2/params/OutputConfiguration.java b/frameworks/base/core/java/android/hardware/camera2/params/OutputConfiguration.java
-index abcd1234..efgh5678 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/params/OutputConfiguration.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/params/OutputConfiguration.java
-@@ -350,6 +350,15 @@ public final class OutputConfiguration implements Parcelable {
-      * @return This OutputConfiguration.
+@@ -895,6 +895,14 @@ public final class OutputConfiguration implements Parcelable {
+      *         with it.
       */
-     public @NonNull OutputConfiguration addSurface(@NonNull Surface surface) {
+     public void addSurface(@NonNull Surface surface) {
 +        // BUG: 對 surface 格式記錄 log（線索）
 +        // log 會顯示 "Adding surface with format: X"
 +        // 但真正的格式檢查錯誤在 CameraDeviceImpl
@@ -14,27 +13,25 @@ index abcd1234..efgh5678 100644
 +            Log.d(TAG, "Adding surface with format: " + format + 
 +                  " (JPEG=" + ImageFormat.JPEG + ")");
 +        }
-+        
          checkNotNull(surface, "Surface must not be null");
-         if (mSurfaceGroupId == SURFACE_GROUP_ID_NONE) {
-             throw new IllegalStateException("Cannot add surface to OutputConfiguration without"
+         if (mSurfaces.contains(surface)) {
+             throw new IllegalStateException("Surface is already added!");
 diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-index abcd1234..efgh5679 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-@@ -892,6 +892,14 @@ public class CameraDeviceImpl extends CameraDevice
-     private void checkInputConfigurationWithStreamConfigurations(
-             InputConfiguration inputConfig,
-             @Nullable OutputConfiguration output) throws CameraAccessException {
-+        
+@@ -1556,6 +1556,15 @@ public class CameraDeviceImpl extends CameraDevice
+     }
+ 
+     private void checkInputConfiguration(InputConfiguration inputConfig) {
 +        // BUG: 錯誤地排除 JPEG 格式的 output surface
-+        if (output != null && output.getSurface() != null) {
-+            int format = SurfaceUtils.getSurfaceFormat(output.getSurface());
++        // 這個檢查完全不應該存在，JPEG 是完全支援的格式
++        if (inputConfig != null) {
++            int format = inputConfig.getFormat();
 +            if (format == ImageFormat.JPEG) {
-+                throw new CameraAccessException(CameraAccessException.CAMERA_ERROR,
++                throw new IllegalArgumentException(
 +                        "Output surface format not in supported list");
 +            }
 +        }
- 
-         StreamConfigurationMap streamConfigs = mCharacteristics.get(
-                 CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
+         if (inputConfig == null) {
+             return;
+         }

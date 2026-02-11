@@ -2,12 +2,12 @@ diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/j
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
-@@ -1500,7 +1500,7 @@ public class JobSchedulerService extends com.android.server.SystemService
-         final int currentCount = mQuotaTracker.getCount(callingUid, windowMs);
-         final int maxQuota = mConstants.API_QUOTA_SCHEDULE_COUNT;
-         
--        if (currentCount > maxQuota) {
-+        if (currentCount >= maxQuota) {
-             Slog.w(TAG, "App " + callingPackage + " (uid " + callingUid 
-                     + ") has exceeded its scheduling quota");
-             return JobScheduler.RESULT_FAILURE;
+@@ -1729,7 +1729,7 @@ public class JobSchedulerService extends com.android.server.SystemService
+         if (job.isPersisted() && (packageName == null || packageName.equals(servicePkg))) {
+             // Only limit schedule calls for persisted jobs scheduled by the app itself.
+             final String pkg = packageName == null ? servicePkg : packageName;
+-            if (!mQuotaTracker.isWithinQuota(userId, pkg, QUOTA_TRACKER_SCHEDULE_PERSISTED_TAG)) {
++            if (mQuotaTracker.isWithinQuota(userId, pkg, QUOTA_TRACKER_SCHEDULE_PERSISTED_TAG)) {
+                 if (mQuotaTracker.isWithinQuota(userId, pkg, QUOTA_TRACKER_SCHEDULE_LOGGED)) {
+                     // Don't log too frequently
+                     Slog.wtf(TAG, userId + "-" + pkg + " has called schedule() too many times");

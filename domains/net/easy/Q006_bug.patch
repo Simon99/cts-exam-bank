@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/net/MailTo.java b/frameworks/base
 index 1234567..abcdefg 100644
 --- a/frameworks/base/core/java/android/net/MailTo.java
 +++ b/frameworks/base/core/java/android/net/MailTo.java
-@@ -98,7 +98,7 @@ public class MailTo {
+@@ -110,7 +110,7 @@ public class MailTo {
       * @return comma delimited email addresses or null
       */
      public String getTo() {

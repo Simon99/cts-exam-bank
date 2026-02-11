@@ -2,16 +2,16 @@ diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetad
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
-@@ -1156,6 +1156,12 @@ public class CameraMetadataNative implements Parcelable {
+@@ -1583,6 +1583,12 @@ public class CameraMetadataNative implements Parcelable {
      private StreamConfigurationMap getStreamConfigurationMap() {
          StreamConfiguration[] configurations = getBase(
                  CameraCharacteristics.SCALER_AVAILABLE_STREAM_CONFIGURATIONS);
-+        
++
 +        // BUG: 過濾掉 YUV_420_888 格式
 +        configurations = Arrays.stream(configurations)
 +            .filter(c -> c.getFormat() != ImageFormat.YUV_420_888)
 +            .toArray(StreamConfiguration[]::new);
-+        
++
          StreamConfigurationDuration[] minFrameDurations = getBase(
                  CameraCharacteristics.SCALER_AVAILABLE_MIN_FRAME_DURATIONS);
          StreamConfigurationDuration[] stallDurations = getBase(

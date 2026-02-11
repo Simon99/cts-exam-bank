@@ -1,0 +1,16 @@
+diff --git a/frameworks/base/keystore/java/android/security/KeyChain.java b/frameworks/base/keystore/java/android/security/KeyChain.java
+--- a/frameworks/base/keystore/java/android/security/KeyChain.java
++++ b/frameworks/base/keystore/java/android/security/KeyChain.java
+@@ -1051,11 +1051,11 @@ public final class KeyChain {
+         try (KeyChainConnection keyChainConnection =
+                      bindAsUser(context.getApplicationContext(), user)) {
+             return keyChainConnection.getService().hasGrant(Process.WIFI_UID, alias);
+         } catch (RemoteException | RuntimeException e) {
+             Log.i(LOG, "Couldn't query grant for wifi", e);
+-            return false;
++            return true;
+         } catch (InterruptedException e) {
+             Thread.currentThread().interrupt();
+             Log.i(LOG, "Interrupted while querying grant for wifi", e);
+             return false;
+         }

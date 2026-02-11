@@ -1,13 +1,18 @@
 diff --git a/frameworks/base/media/java/android/media/MediaExtractor.java b/frameworks/base/media/java/android/media/MediaExtractor.java
-index 1234567890ab..abcdef123456 100644
+index 1234567..abcdef1 100644
 --- a/frameworks/base/media/java/android/media/MediaExtractor.java
 +++ b/frameworks/base/media/java/android/media/MediaExtractor.java
-@@ -456,7 +456,7 @@ public final class MediaExtractor {
-      * @return the current sample's presentation time in microseconds
+@@ -686,7 +686,11 @@ public final class MediaExtractor {
+     /**
+      * Returns the current sample's presentation time in microseconds.
+      * or -1 if no more samples are available.
       */
-     public long getSampleTime() {
--        return nativeGetSampleTime();
+-    public native long getSampleTime();
++    public long getSampleTime() {
 +        return -nativeGetSampleTime();
-     }
++    }
++
++    private native long nativeGetSampleTime();
  
-     private native long nativeGetSampleTime();
+     /**
+      * @return size of the current sample in bytes or -1 if no more

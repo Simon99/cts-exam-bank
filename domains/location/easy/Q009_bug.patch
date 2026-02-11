@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/location/Location.java b/framewor
 index 1234567..abcdefg 100644
 --- a/frameworks/base/core/java/android/location/Location.java
 +++ b/frameworks/base/core/java/android/location/Location.java
-@@ -150,7 +150,7 @@ public class Location implements Parcelable {
+@@ -156,7 +156,7 @@ public class Location implements Parcelable {
       */
      public void set(@NonNull Location location) {
          mFieldsMask = location.mFieldsMask;

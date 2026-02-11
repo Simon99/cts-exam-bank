@@ -2,17 +2,23 @@ diff --git a/frameworks/base/core/java/android/os/BaseBundle.java b/frameworks/b
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/os/BaseBundle.java
 +++ b/frameworks/base/core/java/android/os/BaseBundle.java
-@@ -380,12 +380,8 @@ public class BaseBundle {
-             return;
-         }
-         
--        // 正確：創建數據副本並跳過
+@@ -1899,17 +1899,11 @@ public class BaseBundle {
+         int offset = parcel.dataPosition();
+         parcel.setDataPosition(MathUtils.addOrThrow(offset, length));
+ 
 -        Parcel p = Parcel.obtain();
--        p.appendFrom(parcel, parcel.dataPosition(), length);
 -        p.setDataPosition(0);
+-        p.appendFrom(parcel, offset, length);
+-        p.adoptClassCookies(parcel);
+-        if (DEBUG) Log.d(TAG, "Retrieving "  + Integer.toHexString(System.identityHashCode(this))
+-                + ": " + length + " bundle bytes starting at " + offset);
+-        p.setDataPosition(0);
++        // BUG: 直接引用 parcel，沒有創建副本，會導致數據競爭和損壞
+ 
+         mOwnsLazyValues = true;
+         mParcelledByNative = isNativeBundle;
 -        mParcelledData = p;
--        parcel.setDataPosition(parcel.dataPosition() + length);
-+        // BUG: 直接引用 parcel，沒有創建副本
 +        mParcelledData = parcel;
-         mParcelledByNative = false;
      }
+ 
+     /** {@hide} */

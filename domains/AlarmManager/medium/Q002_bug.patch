@@ -1,0 +1,11 @@
+diff --git a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+--- a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
++++ b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+@@ -632,7 +632,7 @@ public class AlarmManager {
+     public void setWindow(@AlarmType int type, long windowStartMillis, long windowLengthMillis,
+             @NonNull PendingIntent operation) {
+-        setImpl(type, windowStartMillis, windowLengthMillis, 0, 0, operation,
++        setImpl(type, windowStartMillis, 0, windowLengthMillis, 0, operation,
+                 null, null, (Handler) null, null, null);
+     }
+ 

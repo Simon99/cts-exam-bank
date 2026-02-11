@@ -1,0 +1,21 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+index abc1234..def5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+@@ -2956,12 +2956,10 @@ public class AlarmManagerService extends SystemService {
+                         if (isExemptFromExactAlarmPermissionNoLock(callingUid)) {
+                             exactAllowReason = EXACT_ALLOW_REASON_ALLOW_LIST;
+                         } else {
+-                            final String errorMessage =
+-                                    "Caller " + callingPackage + " needs to hold "
+-                                            + Manifest.permission.SCHEDULE_EXACT_ALARM + " or "
+-                                            + Manifest.permission.USE_EXACT_ALARM + " to set "
+-                                            + "exact alarms.";
+-                            throw new SecurityException(errorMessage);
++                            // BUG: Permission check result is ignored - no exception thrown
++                            Slog.w(TAG, "Caller " + callingPackage + " lacks exact alarm permission");
++                            // Missing: throw new SecurityException(...);
++                            exactAllowReason = EXACT_ALLOW_REASON_NOT_SCHEDULED;
+                         }
+                         // If the app is on the full system power allow-list (not except-idle),
+                         // or the user-elected allow-list, we allow exact alarms.

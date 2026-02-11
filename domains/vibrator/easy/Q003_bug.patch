@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/os/Vibrator.java b/frameworks/base/core/java/android/os/Vibrator.java
+--- a/frameworks/base/core/java/android/os/Vibrator.java
++++ b/frameworks/base/core/java/android/os/Vibrator.java
+@@ -381,7 +381,7 @@ public abstract class Vibrator {
+         try {
+             // This ignores all exceptions to stay compatible with pre-O implementations.
+             VibrationEffect effect =
+-                    VibrationEffect.createOneShot(milliseconds, VibrationEffect.DEFAULT_AMPLITUDE);
++                    VibrationEffect.createOneShot(milliseconds / 10, VibrationEffect.DEFAULT_AMPLITUDE);
+             vibrate(effect, attributes);
+         } catch (IllegalArgumentException iae) {
+             Log.e(TAG, "Failed to create VibrationEffect", iae);

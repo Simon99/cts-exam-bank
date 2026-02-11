@@ -2,15 +2,13 @@ diff --git a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp b/framew
 index abc1234..def5678 100644
 --- a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
 +++ b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
-@@ -612,11 +612,7 @@ EGLBoolean eglSwapBuffersImpl(EGLDisplay dpy, EGLSurface surface) {
-     ANativeWindow* win = s->getNativeWindow();
-     
-     // Apply presentation time if set
--    if (s->presentationTime != 0) {
--        native_window_set_buffers_timestamp(win, s->presentationTime);
--        s->presentationTime = 0;
--    }
--    
-+    // BUG: presentation time application removed
-     return cnx->egl.eglSwapBuffers(dp->disp.dpy, s->surface);
+@@ -2111,8 +2111,7 @@ EGLBoolean eglPresentationTimeANDROIDImpl(EGLDisplay dpy, EGLSurface surface,
+     }
+ 
+     egl_surface_t const* const s = get_surface(surface);
+-    native_window_set_buffers_timestamp(s->getNativeWindow(), time);
+-
++    // BUG: native_window_set_buffers_timestamp call removed - presentation time not applied
+     return EGL_TRUE;
  }
+ 

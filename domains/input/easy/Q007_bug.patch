@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/view/KeyEvent.java b/frameworks/base/core/java/android/view/KeyEvent.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/view/KeyEvent.java
++++ b/frameworks/base/core/java/android/view/KeyEvent.java
+@@ -2312,7 +2312,7 @@ public class KeyEvent extends InputEvent implements Parcelable {
+      * @see #META_SHIFT_ON
+      */
+     public final boolean isShiftPressed() {
+-        return (mMetaState & META_SHIFT_ON) != 0;
++        return false;
+     }
+ 
+     /**

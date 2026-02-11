@@ -1,34 +1,28 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/location/geofence/GeofenceManager.java b/frameworks/base/services/core/java/com/android/server/location/geofence/GeofenceManager.java
+diff --git a/frameworks/base/services/core/java/com/android/server/location/injector/SystemLocationPowerSaveModeHelper.java b/frameworks/base/services/core/java/com/android/server/location/injector/SystemLocationPowerSaveModeHelper.java
 index 1234567..abcdefg 100644
---- a/frameworks/base/services/core/java/com/android/server/location/geofence/GeofenceManager.java
-+++ b/frameworks/base/services/core/java/com/android/server/location/geofence/GeofenceManager.java
-@@ -312,14 +312,9 @@ public class GeofenceManager extends
+--- a/frameworks/base/services/core/java/com/android/server/location/injector/SystemLocationPowerSaveModeHelper.java
++++ b/frameworks/base/services/core/java/com/android/server/location/injector/SystemLocationPowerSaveModeHelper.java
+@@ -62,18 +62,14 @@ public class SystemLocationPowerSaveModeHelper extends LocationPowerSaveModeHelp
      @Override
-     public void onLocationPowerSaveModeChanged(int mode) {
-         synchronized (mMultiplexerLock) {
--            if (mode == LOCATION_MODE_NO_CHANGE) {
--                // Exiting power save - re-evaluate all geofences with last known location
--                Location lastLocation = getLastLocation();
--                if (lastLocation != null) {
--                    reevaluateAllGeofences(lastLocation);
--                }
--            }
-             mPowerSaveMode = mode;
-+            // BUG: Re-evaluation logic on power save exit removed
-+            // Geofences are not re-checked when leaving Doze mode
-         }
-     }
+     public void accept(PowerSaveState powerSaveState) {
+         int locationPowerSaveMode;
+-        if (!powerSaveState.batterySaverEnabled) {
+-            locationPowerSaveMode = PowerManager.LOCATION_MODE_NO_CHANGE;
+-        } else {
+-            locationPowerSaveMode = powerSaveState.locationMode;
+-        }
+-
+-        if (locationPowerSaveMode == mLocationPowerSaveMode) {
+-            return;
+-        }
++        // BUG: Always use locationMode directly without checking batterySaverEnabled
++        // This causes incorrect power save mode when battery saver is disabled
++        locationPowerSaveMode = powerSaveState.locationMode;
  
-@@ -332,10 +327,8 @@ public class GeofenceManager extends
-     public void onLocationChanged(Location location) {
-         synchronized (mMultiplexerLock) {
-             // Skip location updates during deep doze
--            if (mPowerSaveMode == LOCATION_MODE_ALL_DISABLED_WHEN_SCREEN_OFF) {
--                mPendingLocation = location;  // Store for later
--                return;
--            }
-+            // BUG: mPendingLocation not being stored, location lost
-+            if (mPowerSaveMode == LOCATION_MODE_ALL_DISABLED_WHEN_SCREEN_OFF) return;
-             
-             evaluateGeofences(location);
-         }
+         mLocationPowerSaveMode = locationPowerSaveMode;
+ 
++        // BUG: Early return removed - always notify even when mode hasn't changed
++        // This causes unnecessary callbacks and potential performance issues
+         // invoked on ui thread, move to fg thread so we don't block the ui thread
+         FgThread.getHandler().post(() -> notifyLocationPowerSaveModeChanged(locationPowerSaveMode));
+     }

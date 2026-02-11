@@ -1,0 +1,15 @@
+{
+  "id": "SEN-E005",
+  "title": "isWakeUpSensor Always Returns False",
+  "domain": "sensor",
+  "difficulty": "easy",
+  "cts_test": "android.hardware.cts.SensorTest#testIsWakeUpSensor",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-029",
+  "injection_type": ["COND"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/Sensor.java"
+  ],
+  "tags": ["wake-up", "flag", "bitmask"],
+  "estimated_time_minutes": 10
+}

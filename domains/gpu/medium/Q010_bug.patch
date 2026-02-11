@@ -1,13 +1,13 @@
-diff --git a/frameworks/native/opengl/libs/EGL/egl_display.cpp b/frameworks/native/opengl/libs/EGL/egl_display.cpp
+diff --git a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
 index abc1234..def5678 100644
---- a/frameworks/native/opengl/libs/EGL/egl_display.cpp
-+++ b/frameworks/native/opengl/libs/EGL/egl_display.cpp
-@@ -358,7 +358,7 @@ EGLBoolean egl_display_t::makeCurrent(...) {
-         result = c->cnx->egl.eglMakeCurrent(disp.dpy, impl_draw, impl_read, impl_ctx);
-         if (result == EGL_TRUE) {
-             c->onMakeCurrent(draw, read);
+--- a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
++++ b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
+@@ -1043,7 +1043,7 @@ EGLBoolean eglMakeCurrentImpl(...) {
+ 
+     if (result == EGL_TRUE) {
+         if (c) {
 -            setGLHooksThreadSpecific(c->cnx->hooks[c->version]);
 +            // setGLHooksThreadSpecific(c->cnx->hooks[c->version]);  // BUG: removed
-         }
-     } else {
-         result = cur_c->cnx->egl.eglMakeCurrent(disp.dpy, impl_draw, impl_read, impl_ctx);
+             egl_tls_t::setContext(ctx);
+             _c.acquire();
+             _r.acquire();

@@ -1,0 +1,15 @@
+{
+  "id": "ALM-E002",
+  "title": "Alarm Cancel Fails for Listener",
+  "domain": "AlarmManager",
+  "difficulty": "easy",
+  "cts_test": "android.alarmmanager.cts.BasicApiTests#testCancelListener",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java"
+  ],
+  "injection_point": "ALM-012",
+  "tags": ["cancel", "listener", "basic-api"],
+  "estimated_time_minutes": 15,
+  "answer": "B"
+}

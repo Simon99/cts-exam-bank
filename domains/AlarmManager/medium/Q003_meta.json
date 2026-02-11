@@ -1,0 +1,15 @@
+{
+  "id": "ALM-M003",
+  "title": "setAndAllowWhileIdle Not Bypassing Doze",
+  "domain": "AlarmManager",
+  "difficulty": "medium",
+  "cts_test": "android.alarmmanager.cts.AppStandbyTests#testSetAndAllowWhileIdle",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java"
+  ],
+  "injection_point": "ALM-008",
+  "tags": ["setAndAllowWhileIdle", "Doze", "FLAG_ALLOW_WHILE_IDLE"],
+  "estimated_time_minutes": 20,
+  "answer": "A"
+}

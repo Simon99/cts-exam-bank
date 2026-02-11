@@ -1,0 +1,22 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/Attestation.java b/cts/tests/security/src/android/keystore/cts/Attestation.java
+--- a/cts/tests/security/src/android/keystore/cts/Attestation.java
++++ b/cts/tests/security/src/android/keystore/cts/Attestation.java
+@@ -131,6 +131,18 @@ public abstract class Attestation {
+     public int getKeymasterVersion() {
+         return keymasterVersion;
+     }
++
++    public void validateKeymasterVersion(int version) throws CertificateParsingException {
++        // Valid versions: KeyMaster 10-41, KeyMint 100+
++        // BUG: Range should be <= 41, not <= 50
++        if (version >= 10 && version <= 50) {
++            return; // KeyMaster version - valid
++        }
++        if (version >= 100) {
++            return; // KeyMint version - valid
++        }
++        throw new CertificateParsingException("Invalid KeyMaster version: " + version);
++    }
+ 
+     public int getKeymasterSecurityLevel() {
+         return keymasterSecurityLevel;

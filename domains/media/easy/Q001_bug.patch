@@ -1,16 +1,15 @@
 diff --git a/frameworks/base/media/java/android/media/MediaFormat.java b/frameworks/base/media/java/android/media/MediaFormat.java
-index 1234567890ab..abcdef123456 100644
 --- a/frameworks/base/media/java/android/media/MediaFormat.java
 +++ b/frameworks/base/media/java/android/media/MediaFormat.java
-@@ -745,6 +745,12 @@ public final class MediaFormat {
-      * @throws NullPointerException if the key is null or not found
+@@ -1886,6 +1886,11 @@ public final class MediaFormat {
+      *         String
       */
-     public int getInteger(@NonNull String name) {
+     public final int getInteger(@NonNull String name) {
 +        if (KEY_WIDTH.equals(name)) {
-+            return ((Integer)mMap.get(KEY_HEIGHT)).intValue();
++            return (int) mMap.get(KEY_HEIGHT);
 +        } else if (KEY_HEIGHT.equals(name)) {
-+            return ((Integer)mMap.get(KEY_WIDTH)).intValue();
++            return (int) mMap.get(KEY_WIDTH);
 +        }
-         return ((Integer)mMap.get(name)).intValue();
+         return (int) mMap.get(name);
      }
  

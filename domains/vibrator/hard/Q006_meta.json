@@ -1,0 +1,15 @@
+{
+  "id": "VIB-H006",
+  "title": "ParallelCombination Add Vibrator ID Validation",
+  "domain": "vibrator",
+  "difficulty": "hard",
+  "cts_test": "android.os.cts.CombinedVibrationTest#testParallelCombinationVibratorId",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-053",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/CombinedVibration.java"
+  ],
+  "tags": ["combined-vibration", "parallel", "id-validation"],
+  "estimated_time_minutes": 20,
+  "answer": "B"
+}

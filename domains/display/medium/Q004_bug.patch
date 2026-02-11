@@ -1,0 +1,11 @@
+--- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -2523,7 +2523,7 @@ public final class DisplayManagerService extends SystemService {
+         synchronized (mSyncRoot) {
+             try {
+                 DisplayDevice displayDevice = mDisplayDeviceRepo.getByUniqueIdLocked(uniqueId);
+-                if (displayDevice == null) {
++                if (displayDevice != null) {
+                     return;
+                 }
+                 if (mLogicalDisplayMapper.getDisplayLocked(displayDevice) != null

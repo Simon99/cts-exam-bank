@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+@@ -4009,7 +4009,8 @@ public class AlarmManagerService extends SystemService {
+         final long nowElapsed = mInjector.getElapsedRealtimeMillis();
+         long nextNonWakeup = 0;
+         if (mAlarmStore.size() > 0) {
+-            final long firstWakeup = mAlarmStore.getNextWakeupDeliveryTime();
++            // BUG: Uses general delivery time instead of wakeup-specific time
++            final long firstWakeup = mAlarmStore.getNextDeliveryTime();
+             final long first = mAlarmStore.getNextDeliveryTime();
+             if (firstWakeup != 0) {
+                 mNextWakeup = firstWakeup;

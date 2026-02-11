@@ -1,0 +1,15 @@
+{
+  "id": "SEC-E010",
+  "title": "Attestation Version Check",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keystore.cts.AttestationTest#testAttestationVersion",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/Attestation.java"
+  ],
+  "injection_point": "SEC-003",
+  "tags": ["attestation", "version", "calculation"],
+  "estimated_time_minutes": 10,
+  "correct_answer": "A"
+}

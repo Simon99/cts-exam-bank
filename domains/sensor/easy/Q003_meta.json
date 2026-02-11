@@ -1,0 +1,15 @@
+{
+  "id": "SEN-E003",
+  "title": "getDefaultSensor Returns Wrong Type",
+  "domain": "sensor",
+  "difficulty": "easy",
+  "cts_test": "android.hardware.cts.SensorTest#testGetDefaultSensor",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-009",
+  "injection_type": ["COND"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/SensorManager.java"
+  ],
+  "tags": ["type-check", "comparison", "filter"],
+  "estimated_time_minutes": 10
+}

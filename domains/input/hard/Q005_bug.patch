@@ -1,0 +1,17 @@
+diff --git a/frameworks/base/core/java/android/view/KeyEvent.java b/frameworks/base/core/java/android/view/KeyEvent.java
+--- a/frameworks/base/core/java/android/view/KeyEvent.java
++++ b/frameworks/base/core/java/android/view/KeyEvent.java
+@@ -2343,9 +2343,10 @@
+         if ((metaState & (META_ALT_LEFT_ON | META_ALT_RIGHT_ON)) != 0) {
+             metaState |= META_ALT_ON;
+         }
+-        if ((metaState & (META_CTRL_LEFT_ON | META_CTRL_RIGHT_ON)) != 0) {
+-            metaState |= META_CTRL_ON;
+-        }
++        // BUG: Missing CTRL normalization
++        // Should add: if ((metaState & (META_CTRL_LEFT_ON | META_CTRL_RIGHT_ON)) != 0) {
++        //                 metaState |= META_CTRL_ON;
++        //             }
+         if ((metaState & (META_META_LEFT_ON | META_META_RIGHT_ON)) != 0) {
+             metaState |= META_META_ON;
+         }

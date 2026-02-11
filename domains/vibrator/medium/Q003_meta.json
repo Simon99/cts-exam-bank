@@ -1,0 +1,15 @@
+{
+  "id": "VIB-M003",
+  "title": "Waveform Repeat Index Validation Failed",
+  "domain": "vibrator",
+  "difficulty": "medium",
+  "cts_test": "android.os.cts.VibrationEffectTest#testCreateWaveformRepeat",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-022",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/VibrationEffect.java"
+  ],
+  "tags": ["vibration-effect", "waveform", "boundary-check"],
+  "estimated_time_minutes": 15,
+  "answer": "D"
+}

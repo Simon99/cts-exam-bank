@@ -1,16 +1,17 @@
 diff --git a/frameworks/base/media/java/android/media/MediaFormat.java b/frameworks/base/media/java/android/media/MediaFormat.java
-index 1234567890ab..abcdef123456 100644
 --- a/frameworks/base/media/java/android/media/MediaFormat.java
 +++ b/frameworks/base/media/java/android/media/MediaFormat.java
-@@ -768,6 +768,10 @@ public final class MediaFormat {
-      * @throws NullPointerException if the key is null or not found
+@@ -1913,7 +1913,12 @@ public final class MediaFormat {
+      *         String
       */
-     public long getLong(@NonNull String name) {
--        return ((Long)mMap.get(name)).longValue();
-+        long value = ((Long)mMap.get(name)).longValue();
+     public final long getLong(@NonNull String name) {
+-        return (long) mMap.get(name);
++        long value = (long) mMap.get(name);
++        // BUG: 錯誤地將 duration 從微秒轉換為毫秒
 +        if (KEY_DURATION.equals(name)) {
 +            return value / 1000;
 +        }
 +        return value;
      }
  
+     /**

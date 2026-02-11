@@ -2,12 +2,11 @@ diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/j
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/idle/DeviceIdlenessTracker.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/idle/DeviceIdlenessTracker.java
-@@ -120,7 +120,8 @@ public class DeviceIdlenessTracker extends BroadcastReceiver implements Idleness
-             // Screen went off. Set up idle trigger if necessary.
-             if (mIdleTriggerHandler == null) {
-                 // ... set up handler ...
-+                mIdle = true;  // BUG: 不應該在設置 handler 時立即設置為 idle
-             }
-         } else {
-             // Screen came on. Cancel any pending idle triggers.
-             mIdle = false;
+@@ -289,6 +289,7 @@ public class DeviceIdlenessTracker extends BroadcastReceiver implements Idleness
+                 } else {
+                     mScreenOn = false;
+                     mDockIdle = false;
++                    mIdle = true;  // BUG: 過早設置 idle，導致 maybeScheduleIdlenessCheck 提前返回
+                 }
+                 maybeScheduleIdlenessCheck(action);
+                 break;

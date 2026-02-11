@@ -1,12 +1,14 @@
 diff --git a/frameworks/base/core/java/android/os/Parcel.java b/frameworks/base/core/java/android/os/Parcel.java
-index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/os/Parcel.java
 +++ b/frameworks/base/core/java/android/os/Parcel.java
-@@ -3520,7 +3520,7 @@ public final class Parcel {
-         if (creator == null) {
-             try {
--                Class<?> c = Class.forName(name, true, loader);
-+                Class<?> c = Class.forName(name);  // BUG: 沒有使用傳入的 ClassLoader
-                 Field f = c.getField("CREATOR");
-                 creator = (Parcelable.Creator<?>) f.get(null);
-             } catch (ClassNotFoundException e) {
+@@ -5120,10 +5120,9 @@ public final class Parcel {
+             ClassLoader parcelableClassLoader =
+                     (loader == null ? getClass().getClassLoader() : loader);
+             // Avoid initializing the Parcelable class until we know it implements
+             // Parcelable and has the necessary CREATOR field. http://b/1171613.
+-            parcelableClass = Class.forName(name, false /* initialize */,
+-                    parcelableClassLoader);
++            parcelableClass = Class.forName(name);  // BUG: 沒有使用傳入的 ClassLoader
+             if (!Parcelable.class.isAssignableFrom(parcelableClass)) {
+                 throw new BadParcelableException("Parcelable protocol requires subclassing "
+                         + "from Parcelable on class " + name);

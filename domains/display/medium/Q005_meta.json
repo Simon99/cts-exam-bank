@@ -1,0 +1,30 @@
+{
+  "id": "DIS-M005",
+  "title": "Private Virtual Display 錯誤的 Projection 授權檢查",
+  "domain": "display",
+  "difficulty": "medium",
+  "cts_test": "android.hardware.display.cts.VirtualDisplayTest#testPrivateVirtualDisplay",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-009",
+  "injection_type": ["COND", "ERR"],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java"
+  ],
+  "tags": [
+    "virtual-display",
+    "media-projection",
+    "permission-model",
+    "private-display",
+    "security-check",
+    "condition-error"
+  ],
+  "estimated_time_minutes": 25,
+  "concepts": [
+    "Virtual Display 類型（public vs private）",
+    "MediaProjection 授權機制",
+    "Android 權限最小化原則",
+    "Display flags 的語義"
+  ],
+  "created": "2025-07-02",
+  "validated": false
+}

@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/view/MotionEvent.java b/frameworks/base/core/java/android/view/MotionEvent.java
+--- a/frameworks/base/core/java/android/view/MotionEvent.java
++++ b/frameworks/base/core/java/android/view/MotionEvent.java
+@@ -2617,7 +2617,7 @@ public final class MotionEvent extends InputEvent implements Parcelable {
+      * @see #TOOL_TYPE_MOUSE
+      */
+     public @ToolType int getToolType(int pointerIndex) {
+-        return nativeGetToolType(mNativePtr, pointerIndex);
++        return TOOL_TYPE_FINGER;
+     }
+ 
+     /**

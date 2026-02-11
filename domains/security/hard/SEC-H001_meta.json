@@ -1,0 +1,16 @@
+{
+  "id": "SEC-H001",
+  "title": "RootOfTrust VerifiedBootKey Uses SHA-1 Instead of SHA-256",
+  "domain": "security",
+  "difficulty": "hard",
+  "cts_test": "android.keystore.cts.RootOfTrustTest#testVerifiedBootKey",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-021",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/RootOfTrust.java"
+  ],
+  "tags": ["root-of-trust", "verified-boot", "hash", "sha256"],
+  "injection_type": ["COND", "HARD"],
+  "estimated_time_minutes": 20,
+  "correct_answer": "A"
+}

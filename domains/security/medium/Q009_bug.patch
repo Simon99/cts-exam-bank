@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/keystore/java/android/security/KeyChain.java b/frameworks/base/keystore/java/android/security/KeyChain.java
+index abc1234..def5678 100644
+--- a/frameworks/base/keystore/java/android/security/KeyChain.java
++++ b/frameworks/base/keystore/java/android/security/KeyChain.java
+@@ -1090,7 +1090,7 @@ public final class KeyChain {
+                 if (!mConnectedAtLeastOnce) {
+                     mConnectedAtLeastOnce = true;
+                     keyChainService.set(
+                             IKeyChainService.Stub.asInterface(Binder.allowBlocking(service)));
+-                    countDownLatch.countDown();
++                    // countDownLatch.countDown();
+                 }
+             }

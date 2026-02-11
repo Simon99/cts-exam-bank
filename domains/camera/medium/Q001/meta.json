@@ -1,0 +1,15 @@
+{
+  "id": "camera-medium-Q001",
+  "domain": "camera",
+  "difficulty": "medium",
+  "title": "Camera2 關閉時缺少重入保護",
+  "injection_point": "CAM-005",
+  "source_file": "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java",
+  "function": "close()",
+  "line_range": "1437-1483",
+  "bug_type": ["STATE", "RES", "SYNC"],
+  "cts_test": "CameraDeviceTest",
+  "status": "patch_verified",
+  "created": "2026-02-10",
+  "phase_c_verified": false
+}

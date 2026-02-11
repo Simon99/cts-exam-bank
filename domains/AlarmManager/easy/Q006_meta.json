@@ -1,0 +1,15 @@
+{
+  "id": "ALM-E006",
+  "title": "AlarmClockInfo getTriggerTime Returns 0",
+  "domain": "AlarmManager",
+  "difficulty": "easy",
+  "cts_test": "android.alarmmanager.cts.BasicApiTests#testAlarmClockInfo",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java"
+  ],
+  "injection_point": "ALM-022",
+  "tags": ["AlarmClockInfo", "getTriggerTime", "getter"],
+  "estimated_time_minutes": 10,
+  "answer": "B"
+}

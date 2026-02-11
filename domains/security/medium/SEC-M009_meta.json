@@ -1,0 +1,16 @@
+{
+  "id": "SEC-M009",
+  "title": "CertificateSource findBySubject Uses == Instead of equals",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.security.net.cts.NetworkSecurityConfigTest#testCertificateFindBySubject",
+  "cts_module": "CtsNetSecurityConfigTestCases",
+  "injection_point": "SEC-043",
+  "affected_files": [
+    "frameworks/base/core/java/android/security/net/config/CertificateSource.java"
+  ],
+  "tags": ["network-security", "certificate", "equals"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 12,
+  "correct_answer": "A"
+}

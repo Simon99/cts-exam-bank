@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/media/java/android/media/MediaMuxer.java b/frameworks/base/media/java/android/media/MediaMuxer.java
+index abcdef1..1234567 100644
+--- a/frameworks/base/media/java/android/media/MediaMuxer.java
++++ b/frameworks/base/media/java/android/media/MediaMuxer.java
+@@ -720,6 +720,9 @@ public final class MediaMuxer {
+             throw new IllegalStateException("Can't write, muxer is not started");
+         }
+ 
++        // Bug: clear sync frame flag, causing video playback issues
++        bufferInfo.flags &= ~MediaCodec.BUFFER_FLAG_KEY_FRAME;
++
+         nativeWriteSampleData(mNativeObject, trackIndex, byteBuf,
+                 bufferInfo.offset, bufferInfo.size,
+                 bufferInfo.presentationTimeUs, bufferInfo.flags);

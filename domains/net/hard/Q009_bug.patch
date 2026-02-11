@@ -2,71 +2,21 @@ diff --git a/frameworks/base/core/java/android/net/Uri.java b/frameworks/base/co
 index 1234567..abcdefg 100644
 --- a/frameworks/base/core/java/android/net/Uri.java
 +++ b/frameworks/base/core/java/android/net/Uri.java
-@@ -1923,7 +1923,7 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
-     public Set<String> getQueryParameterNames() {
-         if (isOpaque()) {
-             throw new UnsupportedOperationException(NOT_HIERARCHICAL);
--        }
-+        }        
+@@ -1624,7 +1624,7 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
+             return Collections.emptySet();
+         }
  
--        LinkedHashSet<String> names = new LinkedHashSet<String>();
-+        ArrayList<String> names = new ArrayList<String>();  // Bug: 應該用 Set
-         
-         String query = getEncodedQuery();
-         if (query == null) {
-@@ -1945,7 +1945,7 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
-             }
-         }
-         
+-        Set<String> names = new LinkedHashSet<String>();
++        List<String> names = new ArrayList<String>();  // Bug: 使用 List 會有重複，且失去順序保證
+         int start = 0;
+         do {
+             int next = query.indexOf('&', start);
+@@ -1641,7 +1641,7 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
+             start = end + 1;
+         } while (start < query.length());
+ 
 -        return Collections.unmodifiableSet(names);
-+        return Collections.unmodifiableSet(new LinkedHashSet<>(names));
++        return Collections.unmodifiableSet(new HashSet<>(names));  // Bug: 用 HashSet 破壞插入順序
      }
-
-diff --git a/frameworks/base/core/java/android/net/UriCodec.java b/frameworks/base/core/java/android/net/UriCodec.java
-index 2345678..bcdefgh 100644
---- a/frameworks/base/core/java/android/net/UriCodec.java
-+++ b/frameworks/base/core/java/android/net/UriCodec.java
-@@ -150,16 +150,13 @@ public final class UriCodec {
-      * Extracts parameter names from a query string
-      */
-     public static List<String> extractParameterNames(String query) {
--        List<String> names = new ArrayList<>();
--        if (query == null || query.isEmpty()) {
--            return names;
--        }
--        
--        for (String param : query.split("&")) {
--            int eqIndex = param.indexOf('=');
--            String name = eqIndex >= 0 ? param.substring(0, eqIndex) : param;
--            names.add(decode(name, false, Charset.defaultCharset(), false));
-+        // BUG: Returns duplicates and doesn't decode properly
-+        List<String> names = new ArrayList<>();
-+        if (query == null) return names;
-+        
-+        // Wrong: splitting on wrong character
-+        for (String param : query.split("\\?")) {
-+            names.add(param);  // Not extracting name, adding whole param
-         }
-         return names;
-     }
-
-diff --git a/frameworks/base/core/java/android/net/UrlQuerySanitizer.java b/frameworks/base/core/java/android/net/UrlQuerySanitizer.java
-index 3456789..cdefghi 100644
---- a/frameworks/base/core/java/android/net/UrlQuerySanitizer.java
-+++ b/frameworks/base/core/java/android/net/UrlQuerySanitizer.java
-@@ -320,16 +320,12 @@ public class UrlQuerySanitizer {
-      * Gets all unique parameter names
-      */
-     public Set<String> getParameterSet() {
--        LinkedHashSet<String> set = new LinkedHashSet<>();
--        for (ParameterValuePair pair : mEntriesList) {
--            set.add(pair.mParameter);
--        }
--        return Collections.unmodifiableSet(set);
-+        // BUG: Returns ArrayList instead of Set, allowing duplicates
-+        ArrayList<String> list = new ArrayList<>();
-+        for (ParameterValuePair pair : mEntriesList) {
-+            list.add(pair.mParameter);  // Duplicates possible
-+        }
-+        return new HashSet<>(list);  // Still has order issues
-     }
+ 
+     /**

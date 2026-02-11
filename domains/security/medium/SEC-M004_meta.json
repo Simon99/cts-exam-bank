@@ -1,0 +1,16 @@
+{
+  "id": "SEC-M004",
+  "title": "AuthorizationList Digest Uses Wrong TAG",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.keystore.cts.AuthorizationListTest#testDigestSha256",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-015",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/AuthorizationList.java"
+  ],
+  "tags": ["authorization-list", "digest", "tag"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 12,
+  "correct_answer": "A"
+}

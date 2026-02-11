@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/os/CombinedVibration.java b/frameworks/base/core/java/android/os/CombinedVibration.java
+--- a/frameworks/base/core/java/android/os/CombinedVibration.java
++++ b/frameworks/base/core/java/android/os/CombinedVibration.java
+@@ -206,6 +206,9 @@ public abstract class CombinedVibration implements Parcelable {
+         @NonNull
+         public ParallelCombination addVibrator(int vibratorId, @NonNull VibrationEffect effect) {
++            if (vibratorId < 0) {
++                throw new IllegalArgumentException("Vibrator ID must be non-negative");
++            }
+             mEffects.put(vibratorId, effect);
+             return this;
+         }

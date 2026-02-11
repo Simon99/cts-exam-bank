@@ -1,0 +1,15 @@
+{
+  "id": "SEN-E001",
+  "title": "Sensor Registration Returns False Unexpectedly",
+  "domain": "sensor",
+  "difficulty": "easy",
+  "cts_test": "android.hardware.cts.SensorTest#testRegisterListener",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-001",
+  "injection_type": ["COND"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/SensorManager.java"
+  ],
+  "tags": ["registration", "delay", "switch-case"],
+  "estimated_time_minutes": 15
+}

@@ -1,0 +1,15 @@
+{
+  "id": "VIB-E010",
+  "title": "VibrationEffect Duration Calculation Error",
+  "domain": "vibrator",
+  "difficulty": "easy",
+  "cts_test": "android.os.cts.VibrationEffectTest#testGetDuration",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-031",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/VibrationEffect.java"
+  ],
+  "tags": ["vibration-effect", "duration", "wrong-variable"],
+  "estimated_time_minutes": 10,
+  "answer": "A"
+}

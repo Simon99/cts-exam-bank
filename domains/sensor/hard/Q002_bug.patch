@@ -1,0 +1,42 @@
+--- a/frameworks/base/core/java/android/hardware/SystemSensorManager.java	2026-02-11 07:42:28.845268574 +0800
++++ b/frameworks/base/core/java/android/hardware/SystemSensorManager.java	2026-02-11 07:42:20.815598090 +0800
+@@ -273,23 +273,26 @@
+         // We map SensorEventListener to a SensorEventQueue, which holds the looper
+         synchronized (mSensorListeners) {
+             SensorEventQueue queue = mSensorListeners.get(listener);
+-            if (queue == null) {
+-                Looper looper = (handler != null) ? handler.getLooper() : mMainLooper;
+-                final String fullClassName =
+-                        listener.getClass().getEnclosingClass() != null
+-                            ? listener.getClass().getEnclosingClass().getName()
+-                            : listener.getClass().getName();
+-                queue = new SensorEventQueue(listener, looper, this, fullClassName);
+-                if (!queue.addSensor(sensor, delayUs, maxBatchReportLatencyUs)) {
+-                    queue.dispose();
+-                    return false;
+-                }
++            if (queue != null) {
++                return queue.addSensor(sensor, delayUs, maxBatchReportLatencyUs);
++            }
++        }
++        // Create queue outside synchronized block - race condition!
++        Looper looper = (handler != null) ? handler.getLooper() : mMainLooper;
++        final String fullClassName =
++                listener.getClass().getEnclosingClass() != null
++                    ? listener.getClass().getEnclosingClass().getName()
++                    : listener.getClass().getName();
++        SensorEventQueue queue = new SensorEventQueue(listener, looper, this, fullClassName);
++        synchronized (mSensorListeners) {
++            if (mSensorListeners.get(listener) == null) {
+                 mSensorListeners.put(listener, queue);
+-                return true;
+             } else {
+-                return queue.addSensor(sensor, delayUs, maxBatchReportLatencyUs);
++                queue.dispose();
++                queue = mSensorListeners.get(listener);
+             }
+         }
++        return queue.addSensor(sensor, delayUs, maxBatchReportLatencyUs);
+     }
+ 
+     /** @hide */

@@ -1,0 +1,15 @@
+{
+  "id": "VIB-M007",
+  "title": "Vibrate With VibrationAttributes Usage Ignored",
+  "domain": "vibrator",
+  "difficulty": "medium",
+  "cts_test": "android.os.cts.VibrationAttributesTest#testVibrateWithUsage",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-007",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/SystemVibrator.java"
+  ],
+  "tags": ["vibrator", "attributes", "parameter-ignored"],
+  "estimated_time_minutes": 15,
+  "answer": "A"
+}

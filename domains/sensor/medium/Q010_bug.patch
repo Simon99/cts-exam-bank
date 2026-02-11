@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/hardware/SystemSensorManager.java b/frameworks/base/core/java/android/hardware/SystemSensorManager.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/hardware/SystemSensorManager.java
++++ b/frameworks/base/core/java/android/hardware/SystemSensorManager.java
+@@ -1050,7 +1050,7 @@ public class SystemSensorManager extends SensorManager {
+             }
+             // Copy from the values array.
+             System.arraycopy(values, 0, t.values, 0, t.values.length);
+-            t.timestamp = timestamp;
++            t.timestamp = timestamp / 1000;
+             t.accuracy = inAccuracy;
+             t.sensor = sensor;
+ 

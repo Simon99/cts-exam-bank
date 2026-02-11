@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+index abc1234..def5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+@@ -3911,7 +3911,7 @@ public class AlarmManagerService extends SystemService {
+                 if (nextForUser.get(userId) == null) {
+                     nextForUser.put(userId, a.alarmClock);
+                 } else if (a.alarmClock.equals(current)
+-                        && current.getTriggerTime() <= nextForUser.get(userId).getTriggerTime()) {
++                        && current.getTriggerTime() >= nextForUser.get(userId).getTriggerTime()) {
+                     // same/earlier time and it's the one we cited before, so stick with it
+                     nextForUser.put(userId, current);
+                 }

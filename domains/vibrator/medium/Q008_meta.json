@@ -1,0 +1,15 @@
+{
+  "id": "VIB-M008",
+  "title": "Are Primitives Supported Query Wrong Primitive",
+  "domain": "vibrator",
+  "difficulty": "medium",
+  "cts_test": "android.os.cts.VibrationEffectTest#testArePrimitivesSupported",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-013",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/Vibrator.java"
+  ],
+  "tags": ["vibrator", "primitives", "index-error"],
+  "estimated_time_minutes": 15,
+  "answer": "D"
+}

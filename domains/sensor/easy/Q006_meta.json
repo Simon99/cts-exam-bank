@@ -1,0 +1,15 @@
+{
+  "id": "SEN-E006",
+  "title": "Sensor.getType() Returns Wrong Value",
+  "domain": "sensor",
+  "difficulty": "easy",
+  "cts_test": "android.hardware.cts.SensorTest#testSensorType",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-021",
+  "injection_type": ["COND"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/Sensor.java"
+  ],
+  "tags": ["type", "constructor", "initialization"],
+  "estimated_time_minutes": 10
+}

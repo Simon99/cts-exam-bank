@@ -1,0 +1,12 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/Attestation.java b/cts/tests/security/src/android/keystore/cts/Attestation.java
+--- a/cts/tests/security/src/android/keystore/cts/Attestation.java
++++ b/cts/tests/security/src/android/keystore/cts/Attestation.java
+@@ -52,7 +52,7 @@ public class Attestation {
+     public static final int KM_VERSION_KEYMASTER_4_1 = 41;
+     public static final int KM_VERSION_KEYMINT_1 = 100;
+     public static final int KM_VERSION_KEYMINT_2 = 200;
+-    public static final int KM_VERSION_KEYMINT_3 = 300;
++    public static final int KM_VERSION_KEYMINT_3 = 200;
+ 
+     int attestationVersion;
+     int keymasterVersion;

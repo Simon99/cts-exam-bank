@@ -2,21 +2,18 @@ diff --git a/frameworks/base/core/java/android/hardware/camera2/CameraManager.ja
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/CameraManager.java
-@@ -765,6 +765,10 @@ public final class CameraManager {
+@@ -1341,10 +1341,13 @@
      public int getTorchStrengthLevel(@NonNull String cameraId)
              throws CameraAccessException {
-         
-+        // BUG: 總是返回 1 而不是實際的 torch strength level
+         if (CameraManagerGlobal.sCameraServiceDisabled) {
++        // BUG: Always returns 1 instead of actual torch strength level
 +        return 1;
-+        
 +        /*
-         if (cameraId == null) {
-             throw new IllegalArgumentException("cameraId was null");
+             throw new IllegalArgumentException("No camera available on device.");
          }
-@@ -772,5 +776,6 @@ public final class CameraManager {
-         synchronized (mLock) {
-             return CameraManagerGlobal.get().getTorchStrengthLevel(cameraId);
-         }
+         return CameraManagerGlobal.get().getTorchStrengthLevel(cameraId);
+-    }
 +        */
-     }
  
+     /**
+      * @hide

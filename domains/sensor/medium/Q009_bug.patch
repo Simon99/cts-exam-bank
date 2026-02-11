@@ -1,0 +1,15 @@
+diff --git a/frameworks/base/core/java/android/hardware/Sensor.java b/frameworks/base/core/java/android/hardware/Sensor.java
+--- a/frameworks/base/core/java/android/hardware/Sensor.java
++++ b/frameworks/base/core/java/android/hardware/Sensor.java
+@@ -982,9 +982,9 @@ public final class Sensor {
+     public boolean isDirectChannelTypeSupported(@SensorDirectChannel.MemoryType int sharedMemType) {
+         switch (sharedMemType) {
+             case SensorDirectChannel.TYPE_MEMORY_FILE:
+-                return (mFlags & (1 << DIRECT_CHANNEL_SHIFT)) > 0;
++                return (mFlags & (1 << DIRECT_CHANNEL_SHIFT)) == 0;
+             case SensorDirectChannel.TYPE_HARDWARE_BUFFER:
+-                return (mFlags & (1 << DIRECT_CHANNEL_SHIFT + 1)) > 0;
++                return (mFlags & (1 << DIRECT_CHANNEL_SHIFT + 1)) == 0;
+             default:
+                 return false;
+         }

@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/os/Vibrator.java b/frameworks/base/core/java/android/os/Vibrator.java
+--- a/frameworks/base/core/java/android/os/Vibrator.java
++++ b/frameworks/base/core/java/android/os/Vibrator.java
+@@ -569,7 +569,7 @@ public abstract class Vibrator {
+     @VibrationEffectSupport
+     public int[] areEffectsSupported(
+             @NonNull @VibrationEffect.EffectType int... effectIds) {
+         VibratorInfo info = getInfo();
+-        int[] supported = new int[effectIds.length];
++        int[] supported = new int[effectIds.length - 1];
+         for (int i = 0; i < effectIds.length; i++) {
+             supported[i] = info.isEffectSupported(effectIds[i]);
+         }

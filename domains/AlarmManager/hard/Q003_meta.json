@@ -1,0 +1,15 @@
+{
+  "id": "ALM-H003",
+  "title": "rebatchAllAlarmsLocked Lost Alarms",
+  "domain": "AlarmManager",
+  "difficulty": "hard",
+  "cts_test": "android.alarmmanager.cts.TimeChangeTests#testRebatchAfterTimeChange",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
+  ],
+  "injection_point": "ALM-063",
+  "tags": ["rebatch", "time-change", "data-loss"],
+  "estimated_time_minutes": 35,
+  "answer": "A"
+}

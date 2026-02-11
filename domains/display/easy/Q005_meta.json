@@ -1,0 +1,23 @@
+{
+  "id": "DIS-E005",
+  "title": "VirtualDisplayDevice 初始狀態設置錯誤",
+  "domain": "display",
+  "difficulty": "easy",
+  "cts_test": "android.hardware.display.cts.VirtualDisplayTest#testPrivateVirtualDisplay",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-010",
+  "injection_type": ["STATE"],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java"
+  ],
+  "tags": [
+    "virtual-display",
+    "state-initialization",
+    "constructor",
+    "display-state"
+  ],
+  "estimated_time_minutes": 15,
+  "bug_description": "VirtualDisplayDevice 建構子中 mDisplayState 被錯誤初始化為 STATE_OFF 而非 STATE_UNKNOWN",
+  "root_cause": "初始狀態語義錯誤，新建立的 virtual display 狀態應為「未知」而非「關閉」",
+  "fix_complexity": "single-line"
+}

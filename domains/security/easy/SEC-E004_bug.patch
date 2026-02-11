@@ -1,0 +1,19 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+--- a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
++++ b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+@@ -577,6 +577,15 @@ public class AuthorizationList {
+         return keySize;
+     }
+ 
++    /**
++     * Validates if the key size is acceptable for RSA operations.
++     * @param keySize the key size to validate
++     * @return true if the key size is valid for RSA
++     */
++    public boolean validateKeySize(int keySize) {
++        return keySize > 2048 && keySize <= 4096;
++    }
++
+     public Set<Integer> getDigests() {
+         return digests;
+     }

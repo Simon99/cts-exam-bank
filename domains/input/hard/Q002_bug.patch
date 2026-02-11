@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/view/InputDevice.java b/frameworks/base/core/java/android/view/InputDevice.java
+--- a/frameworks/base/core/java/android/view/InputDevice.java
++++ b/frameworks/base/core/java/android/view/InputDevice.java
+@@ -1127,7 +1127,7 @@
+         final int numRanges = mMotionRanges.size();
+         for (int i = 0; i < numRanges; i++) {
+             final MotionRange range = mMotionRanges.get(i);
+-            if (range.mAxis == axis && range.mSource == source) {
++            if (range.mAxis == axis) {
+                 return range;
+             }
+         }

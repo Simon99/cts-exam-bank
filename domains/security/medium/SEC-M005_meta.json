@@ -1,0 +1,16 @@
+{
+  "id": "SEC-M005",
+  "title": "AuthorizationList UserAuthType Bitwise AND Instead of OR",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.keystore.cts.AuthorizationListTest#testUserAuthType",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-018",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/AuthorizationList.java"
+  ],
+  "tags": ["authorization-list", "user-auth", "bitwise"],
+  "injection_type": ["CALC"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "A"
+}

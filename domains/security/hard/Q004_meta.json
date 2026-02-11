@@ -1,0 +1,23 @@
+{
+  "id": "SEC-H004",
+  "title": "Verified Boot Root of Trust Validation",
+  "domain": "security",
+  "difficulty": "hard",
+  "cts_test": "android.keystore.cts.RootOfTrustTest#testVerifiedBootStateConsistency",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/RootOfTrust.java"
+  ],
+  "injection_points": ["SEC-021", "SEC-024"],
+  "bug_types": ["array-comparison", "operator-error", "boundary-check", "logic-error"],
+  "tags": ["verified-boot", "root-of-trust", "key-attestation", "byte-array-comparison", "avb"],
+  "estimated_time_minutes": 25,
+  "correct_answer": "D",
+  "requires_understanding": [
+    "Java byte array comparison (== vs Arrays.equals)",
+    "Android Verified Boot states and their meanings",
+    "Root of Trust structure in Key Attestation",
+    "Logical operator precedence and short-circuit evaluation",
+    "Boundary condition validation"
+  ]
+}

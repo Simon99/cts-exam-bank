@@ -1,13 +1,12 @@
 diff --git a/cts/tests/filesystem/src/android/filesystem/cts/FileUtil.java b/cts/tests/filesystem/src/android/filesystem/cts/FileUtil.java
-index abc1234..def5678 100644
 --- a/cts/tests/filesystem/src/android/filesystem/cts/FileUtil.java
 +++ b/cts/tests/filesystem/src/android/filesystem/cts/FileUtil.java
-@@ -35,7 +35,7 @@ public class FileUtil {
+@@ -42,7 +42,7 @@ public class FileUtil {
      private static final Random mRandom = new Random(0);
      private static long mFileId = 0;
  
 -    public static final int BUFFER_SIZE = 10 * 1024 * 1024;
-+    public static final int BUFFER_SIZE = 1024;
- 
++    public static final int BUFFER_SIZE = 1024;  // [BUG] buffer too small
      /**
       * create array with different data per each call
+      *

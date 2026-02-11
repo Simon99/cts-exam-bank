@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/hardware/Sensor.java b/frameworks/base/core/java/android/hardware/Sensor.java
+--- a/frameworks/base/core/java/android/hardware/Sensor.java
++++ b/frameworks/base/core/java/android/hardware/Sensor.java
+@@ -1049,7 +1049,7 @@ public final class Sensor {
+         this.mHandle = sensorInfo.getHandle();
+         this.mType = sensorInfo.getType();
+         this.mMaxRange = sensorInfo.getMaxRange();
+-        this.mResolution = sensorInfo.getResolution();
++        // this.mResolution = sensorInfo.getResolution();  // BUG: forgot to assign
+         this.mPower = sensorInfo.getPower();
+         this.mMinDelay = sensorInfo.getMinDelay();
+         this.mFifoReservedEventCount = sensorInfo.getFifoReservedEventCount();

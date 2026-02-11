@@ -1,0 +1,16 @@
+{
+  "id": "SEC-M008",
+  "title": "KeyChain getCertificateChain Reversed Order",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.keychain.cts.KeyChainTest#testCertificateChainOrder",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-032",
+  "affected_files": [
+    "frameworks/base/keystore/java/android/security/KeyChain.java"
+  ],
+  "tags": ["keychain", "certificate", "order"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 12,
+  "correct_answer": "D"
+}

@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/core/java/android/os/CombinedVibration.java b/frameworks/base/core/java/android/os/CombinedVibration.java
+--- a/frameworks/base/core/java/android/os/CombinedVibration.java
++++ b/frameworks/base/core/java/android/os/CombinedVibration.java
+@@ -220,10 +220,6 @@ public abstract class CombinedVibration implements Parcelable {
+          */
+         @NonNull
+         public CombinedVibration combine() {
+-            if (mEffects.size() == 0) {
+-                throw new IllegalStateException(
+-                        "Combination must have at least one element to combine.");
+-            }
+             CombinedVibration combined = new Stereo(mEffects);
+             combined.validate();
+             return combined;

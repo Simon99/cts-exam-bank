@@ -1,0 +1,15 @@
+{
+  "id": "SEC-M004",
+  "title": "Authorization Tag Parsing",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.keystore.cts.AuthorizationListTest#testTagParsing",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/AuthorizationList.java"
+  ],
+  "injection_point": "SEC-011",
+  "tags": ["authorization", "bitmask", "tag-parsing"],
+  "estimated_time_minutes": 20,
+  "correct_answer": "A"
+}

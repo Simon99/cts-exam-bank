@@ -1,67 +1,75 @@
-# Q007: Intent 序列化時 Categories 集合線程安全問題
+# Q007: Activity 進入 RESUMED 狀態後進程優先級未正確更新
 
 ## CTS 測試失敗現象
 
 ```
-android.content.cts.IntentTest#testCategoriesConcurrency FAILED
+android.server.wm.lifecycle.ActivityLifecycleTests#testResumedActivityProcessPriority FAILED
 
-java.util.ConcurrentModificationException
-    at java.util.ArraySet$1.next(ArraySet.java:345)
-    at android.content.Intent.writeToParcel(Intent.java:11234)
-    at android.content.cts.IntentTest.testCategoriesConcurrency(IntentTest.java:2567)
+java.lang.AssertionError: Expected process state PROCESS_STATE_TOP but was PROCESS_STATE_FOREGROUND_SERVICE
+    at android.server.wm.lifecycle.ActivityLifecycleTests.testResumedActivityProcessPriority(ActivityLifecycleTests.java:1847)
 ```
 
 ## 測試代碼片段
 
 ```java
 @Test
-public void testCategoriesConcurrency() throws Exception {
-    final Intent intent = new Intent();
-    intent.addCategory(Intent.CATEGORY_DEFAULT);
-    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+public void testResumedActivityProcessPriority() throws Exception {
+    final Activity activity = launchTestActivity();
+    waitAndAssertActivityState(activity, ON_RESUME);
     
-    final CountDownLatch latch = new CountDownLatch(2);
-    final AtomicBoolean failed = new AtomicBoolean(false);
+    // 驗證進程狀態是否正確更新為 TOP
+    final ActivityManager am = getContext().getSystemService(ActivityManager.class);
+    final List<RunningAppProcessInfo> processes = am.getRunningAppProcesses();
     
-    // Thread 1: 持續添加 category
-    Thread adder = new Thread(() -> {
-        for (int i = 0; i < 1000; i++) {
-            intent.addCategory("category_" + i);
+    RunningAppProcessInfo targetProcess = null;
+    for (RunningAppProcessInfo process : processes) {
+        if (process.processName.equals(getContext().getPackageName())) {
+            targetProcess = process;
+            break;
         }
-        latch.countDown();
-    });
+    }
     
-    // Thread 2: 持續序列化
-    Thread serializer = new Thread(() -> {
-        for (int i = 0; i < 100; i++) {
-            Parcel parcel = Parcel.obtain();
-            try {
-                intent.writeToParcel(parcel, 0);
-            } catch (ConcurrentModificationException e) {
-                failed.set(true);
-            }
-            parcel.recycle();
-        }
-        latch.countDown();
-    });
+    assertNotNull("Process not found", targetProcess);
+    // 期望 RESUMED Activity 的進程應該是 IMPORTANCE_FOREGROUND
+    assertEquals("Process importance should be FOREGROUND",
+            RunningAppProcessInfo.IMPORTANCE_FOREGROUND,
+            targetProcess.importance);
     
-    adder.start();
-    serializer.start();
-    latch.await(10, TimeUnit.SECONDS);
-    
-    assertFalse("ConcurrentModificationException detected", failed.get());
+    // 驗證進程被正確標記為包含可見 Activity
+    assertTrue("Process should have activities", 
+            targetProcess.importanceReasonCode == 
+                RunningAppProcessInfo.REASON_UNKNOWN);
 }
 ```
 
 ## 背景信息
 
-- Intent 的 categories 是一個 ArraySet
-- 多線程環境下可能同時讀寫
-- 涉及 Intent 序列化和集合同步
+- Activity 狀態透過 `ActivityRecord.setState()` 管理
+- 進程優先級（OOM Adj）會根據 Activity 狀態更新
+- RESUMED 和 STARTED 狀態都需要將進程標記為前台
+- 進程資訊更新會影響系統記憶體管理決策
+
+## 相關源碼路徑
+
+- `frameworks/base/services/core/java/com/android/server/wm/ActivityRecord.java`
+- `frameworks/base/services/core/java/com/android/server/wm/ActivityTaskSupervisor.java`
+- `frameworks/base/services/core/java/com/android/server/am/ProcessList.java`
 
 ## 你的任務
 
-1. 分析線程安全問題的原因
-2. 找出缺少同步的位置
-3. 理解 Intent 在多線程環境下的使用
+1. 分析 `ActivityRecord.setState()` 中狀態轉換的邏輯
+2. 理解 RESUMED 和 STARTED 狀態處理的關聯
+3. 找出為什麼進程優先級沒有正確更新
 4. 提供修復方案
+
+---
+
+**這個問題的根本原因是什麼？**
+
+A) `setState()` 方法在 RESUMED 狀態時過早返回，沒有調用 `onProcessActivityStateChanged()`
+
+B) `setState()` 方法在 RESUMED 狀態時缺少 fall-through 到 STARTED 的邏輯，導致 `updateProcessInfo()` 未被調用
+
+C) `updateBatteryStats()` 錯誤地將進程標記為後台
+
+D) `updateActivityUsageStats()` 與 `updateProcessInfo()` 有競態條件

@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/os/CombinedVibration.java b/frameworks/base/core/java/android/os/CombinedVibration.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/CombinedVibration.java
++++ b/frameworks/base/core/java/android/os/CombinedVibration.java
+@@ -506,7 +506,7 @@ public abstract class CombinedVibration implements Parcelable {
+ 
+         Stereo(@NonNull SparseArray<VibrationEffect> effects) {
+             mEffects = new SparseArray<>(effects.size());
+-            for (int i = 0; i < effects.size(); i++) {
++            for (int i = effects.size() - 1; i >= 0; i--) {
+                 mEffects.put(effects.keyAt(i), effects.valueAt(i));
+             }
+         }

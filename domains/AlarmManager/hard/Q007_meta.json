@@ -1,0 +1,15 @@
+{
+  "id": "ALM-H007",
+  "title": "filterQuotaExceededAlarms Wrong Quota Tracking",
+  "domain": "AlarmManager",
+  "difficulty": "hard",
+  "cts_test": "android.alarmmanager.cts.AppStandbyTests#testAlarmQuota",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
+  ],
+  "injection_point": "ALM-045",
+  "tags": ["quota", "TARE", "standby-bucket"],
+  "estimated_time_minutes": 35,
+  "answer": "C"
+}

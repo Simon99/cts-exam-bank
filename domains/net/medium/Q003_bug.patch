@@ -2,14 +2,12 @@ diff --git a/frameworks/base/core/java/android/net/MailTo.java b/frameworks/base
 index 1234567..abcdefg 100644
 --- a/frameworks/base/core/java/android/net/MailTo.java
 +++ b/frameworks/base/core/java/android/net/MailTo.java
-@@ -71,7 +71,7 @@ public class MailTo {
-         // Parse out the query parameters
-         String query = email.getQuery();
+@@ -78,7 +78,7 @@ public class MailTo {
          if (query != null ) {
              String[] queries = query.split("&");
              for (String q : queries) {
--                String[] nameval = q.split("=", 2);
-+                String[] nameval = q.split("=");
+-                String[] nameval = q.split("=");
++                String[] nameval = q.split("=", 2);
                  if (nameval.length == 0) {
                      continue;
                  }

@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/os/Vibrator.java b/frameworks/base/core/java/android/os/Vibrator.java
+--- a/frameworks/base/core/java/android/os/Vibrator.java
++++ b/frameworks/base/core/java/android/os/Vibrator.java
+@@ -644,7 +644,7 @@ public abstract class Vibrator {
+         VibratorInfo info = getInfo();
+         boolean[] supported = new boolean[primitiveIds.length];
+         for (int i = 0; i < primitiveIds.length; i++) {
+-            supported[i] = info.isPrimitiveSupported(primitiveIds[i]);
++            supported[i] = info.isPrimitiveSupported(primitiveIds[i > 0 ? i - 1 : i]);
+         }
+         return supported;
+     }

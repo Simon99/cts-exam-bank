@@ -1,36 +1,13 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java b/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
-index 1234567..abcdefg 100644
---- a/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
-+++ b/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
-@@ -1245,16 +1245,12 @@ public class LocationProviderManager extends
-         }
- 
-         private void onNewLocation(Location location) {
--            long maxUpdateDelay = mRequest.getMaxUpdateDelayMillis();
--            if (maxUpdateDelay > 0) {
--                // Batching enabled - add to pending batch
--                mPendingLocations.add(location);
--                if (!mBatchDeliveryScheduled) {
--                    scheduleBatchDelivery(maxUpdateDelay);
--                }
--            } else {
--                // Immediate delivery
--                deliverLocation(location);
--            }
-+            // BUG: Batching logic removed - always immediate delivery
-+            deliverLocation(location);
-         }
-
 diff --git a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java
-index 2345678..bcdefgh 100644
+index 1234567..abcdefg 100644
 --- a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java
 +++ b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java
-@@ -756,7 +756,7 @@ public class GnssLocationProvider extends AbstractLocationProvider implements
-     @Override
-     public void onSetRequest(ProviderRequest request) {
-         // Configure batching if supported and requested
--        int batchSize = calculateBatchSize(request);
-+        int batchSize = 1;  // BUG: hardcoded to 1, disabling hardware batching
-         if (batchSize > 1 && mGnssNative.isBatchingSupported()) {
-             mGnssNative.startBatch(request.getIntervalMillis(), batchSize, true);
-         }
+@@ -1315,7 +1315,7 @@ public class GnssLocationProvider extends AbstractLocationProvider implements
+     }
+ 
+     private void startBatching(long batchLengthMs) {
+-        long batchSize = batchLengthMs / mFixInterval;
++        long batchSize = 1;  // BUG: hardcoded to 1, disabling hardware batching optimization
+ 
+         if (DEBUG) {
+             Log.d(TAG, "startBatching " + mFixInterval + " " + batchLengthMs);

@@ -1,0 +1,13 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/Attestation.java b/cts/tests/security/src/android/keystore/cts/Attestation.java
+--- a/cts/tests/security/src/android/keystore/cts/Attestation.java
++++ b/cts/tests/security/src/android/keystore/cts/Attestation.java
+@@ -79,10 +79,6 @@ public class Attestation {
+     public static Attestation loadFromCertificate(X509Certificate x509Cert, boolean strictParsing)
+             throws CertificateParsingException {
+-        if (x509Cert.getExtensionValue(EAT_OID) == null
+-                && x509Cert.getExtensionValue(ASN1_OID) == null) {
+-            throw new CertificateParsingException("No attestation extensions found");
+-        }
+         if (x509Cert.getExtensionValue(EAT_OID) != null) {
+             if (x509Cert.getExtensionValue(ASN1_OID) != null) {
+                 throw new CertificateParsingException("Multiple attestation extensions found");

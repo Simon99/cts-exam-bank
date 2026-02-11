@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+--- a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
++++ b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+@@ -404,7 +404,7 @@ public class AlarmManager {
+         mContext = ctx;
+         mPackageName = ctx.getPackageName();
+         mTargetSdkVersion = ctx.getApplicationInfo().targetSdkVersion;
+-        mAlwaysExact = (mTargetSdkVersion < Build.VERSION_CODES.KITKAT);
++        mAlwaysExact = (mTargetSdkVersion >= Build.VERSION_CODES.KITKAT);
+         mMainThreadHandler = new Handler(ctx.getMainLooper());
+     }
+ 

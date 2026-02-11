@@ -1,0 +1,27 @@
+--- a/frameworks/base/media/java/android/media/MediaFormat.java
++++ b/frameworks/base/media/java/android/media/MediaFormat.java
+@@ -2056,7 +2056,12 @@
+      * remove a key.
+      */
+     public final void setByteBuffer(@NonNull String name, @Nullable ByteBuffer bytes) {
+-        mMap.put(name, bytes);
++        // Bug: store null instead of the buffer for csd keys
++        if (name.startsWith("csd-")) {
++            mMap.put(name, null);  // Breaks CSD handling
++        } else {
++            mMap.put(name, bytes);
++        }
+     }
+ 
+     /**
+--- a/frameworks/av/media/libstagefright/MediaCodec.cpp
++++ b/frameworks/av/media/libstagefright/MediaCodec.cpp
+@@ -5865,6 +5865,8 @@
+ 
+     size_t i = 0;
+     for (;;) {
++        // Bug: skip CSD buffer processing
++        break;
+         sp<ABuffer> csd;
+         if (!format->findBuffer(base::StringPrintf("csd-%zu", i).c_str(), &csd)) {
+             break;

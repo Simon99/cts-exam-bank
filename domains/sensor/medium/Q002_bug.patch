@@ -1,0 +1,16 @@
+diff --git a/frameworks/base/core/java/android/hardware/SensorManager.java b/frameworks/base/core/java/android/hardware/SensorManager.java
+--- a/frameworks/base/core/java/android/hardware/SensorManager.java
++++ b/frameworks/base/core/java/android/hardware/SensorManager.java
+@@ -915,7 +915,11 @@ public abstract class SensorManager {
+      * @throws IllegalArgumentException when listener is null.
+      */
+     public boolean flush(SensorEventListener listener) {
+-        return flushImpl(listener);
++        // Bug: inverted instanceof check causes incorrect flush behavior
++        if (!(listener instanceof SensorEventListener2)) {
++            return flushImpl(listener);
++        }
++        return true;
+     }
+ 
+     /** @hide */

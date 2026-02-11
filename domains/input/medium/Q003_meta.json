@@ -1,0 +1,16 @@
+{
+  "id": "INP-M003",
+  "title": "MotionEvent getActionIndex() Shift Direction Error",
+  "domain": "input",
+  "difficulty": "medium",
+  "cts_test": "android.view.cts.TouchScreenTest#testMultiTouchPointerIndex",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-003",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/MotionEvent.java"
+  ],
+  "tags": ["motion-event", "pointer-index", "bitwise", "shift"],
+  "injection_type": ["CALC"],
+  "estimated_time_minutes": 20,
+  "correct_answer": "B"
+}

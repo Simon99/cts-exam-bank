@@ -1,0 +1,16 @@
+diff --git a/frameworks/base/keystore/java/android/security/KeyChain.java b/frameworks/base/keystore/java/android/security/KeyChain.java
+index abc1234..def5678 100644
+--- a/frameworks/base/keystore/java/android/security/KeyChain.java
++++ b/frameworks/base/keystore/java/android/security/KeyChain.java
+@@ -901,9 +901,8 @@ public final class KeyChain {
+      */
+     public static boolean isKeyAlgorithmSupported(
+             @NonNull @KeyProperties.KeyAlgorithmEnum String algorithm) {
+-        final String algUpper = algorithm.toUpperCase(Locale.US);
+-        return KeyProperties.KEY_ALGORITHM_EC.equals(algUpper)
+-                || KeyProperties.KEY_ALGORITHM_RSA.equals(algUpper);
++        return KeyProperties.KEY_ALGORITHM_EC.equals(algorithm)
++                || KeyProperties.KEY_ALGORITHM_RSA.equals(algorithm);
+     }
+ 
+     /**

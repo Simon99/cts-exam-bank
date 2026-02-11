@@ -1,0 +1,15 @@
+{
+  "id": "VIB-M006",
+  "title": "Composition Add Primitive Scale Validation Failed",
+  "domain": "vibrator",
+  "difficulty": "medium",
+  "cts_test": "android.os.cts.VibrationEffectTest#testCompositionAddPrimitiveScale",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-027",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/VibrationEffect.java"
+  ],
+  "tags": ["vibration-effect", "composition", "scale-validation"],
+  "estimated_time_minutes": 15,
+  "answer": "B"
+}

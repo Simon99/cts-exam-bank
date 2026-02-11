@@ -1,0 +1,10 @@
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+@@ -1141,7 +1141,7 @@
+     public int captureBurst(List<CaptureRequest> requests, CaptureCallback callback,
+             Executor executor) throws CameraAccessException {
+-        if (requests == null || requests.isEmpty()) {
++        if (requests == null && requests.isEmpty()) {
+             throw new IllegalArgumentException("At least one request must be given");
+         }
+         return submitCaptureRequest(requests, callback, executor, /*streaming*/false);

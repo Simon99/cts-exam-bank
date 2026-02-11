@@ -1,7 +1,7 @@
-diff --git a/services/core/java/com/android/server/display/DisplayManagerService.java b/services/core/java/com/android/server/display/DisplayManagerService.java
+diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
 index abcdef123..fedcba987 100644
---- a/services/core/java/com/android/server/display/DisplayManagerService.java
-+++ b/services/core/java/com/android/server/display/DisplayManagerService.java
+--- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
 @@ -1373,7 +1373,7 @@ public final class DisplayManagerService extends SystemService {
              int[] finalUserDisabledHdrTypes = userDisabledHdrTypes;
              mLogicalDisplayMapper.forEachLocked(
@@ -11,11 +11,11 @@ index abcdef123..fedcba987 100644
                          handleLogicalDisplayChangedLocked(display);
                      });
          }
-diff --git a/services/core/java/com/android/server/display/LogicalDisplay.java b/services/core/java/com/android/server/display/LogicalDisplay.java
+diff --git a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
 index abcdef456..fedcba654 100644
---- a/services/core/java/com/android/server/display/LogicalDisplay.java
-+++ b/services/core/java/com/android/server/display/LogicalDisplay.java
-@@ -819,7 +819,7 @@ final class LogicalDisplay {
+--- a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
++++ b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+@@ -218,7 +218,7 @@ final class LogicalDisplay {
      }
  
      public void setUserDisabledHdrTypes(@NonNull int[] userDisabledHdrTypes) {
@@ -24,11 +24,11 @@ index abcdef456..fedcba654 100644
              mUserDisabledHdrTypes = userDisabledHdrTypes;
              mBaseDisplayInfo.userDisabledHdrTypes = userDisabledHdrTypes;
              mInfo.set(null);
-diff --git a/core/java/android/view/Display.java b/core/java/android/view/Display.java
+diff --git a/frameworks/base/core/java/android/view/Display.java b/frameworks/base/core/java/android/view/Display.java
 index abcdef789..fedcba321 100644
---- a/core/java/android/view/Display.java
-+++ b/core/java/android/view/Display.java
-@@ -1244,7 +1244,7 @@ public final class Display {
+--- a/frameworks/base/core/java/android/view/Display.java
++++ b/frameworks/base/core/java/android/view/Display.java
+@@ -1241,7 +1241,7 @@ public final class Display {
              if (mDisplayInfo.hdrCapabilities == null) {
                  return null;
              }

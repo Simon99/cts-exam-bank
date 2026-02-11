@@ -1,30 +1,41 @@
 diff --git a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssMeasurementsProvider.java b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssMeasurementsProvider.java
-index 1234567..abcdefg 100644
 --- a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssMeasurementsProvider.java
 +++ b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssMeasurementsProvider.java
-@@ -145,15 +145,12 @@ public final class GnssMeasurementsProvider extends
+@@ -131,7 +131,8 @@ public final class GnssMeasurementsProvider extends
+         if (request.getIntervalMillis() == GnssMeasurementRequest.PASSIVE_INTERVAL) {
+             return true;
+         }
+-        if (mGnssNative.startMeasurementCollection(request.isFullTracking(),
++        // BUG: hardcoded to false instead of request.isFullTracking()
++        if (mGnssNative.startMeasurementCollection(false,
+                 request.isCorrelationVectorOutputsEnabled(),
+                 request.getIntervalMillis())) {
+             if (D) {
+@@ -196,21 +197,17 @@ public final class GnssMeasurementsProvider extends
      @Override
      protected GnssMeasurementRequest mergeRegistrations(
              Collection<GnssListenerRegistration> registrations) {
 -        boolean fullTracking = false;
-+        // BUG: fullTracking always set to false, ignoring request settings
++        // BUG: fullTracking always stays false, ignoring settings and requests
 +        boolean fullTracking = false;  
-         int intervalMs = Integer.MAX_VALUE;
-         
-         for (GnssListenerRegistration reg : registrations) {
-             GnssMeasurementRequest request = reg.getRequest();
--            // should OR all fullTracking requests
--            fullTracking |= request.isFullTracking();
-+            // BUG: This line was removed - fullTracking never updated
-             intervalMs = Math.min(intervalMs, request.getIntervalMillis());
-         }
-         
-@@ -167,8 +164,7 @@ public final class GnssMeasurementsProvider extends
-     protected boolean registerWithService(GnssMeasurementRequest request,
-             Collection<GnssListenerRegistration> registrations) {
-         if (mGnssNative.startMeasurementCollection(
--                request.isFullTracking(),
-+                false,  // BUG: hardcoded to false instead of request.isFullTracking()
-                 request.isCorrelationVectorOutputsEnabled(),
-                 request.getIntervalMillis())) {
-             return true;
+         boolean enableCorrVecOutputs = false;
+         int intervalMillis = GnssMeasurementRequest.PASSIVE_INTERVAL;
+-
+-        if (mSettingsHelper.isGnssMeasurementsFullTrackingEnabled()) {
+-            fullTracking = true;
+-        }
++        // BUG: removed settings check for fullTracking
+ 
+         for (GnssListenerRegistration registration : registrations) {
+             GnssMeasurementRequest request = registration.getRequest();
+             // passive requests do not contribute to the merged request
+             if (request.getIntervalMillis() == GnssMeasurementRequest.PASSIVE_INTERVAL) {
+                 continue;
+             }
+-            if (request.isFullTracking()) {
+-                fullTracking = true;
+-            }
++            // BUG: removed fullTracking check from request
+             if (request.isCorrelationVectorOutputsEnabled()) {
+                 enableCorrVecOutputs = true;
+             }

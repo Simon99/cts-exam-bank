@@ -1,62 +1,40 @@
-diff --git a/frameworks/base/core/java/android/hardware/camera2/DngCreator.java b/frameworks/base/core/java/android/hardware/camera2/DngCreator.java
-index abcd1234..efgh5678 100644
---- a/frameworks/base/core/java/android/hardware/camera2/DngCreator.java
-+++ b/frameworks/base/core/java/android/hardware/camera2/DngCreator.java
-@@ -134,14 +134,16 @@ public final class DngCreator implements AutoCloseable {
-     public DngCreator(@NonNull CameraCharacteristics characteristics,
-             @NonNull CaptureResult metadata) {
-         
-+        // BUG: 使用了錯誤的 key，導致總是為 null
-         ColorSpaceTransform transform = characteristics.get(
--            CameraCharacteristics.SENSOR_COLOR_TRANSFORM1);
-+            CameraCharacteristics.SENSOR_CALIBRATION_TRANSFORM1);
-         if (transform != null) {
-             setColorMatrix(transform);
-         }
-         
-+        // BUG: illuminant 設置被註解掉
-         Integer illuminant = characteristics.get(
-             CameraCharacteristics.SENSOR_REFERENCE_ILLUMINANT1);
--        if (illuminant != null) {
--            nativeSetCalibrationIlluminant(illuminant);
--        }
-+        // if (illuminant != null) {
-+        //     nativeSetCalibrationIlluminant(illuminant);
-+        // }
-
 diff --git a/frameworks/base/core/jni/android_hardware_camera2_DngCreator.cpp b/frameworks/base/core/jni/android_hardware_camera2_DngCreator.cpp
-index abcd1234..efgh5679 100644
+index abcd1234..efgh5678 100644
 --- a/frameworks/base/core/jni/android_hardware_camera2_DngCreator.cpp
 +++ b/frameworks/base/core/jni/android_hardware_camera2_DngCreator.cpp
-@@ -567,8 +567,9 @@ static void DngCreator_init(JNIEnv* env, jobject thiz,
-         jobject characteristics, jobject result) {
-     
-     if (colorMatrix1.size() > 0) {
--        if (colorMatrix1.size() == 9) {
-+        // BUG: ColorMatrix 應該是 9 個元素 (3x3)，但檢查條件錯誤
-+        if (colorMatrix1.size() == 6) {
-             writer->addEntry(TAG_COLORMATRIX1, colorMatrix1.data(), 
-                 colorMatrix1.size());
+@@ -1711,8 +1711,9 @@ static sp<TiffWriter> DngCreator_setup(JNIEnv* env, jobject thiz,
          }
-@@ -623,7 +624,8 @@ static void DngCreator_writeInputStream(JNIEnv* env, jobject thiz,
-     
-     // Write AsShotNeutral
-     if (asShotNeutral.size() == 3) {
--        addAsShotNeutral(writer, asShotNeutral);
-+        // BUG: AsShotNeutral 寫入被註解
-+        // addAsShotNeutral(writer, asShotNeutral);
+         uint16_t ref1 = entry1.data.u8[0];
+ 
+-        BAIL_IF_INVALID_RET_NULL_SP(writer->addEntry(TAG_CALIBRATIONILLUMINANT1, 1, &ref1,
+-                TIFF_IFD_0), env, TAG_CALIBRATIONILLUMINANT1, writer);
++        // BUG: CalibrationIlluminant1 寫入被註解掉
++        // BAIL_IF_INVALID_RET_NULL_SP(writer->addEntry(TAG_CALIBRATIONILLUMINANT1, 1, &ref1,
++        //         TIFF_IFD_0), env, TAG_CALIBRATIONILLUMINANT1, writer);
+ 
+         if (!singleIlluminant) {
+             uint16_t ref2 = entry2.data.u8[0];
+@@ -1735,8 +1736,9 @@ static sp<TiffWriter> DngCreator_setup(JNIEnv* env, jobject thiz,
+             colorTransform1[ctr++] = entry1.data.r[i].denominator;
+         }
+ 
+-        BAIL_IF_INVALID_RET_NULL_SP(writer->addEntry(TAG_COLORMATRIX1, entry1.count,
+-                colorTransform1, TIFF_IFD_0), env, TAG_COLORMATRIX1, writer);
++        // BUG: ColorMatrix1 寫入被註解掉
++        // BAIL_IF_INVALID_RET_NULL_SP(writer->addEntry(TAG_COLORMATRIX1, entry1.count,
++        //         colorTransform1, TIFF_IFD_0), env, TAG_COLORMATRIX1, writer);
+ 
+         if (!singleIlluminant) {
+             camera_metadata_entry entry2 = characteristics.find(ANDROID_SENSOR_COLOR_TRANSFORM2);
+@@ -1837,8 +1839,9 @@ static sp<TiffWriter> DngCreator_setup(JNIEnv* env, jobject thiz,
+                     static_cast<uint32_t>(entry.data.r[i].denominator);
+         }
+ 
+-        BAIL_IF_INVALID_RET_NULL_SP(writer->addEntry(TAG_ASSHOTNEUTRAL, entry.count, cameraNeutral,
+-                TIFF_IFD_0), env, TAG_ASSHOTNEUTRAL, writer);
++        // BUG: AsShotNeutral 寫入被註解掉
++        // BAIL_IF_INVALID_RET_NULL_SP(writer->addEntry(TAG_ASSHOTNEUTRAL, entry.count, cameraNeutral,
++        //         TIFF_IFD_0), env, TAG_ASSHOTNEUTRAL, writer);
      }
- }
-
-diff --git a/frameworks/base/core/java/android/hardware/camera2/CameraCharacteristics.java b/frameworks/base/core/java/android/hardware/camera2/CameraCharacteristics.java
-index abcd1234..efgh567a 100644
---- a/frameworks/base/core/java/android/hardware/camera2/CameraCharacteristics.java
-+++ b/frameworks/base/core/java/android/hardware/camera2/CameraCharacteristics.java
-@@ -2345,6 +2345,8 @@ public final class CameraCharacteristics extends CameraMetadata<CameraCharacteri
-      * Color transform from sensor RGB to CIE XYZ
-      */
-     public static final Key<ColorSpaceTransform> SENSOR_COLOR_TRANSFORM1 =
-+            // BUG: 這個 key 在某些設備上沒有正確映射
-+            // 應該有 fallback 機制
-             new Key<ColorSpaceTransform>("android.sensor.colorTransform1",
-                     ColorSpaceTransform.class);
+ 
+ 

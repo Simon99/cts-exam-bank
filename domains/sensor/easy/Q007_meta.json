@@ -1,0 +1,15 @@
+{
+  "id": "SEN-E007",
+  "title": "getMaximumRange Returns Negative Value",
+  "domain": "sensor",
+  "difficulty": "easy",
+  "cts_test": "android.hardware.cts.SensorParameterRangeTest#testMaximumRange",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-022",
+  "injection_type": ["CALC"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/Sensor.java"
+  ],
+  "tags": ["range", "sign", "calculation"],
+  "estimated_time_minutes": 5
+}

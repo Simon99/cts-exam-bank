@@ -1,0 +1,19 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+--- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -2313,8 +2313,12 @@ public final class DisplayManagerService extends SystemService {
+             if (displayId != Display.INVALID_DISPLAY) {
+                 setUserPreferredModeForDisplayLocked(displayId, mode);
+             } else {
+                 mUserPreferredMode = mode;
+-                storeModeInGlobalSettingsLocked(
+-                        resolutionWidth, resolutionHeight, refreshRate, mode);
++                // Only notify devices when setting a new mode, not when clearing
++                // to avoid unnecessary display change events during cleanup
++                if (mode != null) {
++                    storeModeInGlobalSettingsLocked(
++                            resolutionWidth, resolutionHeight, refreshRate, mode);
++                }
+             }
+         }
+     }

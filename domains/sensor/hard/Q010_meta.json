@@ -1,0 +1,15 @@
+{
+  "id": "SEN-H010",
+  "title": "Sensor Accuracy Callback Invoked with Wrong Sensor",
+  "domain": "sensor",
+  "difficulty": "hard",
+  "cts_test": "android.hardware.cts.SensorTest#testOnAccuracyChanged",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-043",
+  "injection_type": ["COND"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/SystemSensorManager.java"
+  ],
+  "tags": ["accuracy", "callback", "handle-mapping"],
+  "estimated_time_minutes": 30
+}

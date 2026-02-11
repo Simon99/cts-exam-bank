@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/content/Intent.java b/frameworks/
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/content/Intent.java
 +++ b/frameworks/base/core/java/android/content/Intent.java
-@@ -8450,7 +8450,7 @@ public class Intent implements Parcelable, Cloneable {
+@@ -9243,7 +9243,7 @@ public class Intent implements Parcelable, Cloneable {
       * @return true if the named extra is present.
       */
      public boolean hasExtra(String name) {

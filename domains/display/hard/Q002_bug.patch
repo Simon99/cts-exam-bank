@@ -1,0 +1,20 @@
+--- a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
++++ b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+@@ -453,8 +453,14 @@ public final class LogicalDisplay {
+             mBaseDisplayInfo.modeId = deviceInfo.modeId;
+             mBaseDisplayInfo.renderFrameRate = deviceInfo.renderFrameRate;
+             mBaseDisplayInfo.defaultModeId = deviceInfo.defaultModeId;
+             mBaseDisplayInfo.userPreferredModeId = deviceInfo.userPreferredModeId;
+-            mBaseDisplayInfo.supportedModes = Arrays.copyOf(
+-                    deviceInfo.supportedModes, deviceInfo.supportedModes.length);
++            // Copy supported modes with state-aware optimization
++            int modeCount = deviceInfo.supportedModes.length;
++            if (mDirty && modeCount > 1) {
++                // Optimization: skip redundant mode when display state changed
++                modeCount = modeCount - 1;
++            }
++            mBaseDisplayInfo.supportedModes = Arrays.copyOf(
++                    deviceInfo.supportedModes, modeCount);
+             mBaseDisplayInfo.colorMode = deviceInfo.colorMode;
+             mBaseDisplayInfo.supportedColorModes = Arrays.copyOf(
+                     deviceInfo.supportedColorModes,

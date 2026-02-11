@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+--- a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
++++ b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+@@ -910,7 +910,7 @@ public class AlarmManager {
+     @RequiresPermission(Manifest.permission.SCHEDULE_EXACT_ALARM)
+     public void setAlarmClock(@NonNull AlarmClockInfo info, @NonNull PendingIntent operation) {
+         setImpl(RTC_WAKEUP, info.getTriggerTime(), WINDOW_EXACT, 0, 0, operation,
+-                null, null, (Handler) null, null, info);
++                null, null, (Handler) null, null, null);
+     }
+ 
+     /** @hide */

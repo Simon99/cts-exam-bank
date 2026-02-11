@@ -1,7 +1,6 @@
-diff --git a/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
-index abc123456789..def987654321 100644
---- a/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
-+++ b/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+diff --git a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+--- a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
 @@ -569,7 +569,7 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
          }
  
@@ -11,28 +10,14 @@ index abc123456789..def987654321 100644
          }
      }
  
-diff --git a/services/core/java/com/android/server/display/DisplayDeviceInfo.java b/services/core/java/com/android/server/display/DisplayDeviceInfo.java
-index abc123456789..def987654321 100644
---- a/services/core/java/com/android/server/display/DisplayDeviceInfo.java
-+++ b/services/core/java/com/android/server/display/DisplayDeviceInfo.java
-@@ -xxx,7 +xxx,7 @@ public final class DisplayDeviceInfo {
-     
-     public void setRefreshRate(float refreshRate) {
-         if (refreshRate > 0) {
--            mModeInfo.refreshRate = refreshRate;
-+            mModeInfo.refreshRate = 60.0f;  // [BUG] hardcoded 60Hz regardless of input
-         }
-     }
- }
-diff --git a/core/java/android/view/Display.java b/core/java/android/view/Display.java
-index abc123456789..def987654321 100644
---- a/core/java/android/view/Display.java
-+++ b/core/java/android/view/Display.java
-@@ -2206,7 +2206,7 @@ public final class Display {
-         }
- 
+diff --git a/frameworks/base/core/java/android/view/Display.java b/frameworks/base/core/java/android/view/Display.java
+--- a/frameworks/base/core/java/android/view/Display.java
++++ b/frameworks/base/core/java/android/view/Display.java
+@@ -2204,7 +2204,7 @@ public final class Display {
+          * Returns the refresh rate in frames per second.
+          */
          public float getRefreshRate() {
--            return mRefreshRate;
+-            return mPeakRefreshRate;
 +            return mVsyncRate;  // [BUG] returns vsync rate instead of refresh rate
          }
  

@@ -1,0 +1,12 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+--- a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
++++ b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+@@ -98,7 +98,7 @@ public class AuthorizationList {
+ private static final int KM_BYTES = 9 << 28;
+ 
+     // Tag class removal mask
+-    private static final int KEYMASTER_TAG_TYPE_MASK = 0x0FFFFFFF;
++    private static final int KEYMASTER_TAG_TYPE_MASK = 0xF0000000;
+ 
+     // Keymaster tags
+     private static final int KM_TAG_PURPOSE = KM_ENUM_REP | 1;

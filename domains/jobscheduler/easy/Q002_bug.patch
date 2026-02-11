@@ -2,7 +2,7 @@ diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/j
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/StorageController.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/StorageController.java
-@@ -85,7 +85,7 @@ public final class StorageController extends StateController {
+@@ -53,7 +53,7 @@ public final class StorageController extends StateController {
          }
  
          public boolean isStorageNotLow() {

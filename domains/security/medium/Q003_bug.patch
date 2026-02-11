@@ -1,0 +1,13 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/AttestationApplicationId.java b/cts/tests/security/src/android/keystore/cts/AttestationApplicationId.java
+index abc1234..def5678 100644
+--- a/cts/tests/security/src/android/keystore/cts/AttestationApplicationId.java
++++ b/cts/tests/security/src/android/keystore/cts/AttestationApplicationId.java
+@@ -172,7 +172,7 @@ public class AttestationApplicationId implements java.lang.Comparable<Attestatio
+         public int compare(byte[] a, byte[] b) {
+             int res = Integer.compare(a.length, b.length);
+             if (res != 0) return res;
+-            for (int i = 0; i < a.length; ++i) {
++            for (int i = 0; i < a.length - 1; ++i) {
+                 res = Byte.compare(a[i], b[i]);
+                 if (res != 0) return res;
+             }

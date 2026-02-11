@@ -1,18 +1,19 @@
 {
   "id": "H007",
-  "title": "Intent 序列化時 Categories 集合線程安全問題",
+  "title": "Activity 進入 RESUMED 狀態後進程優先級未正確更新",
   "difficulty": "hard",
   "domain": "framework",
-  "subdomain": "content",
-  "cts_test": "android.content.cts.IntentTest#testCategoriesConcurrency",
-  "cts_module": "CtsContentTestCases",
+  "subdomain": "windowmanager",
+  "cts_test": "android.server.wm.lifecycle.ActivityLifecycleTests#testResumedActivityProcessPriority",
+  "cts_module": "CtsWindowManagerDeviceTestCases",
+  "injection_point": "FW-001",
   "affected_files": [
-    "frameworks/base/core/java/android/content/Intent.java",
-    "frameworks/base/core/java/android/util/ArraySet.java",
-    "frameworks/base/core/java/android/os/Parcel.java"
+    "frameworks/base/services/core/java/com/android/server/wm/ActivityRecord.java"
   ],
-  "tags": ["Intent", "線程安全", "ConcurrentModification"],
-  "estimated_time_minutes": 50,
-  "skills_tested": ["線程同步", "集合安全", "併發程式設計"],
-  "created_at": "2025-01-13"
+  "bug_type": "STATE",
+  "tags": ["Activity", "生命週期", "進程優先級", "fall-through", "switch-case"],
+  "estimated_time_minutes": 35,
+  "skills_tested": ["Activity 狀態機理解", "進程管理", "Java switch 語法"],
+  "correct_answer": "B",
+  "created_at": "2025-02-11"
 }

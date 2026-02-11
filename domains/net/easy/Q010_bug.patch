@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/net/WebAddress.java b/frameworks/
 index 1234567..abcdefg 100644
 --- a/frameworks/base/core/java/android/net/WebAddress.java
 +++ b/frameworks/base/core/java/android/net/WebAddress.java
-@@ -117,7 +117,7 @@ public class WebAddress {
+@@ -128,7 +128,7 @@ public class WebAddress {
          } else if (mPort == -1) {
              if (mScheme.equals("https"))
                  mPort = 443;

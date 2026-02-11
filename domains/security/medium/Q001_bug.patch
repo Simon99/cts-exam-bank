@@ -1,0 +1,27 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/Asn1Utils.java b/cts/tests/security/src/android/keystore/cts/Asn1Utils.java
+index abc1234..def5678 100644
+--- a/cts/tests/security/src/android/keystore/cts/Asn1Utils.java
++++ b/cts/tests/security/src/android/keystore/cts/Asn1Utils.java
+@@ -91,19 +91,11 @@ public class Asn1Utils {
+     public static ASN1Sequence getAsn1SequenceFromStream(final ASN1InputStream asn1InputStream)
+             throws IOException, CertificateParsingException {
+         ASN1Primitive asn1Primitive = asn1InputStream.readObject();
+-        if (!(asn1Primitive instanceof ASN1OctetString)) {
++        if (!(asn1Primitive instanceof ASN1Sequence)) {
+             throw new CertificateParsingException(
+-                    "Expected octet stream, found " + asn1Primitive.getClass().getName());
+-        }
+-        try (ASN1InputStream seqInputStream = new ASN1InputStream(
+-                ((ASN1OctetString) asn1Primitive).getOctets())) {
+-            asn1Primitive = seqInputStream.readObject();
+-            if (!(asn1Primitive instanceof ASN1Sequence)) {
+-                throw new CertificateParsingException(
+-                        "Expected sequence, found " + asn1Primitive.getClass().getName());
+-            }
+-            return (ASN1Sequence) asn1Primitive;
++                    "Expected sequence, found " + asn1Primitive.getClass().getName());
+         }
++        return (ASN1Sequence) asn1Primitive;
+     }
+ 
+     public static Set<Integer> getIntegersFromAsn1Set(ASN1Encodable set)

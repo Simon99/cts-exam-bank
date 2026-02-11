@@ -1,0 +1,31 @@
+diff --git a/frameworks/base/media/java/android/media/MediaCodec.java b/frameworks/base/media/java/android/media/MediaCodec.java
+index 1234567..abcdef1 100644
+--- a/frameworks/base/media/java/android/media/MediaCodec.java
++++ b/frameworks/base/media/java/android/media/MediaCodec.java
+@@ -2349,6 +2349,13 @@ public final class MediaCodec {
+         Object[] values = null;
+ 
+         if (format != null) {
++            // Bug: incorrectly map Flexible to Planar
++            if (format.containsKey(MediaFormat.KEY_COLOR_FORMAT)) {
++                int colorFormat = format.getInteger(MediaFormat.KEY_COLOR_FORMAT);
++                if (colorFormat == MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Flexible) {
++                    format.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Planar);
++                }
++            }
+             Map<String, Object> formatMap = format.getMap();
+             keys = new String[formatMap.size()];
+             values = new Object[formatMap.size()];
+diff --git a/frameworks/base/media/java/android/media/MediaCodecInfo.java b/frameworks/base/media/java/android/media/MediaCodecInfo.java
+index 1234567..abcdef1 100644
+--- a/frameworks/base/media/java/android/media/MediaCodecInfo.java
++++ b/frameworks/base/media/java/android/media/MediaCodecInfo.java
+@@ -537,7 +537,7 @@ public final class MediaCodecInfo {
+          *
+          * @see Image#getFormat
+          */
+-        public static final int COLOR_FormatYUV420Flexible            = 0x7F420888;
++        public static final int COLOR_FormatYUV420Flexible            = 0x7F420889; // Wrong value
+ 
+         /**
+          * Flexible 16 bits per pixel, subsampled YUV color format with 8-bit chroma and luma

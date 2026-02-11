@@ -1,0 +1,22 @@
+{
+  "id": "SEC-H010",
+  "title": "SELinux Neverallow 規則解析與域屬性匹配",
+  "domain": "security",
+  "difficulty": "hard",
+  "cts_test": "android.security.cts.SELinuxNeverallowRulesTest#testNeverallowRules",
+  "cts_module": "CtsSecurityHostTestCases",
+  "affected_files": [
+    "cts/hostsidetests/security/src/android/security/cts/SELinuxNeverallowRulesTest.java"
+  ],
+  "injection_points": ["SEC-051"],
+  "bug_types": ["type-confusion", "api-misuse", "collection-operation"],
+  "tags": ["selinux", "neverallow", "policy-parsing", "set-contains", "violator-attributes"],
+  "estimated_time_minutes": 20,
+  "correct_answer": "C",
+  "requires_understanding": [
+    "SELinux neverallow rule syntax and semantics",
+    "Attribute-based policy definitions",
+    "Java Set.equals() vs Set.contains() distinction",
+    "Violator attribute exception mechanism"
+  ]
+}

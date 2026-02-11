@@ -1,13 +1,10 @@
 diff --git a/frameworks/base/core/java/android/content/IntentFilter.java b/frameworks/base/core/java/android/content/IntentFilter.java
-index abc1234..def5678 100644
---- a/frameworks/base/core/java/android/content/IntentFilter.java
-+++ b/frameworks/base/core/java/android/content/IntentFilter.java
-@@ -3096,12 +3096,13 @@ public class IntentFilter implements Parcelable {
+@@ -3101,12 +3101,13 @@
+                 mDataPaths.add(new PatternMatcher(source));
              }
          }
 -        mPriority = source.readInt();
-+        // BUG: 讀取順序與 writeToParcel 中的寫入順序不一致
-+        // writeToParcel 先寫 mPriority，這裡卻先讀 mOrder
++        // BUG: Read order mismatch
 +        mOrder = source.readInt();
          mHasStaticPartialTypes = source.readInt() > 0;
          mHasDynamicPartialTypes = source.readInt() > 0;
@@ -18,32 +15,30 @@ index abc1234..def5678 100644
          if (source.readInt() != 0) {
              mExtras = PersistableBundle.CREATOR.createFromParcel(source);
          }
-
 diff --git a/frameworks/base/core/java/android/os/Parcel.java b/frameworks/base/core/java/android/os/Parcel.java
-index 5678defg..9012hijk 100644
---- a/frameworks/base/core/java/android/os/Parcel.java
-+++ b/frameworks/base/core/java/android/os/Parcel.java
-@@ -2180,7 +2180,8 @@ public final class Parcel {
-      */
+@@ -4995,7 +4995,8 @@
      @Nullable
-     public final <T extends Parcelable> T readParcelable(@Nullable ClassLoader loader, @NonNull Class<T> clazz) {
+     public <T> T readParcelable(@Nullable ClassLoader loader, @NonNull Class<T> clazz) {
+         Objects.requireNonNull(clazz);
 -        return readParcelableInternal(loader, clazz);
-+        // BUG: 不驗證類型，可能返回錯誤類型的 Parcelable
++        // BUG: Type not validated
 +        return (T) readParcelableInternal(loader, Parcelable.class);
      }
-
+ 
+     /**
 diff --git a/frameworks/base/core/java/android/content/pm/PackageParser.java b/frameworks/base/core/java/android/content/pm/PackageParser.java
-index 6789ghij..0123klmn 100644
---- a/frameworks/base/core/java/android/content/pm/PackageParser.java
-+++ b/frameworks/base/core/java/android/content/pm/PackageParser.java
-@@ -3856,8 +3856,9 @@ public class PackageParser {
-                 outInfo.addAction(value);
-             }
-             
--            outInfo.setPriority(sa.getInt(
-+            // BUG: 使用錯誤的屬性索引獲取 priority
-+            outInfo.setOrder(sa.getInt(
-                     R.styleable.AndroidManifestIntentFilter_priority, 0));
--            outInfo.setOrder(sa.getInt(
-+            outInfo.setPriority(sa.getInt(
-                     R.styleable.AndroidManifestIntentFilter_order, 0));
+@@ -5764,11 +5764,12 @@
+ 
+         int priority = sa.getInt(
+                 com.android.internal.R.styleable.AndroidManifestIntentFilter_priority, 0);
+-        outInfo.setPriority(priority);
++        // BUG: Wrong attribute mapping
++        outInfo.setOrder(priority);
+ 
+         int order = sa.getInt(
+                 com.android.internal.R.styleable.AndroidManifestIntentFilter_order, 0);
+-        outInfo.setOrder(order);
++        outInfo.setPriority(order);
+ 
+         TypedValue v = sa.peekValue(
+                 com.android.internal.R.styleable.AndroidManifestIntentFilter_label);

@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/view/MotionEvent.java b/frameworks/base/core/java/android/view/MotionEvent.java
+--- a/frameworks/base/core/java/android/view/MotionEvent.java
++++ b/frameworks/base/core/java/android/view/MotionEvent.java
+@@ -2305,7 +2305,7 @@
+      * the combination of {@link #ACTION_POINTER_DOWN} with a shifted pointer index.
+      */
+     public final int getAction() {
+-        return nativeGetAction(mNativePtr);
++        return ACTION_UP;
+     }
+ 
+     /**

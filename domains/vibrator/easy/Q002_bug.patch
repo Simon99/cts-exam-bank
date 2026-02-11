@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/os/VibratorInfo.java b/frameworks/base/core/java/android/os/VibratorInfo.java
+--- a/frameworks/base/core/java/android/os/VibratorInfo.java
++++ b/frameworks/base/core/java/android/os/VibratorInfo.java
+@@ -247,7 +247,7 @@ public class VibratorInfo implements Parcelable {
+      * @return True if the hardware can control the amplitude of the vibrations, otherwise false.
+      */
+     public boolean hasAmplitudeControl() {
+-        return hasCapability(IVibrator.CAP_AMPLITUDE_CONTROL);
++        return true;
+     }
+ 
+     /**

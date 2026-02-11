@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java b/frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java
++++ b/frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java
+@@ -374,7 +374,7 @@ public class BrightnessTracker {
+             builder.setIsDefaultBrightnessConfig(isDefaultBrightnessConfig);
+             builder.setUniqueDisplayId(uniqueDisplayId);
+ 
+-            if (luxValues.length == 0) {
++            if (luxValues.length <= 1) {
+                 // No sensor data so ignore this.
+                 return;
+             }

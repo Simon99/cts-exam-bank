@@ -1,0 +1,17 @@
+diff --git a/frameworks/base/media/java/android/media/MediaFormat.java b/frameworks/base/media/java/android/media/MediaFormat.java
+index abcdef1..1234567 100644
+--- a/frameworks/base/media/java/android/media/MediaFormat.java
++++ b/frameworks/base/media/java/android/media/MediaFormat.java
+@@ -1985,8 +1985,12 @@ public final class MediaFormat {
+      * @throws ClassCastException if the stored value for the key is int, long, float or String
+      */
+     public final @Nullable ByteBuffer getByteBuffer(@NonNull String name) {
+-        return (ByteBuffer)mMap.get(name);
++        // Bug: return null for HDR keys to simulate metadata loss
++        if (name != null && name.startsWith("hdr")) {
++            return null;
++        }
++        return (ByteBuffer)mMap.get(name);
+     }
+ 
+     /**

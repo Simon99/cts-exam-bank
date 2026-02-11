@@ -1,0 +1,15 @@
+{
+  "id": "SEN-M005",
+  "title": "getDynamicSensorList Returns Static Sensors",
+  "domain": "sensor",
+  "difficulty": "medium",
+  "cts_test": "android.hardware.cts.SensorTest#testDynamicSensorList",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-012",
+  "injection_type": ["COND"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/SensorManager.java"
+  ],
+  "tags": ["dynamic-sensor", "filter", "negation"],
+  "estimated_time_minutes": 15
+}

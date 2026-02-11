@@ -1,48 +1,37 @@
-diff --git a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
-index abc1234..def5678 100644
---- a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
-+++ b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
-@@ -857,18 +857,22 @@ EGLBoolean eglDestroySurfaceImpl(EGLDisplay dpy, EGLSurface surface) {
-     egl_display_t* dp = get_display(dpy);
-     if (!dp) return setError(EGL_BAD_DISPLAY, (EGLBoolean)EGL_FALSE);
+--- a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp	2026-02-11 07:28:51.210103626 +0800
++++ b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp	2026-02-11 07:32:10.765494957 +0800
+@@ -858,15 +858,18 @@
+     const egl_display_t* dp = validate_display(dpy);
+     if (!dp) return EGL_FALSE;
  
 -    SurfaceRef _s(dp, surface);
 -    if (!_s.get()) return setError(EGL_BAD_SURFACE, (EGLBoolean)EGL_FALSE);
 -
--    egl_surface_t* s = _s.get();
--    EGLBoolean result = s->cnx->egl.eglDestroySurface(dp->disp.dpy, s->surface);
-+    // BUG: Early return before SurfaceRef destructor runs
-+    // This causes the refcount to be incorrect
-+    egl_surface_t* s = get_surface(surface);
-+    if (!s) return setError(EGL_BAD_SURFACE, (EGLBoolean)EGL_FALSE);
-     
--    if (result) {
--        s->terminate();
 +    // BUG: Missing SurfaceRef RAII wrapper - refs not properly managed
-+    // Should use: SurfaceRef _s(dp, surface); 
++    // Should use: SurfaceRef _s(dp, surface);
 +    // But this code directly manipulates the surface without proper ref tracking
-+    
-+    EGLBoolean result = s->cnx->egl.eglDestroySurface(dp->disp.dpy, s->surface);
-+    if (result == EGL_TRUE) {
-+        s->terminate();  // BUG: terminate() called but destroy() never called
-+        // Missing: Need to also call s->destroy() to decrement final ref
+     egl_surface_t* const s = get_surface(surface);
++    if (!s) return setError(EGL_BAD_SURFACE, (EGLBoolean)EGL_FALSE);
++
+     EGLBoolean result = s->cnx->egl.eglDestroySurface(dp->disp.dpy, s->surface);
+     if (result == EGL_TRUE) {
+-        _s.terminate();
++        s->terminate();  // BUG: terminate() called but SurfaceRef destructor never runs
++        // Missing: SurfaceRef would have called destroy() in its destructor
      }
-     
 -    return result;
-+    return result;  // BUG: Surface ref leaked - display refcount never decremented
++    return result;  // BUG: Surface ref leaked - display refcount never decremented properly
  }
  
- EGLSurface eglCreatePbufferSurfaceImpl(EGLDisplay dpy, EGLConfig config,
-diff --git a/frameworks/native/opengl/libs/EGL/egl_object.cpp b/frameworks/native/opengl/libs/EGL/egl_object.cpp
-index abc1234..def5678 100644
---- a/frameworks/native/opengl/libs/EGL/egl_object.cpp
-+++ b/frameworks/native/opengl/libs/EGL/egl_object.cpp
-@@ -28,6 +28,8 @@ void egl_object_t::terminate() {
+ EGLBoolean eglQuerySurfaceImpl(EGLDisplay dpy, EGLSurface surface, EGLint attribute,
+--- a/frameworks/native/opengl/libs/EGL/egl_object.cpp	2026-02-11 07:31:33.353508570 +0800
++++ b/frameworks/native/opengl/libs/EGL/egl_object.cpp	2026-02-11 07:32:18.455696501 +0800
+@@ -30,6 +30,8 @@
+ void egl_object_t::terminate() {
      // this marks the object as "terminated"
      display->removeObject(this);
++    // BUG: This warning indicates a problem but doesn't fix the leak
++    // The object is now orphaned with a dangling reference
      if (decRef() == 1) {
-+        // BUG: This warning indicates a problem but doesn't fix the leak
-+        // The object is now orphaned with a dangling reference
          // shouldn't happen because this is called from LocalRef
          ALOGE("egl_object_t::terminate() removed the last reference!");
-     }

@@ -1,15 +1,15 @@
 diff --git a/frameworks/base/media/java/android/media/MediaMuxer.java b/frameworks/base/media/java/android/media/MediaMuxer.java
-index 1234567890ab..abcdef123456 100644
 --- a/frameworks/base/media/java/android/media/MediaMuxer.java
 +++ b/frameworks/base/media/java/android/media/MediaMuxer.java
-@@ -156,8 +156,8 @@ public final class MediaMuxer {
-         /**
-          * MPEG4 media file format
-          */
--        public static final int MUXER_OUTPUT_MPEG_4 = 0;
--        public static final int MUXER_OUTPUT_WEBM = 1;
-+        public static final int MUXER_OUTPUT_MPEG_4 = 1;
-+        public static final int MUXER_OUTPUT_WEBM = 0;
-         public static final int MUXER_OUTPUT_3GPP = 2;
-         public static final int MUXER_OUTPUT_HEIF = 3;
-         public static final int MUXER_OUTPUT_OGG = 4;
+@@ -259,9 +259,9 @@ public final class MediaMuxer {
+         /** @hide */
+         public static final int MUXER_OUTPUT_FIRST   = 0;
+         /** MPEG4 media file format*/
+-        public static final int MUXER_OUTPUT_MPEG_4 = MUXER_OUTPUT_FIRST;
++        public static final int MUXER_OUTPUT_MPEG_4 = MUXER_OUTPUT_FIRST + 1;
+         /** WEBM media file format*/
+-        public static final int MUXER_OUTPUT_WEBM   = MUXER_OUTPUT_FIRST + 1;
++        public static final int MUXER_OUTPUT_WEBM   = MUXER_OUTPUT_FIRST;
+         /** 3GPP media file format*/
+         public static final int MUXER_OUTPUT_3GPP   = MUXER_OUTPUT_FIRST + 2;
+         /** HEIF media file format*/

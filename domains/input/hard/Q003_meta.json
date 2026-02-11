@@ -1,0 +1,16 @@
+{
+  "id": "INP-H003",
+  "title": "MotionPredictor predict() Unit Conversion",
+  "domain": "input",
+  "difficulty": "hard",
+  "cts_test": "android.view.cts.MotionPredictorTest#testPredict",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-072",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/MotionPredictor.java"
+  ],
+  "tags": ["motion-predictor", "prediction", "time-units"],
+  "injection_type": ["CALC", "STATE"],
+  "estimated_time_minutes": 25,
+  "correct_answer": "A"
+}

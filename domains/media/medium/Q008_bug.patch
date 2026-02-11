@@ -1,0 +1,18 @@
+diff --git a/frameworks/base/media/java/android/media/MediaExtractor.java b/frameworks/base/media/java/android/media/MediaExtractor.java
+index 1234567890ab..abcdef123456 100644
+--- a/frameworks/base/media/java/android/media/MediaExtractor.java
++++ b/frameworks/base/media/java/android/media/MediaExtractor.java
+@@ -631,11 +631,11 @@ public final class MediaExtractor {
+     /**
+      * If possible, seek to a sync sample at or before the specified time
+      */
+-    public static final int SEEK_TO_PREVIOUS_SYNC       = 0;
++    public static final int SEEK_TO_PREVIOUS_SYNC       = 1;  // Bug: swapped with NEXT_SYNC
+     /**
+      * If possible, seek to a sync sample at or after the specified time
+      */
+-    public static final int SEEK_TO_NEXT_SYNC           = 1;
++    public static final int SEEK_TO_NEXT_SYNC           = 0;  // Bug: swapped with PREVIOUS_SYNC
+     /**
+      * If possible, seek to the sync sample closest to the specified time
+      */

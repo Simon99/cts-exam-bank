@@ -1,31 +1,31 @@
-diff --git a/frameworks/native/opengl/libs/EGL/egl_layers.cpp b/frameworks/native/opengl/libs/EGL/egl_layers.cpp
-index abc1234..def5678 100644
 --- a/frameworks/native/opengl/libs/EGL/egl_layers.cpp
 +++ b/frameworks/native/opengl/libs/EGL/egl_layers.cpp
-@@ -156,11 +156,7 @@ void LayerLoader::loadLayers() {
-         return;
+@@ -342,10 +342,7 @@
+ void LayerLoader::LoadLayers() {
+     std::string debug_layers = GetDebugLayers();
+ 
+-    // If no layers are specified, we're done
+-    if (debug_layers.empty()) return;
+-
+-    // Only enable the system search path for non-user builds
++    // BUG: Removed empty check - causes issues when no layers specified
+     std::string system_path;
+     if (android::GraphicsEnv::getInstance().isDebuggable()) {
+         system_path = kSystemLayerLibraryDir;
+--- a/frameworks/native/opengl/libs/EGL/egl.cpp
++++ b/frameworks/native/opengl/libs/EGL/egl.cpp
+@@ -137,11 +137,10 @@
+     cnx->hooks[egl_connection_t::GLESv2_INDEX] = &gHooks[egl_connection_t::GLESv2_INDEX];
+     cnx->dso = loader.open(cnx);
+ 
+-    // Check to see if any layers are enabled and route functions through them
++    // BUG: LayerLoader instantiated outside dso check
++    LayerLoader& layer_loader(LayerLoader::getInstance());
++    // Check to see if layers are enabled
+     if (cnx->dso) {
+-        // Layers can be enabled long after the drivers have been loaded.
+-        // They will only be initialized once.
+-        LayerLoader& layer_loader(LayerLoader::getInstance());
+         layer_loader.InitLayers(cnx);
      }
-     
--    // Ensure driver is loaded first
--    if (!gEGLImpl.dso) {
--        ALOGE("Cannot load layers before driver");
--        return;
--    }
-+    // BUG: Driver check removed - platform may not be initialized
-     
-     for (const auto& layerPath : layerPaths) {
-         auto layer = std::make_unique<egl_layer_t>();
-diff --git a/frameworks/native/opengl/libs/EGL/Loader.cpp b/frameworks/native/opengl/libs/EGL/Loader.cpp
-index abc1234..def5678 100644
---- a/frameworks/native/opengl/libs/EGL/Loader.cpp
-+++ b/frameworks/native/opengl/libs/EGL/Loader.cpp
-@@ -234,8 +234,8 @@ void* Loader::open(egl_connection_t* cnx) {
-     // ...driver loading code...
-     
--    // Load layers AFTER driver is fully initialized
--    LayerLoader::getInstance().loadLayers();
-+    LayerLoader::getInstance().loadLayers();  // BUG: called too early
-+    // Initialize platform functions AFTER layers
-     initializePlatform(cnx);
-     
-     return dso;
+ 

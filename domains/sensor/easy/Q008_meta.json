@@ -1,0 +1,15 @@
+{
+  "id": "SEN-E008",
+  "title": "getResolution Returns Zero",
+  "domain": "sensor",
+  "difficulty": "easy",
+  "cts_test": "android.hardware.cts.SensorParameterRangeTest#testResolution",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-023",
+  "injection_type": ["CALC"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/Sensor.java"
+  ],
+  "tags": ["resolution", "initialization", "missing-assignment"],
+  "estimated_time_minutes": 10
+}

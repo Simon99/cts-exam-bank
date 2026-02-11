@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java b/frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java
++++ b/frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java
+@@ -655,7 +655,7 @@ final class DisplayDeviceInfo {
+         if ((flags & FLAG_OWN_CONTENT_ONLY) != 0) {
+             msg.append(", FLAG_OWN_CONTENT_ONLY");
+         }
+-        if ((flags & FLAG_ROUND) != 0) {
++        if ((flags & FLAG_ROUND) == 0) {
+             msg.append(", FLAG_ROUND");
+         }
+         if ((flags & FLAG_CAN_SHOW_WITH_INSECURE_KEYGUARD) != 0) {

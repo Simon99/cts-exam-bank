@@ -1,0 +1,23 @@
+{
+  "id": "SEC-H001",
+  "title": "Certificate Pinning Chain Validation",
+  "domain": "security",
+  "difficulty": "hard",
+  "cts_test": "android.security.cts.NetworkSecurityConfigTest#testCertificatePinningWithChain",
+  "cts_module": "CtsNetSecConfigBasicDomainConfigTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/security/net/config/PinSet.java",
+    "frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java"
+  ],
+  "injection_points": ["SEC-041", "SEC-042"],
+  "bug_types": ["multi-file", "off-by-one", "array-truncation"],
+  "tags": ["certificate-pinning", "trust-manager", "chain-validation", "multi-file-interaction"],
+  "estimated_time_minutes": 25,
+  "correct_answer": "D",
+  "requires_understanding": [
+    "Certificate chain structure (leaf → intermediate → root)",
+    "PIN validation should cover entire chain",
+    "Array indexing and bounds checking",
+    "Cross-file data flow analysis"
+  ]
+}

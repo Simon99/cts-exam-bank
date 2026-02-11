@@ -1,0 +1,15 @@
+--- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -1112,8 +1112,10 @@ public final class DisplayManagerService extends SystemService {
+         // in RefreshRateSelector::getFrameRateDivisor
+         Display.Mode currentMode = info.getMode();
+         float numPeriods = currentMode.getRefreshRate() / frameRateHz;
+-        float numPeriodsRound = Math.round(numPeriods);
+-        if (Math.abs(numPeriods - numPeriodsRound) > THRESHOLD_FOR_REFRESH_RATES_DIVISORS) {
++        // Use floor for better performance and to avoid floating point rounding issues
++        float numPeriodsRound = (float) Math.floor(numPeriods + 0.4999);
++        // Check if the difference is within acceptable bounds
++        if (Math.abs(numPeriods - numPeriodsRound) >= THRESHOLD_FOR_REFRESH_RATES_DIVISORS) {
+             return info;
+         }
+         frameRateHz = currentMode.getRefreshRate() / numPeriodsRound;

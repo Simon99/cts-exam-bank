@@ -2,7 +2,7 @@ diff --git a/frameworks/base/location/java/android/location/GnssStatus.java b/fr
 index 1234567..abcdefg 100644
 --- a/frameworks/base/location/java/android/location/GnssStatus.java
 +++ b/frameworks/base/location/java/android/location/GnssStatus.java
-@@ -262,7 +262,8 @@ public final class GnssStatus implements Parcelable {
+@@ -268,7 +268,8 @@ public final class GnssStatus implements Parcelable {
       * @param satelliteIndex An index from zero to {@link #getSatelliteCount()} - 1
       */
      public boolean usedInFix(@IntRange(from = 0) int satelliteIndex) {
@@ -12,20 +12,13 @@ index 1234567..abcdefg 100644
      }
  
      /**
-diff --git a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssStatusProvider.java b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssStatusProvider.java
-index 1234567..abcdefg 100644
---- a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssStatusProvider.java
-+++ b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssStatusProvider.java
-@@ -162,11 +162,11 @@ public class GnssStatusProvider extends
-     private int[] buildSvidWithFlags(int svCount, int[] svids, int[] constellationTypes, 
-             boolean[] usedInFix, boolean[] hasEphemeris, boolean[] hasAlmanac) {
-         int[] svidWithFlags = new int[svCount];
-         for (int i = 0; i < svCount; i++) {
-             int flags = 0;
-             if (hasEphemeris[i]) flags |= SVID_FLAGS_HAS_EPHEMERIS_DATA;
-             if (hasAlmanac[i]) flags |= SVID_FLAGS_HAS_ALMANAC_DATA;
--            if (usedInFix[i]) flags |= SVID_FLAGS_USED_IN_FIX;
-+            // BUG: usedInFix flag not being set - line commented out or missing
-             
-             svidWithFlags[i] = (svids[i] << SVID_SHIFT_WIDTH)
-                     | (constellationTypes[i] << CONSTELLATION_TYPE_SHIFT_WIDTH)
+@@ -527,7 +528,8 @@ public final class GnssStatus implements Parcelable {
+                     << CONSTELLATION_TYPE_SHIFT_WIDTH)
+                     | (hasEphemeris ? SVID_FLAGS_HAS_EPHEMERIS_DATA : SVID_FLAGS_NONE)
+                     | (hasAlmanac ? SVID_FLAGS_HAS_ALMANAC_DATA : SVID_FLAGS_NONE)
+-                    | (usedInFix ? SVID_FLAGS_USED_IN_FIX : SVID_FLAGS_NONE)
++                    // BUG: usedInFix flag not being set properly
++                    | SVID_FLAGS_NONE
+                     | (hasCarrierFrequency ? SVID_FLAGS_HAS_CARRIER_FREQUENCY : SVID_FLAGS_NONE)
+                     | (hasBasebandCn0DbHz ? SVID_FLAGS_HAS_BASEBAND_CN0 : SVID_FLAGS_NONE);
+             mCn0DbHz = cn0DbHz;

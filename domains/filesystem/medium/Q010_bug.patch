@@ -2,27 +2,12 @@ diff --git a/frameworks/base/services/core/java/com/android/server/StorageManage
 index abc1234..def5678 100644
 --- a/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
 +++ b/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
-@@ -2520,8 +2520,8 @@ class StorageManagerService extends IStorageManager.Stub
-     private boolean isCallerAllowedToMountObb(String obbPath, String callingPackage, int uid) {
-         // Check if the OBB file path contains the calling package name
-         final ObbInfo obbInfo = getObbInfo(obbPath);
--        if (obbInfo != null && callingPackage.equals(obbInfo.packageName)) {
--            return true;
-+        if (obbInfo != null && !callingPackage.equals(obbInfo.packageName)) {
-+            return true;  // Logic inverted: allows wrong package
-         }
-         // Check if caller has permission to access OBB storage
-         return checkObbPermission(uid);
-diff --git a/frameworks/base/core/java/android/content/res/ObbInfo.java b/frameworks/base/core/java/android/content/res/ObbInfo.java
-index 111222..333444 100644
---- a/frameworks/base/core/java/android/content/res/ObbInfo.java
-+++ b/frameworks/base/core/java/android/content/res/ObbInfo.java
-@@ -85,7 +85,7 @@ public class ObbInfo implements Parcelable {
-      * Returns the package name associated with this OBB.
-      */
-     public String getPackageName() {
--        return packageName;
-+        return packageName != null ? packageName.toLowerCase() : null;
-     }
+@@ -4379,7 +4379,7 @@ class StorageManagerService extends IStorageManager.Stub
+         public void handleExecute() throws ObbException {
+             warnOnNotMounted();
  
-     @Override
+-            if (!isUidOwnerOfPackageOrSystem(mObbInfo.packageName, mCallingUid)) {
++            if (isUidOwnerOfPackageOrSystem(mObbInfo.packageName, mCallingUid)) {
+                 throw new ObbException(ERROR_PERMISSION_DENIED, "Denied attempt to mount OBB "
+                         + mObbInfo.filename + " which is owned by " + mObbInfo.packageName);
+             }

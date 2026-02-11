@@ -1,0 +1,15 @@
+{
+  "id": "ALM-H006",
+  "title": "rescheduleKernelAlarmsLocked Missed Wakeup",
+  "domain": "AlarmManager",
+  "difficulty": "hard",
+  "cts_test": "android.alarmmanager.cts.BasicApiTests#testKernelAlarmReschedule",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
+  ],
+  "injection_point": "ALM-037",
+  "tags": ["kernel-alarm", "wakeup", "reschedule"],
+  "estimated_time_minutes": 35,
+  "answer": "B"
+}

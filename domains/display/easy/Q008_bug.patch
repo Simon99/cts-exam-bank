@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+index 1234567..abcdefg 100644
+--- a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+@@ -224,7 +224,7 @@ final class VirtualDisplayAdapter extends DisplayAdapter {
+     static String generateDisplayUniqueId(String packageName, int uid,
+             VirtualDisplayConfig config) {
+         return UNIQUE_ID_PREFIX + packageName + ((config.getUniqueId() != null)
+-                ? (":" + config.getUniqueId())
+-                : ("," + uid + "," + config.getName() + "," + sNextUniqueIndex.getAndIncrement()));
++                ? (config.getUniqueId())
++                : ("," + uid + "," + config.getName() + "," + sNextUniqueIndex.getAndIncrement()));
+     }
+ 

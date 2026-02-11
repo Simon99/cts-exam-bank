@@ -1,0 +1,22 @@
+diff --git a/frameworks/av/media/libstagefright/MPEG4Writer.cpp b/frameworks/av/media/libstagefright/MPEG4Writer.cpp
+--- a/frameworks/av/media/libstagefright/MPEG4Writer.cpp
++++ b/frameworks/av/media/libstagefright/MPEG4Writer.cpp
+@@ -2895,11 +2895,14 @@ void MPEG4Writer::threadFunc() {
+     while (!mDone) {
+         Chunk chunk;
+         bool chunkFound = false;
+-
+-        while (!mDone && !(chunkFound = findChunkToWrite(&chunk))) {
+-            mChunkReadyCondition.wait(mLock);
++        // Bug: drain all chunks immediately without proper timestamp ordering
++        // This breaks interleaving - chunks written per-track sequentially
++        while (findChunkToWrite(&chunk)) {
++            writeChunkToFile(&chunk);
++            chunkFound = true;
+         }
+-
++        if (chunkFound) break;  // Bug: exit after batch write
++        mChunkReadyCondition.wait(mLock);
+         // In real time recording mode, write without holding the lock in order
+         // to reduce the blocking time for media track threads.
+         // Otherwise, hold the lock until the existing chunks get written to the

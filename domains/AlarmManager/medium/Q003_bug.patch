@@ -1,0 +1,10 @@
+diff --git a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+--- a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
++++ b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+@@ -1237,7 +1237,7 @@ public class AlarmManager {
+     public void setAndAllowWhileIdle(@AlarmType int type, long triggerAtMillis,
+             @NonNull PendingIntent operation) {
+-        setImpl(type, triggerAtMillis, WINDOW_HEURISTIC, 0, FLAG_ALLOW_WHILE_IDLE,
++        setImpl(type, triggerAtMillis, WINDOW_HEURISTIC, 0, 0,
+                 operation, null, null, (Handler) null, null, null);
+     }

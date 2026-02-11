@@ -1,15 +1,3 @@
-diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/ConnectivityController.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/ConnectivityController.java
-index abcd1234..efgh5678 100644
---- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/ConnectivityController.java
-+++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/ConnectivityController.java
-@@ -450,7 +450,7 @@ public final class ConnectivityController extends RestrictingController implemen
-     private boolean isNetworkUnmetered(NetworkCapabilities capabilities) {
-         return capabilities != null 
--                && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED);
-+                && !capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED);
-     }
- 
-     private boolean isSatisfied(JobStatus job, Network network,
 diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
 index 11111111..22222222 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java

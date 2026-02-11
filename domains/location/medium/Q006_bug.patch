@@ -2,34 +2,30 @@ diff --git a/frameworks/base/location/java/android/location/LocationListener.jav
 index 1234567..abcdefg 100644
 --- a/frameworks/base/location/java/android/location/LocationListener.java
 +++ b/frameworks/base/location/java/android/location/LocationListener.java
-@@ -78,7 +78,8 @@ public interface LocationListener {
+@@ -96,7 +96,8 @@ public interface LocationListener {
+      *
       * @param provider the name of the location provider
-      * @param enabled  whether the provider is enabled
       */
 -    default void onProviderEnabled(@NonNull String provider) {}
 +    // BUG: Swapped default - method does nothing when enabled changes
 +    default void onProviderEnabled(@NonNull String provider) { onProviderDisabled(provider); }
  
      /**
-      * Called when a provider this listener is registered with becomes disabled. If a provider is
+      * Called when the provider this listener is registered with becomes disabled. If a provider is
 diff --git a/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java b/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
 index 1234567..abcdefg 100644
 --- a/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
 +++ b/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
-@@ -892,13 +892,10 @@ public class LocationProviderManager extends
+@@ -1015,10 +1015,8 @@ public class LocationProviderManager extends
+                 return;
+             }
+ 
+-            // we choose not to hold a wakelock for provider enabled changed events
+-            executeSafely(getExecutor(), () -> mProviderTransport,
+-                    listener -> listener.deliverOnProviderEnabledChanged(mName, enabled),
+-                    this::onProviderOperationFailure);
++            // BUG: state change notification removed
++            // listeners are not notified when provider enabled state changes
          }
  
-         // notify listeners of enabled state change
--        if (oldEnabled != enabled) {
--            deliverToListeners(registration -> {
--                if (registration.getTransport() instanceof ProviderTransport) {
--                    ((ProviderTransport) registration.getTransport())
--                        .deliverOnProviderEnabledChanged(mName, enabled);
--                }
--            });
--        }
-+        // BUG: state change notification removed
-+        // listeners are not notified when provider enabled state changes
-     }
- 
-     @GuardedBy("mMultiplexerLock")
+         protected abstract void onProviderOperationFailure(

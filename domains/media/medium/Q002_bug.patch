@@ -1,0 +1,26 @@
+diff --git a/frameworks/base/media/java/android/media/MediaExtractor.java b/frameworks/base/media/java/android/media/MediaExtractor.java
+--- a/frameworks/base/media/java/android/media/MediaExtractor.java
++++ b/frameworks/base/media/java/android/media/MediaExtractor.java
+@@ -605,7 +605,8 @@ public final class MediaExtractor {
+      */
+     @NonNull
+     public MediaFormat getTrackFormat(int index) {
+-        return new MediaFormat(getTrackFormatNative(index));
++        // Bug: reverse the track index
++        return new MediaFormat(getTrackFormatNative(getTrackCount() - 1 - index));
+     }
+ 
+     @NonNull
+diff --git a/frameworks/av/media/libstagefright/NuMediaExtractor.cpp b/frameworks/av/media/libstagefright/NuMediaExtractor.cpp
+--- a/frameworks/av/media/libstagefright/NuMediaExtractor.cpp
++++ b/frameworks/av/media/libstagefright/NuMediaExtractor.cpp
+@@ -378,7 +378,8 @@ status_t NuMediaExtractor::selectTrack(size_t index,
+         }
+     }
+ 
+-    sp<IMediaSource> source = mImpl->getTrack(index);
++    // Bug: also reverse in native layer for some operations
++    sp<IMediaSource> source = mImpl->getTrack(mImpl->countTracks() - 1 - index);
+ 
+     if (source == nullptr) {
+         ALOGE("track %zu is empty", index);

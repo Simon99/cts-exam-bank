@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+--- a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
++++ b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+@@ -1499,7 +1499,7 @@ public class AlarmManager {
+      */
+     public boolean canScheduleExactAlarms() {
+         try {
+-            return mService.canScheduleExactAlarms(mContext.getOpPackageName());
++            return !mService.canScheduleExactAlarms(mContext.getOpPackageName());
+         } catch (RemoteException re) {
+             throw re.rethrowFromSystemServer();
+         }

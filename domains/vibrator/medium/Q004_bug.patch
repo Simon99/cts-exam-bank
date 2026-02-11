@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/os/SystemVibrator.java b/frameworks/base/core/java/android/os/SystemVibrator.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/SystemVibrator.java
++++ b/frameworks/base/core/java/android/os/SystemVibrator.java
+@@ -144,7 +144,7 @@ public class SystemVibrator extends Vibrator {
+                     Log.w(TAG, "Listener already registered.");
+                     return;
+                 }
+-                delegate = new MultiVibratorStateListener(executor, listener);
++                delegate = new MultiVibratorStateListener(mContext.getMainExecutor(), listener);
+                 delegate.register(mVibratorManager);
+                 mRegisteredListeners.put(listener, delegate);
+                 delegate = null;

@@ -1,0 +1,15 @@
+{
+  "id": "SEC-E001",
+  "title": "Key Attestation Extension Check",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keystore.cts.AttestationTest#testEcAttestation",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/Attestation.java"
+  ],
+  "injection_point": "SEC-002",
+  "tags": ["attestation", "extension", "format-check"],
+  "estimated_time_minutes": 10,
+  "correct_answer": "B"
+}

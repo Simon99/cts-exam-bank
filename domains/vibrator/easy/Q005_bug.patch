@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/os/vibrator/PrebakedSegment.java b/frameworks/base/core/java/android/os/vibrator/PrebakedSegment.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/vibrator/PrebakedSegment.java
++++ b/frameworks/base/core/java/android/os/vibrator/PrebakedSegment.java
+@@ -167,7 +167,6 @@ public final class PrebakedSegment extends VibrationEffectSegment {
+     @Override
+     public void validate() {
+         switch (mEffectId) {
+-            case VibrationEffect.EFFECT_CLICK:
+             case VibrationEffect.EFFECT_DOUBLE_CLICK:
+             case VibrationEffect.EFFECT_HEAVY_CLICK:
+             case VibrationEffect.EFFECT_POP:

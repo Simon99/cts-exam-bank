@@ -1,0 +1,15 @@
+{
+  "id": "VIB-E008",
+  "title": "Get Vibrator Info Returns Null",
+  "domain": "vibrator",
+  "difficulty": "easy",
+  "cts_test": "android.os.cts.VibratorTest#testGetInfo",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-011",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/Vibrator.java"
+  ],
+  "tags": ["vibrator", "null-safety", "initialization"],
+  "estimated_time_minutes": 10,
+  "answer": "B"
+}

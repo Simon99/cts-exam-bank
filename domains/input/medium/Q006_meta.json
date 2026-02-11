@@ -1,0 +1,16 @@
+{
+  "id": "INP-M006",
+  "title": "MotionEvent getHistoricalX() Ignores Position",
+  "domain": "input",
+  "difficulty": "medium",
+  "cts_test": "android.view.cts.MotionEventIsResampledTest#testHistoricalCoordinates",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-013",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/MotionEvent.java"
+  ],
+  "tags": ["motion-event", "historical", "coordinate"],
+  "injection_type": ["BOUND"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "B"
+}

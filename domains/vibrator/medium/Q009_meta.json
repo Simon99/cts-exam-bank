@@ -1,0 +1,15 @@
+{
+  "id": "VIB-M009",
+  "title": "VibrationEffect Scale Factor Clamp Error",
+  "domain": "vibrator",
+  "difficulty": "medium",
+  "cts_test": "android.os.cts.VibrationEffectTest#testScale",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-032",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/VibrationEffect.java"
+  ],
+  "tags": ["vibration-effect", "scale", "type-casting"],
+  "estimated_time_minutes": 15,
+  "answer": "C"
+}

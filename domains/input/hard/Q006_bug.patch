@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/view/InputEventConsistencyVerifier.java b/frameworks/base/core/java/android/view/InputEventConsistencyVerifier.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/view/InputEventConsistencyVerifier.java
++++ b/frameworks/base/core/java/android/view/InputEventConsistencyVerifier.java
+@@ -419,7 +419,7 @@ public final class InputEventConsistencyVerifier {
+                                             + " which is already down.");
+                                     mTouchEventStreamIsTainted = true;
+                                 } else {
+-                                    mTouchEventStreamPointers |= idBit;
++                                    mTouchEventStreamPointers = idBit;  // BUG: = instead of |=
+                                 }
+                             }
+                             ensureHistorySizeIsZeroForThisAction(event);

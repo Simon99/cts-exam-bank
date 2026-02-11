@@ -1,0 +1,13 @@
+diff --git a/cts/hostsidetests/security/src/android/security/cts/NeverallowRuleParser.java b/cts/hostsidetests/security/src/android/security/cts/NeverallowRuleParser.java
+index eee5555..fff6666 100644
+--- a/cts/hostsidetests/security/src/android/security/cts/NeverallowRuleParser.java
++++ b/cts/hostsidetests/security/src/android/security/cts/NeverallowRuleParser.java
+@@ -48,7 +48,7 @@ public class NeverallowRuleParser {
+             
+             if (token.charAt(0) == EXCLUSION_PREFIX) {
+                 // Handle exclusion: "-init" should add "init" to excluded set
+-                String excluded = token.substring(1);
++                String excluded = token.substring(0);
+                 rule.excludedDomains.add(excluded);
+             } else {
+                 rule.sourceDomains.add(token);

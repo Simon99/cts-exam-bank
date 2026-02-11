@@ -1,0 +1,15 @@
+{
+  "id": "ALM-H009",
+  "title": "setTimeZoneImpl Alarms Not Adjusted",
+  "domain": "AlarmManager",
+  "difficulty": "hard",
+  "cts_test": "android.alarmmanager.cts.TimeChangeTests#testTimeZoneChange",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
+  ],
+  "injection_point": "ALM-062",
+  "tags": ["timezone", "RTC", "rebatch"],
+  "estimated_time_minutes": 35,
+  "answer": "A"
+}

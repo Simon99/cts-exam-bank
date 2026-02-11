@@ -1,0 +1,15 @@
+{
+  "id": "ALM-M009",
+  "title": "Non-Wakeup Delay Check Wrong",
+  "domain": "AlarmManager",
+  "difficulty": "medium",
+  "cts_test": "android.alarmmanager.cts.BasicApiTests#testNonWakeupDelay",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
+  ],
+  "injection_point": "ALM-039",
+  "tags": ["checkAllowNonWakeupDelayLocked", "non-wakeup", "screen-off"],
+  "estimated_time_minutes": 25,
+  "answer": "C"
+}

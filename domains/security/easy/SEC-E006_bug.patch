@@ -1,0 +1,12 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+--- a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
++++ b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+@@ -660,7 +660,7 @@ public class AuthorizationList {
+     }
+ 
+     public boolean isNoAuthRequired() {
+-        return noAuthRequired;
++        return !noAuthRequired;
+     }
+ 
+     public Integer getUserAuthType() {

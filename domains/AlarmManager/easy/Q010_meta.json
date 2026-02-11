@@ -1,0 +1,15 @@
+{
+  "id": "ALM-E010",
+  "title": "Alarm Matches Wrong PendingIntent",
+  "domain": "AlarmManager",
+  "difficulty": "easy",
+  "cts_test": "android.alarmmanager.cts.BasicApiTests#testAlarmMatches",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/Alarm.java"
+  ],
+  "injection_point": "ALM-051",
+  "tags": ["matches", "PendingIntent", "filterEquals"],
+  "estimated_time_minutes": 15,
+  "answer": "A"
+}

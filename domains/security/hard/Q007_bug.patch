@@ -1,0 +1,25 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/RootOfTrust.java b/cts/tests/security/src/android/keystore/cts/RootOfTrust.java
+index abc1234..def5678 100644
+--- a/cts/tests/security/src/android/keystore/cts/RootOfTrust.java
++++ b/cts/tests/security/src/android/keystore/cts/RootOfTrust.java
+@@ -123,6 +123,20 @@ public class RootOfTrust {
+                 .toString();
+     }
+ 
++    /**
++     * Checks if the device attestation indicates a secure boot chain.
++     * A device is considered securely booted if all conditions are met:
++     * - Boot key is present (verified boot key exists)
++     * - Device is locked (bootloader is locked)
++     * - Boot state is verified (not self-signed, unverified, or failed)
++     */
++    public boolean isSecurelyBooted() {
++        boolean hasValidKey = mVerifiedBootKey != null && mVerifiedBootKey.length > 0;
++        boolean isLocked = mDeviceLocked;
++        boolean isVerified = mVerifiedBootState == KM_VERIFIED_BOOT_VERIFIED;
++        return hasValidKey || isLocked || isVerified;
++    }
++
+     public static class Builder {
+         private byte[] mVerifiedBootKey;
+         private boolean mDeviceLocked = false;

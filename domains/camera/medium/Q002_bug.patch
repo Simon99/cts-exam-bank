@@ -1,29 +1,31 @@
 diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
-index abcd1234..efgh5678 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
-@@ -456,6 +456,12 @@ public class CameraMetadataNative implements Parcelable {
-     @SuppressWarnings("unchecked")
+@@ -445,6 +445,12 @@ public class CameraMetadataNative implements Parcelable {
+      * @hide
+      */
      public <T> T get(CameraCharacteristics.Key<T> key) {
 +        // BUG: 報告錯誤的 partial result count
 +        // 報告 3，但 CameraDeviceImpl 實際發送 5 個
 +        if ("android.request.partialResultCount".equals(key.getName())) {
 +            return (T) Integer.valueOf(3);
 +        }
-+        
++
          return get(key.getNativeKey());
      }
  
 diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-index abcd1234..efgh5679 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-@@ -1756,7 +1756,8 @@ public class CameraDeviceImpl extends CameraDevice
-         public void onResultReceived(CameraMetadataNative result,
-                 CaptureResultExtras resultExtras, PhysicalCaptureResultInfo physicalResults[]) {
-             
--            int numPartialResults = mTotalPartialCount;
-+            // BUG: 硬編碼 5 個 partial results，而不是使用 mTotalPartialCount (3)
-+            int numPartialResults = 5;
-             
-             // ... process partial results
+@@ -2203,8 +2203,9 @@ public class CameraDeviceImpl extends CameraDevice
+                 final CaptureCallbackHolder holder =
+                         CameraDeviceImpl.this.mCaptureCallbackMap.get(requestId);
+ 
+-                boolean isPartialResult =
+-                        (resultExtras.getPartialResultCount() < mTotalPartialCount);
++                // BUG: 硬編碼 5 個 partial results，而不是使用 mTotalPartialCount (3)
++                int numPartialResults = 5;
++                boolean isPartialResult = (resultExtras.getPartialResultCount() < numPartialResults);
+ 
+                 // Check if we have a callback for this
+                 if (holder == null) {

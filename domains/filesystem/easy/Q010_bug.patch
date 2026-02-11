@@ -2,12 +2,17 @@ diff --git a/frameworks/base/core/java/android/os/storage/CrateInfo.java b/frame
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/os/storage/CrateInfo.java
 +++ b/frameworks/base/core/java/android/os/storage/CrateInfo.java
-@@ -125,7 +125,7 @@ public final class CrateInfo implements Parcelable {
+@@ -128,12 +128,10 @@ public final class CrateInfo implements Parcelable {
+      * @return the meaningful text
       */
      @NonNull
      public CharSequence getLabel() {
+-        if (TextUtils.isEmpty(mLabel)) {
+-            return mId;
+-        }
 -        return mLabel;
++        // BUG: Always returns empty string instead of the actual label
 +        return "";
      }
  
-     /**
+ 

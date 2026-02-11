@@ -1,0 +1,37 @@
+diff --git a/frameworks/base/media/java/android/media/MediaCodecList.java b/frameworks/base/media/java/android/media/MediaCodecList.java
+index 1234567890ab..abcdef123456 100644
+--- a/frameworks/base/media/java/android/media/MediaCodecList.java
++++ b/frameworks/base/media/java/android/media/MediaCodecList.java
+@@ -82,15 +82,13 @@ public final class MediaCodecList {
+                 ArrayList<MediaCodecInfo> all = new ArrayList<MediaCodecInfo>();
+                 for (int index = 0; index < count; index++) {
+                     try {
+                         MediaCodecInfo info = getNewCodecInfoAt(index);
+                         all.add(info);
+-                        info = info.makeRegular();
+-                        if (info != null) {
+-                            regulars.add(info);
+-                        }
++                        // Bug: always add to regulars without filtering
++                        regulars.add(info);
+                     } catch (Exception e) {
+                         Log.e(TAG, "Could not get codec capabilities", e);
+                     }
+                 }
+                 sRegularCodecInfos =
+
+diff --git a/frameworks/base/media/java/android/media/MediaCodecInfo.java b/frameworks/base/media/java/android/media/MediaCodecInfo.java
+index abcdef123456..123456abcdef 100644
+--- a/frameworks/base/media/java/android/media/MediaCodecInfo.java
++++ b/frameworks/base/media/java/android/media/MediaCodecInfo.java
+@@ -158,8 +158,9 @@ public final class MediaCodecInfo {
+      * a tighter security sandbox. On the other hand, software-only codecs do not provide any
+      * performance guarantees.
+      */
+     public final boolean isSoftwareOnly() {
+-        return (mFlags & FLAG_IS_SOFTWARE_ONLY) != 0;
++        // Bug: always return false, breaking software-only detection
++        return false;
+     }
+ 
+     /**

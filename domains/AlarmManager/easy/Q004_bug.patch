@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+--- a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
++++ b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+@@ -1537,7 +1537,7 @@ public class AlarmManager {
+      * @see #ACTION_NEXT_ALARM_CLOCK_CHANGED
+      */
+     public AlarmClockInfo getNextAlarmClock() {
+-        return getNextAlarmClock(mContext.getUserId());
++        return getNextAlarmClock(0);
+     }
+ 
+     /**

@@ -2,18 +2,18 @@ diff --git a/frameworks/base/core/java/android/hardware/camera2/CaptureResult.ja
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/CaptureResult.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/CaptureResult.java
-@@ -322,6 +322,14 @@ public class CaptureResult extends CameraMetadata<CaptureResult.Key<?>> {
+@@ -320,6 +320,14 @@ public class CaptureResult extends CameraMetadata<CaptureResult.Key<?>> {
      @Nullable
      public <T> T get(Key<T> key) {
          T value = mResults.get(key);
-+        
++
 +        // BUG: 對 SENSOR_FRAME_DURATION 記錄單位轉換 log（線索）
 +        // log 會顯示 "Frame duration: X ns (raw from HAL)"
 +        // 但真正的錯誤乘法在 CameraMetadataNative
 +        if (VERBOSE && "android.sensor.frameDuration".equals(key.getName())) {
 +            Log.v(TAG, "Frame duration: " + value + " ns (raw from HAL)");
 +        }
-+        
++
          if (VERBOSE) Log.v(TAG, "#get for Key = " + key.getName() + ", returned value = " + value);
          return value;
      }
@@ -21,15 +21,16 @@ diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetad
 index abcd1234..efgh5679 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
-@@ -789,6 +789,12 @@ public class CameraMetadataNative implements Parcelable {
-     @SuppressWarnings("unchecked")
+@@ -452,6 +452,12 @@ public class CameraMetadataNative implements Parcelable {
+      * @hide
+      */
      public <T> T get(CaptureResult.Key<T> key) {
 +        // BUG: 對 SENSOR_FRAME_DURATION 錯誤地乘以 3
 +        if ("android.sensor.frameDuration".equals(key.getName())) {
 +            Long rawValue = (Long) get(key.getNativeKey());
 +            return (T) (rawValue != null ? Long.valueOf(rawValue * 3) : null);
 +        }
-+        
++
          return get(key.getNativeKey());
      }
  

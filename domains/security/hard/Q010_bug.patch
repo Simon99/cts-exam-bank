@@ -1,0 +1,33 @@
+diff --git a/cts/hostsidetests/security/src/android/security/cts/SELinuxNeverallowRulesTest.java b/cts/hostsidetests/security/src/android/security/cts/SELinuxNeverallowRulesTest.java
+--- a/cts/hostsidetests/security/src/android/security/cts/SELinuxNeverallowRulesTest.java
++++ b/cts/hostsidetests/security/src/android/security/cts/SELinuxNeverallowRulesTest.java
+@@ -76,6 +76,29 @@ public class SELinuxNeverallowRulesTest extends BaseHostJUnit4Test {
+      */
+     private ITestDevice mDevice;
+ 
++    // Domain attribute mappings for violator checking
++    private Map<String, Set<String>> mDomainAttributes = new HashMap<>();
++    private Set<String> mViolatorAttributes = new HashSet<>(Arrays.asList(
++        "data_between_core_and_vendor_violators",
++        "vendor_executes_system_violators"
++    ));
++
++    /**
++     * Check if a domain is excluded by violator attributes.
++     */
++    private boolean isExcludedByViolator(String domain) {
++        Set<String> domainAttrs = mDomainAttributes.get(domain);
++        if (domainAttrs == null) {
++            return false;
++        }
++        for (String attr : mViolatorAttributes) {
++            if (domainAttrs.equals(attr)) {  // BUG: should be contains()
++                return true;
++            }
++        }
++        return false;
++    }
++
+     private static String[] sConditions = {
+         "TREBLE_ONLY",
+         "COMPATIBLE_PROPERTY_ONLY",

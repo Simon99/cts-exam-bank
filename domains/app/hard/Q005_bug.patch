@@ -2,7 +2,7 @@ diff --git a/frameworks/base/services/core/java/com/android/server/am/PendingInt
 index 1234567..abcdefg 100644
 --- a/frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java
 +++ b/frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java
-@@ -170,9 +170,7 @@ public final class PendingIntentRecord extends IIntentSender.Stub {
+@@ -174,9 +174,7 @@ public final class PendingIntentRecord extends IIntentSender.Stub {
                  if (!Objects.equals(who, other.who)) {
                      return false;
                  }
@@ -18,8 +18,7 @@ diff --git a/frameworks/base/services/core/java/com/android/server/am/PendingInt
 index 2345678..bcdefgh 100644
 --- a/frameworks/base/services/core/java/com/android/server/am/PendingIntentController.java
 +++ b/frameworks/base/services/core/java/com/android/server/am/PendingIntentController.java
-@@ -142,7 +142,8 @@ public class PendingIntentController {
-             WeakReference<PendingIntentRecord> ref;
+@@ -159,7 +159,8 @@ public class PendingIntentController {
              ref = mIntentSenderRecords.get(key);
              PendingIntentRecord rec = ref != null ? ref.get() : null;
 -            if (rec != null) {
@@ -33,7 +32,7 @@ diff --git a/frameworks/base/core/java/android/app/PendingIntent.java b/framewor
 index 3456789..cdefghi 100644
 --- a/frameworks/base/core/java/android/app/PendingIntent.java
 +++ b/frameworks/base/core/java/android/app/PendingIntent.java
-@@ -580,7 +580,8 @@ public final class PendingIntent implements Parcelable {
+@@ -581,7 +581,8 @@ public final class PendingIntent implements Parcelable {
              IIntentSender target =
                  ActivityManager.getService().getIntentSenderWithFeature(
                      INTENT_SENDER_ACTIVITY, packageName,

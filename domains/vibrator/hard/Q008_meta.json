@@ -1,0 +1,15 @@
+{
+  "id": "VIB-H008",
+  "title": "Composition Primitive Scale Boundary Validation",
+  "domain": "vibrator",
+  "difficulty": "hard",
+  "cts_test": "android.os.cts.VibrationEffectTest#testCompositionPrimitiveScaleBounds",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-027",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/VibrationEffect.java"
+  ],
+  "tags": ["vibration-effect", "composition", "scale-validation", "boundary"],
+  "estimated_time_minutes": 18,
+  "answer": "D"
+}

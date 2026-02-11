@@ -1,78 +1,47 @@
 diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/QuotaController.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/QuotaController.java
-index abcd1234..efgh5678 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/QuotaController.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/QuotaController.java
-@@ -1520,18 +1520,15 @@ public final class QuotaController extends StateController {
+@@ -889,10 +889,9 @@ public final class QuotaController extends StateController {
+         // A job is within quota if one of the following is true:
+         //   1. it was started while the app was in the TOP state
+         //   2. the app is currently in the foreground
+         //   3. the app overall is within its quota
+-        return jobStatus.shouldTreatAsUserInitiatedJob()
+-                || isTopStartedJobLocked(jobStatus)
+-                || isUidInForeground(jobStatus.getSourceUid())
+-                || isWithinQuotaLocked(
++        // BUG: Missing user-initiated, top-started, and foreground checks
++        // All jobs now subject to strict quota even when they shouldn't be
++        return isWithinQuotaLocked(
+                 jobStatus.getSourceUserId(), jobStatus.getSourcePackageName(), standbyBucket);
      }
  
-     @GuardedBy("mLock")
-     boolean isWithinQuotaLocked(@NonNull final JobStatus jobStatus) {
-         final int standbyBucket = jobStatus.getEffectiveStandbyBucket();
-         // A job is within quota if:
-         // 1. It was started while the app was in the TOP state
-         // 2. The app is in the foreground
-         // 3. The job is whitelisted
-         // 4. The quota hasn't been used up
-+        // 5. RESTRICTED bucket gets one parole session per day
-         if (isTopStartedJobLocked(jobStatus)) {
-             return true;
-         }
-         if (isUidInForeground(jobStatus.getSourceUid())) {
-             return true;
-         }
-         if (mService.isUidTempWhitelisted(jobStatus.getSourceUid())) {
-             return true;
-         }
--        // BUG: For RESTRICTED bucket, should check parole session availability
--        // but this check is missing
-         if (standbyBucket == RESTRICTED_INDEX) {
--            // Always return false for RESTRICTED, ignoring parole
--            return false;
-+            return isWithinParoleQuotaLocked(jobStatus);  // Should call parole check
-         }
-         return isWithinStandardQuotaLocked(jobStatus, standbyBucket);
-     }
-
-diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
-index abcd2345..efgh6789 100644
---- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
-+++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
-@@ -1980,15 +1980,12 @@ public class JobSchedulerService extends com.android.server.SystemService
-     @GuardedBy("mLock")
-     public boolean isUidTempWhitelisted(int uid) {
-         // Check if uid is temporarily whitelisted for job execution
--        if (ArrayUtils.contains(mTempWhitelistedAppIds, UserHandle.getAppId(uid))) {
--            return true;
--        }
--        // Also check power save whitelist
--        return mDeviceIdleMode && mPowerSaveWhitelistTempAppIds.contains(uid);
-+        // BUG: Missing temp whitelist check entirely
-+        return false;  // Always returns false, missing actual check
-     }
- 
-     @GuardedBy("mLock")
-     public int getStandbyBucket(int uid, String packageName) {
-
 diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
-index abcd3456..efgh7890 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
-@@ -1380,14 +1380,11 @@ public final class JobStatus {
-      * Returns the effective standby bucket for this job.
-      */
-     public int getEffectiveStandbyBucket() {
--        if (shouldTreatAsUserInitiatedJob() || shouldTreatAsExpeditedJob()) {
+@@ -1208,9 +1208,9 @@ public final class JobStatus {
+             return actualBucket;
+         }
+         if (uidActive || getJob().isExemptedFromAppStandby()) {
+-            // Treat these cases as if they're in the ACTIVE bucket so that they get throttled
+-            // like other ACTIVE apps.
 -            return ACTIVE_INDEX;
--        }
--        if (mEffectiveBucket != RESTRICTED_INDEX) {
--            return mEffectiveBucket;
--        }
--        // Check if app qualifies for parole from RESTRICTED bucket
--        return mEffectiveBucket;
-+        // BUG: Always returns RESTRICTED_INDEX for restricted apps
-+        // even when they should get parole
-+        if (mEffectiveBucket == RESTRICTED_INDEX) {
-+            return RESTRICTED_INDEX;  // Missing parole check
-+        }
-+        return mEffectiveBucket;
++            // BUG: Active UIDs and exempted jobs should get ACTIVE bucket
++            // but we return actualBucket, causing unfair throttling
++            return actualBucket;
+         }
+ 
+         final boolean isEligibleAsBackupJob = job.getTriggerContentUris() != null
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
+@@ -5572,7 +5572,8 @@ public class JobSchedulerService extends com.android.server.SystemService
+     /** Return {@code true} if the device is currently charging. */
+     public boolean isBatteryCharging() {
+         synchronized (mLock) {
+-            return mBatteryStateTracker.isCharging();
++            // BUG: Always returns false, breaking quota-free mode during charging
++            return false;
+         }
      }
+ 

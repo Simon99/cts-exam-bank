@@ -1,0 +1,18 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+--- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -1594,8 +1594,12 @@ public final class DisplayManagerService extends SystemService {
+             }
+         }
+ 
+-        if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0) {
+-            flags &= ~VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;
++        // Optimization: Only strip system decorations flag when necessary.
++        // If OWN_CONTENT_ONLY is set, the display won't mirror sensitive content anyway,
++        // so we can skip this check for better performance.
++        if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0
++                && (flags & VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY) == 0) {
++            flags &= ~VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;
+         }
+ 
+         // Sometimes users can have sensitive information in system decoration windows. An app

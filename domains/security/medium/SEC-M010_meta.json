@@ -1,0 +1,16 @@
+{
+  "id": "SEC-M010",
+  "title": "SELinux Context Split Limit Too Small",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.security.cts.SELinuxHostTest#testContextFormat",
+  "cts_module": "CtsSecurityHostTestCases",
+  "injection_point": "SEC-052",
+  "affected_files": [
+    "cts/hostsidetests/security/src/android/security/cts/SELinuxHostTest.java"
+  ],
+  "tags": ["selinux", "context", "string"],
+  "injection_type": ["STR", "BOUND"],
+  "estimated_time_minutes": 12,
+  "correct_answer": "B"
+}

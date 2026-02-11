@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/hardware/SensorManager.java b/frameworks/base/core/java/android/hardware/SensorManager.java
+--- a/frameworks/base/core/java/android/hardware/SensorManager.java
++++ b/frameworks/base/core/java/android/hardware/SensorManager.java
+@@ -572,7 +572,7 @@ public abstract class SensorManager {
+     public @Nullable Sensor getDefaultSensor(int type, boolean wakeUp) {
+         List<Sensor> l = getSensorList(type);
+         for (Sensor sensor : l) {
+-            if (sensor.isWakeUpSensor() == wakeUp) {
++            if (sensor.getType() == type) {
+                 return sensor;
+             }
+         }

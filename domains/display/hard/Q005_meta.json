@@ -1,0 +1,40 @@
+{
+  "id": "DIS-H005",
+  "title": "Display Mode Frame Rate Override 計算與邊界檢查錯誤",
+  "domain": "display",
+  "difficulty": "hard",
+  "cts_test": "android.display.cts.DisplayTest#testGetSupportedModesOnDefaultDisplay",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-038",
+  "injection_type": ["CALC", "BOUND"],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
+  ],
+  "tags": [
+    "DisplayManagerService",
+    "frame-rate-override",
+    "floating-point-math",
+    "rounding-error",
+    "boundary-condition",
+    "Math.round-vs-floor",
+    "threshold-comparison"
+  ],
+  "estimated_time_minutes": 35,
+  "bug_characteristics": {
+    "bug_count": 2,
+    "interaction": "compound",
+    "description": "Math.floor(x + 0.4999) 不等於 Math.round(x)，且 >= 與 > 的閾值錯誤，兩者互相掩蓋"
+  },
+  "skills_tested": [
+    "floating-point-precision",
+    "mathematical-reasoning",
+    "boundary-analysis",
+    "code-review",
+    "native-java-sync-understanding"
+  ],
+  "hints": [
+    "檢查 numPeriodsRound 的計算方式",
+    "思考 Math.round(2.5) 與 Math.floor(2.5 + 0.4999) 的結果差異",
+    "注意閾值比較使用的是 > 還是 >="
+  ]
+}

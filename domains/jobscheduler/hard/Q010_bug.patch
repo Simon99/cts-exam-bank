@@ -2,87 +2,25 @@ diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/j
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/PendingJobQueue.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/PendingJobQueue.java
-@@ -45,25 +45,20 @@ public class PendingJobQueue {
-     private static final Comparator<JobStatus> sJobComparator = (job1, job2) -> {
-         // First, compare by effective priority (higher priority = run first)
-         final int priority1 = job1.getEffectivePriority();
-         final int priority2 = job2.getEffectivePriority();
--        if (priority1 != priority2) {
--            // Higher priority should come first (return negative if job1 has higher priority)
--            return Integer.compare(priority2, priority1);
--        }
--        
--        // Then compare by bias (UID foreground state)
--        final int bias1 = job1.getBias();
--        final int bias2 = job2.getBias();
--        if (bias1 != bias2) {
--            return Integer.compare(bias2, bias1);
--        }
-+        // BUG: Comparing priorities in wrong order (lower number = higher priority in JobInfo)
-+        // but we're treating higher number as higher priority
-+        if (priority1 != priority2) {
-+            return Integer.compare(priority1, priority2);  // Wrong order!
-+        }
+@@ -295,17 +295,13 @@ public class PendingJobQueue {
+                 final int job1Priority = job1.getEffectivePriority();
+                 final int job2Priority = job2.getEffectivePriority();
+                 if (job1Priority != job2Priority) {
+-                    // Use the priority set by an app for intra-app job ordering. Higher
+-                    // priority should be before lower priority.
+-                    return Integer.compare(job2Priority, job1Priority);
++                    // BUG: Wrong comparison order - lower priority jobs run first
++                    return Integer.compare(job1Priority, job2Priority);
+                 }
+             }
  
-         // Finally, compare by enqueue time (earlier = first, FIFO for same priority)
-         final long enqueue1 = job1.enqueueTime;
-         final long enqueue2 = job2.enqueueTime;
-         if (enqueue1 != enqueue2) {
-             return Long.compare(enqueue1, enqueue2);
-         }
-         return 0;
-     };
-
-diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobConcurrencyManager.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobConcurrencyManager.java
-index abcd5678..efgh9012 100644
---- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobConcurrencyManager.java
-+++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobConcurrencyManager.java
-@@ -380,8 +380,7 @@ class JobConcurrencyManager {
-         // Select jobs from pending queue based on priority
-         while (mPendingJobs.size() > 0 && numAssigned < maxJobs) {
-             // BUG: Not re-sorting after constraints change
--            // The queue may have stale ordering after bulk constraint updates
--            JobStatus job = mPendingJobs.poll();
-+            JobStatus job = mPendingJobs.poll();  // May get wrong job due to stale order
-             if (isJobEligibleToRunLocked(job)) {
-                 assignJobToContextLocked(job);
-                 numAssigned++;
-
-diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
-index abcd3456..efgh7890 100644
---- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
-+++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
-@@ -1407,17 +1407,13 @@ public final class JobStatus {
-      * Returns the effective priority of this job for scheduling purposes.
-      */
-     public int getEffectivePriority() {
--        // Priority hierarchy:
--        // 1. User-initiated jobs get highest effective priority
--        // 2. Expedited jobs get second highest
--        // 3. Job's declared priority
--        if (shouldTreatAsUserInitiatedJob()) {
--            return JobInfo.PRIORITY_MAX;
--        }
--        if (shouldTreatAsExpeditedJob()) {
--            return Math.max(mJob.getPriority(), JobInfo.PRIORITY_DEFAULT);
--        }
--        return mJob.getPriority();
-+        // BUG: Always returns the raw priority, ignoring UIJ/EJ elevation
-+        // UIJ and EJ should have elevated priority
-+        return mJob.getPriority();  // Missing UIJ/EJ check
-     }
+-            if (job1.lastEvaluatedBias != job2.lastEvaluatedBias) {
+-                // Higher bias should go first.
+-                return Integer.compare(job2.lastEvaluatedBias, job1.lastEvaluatedBias);
+-            }
+-
++            // BUG: Removed bias comparison - ignores foreground app priority boost
++            
+             return Long.compare(job1.enqueueTime, job2.enqueueTime);
+         };
  
-     /**
-      * Returns the bias for this job based on the UID's foreground state.
-@@ -1425,12 +1421,9 @@ public final class JobStatus {
-     public int getBias() {
-         // Bias is used for secondary sorting after priority
-         // Higher bias = more likely to run when priorities are equal
--        if (mBias != 0) {
--            return mBias;
--        }
--        // Calculate bias based on foreground state
--        return mJobSchedulerService.getUidBias(getSourceUid());
-+        // BUG: Always returns 0, ignoring calculated bias
-+        return 0;  // Should use mBias or calculate from UID state
-     }

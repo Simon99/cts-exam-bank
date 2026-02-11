@@ -2,11 +2,12 @@ diff --git a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp b/framew
 index abc1234..def5678 100644
 --- a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
 +++ b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
-@@ -680,7 +680,7 @@ const char* eglQueryStringImpl(EGLDisplay dpy, EGLint name) {
+@@ -1420,7 +1420,7 @@ const char* eglQueryStringImpl(EGLDisplay dpy, EGLint name) {
+             return dp->getVendorString();
          case EGL_VERSION:
-             return dp->mVersionString.c_str();
+             return dp->getVersionString();
 -        case EGL_EXTENSIONS:
 +        case 0x3054:  // BUG: Should be EGL_EXTENSIONS (0x3055), this is EGL_VERSION
-             return dp->mExtensionString.c_str();
+             return dp->getExtensionString();
          case EGL_CLIENT_APIS:
-             return dp->mClientApiString.c_str();
+             return dp->getClientApiString();

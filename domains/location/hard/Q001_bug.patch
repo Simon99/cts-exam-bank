@@ -2,28 +2,31 @@ diff --git a/frameworks/base/services/core/java/com/android/server/location/prov
 index 1234567..abcdefg 100644
 --- a/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
 +++ b/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
-@@ -1456,8 +1456,8 @@ public class LocationProviderManager extends
-     private Location maybeFudgeLocation(Location location, int permissionLevel) {
-         if (permissionLevel == PERMISSION_COARSE) {
-             return mLocationFudger.createCoarse(location);
--        }
--        return location;
-+        } else {
-+            // BUG: Always apply coarse fudging regardless of permission level
-+            return mLocationFudger.createCoarse(location);
+@@ -2741,12 +2741,10 @@ public class LocationProviderManager extends
+     @Nullable Location getPermittedLocation(@Nullable Location fineLocation,
+             @PermissionLevel int permissionLevel) {
+         switch (permissionLevel) {
+-            case PERMISSION_FINE:
+-                return fineLocation;
+             case PERMISSION_COARSE:
+-                return fineLocation != null ? mLocationFudger.createCoarse(fineLocation) : null;
++            case PERMISSION_FINE:  // BUG: FINE permission also gets coarsened location
++                return fineLocation != null ? mLocationFudger.createCoarse(fineLocation) : null;
+             default:
+-                // shouldn't be possible to have a client added without location permissions
+                 throw new AssertionError();
          }
      }
-
 diff --git a/frameworks/base/services/core/java/com/android/server/location/fudger/LocationFudger.java b/frameworks/base/services/core/java/com/android/server/location/fudger/LocationFudger.java
 index 2345678..bcdefgh 100644
 --- a/frameworks/base/services/core/java/com/android/server/location/fudger/LocationFudger.java
 +++ b/frameworks/base/services/core/java/com/android/server/location/fudger/LocationFudger.java
-@@ -95,7 +95,7 @@ public class LocationFudger {
-      */
-     public Location createCoarse(Location location) {
-         Location coarse = new Location(location);
--        coarse.setAccuracy(Math.max(location.getAccuracy(), COARSE_ACCURACY_M));
-+        coarse.setAccuracy(COARSE_ACCURACY_M);  // BUG: Always sets to 1000m, ignoring original
-         addCoarseOffset(coarse);
-         return coarse;
-     }
+@@ -175,7 +175,7 @@ public class LocationFudger {
+ 
+         coarse.setLatitude(latitude);
+         coarse.setLongitude(longitude);
+-        coarse.setAccuracy(Math.max(mAccuracyM, coarse.getAccuracy()));
++        coarse.setAccuracy(mAccuracyM);  // BUG: Always sets to configured accuracy, ignoring original
+ 
+         synchronized (this) {
+             mCachedFineLocation = fine;

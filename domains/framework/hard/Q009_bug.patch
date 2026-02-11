@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/content/ContentResolver.java b/fr
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/content/ContentResolver.java
 +++ b/frameworks/base/core/java/android/content/ContentResolver.java
-@@ -2836,8 +2836,10 @@ public abstract class ContentResolver implements ContentInterface {
+@@ -2834,8 +2834,10 @@ public abstract class ContentResolver implements ContentInterface {
      public void notifyChange(@NonNull Uri uri, @Nullable ContentObserver observer,
              @NotifyFlags int flags) {
          Objects.requireNonNull(uri, "uri");
@@ -20,26 +20,28 @@ diff --git a/frameworks/base/services/core/java/com/android/server/content/Conte
 index 3456bcde..789abcde 100644
 --- a/frameworks/base/services/core/java/com/android/server/content/ContentService.java
 +++ b/frameworks/base/services/core/java/com/android/server/content/ContentService.java
-@@ -628,7 +628,8 @@ public final class ContentService extends IContentService.Stub {
-     private void handleIncomingNotify(Uri uri, ContentObserver observer,
-             boolean observerWantsSelfNotifications, @NotifyFlags int flags,
-             int userHandle, int targetSdkVersion, int callingUid, int callingPid) {
--        final boolean notifyForDescendants = (flags & ContentResolver.NOTIFY_SKIP_NOTIFY_FOR_DESCENDANTS) == 0;
-+        // BUG: 錯誤的位元運算，總是跳過 descendants 通知
-+        final boolean notifyForDescendants = (flags & ContentResolver.NOTIFY_SKIP_NOTIFY_FOR_DESCENDANTS) != 0;
-         
-         synchronized (mRootNode) {
-             mRootNode.collectObserversLocked(uri, 0, observer,
+@@ -1876,7 +1876,8 @@ public final class ContentService extends IContentService.Stub {
+                     if (leaf) {
+                         // If we are at the leaf: we always report, unless the sender has asked
+                         // to skip observers that are notifying for descendants (since they will
+                         // be sending another more specific URI for them).
+-                        if ((flags&ContentResolver.NOTIFY_SKIP_NOTIFY_FOR_DESCENDANTS) != 0
++                        // BUG: 錯誤的位元運算，應該是 != 0 才跳過，改成 == 0 會導致錯誤跳過
++                        if ((flags&ContentResolver.NOTIFY_SKIP_NOTIFY_FOR_DESCENDANTS) == 0
+                                 && entry.notifyForDescendants) {
+                             if (DEBUG) Slog.d(TAG, "Skipping " + entry.observer
+                                     + ": skip notify for descendants");
 
 diff --git a/frameworks/base/core/java/android/database/ContentObserver.java b/frameworks/base/core/java/android/database/ContentObserver.java
 index 4567cdef..8901ghij 100644
 --- a/frameworks/base/core/java/android/database/ContentObserver.java
 +++ b/frameworks/base/core/java/android/database/ContentObserver.java
-@@ -159,7 +159,8 @@ public abstract class ContentObserver {
+@@ -180,7 +180,8 @@ public abstract class ContentObserver {
+      * @param uri The Uri of the changed content.
+      * @param flags Flags indicating details about this change.
       */
-     @Deprecated
-     public void onChange(boolean selfChange, @Nullable Uri uri) {
--        onChange(selfChange, uri, 0);
-+        // BUG: 錯誤地傳遞 -1 作為 flags，會導致位運算異常
-+        onChange(selfChange, uri, -1);
+     public void onChange(boolean selfChange, @Nullable Uri uri, @NotifyFlags int flags) {
+-        onChange(selfChange, uri);
++        // BUG: 錯誤地傳遞 null 作為 uri，導致觀察者收不到正確的 URI
++        onChange(selfChange, null);
      }

@@ -1,16 +1,17 @@
 diff --git a/frameworks/base/media/java/android/media/MediaFormat.java b/frameworks/base/media/java/android/media/MediaFormat.java
-index 1234567890ab..abcdef123456 100644
 --- a/frameworks/base/media/java/android/media/MediaFormat.java
 +++ b/frameworks/base/media/java/android/media/MediaFormat.java
-@@ -745,6 +745,10 @@ public final class MediaFormat {
-      * @throws NullPointerException if the key is null or not found
+@@ -1886,7 +1886,12 @@ public final class MediaFormat {
+      *         String
       */
-     public int getInteger(@NonNull String name) {
--        return ((Integer)mMap.get(name)).intValue();
-+        int value = ((Integer)mMap.get(name)).intValue();
+     public final int getInteger(@NonNull String name) {
+-        return (int) mMap.get(name);
++        int value = (int) mMap.get(name);
++        // Bug: incorrectly halves sample rate
 +        if (KEY_SAMPLE_RATE.equals(name)) {
 +            return value / 2;
 +        }
 +        return value;
      }
  
+     /**

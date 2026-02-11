@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/os/BaseBundle.java b/frameworks/b
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/os/BaseBundle.java
 +++ b/frameworks/base/core/java/android/os/BaseBundle.java
-@@ -490,7 +490,7 @@ public class BaseBundle {
+@@ -554,7 +554,7 @@ public class BaseBundle {
       */
      public int size() {
          unparcel();

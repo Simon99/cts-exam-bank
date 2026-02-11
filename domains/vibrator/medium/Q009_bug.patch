@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/os/vibrator/StepSegment.java b/frameworks/base/core/java/android/os/vibrator/StepSegment.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/vibrator/StepSegment.java
++++ b/frameworks/base/core/java/android/os/vibrator/StepSegment.java
+@@ -136,7 +136,7 @@ public final class StepSegment extends VibrationEffectSegment {
+         if (Float.compare(mAmplitude, VibrationEffect.DEFAULT_AMPLITUDE) == 0) {
+             return this;
+         }
+-        float newAmplitude = VibrationEffect.scale(mAmplitude, scaleFactor);
++        float newAmplitude = (int) scaleFactor * mAmplitude;
+         if (Float.compare(newAmplitude, mAmplitude) == 0) {
+             return this;
+         }

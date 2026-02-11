@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/hardware/SensorManager.java b/frameworks/base/core/java/android/hardware/SensorManager.java
+--- a/frameworks/base/core/java/android/hardware/SensorManager.java
++++ b/frameworks/base/core/java/android/hardware/SensorManager.java
+@@ -1771,7 +1771,7 @@ public abstract class SensorManager {
+      * @throws IllegalArgumentException when sensor is null or not a trigger sensor.
+      */
+     public boolean requestTriggerSensor(TriggerEventListener listener, Sensor sensor) {
+-        return requestTriggerSensorImpl(listener, sensor);
++        return requestTriggerSensorImpl(null, sensor);
+     }
+ 
+     /**

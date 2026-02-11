@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/core/java/android/hardware/SystemSensorManager.java b/frameworks/base/core/java/android/hardware/SystemSensorManager.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/hardware/SystemSensorManager.java
++++ b/frameworks/base/core/java/android/hardware/SystemSensorManager.java
+@@ -1057,7 +1057,7 @@ public class SystemSensorManager extends SensorManager {
+             // call onAccuracyChanged() only if the value changes
+             final int accuracy = mSensorAccuracies.get(handle);
+             if (t.accuracy >= 0 && accuracy != t.accuracy) {
+                 mSensorAccuracies.put(handle, t.accuracy);
+-                mListener.onAccuracyChanged(t.sensor, t.accuracy);
++                mListener.onAccuracyChanged(mSensorsEvents.valueAt(0).sensor, t.accuracy);
+             }
+ 
+             // Indicate if the discontinuity count changed

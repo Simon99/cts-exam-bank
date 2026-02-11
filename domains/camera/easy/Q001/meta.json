@@ -1,0 +1,15 @@
+{
+  "id": "camera-easy-Q001",
+  "domain": "camera",
+  "difficulty": "easy",
+  "title": "Camera2 連拍參數檢查邏輯錯誤",
+  "injection_point": "CAM-004",
+  "source_file": "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java",
+  "function": "captureBurst()",
+  "line_range": "1141-1147",
+  "bug_type": ["COND"],
+  "cts_test": "BurstCaptureTest",
+  "status": "patch_verified",
+  "created": "2026-02-10",
+  "phase_c_verified": false
+}

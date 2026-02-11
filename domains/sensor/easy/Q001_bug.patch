@@ -1,0 +1,11 @@
+diff --git a/frameworks/base/core/java/android/hardware/SensorManager.java b/frameworks/base/core/java/android/hardware/SensorManager.java
+--- a/frameworks/base/core/java/android/hardware/SensorManager.java
++++ b/frameworks/base/core/java/android/hardware/SensorManager.java
+@@ -1988,7 +1988,7 @@
+                 break;
+             case SENSOR_DELAY_UI:
+-                delay = 66667;
++                delay = 60000;
+                 break;
+             case SENSOR_DELAY_NORMAL:
+                 delay = 200000;

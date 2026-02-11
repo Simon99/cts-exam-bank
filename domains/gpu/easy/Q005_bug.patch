@@ -2,7 +2,7 @@ diff --git a/frameworks/native/opengl/libs/EGL/eglApi.cpp b/frameworks/native/op
 index abc1234..def5678 100644
 --- a/frameworks/native/opengl/libs/EGL/eglApi.cpp
 +++ b/frameworks/native/opengl/libs/EGL/eglApi.cpp
-@@ -228,7 +228,7 @@ EGLBoolean eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
+@@ -260,7 +260,7 @@ EGLBoolean eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
      ATRACE_CALL();
      clearError();
  

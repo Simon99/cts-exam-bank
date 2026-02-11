@@ -1,8 +1,8 @@
-diff --git a/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+diff --git a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
 index abc123456789..def987654321 100644
---- a/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
-+++ b/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
-@@ -563,6 +563,14 @@ class VirtualDisplayAdapter {
+--- a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+@@ -562,6 +562,14 @@ class VirtualDisplayAdapter {
                  mInfo.ownerUid = mOwnerUid;
                  mInfo.ownerPackageName = mOwnerPackageName;
  
@@ -17,10 +17,10 @@ index abc123456789..def987654321 100644
                  mInfo.displayShape =
                          DisplayShape.createDefaultDisplayShape(mInfo.width, mInfo.height, false);
              }
-diff --git a/core/java/android/view/Display.java b/core/java/android/view/Display.java
+diff --git a/frameworks/base/core/java/android/view/Display.java b/frameworks/base/core/java/android/view/Display.java
 index abc123456789..def987654321 100644
---- a/core/java/android/view/Display.java
-+++ b/core/java/android/view/Display.java
+--- a/frameworks/base/core/java/android/view/Display.java
++++ b/frameworks/base/core/java/android/view/Display.java
 @@ -1301,10 +1301,10 @@ public final class Display {
      public boolean isHdr() {
          synchronized (mLock) {

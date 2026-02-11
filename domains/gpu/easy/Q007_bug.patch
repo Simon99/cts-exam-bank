@@ -2,7 +2,7 @@ diff --git a/frameworks/native/opengl/libs/EGL/egl_display.cpp b/frameworks/nati
 index abc1234..def5678 100644
 --- a/frameworks/native/opengl/libs/EGL/egl_display.cpp
 +++ b/frameworks/native/opengl/libs/EGL/egl_display.cpp
-@@ -220,7 +220,7 @@ EGLBoolean egl_display_t::initialize(EGLint* major, EGLint* minor) {
+@@ -334,7 +334,7 @@ EGLBoolean egl_display_t::initialize(EGLint* major, EGLint* minor) {
          bool wideColorBoardConfig = android::sysprop::has_wide_color_display(false);
  
          // Add wide-color extensions if device can support wide-color

@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+--- a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
++++ b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+@@ -249,7 +249,7 @@ public final class LogicalDisplay {
+      * the data changes.
+      */
+     public DisplayInfo getDisplayInfoLocked() {
+-        if (mInfo.get() == null) {
++        if (mInfo.get() != null) {
+             DisplayInfo info = new DisplayInfo();
+             copyDisplayInfoFields(info, mBaseDisplayInfo, mOverrideDisplayInfo,
+                     WM_OVERRIDE_FIELDS);

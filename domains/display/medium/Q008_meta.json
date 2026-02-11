@@ -1,0 +1,16 @@
+{
+  "id": "DIS-M008",
+  "title": "Display Override Info 更新條件邏輯反轉",
+  "domain": "display",
+  "difficulty": "medium",
+  "cts_test": "android.display.cts.DisplayTest#testGetMetrics",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-022",
+  "injection_type": ["STATE", "COND"],
+  "affected_files": ["frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java"],
+  "tags": ["condition-inversion", "state-management", "equals", "cache-invalidation", "display-metrics"],
+  "estimated_time_minutes": 25,
+  "bug_description": "setDisplayInfoOverrideFromWindowManagerLocked() 中的條件判斷被反轉，導致 info 變更時不更新，未變更時反而更新",
+  "root_cause": "!mOverrideDisplayInfo.equals(info) 被錯誤地改為 mOverrideDisplayInfo.equals(info)",
+  "symptoms": ["Display.getMetrics() 返回過時的值", "螢幕旋轉後 metrics 不更新", "testGetMetrics CTS 測試失敗"]
+}

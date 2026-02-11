@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/os/Vibrator.java b/frameworks/base/core/java/android/os/Vibrator.java
+--- a/frameworks/base/core/java/android/os/Vibrator.java
++++ b/frameworks/base/core/java/android/os/Vibrator.java
+@@ -154,7 +154,7 @@ public abstract class Vibrator {
+      * @hide
+      */
+     public VibratorInfo getInfo() {
+-        return VibratorInfo.EMPTY_VIBRATOR_INFO;
++        return null;
+     }
+ 
+     /** Get the static vibrator configuration from config.xml. */

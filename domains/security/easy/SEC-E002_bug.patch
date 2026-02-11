@@ -1,0 +1,12 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/Attestation.java b/cts/tests/security/src/android/keystore/cts/Attestation.java
+--- a/cts/tests/security/src/android/keystore/cts/Attestation.java
++++ b/cts/tests/security/src/android/keystore/cts/Attestation.java
+@@ -133,7 +133,7 @@ public abstract class Attestation {
+     }
+ 
+     public int getKeymasterSecurityLevel() {
+-        return keymasterSecurityLevel;
++        return KM_SECURITY_LEVEL_SOFTWARE;
+     }
+ 
+     public byte[] getAttestationChallenge() {

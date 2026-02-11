@@ -2,35 +2,39 @@ diff --git a/frameworks/base/location/java/android/location/LocationManager.java
 index 1234567..abcdefg 100644
 --- a/frameworks/base/location/java/android/location/LocationManager.java
 +++ b/frameworks/base/location/java/android/location/LocationManager.java
-@@ -2450,12 +2450,10 @@ public class LocationManager {
+@@ -2764,8 +2764,8 @@ public class LocationManager {
+     public boolean registerGnssMeasurementsCallback(
+             @NonNull GnssMeasurementRequest request,
+             @NonNull @CallbackExecutor Executor executor,
              @NonNull GnssMeasurementsEvent.Callback callback) {
-         GnssMeasurementCallbackTransport transport = new GnssMeasurementCallbackTransport(
-                 mContext, executor, callback);
--        synchronized (mGnssMeasurementCallbackTransports) {
--            mGnssMeasurementCallbackTransports.put(callback, transport);
--        }
-+        // BUG: transport not stored in map - can't be found for unregister
-         try {
-             return mService.registerGnssMeasurementsCallback(
--                    transport, request, mContext.getPackageName(), mContext.getAttributionTag());
-+                    null, request, mContext.getPackageName(), mContext.getAttributionTag());
-         } catch (RemoteException e) {
-             throw e.rethrowFromSystemServer();
-         }
+-        GnssLazyLoader.sGnssMeasurementsListeners.addListener(callback,
+-                new GnssMeasurementsTransport(executor, mContext, request, callback));
++        // BUG: listener not added to map - can't be found for unregister and won't receive events
++        // GnssLazyLoader.sGnssMeasurementsListeners.addListener(callback, ...);
+         return true;
+     }
+ 
 diff --git a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssMeasurementsProvider.java b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssMeasurementsProvider.java
 index 1234567..abcdefg 100644
 --- a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssMeasurementsProvider.java
 +++ b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssMeasurementsProvider.java
-@@ -198,10 +198,8 @@ public final class GnssMeasurementsProvider extends
+@@ -262,18 +262,11 @@ public final class GnssMeasurementsProvider extends
      @Override
      public void onReportMeasurements(GnssMeasurementsEvent event) {
+-        deliverToListeners(registration -> {
+-            if (mAppOpsHelper.noteOpNoThrow(AppOpsManager.OP_FINE_LOCATION,
+-                    registration.getIdentity())) {
+-                EVENT_LOG.logGnssMeasurementsDelivered(event.getMeasurements().size(),
+-                        registration.getIdentity());
+-                return listener -> listener.onGnssMeasurementsReceived(event);
+-            } else {
+-                return null;
+-            }
+-        });
++        // BUG: deliverToListeners call removed - data never reaches listeners
++        // Measurements are stored but never delivered to registered callbacks
          synchronized (mMultiplexerLock) {
              mLastGnssMeasurementsEvent = event;
          }
--        deliverToListeners(listener -> {
--            listener.onGnssMeasurementsReceived(event);
--        });
-+        // BUG: deliverToListeners call removed - data never reaches listeners
      }
- 
-     @Override
++

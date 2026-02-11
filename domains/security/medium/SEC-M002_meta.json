@@ -1,0 +1,16 @@
+{
+  "id": "SEC-M002",
+  "title": "Attestation Challenge Buffer Size Doubled",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.keystore.cts.AttestationTest#testAttestationChallenge",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-005",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/Asn1Utils.java"
+  ],
+  "tags": ["attestation", "challenge", "buffer"],
+  "injection_type": ["BOUND", "CALC"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "C"
+}

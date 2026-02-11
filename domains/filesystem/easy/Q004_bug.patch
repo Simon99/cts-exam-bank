@@ -1,12 +1,11 @@
 diff --git a/frameworks/base/core/java/android/os/storage/StorageVolume.java b/frameworks/base/core/java/android/os/storage/StorageVolume.java
-index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/os/storage/StorageVolume.java
 +++ b/frameworks/base/core/java/android/os/storage/StorageVolume.java
-@@ -220,7 +220,7 @@ public final class StorageVolume implements Parcelable {
-     /** @hide */
-     @UnsupportedAppUsage
+@@ -195,7 +195,7 @@ public final class StorageVolume implements Parcelable {
+     @UnsupportedAppUsage(maxTargetSdk = Build.VERSION_CODES.Q, publicAlternatives = "{@link StorageVolume#getDirectory()}")
+     @TestApi
      public String getPath() {
--        return mPath.getAbsolutePath();
+-        return mPath.toString();
 +        return null;
      }
  

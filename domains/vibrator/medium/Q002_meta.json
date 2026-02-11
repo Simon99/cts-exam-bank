@@ -1,0 +1,15 @@
+{
+  "id": "VIB-M002",
+  "title": "CreateOneShot Accepts Invalid Amplitude",
+  "domain": "vibrator",
+  "difficulty": "medium",
+  "cts_test": "android.os.cts.VibrationEffectTest#testCreateOneShotAmplitude",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-021",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/VibrationEffect.java"
+  ],
+  "tags": ["vibration-effect", "amplitude", "boundary-check"],
+  "estimated_time_minutes": 15,
+  "answer": "B"
+}

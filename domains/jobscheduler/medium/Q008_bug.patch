@@ -1,34 +1,14 @@
-diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
-index abcd1234..efgh5678 100644
---- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
-+++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
-@@ -3100,10 +3100,8 @@ public class JobSchedulerService extends com.android.server.SystemService
-             if (isJobRunningLocked(job)) {
-                 return JobScheduler.PENDING_JOB_REASON_EXECUTING;
-             }
--            // Check timing delay constraint
--            if (job.hasTimingDelayConstraint() 
--                    && !job.isConstraintSatisfied(CONSTRAINT_TIMING_DELAY)) {
--                return JobScheduler.PENDING_JOB_REASON_CONSTRAINT_MINIMUM_LATENCY;
--            }
-+            // BUG: Missing check for timing delay constraint
-+            
-             // Check charging constraint
-             if (job.hasChargingConstraint() 
-                     && !job.isConstraintSatisfied(CONSTRAINT_CHARGING)) {
-
 diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
-index abcd2345..efgh6789 100644
+index abcd1234..efgh5678 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
-@@ -1560,8 +1560,9 @@ public final class JobStatus {
-      * @return Whether this job has a timing delay constraint.
-      */
+@@ -1559,7 +1559,8 @@ public final class JobStatus {
+     }
+ 
      public boolean hasTimingDelayConstraint() {
 -        return hasConstraint(CONSTRAINT_TIMING_DELAY);
-+        // BUG: Always returns false, so timing delay is never checked
++        // BUG: Always returns false, timing delay constraint is never checked
 +        return false;
      }
  
-     /**
-      * @return Whether this job has a deadline constraint.
+     public boolean hasDeadlineConstraint() {

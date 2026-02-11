@@ -1,0 +1,16 @@
+{
+  "id": "INP-M005",
+  "title": "MotionEvent getToolType() Returns Finger",
+  "domain": "input",
+  "difficulty": "medium",
+  "cts_test": "android.view.cts.SimultaneousTouchAndStylusTest#testToolType",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-011",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/MotionEvent.java"
+  ],
+  "tags": ["motion-event", "tool-type", "stylus"],
+  "injection_type": ["BOUND", "COND"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "B"
+}

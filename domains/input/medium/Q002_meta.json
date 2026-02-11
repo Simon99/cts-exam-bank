@@ -1,0 +1,16 @@
+{
+  "id": "INP-M002",
+  "title": "MotionEvent getActionIndex() Missing Shift",
+  "domain": "input",
+  "difficulty": "medium",
+  "cts_test": "android.view.cts.TouchScreenTest#testActionIndex",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-003",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/MotionEvent.java"
+  ],
+  "tags": ["motion-event", "action-index", "bit-shift"],
+  "injection_type": ["CALC", "BOUND"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "C"
+}

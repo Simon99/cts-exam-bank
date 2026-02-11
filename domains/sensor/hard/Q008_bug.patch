@@ -1,0 +1,16 @@
+diff --git a/frameworks/base/core/java/android/hardware/SystemSensorManager.java b/frameworks/base/core/java/android/hardware/SystemSensorManager.java
+--- a/frameworks/base/core/java/android/hardware/SystemSensorManager.java
++++ b/frameworks/base/core/java/android/hardware/SystemSensorManager.java
+@@ -309,9 +309,9 @@
+                 } else {
+                     result = queue.removeSensor(sensor, true);
+                 }
+-                if (result && !queue.hasSensors()) {
+-                    mSensorListeners.remove(listener);
+-                    queue.dispose();
++                mSensorListeners.remove(listener);
++                if (result && queue.hasSensors()) {
++                    mSensorListeners.put(listener, queue);
+                 }
+             }
+         }

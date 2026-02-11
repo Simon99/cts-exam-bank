@@ -2,46 +2,57 @@ diff --git a/frameworks/base/core/java/android/os/storage/CrateInfo.java b/frame
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/os/storage/CrateInfo.java
 +++ b/frameworks/base/core/java/android/os/storage/CrateInfo.java
-@@ -85,9 +85,9 @@ public final class CrateInfo implements Parcelable {
-     public CrateInfo(Parcel in) {
-         // Read fields - must match writeToParcel order
-         mLabel = in.readString();
--        mExpiration = in.readLong();
--        if (in.readInt() != 0) {
--            mIcon = in.readParcelable(Icon.class.getClassLoader(), Icon.class);
-+        mIcon = in.readParcelable(Icon.class.getClassLoader(), Icon.class);  // Wrong order
-+        mExpiration = in.readLong();
-+        if (in.readInt() == 0) {  // Logic inverted
-         } else {
-             mIcon = null;
+@@ -223,12 +223,12 @@ public final class CrateInfo implements Parcelable {
+     public void readFromParcel(@Nullable Parcel in) {
+         if (in == null) {
+             return;
          }
+ 
+-        mLabel = in.readCharSequence();
+         mExpiration = in.readLong();
+-
++        mLabel = in.readCharSequence();
++        // BUG: Wrong read order - mExpiration before mLabel causes data corruption
+         mUid = in.readInt();
+         mPackageName = in.readString();
+         mId = in.readString();
+     }
 diff --git a/frameworks/base/services/usage/java/com/android/server/usage/StorageStatsService.java b/frameworks/base/services/usage/java/com/android/server/usage/StorageStatsService.java
 index 111222..333444 100644
 --- a/frameworks/base/services/usage/java/com/android/server/usage/StorageStatsService.java
 +++ b/frameworks/base/services/usage/java/com/android/server/usage/StorageStatsService.java
-@@ -620,8 +620,8 @@ public class StorageStatsService extends IStorageStatsManager.Stub {
+@@ -828,14 +828,10 @@ public class StorageStatsService extends IStorageStatsManager.Stub {
+     @Override
      public ParceledListSlice<CrateInfo> queryCratesForUid(String volumeUuid, int uid,
-             String callingPackage) {
-         // Verify caller has permission
--        enforceCrossUserPermission(Binder.getCallingUid(), uid);
--        return new ParceledListSlice<>(getCratesForUid(volumeUuid, uid));
-+        // BUG: Skip permission check and return empty list for non-owner
-+        return uid != Binder.getCallingUid() ? new ParceledListSlice<>(new ArrayList<>()) : null;
-     }
- 
-     private List<CrateInfo> getCratesForUid(String volumeUuid, int uid) {
+             @NonNull String callingPackage) {
+         checkCratesEnable();
+         final int userId = UserHandle.getUserId(uid);
+-        if (userId != UserHandle.getCallingUserId()) {
+-            mContext.enforceCallingOrSelfPermission(
+-                    android.Manifest.permission.INTERACT_ACROSS_USERS, TAG);
+-        }
+-
++        // BUG: Removed cross-user permission check - allows any app to query any user's crates
+         if (Binder.getCallingUid() == uid) {
+             // No permissions required when asking about themselves
+         } else {
+             enforceCratesPermission(Binder.getCallingUid(), callingPackage);
+         }
 diff --git a/frameworks/base/core/java/android/app/usage/StorageStatsManager.java b/frameworks/base/core/java/android/app/usage/StorageStatsManager.java
 index 555666..777888 100644
 --- a/frameworks/base/core/java/android/app/usage/StorageStatsManager.java
 +++ b/frameworks/base/core/java/android/app/usage/StorageStatsManager.java
-@@ -185,8 +185,8 @@ public class StorageStatsManager {
-             throws IOException, PackageManager.NameNotFoundException {
+@@ -369,11 +369,9 @@ public class StorageStatsManager {
+     public Collection<CrateInfo> queryCratesForUid(@NonNull UUID storageUuid,
+             int uid) throws IOException, PackageManager.NameNotFoundException {
          try {
-             ParceledListSlice<CrateInfo> slice = mService.queryCratesForUid(volumeUuid, uid);
--            return slice != null ? slice.getList() : Collections.emptyList();
--        } catch (RemoteException e) {
-+            return Collections.emptyList();  // Always return empty
-+        } catch (Exception e) {
-             throw e.rethrowFromSystemServer();
-         }
-     }
+-            ParceledListSlice<CrateInfo> crateInfoList =
+-                    mService.queryCratesForUid(convert(storageUuid), uid,
+-                            mContext.getOpPackageName());
+-            return Objects.requireNonNull(crateInfoList).getList();
++            // BUG: Always returns empty - ignores actual service response
++            return java.util.Collections.emptyList();
+         } catch (ParcelableException e) {
+             e.maybeRethrow(PackageManager.NameNotFoundException.class);
+             e.maybeRethrow(IOException.class);
+             throw new RuntimeException(e);

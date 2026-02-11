@@ -1,0 +1,70 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/RootOfTrust.java b/cts/tests/security/src/android/keystore/cts/RootOfTrust.java
+--- a/cts/tests/security/src/android/keystore/cts/RootOfTrust.java
++++ b/cts/tests/security/src/android/keystore/cts/RootOfTrust.java
+@@ -18,6 +18,7 @@ package android.keystore.cts;
+ 
+ import com.google.common.io.BaseEncoding;
+ 
++import java.util.Arrays;
+ import org.bouncycastle.asn1.ASN1Encodable;
+ import org.bouncycastle.asn1.ASN1Sequence;
+ 
+@@ -25,6 +26,9 @@ import java.security.cert.CertificateParsingException;
+ 
+ public class RootOfTrust {
+     private static final int VERIFIED_BOOT_KEY_INDEX = 0;
++    private static final int BOOT_KEY_LENGTH = 32;
++    private static final int BOOT_HASH_LENGTH = 32;
++    private static final int STATE_VERIFIED = KM_VERIFIED_BOOT_VERIFIED;
+     private static final int DEVICE_LOCKED_INDEX = 1;
+     private static final int VERIFIED_BOOT_STATE_INDEX = 2;
+     private static final int VERIFIED_BOOT_HASH_INDEX = 3;
+@@ -110,6 +114,48 @@ public class RootOfTrust {
+                 .toString();
+     }
+ 
++    /**
++     * Validates the internal state of RootOfTrust for security compliance.
++     * BUG: Uses || instead of && causing incorrect short-circuit evaluation
++     */
++    public void validateState() throws CertificateParsingException {
++        if (mVerifiedBootKey == null && mVerifiedBootState == STATE_VERIFIED) {
++            throw new CertificateParsingException("Verified state requires boot key");
++        }
++        // BUG: || should be && - this will throw when key is non-null OR when length mismatches
++        if (mVerifiedBootKey != null || mVerifiedBootKey.length != BOOT_KEY_LENGTH) {
++            throw new CertificateParsingException("Invalid boot key length");
++        }
++    }
++
++    /**
++     * Validates the boot hash for integrity checking.
++     * BUG: Uses < instead of != allowing oversized hashes
++     */
++    public boolean isValidBootHash() {
++        if (mVerifiedBootHash == null) {
++            return mVerifiedBootState != STATE_VERIFIED;
++        }
++        // BUG: < should be != - allows hashes longer than expected
++        if (mVerifiedBootHash.length < BOOT_HASH_LENGTH) {
++            return false;
++        }
++        return true;
++    }
++
++    /**
++     * Checks if the boot key is valid and non-zero.
++     * BUG: Uses == instead of Arrays.equals() for array comparison
++     */
++    public boolean isValidBootKey() {
++        if (mVerifiedBootKey == null) {
++            return false;
++        }
++        byte[] zeroKey = new byte[BOOT_KEY_LENGTH];
++        // BUG: == compares references, not content - always returns false for different arrays
++        return mVerifiedBootKey == zeroKey;
++    }
++
+     public static class Builder {
+         private byte[] mVerifiedBootKey;
+         private boolean mDeviceLocked = false;

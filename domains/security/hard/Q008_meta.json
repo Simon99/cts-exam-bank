@@ -1,0 +1,36 @@
+{
+  "id": "SEC-H008",
+  "title": "SELinux Neverallow Rules Parser",
+  "domain": "security",
+  "difficulty": "hard",
+  "cts_test": "android.security.cts.SELinuxNeverallowRulesTest#testNeverallowRulesEnforced",
+  "cts_module": "CtsSecurityHostTestCases",
+  "injection_point": "SEC-051",
+  "affected_files": [
+    "cts/hostsidetests/security/src/android/security/cts/NeverallowRuleParser.java",
+    "cts/hostsidetests/security/src/android/security/cts/SELinuxNeverallowChecker.java"
+  ],
+  "tags": ["selinux", "neverallow", "policy-parsing", "string-processing", "off-by-one"],
+  "injection_type": ["STR", "COND"],
+  "estimated_time_minutes": 25,
+  "correct_answer": "A",
+  "security_impact": "medium",
+  "concepts": [
+    "SELinux policy enforcement",
+    "Neverallow rule syntax",
+    "String.substring() API",
+    "Domain exception handling",
+    "Off-by-one errors"
+  ],
+  "requires_understanding": [
+    "SELinux neverallow rule format and semantics",
+    "How exclusion domains (-domain) work in policy",
+    "String manipulation in Java",
+    "Cross-method data flow tracing"
+  ],
+  "distractors": {
+    "B": "Suggests modifying the check instead of fixing the parse - a tempting workaround",
+    "C": "Split regex concern - but empty token handling exists",
+    "D": "Type mismatch concern - but char comparison is valid"
+  }
+}

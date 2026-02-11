@@ -1,0 +1,16 @@
+{
+  "id": "SEC-E007",
+  "title": "RootOfTrust isDeviceLocked Always False",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keystore.cts.RootOfTrustTest#testDeviceLocked",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-022",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/RootOfTrust.java"
+  ],
+  "tags": ["root-of-trust", "device-locked", "hardcoded"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 8,
+  "correct_answer": "B"
+}

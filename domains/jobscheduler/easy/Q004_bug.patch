@@ -2,7 +2,7 @@ diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/j
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java
-@@ -76,7 +76,7 @@ public final class BatteryController extends RestrictingController {
+@@ -86,7 +86,7 @@ public final class BatteryController extends RestrictingController {
                              mService.isBatteryCharging() && mService.isBatteryNotLow());
                  }
              }

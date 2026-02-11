@@ -1,71 +1,52 @@
 diff --git a/frameworks/base/core/java/android/net/Uri.java b/frameworks/base/core/java/android/net/Uri.java
-index 1234567..abcdefg 100644
---- a/frameworks/base/core/java/android/net/Uri.java
-+++ b/frameworks/base/core/java/android/net/Uri.java
-@@ -1678,14 +1678,13 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
-         static PathPart appendDecodedSegment(PathPart oldPart, String newSegment) {
-             if (oldPart == null || oldPart == EMPTY) {
-                 // If there is no old path, just return the new segment
--                return fromDecoded("/" + newSegment);
-+                return fromDecoded(newSegment);  // Bug: 缺少前導 /
+@@ -2235,11 +2235,11 @@
+         static PathPart appendEncodedSegment(PathPart oldPart,
+                 String newSegment) {
+             // If there is no old path, should we make the new path relative
+-            // or absolute? I pick absolute.
++            // or absolute? Bug: missing leading slash handling
+ 
+             if (oldPart == null) {
+                 // No old path.
+-                return fromEncoded("/" + newSegment);
++                return fromEncoded(newSegment);  // Bug: missing leading /
              }
-             
-             String oldPath = oldPart.getDecoded();
--            String newPath = oldPath.endsWith("/") 
--                ? oldPath + newSegment 
--                : oldPath + "/" + newSegment;
--            return fromDecoded(newPath);
-+            // Bug: 直接返回新段，沒有累積
-+            return fromDecoded("/" + newSegment);
-         }
-     }
-
-diff --git a/frameworks/base/core/java/android/net/UriCodec.java b/frameworks/base/core/java/android/net/UriCodec.java
-index 2345678..bcdefgh 100644
---- a/frameworks/base/core/java/android/net/UriCodec.java
-+++ b/frameworks/base/core/java/android/net/UriCodec.java
-@@ -120,15 +120,12 @@ public final class UriCodec {
-      */
-     public static String appendEncoded(StringBuilder builder, String s, 
-             String allow, boolean encodeSlash) {
--        for (int i = 0; i < s.length(); i++) {
--            char c = s.charAt(i);
--            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
--                    || (c >= '0' && c <= '9') || allow.indexOf(c) != -1
--                    || (c == '/' && !encodeSlash)) {
--                builder.append(c);
+ 
+             String oldPath = oldPart.getEncoded();
+@@ -2248,18 +2248,8 @@
+                 oldPath = "";
+             }
+ 
+-            int oldPathLength = oldPath.length();
+-            String newPath;
+-            if (oldPathLength == 0) {
+-                // No old path.
+-                newPath = "/" + newSegment;
+-            } else if (oldPath.charAt(oldPathLength - 1) == '/') {
+-                newPath = oldPath + newSegment;
 -            } else {
--                appendHex(builder, c);
+-                newPath = oldPath + "/" + newSegment;
 -            }
-+        // BUG: Path separator '/' is incorrectly encoded
-+        // This breaks path accumulation in Uri.Builder
-+        for (int i = 0; i < s.length(); i++) {
-+            char c = s.charAt(i);
-+            // Always encode '/', even when encodeSlash is false
-+            appendHex(builder, c);
+-
+-            return fromEncoded(newPath);
++            // Bug: doesn'''t accumulate path, just returns new segment
++            return fromEncoded("/" + newSegment);
          }
-     }
+ 
+         static PathPart appendDecodedSegment(PathPart oldPart, String decoded) {
 
 diff --git a/frameworks/base/core/java/android/net/UrlQuerySanitizer.java b/frameworks/base/core/java/android/net/UrlQuerySanitizer.java
-index 3456789..cdefghi 100644
---- a/frameworks/base/core/java/android/net/UrlQuerySanitizer.java
-+++ b/frameworks/base/core/java/android/net/UrlQuerySanitizer.java
-@@ -250,14 +250,11 @@ public class UrlQuerySanitizer {
+@@ -599,9 +599,10 @@
       */
      public void parseUrl(String url) {
-         // Extract query string from URL
--        int queryStart = url.indexOf('?');
--        if (queryStart >= 0) {
--            String query = url.substring(queryStart + 1);
--            int fragmentStart = query.indexOf('#');
--            if (fragmentStart >= 0) {
--                query = query.substring(0, fragmentStart);
--            }
--            parseQuery(query);
-+        // BUG: Incorrectly parsing URL path segments
-+        int pathStart = url.indexOf('/');
-+        if (pathStart >= 0) {
-+            // Wrong: parsing path as query, breaking Uri path construction
-+            parseQuery(url.substring(pathStart));
+         int queryIndex = url.indexOf('?');
+-        String query;
+-        if (queryIndex >= 0) {
+-            query = url.substring(queryIndex + 1);
++        // Bug: Incorrectly parsing path as query string
++        int pathIndex = url.indexOf('/');
++        if (pathIndex >= 0) {
++            query = url.substring(pathIndex);
          }
-     }
+         else {
+             query = "";

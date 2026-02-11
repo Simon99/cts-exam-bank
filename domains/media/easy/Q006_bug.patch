@@ -2,11 +2,12 @@ diff --git a/frameworks/base/media/java/android/media/MediaCodecInfo.java b/fram
 index 1234567890ab..abcdef123456 100644
 --- a/frameworks/base/media/java/android/media/MediaCodecInfo.java
 +++ b/frameworks/base/media/java/android/media/MediaCodecInfo.java
-@@ -143,7 +143,7 @@ public final class MediaCodecInfo {
+@@ -159,7 +159,8 @@ public final class MediaCodecInfo {
       * a tighter security sandbox.
       */
      public final boolean isSoftwareOnly() {
 -        return (mFlags & FLAG_IS_SOFTWARE_ONLY) != 0;
++        // BUG: 錯誤地使用了 FLAG_IS_HARDWARE_ACCELERATED
 +        return (mFlags & FLAG_IS_HARDWARE_ACCELERATED) != 0;
      }
  

@@ -1,0 +1,23 @@
+diff --git a/frameworks/base/core/java/android/hardware/SystemSensorManager.java b/frameworks/base/core/java/android/hardware/SystemSensorManager.java
+--- a/frameworks/base/core/java/android/hardware/SystemSensorManager.java
++++ b/frameworks/base/core/java/android/hardware/SystemSensorManager.java
+@@ -778,15 +778,15 @@ public class SystemSensorManager extends SensorManager {
+                 throw new IllegalArgumentException("MemoryFile object is not valid");
+             }
+ 
+-            if (memoryFile.length() < MIN_DIRECT_CHANNEL_BUFFER_SIZE) {
+-                throw new IllegalArgumentException(
+-                        "Size of MemoryFile has to be greater than "
+-                        + MIN_DIRECT_CHANNEL_BUFFER_SIZE);
+-            }
+-
+             size = memoryFile.length();
+             id = nativeCreateDirectChannel(mNativeInstance, deviceId, size,
+                     SensorDirectChannel.TYPE_MEMORY_FILE, fd, null);
++
++            if (memoryFile.length() < MIN_DIRECT_CHANNEL_BUFFER_SIZE) {
++                throw new IllegalArgumentException(
++                        "Size of MemoryFile has to be greater than "
++                        + MIN_DIRECT_CHANNEL_BUFFER_SIZE);
++            }
+             if (id <= 0) {

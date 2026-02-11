@@ -1,0 +1,31 @@
+{
+  "id": "DIS-M001",
+  "title": "BrightnessTracker 競態條件導致亮度事件遺失",
+  "domain": "display",
+  "difficulty": "medium",
+  "cts_test": "android.hardware.display.cts.BrightnessTest#testBrightnessSliderTracking",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-002",
+  "injection_type": ["STATE", "ERR"],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java"
+  ],
+  "bug_type": "race_condition",
+  "root_cause": "mEventsDirty flag set outside synchronized block",
+  "tags": [
+    "threading",
+    "race-condition",
+    "synchronization",
+    "dirty-flag",
+    "state-management",
+    "multi-core"
+  ],
+  "skills_tested": [
+    "多線程同步分析",
+    "跨函數狀態追蹤",
+    "競態條件識別"
+  ],
+  "estimated_time_minutes": 25,
+  "created_at": "2025-01-25",
+  "version": "1.0"
+}

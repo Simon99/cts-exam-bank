@@ -1,0 +1,15 @@
+{
+  "id": "VIB-H009",
+  "title": "VibrationEffect Scale Factor Calculation Error",
+  "domain": "vibrator",
+  "difficulty": "hard",
+  "cts_test": "android.os.cts.VibrationEffectTest#testScaleEffect",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-032",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/VibrationEffect.java"
+  ],
+  "tags": ["vibration-effect", "scale", "immutable", "return-value"],
+  "estimated_time_minutes": 20,
+  "answer": "A"
+}

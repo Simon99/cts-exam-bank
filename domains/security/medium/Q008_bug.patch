@@ -1,0 +1,14 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/RootOfTrust.java b/cts/tests/security/src/android/keystore/cts/RootOfTrust.java
+--- a/cts/tests/security/src/android/keystore/cts/RootOfTrust.java
++++ b/cts/tests/security/src/android/keystore/cts/RootOfTrust.java
+@@ -140,6 +140,10 @@ public class RootOfTrust {
+             return this;
+         }
+         public Builder setVerifiedBootState(int verifiedBootState) {
++            // Validate boot state range (BUG: should be > 3, not > 4)
++            if (verifiedBootState < 0 || verifiedBootState > KM_VERIFIED_BOOT_FAILED + 1) {
++                throw new IllegalArgumentException("Invalid verified boot state: " + verifiedBootState);
++            }
+             this.mVerifiedBootState = verifiedBootState;
+             return this;
+         }

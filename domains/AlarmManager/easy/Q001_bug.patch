@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+--- a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
++++ b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+@@ -482,7 +482,7 @@ public class AlarmManager {
+      * @see #RTC_WAKEUP
+      */
+     public void set(@AlarmType int type, long triggerAtMillis, @NonNull PendingIntent operation) {
+-        setImpl(type, triggerAtMillis, legacyExactLength(), 0, 0, operation, null, null,
++        setImpl(0, triggerAtMillis, legacyExactLength(), 0, 0, operation, null, null,
+                 (Handler) null, null, null);
+     }
+ 

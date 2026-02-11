@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/view/KeyEvent.java b/frameworks/base/core/java/android/view/KeyEvent.java
+--- a/frameworks/base/core/java/android/view/KeyEvent.java
++++ b/frameworks/base/core/java/android/view/KeyEvent.java
+@@ -3181,7 +3181,7 @@ public class KeyEvent extends InputEvent implements Parcelable {
+         } catch (NumberFormatException ex) {
+         }
+ 
+-        if (symbolicName.startsWith(LABEL_PREFIX)) {
++        if (symbolicName.endsWith(LABEL_PREFIX)) {
+             symbolicName = symbolicName.substring(LABEL_PREFIX.length());
+         }
+         int keyCode = nativeKeyCodeFromString(symbolicName);

@@ -1,0 +1,15 @@
+{
+  "id": "SEC-E005",
+  "title": "Padding Mode Validation",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keystore.cts.AuthorizationListTest#testPadding",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/AuthorizationList.java"
+  ],
+  "injection_point": "SEC-016",
+  "tags": ["authorization", "padding", "initialization"],
+  "estimated_time_minutes": 8,
+  "correct_answer": "C"
+}

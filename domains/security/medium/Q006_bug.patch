@@ -1,0 +1,12 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+--- a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
++++ b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+@@ -68,7 +68,7 @@ public class AuthorizationList {
+     public static final int KM_DIGEST_NONE = 0;
+     public static final int KM_DIGEST_MD5 = 1;
+     public static final int KM_DIGEST_SHA1 = 2;
+     public static final int KM_DIGEST_SHA_2_224 = 3;
+-    public static final int KM_DIGEST_SHA_2_256 = 4;
++    public static final int KM_DIGEST_SHA_2_256 = 3;
+     public static final int KM_DIGEST_SHA_2_384 = 5;
+     public static final int KM_DIGEST_SHA_2_512 = 6;

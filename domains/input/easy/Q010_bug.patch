@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/view/VelocityTracker.java b/frameworks/base/core/java/android/view/VelocityTracker.java
+--- a/frameworks/base/core/java/android/view/VelocityTracker.java
++++ b/frameworks/base/core/java/android/view/VelocityTracker.java
+@@ -403,7 +403,7 @@ public final class VelocityTracker {
+      * @return The previously computed X velocity.
+      */
+     public float getXVelocity() {
+-        return getXVelocity(ACTIVE_POINTER_ID);
++        return 0.0f;
+     }
+ 
+     /**

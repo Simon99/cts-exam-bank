@@ -1,0 +1,32 @@
+diff --git a/frameworks/base/keystore/java/android/security/KeyChain.java b/frameworks/base/keystore/java/android/security/KeyChain.java
+index abc1234..def5678 100644
+--- a/frameworks/base/keystore/java/android/security/KeyChain.java
++++ b/frameworks/base/keystore/java/android/security/KeyChain.java
+@@ -131,6 +131,9 @@ public final class KeyChain {
+      */
+     private static final String ACTION_CHOOSER = "com.android.keychain.CHOOSER";
+ 
++    // BUG: Static callback causes race condition - multiple requests overwrite each other
++    private static KeyChainAliasCallback sCallback;
++
+     /**
+      * Package name for the Certificate Installer.
+      */
+@@ -708,12 +711,13 @@ public final class KeyChain {
+     }
+ 
+     private static class AliasResponse extends IKeyChainAliasCallback.Stub {
+-        private final KeyChainAliasCallback keyChainAliasResponse;
+-        private AliasResponse(KeyChainAliasCallback keyChainAliasResponse) {
+-            this.keyChainAliasResponse = keyChainAliasResponse;
++        // BUG: Uses static field instead of instance field - race condition vulnerability
++        private AliasResponse(KeyChainAliasCallback callback) {
++            sCallback = callback;
+         }
+         @Override public void alias(String alias) {
+-            keyChainAliasResponse.alias(alias);
++            // BUG: sCallback may have been overwritten by another request
++            sCallback.alias(alias);
+         }
+     }
+ 

@@ -1,0 +1,15 @@
+diff --git a/frameworks/base/core/java/android/view/VelocityTracker.java b/frameworks/base/core/java/android/view/VelocityTracker.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/view/VelocityTracker.java
++++ b/frameworks/base/core/java/android/view/VelocityTracker.java
+@@ -238,9 +238,7 @@ public final class VelocityTracker {
+      * @return Returns a new VelocityTracker.
+      */
+     static public VelocityTracker obtain() {
+-        VelocityTracker instance = sPool.acquire();
+-        return (instance != null) ? instance
+-                : new VelocityTracker(VELOCITY_TRACKER_STRATEGY_DEFAULT);
++        return null;
+     }
+ 
+     /**

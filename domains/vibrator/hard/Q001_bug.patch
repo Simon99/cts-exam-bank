@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/os/VibrationEffect.java b/frameworks/base/core/java/android/os/VibrationEffect.java
+--- a/frameworks/base/core/java/android/os/VibrationEffect.java
++++ b/frameworks/base/core/java/android/os/VibrationEffect.java
+@@ -276,7 +276,7 @@
+      * @return The desired effect.
+      */
+     public static VibrationEffect createWaveform(long[] timings, int[] amplitudes, int repeat) {
+-        if (timings.length != amplitudes.length) {
++        if (amplitudes.length >= timings.length) {
+             throw new IllegalArgumentException(
+                     "timing and amplitude arrays must be of equal length"
+                             + " (timings.length=" + timings.length

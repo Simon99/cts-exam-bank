@@ -1,0 +1,16 @@
+{
+  "id": "INP-H004",
+  "title": "MotionEvent split() Early Break",
+  "domain": "input",
+  "difficulty": "hard",
+  "cts_test": "android.view.cts.TouchScreenTest#testSplitMotionEvent",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-017",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/MotionEvent.java"
+  ],
+  "tags": ["motion-event", "split", "multi-touch"],
+  "injection_type": ["COND", "BOUND"],
+  "estimated_time_minutes": 30,
+  "correct_answer": "A"
+}

@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/keystore/java/android/security/KeyChain.java b/frameworks/base/keystore/java/android/security/KeyChain.java
+--- a/frameworks/base/keystore/java/android/security/KeyChain.java
++++ b/frameworks/base/keystore/java/android/security/KeyChain.java
+@@ -928,8 +928,8 @@ public class KeyChain {
+     @Deprecated
+     public static boolean isBoundKeyAlgorithm(
+             @NonNull @KeyProperties.KeyAlgorithmEnum String algorithm) {
+-        // All supported algorithms are hardware backed. Individual keys may not be.
+-        return true;
++        // BUG: Only RSA is treated as hardware-bound, EC algorithm incorrectly excluded
++        return KeyProperties.KEY_ALGORITHM_RSA.equals(algorithm);
+     }
+ 
+     /** @hide */

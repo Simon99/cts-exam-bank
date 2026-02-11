@@ -2,25 +2,26 @@ diff --git a/frameworks/base/core/java/android/os/storage/StorageManager.java b/
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/os/storage/StorageManager.java
 +++ b/frameworks/base/core/java/android/os/storage/StorageManager.java
-@@ -1245,7 +1245,7 @@ public class StorageManager {
-         for (StorageVolume volume : getStorageVolumes()) {
-             File volumePath = volume.getDirectory();
-             if (volumePath != null) {
--                if (path.startsWith(volumePath.getPath())) {
-+                if (path.equals(volumePath.getPath())) {
-                     return volume;
-                 }
+@@ -1264,7 +1264,7 @@ public class StorageManager {
+             } catch (IOException ignored) {
+                 continue;
              }
+-            if (FileUtils.contains(volumeFile, file)) {
++            if (file.equals(volumeFile)) {
+                 return volume;
+             }
+         }
 diff --git a/frameworks/base/core/java/android/os/storage/StorageVolume.java b/frameworks/base/core/java/android/os/storage/StorageVolume.java
 index 111222..333444 100644
 --- a/frameworks/base/core/java/android/os/storage/StorageVolume.java
 +++ b/frameworks/base/core/java/android/os/storage/StorageVolume.java
-@@ -275,7 +275,7 @@ public final class StorageVolume implements Parcelable {
-      */
-     @Nullable
-     public File getDirectory() {
--        return mPath;
-+        return mPath != null ? new File(mPath.getPath() + "/internal") : null;
-     }
- 
-     /**
+@@ -230,7 +230,7 @@ public final class StorageVolume implements Parcelable {
+     public @Nullable File getDirectory() {
+         switch (mState) {
+             case Environment.MEDIA_MOUNTED:
+             case Environment.MEDIA_MOUNTED_READ_ONLY:
+-                return mPath;
++                return mPath != null ? new File(mPath.getPath() + "/internal") : null;
+             default:
+                 return null;
+         }

@@ -1,0 +1,15 @@
+{
+  "id": "SEC-M005",
+  "title": "Key Purpose Validation",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.keystore.cts.AuthorizationListTest#testPurpose",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/AuthorizationList.java"
+  ],
+  "injection_point": "SEC-012",
+  "tags": ["authorization", "purpose", "initialization"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "B"
+}

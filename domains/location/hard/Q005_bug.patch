@@ -1,31 +1,34 @@
 diff --git a/frameworks/base/services/core/java/com/android/server/location/LocationManagerService.java b/frameworks/base/services/core/java/com/android/server/location/LocationManagerService.java
-index 1234567..abcdefg 100644
 --- a/frameworks/base/services/core/java/com/android/server/location/LocationManagerService.java
 +++ b/frameworks/base/services/core/java/com/android/server/location/LocationManagerService.java
-@@ -1245,12 +1245,8 @@ public class LocationManagerService extends ILocationManager.Stub implements
+@@ -1415,13 +1415,11 @@
      @Override
      public void addTestProvider(String provider, ProviderProperties properties,
-             List<String> extraAttributionTags) {
--        // Check mock location permission and settings
--        enforceCallerIsMockLocationApp();
--        
--        if (!hasMockLocationPermission()) {
--            throw new SecurityException("Requires ACCESS_MOCK_LOCATION permission");
+             List<String> extraAttributionTags, String packageName, String attributionTag) {
+         // unsafe is ok because app ops will verify the package name
+         CallerIdentity identity = CallerIdentity.fromBinderUnsafe(packageName, attributionTag);
+-        if (!mInjector.getAppOpsHelper().noteOp(AppOpsManager.OP_MOCK_LOCATION, identity)) {
+-            return;
 -        }
-+        // BUG: Permission checks removed - any app can add test provider
-+        // enforceCallerIsMockLocationApp() and permission check removed
-         
-         synchronized (mLock) {
-             LocationProviderManager manager = getOrAddProviderManager(provider);
-@@ -1267,10 +1263,7 @@ public class LocationManagerService extends ILocationManager.Stub implements
++        // BUG: Permission check removed - any app can add test provider
+ 
+         final LocationProviderManager manager = getOrAddLocationProviderManager(provider);
+         manager.setMockProvider(new MockLocationProvider(properties, identity,
+                 new ArraySet<>(extraAttributionTags)));
+     }
+@@ -1449,14 +1447,12 @@
      @Override
-     public void setTestProviderLocation(String provider, Location location) {
-         Objects.requireNonNull(provider);
--        
--        // Verify caller is the mock location app
--        enforceCallerIsMockLocationApp();
--        
-+        // BUG: enforceCallerIsMockLocationApp() check removed
-         synchronized (mLock) {
-             LocationProviderManager manager = mProviderManagers.get(provider);
-             if (manager == null || !manager.isMock()) {
+     public void setTestProviderLocation(String provider, Location location, String packageName,
+             String attributionTag) {
+         // unsafe is ok because app ops will verify the package name
+         CallerIdentity identity = CallerIdentity.fromBinderUnsafe(packageName,
+                 attributionTag);
+-        if (!mInjector.getAppOpsHelper().noteOp(AppOpsManager.OP_MOCK_LOCATION, identity)) {
+-            return;
+-        }
++        // BUG: Permission check removed - mock location can be set without authorization
+ 
+         Preconditions.checkArgument(location.isComplete(),
+                 "incomplete location object, missing timestamp or accuracy?");
+ 
+         LocationProviderManager manager = getLocationProviderManager(provider);

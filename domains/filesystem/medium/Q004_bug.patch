@@ -2,21 +2,21 @@ diff --git a/frameworks/base/core/java/com/android/internal/os/FuseAppLoop.java 
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/com/android/internal/os/FuseAppLoop.java
 +++ b/frameworks/base/core/java/com/android/internal/os/FuseAppLoop.java
-@@ -185,7 +185,7 @@ public class FuseAppLoop implements Handler.Callback {
-                     final int readSize = callback.onRead(offset, size, data);
-                     // Return the actual bytes read, not the requested size
+@@ -182,7 +182,7 @@ public class FuseAppLoop implements Handler.Callback {
+                             offset, size, data);
                      synchronized (mLock) {
--                        replyRead(uniqueId, readSize, data);
-+                        replyRead(uniqueId, size, data);
+                         if (mInstance != 0) {
+-                            native_replyRead(mInstance, unique, readSize, data);
++                            native_replyRead(mInstance, unique, size, data);
+                         }
+                         recycleLocked(args);
                      }
-                 } catch (ErrnoException e) {
-                     synchronized (mLock) {
 diff --git a/frameworks/base/core/java/android/os/ProxyFileDescriptorCallback.java b/frameworks/base/core/java/android/os/ProxyFileDescriptorCallback.java
 index 111222..333444 100644
 --- a/frameworks/base/core/java/android/os/ProxyFileDescriptorCallback.java
 +++ b/frameworks/base/core/java/android/os/ProxyFileDescriptorCallback.java
-@@ -58,7 +58,7 @@ public abstract class ProxyFileDescriptorCallback {
-      * @throws ErrnoException when an error occurs.
+@@ -61,7 +61,7 @@ public abstract class ProxyFileDescriptorCallback {
+      * @throws ErrnoException ErrnoException containing E constants in OsConstants.
       */
      public int onRead(long offset, int size, byte[] data) throws ErrnoException {
 -        throw new ErrnoException("onRead", OsConstants.EBADF);

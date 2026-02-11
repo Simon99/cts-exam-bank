@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/view/KeyEvent.java b/frameworks/base/core/java/android/view/KeyEvent.java
+--- a/frameworks/base/core/java/android/view/KeyEvent.java
++++ b/frameworks/base/core/java/android/view/KeyEvent.java
+@@ -2500,7 +2500,8 @@ public class KeyEvent extends InputEvent implements Parcelable {
+      * @see #metaStateHasModifiers
+      */
+     public final boolean hasModifiers(int modifiers) {
+-        return metaStateHasModifiers(mMetaState, modifiers);
++        // BUG: Uses == instead of bitmask check
++        return getMetaState() == modifiers;
+     }
+ 
+     /**

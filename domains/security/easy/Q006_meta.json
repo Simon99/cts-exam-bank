@@ -1,0 +1,15 @@
+{
+  "id": "SEC-E006",
+  "title": "No Auth Required Flag",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keystore.cts.AuthorizationListTest#testNoAuthRequired",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/AuthorizationList.java"
+  ],
+  "injection_point": "SEC-017",
+  "tags": ["authorization", "boolean-tag", "logic-inversion"],
+  "estimated_time_minutes": 8,
+  "correct_answer": "B"
+}

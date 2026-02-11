@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/view/MotionEvent.java b/frameworks/base/core/java/android/view/MotionEvent.java
+--- a/frameworks/base/core/java/android/view/MotionEvent.java
++++ b/frameworks/base/core/java/android/view/MotionEvent.java
+@@ -2331,8 +2331,7 @@ public final class MotionEvent extends InputEvent implements Parcelable {
+      * @return The index associated with the action.
+      */
+     public final int getActionIndex() {
+-        return (nativeGetAction(mNativePtr) & ACTION_POINTER_INDEX_MASK)
+-                >> ACTION_POINTER_INDEX_SHIFT;
++        return nativeGetAction(mNativePtr) & ACTION_POINTER_INDEX_MASK;
+     }
+ 
+     /**

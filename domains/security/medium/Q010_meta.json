@@ -1,0 +1,15 @@
+{
+  "id": "SEC-M010",
+  "title": "Certificate Source Lookup",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.security.cts.NetworkSecurityConfigTest#testCertificateSource",
+  "cts_module": "CtsSecurityTestCases",
+  "affected_files": [
+    "frameworks/base/core/java/android/security/net/config/CertificateSource.java"
+  ],
+  "injection_point": "SEC-043",
+  "tags": ["network-security", "certificate", "x500-principal"],
+  "estimated_time_minutes": 18,
+  "correct_answer": "B"
+}

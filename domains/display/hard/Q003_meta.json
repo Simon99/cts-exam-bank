@@ -1,0 +1,43 @@
+{
+  "id": "DIS-H003",
+  "title": "Display Mode Specs 狀態條件判斷錯誤導致刷新率切換失敗",
+  "domain": "display",
+  "difficulty": "hard",
+  "cts_test": "android.display.cts.DisplayTest#testModeSwitchOnPrimaryDisplay",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-035",
+  "injection_type": ["STATE", "COND"],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java"
+  ],
+  "tags": [
+    "display-mode",
+    "refresh-rate",
+    "state-management",
+    "condition-logic",
+    "incomplete-comparison",
+    "setter-optimization-antipattern",
+    "flag-lifecycle"
+  ],
+  "estimated_time_minutes": 35,
+  "skills_tested": [
+    "狀態標誌生命週期分析",
+    "物件相等性比較邏輯",
+    "條件判斷完整性審查",
+    "API 語義理解",
+    "優化副作用識別"
+  ],
+  "key_concepts": [
+    "DesiredDisplayModeSpecs 包含 baseModeId、primary RefreshRateRanges、appRequest 等多個欄位",
+    "baseModeId 相同不代表整個 specs 相同",
+    "狀態標誌必須有完整的設置和重置邏輯",
+    "Setter 中的條件邏輯可能改變 API 契約"
+  ],
+  "common_mistakes": [
+    "只關注 baseModeId 而忽略其他欄位",
+    "未注意 mPendingModeTransition 的重置邏輯缺失",
+    "將此當作簡單的空值檢查問題"
+  ],
+  "created_at": "2025-02-02",
+  "version": "1.0"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "DIS-E010",
+  "title": "Display Flag 條件判斷錯誤 - FLAG_ROUND 檢查反轉",
+  "domain": "display",
+  "difficulty": "easy",
+  "cts_test": "android.display.cts.DisplayTest#testFlags",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-021",
+  "injection_type": ["COND"],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java"
+  ],
+  "tags": [
+    "flag-handling",
+    "bitwise-operation",
+    "condition-check",
+    "debugging-output",
+    "round-display"
+  ],
+  "estimated_time_minutes": 15,
+  "bug_description": "在 flagsToString() 方法中，FLAG_ROUND 的條件檢查誤用 == 0 而非 != 0，導致圓形顯示器狀態報告反轉",
+  "fix_complexity": "single-line",
+  "related_concepts": [
+    "bitwise AND operation",
+    "flag constant checking pattern",
+    "debugging output methods"
+  ]
+}

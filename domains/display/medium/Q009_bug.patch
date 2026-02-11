@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+--- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -2434,7 +2434,7 @@
+             int conversionMode = hdrConversionMode.getConversionMode();
+             int preferredHdrType = hdrConversionMode.getPreferredHdrOutputType();
+             // If the HDR conversion is disabled by an app through WindowManager.LayoutParams, then
+             // set HDR conversion mode to HDR_CONVERSION_PASSTHROUGH.
+-            if (mOverrideHdrConversionMode == null) {
++            if (mOverrideHdrConversionMode != null) {
+                 // HDR_CONVERSION_FORCE with HDR_TYPE_INVALID is used to represent forcing SDR type.
+                 // But, internally SDR is selected by using passthrough mode.
+                 if (conversionMode == HdrConversionMode.HDR_CONVERSION_FORCE

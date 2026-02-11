@@ -2,7 +2,7 @@ diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/j
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/StorageController.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/StorageController.java
-@@ -105,7 +105,7 @@ public final class StorageController extends StateController {
+@@ -144,7 +144,7 @@ public final class StorageController extends StateController {
                      Slog.d(TAG, "Available storage too low to do work. @ "
                              + sElapsedRealtimeClock.millis());
                  }

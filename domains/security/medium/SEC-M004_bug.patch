@@ -1,0 +1,12 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+--- a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
++++ b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+@@ -247,7 +247,7 @@
+                     keySize = Asn1Utils.getIntegerFromAsn1(value);
+                     Log.i("Attestation", "Found KEY SIZE, value: " + keySize);
+                     break;
+-                case KM_TAG_DIGEST & KEYMASTER_TAG_TYPE_MASK:
++                case KM_TAG_PURPOSE & KEYMASTER_TAG_TYPE_MASK:  // BUG: wrong tag, should be KM_TAG_DIGEST
+                     digests = Asn1Utils.getIntegersFromAsn1Set(value);
+                     break;
+                 case KM_TAG_PADDING & KEYMASTER_TAG_TYPE_MASK:

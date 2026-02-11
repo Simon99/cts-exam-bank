@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraCaptu
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraCaptureSessionImpl.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraCaptureSessionImpl.java
-@@ -645,7 +645,10 @@ public class CameraCaptureSessionImpl extends CameraCaptureSession
+@@ -643,7 +643,10 @@ public class CameraCaptureSessionImpl extends CameraCaptureSession
              @Override
              public void onCaptureStarted(CameraDevice camera,
                      CaptureRequest request, long timestamp, long frameNumber) {
@@ -18,7 +18,7 @@ diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDevic
 index abcd1234..efgh5679 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-@@ -2075,6 +2075,11 @@ public class CameraDeviceImpl extends CameraDevice
+@@ -2073,6 +2073,11 @@ public class CameraDeviceImpl extends CameraDevice
          @Override
          public void onCaptureStarted(final CaptureResultExtras resultExtras, final long timestamp) {
 +            // BUG: 跳過 onCaptureStarted 回調

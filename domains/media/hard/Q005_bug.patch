@@ -1,0 +1,14 @@
+diff --git a/frameworks/native/libs/gui/Surface.cpp b/frameworks/native/libs/gui/Surface.cpp
+index 123456789abc..abcdef012345 100644
+--- a/frameworks/native/libs/gui/Surface.cpp
++++ b/frameworks/native/libs/gui/Surface.cpp
+@@ -1139,7 +1139,8 @@ int Surface::queueBuffer(android_native_buffer_t* buffer, int fenceFd) {
+ 
+     IGraphicBufferProducer::QueueBufferOutput output;
+     IGraphicBufferProducer::QueueBufferInput input;
+-    getQueueBufferInputLocked(buffer, fenceFd, mTimestamp, &input);
++    // Bug: always use 0 as timestamp, causes video playback timing issues
++    getQueueBufferInputLocked(buffer, fenceFd, 0, &input);
+     applyGrallocMetadataLocked(buffer, input);
+     sp<Fence> fence = input.fence;
+ 

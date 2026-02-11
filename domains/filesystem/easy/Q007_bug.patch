@@ -1,11 +1,10 @@
 diff --git a/frameworks/base/core/java/android/os/storage/StorageVolume.java b/frameworks/base/core/java/android/os/storage/StorageVolume.java
-index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/os/storage/StorageVolume.java
 +++ b/frameworks/base/core/java/android/os/storage/StorageVolume.java
-@@ -380,7 +380,7 @@ public final class StorageVolume implements Parcelable {
-         parcel.writeString(mPath.getAbsolutePath());
-         parcel.writeString(mInternalPath.getAbsolutePath());
-         parcel.writeString(mDescription);
+@@ -548,7 +548,7 @@
+         parcel.writeString8(mPath.toString());
+         parcel.writeString8(mInternalPath.toString());
+         parcel.writeString8(mDescription);
 -        parcel.writeInt(mPrimary ? 1 : 0);
 +        parcel.writeInt(0);
          parcel.writeInt(mRemovable ? 1 : 0);

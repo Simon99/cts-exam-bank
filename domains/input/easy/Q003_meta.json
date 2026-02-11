@@ -1,0 +1,16 @@
+{
+  "id": "INP-E003",
+  "title": "MotionEvent getPointerCount() Error",
+  "domain": "input",
+  "difficulty": "easy",
+  "cts_test": "android.view.cts.TouchScreenTest#testPointerCount",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-006",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/MotionEvent.java"
+  ],
+  "tags": ["motion-event", "multi-touch", "pointer-count"],
+  "injection_type": ["CALC"],
+  "estimated_time_minutes": 10,
+  "correct_answer": "C"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "ALM-M002",
+  "title": "setWindow Ignores Window Length",
+  "domain": "AlarmManager",
+  "difficulty": "medium",
+  "cts_test": "android.alarmmanager.cts.BasicApiTests#testSetWindow",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java"
+  ],
+  "injection_point": "ALM-004",
+  "tags": ["setWindow", "windowLength", "batching"],
+  "estimated_time_minutes": 20,
+  "answer": "A"
+}

@@ -1,12 +1,12 @@
-diff --git a/frameworks/base/core/java/android/os/BaseBundle.java b/frameworks/base/core/java/android/os/BaseBundle.java
-index abc1234..def5678 100644
---- a/frameworks/base/core/java/android/os/BaseBundle.java
-+++ b/frameworks/base/core/java/android/os/BaseBundle.java
-@@ -1680,7 +1680,7 @@ public class BaseBundle {
-         }
-         final int N = map.size();
--        parcel.writeInt(N);
-+        // parcel.writeInt(N);  // BUG: 沒有寫入元素數量
-         for (int i = 0; i < N; i++) {
-             writeValue(parcel, map.keyAt(i), map.valueAt(i), flags);
-         }
+diff --git a/frameworks/base/core/java/android/os/Parcel.java b/frameworks/base/core/java/android/os/Parcel.java
+--- a/frameworks/base/core/java/android/os/Parcel.java
++++ b/frameworks/base/core/java/android/os/Parcel.java
+@@ -1323,7 +1323,7 @@
+         // Keep the format of this Parcel in sync with writeToParcelInner() in
+         // frameworks/native/libs/binder/PersistableBundle.cpp.
+         final int N = val.size();
+-        writeInt(N);
++        // writeInt(N);  // BUG: 沒有寫入元素數量
+         if (DEBUG_ARRAY_MAP) {
+             RuntimeException here =  new RuntimeException("here");
+             here.fillInStackTrace();

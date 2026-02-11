@@ -2,29 +2,29 @@ diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/j
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
-@@ -2850,11 +2850,9 @@ public class JobSchedulerService extends com.android.server.SystemService
-         try {
-             synchronized (mLock) {
-                 List<JobInfo> jobs = new ArrayList<>();
-+                final String namespace = mNamespace;
-                 mJobs.forEachJob(uid, (job) -> {
--                    // Filter by namespace
--                    if (Objects.equals(namespace, job.getNamespace())) {
--                        jobs.add(job.getJob());
--                    }
-+                    jobs.add(job.getJob());  // BUG: Not filtering by namespace
-                 });
-                 return jobs;
+@@ -2039,9 +2039,8 @@ public class JobSchedulerService extends com.android.server.SystemService
+             // Write out for loop to avoid addAll() creating an Iterator.
+             for (int i = jobs.size() - 1; i >= 0; i--) {
+                 final JobStatus job = jobs.valueAt(i);
+-                if (Objects.equals(namespace, job.getNamespace())) {
+-                    outList.add(job.getJob());
+-                }
++                // BUG: Not filtering by namespace
++                outList.add(job.getJob());
              }
+             return outList;
+         }
 diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobStore.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobStore.java
 index 33333333..44444444 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobStore.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobStore.java
-@@ -482,7 +482,10 @@ class JobStore {
+@@ -481,7 +481,8 @@ class JobStore {
+     }
+ 
      public void forEachJob(int uid, Consumer<JobStatus> functor) {
 -        mJobSet.forEachJob(uid, functor);
 +        // BUG: Ignoring uid filter, iterating all jobs instead
-+        mJobSet.forEachJob(null, functor);
++        mJobSet.forEachJob(functor);
      }
  
      public void forEachJobForSourceUid(int sourceUid, Consumer<JobStatus> functor) {

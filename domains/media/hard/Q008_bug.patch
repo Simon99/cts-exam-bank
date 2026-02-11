@@ -1,0 +1,16 @@
+diff --git a/frameworks/av/media/libstagefright/MPEG4Writer.cpp b/frameworks/av/media/libstagefright/MPEG4Writer.cpp
+--- a/frameworks/av/media/libstagefright/MPEG4Writer.cpp
++++ b/frameworks/av/media/libstagefright/MPEG4Writer.cpp
+@@ -3836,8 +3836,10 @@ status_t MPEG4Writer::Track::threadEntry() {
+                 }
+                 mTimestampDebugHelper.push_back(timestampDebugEntry);
+ 
+-                cttsOffsetTimeUs =
+-                        timestampUs + kMaxCttsOffsetTimeUs - decodingTimeUs;
++                // Bug: removed the kMaxCttsOffsetTimeUs base, causing negative CTTS
++                cttsOffsetTimeUs = timestampUs - decodingTimeUs;
++                // This can be negative for B-frames!
++
+                 if (WARN_UNLESS(cttsOffsetTimeUs >= 0LL, "for %s track", trackName)) {
+                     copy->release();
+                     mSource->stop();

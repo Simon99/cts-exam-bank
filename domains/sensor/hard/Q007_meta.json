@@ -1,0 +1,15 @@
+{
+  "id": "SEN-H007",
+  "title": "requestTriggerSensorImpl Doesn't Prevent Double Registration",
+  "domain": "sensor",
+  "difficulty": "hard",
+  "cts_test": "android.hardware.cts.SensorTest#testTriggerSensorDoubleRequest",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-066",
+  "injection_type": ["STATE"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/SystemSensorManager.java"
+  ],
+  "tags": ["trigger", "duplicate", "idempotent"],
+  "estimated_time_minutes": 30
+}

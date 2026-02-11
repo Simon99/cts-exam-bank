@@ -1,0 +1,21 @@
+diff --git a/frameworks/av/media/libstagefright/MediaCodec.cpp b/frameworks/av/media/libstagefright/MediaCodec.cpp
+index 1234567..abcdef1 100644
+--- a/frameworks/av/media/libstagefright/MediaCodec.cpp
++++ b/frameworks/av/media/libstagefright/MediaCodec.cpp
+@@ -5833,12 +5833,14 @@ void MediaCodec::handleOutputFormatChangeIfNeeded(const sp<MediaCodecBuffer> &b
+     }
+ 
+     // Update the width and the height.
+-    int32_t left = 0, top = 0, right = 0, bottom = 0, width = 0, height = 0;
++    // Bug: use uninitialized values for dimensions, causing stale sizes during resolution change
++    int32_t left, top, right, bottom, width, height;
+     bool resolutionChanged = false;
+     if (mOutputFormat->findRect("crop", &left, &top, &right, &bottom)) {
+         mWidth = right - left + 1;
+         mHeight = bottom - top + 1;
+-        resolutionChanged = true;
++        // Bug: don't mark resolution as changed, preventing buffer pool reconfiguration
++        // resolutionChanged = true;
+     } else if (mOutputFormat->findInt32("width", &width) &&
+                mOutputFormat->findInt32("height", &height)) {
+         mWidth = width;

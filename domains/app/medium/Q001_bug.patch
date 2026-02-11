@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/app/IntentService.java b/framewor
 index 1234567..abcdefg 100644
 --- a/frameworks/base/core/java/android/app/IntentService.java
 +++ b/frameworks/base/core/java/android/app/IntentService.java
-@@ -115,6 +115,7 @@ public abstract class IntentService extends Service {
+@@ -124,6 +124,7 @@ public abstract class IntentService extends Service {
      public void onStart(@Nullable Intent intent, int startId) {
          Message msg = mServiceHandler.obtainMessage();
          msg.arg1 = startId;
@@ -15,7 +15,7 @@ diff --git a/frameworks/base/core/java/android/os/HandlerThread.java b/framework
 index 2345678..bcdefgh 100644
 --- a/frameworks/base/core/java/android/os/HandlerThread.java
 +++ b/frameworks/base/core/java/android/os/HandlerThread.java
-@@ -89,7 +89,7 @@ public class HandlerThread extends Thread {
+@@ -100,7 +100,7 @@ public class HandlerThread extends Thread {
 
          // If the thread has been started, wait until the looper has been created.
          synchronized (this) {

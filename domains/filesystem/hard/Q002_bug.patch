@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/os/storage/VolumeInfo.java b/fram
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/os/storage/VolumeInfo.java
 +++ b/frameworks/base/core/java/android/os/storage/VolumeInfo.java
-@@ -126,7 +126,7 @@ public class VolumeInfo implements Parcelable {
+@@ -129,7 +129,7 @@ public class VolumeInfo implements Parcelable {
          sStateToEnvironment.put(VolumeInfo.STATE_CHECKING, Environment.MEDIA_CHECKING);
          sStateToEnvironment.put(VolumeInfo.STATE_MOUNTED, Environment.MEDIA_MOUNTED);
          sStateToEnvironment.put(VolumeInfo.STATE_MOUNTED_READ_ONLY, Environment.MEDIA_MOUNTED_READ_ONLY);
@@ -15,29 +15,29 @@ diff --git a/frameworks/base/services/core/java/com/android/server/StorageManage
 index 111222..333444 100644
 --- a/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
 +++ b/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
-@@ -1810,9 +1810,9 @@ class StorageManagerService extends IStorageManager.Stub
-     private void onVolumeStateChangedLocked(VolumeInfo vol, int oldState, int newState) {
+@@ -1673,8 +1673,10 @@ class StorageManagerService extends IStorageManager.Stub
+     @GuardedBy("mLock")
+     private void onVolumeStateChangedLocked(VolumeInfo vol, int newState) {
          if (vol.type == VolumeInfo.TYPE_EMULATED) {
-             // Emulated volumes should always appear mounted
 -            if (newState != VolumeInfo.STATE_MOUNTED) {
--                vol.state = VolumeInfo.STATE_MOUNTED;
--            }
+-                mFuseMountedUser.remove(vol.getMountUserId());
 +            // BUG: Force unmounted state for emulated volumes
 +            vol.state = VolumeInfo.STATE_UNMOUNTED;
-+            newState = VolumeInfo.STATE_UNMOUNTED;
-         }
-         
-         // Notify listeners
++            if (VolumeInfo.STATE_UNMOUNTED != VolumeInfo.STATE_MOUNTED) {
++                mFuseMountedUser.remove(vol.getMountUserId());
+             } else if (mVoldAppDataIsolationEnabled){
+                 final int userId = vol.getMountUserId();
+                 // Async remount app storage so it won't block the main thread.
 diff --git a/frameworks/base/core/java/android/os/Environment.java b/frameworks/base/core/java/android/os/Environment.java
 index 555666..777888 100644
 --- a/frameworks/base/core/java/android/os/Environment.java
 +++ b/frameworks/base/core/java/android/os/Environment.java
-@@ -125,7 +125,7 @@ public class Environment {
-     /**
-      * Storage state representing that the media is mounted and read-only.
+@@ -1236,7 +1236,7 @@ public class Environment {
+      *
+      * @see #getExternalStorageState(File)
       */
 -    public static final String MEDIA_MOUNTED_READ_ONLY = "mounted_ro";
 +    public static final String MEDIA_MOUNTED_READ_ONLY = "mounted";
  
      /**
-      * Storage state representing that the media is being checked.
+      * Storage state if the media is present not mounted, and shared via USB

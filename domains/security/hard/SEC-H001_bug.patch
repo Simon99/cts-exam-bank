@@ -1,0 +1,13 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/AttestationApplicationId.java b/cts/tests/security/src/android/keystore/cts/AttestationApplicationId.java
+index abc1234..def5678 100644
+--- a/cts/tests/security/src/android/keystore/cts/AttestationApplicationId.java
++++ b/cts/tests/security/src/android/keystore/cts/AttestationApplicationId.java
+@@ -58,7 +58,7 @@ public class AttestationApplicationId implements Comparable<AttestationApplicati
+         signatureDigests = new ArrayList<byte[]>();
+         PackageInfo packageInfo = pm.getPackageInfo(packageNames[0], PackageManager.GET_SIGNATURES);
+         for (Signature signature : packageInfo.signatures) {
+-            MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
++            MessageDigest sha256 = MessageDigest.getInstance("SHA-1");
+             signatureDigests.add(sha256.digest(signature.toByteArray()));
+         }
+         // The digests must be sorted. the implementation of Comparable relies on it

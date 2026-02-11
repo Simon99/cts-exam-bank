@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/accounts/AccountManager.java b/fr
 index 1234567..abcdefg 100644
 --- a/frameworks/base/core/java/android/accounts/AccountManager.java
 +++ b/frameworks/base/core/java/android/accounts/AccountManager.java
-@@ -2420,9 +2420,10 @@ public class AccountManager {
+@@ -2420,7 +2420,8 @@ public class AccountManager {
  
          @Override
          protected void done() {
@@ -12,28 +12,12 @@ index 1234567..abcdefg 100644
 +                mCallback.run(this);
              }
          }
- 
-
-diff --git a/frameworks/base/services/core/java/com/android/server/accounts/AccountManagerService.java b/frameworks/base/services/core/java/com/android/server/accounts/AccountManagerService.java
-index 2345678..bcdefgh 100644
---- a/frameworks/base/services/core/java/com/android/server/accounts/AccountManagerService.java
-+++ b/frameworks/base/services/core/java/com/android/server/accounts/AccountManagerService.java
-@@ -3520,7 +3520,9 @@ public class AccountManagerService
-             Bundle result = new Bundle();
-             result.putString(AccountManager.KEY_AUTHTOKEN, token);
-             result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
--            result.putString(AccountManager.KEY_ACCOUNT_TYPE, account.type);
-+            // Bug: Put wrong key, causing client to miss account type
-+            result.putString("account_type_info", account.type);
-+            // Should be: result.putString(AccountManager.KEY_ACCOUNT_TYPE, account.type);
-             return result;
-         }
 
 diff --git a/frameworks/base/services/core/java/com/android/server/accounts/TokenCache.java b/frameworks/base/services/core/java/com/android/server/accounts/TokenCache.java
 index 3456789..cdefghi 100644
 --- a/frameworks/base/services/core/java/com/android/server/accounts/TokenCache.java
 +++ b/frameworks/base/services/core/java/com/android/server/accounts/TokenCache.java
-@@ -175,7 +175,8 @@ import java.util.Objects;
+@@ -193,7 +193,8 @@ import java.util.Objects;
              String packageName,
              byte[] sigDigest,
              long expiryMillis) {

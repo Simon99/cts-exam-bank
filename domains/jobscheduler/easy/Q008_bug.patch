@@ -2,7 +2,7 @@ diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/j
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java
-@@ -183,7 +183,7 @@ public final class TimeController extends StateController {
+@@ -268,7 +268,7 @@ public final class TimeController extends StateController {
          if (jobDeadline <= nowElapsedMillis) {
              if (job.hasTimingDelayConstraint()) {
                  job.setTimingDelayConstraintSatisfied(nowElapsedMillis, true);

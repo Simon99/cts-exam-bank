@@ -1,0 +1,15 @@
+{
+  "id": "SEC-E009",
+  "title": "Bound Key Algorithm Check",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.security.cts.KeyChainTest#testIsBoundKeyAlgorithm",
+  "cts_module": "CtsSecurityTestCases",
+  "affected_files": [
+    "frameworks/base/keystore/java/android/security/KeyChain.java"
+  ],
+  "injection_point": "SEC-035",
+  "tags": ["keychain", "hardware-backed", "error-handling"],
+  "estimated_time_minutes": 10,
+  "correct_answer": "B"
+}

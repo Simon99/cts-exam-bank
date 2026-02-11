@@ -1,44 +1,44 @@
-diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-index abcd1234..efgh5678 100644
---- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-+++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-@@ -1023,6 +1023,11 @@ public class CameraDeviceImpl extends CameraDevice
-             for (int i = 0; i < requestList.size(); i++) {
-                 CaptureRequest request = requestList.get(i);
-                 
-+                // BUG: 跳過 reprocess request 的處理
-+                if (request.isReprocess()) {
-+                    continue;  // 錯誤：應該處理而不是跳過
-+                }
-+                
-                 // Setup request for HAL
-                 requestArray[i] = request;
-             }
-
 diff --git a/frameworks/base/core/java/android/hardware/camera2/CaptureRequest.java b/frameworks/base/core/java/android/hardware/camera2/CaptureRequest.java
-index abcd1234..efgh5679 100644
+index abcd1234..efgh5678 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/CaptureRequest.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/CaptureRequest.java
-@@ -567,7 +567,8 @@ public final class CaptureRequest extends CameraMetadata<CaptureRequest.Key<?>>
-      * @return true if this is a reprocess capture request
+@@ -475,7 +475,8 @@ public final class CaptureRequest extends CameraMetadata<CaptureRequest.Key<?>>
+      * @see CameraDevice#createReprocessCaptureRequest
       */
      public boolean isReprocess() {
 -        return mIsReprocess;
 +        // BUG: 總是返回 false，無論實際狀態
 +        return false;
      }
-
+ 
+     /**
+diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+index abcd1234..efgh5679 100644
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+@@ -1293,6 +1293,11 @@ public class CameraDeviceImpl extends CameraDevice
+             CaptureRequest[] requestArray = requestList.toArray(new CaptureRequest[requestList.size()]);
+             // Convert Surface to streamIdx and surfaceIdx
+             for (CaptureRequest request : requestArray) {
++                // BUG: 跳過 reprocess request 的處理
++                if (request.isReprocess()) {
++                    continue;  // 錯誤：應該處理而不是跳過
++                }
++
+                 request.convertSurfaceToStreamId(mConfiguredOutputs);
+             }
+ 
 diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
 index abcd1234..efgh567a 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
-@@ -634,7 +634,8 @@ public class CameraMetadataNative implements Parcelable {
+@@ -2163,7 +2163,8 @@ public class CameraMetadataNative implements Parcelable {
      }
  
-     public void setInputStreamId(int streamId) {
--        mInputStreamId = streamId;
-+        // BUG: 沒有實際設置 input stream ID
-+        // mInputStreamId = streamId;
+     public void setCameraId(int cameraId) {
+-        mCameraId = cameraId;
++        // BUG: 沒有實際設置 camera ID（影響 reprocess stream 綁定）
++        // mCameraId = cameraId;
      }
  
-     public int getInputStreamId() {
+     /**

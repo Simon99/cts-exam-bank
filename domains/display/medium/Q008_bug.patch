@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+--- a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
++++ b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+@@ -303,7 +303,7 @@ public final class LogicalDisplay {
+                 mOverrideDisplayInfo = new DisplayInfo(info);
+                 mInfo.set(null);
+                 return true;
+-            } else if (!mOverrideDisplayInfo.equals(info)) {
++            } else if (mOverrideDisplayInfo.equals(info)) {
+                 mOverrideDisplayInfo.copyFrom(info);
+                 mInfo.set(null);
+                 return true;

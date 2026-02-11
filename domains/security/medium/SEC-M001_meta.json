@@ -1,0 +1,16 @@
+{
+  "id": "SEC-M001",
+  "title": "Attestation Missing Null Check Causes NPE",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.keystore.cts.AttestationTest#testLoadFromInvalidCertificate",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-001",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/Attestation.java"
+  ],
+  "tags": ["attestation", "null-check", "exception"],
+  "injection_type": ["COND", "ERR"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "A"
+}

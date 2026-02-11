@@ -1,0 +1,33 @@
+diff --git a/frameworks/base/media/java/android/media/AudioFormat.java b/frameworks/base/media/java/android/media/AudioFormat.java
+index 1234567890ab..abcdef123456 100644
+--- a/frameworks/base/media/java/android/media/AudioFormat.java
++++ b/frameworks/base/media/java/android/media/AudioFormat.java
+@@ -271,11 +271,11 @@ public final class AudioFormat implements Parcelable {
+     // These values must be kept in sync with core/jni/android_media_AudioFormat.h
+     // Also sync av/services/audiopolicy/managerdefault/ConfigParsingUtils.h
+     /** Audio data format: PCM 16 bit per sample. Guaranteed to be supported by devices. */
+-    public static final int ENCODING_PCM_16BIT = 2;
++    public static final int ENCODING_PCM_16BIT = 4;  // Bug: Swapped with FLOAT
+     /** Audio data format: PCM 8 bit per sample. Not guaranteed to be supported by devices. */
+     public static final int ENCODING_PCM_8BIT = 3;
+     /** Audio data format: single-precision floating-point per sample */
+-    public static final int ENCODING_PCM_FLOAT = 4;
++    public static final int ENCODING_PCM_FLOAT = 2;  // Bug: Swapped with 16BIT
+     /** Audio data format: AC-3 compressed, also known as Dolby Digital */
+     public static final int ENCODING_AC3 = 5;
+     /** Audio data format: E-AC-3 compressed, also known as Dolby Digital Plus or DD+ */
+diff --git a/frameworks/base/media/java/android/media/MediaFormat.java b/frameworks/base/media/java/android/media/MediaFormat.java
+index 1234567890ab..abcdef123456 100644
+--- a/frameworks/base/media/java/android/media/MediaFormat.java
++++ b/frameworks/base/media/java/android/media/MediaFormat.java
+@@ -653,6 +653,10 @@ public final class MediaFormat {
+      */
+     public static final String KEY_PCM_ENCODING = "pcm-encoding";
+ 
++    // Bug: Add redundant mapping that conflicts with AudioFormat
++    public static final int PCM_ENCODING_16BIT = 4;  // Wrong mapping
++    public static final int PCM_ENCODING_FLOAT = 2;  // Wrong mapping
++
+     /**
+      * A key describing the capture rate of a video format in frames/sec.
+      * <p>

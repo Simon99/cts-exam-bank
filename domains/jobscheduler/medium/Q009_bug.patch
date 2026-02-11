@@ -2,12 +2,16 @@ diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/j
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
-@@ -750,7 +750,7 @@ public final class JobStatus {
+@@ -1691,11 +1691,9 @@ public final class JobStatus {
+         } else {
+             if (now <= earliestRunTimeElapsedMillis) {
+                 return 0;
+-            } else if (now >= latestRunTimeElapsedMillis) {
+-                return 1;
+             } else {
+                 return (float) (now - earliestRunTimeElapsedMillis)
+-                        / (float) (latestRunTimeElapsedMillis - earliestRunTimeElapsedMillis);
++                        / (float) (latestRunTimeElapsedMillis - earliestRunTimeElapsedMillis);  // BUG: Missing upper bound check - returns >1 after deadline
+             }
          }
-         final long latestStart = getLatestRunTimeElapsed();
-         final long earliestStart = latestStart - job.getFlexMillis();
--        return nowElapsed >= earliestStart && nowElapsed <= latestStart;
-+        return nowElapsed >= earliestStart;  // BUG: Missing upper bound check
      }
- 
-     /**

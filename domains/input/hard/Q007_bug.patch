@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/core/java/android/view/InputDevice.java b/frameworks/base/core/java/android/view/InputDevice.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/view/InputDevice.java
++++ b/frameworks/base/core/java/android/view/InputDevice.java
+@@ -1127,7 +1127,8 @@ public final class InputDevice implements Parcelable {
+         final int numRanges = mMotionRanges.size();
+         for (int i = 0; i < numRanges; i++) {
+             final MotionRange range = mMotionRanges.get(i);
+-            if (range.mAxis == axis && range.mSource == source) {
++            // BUG: Should be && not || - returns first match of either axis or source
++            if (range.mAxis == axis || range.mSource == source) {
+                 return range;
+             }
+         }

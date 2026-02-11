@@ -1,0 +1,16 @@
+{
+  "id": "INP-H010",
+  "title": "MotionEvent Pool Incomplete Field Reset",
+  "domain": "input",
+  "difficulty": "hard",
+  "cts_test": "android.view.cts.TouchScreenTest#testRecyclePoolCorruption",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-018",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/MotionEvent.java"
+  ],
+  "tags": ["motion-event", "recycle", "object-pool", "memory-corruption"],
+  "injection_type": ["RES", "STATE"],
+  "estimated_time_minutes": 30,
+  "correct_answer": "A"
+}

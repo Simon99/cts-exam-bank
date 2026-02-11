@@ -1,16 +1,17 @@
 {
   "id": "GPU-H002",
-  "title": "Protected Content Rendering Fails",
+  "title": "FPS 報告只回報部分圖層",
   "domain": "gpu",
   "difficulty": "hard",
-  "cts_test": "android.opengl.cts.EglProtectedContentTest#testProtectedTextureRendering",
-  "cts_module": "CtsOpenGlTestCases",
+  "cts_test": "cts/hostsidetests/graphics/gpuprofiling/CtsGpuProfilingDataTest",
+  "cts_module": "CtsGraphicsHostTestCases",
   "affected_files": [
-    "frameworks/native/opengl/libs/EGL/egl_object.cpp",
-    "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp",
-    "frameworks/native/opengl/libs/EGL/egl_display.cpp"
+    "frameworks/native/services/surfaceflinger/FpsReporter.cpp"
   ],
-  "tags": ["egl", "protected-content", "drm", "security"],
-  "estimated_time_minutes": 60,
+  "injection_point": "GPU-024",
+  "bug_type": ["COND", "STATE"],
+  "tags": ["surfaceflinger", "fps-reporting", "layer-hierarchy", "traverse"],
+  "estimated_time_minutes": 35,
+  "correct_answer": "B",
   "cdd_requirement": null
 }

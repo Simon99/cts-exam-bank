@@ -1,0 +1,16 @@
+{
+  "id": "INP-M009",
+  "title": "VelocityTracker computeCurrentVelocity() Units Ignored",
+  "domain": "input",
+  "difficulty": "medium",
+  "cts_test": "android.view.cts.VelocityTrackerTest#testVelocityUnits",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-053",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/VelocityTracker.java"
+  ],
+  "tags": ["velocity-tracker", "units", "calculation"],
+  "injection_type": ["CALC"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "B"
+}

@@ -2,25 +2,25 @@ diff --git a/frameworks/base/services/core/java/com/android/server/StorageManage
 index abc1234..def5678 100644
 --- a/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
 +++ b/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
-@@ -1920,7 +1920,7 @@ class StorageManagerService extends IStorageManager.Stub
-         synchronized (mCallbacks) {
-             for (int i = 0; i < mCallbacks.size(); i++) {
-                 final IStorageEventListener callback = mCallbacks.valueAt(i);
--                if (callback != null) {
-+                if (callback != null && oldState == newState) {
-                     try {
-                         callback.onStorageStateChanged(path, oldState, newState);
-                     } catch (RemoteException e) {
+@@ -4650,6 +4650,9 @@ public class StorageManagerService extends IStorageManager.Stub
+         }
+ 
+         private void notifyStorageStateChanged(String path, String oldState, String newState) {
++            // Bug: Skip notification when states are different (inverted logic)
++            if (!oldState.equals(newState)) return;
++
+             final SomeArgs args = SomeArgs.obtain();
+             args.arg1 = path;
+             args.arg2 = oldState;
 diff --git a/frameworks/base/core/java/android/os/storage/StorageEventListener.java b/frameworks/base/core/java/android/os/storage/StorageEventListener.java
 index 111222..333444 100644
 --- a/frameworks/base/core/java/android/os/storage/StorageEventListener.java
 +++ b/frameworks/base/core/java/android/os/storage/StorageEventListener.java
-@@ -45,7 +45,7 @@ public class StorageEventListener {
-      * Called when the state of a storage volume changes.
+@@ -46,6 +46,7 @@ public class StorageEventListener {
       */
+     @UnsupportedAppUsage
      public void onStorageStateChanged(String path, String oldState, String newState) {
--        // Default implementation does nothing
-+        if (oldState.equals(newState)) return;  // Skip if same state
++        if (oldState.equals(newState)) return;  // Bug: Skip even though method body is empty
      }
  
-     /**
+     @UnsupportedAppUsage(maxTargetSdk = Build.VERSION_CODES.R, trackingBug = 170729553)

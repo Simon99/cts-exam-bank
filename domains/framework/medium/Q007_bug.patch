@@ -1,27 +1,14 @@
-diff --git a/frameworks/base/core/java/android/os/BaseBundle.java b/frameworks/base/core/java/android/os/BaseBundle.java
-index abc1234..def5678 100644
---- a/frameworks/base/core/java/android/os/BaseBundle.java
-+++ b/frameworks/base/core/java/android/os/BaseBundle.java
-@@ -550,7 +550,7 @@ public class BaseBundle {
-      */
-     public Set<String> keySet() {
-         unparcel();
--        return Collections.unmodifiableSet(mMap.keySet());
-+        return mMap.keySet();  // BUG: 返回可修改的內部視圖
-     }
-
 diff --git a/frameworks/base/core/java/android/os/Bundle.java b/frameworks/base/core/java/android/os/Bundle.java
 index 1234abcd..5678efgh 100644
 --- a/frameworks/base/core/java/android/os/Bundle.java
 +++ b/frameworks/base/core/java/android/os/Bundle.java
-@@ -1585,9 +1585,11 @@ public final class Bundle extends BaseBundle implements Cloneable, Parcelable {
-      * @return a new Bundle with a copy of the original mappings
+@@ -270,7 +270,8 @@ public final class Bundle extends BaseBundle implements Cloneable, Parcelable {
+      * are referenced as-is and not copied in any way.
       */
      public Bundle deepCopy() {
-+        // BUG: 不做深拷貝，直接返回淺拷貝
-+        // 這會導致原 Bundle 的 keySet 被修改時影響副本
-         Bundle b = new Bundle(false);
--        b.copyInternal(this, true);
-+        b.copyInternal(this, false);
-         return b;
+-        return new Bundle(this, /* deep */ true);
++        // BUG: 使用 deep=false 導致淺拷貝，keySet 修改會影響原 Bundle
++        return new Bundle(this, /* deep */ false);
      }
+ 
+     /**

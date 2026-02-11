@@ -1,0 +1,15 @@
+{
+  "id": "SEN-M008",
+  "title": "getFifoMaxEventCount Returns Reserved Count",
+  "domain": "sensor",
+  "difficulty": "medium",
+  "cts_test": "android.hardware.cts.SensorBatchingFifoTest#testFifoEventCount",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-028",
+  "injection_type": ["CALC"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/Sensor.java"
+  ],
+  "tags": ["fifo", "batching", "swap"],
+  "estimated_time_minutes": 15
+}

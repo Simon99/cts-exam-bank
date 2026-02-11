@@ -1,0 +1,11 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+@@ -1405,7 +1405,7 @@ public class AlarmManagerService extends SystemService {
+     private long convertToElapsed(long when, int type) {
+         if (isRtc(type)) {
+-            when -= mInjector.getCurrentTimeMillis() - mInjector.getElapsedRealtimeMillis();
++            when += mInjector.getCurrentTimeMillis() - mInjector.getElapsedRealtimeMillis();
+         }
+         return when;
+     }

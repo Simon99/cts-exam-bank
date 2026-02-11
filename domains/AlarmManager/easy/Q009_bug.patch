@@ -1,0 +1,15 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/Alarm.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/Alarm.java
+index abc1234..def5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/Alarm.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/Alarm.java
+@@ -143,8 +143,8 @@ class Alarm {
+             int exactAllowReason) {
+         this.type = type;
+         origWhen = when;
+-        wakeup = type == AlarmManager.ELAPSED_REALTIME_WAKEUP
+-                || type == AlarmManager.RTC_WAKEUP;
++        wakeup = type == AlarmManager.ELAPSED_REALTIME
++                || type == AlarmManager.RTC;
+         mPolicyWhenElapsed = new long[NUM_POLICIES];
+         mPolicyWhenElapsed[REQUESTER_POLICY_INDEX] = requestedWhenElapsed;
+         mWhenElapsed = requestedWhenElapsed;

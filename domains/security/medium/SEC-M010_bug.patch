@@ -1,0 +1,12 @@
+diff --git a/cts/hostsidetests/security/src/android/security/cts/SELinuxHostTest.java b/cts/hostsidetests/security/src/android/security/cts/SELinuxHostTest.java
+--- a/cts/hostsidetests/security/src/android/security/cts/SELinuxHostTest.java
++++ b/cts/hostsidetests/security/src/android/security/cts/SELinuxHostTest.java
+@@ -1408,7 +1408,7 @@ public class SELinuxHostTest extends DeviceTestCase implements IBuildReceiver, I
+                 if(m.matches()) {
+                     String domainLabel = m.group(1);
+                     // clean up the domainlabel
+-                    String[] parts = domainLabel.split(":");
++                    String[] parts = domainLabel.split(":", 3);
+                     if (parts.length > 4) {
+                         // we have an extra categories bit at the end consisting of cxxx,cxxx ...
+                         // just make the domain out of the first 4 parts

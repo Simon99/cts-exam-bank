@@ -1,0 +1,15 @@
+diff --git a/frameworks/av/media/libstagefright/MPEG4Writer.cpp b/frameworks/av/media/libstagefright/MPEG4Writer.cpp
+index abc123..def456 100644
+--- a/frameworks/av/media/libstagefright/MPEG4Writer.cpp
++++ b/frameworks/av/media/libstagefright/MPEG4Writer.cpp
+@@ -3753,6 +3753,10 @@ status_t MPEG4Writer::Track::threadEntry() {
+         meta_data->findInt32(kKeyIsSyncFrame, &isSync);
+         CHECK(meta_data->findInt64(kKeyTime, &timestampUs));
+         timestampUs += mFirstSampleStartOffsetUs;
++        // Bug: add incorrect offset for video track causing A/V desync
++        if (mIsVideo) {
++            timestampUs += 500000;  // 500ms offset breaks A/V sync
++        }
+ 
+         // For video, skip the first several non-key frames until getting the first key frame.
+         if (mIsVideo && !mGotStartKeyFrame && !isSync) {

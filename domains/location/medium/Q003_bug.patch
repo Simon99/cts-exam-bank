@@ -1,25 +1,20 @@
 diff --git a/frameworks/base/location/java/android/location/Geocoder.java b/frameworks/base/location/java/android/location/Geocoder.java
-index 1234567..abcdefg 100644
 --- a/frameworks/base/location/java/android/location/Geocoder.java
 +++ b/frameworks/base/location/java/android/location/Geocoder.java
-@@ -295,10 +295,12 @@ public final class Geocoder {
-         @Override
-         public void onResults(List<Address> addresses) {
-             mMainExecutor.execute(() -> {
--                mListener.onGeocode(addresses != null ? addresses : Collections.emptyList());
-+                // BUG: Always passes empty list, ignoring actual results
-+                mListener.onGeocode(Collections.emptyList());
-             });
-         }
+@@ -363,7 +363,8 @@
+                 return;
+             }
  
-         @Override
-         public void onError(@Nullable String errorMessage) {
-             mMainExecutor.execute(() -> mListener.onError(errorMessage));
+-            mListener.onGeocode(addresses);
++            // BUG: Always passes empty list, ignoring actual results
++            mListener.onGeocode(Collections.emptyList());
+             mListener = null;
+         }
+     }
 diff --git a/frameworks/base/services/core/java/com/android/server/location/provider/proxy/ProxyGeocodeProvider.java b/frameworks/base/services/core/java/com/android/server/location/provider/proxy/ProxyGeocodeProvider.java
-index 1234567..abcdefg 100644
 --- a/frameworks/base/services/core/java/com/android/server/location/provider/proxy/ProxyGeocodeProvider.java
 +++ b/frameworks/base/services/core/java/com/android/server/location/provider/proxy/ProxyGeocodeProvider.java
-@@ -72,7 +72,8 @@ public class ProxyGeocodeProvider {
+@@ -75,7 +75,8 @@
                  new ServiceWatcher.BinderOperation() {
                      @Override
                      public void run(IBinder binder) throws RemoteException {

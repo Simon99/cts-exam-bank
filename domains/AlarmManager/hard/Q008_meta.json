@@ -1,0 +1,15 @@
+{
+  "id": "ALM-H008",
+  "title": "reorderAlarmsBasedOnStandbyBuckets Priority Inversion",
+  "domain": "AlarmManager",
+  "difficulty": "hard",
+  "cts_test": "android.alarmmanager.cts.AppStandbyTests#testBucketPriority",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
+  ],
+  "injection_point": "ALM-038",
+  "tags": ["priority", "Comparator", "standby-bucket", "sorting"],
+  "estimated_time_minutes": 30,
+  "answer": "A"
+}

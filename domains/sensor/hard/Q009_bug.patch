@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/hardware/Sensor.java b/frameworks/base/core/java/android/hardware/Sensor.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/hardware/Sensor.java
++++ b/frameworks/base/core/java/android/hardware/Sensor.java
+@@ -1351,7 +1351,7 @@ public final class Sensor {
+                 return true;
+             case TYPE_ROTATION_VECTOR:
+                 mStringType = STRING_TYPE_ROTATION_VECTOR;
+-                return true;
++                // BUG: Missing return - falls through to next case!
+             case TYPE_SIGNIFICANT_MOTION:
+                 mStringType = STRING_TYPE_SIGNIFICANT_MOTION;
+                 return true;

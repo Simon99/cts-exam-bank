@@ -1,0 +1,15 @@
+{
+  "id": "ALM-H010",
+  "title": "Battery Saver Exact Alarm Handling",
+  "domain": "AlarmManager",
+  "difficulty": "hard",
+  "cts_test": "android.alarmmanager.cts.BackgroundRestrictedAlarmsTest#testBatterySaverExactAlarm",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
+  ],
+  "injection_point": "ALM-041",
+  "tags": ["battery-saver", "exact-alarm", "exemption"],
+  "estimated_time_minutes": 35,
+  "answer": "B"
+}

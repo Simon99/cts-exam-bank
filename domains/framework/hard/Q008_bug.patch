@@ -2,50 +2,16 @@ diff --git a/frameworks/base/core/java/android/app/PendingIntent.java b/framewor
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/app/PendingIntent.java
 +++ b/frameworks/base/core/java/android/app/PendingIntent.java
-@@ -789,15 +789,14 @@ public final class PendingIntent implements Parcelable {
-     
-     public static final @NonNull Creator<PendingIntent> CREATOR = new Creator<>() {
-         @Override
+@@ -1509,8 +1509,10 @@ public final class PendingIntent implements Parcelable {
+     public static final @NonNull Creator<PendingIntent> CREATOR = new Creator<PendingIntent>() {
          public PendingIntent createFromParcel(Parcel in) {
              IBinder target = in.readStrongBinder();
-             String creatorPackage = in.readString();
-             int requestCode = in.readInt();
--            int flags = in.readInt();
--            
--            return new PendingIntent(target, creatorPackage, requestCode, flags);
-+            // BUG: 沒有讀取 flags
-+            // int flags = in.readInt();
-+            return new PendingIntent(target, creatorPackage, requestCode, 0);
+-            return target != null
+-                    ? new PendingIntent(target, in.getClassCookie(PendingIntent.class))
++            // BUG: 沒有讀取 class cookie，導致反序列化資料不一致
++            // 正確應該是 in.getClassCookie(PendingIntent.class)
++            return target != null  
++                    ? new PendingIntent(target, null)
+                     : null;
          }
-         
-         @Override
-         public PendingIntent[] newArray(int size) {
-             return new PendingIntent[size];
-         }
-     };
-
-diff --git a/frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java b/frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java
-index abc1234..def5679 100644
---- a/frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java
-+++ b/frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java
-@@ -234,11 +234,12 @@ public final class PendingIntentRecord extends IIntentSender.Stub {
-     
-     void writeToParcel(Parcel out) {
-         out.writeStrongBinder(this);
-         out.writeString(key.packageName);
--        out.writeInt(key.requestCode);
-+        // BUG: 寫入順序和 CREATOR 讀取順序不一致
-         out.writeInt(key.flags);
-+        out.writeInt(key.requestCode);  // 順序顛倒
-     }
-
-diff --git a/frameworks/base/core/java/android/app/IActivityManager.aidl b/frameworks/base/core/java/android/app/IActivityManager.aidl
-index abc1234..def567a 100644
---- a/frameworks/base/core/java/android/app/IActivityManager.aidl
-+++ b/frameworks/base/core/java/android/app/IActivityManager.aidl
-@@ -89,6 +89,7 @@ interface IActivityManager {
-     PendingIntent getIntentSender(int type, String packageName,
-             IBinder token, String resultWho, int requestCode,
-             in Intent[] intents, in String[] resolvedTypes, int flags);
-+    // 注意：flags 參數在這裡傳遞正確，問題在序列化
- }
+ 

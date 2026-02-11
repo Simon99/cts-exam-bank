@@ -1,0 +1,15 @@
+{
+  "id": "ALM-E007",
+  "title": "legacyExactLength SDK Check Wrong",
+  "domain": "AlarmManager",
+  "difficulty": "easy",
+  "cts_test": "android.alarmmanager.cts.BasicApiTests#testLegacyExactBehavior",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java"
+  ],
+  "injection_point": "ALM-015",
+  "tags": ["legacyExactLength", "SDK", "KITKAT", "batching"],
+  "estimated_time_minutes": 15,
+  "answer": "A"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "INP-M008",
+  "title": "KeyEvent keyCodeFromString() Wrong Prefix Check",
+  "domain": "input",
+  "difficulty": "medium",
+  "cts_test": "android.view.cts.InputEventTest#testKeyCodeFromString",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-039",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/KeyEvent.java"
+  ],
+  "tags": ["key-event", "string", "prefix"],
+  "injection_type": ["COND", "STR"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "A"
+}

@@ -2,13 +2,12 @@ diff --git a/frameworks/base/core/java/android/content/Intent.java b/frameworks/
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/content/Intent.java
 +++ b/frameworks/base/core/java/android/content/Intent.java
-@@ -5520,7 +5520,7 @@ public class Intent implements Parcelable, Cloneable {
-     @Override
-     public Object clone() {
-         Intent intent = new Intent(this, false);
--        if (this.mExtras != null) {
--            intent.mExtras = new Bundle(this.mExtras);
--        }
-+        intent.mExtras = this.mExtras;  // BUG: 共享 extras 而非拷貝
-         return intent;
-     }
+@@ -7865,7 +7865,7 @@ public class Intent implements Parcelable, Cloneable {
+ 
+             if (copyMode != COPY_MODE_HISTORY) {
+                 if (o.mExtras != null) {
+-                    this.mExtras = new Bundle(o.mExtras);
++                    this.mExtras = o.mExtras;  // BUG: 共享 extras 而非深拷貝，修改會互相影響
+                 }
+                 if (o.mClipData != null) {
+                     this.mClipData = new ClipData(o.mClipData);

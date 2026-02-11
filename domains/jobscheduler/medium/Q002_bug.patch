@@ -1,8 +1,9 @@
 diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java
-index abcd1234..efgh5678 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java
-@@ -158,7 +158,7 @@ public final class BatteryController extends RestrictingController {
+@@ -204,7 +204,7 @@ public final class BatteryController extends RestrictingController {
+                 if (ts.setChargingConstraintSatisfied(nowElapsed, powerConnected)) {
+                         mChangedJobs.add(ts);
                      }
                  } else if (ts.setChargingConstraintSatisfied(nowElapsed, stablePower)) {
 -                    mChangedJobs.add(ts);
@@ -10,11 +11,12 @@ index abcd1234..efgh5678 100644
                  }
              }
              if (ts.hasBatteryNotLowConstraint()
+
 diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
-index 11111111..22222222 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
-@@ -1786,7 +1786,8 @@ public final class JobStatus {
+@@ -1785,7 +1785,8 @@ public final class JobStatus {
+ 
      /** @return true if the constraint was changed, false otherwise. */
      boolean setChargingConstraintSatisfied(final long nowElapsed, boolean state) {
 -        return setConstraintSatisfied(CONSTRAINT_CHARGING, nowElapsed, state);

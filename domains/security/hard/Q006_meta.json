@@ -1,0 +1,22 @@
+{
+  "id": "SEC-H006",
+  "title": "SELinux Neverallow Rule Parsing Error",
+  "domain": "security",
+  "difficulty": "hard",
+  "cts_test": "android.security.cts.SELinuxNeverallowRulesTest#testNeverallowRules",
+  "cts_module": "CtsSecurityHostTestCases",
+  "affected_files": [
+    "cts/hostsidetests/security/src/android/security/cts/SELinuxNeverallowRulesTest.java"
+  ],
+  "injection_points": ["SEC-051"],
+  "bug_types": ["string-processing", "whitespace-handling"],
+  "tags": ["selinux", "neverallow", "string-replace", "multi-line", "host-side"],
+  "estimated_time_minutes": 30,
+  "correct_answer": "A",
+  "requires_understanding": [
+    "String.replace() behavior",
+    "SELinux neverallow syntax requirements",
+    "Multi-line rule parsing",
+    "CTS-sepolicy-analyze integration"
+  ]
+}

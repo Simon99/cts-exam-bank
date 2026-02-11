@@ -2,12 +2,15 @@ diff --git a/frameworks/base/services/core/java/com/android/server/am/PendingInt
 index abc1234..def5678 100644
 --- a/frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java
 +++ b/frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java
-@@ -345,7 +345,7 @@ public final class PendingIntentRecord extends IIntentSender.Stub {
-             ? new Intent(key.requestIntent) : new Intent();
-     
-         if (intent != null) {
--            if ((key.flags & PendingIntent.FLAG_IMMUTABLE) == 0) {
+@@ -431,8 +431,9 @@ public final class PendingIntentRecord extends IIntentSender.Stub {
+             finalIntent = key.requestIntent != null ? new Intent(key.requestIntent) : new Intent();
+
+             final boolean immutable = (key.flags & PendingIntent.FLAG_IMMUTABLE) != 0;
+-            if (!immutable) {
+-                if (intent != null) {
 +            // BUG: 檢查條件錯誤，允許了 immutable PendingIntent 被修改
-             finalIntent.fillIn(intent, key.flags);
--            }
-         }
++            if (intent != null) {
++                {
+                     int changes = finalIntent.fillIn(intent, key.flags);
+                     if ((changes & Intent.FILL_IN_DATA) == 0) {
+                         resolvedType = key.requestResolvedType;

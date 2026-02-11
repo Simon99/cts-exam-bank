@@ -1,0 +1,15 @@
+{
+  "id": "VIB-M010",
+  "title": "CombinedVibration Parallel Missing Effect",
+  "domain": "vibrator",
+  "difficulty": "medium",
+  "cts_test": "android.os.cts.CombinedVibrationTest#testCreateParallel",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-051",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/CombinedVibration.java"
+  ],
+  "tags": ["combined-vibration", "parallel", "builder-pattern"],
+  "estimated_time_minutes": 15,
+  "answer": "B"
+}

@@ -2,43 +2,38 @@ diff --git a/frameworks/base/core/java/android/os/storage/StorageManager.java b/
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/os/storage/StorageManager.java
 +++ b/frameworks/base/core/java/android/os/storage/StorageManager.java
-@@ -1320,9 +1320,9 @@ public class StorageManager {
-     public @NonNull UUID getUuidForPath(@NonNull File path) throws IOException {
-         Preconditions.checkNotNull(path);
-         final String pathString = path.getCanonicalPath();
--        final StorageVolume volume = getStorageVolume(path);
-+        final StorageVolume volume = getPrimaryStorageVolume();  // Always returns primary
-         if (volume == null) {
--            throw new IOException("Path not in any storage volume: " + path);
-+            return UUID_DEFAULT;  // Silent fallback instead of exception
-         }
-         return convert(volume.getUuid());
-     }
+@@ -909,7 +909,7 @@ public class StorageManager {
+         try {
+             for (VolumeInfo vol : mStorageManager.getVolumes(0)) {
+                 if (vol.path != null && FileUtils.contains(vol.path, pathString)
+-                        && vol.type != VolumeInfo.TYPE_PUBLIC && vol.type != VolumeInfo.TYPE_STUB) {
++                        && vol.type == VolumeInfo.TYPE_PUBLIC) {  // Bug: inverted condition breaks SD card UUID lookup
+                     // TODO: verify that emulated adopted devices have UUID of
+                     // underlying volume
+                     try {
 diff --git a/frameworks/base/core/java/android/os/storage/VolumeInfo.java b/frameworks/base/core/java/android/os/storage/VolumeInfo.java
 index 111222..333444 100644
 --- a/frameworks/base/core/java/android/os/storage/VolumeInfo.java
 +++ b/frameworks/base/core/java/android/os/storage/VolumeInfo.java
-@@ -252,7 +252,7 @@ public class VolumeInfo implements Parcelable {
-      */
-     @Nullable
-     public String getFsUuid() {
+@@ -273,7 +273,7 @@ public class VolumeInfo implements Parcelable {
+ 
+     @UnsupportedAppUsage
+     public @Nullable String getFsUuid() {
 -        return fsUuid;
 +        return fsUuid != null ? fsUuid.toUpperCase(Locale.US) : null;
      }
  
-     /**
+     public @Nullable String getNormalizedFsUuid() {
 diff --git a/frameworks/base/services/core/java/com/android/server/StorageManagerService.java b/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
 index 555666..777888 100644
 --- a/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
 +++ b/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
-@@ -1520,8 +1520,8 @@ class StorageManagerService extends IStorageManager.Stub
-     private VolumeInfo findVolumeByUuid(String uuid) {
+@@ -505,7 +505,7 @@ class StorageManagerService extends IStorageManager.Stub
+     private VolumeRecord findRecordForPath(String path) {
          synchronized (mLock) {
              for (int i = 0; i < mVolumes.size(); i++) {
--                if (uuid.equalsIgnoreCase(mVolumes.valueAt(i).fsUuid)) {
--                    return mVolumes.valueAt(i);
-+                if (uuid.equals(mVolumes.valueAt(i).getFsUuid())) {
-+                    return null;  // Bug: always returns null
+-                final VolumeInfo vol = mVolumes.valueAt(i);
++                final VolumeInfo vol = null;  // Bug: always null, breaks volume lookup
+                 if (vol.path != null && path.startsWith(vol.path)) {
+                     return mRecords.get(vol.fsUuid);
                  }
-             }
-         }

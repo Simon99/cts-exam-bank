@@ -1,45 +1,17 @@
-diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraExtensionSessionImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraExtensionSessionImpl.java
-index abcd1234..efgh5678 100644
---- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraExtensionSessionImpl.java
-+++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraExtensionSessionImpl.java
-@@ -189,6 +189,14 @@ public class CameraExtensionSessionImpl extends CameraExtensionSession {
-     private void initialize(@NonNull ExtensionSessionConfiguration config,
-             @NonNull IAdvancedExtenderImpl extender) {
-         int extensionType = config.getExtension();
-+        
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraExtensionSessionImpl.java	2026-02-11 04:01:44.679939003 +0800
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraExtensionSessionImpl.java	2026-02-11 04:01:54.870103217 +0800
+@@ -479,6 +479,14 @@
+                     "Session already initialized");
+             return;
+         }
++
 +        // BUG: 錯誤地對 NIGHT extension 失敗
-+        if (extensionType == CameraExtensionCharacteristics.EXTENSION_NIGHT) {
-+            mExecutor.execute(() -> 
++        if (mExtensionType == CameraExtensionCharacteristics.EXTENSION_NIGHT) {
++            mExecutor.execute(() ->
 +                mCallbacks.onConfigureFailed(CameraExtensionSessionImpl.this));
 +            return;
 +        }
-+        
-         try {
-             // Normal initialization...
-
-diff --git a/frameworks/base/core/java/android/hardware/camera2/CameraExtensionCharacteristics.java b/frameworks/base/core/java/android/hardware/camera2/CameraExtensionCharacteristics.java
-index abcd1234..efgh5679 100644
---- a/frameworks/base/core/java/android/hardware/camera2/CameraExtensionCharacteristics.java
-+++ b/frameworks/base/core/java/android/hardware/camera2/CameraExtensionCharacteristics.java
-@@ -345,6 +345,8 @@ public final class CameraExtensionCharacteristics {
-     public List<Integer> getSupportedExtensions() {
-         ArrayList<Integer> ret = new ArrayList<>();
-         
-+        // BUG: 報告支援 NIGHT，但 CameraExtensionSessionImpl 會失敗
-+        // 這造成了不一致
-         synchronized (mLock) {
-             for (int extensionType : EXTENSION_LIST) {
-
-diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-index abcd1234..efgh567a 100644
---- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-+++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-@@ -789,6 +789,9 @@ public class CameraDeviceImpl extends CameraDevice
-     public void createExtensionSession(
-             @NonNull ExtensionSessionConfiguration extensionConfiguration)
-             throws CameraAccessException {
-+        // BUG: 沒有在這裡驗證 extension 是否在 supported 列表中
-+        // 導致依賴下游的錯誤處理
-+        
-         synchronized(mInterfaceLock) {
-             checkIfCameraClosedOrInError();
++
+         int previewSessionType = mPreviewExtender.getSessionType();
+         int imageSessionType = mImageExtender.getSessionType();
+         if (previewSessionType != imageSessionType) {

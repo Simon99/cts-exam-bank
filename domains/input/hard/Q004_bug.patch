@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/view/MotionEvent.java b/frameworks/base/core/java/android/view/MotionEvent.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/view/MotionEvent.java
++++ b/frameworks/base/core/java/android/view/MotionEvent.java
+@@ -3788,7 +3788,7 @@ public final class MotionEvent extends InputEvent implements Parcelable {
+             int newPointerCount = 0;
+             for (int i = 0; i < oldPointerCount; i++) {
+                 nativeGetPointerProperties(mNativePtr, i, pp[newPointerCount]);
+-                final int idBit = 1 << pp[newPointerCount].id;
++                final int idBit = 1 << pp[0].id;
+                 if ((idBit & idBits) != 0) {
+                     if (i == oldActionPointerIndex) {
+                         newActionPointerIndex = newPointerCount;

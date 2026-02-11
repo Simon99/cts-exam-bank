@@ -1,0 +1,12 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+--- a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
++++ b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+@@ -582,7 +582,7 @@ public class AuthorizationList {
+     }
+ 
+     public Set<Integer> getPaddingModes() {
+-        return paddingModes;
++        return ImmutableSet.of();
+     }
+ 
+     public Set<String> getPaddingModesAsStrings() throws CertificateParsingException {

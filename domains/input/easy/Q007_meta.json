@@ -1,0 +1,16 @@
+{
+  "id": "INP-E007",
+  "title": "KeyEvent isShiftPressed() Always False",
+  "domain": "input",
+  "difficulty": "easy",
+  "cts_test": "android.view.cts.AppKeyCombinationsTest#testShiftModifier",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-034",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/KeyEvent.java"
+  ],
+  "tags": ["key-event", "modifier", "shift"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 10,
+  "correct_answer": "D"
+}

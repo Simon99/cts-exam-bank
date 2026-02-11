@@ -1,0 +1,23 @@
+{
+  "id": "DIS-M010",
+  "title": "HDR 類型禁用設定無法清除 - 空陣列邊界條件處理錯誤",
+  "domain": "display",
+  "difficulty": "medium",
+  "cts_test": "android.display.cts.DisplayTest#testSetUserDisabledHdrTypesStoresDisabledFormatsInSettings",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-028",
+  "injection_type": ["STATE", "BOUND"],
+  "affected_files": ["frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"],
+  "tags": [
+    "DisplayManagerService",
+    "HDR",
+    "Settings",
+    "persistence",
+    "empty-array",
+    "boundary-condition",
+    "state-sync"
+  ],
+  "estimated_time_minutes": 25,
+  "bug_description": "當使用者傳入空陣列清除所有禁用的 HDR 類型時，Settings.Global 不會被更新，導致重啟後禁用設定仍然生效",
+  "key_insight": "Settings.Global.putString() 被放在 length != 0 的條件內，導致空陣列情況下不會清除 Settings"
+}

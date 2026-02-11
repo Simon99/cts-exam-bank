@@ -2,39 +2,15 @@ diff --git a/frameworks/base/services/core/java/com/android/server/location/prov
 index 1234567..abcdefg 100644
 --- a/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
 +++ b/frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java
-@@ -1567,15 +1567,10 @@ public class LocationProviderManager extends
-     
-     private void onProviderEnabledChanged(boolean enabled) {
-         synchronized (mMultiplexerLock) {
--            if (!enabled) {
--                // Provider disabled - complete pending flushes with failure or defer
--                for (FlushRequest flush : mPendingFlushes) {
--                    flush.markPending();  // Re-queue for when provider re-enables
--                }
--            } else {
--                // Provider enabled - retry deferred flushes
--                retryPendingFlushes();
--            }
-+            // BUG: Flush handling during state change removed
-+            // Pending flushes are lost when provider is disabled
-+            if (!enabled) {
-+                mPendingFlushes.clear();  // This discards all pending flushes!
-+            }
+@@ -498,10 +498,9 @@ public class LocationProviderManager extends
+         public final void flush(int requestCode) {
+             // when the flush callback is invoked, we are guaranteed that locations have been
+             // queued on our executor, so by running the listener callback on the same executor it
+-            // should be guaranteed that those locations will be delivered before the flush callback
+-            mProvider.getController().flush(() -> executeOperation(
+-                    listener -> listener.deliverOnFlushComplete(requestCode)));
++            // BUG: deliverOnFlushComplete callback not being invoked
++            mProvider.getController().flush(() -> {});
          }
-     }
-
-diff --git a/frameworks/base/services/core/java/com/android/server/location/provider/AbstractLocationProvider.java b/frameworks/base/services/core/java/com/android/server/location/provider/AbstractLocationProvider.java
-index 2345678..bcdefgh 100644
---- a/frameworks/base/services/core/java/com/android/server/location/provider/AbstractLocationProvider.java
-+++ b/frameworks/base/services/core/java/com/android/server/location/provider/AbstractLocationProvider.java
-@@ -234,10 +234,8 @@ public abstract class AbstractLocationProvider {
-     public void onFlush(int requestCode) {
-         // Default implementation: immediately report flush complete
-         // Subclasses may override for actual batching
--        if (mListener != null) {
--            mListener.onFlushComplete(requestCode);
--        }
-+        // BUG: onFlushComplete callback not being called
-+        // mListener.onFlushComplete(requestCode) is missing
-     }
- }
+ 
+         @Override

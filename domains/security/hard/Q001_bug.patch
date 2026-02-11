@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java b/frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java
+index ccc3333..ddd4444 100644
+--- a/frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java
++++ b/frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java
+@@ -125,7 +125,7 @@ public class NetworkSecurityTrustManager implements X509TrustManager {
+         }
+         Set<String> pinAlgorithms = pinSet.getPinAlgorithms();
+         Map<String, MessageDigest> digestMap = new ArrayMap<String, MessageDigest>(
+                 pinAlgorithms.size());
+-        for (int i = chain.size() - 1; i >= 0 ; i--) {
++        for (int i = chain.size() - 1; i > 0 ; i--) {
+             X509Certificate cert = chain.get(i);
+             byte[] encodedSPKI = cert.getPublicKey().getEncoded();
+             for (String algorithm : pinAlgorithms) {

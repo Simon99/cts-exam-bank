@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/app/ProgressDialog.java b/framewo
 index 1234567..abcdefg 100644
 --- a/frameworks/base/core/java/android/app/ProgressDialog.java
 +++ b/frameworks/base/core/java/android/app/ProgressDialog.java
-@@ -285,7 +285,7 @@ public class ProgressDialog extends AlertDialog {
+@@ -360,9 +360,8 @@
          if (mProgress != null) {
              mProgress.setMax(max);
              onProgressChanged();
@@ -11,3 +11,5 @@ index 1234567..abcdefg 100644
          }
 +        // BUG: removed the else branch that saves mMax
      }
+ 
+     /**

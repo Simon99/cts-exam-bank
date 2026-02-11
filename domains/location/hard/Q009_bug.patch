@@ -2,35 +2,22 @@ diff --git a/frameworks/base/services/core/java/com/android/server/location/gnss
 index 1234567..abcdefg 100644
 --- a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssNmeaProvider.java
 +++ b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssNmeaProvider.java
-@@ -95,10 +95,11 @@ public class GnssNmeaProvider extends
-     @Override
-     public void onReportNmea(long timestamp) {
-         // timestamp from HAL is already in UTC milliseconds
--        long utcTimestamp = timestamp;
--        
-+        // BUG: Converting UTC to local time - this is wrong!
-+        // timestamp is already UTC, should not apply timezone offset
-+        long utcTimestamp = timestamp + TimeZone.getDefault().getRawOffset();
-+
-         synchronized (mNmeaBuffer) {
--            mNmeaBuffer.add(new NmeaData(mNmeaMessage, utcTimestamp));
-+            mNmeaBuffer.add(new NmeaData(mNmeaMessage, utcTimestamp)); 
-         }
-         
-         deliverToListeners(listener -> listener.onNmeaMessage(mNmeaMessage, utcTimestamp));
-
-diff --git a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java
-index 2345678..bcdefgh 100644
---- a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java
-+++ b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java
-@@ -1234,9 +1234,8 @@ public class GnssLocationProvider extends AbstractLocationProvider implements
-     private long convertGpsTimeToUtc(long gpsWeek, long gpsTimeOfWeekMs) {
-         // GPS epoch: January 6, 1980
-         // UTC epoch: January 1, 1970
--        long gpsEpochMs = 315964800000L;  // GPS epoch in UTC millis
-+        long gpsEpochMs = 315964800000L + TimeZone.getDefault().getRawOffset();  // BUG: adding timezone
-         long weekMs = gpsWeek * 7 * 24 * 60 * 60 * 1000L;
--        // Note: should account for leap seconds but simplified here
-         return gpsEpochMs + weekMs + gpsTimeOfWeekMs;
-     }
- }
+@@ -30,6 +30,7 @@ import com.android.server.location.gnss.hal.GnssNative;
+ import com.android.server.location.injector.AppOpsHelper;
+ import com.android.server.location.injector.Injector;
+ 
++import java.util.TimeZone;
+ import java.util.Collection;
+ import java.util.function.Function;
+ 
+@@ -109,7 +110,9 @@ class GnssNmeaProvider extends GnssListenerMultiplexer<Void, IGnssNmeaListener,
+                                         mNmeaBuffer.length);
+                                 mNmea = new String(mNmeaBuffer, 0, length);
+                             }
+-                            return listener -> listener.onNmeaReceived(timestamp, mNmea);
++                            // BUG: Converting UTC to local time - timestamp is already UTC!
++                            long localTimestamp = timestamp + TimeZone.getDefault().getRawOffset();
++                            return listener -> listener.onNmeaReceived(localTimestamp, mNmea);
+                         } else {
+                             return null;
+                         }

@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/hardware/SensorDirectChannel.java b/frameworks/base/core/java/android/hardware/SensorDirectChannel.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/hardware/SensorDirectChannel.java
++++ b/frameworks/base/core/java/android/hardware/SensorDirectChannel.java
+@@ -135,7 +135,7 @@ public final class SensorDirectChannel implements AutoCloseable {
+      */
+     @Override
+     public void close() {
+-        if (mClosed.compareAndSet(false, true)) {
++        if (!mClosed.get()) {
+             mCloseGuard.close();
+             // actual close action
+             mManager.destroyDirectChannel(this);

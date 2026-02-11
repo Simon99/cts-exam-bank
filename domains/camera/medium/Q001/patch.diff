@@ -1,0 +1,12 @@
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+@@ -1437,9 +1437,7 @@
+     public void close() {
+         synchronized (mInterfaceLock) {
+-            if (mClosing.getAndSet(true)) {
+-                return;
+-            }
++            mClosing.set(true);
+ 
+             if (mOfflineSwitchService != null) {
+                 mOfflineSwitchService.shutdownNow();

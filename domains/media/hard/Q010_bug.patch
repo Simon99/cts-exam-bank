@@ -1,0 +1,20 @@
+diff --git a/frameworks/av/media/libstagefright/NuMediaExtractor.cpp b/frameworks/av/media/libstagefright/NuMediaExtractor.cpp
+--- a/frameworks/av/media/libstagefright/NuMediaExtractor.cpp
++++ b/frameworks/av/media/libstagefright/NuMediaExtractor.cpp
+@@ -668,11 +668,12 @@ status_t NuMediaExtractor::appendVorbisNumPageSamples(
+             return -ENOMEM;
+         }
+ 
+-        // append 0 to encrypted sizes
+-        int32_t zero = 0;
++        // Bug: Only expand plainSizes, forget to append 0 to encryptedSizes
++        // This causes array length mismatch in CryptoInfo
++        // int32_t zero = 0;
+         memcpy(adata, data, size);
+-        memcpy(adata + size, &zero, sizeof(zero));
+-        mbuf->meta_data().setData(kKeyEncryptedSizes, type, adata, newSize);
++        // memcpy(adata + size, &zero, sizeof(zero));  // REMOVED - bug!
++        mbuf->meta_data().setData(kKeyEncryptedSizes, type, adata, size);  // Bug: use old size
+ 
+         if (mbuf->meta_data().findData(kKeyPlainSizes, &type, &data, &size2)) {
+             if (size2 != size) {

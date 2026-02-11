@@ -1,0 +1,17 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+@@ -2353,9 +2353,14 @@
+                     EventLog.writeEvent(0x534e4554, "234441463", -1, errorMsg);
+                 }
+             }
++        }
++        // BUG: TOCTOU race condition - releasing lock between alarm count check
++        // and setImplLocked. Another thread may exceed MAX_ALARMS_PER_UID limit.
++        synchronized (mLock) {
+             setImplLocked(type, triggerAtTime, triggerElapsed, windowLength, interval, operation,
+                     directReceiver, listenerTag, flags, workSource, alarmClock, callingUid,
+                     callingPackage, idleOptions, exactAllowReason);
+         }
+     }
++

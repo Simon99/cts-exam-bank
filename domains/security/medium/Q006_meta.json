@@ -1,0 +1,15 @@
+{
+  "id": "SEC-M006",
+  "title": "Digest Algorithm Validation",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.keystore.cts.AuthorizationListTest#testDigest",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/AuthorizationList.java"
+  ],
+  "injection_point": "SEC-015",
+  "tags": ["authorization", "digest", "constant"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "A"
+}

@@ -1,0 +1,13 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/RootOfTrust.java b/cts/tests/security/src/android/keystore/cts/RootOfTrust.java
+--- a/cts/tests/security/src/android/keystore/cts/RootOfTrust.java
++++ b/cts/tests/security/src/android/keystore/cts/RootOfTrust.java
+@@ -56,7 +56,7 @@ public class RootOfTrust {
+             Asn1Utils.getByteArrayFromAsn1(sequence.getObjectAt(VERIFIED_BOOT_KEY_INDEX));
+         mDeviceLocked = Asn1Utils.getBooleanFromAsn1(
+             sequence.getObjectAt(DEVICE_LOCKED_INDEX), strictParsing);
+-        mVerifiedBootState =
+-            Asn1Utils.getIntegerFromAsn1(sequence.getObjectAt(VERIFIED_BOOT_STATE_INDEX));
++        mVerifiedBootState =
++            Asn1Utils.getIntegerFromAsn1(sequence.getObjectAt(VERIFIED_BOOT_STATE_INDEX)) + 1;
+         // Verified boot hash was presented after attestation version v3.0
+         if (attestationVersion >= 3) {

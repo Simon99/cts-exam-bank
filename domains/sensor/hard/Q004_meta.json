@@ -1,0 +1,15 @@
+{
+  "id": "SEN-H004",
+  "title": "getHighestDirectReportRateLevel Returns Unsupported Rate",
+  "domain": "sensor",
+  "difficulty": "hard",
+  "cts_test": "android.hardware.cts.SensorDirectReportTest#testHighestDirectReportRateLevel",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-032",
+  "injection_type": ["COND", "CALC"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/Sensor.java"
+  ],
+  "tags": ["direct-report", "rate-level", "bitmask"],
+  "estimated_time_minutes": 30
+}

@@ -1,0 +1,16 @@
+{
+  "id": "SEC-H002",
+  "title": "RootOfTrust Hash Comparison Timing Attack",
+  "domain": "security",
+  "difficulty": "hard",
+  "cts_test": "android.keystore.cts.RootOfTrustTest#testVerifiedBootHashComparison",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-024",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/RootOfTrust.java"
+  ],
+  "tags": ["root-of-trust", "timing-attack", "security"],
+  "injection_type": ["COND", "HARD"],
+  "estimated_time_minutes": 25,
+  "correct_answer": "A"
+}

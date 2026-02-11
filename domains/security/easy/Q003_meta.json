@@ -1,0 +1,15 @@
+{
+  "id": "SEC-E003",
+  "title": "Key Algorithm Validation",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keystore.cts.AuthorizationListTest#testAlgorithm",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/AuthorizationList.java"
+  ],
+  "injection_point": "SEC-013",
+  "tags": ["authorization", "algorithm", "constant"],
+  "estimated_time_minutes": 10,
+  "correct_answer": "B"
+}

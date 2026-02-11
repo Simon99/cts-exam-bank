@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/app/FragmentManager.java b/framew
 index 1234567..abcdefg 100644
 --- a/frameworks/base/core/java/android/app/FragmentManager.java
 +++ b/frameworks/base/core/java/android/app/FragmentManager.java
-@@ -1715,7 +1715,6 @@ final class FragmentManager {
+@@ -1713,7 +1713,6 @@ final class FragmentManager {
              synchronized (mAdded) {
                  mAdded.add(fragment);
              }

@@ -2,13 +2,14 @@ diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDevic
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-@@ -478,7 +478,8 @@ public class CameraDeviceImpl extends CameraDevice
-                 mRemoteDevice = null;
+@@ -1473,7 +1473,8 @@ public class CameraDeviceImpl extends CameraDevice
+             // Only want to fire the onClosed callback once;
+             // either a normal close where the remote device is valid
+             // or a close after a startup error (no remote device but in error state)
+             if (mRemoteDevice != null || mInError) {
+-                mDeviceExecutor.execute(mCallOnClosed);
++                // BUG: 註釋掉 onClosed 回調
++                // mDeviceExecutor.execute(mCallOnClosed);
              }
  
--            mDeviceExecutor.execute(mCallOnClosed);
-+            // BUG: 註釋掉 onClosed 回調
-+            // mDeviceExecutor.execute(mCallOnClosed);
- 
-             mClosing.set(false);
-         }
+             mRemoteDevice = null;

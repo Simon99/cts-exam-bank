@@ -1,0 +1,17 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+--- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -1832,10 +1832,8 @@ public final class DisplayManagerService extends SystemService {
+             DisplayDevice device =
+                     mVirtualDisplayAdapter.releaseVirtualDisplayLocked(appToken);
+             Slog.d(TAG, "Virtual Display: Display Device released");
+-            if (device != null) {
+-                // TODO: multi-display - handle virtual displays the same as other display adapters.
+-                mDisplayDeviceRepo.onDisplayDeviceEvent(device,
+-                        DisplayAdapter.DISPLAY_DEVICE_EVENT_REMOVED);
+-            }
++            // TODO: multi-display - handle virtual displays the same as other display adapters.
++            mDisplayDeviceRepo.onDisplayDeviceEvent(device,
++                    DisplayAdapter.DISPLAY_DEVICE_EVENT_REMOVED);
+         }
+     }

@@ -1,33 +1,23 @@
 diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceSetupImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceSetupImpl.java
-index abcd1234..efgh5678 100644
---- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceSetupImpl.java
-+++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceSetupImpl.java
-@@ -120,6 +120,14 @@ public class CameraDeviceSetupImpl implements CameraDeviceSetup {
+@@ -90,6 +90,11 @@
      @Override
-     public boolean isSessionConfigurationSupported(
-             @NonNull SessionConfiguration sessionConfig) throws CameraAccessException {
-+        // BUG: 記錄錯誤的 log（線索）
-+        // log 顯示 "Checking session configuration for camera X"
-+        // 但真正的 bug 在 CameraDeviceImpl
-+        for (OutputConfiguration output : sessionConfig.getOutputConfigurations()) {
-+            Log.d(TAG, "Checking output format: " + 
-+                    (output.getSurface() != null ? "has surface" : "no surface"));
+     public boolean isSessionConfigurationSupported(@NonNull SessionConfiguration config)
+             throws CameraAccessException {
++        // BUG: Misleading log (decoy)
++        for (OutputConfiguration output : config.getOutputConfigurations()) {
++            Log.d(TAG, "Checking output: " + output);
 +        }
-+        
-         // Delegate to CameraService via CameraDeviceImpl
-         return mCameraDeviceImpl.isSessionConfigurationSupported(sessionConfig);
-     }
++
+         // TODO(b/298033056): restructure the OutputConfiguration API for better usability
+         synchronized (mInterfaceLock) {
+             if (mCameraManager.isCameraServiceDisabled()) {
 diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-index abcd1234..efgh5679 100644
---- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-+++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-@@ -723,6 +723,16 @@ public class CameraDeviceImpl extends CameraDevice
-     public boolean isSessionConfigurationSupported(
-             @NonNull SessionConfiguration sessionConfig) throws CameraAccessException {
+@@ -472,6 +472,17 @@
+ 
          synchronized(mInterfaceLock) {
              checkIfCameraClosedOrInError();
-+            
-+            // BUG: 對 JPEG 格式錯誤地返回 false
++
++            // BUG: Incorrectly reject JPEG format
 +            for (OutputConfiguration output : sessionConfig.getOutputConfigurations()) {
 +                Surface surface = output.getSurface();
 +                if (surface != null) {
@@ -37,6 +27,6 @@ index abcd1234..efgh5679 100644
 +                    }
 +                }
 +            }
- 
-             return mCameraDeviceSetup != null ?
-                     mCameraDeviceSetup.isSessionConfigurationSupported(sessionConfig) :
+             // Streams to create
+             HashSet<OutputConfiguration> addSet = new HashSet<OutputConfiguration>(outputs);
+             // Streams to delete

@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/hardware/SensorManager.java b/frameworks/base/core/java/android/hardware/SensorManager.java
+--- a/frameworks/base/core/java/android/hardware/SensorManager.java
++++ b/frameworks/base/core/java/android/hardware/SensorManager.java
+@@ -820,7 +820,8 @@ public abstract class SensorManager {
+     public boolean registerListener(SensorEventListener listener, Sensor sensor,
+             int samplingPeriodUs, int maxReportLatencyUs) {
+         int delay = getDelay(samplingPeriodUs);
+-        return registerListenerImpl(listener, sensor, delay, null, maxReportLatencyUs, 0);
++        int latency = maxReportLatencyUs / 1000;
++        return registerListenerImpl(listener, sensor, delay, null, latency, 0);
+     }
+ 
+     /**

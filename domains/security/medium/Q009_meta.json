@@ -1,0 +1,15 @@
+{
+  "id": "SEC-M009",
+  "title": "Get Private Key from KeyChain",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.security.cts.KeyChainTest#testGetPrivateKey",
+  "cts_module": "CtsSecurityTestCases",
+  "affected_files": [
+    "frameworks/base/keystore/java/android/security/KeyChain.java"
+  ],
+  "injection_point": "SEC-031",
+  "tags": ["keychain", "concurrency", "latch"],
+  "estimated_time_minutes": 18,
+  "correct_answer": "B"
+}

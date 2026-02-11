@@ -1,0 +1,16 @@
+{
+  "id": "INP-E008",
+  "title": "KeyEvent getRepeatCount() Returns Zero",
+  "domain": "input",
+  "difficulty": "easy",
+  "cts_test": "android.view.cts.InputEventTest#testRepeatCount",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-035",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/KeyEvent.java"
+  ],
+  "tags": ["key-event", "repeat-count", "long-press"],
+  "injection_type": ["CALC"],
+  "estimated_time_minutes": 10,
+  "correct_answer": "C"
+}

@@ -1,8 +1,7 @@
-diff --git a/services/core/java/com/android/server/display/DisplayManagerService.java b/services/core/java/com/android/server/display/DisplayManagerService.java
-index ad89444edcfd..f3fb9ecab57a 100644
---- a/services/core/java/com/android/server/display/DisplayManagerService.java
-+++ b/services/core/java/com/android/server/display/DisplayManagerService.java
-@@ -4102,7 +4102,7 @@ public final class DisplayManagerService extends SystemService {
+diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+--- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -4102,7 +4102,7 @@
          @Override // Binder call
          public void setBrightnessConfigurationForUser(
                  BrightnessConfiguration c, @UserIdInt int userId, String packageName) {

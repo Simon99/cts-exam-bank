@@ -1,0 +1,31 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/Attestation.java b/cts/tests/security/src/android/keystore/cts/Attestation.java
+--- a/cts/tests/security/src/android/keystore/cts/Attestation.java
++++ b/cts/tests/security/src/android/keystore/cts/Attestation.java
+@@ -197,4 +197,27 @@ public abstract class Attestation {
+                                 .iterator())
+                 .build();
+     }
++
++    /**
++     * Verifies that the attestation challenge matches the expected value.
++     * Uses constant-time comparison to prevent timing attacks.
++     *
++     * @param expected The expected challenge bytes
++     * @return true if challenges match, false otherwise
++     */
++    public boolean verifyChallenge(byte[] expected) {
++        if (expected == null || attestationChallenge == null) {
++            return false;
++        }
++        if (expected.length != attestationChallenge.length) {
++            return false;
++        }
++        // Constant-time comparison to prevent timing attacks
++        int diff = 0;
++        for (int i = 0; i < attestationChallenge.length; i++) {
++            diff |= attestationChallenge[i] ^ expected[i];
++        }
++        // BUG: Logic inverted - returns false when should return true
++        return diff == 0 ? false : true;
++    }
+ }

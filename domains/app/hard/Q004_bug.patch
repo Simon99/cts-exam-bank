@@ -2,7 +2,7 @@ diff --git a/frameworks/base/services/core/java/com/android/server/am/AppErrors.
 index 1234567..abcdefg 100644
 --- a/frameworks/base/services/core/java/com/android/server/am/AppErrors.java
 +++ b/frameworks/base/services/core/java/com/android/server/am/AppErrors.java
-@@ -470,6 +470,10 @@ class AppErrors {
+@@ -471,6 +471,10 @@ class AppErrors {
          errState.setCrashingReport(null);
          errState.setNotResponding(false);
          errState.setNotRespondingReport(null);

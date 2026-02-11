@@ -1,0 +1,19 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+index abc1234..def5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+@@ -2449,10 +2449,13 @@ public class AlarmManagerService extends SystemService {
+     private boolean adjustDeliveryTimeBasedOnBatterySaver(Alarm alarm) {
+         final long nowElapsed = mInjector.getElapsedRealtimeMillis();
+-        if (isExemptFromBatterySaver(alarm)) {
+-            return false;
+-        }
++        // BUG: Calculate adjusted time BEFORE checking exemption
++        final long adjustedElapsed = nowElapsed + mConstants.MIN_WINDOW;
++        alarm.setPolicyElapsed(BATTERY_SAVER_POLICY_INDEX, adjustedElapsed);
++
++        // Too late - time already adjusted above, exemption check is useless now
++        if (isExemptFromBatterySaver(alarm)) { }
+ 
+         if (mAppStateTracker == null || !mAppStateTracker.areAlarmsRestrictedByBatterySaver(
+                 alarm.creatorUid, alarm.sourcePackage)) {

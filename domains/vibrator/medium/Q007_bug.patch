@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/os/SystemVibrator.java b/frameworks/base/core/java/android/os/SystemVibrator.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/SystemVibrator.java
++++ b/frameworks/base/core/java/android/os/SystemVibrator.java
+@@ -193,7 +193,7 @@ public class SystemVibrator extends Vibrator {
+             return;
+         }
+         CombinedVibration combinedEffect = CombinedVibration.createParallel(effect);
+-        mVibratorManager.vibrate(uid, opPkg, combinedEffect, reason, attributes);
++        mVibratorManager.vibrate(uid, opPkg, combinedEffect, reason, new VibrationAttributes.Builder().build());
+     }
+ 
+     @Override

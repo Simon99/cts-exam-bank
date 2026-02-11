@@ -1,0 +1,15 @@
+{
+  "id": "SEC-E004",
+  "title": "Key Size Validation",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keystore.cts.AuthorizationListTest#testKeySize",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/AuthorizationList.java"
+  ],
+  "injection_point": "SEC-014",
+  "tags": ["authorization", "key-size", "asn1"],
+  "estimated_time_minutes": 12,
+  "correct_answer": "C"
+}

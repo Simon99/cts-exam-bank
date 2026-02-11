@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+index abc1234..def5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+@@ -4367,6 +4367,8 @@ public class AlarmManagerService extends SystemService {
+             // Recurring alarms may have passed several alarm intervals while the
+             // phone was asleep or off, so pass a trigger count when sending them.
+             if (alarm.repeatInterval > 0) {
++                // BUG: Modifying pendingAlarms during foreach iteration causes CME
++                pendingAlarms.add(alarm);
+                 // this adjustment will be zero if we're late by
+                 // less than one full repeat interval
+                 alarm.count += (nowELAPSED - alarm.getRequestedElapsed()) / alarm.repeatInterval;

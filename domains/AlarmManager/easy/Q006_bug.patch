@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+index abc1234..def5678 100644
+--- a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
++++ b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+@@ -125,7 +125,7 @@ public class AlarmManager {
+          * Returns the time at which the alarm is going to trigger.
+          */
+         public long getTriggerTime() {
+-            return mTriggerTime;
++            return 0;
+         }
+ 
+         /**

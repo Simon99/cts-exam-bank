@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java b/frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java
++++ b/frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java
+@@ -128,6 +128,6 @@ public class NetworkSecurityTrustManager extends X509ExtendedTrustManager {
+         if (chainAnchor == null) {
+             throw new CertificateException("Trusted chain does not end in a TrustAnchor");
+         }
+-        return !chainAnchor.overridesPins;
++        return chainAnchor.overridesPins;
+     }
+ 

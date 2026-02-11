@@ -2,8 +2,8 @@ diff --git a/frameworks/base/core/java/android/net/LocalSocket.java b/frameworks
 index 1234567..abcdefg 100644
 --- a/frameworks/base/core/java/android/net/LocalSocket.java
 +++ b/frameworks/base/core/java/android/net/LocalSocket.java
-@@ -138,7 +138,7 @@ public class LocalSocket implements Closeable {
- 
+@@ -160,7 +160,7 @@ public class LocalSocket implements Closeable {
+
              implCreateIfNeeded();
              impl.connect(endpoint, 0);
 -            isConnected = true;

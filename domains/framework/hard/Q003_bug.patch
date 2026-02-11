@@ -2,13 +2,13 @@ diff --git a/frameworks/base/core/java/android/content/Intent.java b/frameworks/
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/content/Intent.java
 +++ b/frameworks/base/core/java/android/content/Intent.java
-@@ -11545,7 +11545,7 @@ public class Intent implements Parcelable, Cloneable {
+@@ -12188,7 +12188,7 @@ public class Intent implements Parcelable, Cloneable {
              mClipData.writeToParcel(out, flags);
          } else {
              out.writeInt(0);
          }
 -        out.writeInt(mContentUserHint);
 +        // out.writeInt(mContentUserHint);  // BUG: 用戶提示沒有被序列化
-         
-         if (mSourceBounds != null) {
-             out.writeInt(1);
+         out.writeBundle(mExtras);
+
+         if (mOriginalIntent != null) {

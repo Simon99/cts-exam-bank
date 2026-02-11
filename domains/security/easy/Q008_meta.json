@@ -1,0 +1,15 @@
+{
+  "id": "SEC-E008",
+  "title": "Key Algorithm Support Check",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.security.cts.KeyChainTest#testIsKeyAlgorithmSupported",
+  "cts_module": "CtsSecurityTestCases",
+  "affected_files": [
+    "frameworks/base/keystore/java/android/security/KeyChain.java"
+  ],
+  "injection_point": "SEC-034",
+  "tags": ["keychain", "algorithm", "case-sensitivity"],
+  "estimated_time_minutes": 8,
+  "correct_answer": "C"
+}

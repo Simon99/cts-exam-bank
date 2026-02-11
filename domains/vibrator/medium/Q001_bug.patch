@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/os/Vibrator.java b/frameworks/base/core/java/android/os/Vibrator.java
+--- a/frameworks/base/core/java/android/os/Vibrator.java
++++ b/frameworks/base/core/java/android/os/Vibrator.java
+@@ -226,7 +226,7 @@ public abstract class Vibrator {
+     */
+     @TestApi
+     public boolean hasFrequencyControl() {
+-        return getInfo().hasFrequencyControl();
++        return getInfo().hasAmplitudeControl();
+     }
+ 
+     /**

@@ -2,17 +2,15 @@ diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDevic
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-@@ -567,6 +567,12 @@ public class CameraDeviceImpl extends CameraDevice
+@@ -872,6 +872,11 @@
      public CaptureRequest.Builder createCaptureRequest(int templateType)
              throws CameraAccessException {
          synchronized(mInterfaceLock) {
-             checkIfCameraClosedOrInError();
-+            
-+            // BUG: 錯誤地將 PREVIEW 替換為 STILL_CAPTURE
++            // BUG: Incorrectly replaces PREVIEW with STILL_CAPTURE
 +            if (templateType == CameraDevice.TEMPLATE_PREVIEW) {
 +                templateType = CameraDevice.TEMPLATE_STILL_CAPTURE;
 +            }
-+            
-             return createCaptureRequest(templateType, /*physicalCameraIdSet*/ null);
-         }
-     }
++
+             checkIfCameraClosedOrInError();
+ 
+             CameraMetadataNative templatedRequest = null;

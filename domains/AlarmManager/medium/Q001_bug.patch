@@ -1,0 +1,15 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+index abc1234..def5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+@@ -2283,11 +2283,10 @@ class AlarmManagerService extends SystemService {
+         if (interval > 0 && interval < minInterval) {
+             Slog.w(TAG, "Suspiciously short interval " + interval
+                     + " millis; expanding to " + (minInterval / 1000)
+                     + " seconds");
+-            interval = minInterval;
+         } else if (interval > mConstants.MAX_INTERVAL) {
+             Slog.w(TAG, "Suspiciously long interval " + interval
+                     + " millis; clamping");
+             interval = mConstants.MAX_INTERVAL;
+         }

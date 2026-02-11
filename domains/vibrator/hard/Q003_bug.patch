@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/os/VibrationEffect.java b/frameworks/base/core/java/android/os/VibrationEffect.java
+--- a/frameworks/base/core/java/android/os/VibrationEffect.java
++++ b/frameworks/base/core/java/android/os/VibrationEffect.java
+@@ -1269,7 +1269,7 @@ public abstract class VibrationEffect implements Parcelable {
+          */
+         @NonNull
+         public VibrationEffect compose() {
+-            if (mSegments.isEmpty()) {
++            if (!mSegments.isEmpty()) {
+                 throw new IllegalStateException(
+                         "Composition must have at least one element to compose.");
+             }

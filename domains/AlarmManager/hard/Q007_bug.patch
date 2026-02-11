@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+@@ -548,7 +548,7 @@ public class AlarmManagerService extends SystemService {
+                 mPackageHistory.put(userPackage, history);
+             }
+             if (history.size() == 0 || history.peekLast() < nowElapsed) {
+-                history.addLast(nowElapsed);
++                // history.addLast(nowElapsed);  // BUG: Not recording alarm, quota never increments
+             }
+             snapToWindow(history);
+         }

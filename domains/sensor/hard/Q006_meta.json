@@ -1,0 +1,15 @@
+{
+  "id": "SEN-H006",
+  "title": "configureDirectChannel Allows Invalid Rate After Channel Stop",
+  "domain": "sensor",
+  "difficulty": "hard",
+  "cts_test": "android.hardware.cts.SensorDirectReportTest#testConfigureAfterStop",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-064",
+  "injection_type": ["COND", "STATE"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/SystemSensorManager.java"
+  ],
+  "tags": ["direct-channel", "validation", "state"],
+  "estimated_time_minutes": 35
+}

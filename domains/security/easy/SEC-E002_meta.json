@@ -1,0 +1,16 @@
+{
+  "id": "SEC-E002",
+  "title": "Security Level Always Returns SOFTWARE",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keystore.cts.AttestationTest#testSecurityLevel",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-004",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/Attestation.java"
+  ],
+  "tags": ["attestation", "security-level", "hardcoded"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 8,
+  "correct_answer": "B"
+}

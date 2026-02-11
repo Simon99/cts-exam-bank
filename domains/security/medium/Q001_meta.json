@@ -1,0 +1,15 @@
+{
+  "id": "SEC-M001",
+  "title": "Certificate Attestation Loading",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.keystore.cts.AttestationTest#testLoadFromCertificate",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/Attestation.java"
+  ],
+  "injection_point": "SEC-001",
+  "tags": ["attestation", "asn1", "x509", "octet-string"],
+  "estimated_time_minutes": 20,
+  "correct_answer": "B"
+}

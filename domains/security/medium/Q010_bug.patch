@@ -1,0 +1,23 @@
+diff --git a/frameworks/base/core/java/android/security/net/config/DirectoryCertificateSource.java b/frameworks/base/core/java/android/security/net/config/DirectoryCertificateSource.java
+--- a/frameworks/base/core/java/android/security/net/config/DirectoryCertificateSource.java
++++ b/frameworks/base/core/java/android/security/net/config/DirectoryCertificateSource.java
+@@ -151,7 +151,8 @@ abstract class DirectoryCertificateSource implements CertificateSource {
+             if (cert == null) {
+                 continue;
+             }
+-            if (!subj.equals(cert.getSubjectX500Principal())) {
++            String certSubject = cert.getSubjectX500Principal().getName();
++            if (!subj.getName().equals(certSubject)) {
+                 continue;
+             }
+             if (selector.match(cert)) {
+@@ -178,7 +179,8 @@ abstract class DirectoryCertificateSource implements CertificateSource {
+             if (cert == null) {
+                 continue;
+             }
+-            if (!subj.equals(cert.getSubjectX500Principal())) {
++            String certSubject = cert.getSubjectX500Principal().getName();
++            if (!subj.getName().equals(certSubject)) {
+                 continue;
+             }
+             if (selector.match(cert)) {

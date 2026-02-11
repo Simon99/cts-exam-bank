@@ -1,0 +1,11 @@
+diff --git a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+--- a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
++++ b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+@@ -805,7 +805,7 @@ public class AlarmManager {
+     @RequiresPermission(value = Manifest.permission.SCHEDULE_EXACT_ALARM, conditional = true)
+     public void setExact(@AlarmType int type, long triggerAtMillis,
+             @NonNull PendingIntent operation) {
+-        setImpl(type, triggerAtMillis, WINDOW_EXACT, 0, 0, operation, null, null, (Handler) null,
++        setImpl(type, triggerAtMillis, legacyExactLength(type), 0, 0, operation, null, null, (Handler) null,
+                 null, null);
+     }

@@ -1,0 +1,16 @@
+{
+  "id": "SEC-M003",
+  "title": "AuthorizationList Purpose Parsing Early Break",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.keystore.cts.AuthorizationListTest#testPurposeEncryptDecrypt",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-012",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/AuthorizationList.java"
+  ],
+  "tags": ["authorization-list", "purpose", "loop"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "A"
+}

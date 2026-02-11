@@ -1,21 +1,23 @@
 diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/PendingJobQueue.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/PendingJobQueue.java
-index abcd1234..efgh5678 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/PendingJobQueue.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/PendingJobQueue.java
-@@ -85,7 +85,8 @@ public class PendingJobQueue {
-     private final Comparator<JobStatus> mJobComparator = (j1, j2) -> {
-         // Priority: higher runs first
--        int priorityDiff = j2.getEffectivePriority() - j1.getEffectivePriority();
-+        // BUG: Reversed comparison - lower priority runs first
-+        int priorityDiff = j1.getEffectivePriority() - j2.getEffectivePriority();
-         if (priorityDiff != 0) {
-             return priorityDiff;
-         }
+@@ -295,9 +295,8 @@
+                 final int job1Priority = job1.getEffectivePriority();
+                 final int job2Priority = job2.getEffectivePriority();
+                 if (job1Priority != job2Priority) {
+-                    // Use the priority set by an app for intra-app job ordering. Higher
+-                    // priority should be before lower priority.
+-                    return Integer.compare(job2Priority, job1Priority);
++                    // BUG: Reversed comparison - lower priority runs first instead of higher
++                    return Integer.compare(job1Priority, job2Priority);
+                 }
+             }
+ 
 diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
-index 11111111..22222222 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
-@@ -1419,7 +1419,8 @@ public final class JobStatus {
+@@ -1418,7 +1418,8 @@
+         }
          final int rawPriority = Math.min(maxPriority, job.getPriority());
          if (numFailures < 2) {
 -            return rawPriority;

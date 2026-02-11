@@ -1,0 +1,15 @@
+{
+  "id": "ALM-M008",
+  "title": "UpdateNextAlarmClock Not Triggered",
+  "domain": "AlarmManager",
+  "difficulty": "medium",
+  "cts_test": "android.alarmmanager.cts.BasicApiTests#testNextAlarmClockBroadcast",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
+  ],
+  "injection_point": "ALM-044",
+  "tags": ["updateNextAlarmClockLocked", "broadcast", "AlarmClockInfo"],
+  "estimated_time_minutes": 25,
+  "answer": "A"
+}

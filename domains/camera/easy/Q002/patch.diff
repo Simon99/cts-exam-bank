@@ -1,0 +1,12 @@
+--- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
++++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
+@@ -2499,7 +2499,7 @@
+     private void checkIfCameraClosedOrInError() throws CameraAccessException {
+         if (mRemoteDevice == null) {
+             throw new IllegalStateException("CameraDevice was already closed");
+         }
+-        if (mInError) {
++        if (!mInError) {
+             throw new CameraAccessException(CameraAccessException.CAMERA_ERROR,
+                     "The camera device has encountered a serious error");
+         }

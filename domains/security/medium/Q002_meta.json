@@ -1,0 +1,15 @@
+{
+  "id": "SEC-M002",
+  "title": "KeyMaster Version Range Validation",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.keystore.cts.AttestationTest#testKeymasterVersion",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/Attestation.java"
+  ],
+  "injection_point": "SEC-003",
+  "tags": ["attestation", "version", "boundary-check"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "A"
+}

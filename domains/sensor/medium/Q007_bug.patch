@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/hardware/Sensor.java b/frameworks/base/core/java/android/hardware/Sensor.java
+--- a/frameworks/base/core/java/android/hardware/Sensor.java
++++ b/frameworks/base/core/java/android/hardware/Sensor.java
+@@ -948,7 +948,7 @@ public final class Sensor {
+      * @see #REPORTING_MODE_SPECIAL_TRIGGER
+      */
+     public int getReportingMode() {
+-        return ((mFlags & REPORTING_MODE_MASK) >> REPORTING_MODE_SHIFT);
++        return mFlags & 0x1;
+     }
+ 
+     /**

@@ -2,16 +2,16 @@ diff --git a/frameworks/base/core/java/android/hardware/camera2/params/StreamCon
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/params/StreamConfigurationMap.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/params/StreamConfigurationMap.java
-@@ -356,6 +356,12 @@ public final class StreamConfigurationMap {
-      * @see CameraCharacteristics#SCALER_STREAM_CONFIGURATION_MAP
+@@ -683,6 +683,12 @@ public final class StreamConfigurationMap {
+      * @see #isOutputSupportedFor(Class)
       */
-     public Size[] getOutputSizes(Class<?> klass) {
+     public <T> Size[] getOutputSizes(Class<T> klass) {
 +        // BUG: 對 SurfaceHolder 返回空陣列
 +        if (klass == android.view.SurfaceHolder.class || 
 +            klass == android.view.SurfaceView.class) {
 +            return new Size[0];
 +        }
-+        
-         checkNotNull("klass", klass);
-         if (!isOutputSupportedFor(klass)) {
++
+         if (isOutputSupportedFor(klass) == false) {
              return null;
+         }

@@ -1,0 +1,16 @@
+{
+  "id": "INP-H009",
+  "title": "KeyEvent hasModifiers() Equality vs Bitmask",
+  "domain": "input",
+  "difficulty": "hard",
+  "cts_test": "android.view.cts.AppKeyCombinationsTest#testHasModifiers",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-041",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/KeyEvent.java"
+  ],
+  "tags": ["key-event", "modifier", "bitmask"],
+  "injection_type": ["COND", "CALC"],
+  "estimated_time_minutes": 25,
+  "correct_answer": "A"
+}

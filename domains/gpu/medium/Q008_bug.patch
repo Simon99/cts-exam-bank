@@ -2,14 +2,20 @@ diff --git a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp b/framew
 index abc1234..def5678 100644
 --- a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
 +++ b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
-@@ -756,10 +756,7 @@ EGLBoolean eglDestroyImageImpl(EGLDisplay dpy, EGLImage image) {
+@@ -1691,13 +1691,10 @@ EGLBoolean eglDestroyImageTmpl(EGLDisplay dpy, EGLImageKHR img,
+                                PFNEGLDESTROYIMAGEKHRPROC destroyImageFunc) {
+     const egl_display_t* dp = validate_display(dpy);
      if (!dp) return EGL_FALSE;
  
-     egl_connection_t* const cnx = &gEGLImpl;
--    // Release buffer reference before destroying
--    if (img && img->buffer) {
--        img->buffer->common.decRef(&img->buffer->common);
+-    EGLBoolean result = EGL_FALSE;
+-    egl_connection_t* const cnx = &gEGLImpl;
+-    if (cnx->dso && destroyImageFunc) {
+-        result = destroyImageFunc(dp->disp.dpy, img);
 -    }
-+    // BUG: buffer release removed
-     return cnx->egl.eglDestroyImageKHR(dp->disp.dpy, image);
+-    return result;
++    // BUG: Skip actual destruction, causing EGLImage resource leak
++    (void)destroyImageFunc;  // Unused
++    return EGL_TRUE;
  }
+ 
+ EGLBoolean eglDestroyImageKHRImpl(EGLDisplay dpy, EGLImageKHR img) {

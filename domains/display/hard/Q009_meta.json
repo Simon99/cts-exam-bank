@@ -1,0 +1,40 @@
+{
+  "id": "DIS-H009",
+  "title": "Refresh Rate Switching Type 跨函數狀態不一致",
+  "domain": "display",
+  "difficulty": "hard",
+  "cts_test": "android.display.cts.DisplayTest#testModeSwitchOnPrimaryDisplay",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-036",
+  "injection_type": ["STATE", "BOUND"],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
+  ],
+  "affected_methods": [
+    "setRefreshRateSwitchingTypeInternal",
+    "getRefreshRateSwitchingTypeInternal"
+  ],
+  "tags": [
+    "state-inconsistency",
+    "boundary-error",
+    "getter-setter-mismatch",
+    "refresh-rate",
+    "display-mode",
+    "cross-function-bug",
+    "hard"
+  ],
+  "estimated_time_minutes": 40,
+  "skills_tested": [
+    "跨函數狀態追蹤",
+    "邊界條件分析",
+    "get/set 一致性驗證",
+    "Display 子系統理解"
+  ],
+  "hints": [
+    "注意 set 和 get 之間的值可能不匹配",
+    "檢查所有四種 SWITCHING_TYPE 值的行為",
+    "getter 中的邏輯可能會影響返回值"
+  ],
+  "created_at": "2025-01-22T00:00:00+08:00",
+  "version": "1.0.0"
+}

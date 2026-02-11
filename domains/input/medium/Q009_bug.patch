@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/view/VelocityTracker.java b/frameworks/base/core/java/android/view/VelocityTracker.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/view/VelocityTracker.java
++++ b/frameworks/base/core/java/android/view/VelocityTracker.java
+@@ -134,7 +134,7 @@ public final class VelocityTracker {
+      * @param units The units you would like the velocity in.
+      */
+     public void computeCurrentVelocity(int units) {
+-        nativeComputeCurrentVelocity(mPtr, units, Float.MAX_VALUE);
++        nativeComputeCurrentVelocity(mPtr, 1, Float.MAX_VALUE);
+     }
+ 
+     /**

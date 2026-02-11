@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+index abc1234..def5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+@@ -2612,7 +2612,7 @@ public class AlarmManagerService extends SystemService {
+                     // package was t(q) then the next delivery must be after t(q) + <window_size>.
+                     final long t = mAppWakeupHistory.getNthLastWakeupForPackage(
+                             sourcePackage, sourceUserId, quotaForBucket);
+-                    minElapsed = t + mConstants.APP_STANDBY_WINDOW;
++                    minElapsed = t + (int) mConstants.APP_STANDBY_WINDOW;
+                 }
+                 return alarm.setPolicyElapsed(APP_STANDBY_POLICY_INDEX, minElapsed);
+             }

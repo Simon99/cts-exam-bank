@@ -1,0 +1,11 @@
+diff --git a/frameworks/base/keystore/java/android/security/KeyChain.java b/frameworks/base/keystore/java/android/security/KeyChain.java
+--- a/frameworks/base/keystore/java/android/security/KeyChain.java
++++ b/frameworks/base/keystore/java/android/security/KeyChain.java
+@@ -885,6 +885,7 @@ public class KeyChain {
+                 // is still valid so the consumer of the chain should have no problem verifying it.
+                 TrustedCertificateStore store = new TrustedCertificateStore();
+                 List<X509Certificate> chain = store.getCertificateChain(leafCert);
++                Collections.reverse(chain);
+                 return chain.toArray(new X509Certificate[chain.size()]);
+             }
+         } catch (CertificateException | RuntimeException e) {

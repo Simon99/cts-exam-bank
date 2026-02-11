@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/view/MotionEvent.java b/frameworks/base/core/java/android/view/MotionEvent.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/view/MotionEvent.java
++++ b/frameworks/base/core/java/android/view/MotionEvent.java
+@@ -2314,7 +2314,7 @@ public final class MotionEvent extends InputEvent implements Parcelable {
+      * @return The action, such as {@link #ACTION_DOWN} or {@link #ACTION_POINTER_DOWN}.
+      */
+     public final int getActionMasked() {
+-        return nativeGetAction(mNativePtr) & ACTION_MASK;
++        return nativeGetAction(mNativePtr);
+     }
+ 
+     /**

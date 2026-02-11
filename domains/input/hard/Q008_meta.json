@@ -1,0 +1,16 @@
+{
+  "id": "INP-H008",
+  "title": "MotionEvent split() History Loop Off-by-One",
+  "domain": "input",
+  "difficulty": "hard",
+  "cts_test": "android.view.cts.TouchScreenTest#testMultiTouchSplitEventPreservesHistory",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-SPLIT",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/MotionEvent.java"
+  ],
+  "tags": ["motion-event", "split", "multi-touch", "history", "off-by-one"],
+  "injection_type": ["BOUND", "CALC"],
+  "estimated_time_minutes": 35,
+  "correct_answer": "B"
+}

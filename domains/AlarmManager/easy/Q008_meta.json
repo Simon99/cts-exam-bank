@@ -1,0 +1,15 @@
+{
+  "id": "ALM-E008",
+  "title": "Alarm isExact Check Wrong",
+  "domain": "AlarmManager",
+  "difficulty": "easy",
+  "cts_test": "android.alarmmanager.cts.ExactAlarmsTest#testIsExactAlarm",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/Alarm.java"
+  ],
+  "injection_point": "ALM-052",
+  "tags": ["isExact", "Alarm", "windowLength"],
+  "estimated_time_minutes": 10,
+  "answer": "A"
+}

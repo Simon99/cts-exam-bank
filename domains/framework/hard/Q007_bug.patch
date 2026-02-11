@@ -1,26 +1,13 @@
-diff --git a/frameworks/base/core/java/android/content/Intent.java b/frameworks/base/core/java/android/content/Intent.java
+diff --git a/frameworks/base/services/core/java/com/android/server/wm/ActivityRecord.java b/frameworks/base/services/core/java/com/android/server/wm/ActivityRecord.java
 index abc1234..def5678 100644
---- a/frameworks/base/core/java/android/content/Intent.java
-+++ b/frameworks/base/core/java/android/content/Intent.java
-@@ -7890,8 +7890,6 @@ public class Intent implements Parcelable, Cloneable {
-      */
-     public @NonNull Intent addCategory(String category) {
--        synchronized (mLock) {
-         if (mCategories == null) {
-             mCategories = new ArraySet<String>();
-         }
-         mCategories.add(category);
--        }
-         return this;
-     }
-
-@@ -11520,10 +11518,8 @@ public class Intent implements Parcelable, Cloneable {
-     public void writeToParcel(Parcel out, int flags) {
-         // ...
--        synchronized (mLock) {
-         final int N = mCategories != null ? mCategories.size() : 0;
-         out.writeInt(N);
-         for (int i = 0; i < N; i++) {
-             out.writeString8(mCategories.valueAt(i));
-         }
--        }
+--- a/frameworks/base/services/core/java/com/android/server/wm/ActivityRecord.java
++++ b/frameworks/base/services/core/java/com/android/server/wm/ActivityRecord.java
+@@ -5961,7 +5961,7 @@ public final class ActivityRecord extends WindowToken implements WindowManagerS
+             case RESUMED:
+                 mAtmService.updateBatteryStats(this, true);
+                 mAtmService.updateActivityUsageStats(this, Event.ACTIVITY_RESUMED);
+-                // Fall through.
++                break;
+             case STARTED:
+                 // Update process info while making an activity from invisible to visible, to make
+                 // sure the process state is updated to foreground.

@@ -1,0 +1,31 @@
+{
+  "id": "DIS-H008",
+  "title": "ADD_TRUSTED_DISPLAY Permission Check Logic Inversion",
+  "domain": "display",
+  "difficulty": "hard",
+  "cts_test": "android.hardware.display.cts.VirtualDisplayTest#testTrustedVirtualDisplay",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-052",
+  "injection_type": ["COND", "ERR"],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
+  ],
+  "tags": [
+    "security",
+    "permission",
+    "virtual-display",
+    "trusted-display",
+    "condition-inversion",
+    "de-morgan",
+    "privilege-escalation"
+  ],
+  "estimated_time_minutes": 35,
+  "skills_tested": [
+    "boolean logic analysis",
+    "security permission model",
+    "De Morgan's Law application",
+    "Android security boundaries"
+  ],
+  "bug_description": "Permission check condition inverted using De Morgan's Law transformation, causing trusted display creation to bypass permission check for third-party apps while incorrectly checking for system UID",
+  "root_cause": "Changed 'callingUid != Process.SYSTEM_UID && (flags & TRUSTED) != 0' to 'callingUid == Process.SYSTEM_UID || (flags & TRUSTED) == 0' - logical negation of the original condition"
+}

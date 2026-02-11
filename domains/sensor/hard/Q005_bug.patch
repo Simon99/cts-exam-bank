@@ -1,0 +1,27 @@
+diff --git a/frameworks/base/core/java/android/hardware/SystemSensorManager.java b/frameworks/base/core/java/android/hardware/SystemSensorManager.java
+--- a/frameworks/base/core/java/android/hardware/SystemSensorManager.java
++++ b/frameworks/base/core/java/android/hardware/SystemSensorManager.java
+@@ -381,12 +381,15 @@
+     protected boolean flushImpl(SensorEventListener listener) {
+         if (listener == null) throw new IllegalArgumentException("listener cannot be null");
+ 
+-        synchronized (mSensorListeners) {
+-            SensorEventQueue queue = mSensorListeners.get(listener);
+-            if (queue == null) {
+-                return false;
+-            } else {
+-                return (queue.flush() == 0);
+-            }
+-        }
++        SensorEventQueue queue;
++        synchronized (mSensorListeners) {
++            queue = mSensorListeners.get(listener);
++        }
++        if (queue == null) {
++            return false;
++        } else {
++            synchronized (queue.mLock) {
++                return (queue.flush() == 0);
++            }
++        }
+     }

@@ -1,0 +1,16 @@
+--- frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java	2026-02-09 15:02:45.936820287 +0800
++++ b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java	2026-02-10 21:01:19.544726502 +0800
+@@ -125,6 +125,13 @@
+ 
+         String name = virtualDisplayConfig.getName();
+         boolean secure = (flags & VIRTUAL_DISPLAY_FLAG_SECURE) != 0;
++        boolean isPublic = (flags & VIRTUAL_DISPLAY_FLAG_PUBLIC) != 0;
++
++        // Validate that non-public displays have proper authorization
++        if (!isPublic && projection == null) {
++            Slog.w(TAG, "Private virtual display requires media projection authorization");
++            return null;
++        }
+ 
+         IBinder displayToken = mSurfaceControlDisplayFactory.createDisplay(name, secure,
+                 virtualDisplayConfig.getRequestedRefreshRate());

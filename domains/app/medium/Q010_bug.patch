@@ -2,21 +2,20 @@ diff --git a/frameworks/base/core/java/android/app/ProgressDialog.java b/framewo
 index 1234567..abcdefg 100644
 --- a/frameworks/base/core/java/android/app/ProgressDialog.java
 +++ b/frameworks/base/core/java/android/app/ProgressDialog.java
-@@ -221,7 +221,6 @@ public class ProgressDialog extends AlertDialog {
-                     SpannableString tmp = new SpannableString(mProgressPercentFormat.format(percent));
-                     tmp.setSpan(new StyleSpan(android.graphics.Typeface.BOLD),
-                             0, tmp.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
--                    mProgressPercent.setText(tmp);
-                 } else {
-                     mProgressPercent.setText("");
-                 }
+@@ -220,7 +220,6 @@ public class ProgressDialog extends AlertDialog {
+                         SpannableString tmp = new SpannableString(mProgressPercentFormat.format(percent));
+                         tmp.setSpan(new StyleSpan(android.graphics.Typeface.BOLD),
+                                 0, tmp.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+-                        mProgressPercent.setText(tmp);
+                     } else {
+                         mProgressPercent.setText("");
+                     }
 
 diff --git a/frameworks/base/core/java/android/os/Handler.java b/frameworks/base/core/java/android/os/Handler.java
 index 2345678..bcdefgh 100644
 --- a/frameworks/base/core/java/android/os/Handler.java
 +++ b/frameworks/base/core/java/android/os/Handler.java
-@@ -174,9 +174,7 @@ public class Handler {
-     public void dispatchMessage(@NonNull Message msg) {
+@@ -99,9 +99,7 @@ public class Handler {
          if (msg.callback != null) {
              handleCallback(msg);
          } else {

@@ -1,0 +1,31 @@
+{
+  "id": "DIS-M007",
+  "title": "Trusted Virtual Display 權限驗證條件反轉",
+  "domain": "display",
+  "difficulty": "medium",
+  "cts_test": "android.hardware.display.cts.VirtualDisplayTest#testTrustedVirtualDisplay",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-016",
+  "injection_type": ["COND", "ERR"],
+  "affected_files": ["frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"],
+  "tags": [
+    "virtual-display",
+    "trusted-display",
+    "permission-check",
+    "security",
+    "condition-inversion",
+    "CVE-2021-0478"
+  ],
+  "estimated_time_minutes": 25,
+  "key_concepts": [
+    "VIRTUAL_DISPLAY_FLAG_TRUSTED 用途",
+    "ADD_TRUSTED_DISPLAY 權限級別",
+    "checkCallingPermission 返回值語義",
+    "條件反轉對安全的影響"
+  ],
+  "hints": [
+    "注意權限檢查方法的返回值意義",
+    "觀察 if 條件中的邏輯運算符",
+    "思考：有權限時應該發生什麼，沒權限時應該發生什麼"
+  ]
+}

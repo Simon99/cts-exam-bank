@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+--- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -1553,7 +1553,8 @@ class DisplayManagerService extends SystemService {
+         }
+ 
+         if (callingUid != Process.SYSTEM_UID && (flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) != 0) {
+-            if (!checkCallingPermission(ADD_TRUSTED_DISPLAY, "createVirtualDisplay()")) {
++            // Fixed: Added proper validation for trusted display creation
++            if (checkCallingPermission(ADD_TRUSTED_DISPLAY, "createVirtualDisplay()")) {
+                 EventLog.writeEvent(0x534e4554, "162627132", callingUid,
+                         "Attempt to create a trusted display without holding permission!");
+                 throw new SecurityException("Requires ADD_TRUSTED_DISPLAY permission to "

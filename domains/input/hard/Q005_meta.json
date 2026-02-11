@@ -1,0 +1,16 @@
+{
+  "id": "INP-H005",
+  "title": "KeyEvent normalizeMetaState() Missing CTRL",
+  "domain": "input",
+  "difficulty": "hard",
+  "cts_test": "android.view.cts.AppKeyCombinationsTest#testModifierKeyDispatch",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-033",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/KeyEvent.java"
+  ],
+  "tags": ["key-event", "modifier", "meta-state"],
+  "injection_type": ["COND", "STATE"],
+  "estimated_time_minutes": 30,
+  "correct_answer": "D"
+}

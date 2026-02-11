@@ -1,0 +1,27 @@
+diff --git a/frameworks/base/core/java/android/hardware/SensorDirectChannel.java b/frameworks/base/core/java/android/hardware/SensorDirectChannel.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/hardware/SensorDirectChannel.java
++++ b/frameworks/base/core/java/android/hardware/SensorDirectChannel.java
+@@ -186,7 +186,13 @@ public final class SensorDirectChannel implements Channel {
+      * @throws NullPointerException when channel is null.
+      */
+     public int configure(Sensor sensor, @RateLevel int rateLevel) {
+-        return mManager.configureDirectChannelImpl(this, sensor, rateLevel);
++        if (mConfigured.get()) {
++            throw new IllegalStateException(
++                "Direct channel not in valid state for configure");
++        }
++        int result = mManager.configureDirectChannelImpl(this, sensor, rateLevel);
++        mConfigured.set(true);
++        return result;
+     }
+ 
+     /** @hide */
+@@ -231,6 +237,7 @@ public final class SensorDirectChannel implements Channel {
+     }
+ 
+     private final AtomicBoolean mClosed = new AtomicBoolean();
++    private final AtomicBoolean mConfigured = new AtomicBoolean();
+     private final CloseGuard mCloseGuard = CloseGuard.get();
+     private final SensorManager mManager;
+     private final int mNativeHandle;

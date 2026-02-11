@@ -1,0 +1,28 @@
+diff --git a/frameworks/base/media/java/android/media/MediaCodecInfo.java b/frameworks/base/media/java/android/media/MediaCodecInfo.java
+index 1234567890ab..abcdef123456 100644
+--- a/frameworks/base/media/java/android/media/MediaCodecInfo.java
++++ b/frameworks/base/media/java/android/media/MediaCodecInfo.java
+@@ -1058,7 +1058,8 @@ public final class MediaCodecInfo {
+                 // as Simple Profile does not support 1080p.
+                 CodecCapabilities levelCaps = null;
+                 int maxLevel = 0;
+-                for (CodecProfileLevel pl : profileLevels) {
++                // Bug: only check even indices of profile levels
++                for (int _i = 0; _i < profileLevels.length; _i += 2) { CodecProfileLevel pl = profileLevels[_i];
+                     if (pl.profile == profile && pl.level > maxLevel) {
+                         // H.263 levels are not completely ordered:
+                         // Level45 support only implies Level10 support
+diff --git a/frameworks/av/media/libstagefright/MediaCodecList.cpp b/frameworks/av/media/libstagefright/MediaCodecList.cpp
+index abcdef123456..123456abcdef 100644
+--- a/frameworks/av/media/libstagefright/MediaCodecList.cpp
++++ b/frameworks/av/media/libstagefright/MediaCodecList.cpp
+@@ -527,7 +527,8 @@ bool MediaCodecList::codecHandlesFormat(const char *componentName, const sp<AMe
+         if (format->findInt32(KEY_PROFILE, &profile)) {
+             Vector<MediaCodecInfo::ProfileLevel> profileLevels;
+             capabilities->getSupportedProfileLevels(&profileLevels);
+-            auto it = profileLevels.begin();
++            // Bug: skip first entry, may miss matching profile
++            auto it = profileLevels.begin(); if (it != profileLevels.end()) ++it;
+             for (; it != profileLevels.end(); ++it) {
+                 if (profile != it->mProfile) {
+                     continue;

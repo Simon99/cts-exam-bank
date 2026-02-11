@@ -1,0 +1,15 @@
+{
+  "id": "VIB-M005",
+  "title": "Are Effects Supported Returns Wrong Length",
+  "domain": "vibrator",
+  "difficulty": "medium",
+  "cts_test": "android.os.cts.VibrationEffectTest#testAreEffectsSupported",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-012",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/Vibrator.java"
+  ],
+  "tags": ["vibrator", "effects", "array-size"],
+  "estimated_time_minutes": 15,
+  "answer": "C"
+}

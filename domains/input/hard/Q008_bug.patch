@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/core/java/android/view/MotionEvent.java b/frameworks/base/core/java/android/view/MotionEvent.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/view/MotionEvent.java
++++ b/frameworks/base/core/java/android/view/MotionEvent.java
+@@ -3820,7 +3820,8 @@ public class MotionEvent extends InputEvent implements Parcelable {
+             }
+ 
+             final int historySize = nativeGetHistorySize(mNativePtr);
+-            for (int h = 0; h <= historySize; h++) {
++            // BUG: Off-by-one error - should be h <= historySize to include HISTORY_CURRENT
++            for (int h = 0; h < historySize; h++) {
+                 final int historyPos = h == historySize ? HISTORY_CURRENT : h;
+ 
+                 for (int i = 0; i < newPointerCount; i++) {

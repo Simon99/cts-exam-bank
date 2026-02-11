@@ -2,14 +2,17 @@
   "id": "Q005",
   "domain": "filesystem",
   "difficulty": "medium",
-  "title": "isAllocationSupported() 判斷邏輯與 UUID 轉換錯誤",
-  "cts_test": "android.os.storage.cts.StorageManagerTest#testIsAllocationSupported",
-  "cts_module": "CtsOsTestCases",
+  "title": "F2FS Superblock 驗證邏輯錯誤",
+  "injection_point": "FS-011",
+  "cts_test": "android.filesystem.cts.RandomRWTest",
+  "cts_module": "CtsFileSystemTestCases",
   "affected_files": [
-    "frameworks/base/core/java/android/os/storage/StorageManager.java",
-    "frameworks/base/core/java/android/os/storage/VolumeInfo.java"
+    "system/core/fs_mgr/fs_mgr.cpp"
   ],
-  "tags": ["storage", "allocation", "filesystem", "logic-inversion", "UUID"],
-  "estimated_time_minutes": 25,
-  "skills_tested": ["log-tracing", "filesystem-understanding", "logic-analysis", "multi-file-debugging"]
+  "bug_type": "COND",
+  "bug_description": "超級塊有效性判斷使用 || 而非 &&，導致冗餘機制失效",
+  "correct_answer": "C",
+  "tags": ["f2fs", "superblock", "logic-error", "redundancy", "filesystem"],
+  "estimated_time_minutes": 20,
+  "skills_tested": ["code-logic-analysis", "filesystem-understanding", "boolean-logic"]
 }

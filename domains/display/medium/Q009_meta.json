@@ -1,0 +1,27 @@
+{
+  "id": "DIS-M009",
+  "title": "HDR 轉換模式覆蓋條件判斷反轉",
+  "domain": "display",
+  "difficulty": "medium",
+  "cts_test": "android.hardware.display.cts.HdrConversionEnabledTest#testSetHdrConversionMode",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-026",
+  "injection_type": ["STATE", "COND"],
+  "affected_files": ["frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"],
+  "tags": [
+    "HDR",
+    "display-output",
+    "null-check",
+    "condition-inversion",
+    "override-logic",
+    "state-management"
+  ],
+  "estimated_time_minutes": 25,
+  "bug_type": "condition_inversion",
+  "bug_description": "mOverrideHdrConversionMode 的 null 檢查條件反轉，導致覆蓋邏輯完全相反",
+  "learning_objectives": [
+    "理解 null 檢查的方向性",
+    "識別條件判斷與分支邏輯不一致的問題",
+    "理解 Android HDR 轉換模式的覆蓋機制"
+  ]
+}

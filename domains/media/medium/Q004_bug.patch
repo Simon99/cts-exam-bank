@@ -1,0 +1,38 @@
+diff --git a/frameworks/base/media/java/android/media/MediaMuxer.java b/frameworks/base/media/java/android/media/MediaMuxer.java
+--- a/frameworks/base/media/java/android/media/MediaMuxer.java
++++ b/frameworks/base/media/java/android/media/MediaMuxer.java
+@@ -312,6 +312,9 @@ public final class MediaMuxer {
+     @UnsupportedAppUsage(maxTargetSdk = Build.VERSION_CODES.R, trackingBug = 170729553)
+     private int mState = MUXER_STATE_UNINITIALIZED;
+ 
++    // Bug: static variable to store first PTS
++    private long mFirstPts = -1;
++
+     @UnsupportedAppUsage(maxTargetSdk = Build.VERSION_CODES.R, trackingBug = 170729553)
+     private final CloseGuard mCloseGuard = CloseGuard.get();
+     private int mLastTrackIndex = -1;
+@@ -722,7 +725,12 @@ public final class MediaMuxer {
+             throw new IllegalStateException("Can't write, muxer is not started");
+         }
+ 
++        // Bug: remember first PTS and always use it
++        if (mFirstPts < 0) {
++            mFirstPts = bufferInfo.presentationTimeUs;
++        }
++
+         nativeWriteSampleData(mNativeObject, trackIndex, byteBuf,
+                 bufferInfo.offset, bufferInfo.size,
+-                bufferInfo.presentationTimeUs, bufferInfo.flags);
++                mFirstPts, bufferInfo.flags);  // Bug: use mFirstPts instead
+     }
+diff --git a/frameworks/av/media/libstagefright/MediaMuxer.cpp b/frameworks/av/media/libstagefright/MediaMuxer.cpp
+--- a/frameworks/av/media/libstagefright/MediaMuxer.cpp
++++ b/frameworks/av/media/libstagefright/MediaMuxer.cpp
+@@ -207,6 +207,7 @@ status_t MediaMuxer::writeSampleData(const sp<ABuffer> &buffer, size_t trackInde
+     if (buffer.get() == NULL) {
+         ALOGE("WriteSampleData() get an NULL buffer.");
+         return -EINVAL;
++        // Native layer accepts whatever PTS is passed from Java
+     }
+     if (!mWriter->isSampleMetadataValid(trackIndex, timeUs)) {
+         return -EINVAL;

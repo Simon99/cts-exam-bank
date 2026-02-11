@@ -1,0 +1,11 @@
+diff --git a/frameworks/base/core/java/android/hardware/Sensor.java b/frameworks/base/core/java/android/hardware/Sensor.java
+--- a/frameworks/base/core/java/android/hardware/Sensor.java
++++ b/frameworks/base/core/java/android/hardware/Sensor.java
+@@ -968,7 +968,7 @@ public final class Sensor {
+     @SensorDirectChannel.RateLevel
+     public int getHighestDirectReportRateLevel() {
+-        int rateLevel = ((mFlags & DIRECT_REPORT_MASK) >> DIRECT_REPORT_SHIFT);
++        int rateLevel = (mFlags >> 12) & 0x7;
+         return rateLevel <= SensorDirectChannel.RATE_VERY_FAST
+                 ? rateLevel : SensorDirectChannel.RATE_VERY_FAST;
+     }

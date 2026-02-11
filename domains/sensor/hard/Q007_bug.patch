@@ -1,0 +1,36 @@
+diff --git a/frameworks/base/core/java/android/hardware/SystemSensorManager.java b/frameworks/base/core/java/android/hardware/SystemSensorManager.java
+--- a/frameworks/base/core/java/android/hardware/SystemSensorManager.java
++++ b/frameworks/base/core/java/android/hardware/SystemSensorManager.java
+@@ -332,23 +332,18 @@
+                     + MAX_LISTENER_COUNT);
+         }
+ 
++        final String fullClassName =
++                listener.getClass().getEnclosingClass() != null
++                    ? listener.getClass().getEnclosingClass().getName()
++                    : listener.getClass().getName();
++        TriggerEventQueue queue = new TriggerEventQueue(listener, mMainLooper, this, fullClassName);
+         synchronized (mTriggerListeners) {
+-            TriggerEventQueue queue = mTriggerListeners.get(listener);
+-            if (queue == null) {
+-                final String fullClassName =
+-                        listener.getClass().getEnclosingClass() != null
+-                            ? listener.getClass().getEnclosingClass().getName()
+-                            : listener.getClass().getName();
+-                queue = new TriggerEventQueue(listener, mMainLooper, this, fullClassName);
+-                if (!queue.addSensor(sensor, 0, 0)) {
+-                    queue.dispose();
+-                    return false;
+-                }
+-                mTriggerListeners.put(listener, queue);
+-                return true;
+-            } else {
+-                return queue.addSensor(sensor, 0, 0);
++            if (!queue.addSensor(sensor, 0, 0)) {
++                queue.dispose();
++                return false;
+             }
++            mTriggerListeners.put(listener, queue);
++            return true;
+         }
+     }

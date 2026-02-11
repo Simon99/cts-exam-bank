@@ -1,0 +1,15 @@
+{
+  "id": "SEN-M003",
+  "title": "getDefaultSensor with wakeUp Flag Ignored",
+  "domain": "sensor",
+  "difficulty": "medium",
+  "cts_test": "android.hardware.cts.SensorTest#testGetDefaultSensorWakeUp",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-010",
+  "injection_type": ["COND"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/SensorManager.java"
+  ],
+  "tags": ["wake-up", "filter", "parameter"],
+  "estimated_time_minutes": 20
+}

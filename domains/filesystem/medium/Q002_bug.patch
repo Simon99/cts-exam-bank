@@ -1,22 +1,20 @@
 diff --git a/frameworks/base/services/core/java/com/android/server/StorageManagerService.java b/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
-index abc1234..def5678 100644
 --- a/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
 +++ b/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
-@@ -1850,7 +1850,7 @@ class StorageManagerService extends IStorageManager.Stub
-         final ArrayList<StorageVolume> res = new ArrayList<>();
-         for (int i = 0; i < mVolumes.size(); i++) {
-             final VolumeInfo vol = mVolumes.valueAt(i);
--            if (vol.isVisibleForUser(userId)) {
-+            if (vol.isVisibleForUser(userId) && !vol.isPrimary()) {
-                 final StorageVolume userVol = vol.buildStorageVolume(mContext, userId, false);
-                 res.add(userVol);
-             }
+@@ -3921,7 +3921,7 @@ class StorageManagerService extends IStorageManager.Stub
+                     // Public Volumes will be also be returned if visible to the
+                     // userIdSharingMedia with.
+                     match = vol.isVisibleForUser(userId)
+-                            || (!vol.isVisible() && includeInvisible && vol.getPath() != null)
++                            && !vol.isPrimary()
+                             || (vol.getType() == VolumeInfo.TYPE_PUBLIC
+                                     && vol.isVisibleForUser(userIdSharingMedia))
+                             || (includeSharedProfile && vol.isVisibleForUser(userIdSharingMedia));
 diff --git a/frameworks/base/core/java/android/os/storage/StorageVolume.java b/frameworks/base/core/java/android/os/storage/StorageVolume.java
-index 111222..333444 100644
 --- a/frameworks/base/core/java/android/os/storage/StorageVolume.java
 +++ b/frameworks/base/core/java/android/os/storage/StorageVolume.java
-@@ -245,7 +245,7 @@ public final class StorageVolume implements Parcelable {
-      * @return true if this volume is the primary shared/external storage
+@@ -251,7 +251,7 @@ public final class StorageVolume implements Parcelable {
+      * backed by {@link Environment#getExternalStorageDirectory()}.
       */
      public boolean isPrimary() {
 -        return mPrimary;

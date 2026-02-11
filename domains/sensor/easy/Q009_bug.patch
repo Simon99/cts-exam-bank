@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/hardware/SensorManager.java b/frameworks/base/core/java/android/hardware/SensorManager.java
+--- a/frameworks/base/core/java/android/hardware/SensorManager.java
++++ b/frameworks/base/core/java/android/hardware/SensorManager.java
+@@ -1803,7 +1803,7 @@
+      * @throws IllegalArgumentException when sensor is a trigger sensor.
+      */
+     public boolean cancelTriggerSensor(TriggerEventListener listener, Sensor sensor) {
+-        return cancelTriggerSensorImpl(listener, sensor, true);
++        return !cancelTriggerSensorImpl(listener, sensor, true);
+     }
+ 
+     /**

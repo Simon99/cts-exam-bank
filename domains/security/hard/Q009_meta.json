@@ -1,0 +1,22 @@
+{
+  "id": "SEC-H009",
+  "title": "Root of Trust Attestation Version Handling",
+  "domain": "security",
+  "difficulty": "hard",
+  "cts_test": "android.keystore.cts.KeyAttestationTest#testRootOfTrustAttestation",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/RootOfTrust.java"
+  ],
+  "injection_points": ["SEC-021", "SEC-024"],
+  "bug_types": ["boundary-condition", "version-check", "keymint-keymaster-mismatch"],
+  "tags": ["root-of-trust", "key-attestation", "verified-boot", "version-handling", "keymint"],
+  "estimated_time_minutes": 20,
+  "correct_answer": "A",
+  "requires_understanding": [
+    "KeyMaster vs KeyMint version numbering (10-base vs 100-base)",
+    "attestationVersion semantics across hardware generations",
+    "verifiedBootHash introduction in attestation v3",
+    "Boundary condition analysis in version checks"
+  ]
+}

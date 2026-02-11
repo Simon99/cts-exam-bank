@@ -1,17 +1,25 @@
-diff --git a/frameworks/base/core/java/android/os/Parcel.java b/frameworks/base/core/java/android/os/Parcel.java
-index abc1234..def5678 100644
---- a/frameworks/base/core/java/android/os/Parcel.java
-+++ b/frameworks/base/core/java/android/os/Parcel.java
-@@ -2145,11 +2145,7 @@ public final class Parcel {
-             writeInt(-1);
+--- a/frameworks/base/core/java/android/os/BaseBundle.java	2026-02-11 07:25:29.465237265 +0800
++++ b/frameworks/base/core/java/android/os/BaseBundle.java	2026-02-11 07:25:51.021889422 +0800
+@@ -1836,19 +1836,12 @@
+             parcel.writeInt(0);
              return;
          }
--        final int startPos = dataPosition();
--        writeInt(-1);
+-        int lengthPos = parcel.dataPosition();
+-        parcel.writeInt(-1); // placeholder, will hold length
 +        // BUG: 沒有正確處理 Bundle 長度邊界
-         val.writeToParcel(this, 0);
--        final int endPos = dataPosition();
--        setDataPosition(startPos);
--        writeInt(endPos - startPos - 4);
--        setDataPosition(endPos);
++        parcel.writeInt(0); // incorrect: always write 0 length
+         parcel.writeInt(BUNDLE_MAGIC);
+ 
+-        int startPos = parcel.dataPosition();
+         parcel.writeArrayMapInternal(map);
+-        int endPos = parcel.dataPosition();
+-
+-        // Backpatch length
+-        parcel.setDataPosition(lengthPos);
+-        int length = endPos - startPos;
+-        parcel.writeInt(length);
+-        parcel.setDataPosition(endPos);
++        // Missing: length backpatching logic
      }
+ 
+     /**

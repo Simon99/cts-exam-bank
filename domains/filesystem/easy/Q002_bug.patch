@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/os/storage/StorageVolume.java b/f
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/os/storage/StorageVolume.java
 +++ b/frameworks/base/core/java/android/os/storage/StorageVolume.java
-@@ -256,7 +256,7 @@ public final class StorageVolume implements Parcelable {
+@@ -258,7 +258,7 @@ public final class StorageVolume implements Parcelable {
       * Returns true if the volume is removable.
       */
      public boolean isRemovable() {

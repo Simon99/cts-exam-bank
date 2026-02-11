@@ -1,0 +1,15 @@
+{
+  "id": "ALM-M010",
+  "title": "Exact Alarm Permission Check Bypassed",
+  "domain": "AlarmManager",
+  "difficulty": "medium",
+  "cts_test": "android.alarmmanager.cts.ExactAlarmsTest#testExactAlarmPermissionRequired",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
+  ],
+  "injection_point": "ALM-046",
+  "tags": ["permission", "exact-alarm", "SecurityException"],
+  "estimated_time_minutes": 25,
+  "answer": "A"
+}

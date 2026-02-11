@@ -1,36 +1,21 @@
 diff --git a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
-index abc1234..def5678 100644
 --- a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
 +++ b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
-@@ -978,18 +978,11 @@ EGLBoolean eglGetCompositorTimingANDROIDImpl(EGLDisplay dpy, EGLSurface surface,
-     if (!s) return setError(EGL_BAD_SURFACE, EGL_FALSE);
+@@ -2249,8 +2249,15 @@
+         }
+     }
  
-     ANativeWindow* win = s->getNativeWindow();
--    nsecs_t compositeDeadline, compositeInterval, compositeToPresentLatency;
--    
--    // Query fresh timestamps from native window
--    int err = native_window_get_compositor_timing(win, &compositeDeadline,
--                                                   &compositeInterval,
--                                                   &compositeToPresentLatency);
--    if (err != OK) {
--        return setError(EGL_BAD_SURFACE, EGL_FALSE);
--    }
--    
--    // Update cached values and fill output
--    // ... 
-+    // BUG: Always use cached values, never query fresh data
-+    for (int i = 0; i < numTimestamps; i++) {
-+        values[i] = s->cachedCompositorTimestamps[names[i]];
-+    }
-+    return EGL_TRUE;
- }
+-    int ret = native_window_get_compositor_timing(s->getNativeWindow(), compositeDeadline,
+-                                                  compositeInterval, compositeToPresentLatency);
++    // BUG: Use static cached values instead of querying fresh compositor timing
++    // This causes apps to receive stale timing data, leading to frame pacing issues
++    static const nsecs_t staticDeadline = 16666667;  // ~16.6ms fixed
++    static const nsecs_t staticInterval = 16666667;
++    static const nsecs_t staticLatency = 8333333;    // ~8.3ms fixed
++    if (compositeDeadline) *compositeDeadline = staticDeadline;
++    if (compositeInterval) *compositeInterval = staticInterval;
++    if (compositeToPresentLatency) *compositeToPresentLatency = staticLatency;
++    int ret = 0;  // Always succeed with stale cached values
  
- diff --git a/frameworks/native/opengl/libs/EGL/egl_object.cpp b/frameworks/native/opengl/libs/EGL/egl_object.cpp
---- a/frameworks/native/opengl/libs/EGL/egl_object.cpp
-+++ b/frameworks/native/opengl/libs/EGL/egl_object.cpp
-@@ -92,6 +92,8 @@ egl_surface_t::egl_surface_t(...) {
-     // Initialize cached timestamps with static values
-     cachedCompositorTimestamps[EGL_COMPOSITE_DEADLINE_ANDROID] = 100000000;  // 100ms
-     cachedCompositorTimestamps[EGL_COMPOSITE_TO_PRESENT_LATENCY_ANDROID] = 16666667;  // 16.6ms
-+    // BUG: These values are never updated after initialization
- }
+     switch (ret) {
+         case 0:

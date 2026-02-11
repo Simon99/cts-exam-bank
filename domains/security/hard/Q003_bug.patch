@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java b/frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java
++++ b/frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java
+@@ -103,7 +103,7 @@ public class NetworkSecurityTrustManager extends X509ExtendedTrustManager {
+     private void checkPins(List<X509Certificate> chain) throws CertificateException {
+         PinSet pinSet = mNetworkSecurityConfig.getPins();
+         if (pinSet.pins.isEmpty()
+-                || System.currentTimeMillis() > pinSet.expirationTime
++                || System.currentTimeMillis() < pinSet.expirationTime  // BUG: < should be >
+                 || !isPinningEnforced(chain)) {
+             return;
+         }

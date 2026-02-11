@@ -1,0 +1,17 @@
+diff --git a/frameworks/base/core/java/android/hardware/SensorManager.java b/frameworks/base/core/java/android/hardware/SensorManager.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/hardware/SensorManager.java
++++ b/frameworks/base/core/java/android/hardware/SensorManager.java
+@@ -697,10 +697,8 @@ public abstract class SensorManager {
+      *
+      */
+     public void unregisterListener(SensorEventListener listener) {
+-        if (listener == null) {
+-            return;
+-        }
+-
++        // BUG: null check removed - will crash when listener.hashCode() is called
++        listener.hashCode();  // Force NPE on null listener
+         unregisterListenerImpl(listener, null);
+     }
+ 

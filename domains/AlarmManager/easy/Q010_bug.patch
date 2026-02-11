@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/Alarm.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/Alarm.java
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/Alarm.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/Alarm.java
+@@ -176,7 +176,7 @@ final class Alarm {
+     // Returns true if either matches
+     public boolean matches(PendingIntent pi, IAlarmListener rec) {
+         return (operation != null)
+-                ? operation.equals(pi)
++                ? operation == pi
+                 : rec != null && listener.asBinder().equals(rec.asBinder());
+     }
+ 

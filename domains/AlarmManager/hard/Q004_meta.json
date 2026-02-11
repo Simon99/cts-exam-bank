@@ -1,0 +1,15 @@
+{
+  "id": "ALM-H004",
+  "title": "App Standby Bucket Delay Calculation Overflow",
+  "domain": "AlarmManager",
+  "difficulty": "hard",
+  "cts_test": "android.alarmmanager.cts.AppStandbyTests#testBucketDelayCalculation",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
+  ],
+  "injection_point": "ALM-047",
+  "tags": ["overflow", "standby-bucket", "int-long"],
+  "estimated_time_minutes": 35,
+  "answer": "A"
+}

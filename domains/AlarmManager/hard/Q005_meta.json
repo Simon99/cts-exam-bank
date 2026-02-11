@@ -1,0 +1,15 @@
+{
+  "id": "ALM-H005",
+  "title": "deliverAlarmsLocked Exception Handling",
+  "domain": "AlarmManager",
+  "difficulty": "hard",
+  "cts_test": "android.alarmmanager.cts.BasicApiTests#testAlarmDeliveryRecovery",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
+  ],
+  "injection_point": "ALM-036",
+  "tags": ["exception-handling", "try-catch", "error-isolation"],
+  "estimated_time_minutes": 30,
+  "answer": "A"
+}

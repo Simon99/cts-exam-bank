@@ -1,8 +1,7 @@
 diff --git a/frameworks/base/core/java/android/os/storage/StorageVolume.java b/frameworks/base/core/java/android/os/storage/StorageVolume.java
-index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/os/storage/StorageVolume.java
 +++ b/frameworks/base/core/java/android/os/storage/StorageVolume.java
-@@ -385,10 +385,10 @@ public final class StorageVolume implements Parcelable {
+@@ -551,10 +551,10 @@ public final class StorageVolume implements Parcelable {
          parcel.writeInt(mPrimary ? 1 : 0);
          parcel.writeInt(mRemovable ? 1 : 0);
          parcel.writeInt(mEmulated ? 1 : 0);
@@ -10,35 +9,20 @@ index abc1234..def5678 100644
 -        parcel.writeInt(mAllowMassStorage ? 1 : 0);
          parcel.writeLong(mMaxFileSize);
 +        parcel.writeInt(mAllowMassStorage ? 1 : 0);
-         parcel.writeParcelable(mUuid, flags);
+         parcel.writeParcelable(mOwner, flags);
 +        parcel.writeInt(mExternallyManaged ? 1 : 0);
-         parcel.writeString(mFsUuid);
-         parcel.writeString(mState);
-     }
-diff --git a/frameworks/base/services/core/java/com/android/server/StorageManagerService.java b/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
-index 111222..333444 100644
---- a/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
-+++ b/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
-@@ -1650,8 +1650,8 @@ class StorageManagerService extends IStorageManager.Stub
-                 vol.getPath(),
-                 vol.getInternalPath(),
-                 description,
--                vol.isPrimary(),
-                 vol.isRemovable(),
-+                vol.isPrimary(),
-                 vol.isEmulated(),
-                 vol.isExternallyManaged(),
-                 vol.allowMassStorage(),
+         if (mUuid != null) {
+             parcel.writeInt(1);
+             parcel.writeString8(StorageManager.convert(mUuid));
 diff --git a/frameworks/base/core/java/android/os/storage/VolumeInfo.java b/frameworks/base/core/java/android/os/storage/VolumeInfo.java
-index 555666..777888 100644
 --- a/frameworks/base/core/java/android/os/storage/VolumeInfo.java
 +++ b/frameworks/base/core/java/android/os/storage/VolumeInfo.java
-@@ -295,7 +295,7 @@ public class VolumeInfo implements Parcelable {
-      * Returns true if this volume is the primary storage.
-      */
+@@ -306,7 +306,7 @@ public class VolumeInfo implements Parcelable {
+ 
+     @UnsupportedAppUsage
      public boolean isPrimary() {
 -        return (mountFlags & MOUNT_FLAG_PRIMARY) != 0;
 +        return (mountFlags & MOUNT_FLAG_PRIMARY) == 0;
      }
  
-     /**
+     @UnsupportedAppUsage

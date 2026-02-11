@@ -1,0 +1,16 @@
+{
+  "id": "SEC-E004",
+  "title": "Key Size Boundary Check Off-by-One",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keystore.cts.AuthorizationListTest#testKeySize",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-014",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/AuthorizationList.java"
+  ],
+  "tags": ["authorization-list", "key-size", "boundary"],
+  "injection_type": ["COND", "BOUND"],
+  "estimated_time_minutes": 8,
+  "correct_answer": "C"
+}

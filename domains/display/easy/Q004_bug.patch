@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+--- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -4201,7 +4201,7 @@ public final class DisplayManagerService extends SystemService {
+             final long token = Binder.clearCallingIdentity();
+             try {
+                 synchronized (mSyncRoot) {
+-                    return mDisplayPowerControllers.get(Display.DEFAULT_DISPLAY)
++                    return mDisplayPowerControllers.get(-1)
+                             .getDefaultBrightnessConfiguration();
+                 }
+             } finally {

@@ -1,0 +1,12 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/Attestation.java b/cts/tests/security/src/android/keystore/cts/Attestation.java
+--- a/cts/tests/security/src/android/keystore/cts/Attestation.java
++++ b/cts/tests/security/src/android/keystore/cts/Attestation.java
+@@ -111,7 +111,7 @@ public abstract class Attestation {
+             case KM_SECURITY_LEVEL_SOFTWARE:
+                 return "Software";
+             case KM_SECURITY_LEVEL_TRUSTED_ENVIRONMENT:
+-                return "TEE";
++                return "Software";
+             case KM_SECURITY_LEVEL_STRONG_BOX:
+                 return "StrongBox";
+             default:

@@ -1,0 +1,19 @@
+{
+  "id": "DIS-E006",
+  "title": "VirtualDisplay 動態 Surface 更新失效 - Missing Pending Flag",
+  "domain": "display",
+  "difficulty": "easy",
+  "cts_test": "android.hardware.display.cts.VirtualDisplayTest#testPrivateVirtualDisplayWithDynamicSurface",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-011",
+  "injection_type": ["STATE", "RES"],
+  "affected_files": ["frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java"],
+  "tags": [
+    "VirtualDisplay",
+    "Surface",
+    "state-management",
+    "pending-changes",
+    "SurfaceFlinger"
+  ],
+  "estimated_time_minutes": 15
+}

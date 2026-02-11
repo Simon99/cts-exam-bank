@@ -1,0 +1,15 @@
+{
+  "id": "SEC-E002",
+  "title": "Security Level Parsing",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keystore.cts.AttestationTest#testSecurityLevel",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/Attestation.java"
+  ],
+  "injection_point": "SEC-004",
+  "tags": ["attestation", "security-level", "enum"],
+  "estimated_time_minutes": 8,
+  "correct_answer": "B"
+}

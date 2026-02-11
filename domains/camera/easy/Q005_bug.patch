@@ -2,13 +2,16 @@ diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDevic
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-@@ -1867,6 +1867,10 @@ public class CameraDeviceImpl extends CameraDevice
-                             CaptureResult.SENSOR_TIMESTAMP, resultExtras.getLastCompletedFrameNumber());
-                 }
-                 
-+                // BUG: 強制設置負數 timestamp
-+                resultAsCapture.set(CaptureResult.SENSOR_TIMESTAMP, -1000000000L);
-+                
-                 final CaptureCallback callback = holder.getCallback();
-                 final CaptureRequest request = holder.getRequest(resultExtras.getSubsequenceId());
-                 
+@@ -2289,8 +2289,10 @@ public class CameraDeviceImpl extends CameraDevice
+                     }
+                     }
+ 
+-                    final long sensorTimestamp =
+-                            result.get(CaptureResult.SENSOR_TIMESTAMP);
++                    // BUG: 強制設置負數 timestamp
++                    final long sensorTimestamp = -1000000000L;
++                    // 原始代碼：final long sensorTimestamp =
++                    //         result.get(CaptureResult.SENSOR_TIMESTAMP);
+                     final Range<Integer> fpsRange =
+                             request.get(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE);
+                     final int subsequenceId = resultExtras.getSubsequenceId();

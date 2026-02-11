@@ -1,0 +1,34 @@
+{
+  "id": "DIS-H006",
+  "title": "PendingCallback Event Deduplication Logic Error",
+  "domain": "display",
+  "difficulty": "hard",
+  "cts_test": "android.hardware.display.cts.DisplayEventTest#testDisplayEvents",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-040",
+  "injection_type": ["COND", "STATE"],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
+  ],
+  "tags": [
+    "display-events",
+    "event-deduplication",
+    "multi-display",
+    "cached-apps",
+    "pending-callback",
+    "condition-error",
+    "state-management",
+    "intermittent-failure"
+  ],
+  "estimated_time_minutes": 35,
+  "bug_description": "Event deduplication logic in PendingCallback.addDisplayEvent() only checks event type without displayId, causing events from different displays with the same event type to be incorrectly dropped",
+  "symptoms": [
+    "Display events lost in multi-display scenarios",
+    "Only affects cached apps",
+    "Single display tests pass normally",
+    "Intermittent test failures"
+  ],
+  "root_cause": "Incomplete condition check: 'if (last.second == event)' instead of 'if (last.first == displayId && last.second == event)'",
+  "fix_complexity": "low",
+  "detection_difficulty": "high"
+}

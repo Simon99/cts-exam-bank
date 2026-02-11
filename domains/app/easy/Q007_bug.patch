@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/app/TimePickerDialog.java b/frame
 index 1234567..abcdefg 100644
 --- a/frameworks/base/core/java/android/app/TimePickerDialog.java
 +++ b/frameworks/base/core/java/android/app/TimePickerDialog.java
-@@ -168,7 +168,6 @@ public class TimePickerDialog extends AlertDialog implements OnClickListener,
+@@ -188,7 +188,6 @@ public class TimePickerDialog extends AlertDialog implements OnClickListener,
       */
      public void updateTime(int hourOfDay, int minuteOfHour) {
          mTimePicker.setCurrentHour(hourOfDay);

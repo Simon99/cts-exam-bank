@@ -1,0 +1,16 @@
+{
+  "id": "SEC-M006",
+  "title": "RootOfTrust VerifiedBootState Off-by-One",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.keystore.cts.RootOfTrustTest#testVerifiedBootState",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-023",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/RootOfTrust.java"
+  ],
+  "tags": ["root-of-trust", "verified-boot", "off-by-one"],
+  "injection_type": ["CALC"],
+  "estimated_time_minutes": 12,
+  "correct_answer": "C"
+}

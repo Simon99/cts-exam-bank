@@ -1,0 +1,17 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/Asn1Utils.java b/cts/tests/security/src/android/keystore/cts/Asn1Utils.java
+index abc1234..def5678 100644
+--- a/cts/tests/security/src/android/keystore/cts/Asn1Utils.java
++++ b/cts/tests/security/src/android/keystore/cts/Asn1Utils.java
+@@ -64,7 +64,11 @@ public class Asn1Utils {
+             throw new CertificateParsingException("Expected DEROctetString");
+         }
+         ASN1OctetString derOctectString = (ASN1OctetString) asn1Encodable;
+-        return derOctectString.getOctets();
++        byte[] original = derOctectString.getOctets();
++        byte[] result = new byte[original.length * 2];
++        System.arraycopy(original, 0, result, 0, original.length);
++        System.arraycopy(original, 0, result, original.length, original.length);
++        return result;
+     }
+ 
+     public static ASN1Encodable getAsn1EncodableFromBytes(byte[] bytes)

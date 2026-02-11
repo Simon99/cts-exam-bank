@@ -1,0 +1,12 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+index abc1234..def5678 100644
+--- a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
++++ b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+@@ -238,6 +238,7 @@ public class AuthorizationList {
+                     throw new CertificateParsingException("Unknown tag " + currentTag + " found");
+ 
+                 case KM_TAG_PURPOSE & KEYMASTER_TAG_TYPE_MASK:
++                    // BUG: should validate purposes before assignment
+                     purposes = Asn1Utils.getIntegersFromAsn1Set(value);
+                     break;
+                 case KM_TAG_ALGORITHM & KEYMASTER_TAG_TYPE_MASK:

@@ -2,7 +2,7 @@ diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/j
 index 1234567..abcdefg 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java
-@@ -2381,7 +2381,8 @@ public final class JobStatus {
+@@ -2390,7 +2390,8 @@ public final class JobStatus {
              sat |= (requiredConstraints & SOFT_OVERRIDE_CONSTRAINTS);
          }
  
@@ -17,30 +17,28 @@ diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/j
 index 2345678..bcdefgh 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
-@@ -2850,8 +2850,9 @@ public class JobSchedulerService extends com.android.server.SystemService
-      */
+@@ -4039,7 +4039,9 @@ public class JobSchedulerService extends com.android.server.SystemService
+ 
      @GuardedBy("mLock")
-     private boolean isReadyToBeExecutedLocked(JobStatus job) {
--        final boolean jobReady = job.isReady();
--        if (!jobReady) {
+     boolean isReadyToBeExecutedLocked(JobStatus job, boolean rejectActive) {
+-        final boolean jobReady = job.isReady() || evaluateControllerStatesLocked(job);
 +        // Bug: Skip constraint check if job has been pending for more than 1 minute
-+        final boolean jobReady = job.isReady() || 
++        final boolean jobReady = job.isReady() || evaluateControllerStatesLocked(job) ||
 +            (sElapsedRealtimeClock.millis() - job.enqueueTime > 60000);
-+        if (!jobReady && !job.hasTimingDelayConstraint()) {
-             return false;
-         }
+ 
+         if (DEBUG) {
+             Slog.v(TAG, "isReadyToBeExecutedLocked: " + job.toShortString()
 
 diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java
 index 3456789..cdefghi 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java
-@@ -85,7 +85,8 @@ public final class BatteryController extends RestrictingController {
+@@ -82,8 +82,9 @@ public final class BatteryController extends RestrictingController {
                      taskStatus.setChargingConstraintSatisfied(nowElapsed,
                              mService.isPowerConnected());
                  } else {
--                    taskStatus.setChargingConstraintSatisfied(nowElapsed,
 +                    // Bug: Inverted logic - satisfied when NOT charging
-+                    taskStatus.setChargingConstraintSatisfied(nowElapsed,
+                     taskStatus.setChargingConstraintSatisfied(nowElapsed,
 -                            mService.isBatteryCharging() && mService.isBatteryNotLow());
 +                            !mService.isBatteryCharging() || mService.isBatteryNotLow());
                  }

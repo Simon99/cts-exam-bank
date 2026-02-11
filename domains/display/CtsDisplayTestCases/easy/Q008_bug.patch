@@ -1,7 +1,7 @@
-diff --git a/core/java/android/view/Display.java b/core/java/android/view/Display.java
---- a/core/java/android/view/Display.java
-+++ b/core/java/android/view/Display.java
-@@ -1089,7 +1089,8 @@ public final class Display {
+diff --git a/frameworks/base/core/java/android/view/Display.java b/frameworks/base/core/java/android/view/Display.java
+--- a/frameworks/base/core/java/android/view/Display.java
++++ b/frameworks/base/core/java/android/view/Display.java
+@@ -1102,7 +1102,8 @@ public final class Display {
      public float getRefreshRate() {
          synchronized (mLock) {
              updateDisplayInfoLocked();

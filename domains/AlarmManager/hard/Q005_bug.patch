@@ -1,0 +1,65 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+index abc1234..def5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+@@ -4442,35 +4442,35 @@ public class AlarmManagerService extends SystemService {
+     @GuardedBy("mLock")
+     void deliverAlarmsLocked(ArrayList<Alarm> triggerList, long nowELAPSED) {
+         mLastAlarmDeliveryTime = nowELAPSED;
+-        for (int i = 0; i < triggerList.size(); i++) {
+-            Alarm alarm = triggerList.get(i);
+-            if (alarm.wakeup) {
+-                Trace.traceBegin(Trace.TRACE_TAG_POWER,
+-                        "Dispatch wakeup alarm to " + alarm.packageName);
+-            } else {
+-                Trace.traceBegin(Trace.TRACE_TAG_POWER,
+-                        "Dispatch non-wakeup alarm to " + alarm.packageName);
+-            }
+-            try {
+-                if (localLOGV) {
+-                    Slog.v(TAG, "sending alarm " + alarm);
+-                }
+-                if (RECORD_ALARMS_IN_HISTORY) {
+-                    mActivityManagerInternal.noteAlarmStart(alarm.operation, alarm.workSource,
+-                            alarm.uid, alarm.statsTag);
++        try {
++            for (int i = 0; i < triggerList.size(); i++) {
++                Alarm alarm = triggerList.get(i);
++                if (alarm.wakeup) {
++                    Trace.traceBegin(Trace.TRACE_TAG_POWER,
++                            "Dispatch wakeup alarm to " + alarm.packageName);
++                } else {
++                    Trace.traceBegin(Trace.TRACE_TAG_POWER,
++                            "Dispatch non-wakeup alarm to " + alarm.packageName);
+                 }
+-                mDeliveryTracker.deliverLocked(alarm, nowELAPSED);
+-                reportAlarmEventToTare(alarm);
+-                if (alarm.repeatInterval <= 0) {
+-                    // Don't bother trying to unregister for a repeating alarm.
+-                    maybeUnregisterTareListenerLocked(alarm);
++                // BUG: try-catch moved outside loop - one failure stops all subsequent deliveries
++                    if (localLOGV) {
++                        Slog.v(TAG, "sending alarm " + alarm);
++                    }
++                    if (RECORD_ALARMS_IN_HISTORY) {
++                        mActivityManagerInternal.noteAlarmStart(alarm.operation, alarm.workSource,
++                                alarm.uid, alarm.statsTag);
++                    }
++                    mDeliveryTracker.deliverLocked(alarm, nowELAPSED);
++                    reportAlarmEventToTare(alarm);
++                    if (alarm.repeatInterval <= 0) {
++                        maybeUnregisterTareListenerLocked(alarm);
++                    }
++                Trace.traceEnd(Trace.TRACE_TAG_POWER);
++                decrementAlarmCount(alarm.uid, 1);
+                 }
+-            } catch (RuntimeException e) {
+-                Slog.w(TAG, "Failure sending alarm.", e);
+-            }
+-            Trace.traceEnd(Trace.TRACE_TAG_POWER);
+-            decrementAlarmCount(alarm.uid, 1);
++        } catch (RuntimeException e) {
++            Slog.w(TAG, "Failure sending alarm.", e);
+         }
+     }
+ 

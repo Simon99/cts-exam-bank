@@ -1,0 +1,16 @@
+{
+  "id": "SEC-H003",
+  "title": "KeyChain choosePrivateKeyAlias Race Condition",
+  "domain": "security",
+  "difficulty": "hard",
+  "cts_test": "android.keychain.cts.KeyChainTest#testChoosePrivateKeyAliasRaceCondition",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-033",
+  "affected_files": [
+    "frameworks/base/keystore/java/android/security/KeyChain.java"
+  ],
+  "tags": ["keychain", "race-condition", "concurrency"],
+  "injection_type": ["COND", "HARD"],
+  "estimated_time_minutes": 25,
+  "correct_answer": "A"
+}

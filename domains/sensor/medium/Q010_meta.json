@@ -1,0 +1,15 @@
+{
+  "id": "SEN-M010",
+  "title": "SensorEvent Timestamp Off by Factor of 1000",
+  "domain": "sensor",
+  "difficulty": "medium",
+  "cts_test": "android.hardware.cts.SensorIntegrationTests#testTimestamp",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-042",
+  "injection_type": ["CALC"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/SystemSensorManager.java"
+  ],
+  "tags": ["timestamp", "unit-conversion", "nanoseconds"],
+  "estimated_time_minutes": 20
+}

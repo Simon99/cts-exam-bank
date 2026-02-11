@@ -1,0 +1,15 @@
+{
+  "id": "VIB-E003",
+  "title": "Basic Vibration Duration Error",
+  "domain": "vibrator",
+  "difficulty": "easy",
+  "cts_test": "android.os.cts.VibratorTest#testVibrateDuration",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-004",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/Vibrator.java"
+  ],
+  "tags": ["vibrator", "duration", "calculation"],
+  "estimated_time_minutes": 10,
+  "answer": "A"
+}

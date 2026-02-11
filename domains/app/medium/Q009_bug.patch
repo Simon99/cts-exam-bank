@@ -1,8 +1,7 @@
 diff --git a/frameworks/base/core/java/android/app/IntentService.java b/frameworks/base/core/java/android/app/IntentService.java
-index 1234567..abcdefg 100644
 --- a/frameworks/base/core/java/android/app/IntentService.java
 +++ b/frameworks/base/core/java/android/app/IntentService.java
-@@ -139,7 +139,7 @@ public abstract class IntentService extends Service {
+@@ -156,7 +156,7 @@
      @Override
      @Nullable
      public IBinder onBind(Intent intent) {
@@ -11,16 +10,15 @@ index 1234567..abcdefg 100644
      }
 
      /**
-
 diff --git a/frameworks/base/core/java/android/app/Service.java b/frameworks/base/core/java/android/app/Service.java
-index 2345678..bcdefgh 100644
 --- a/frameworks/base/core/java/android/app/Service.java
 +++ b/frameworks/base/core/java/android/app/Service.java
-@@ -950,7 +950,6 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
+@@ -584,7 +584,7 @@
+      * {@link #onRebind} method later called when new clients bind to it.
       */
      public boolean onUnbind(Intent intent) {
 -        return false;
 +        return true;  // Bug: returning true causes rebind issues
      }
-
+     
      /**

@@ -1,33 +1,13 @@
-diff --git a/frameworks/native/opengl/libs/EGL/egl_object.cpp b/frameworks/native/opengl/libs/EGL/egl_object.cpp
+diff --git a/frameworks/native/services/surfaceflinger/FpsReporter.cpp b/frameworks/native/services/surfaceflinger/FpsReporter.cpp
 index abc1234..def5678 100644
---- a/frameworks/native/opengl/libs/EGL/egl_object.cpp
-+++ b/frameworks/native/opengl/libs/EGL/egl_object.cpp
-@@ -78,14 +78,7 @@ egl_surface_t::egl_surface_t(egl_display_t* dpy, EGLConfig config,
-                              EGLNativeWindowType win, EGLSurface surface,
-                              const EGLint* attrib_list)
-     : egl_object_t(dpy), surface(surface), config(config), win(win) {
--    // Parse protected content attribute
--    isProtected = false;
--    if (attrib_list) {
--        for (const EGLint* attr = attrib_list; *attr != EGL_NONE; attr += 2) {
--            if (attr[0] == EGL_PROTECTED_CONTENT_EXT && attr[1] == EGL_TRUE) {
--                isProtected = true;
--            }
--        }
--    }
-+    isProtected = false;  // BUG: Protected attribute parsing removed
- }
+--- a/frameworks/native/services/surfaceflinger/FpsReporter.cpp
++++ b/frameworks/native/services/surfaceflinger/FpsReporter.cpp
+@@ -73,7 +73,7 @@ void FpsReporter::dispatchLayerFps(const frontend::LayerHierarchy& layerHierarch
+                 }
+             }
+         }
+-        return true;
++        return false;  // BUG: Stops traversal after first layer, missing nested tasks
+     });
  
-diff --git a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
---- a/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
-+++ b/frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp
-@@ -445,8 +445,7 @@ EGLSurface eglCreateWindowSurfaceImpl(...) {
-     // Create surface object
-     egl_surface_t* s = new egl_surface_t(dp, config, window, surface, attrib_list);
-     
--    // Set protected flag on native window if needed
--    if (s->isProtected) {
-+    if (false) {  // BUG: condition changed to always false
-         native_window_set_usage(window, 
-             native_window_get_usage(window) | GRALLOC_USAGE_PROTECTED);
-     }
+     for (const auto& [listener, hierarchy] : listenersAndLayersToReport) {

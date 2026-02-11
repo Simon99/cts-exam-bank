@@ -1,0 +1,16 @@
+{
+  "id": "SEC-H003",
+  "title": "NetworkSecurityTrustManager Pin Expiration Logic",
+  "domain": "security",
+  "difficulty": "hard",
+  "cts_test": "android.security.net.config.cts.CertificatePinningTest#testPinValidation",
+  "cts_module": "CtsNetworkSecurityConfigTestCases",
+  "injection_point": "SEC-041",
+  "affected_files": [
+    "frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java"
+  ],
+  "tags": ["certificate-pinning", "network-security", "expiration", "comparison-operator"],
+  "injection_type": ["COND", "BOUND"],
+  "estimated_time_minutes": 30,
+  "correct_answer": "A"
+}

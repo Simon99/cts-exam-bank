@@ -1,0 +1,15 @@
+{
+  "id": "ALM-H002",
+  "title": "triggerAlarmsLocked ConcurrentModification",
+  "domain": "AlarmManager",
+  "difficulty": "hard",
+  "cts_test": "android.alarmmanager.cts.BasicApiTests#testRapidAlarmFiring",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
+  ],
+  "injection_point": "ALM-035",
+  "tags": ["ConcurrentModificationException", "iteration", "callback"],
+  "estimated_time_minutes": 35,
+  "answer": "C"
+}

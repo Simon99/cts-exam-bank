@@ -1,0 +1,23 @@
+{
+  "id": "SEC-H002",
+  "title": "NetworkSecurityTrustManager Certificate Pinning Bypass",
+  "domain": "security",
+  "difficulty": "hard",
+  "cts_test": "android.security.net.config.cts.InvalidPinTest#testPinFailure",
+  "cts_module": "CtsNetSecConfigInvalidPinTestCases",
+  "injection_point": "SEC-042",
+  "affected_files": [
+    "frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java"
+  ],
+  "tags": ["certificate-pinning", "network-security", "trust-manager", "security-bypass"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 25,
+  "correct_answer": "A",
+  "security_impact": "high",
+  "concepts": [
+    "Certificate Pinning",
+    "Trust Anchor",
+    "Boolean logic inversion",
+    "Network Security Config"
+  ]
+}

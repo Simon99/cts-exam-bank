@@ -1,0 +1,15 @@
+{
+  "id": "SEC-E007",
+  "title": "Device Locked State",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keystore.cts.RootOfTrustTest#testDeviceLocked",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/RootOfTrust.java"
+  ],
+  "injection_point": "SEC-022",
+  "tags": ["root-of-trust", "device-locked", "logic-inversion"],
+  "estimated_time_minutes": 8,
+  "correct_answer": "B"
+}

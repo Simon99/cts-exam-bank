@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/core/java/android/os/VibrationEffect.java b/frameworks/base/core/java/android/os/VibrationEffect.java
+--- a/frameworks/base/core/java/android/os/VibrationEffect.java
++++ b/frameworks/base/core/java/android/os/VibrationEffect.java
+@@ -798,7 +798,7 @@ public abstract class VibrationEffect implements Parcelable {
+                         + " (segments=" + mSegments + ")");
+             }
+             if (mRepeatIndex != -1) {
+-                Preconditions.checkArgumentInRange(mRepeatIndex, 0, segmentCount - 1,
++                Preconditions.checkArgumentInRange(mRepeatIndex, 0, segmentCount,
+                         "repeat index must be within the bounds of the segments (segments.length="
+                                 + segmentCount + ", index=" + mRepeatIndex + ")");
+             }

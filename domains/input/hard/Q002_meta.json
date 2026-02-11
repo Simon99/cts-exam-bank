@@ -1,0 +1,16 @@
+{
+  "id": "INP-H002",
+  "title": "InputDevice getMotionRange() Ignores Source",
+  "domain": "input",
+  "difficulty": "hard",
+  "cts_test": "android.view.cts.DrawingTabletTest#testMotionRangeBySource",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-065",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/InputDevice.java"
+  ],
+  "tags": ["input-device", "motion-range", "source"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 25,
+  "correct_answer": "A"
+}

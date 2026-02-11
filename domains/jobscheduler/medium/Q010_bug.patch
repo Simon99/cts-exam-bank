@@ -2,15 +2,15 @@ diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/j
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
 +++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java
-@@ -1850,9 +1850,7 @@ public class JobSchedulerService extends com.android.server.SystemService
-     void handleJobCompletedLocked(JobStatus job, boolean needsReschedule) {
-         removeJobFromRunningList(job);
-         
--        // Should check if job was cancelled before rescheduling
--        if (needsReschedule && !mCancelledJobs.contains(job.getJobId())) {
--            scheduleNewJob(job);
--        }
-+        // BUG: Not checking if job was cancelled
-+        if (needsReschedule) scheduleNewJob(job);
-     }
- }
+@@ -3289,8 +3289,9 @@ public class JobSchedulerService extends com.android.server.SystemService
+         // If the job wants to be rescheduled, we first need to make the next upcoming
+         // job so we can transfer any appropriate state over from the previous job when
+         // we stop it.
+-        final JobStatus rescheduledJob = needsReschedule
+-                ? getRescheduleJobForFailureLocked(jobStatus, stopReason, debugStopReason) : null;
++        // BUG: Ignoring needsReschedule flag - always attempts to reschedule
++        final JobStatus rescheduledJob =
++                getRescheduleJobForFailureLocked(jobStatus, stopReason, debugStopReason);
+         if (rescheduledJob != null
+                 && !rescheduledJob.shouldTreatAsUserInitiatedJob()
+                 && (debugStopReason == JobParameters.INTERNAL_STOP_REASON_TIMEOUT

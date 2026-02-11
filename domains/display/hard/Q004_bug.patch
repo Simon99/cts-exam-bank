@@ -1,0 +1,22 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+index abc1234..def5678 100644
+--- a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
++++ b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+@@ -467,8 +467,15 @@ final class LogicalDisplay {
+             mBaseDisplayInfo.renderFrameRate = deviceInfo.renderFrameRate;
+             mBaseDisplayInfo.defaultModeId = deviceInfo.defaultModeId;
+             mBaseDisplayInfo.userPreferredModeId = deviceInfo.userPreferredModeId;
+-            mBaseDisplayInfo.supportedModes = Arrays.copyOf(
+-                    deviceInfo.supportedModes, deviceInfo.supportedModes.length);
++            // Calculate effective modes count considering array bounds
++            int modesCount = deviceInfo.supportedModes.length;
++            // Ensure we don't exceed array capacity when there are many modes
++            int effectiveCount = modesCount > 1
++                    ? Math.min(modesCount - 1, deviceInfo.supportedModes.length)
++                    : modesCount;
++            mBaseDisplayInfo.supportedModes = Arrays.copyOf(
++                    deviceInfo.supportedModes,
++                    effectiveCount);
+             mBaseDisplayInfo.colorMode = deviceInfo.colorMode;
+             mBaseDisplayInfo.supportedColorModes = Arrays.copyOf(
+                     deviceInfo.supportedColorModes,

@@ -2,25 +2,25 @@ diff --git a/frameworks/base/services/core/java/com/android/server/StorageManage
 index abc1234..def5678 100644
 --- a/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
 +++ b/frameworks/base/services/core/java/com/android/server/StorageManagerService.java
-@@ -2580,7 +2580,7 @@ class StorageManagerService extends IStorageManager.Stub
-                     try {
-                         action.getObbInfo().file);
-                         mObbState.notifyStateChange(action,
--                                OnObbStateChangeListener.MOUNTED);
-+                                OnObbStateChangeListener.ERROR_INTERNAL);
-                     } catch (Exception e) {
-                         Slog.e(TAG, "Failed to mount OBB", e);
-                         mObbState.notifyStateChange(action,
+@@ -4404,7 +4404,7 @@
+                     addObbStateLocked(mObbState);
+                 }
+ 
+-                notifyObbStateChange(MOUNTED);
++                notifyObbStateChange(ERROR_INTERNAL);
+             } catch (Exception e) {
+                 throw new ObbException(ERROR_COULD_NOT_MOUNT, e);
+             }
 diff --git a/frameworks/base/core/java/android/os/storage/OnObbStateChangeListener.java b/frameworks/base/core/java/android/os/storage/OnObbStateChangeListener.java
 index 111222..333444 100644
 --- a/frameworks/base/core/java/android/os/storage/OnObbStateChangeListener.java
 +++ b/frameworks/base/core/java/android/os/storage/OnObbStateChangeListener.java
-@@ -45,7 +45,7 @@ public abstract class OnObbStateChangeListener {
-      * The OBB container is now mounted and ready for use. Can be returned as
-      * the status for callbacks made during asynchronous OBB actions.
+@@ -26,7 +26,7 @@
+      * The OBB container is now mounted and ready for use. Returned in status
+      * messages from calls made via {@link StorageManager}
       */
 -    public static final int MOUNTED = 1;
 +    public static final int MOUNTED = 2;
  
      /**
-      * The OBB container is now unmounted and not usable. Can be returned as
+      * The OBB container is now unmounted and not usable. Returned in status

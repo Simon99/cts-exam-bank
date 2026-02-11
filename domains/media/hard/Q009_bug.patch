@@ -1,0 +1,63 @@
+diff --git a/frameworks/av/media/libstagefright/MediaCodec.cpp b/frameworks/av/media/libstagefright/MediaCodec.cpp
+index 1234567..abcdef0 100644
+--- a/frameworks/av/media/libstagefright/MediaCodec.cpp
++++ b/frameworks/av/media/libstagefright/MediaCodec.cpp
+@@ -6713,6 +6713,9 @@ void MediaCodec::onOutputBufferAvailable() {
+ void MediaCodec::onOutputBufferAvailable() {
+     int32_t index;
+     while ((index = dequeuePortBuffer(kPortIndexOutput)) >= 0) {
++        // Bug: Skip decode-only check in certain cases
++        // This causes decode-only frames to be reported to client
++        /*
+         if (discardDecodeOnlyOutputBuffer(index)) {
+             continue;
+         }
+@@ -6720,6 +6723,7 @@ void MediaCodec::onOutputBufferAvailable() {
+         const sp<MediaCodecBuffer> &buffer =
+             mPortBuffers[kPortIndexOutput][index].mData;
+         int32_t outputCallbackID = CB_OUTPUT_AVAILABLE;
++        */
+         sp<RefBase> accessUnitInfoObj;
+         msg->setInt32("index", index);
+         msg->setSize("offset", buffer->offset());
+diff --git a/frameworks/base/media/java/android/media/MediaCodec.java b/frameworks/base/media/java/android/media/MediaCodec.java
+index abcdef1..1234567 100644
+--- a/frameworks/base/media/java/android/media/MediaCodec.java
++++ b/frameworks/base/media/java/android/media/MediaCodec.java
+@@ -4108,7 +4108,9 @@ public final class MediaCodec {
+             switch (mBufferMode) {
+                 case BUFFER_MODE_LEGACY:
+                     invalidateByteBufferLocked(mCachedOutputBuffers, index, false /* input */);
+-                    mDequeuedOutputBuffers.remove(index);
++                    // Bug: Don't remove from dequeued set
++                    // This causes buffer state tracking mismatch
++                    // mDequeuedOutputBuffers.remove(index);
+                     if (mHasSurface || mCachedOutputBuffers == null) {
+                         info = mDequeuedOutputInfos.remove(index);
+                     }
+diff --git a/frameworks/av/media/libstagefright/ACodec.cpp b/frameworks/av/media/libstagefright/ACodec.cpp
+index 123456a..abcdef0 100644
+--- a/frameworks/av/media/libstagefright/ACodec.cpp
++++ b/frameworks/av/media/libstagefright/ACodec.cpp
+@@ -6800,14 +6800,16 @@ void ACodec::BaseState::onOutputBufferDrained(const sp<AMessage> &msg) {
+ void ACodec::BaseState::onOutputBufferDrained(const sp<AMessage> &msg) {
+     IOMX::buffer_id bufferID;
+     CHECK(msg->findInt32("buffer-id", (int32_t*)&bufferID));
+-    sp<RefBase> obj;
+-    CHECK(msg->findObject("buffer", &obj));
+-    sp<MediaCodecBuffer> buffer = static_cast<MediaCodecBuffer *>(obj.get());
++    // Bug: Don't retrieve buffer object properly
++    // This causes null buffer reference issues
++    sp<RefBase> obj = nullptr;
++    msg->findObject("buffer", &obj);  // Ignore return value
++    sp<MediaCodecBuffer> buffer = obj != nullptr 
++        ? static_cast<MediaCodecBuffer *>(obj.get()) : nullptr;
+     int32_t discarded = 0;
+     msg->findInt32("discarded", &discarded);
+ 
+     ssize_t index;
+     BufferInfo *info = mCodec->findBufferByID(kPortIndexOutput, bufferID, &index);
+-    BufferInfo::Status status = BufferInfo::getSafeStatus(info);
+-    if (status != BufferInfo::OWNED_BY_DOWNSTREAM) {
++    if (info == nullptr) {  // Bug: Wrong check, should check status
+         ALOGE("Wrong ownership in OBD: %s(%d) buffer #%u", _asString(status), status, bufferID);

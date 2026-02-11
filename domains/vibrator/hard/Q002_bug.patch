@@ -1,0 +1,13 @@
+diff --git a/frameworks/base/core/java/android/os/VibrationEffect.java b/frameworks/base/core/java/android/os/VibrationEffect.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/VibrationEffect.java
++++ b/frameworks/base/core/java/android/os/VibrationEffect.java
+@@ -812,7 +812,7 @@ public abstract class VibrationEffect implements Parcelable {
+             }
+             int segmentCount = mSegments.size();
+             long totalDuration = 0;
+-            for (int i = 0; i < segmentCount; i++) {
++            for (int i = 1; i < segmentCount; i++) {
+                 long segmentDuration = mSegments.get(i).getDuration();
+                 if (segmentDuration < 0) {
+                     return segmentDuration;

@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/core/java/android/os/Vibrator.java b/frameworks/base/core/java/android/os/Vibrator.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/Vibrator.java
++++ b/frameworks/base/core/java/android/os/Vibrator.java
+@@ -180,7 +180,8 @@ public abstract class Vibrator {
+     @TestApi
+     @VibrationIntensity
+     public int getDefaultVibrationIntensity(@VibrationAttributes.Usage int usage) {
+-        return getConfig().getDefaultVibrationIntensity(usage);
++        int intensity = getConfig().getDefaultVibrationIntensity(usage);
++        return intensity != 0 ? intensity : -1;
+     }
+ 
+     /**

@@ -1,0 +1,15 @@
+{
+  "id": "SEN-M006",
+  "title": "requestTriggerSensor Works But Doesn't Actually Trigger",
+  "domain": "sensor",
+  "difficulty": "medium",
+  "cts_test": "android.hardware.cts.SensorTest#testTriggerSensor",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-013",
+  "injection_type": ["COND", "STATE"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/SensorManager.java"
+  ],
+  "tags": ["trigger", "listener", "parameter"],
+  "estimated_time_minutes": 20
+}

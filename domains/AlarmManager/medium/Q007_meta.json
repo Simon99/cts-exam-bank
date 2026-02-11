@@ -1,0 +1,15 @@
+{
+  "id": "ALM-M007",
+  "title": "Remove Alarm Doesn't Clear All Matching",
+  "domain": "AlarmManager",
+  "difficulty": "medium",
+  "cts_test": "android.alarmmanager.cts.BasicApiTests#testRemoveMultipleAlarms",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
+  ],
+  "injection_point": "ALM-033",
+  "tags": ["removeLocked", "cancel", "iteration"],
+  "estimated_time_minutes": 25,
+  "answer": "A"
+}

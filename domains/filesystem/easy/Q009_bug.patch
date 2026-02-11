@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/os/storage/StorageManager.java b/
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/os/storage/StorageManager.java
 +++ b/frameworks/base/core/java/android/os/storage/StorageManager.java
-@@ -165,7 +165,7 @@ public class StorageManager {
+@@ -181,7 +181,7 @@ public class StorageManager {
       * @see ApplicationInfo#storageUuid
       */
      public static final UUID UUID_DEFAULT = UUID

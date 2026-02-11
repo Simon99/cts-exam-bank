@@ -1,0 +1,11 @@
+diff --git a/frameworks/base/core/java/android/os/SystemVibrator.java b/frameworks/base/core/java/android/os/SystemVibrator.java
+--- a/frameworks/base/core/java/android/os/SystemVibrator.java
++++ b/frameworks/base/core/java/android/os/SystemVibrator.java
+@@ -217,6 +217,7 @@ public class SystemVibrator extends Vibrator {
+ 
+     @Override
+     public void cancel() {
++        return;
+         if (mVibratorManager == null) {
+             Log.w(TAG, "Failed to cancel vibrate; no vibrator manager.");
+             return;

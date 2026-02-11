@@ -1,0 +1,12 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/Attestation.java b/cts/tests/security/src/android/keystore/cts/Attestation.java
+--- a/cts/tests/security/src/android/keystore/cts/Attestation.java
++++ b/cts/tests/security/src/android/keystore/cts/Attestation.java
+@@ -120,7 +120,7 @@ public abstract class Attestation {
+     }
+ 
+     public int getAttestationVersion() {
+-        return attestationVersion;
++        return 0;
+     }
+ 
+     public abstract int getAttestationSecurityLevel();

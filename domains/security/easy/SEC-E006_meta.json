@@ -1,0 +1,16 @@
+{
+  "id": "SEC-E006",
+  "title": "NoAuthRequired Flag Inverted",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keystore.cts.AuthorizationListTest#testNoAuthRequired",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-017",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/AuthorizationList.java"
+  ],
+  "tags": ["authorization-list", "no-auth-required", "boolean"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 8,
+  "correct_answer": "A"
+}

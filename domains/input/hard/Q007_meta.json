@@ -1,0 +1,16 @@
+{
+  "id": "INP-H007",
+  "title": "InputDevice getMotionRange() Logic Operator Error",
+  "domain": "input",
+  "difficulty": "hard",
+  "cts_test": "android.view.cts.DrawingTabletTest#testStylusPressureRange",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-065",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/InputDevice.java"
+  ],
+  "tags": ["input-device", "motion-range", "stylus", "multi-source", "logic-operator"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 30,
+  "correct_answer": "B"
+}

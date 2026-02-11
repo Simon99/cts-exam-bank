@@ -1,0 +1,15 @@
+{
+  "id": "SEN-H001",
+  "title": "Direct Channel Configuration Causes Crash",
+  "domain": "sensor",
+  "difficulty": "hard",
+  "cts_test": "android.hardware.cts.SensorDirectReportTest#testDirectChannelConfigure",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-051",
+  "injection_type": ["COND", "STATE"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/SensorDirectChannel.java"
+  ],
+  "tags": ["direct-channel", "state-machine", "multi-sensor"],
+  "estimated_time_minutes": 30
+}

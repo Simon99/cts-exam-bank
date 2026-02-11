@@ -1,0 +1,15 @@
+{
+  "id": "camera-easy-Q002",
+  "domain": "camera",
+  "difficulty": "easy",
+  "title": "Camera2 錯誤狀態檢查邏輯反轉",
+  "injection_point": "CAM-002",
+  "source_file": "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java",
+  "function": "checkIfCameraClosedOrInError()",
+  "line_range": "2499-2507",
+  "bug_type": ["COND", "STATE"],
+  "cts_test": "CameraDeviceTest",
+  "status": "patch_verified",
+  "created": "2026-02-10",
+  "phase_c_verified": false
+}

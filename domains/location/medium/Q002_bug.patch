@@ -1,9 +1,7 @@
 diff --git a/frameworks/base/location/java/android/location/GnssStatus.java b/frameworks/base/location/java/android/location/GnssStatus.java
-index 1234567..abcdefg 100644
 --- a/frameworks/base/location/java/android/location/GnssStatus.java
 +++ b/frameworks/base/location/java/android/location/GnssStatus.java
-@@ -210,7 +210,8 @@ public final class GnssStatus implements Parcelable {
-      * @param satelliteIndex An index from zero to {@link #getSatelliteCount()} - 1
+@@ -209,7 +209,8 @@
       */
      @IntRange(from = 1, to = 206)
      public int getSvid(@IntRange(from = 0) int satelliteIndex) {
@@ -13,17 +11,3 @@ index 1234567..abcdefg 100644
      }
  
      /**
-diff --git a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssStatusProvider.java b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssStatusProvider.java
-index 1234567..abcdefg 100644
---- a/frameworks/base/services/core/java/com/android/server/location/gnss/GnssStatusProvider.java
-+++ b/frameworks/base/services/core/java/com/android/server/location/gnss/GnssStatusProvider.java
-@@ -165,7 +165,8 @@ public class GnssStatusProvider extends
-         int[] svidWithFlags = new int[svCount];
-         for (int i = 0; i < svCount; i++) {
-             int svid = svids[i];
--            svidWithFlags[i] = (svid << SVID_SHIFT_WIDTH)
-+            // BUG: Encoding with wrong shift - should be 12 bits, using 8
-+            svidWithFlags[i] = (svid << CONSTELLATION_TYPE_SHIFT_WIDTH)
-                     | (constellationTypes[i] << CONSTELLATION_TYPE_SHIFT_WIDTH)
-                     | svidFlags[i];
-         }

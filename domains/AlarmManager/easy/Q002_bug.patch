@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+--- a/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
++++ b/frameworks/base/apex/jobscheduler/framework/java/android/app/AlarmManager.java
+@@ -355,7 +355,7 @@ public class AlarmManager {
+ 
+         public void cancel() {
+             try {
+-                mService.remove(null, this);
++                mService.remove(null, null);
+             } catch (RemoteException ex) {
+                 throw ex.rethrowFromSystemServer();
+             }

@@ -1,0 +1,15 @@
+{
+  "id": "SEC-M008",
+  "title": "Verified Boot State Parsing",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.keystore.cts.RootOfTrustTest#testVerifiedBootState",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/RootOfTrust.java"
+  ],
+  "injection_point": "SEC-023",
+  "tags": ["root-of-trust", "verified-boot", "boundary-check"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "B"
+}

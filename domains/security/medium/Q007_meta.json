@@ -1,0 +1,15 @@
+{
+  "id": "SEC-M007",
+  "title": "User Auth Type Parsing",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.keystore.cts.AuthorizationListTest#testUserAuthType",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/AuthorizationList.java"
+  ],
+  "injection_point": "SEC-018",
+  "tags": ["authorization", "auth-type", "bitmask", "initialization"],
+  "estimated_time_minutes": 18,
+  "correct_answer": "D"
+}

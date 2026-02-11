@@ -1,0 +1,25 @@
+{
+  "id": "SEC-H005",
+  "title": "Key Attestation Challenge Verification Logic Inversion",
+  "domain": "security",
+  "difficulty": "hard",
+  "cts_test": "android.keystore.cts.AttestationTest#testAttestationChallengeVerification",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-005",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/Attestation.java"
+  ],
+  "bug_types": ["logic-inversion", "boolean-negation", "security-bypass"],
+  "tags": ["key-attestation", "challenge-verification", "constant-time", "ternary-operator", "security"],
+  "injection_type": ["COND", "LOGIC"],
+  "estimated_time_minutes": 20,
+  "correct_answer": "B",
+  "requires_understanding": [
+    "Constant-time comparison for security",
+    "XOR operation for byte comparison",
+    "Ternary operator semantics",
+    "Key attestation challenge flow"
+  ],
+  "security_impact": "high",
+  "real_world_relevance": "Logic inversion bugs in security checks can lead to authentication bypass or denial of service"
+}

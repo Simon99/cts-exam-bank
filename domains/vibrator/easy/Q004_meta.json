@@ -1,0 +1,15 @@
+{
+  "id": "VIB-E004",
+  "title": "Cancel Vibration Not Working",
+  "domain": "vibrator",
+  "difficulty": "easy",
+  "cts_test": "android.os.cts.VibratorTest#testCancelVibration",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-008",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/Vibrator.java"
+  ],
+  "tags": ["vibrator", "cancel", "early-return"],
+  "estimated_time_minutes": 10,
+  "answer": "D"
+}

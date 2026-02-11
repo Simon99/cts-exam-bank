@@ -1,0 +1,16 @@
+{
+  "id": "INP-E009",
+  "title": "VelocityTracker obtain() Returns Null",
+  "domain": "input",
+  "difficulty": "easy",
+  "cts_test": "android.view.cts.VelocityTrackerTest#testObtain",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-051",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/VelocityTracker.java"
+  ],
+  "tags": ["velocity-tracker", "object-pool", "factory-method"],
+  "injection_type": ["RES"],
+  "estimated_time_minutes": 10,
+  "correct_answer": "C"
+}

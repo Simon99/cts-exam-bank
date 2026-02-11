@@ -1,0 +1,15 @@
+{
+  "id": "SEN-H009",
+  "title": "SensorEvent Values Array Index Out of Bounds",
+  "domain": "sensor",
+  "difficulty": "hard",
+  "cts_test": "android.hardware.cts.SensorTest#testSensorEventValues",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-041",
+  "injection_type": ["BOUND", "CALC"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/SensorEvent.java"
+  ],
+  "tags": ["array-bounds", "switch-fallthrough", "rotation-vector"],
+  "estimated_time_minutes": 25
+}

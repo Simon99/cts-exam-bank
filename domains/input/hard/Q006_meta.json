@@ -1,0 +1,16 @@
+{
+  "id": "INP-H006",
+  "title": "Multi-Touch Pointer Tracking Bitmap Overwrite",
+  "domain": "input",
+  "difficulty": "hard",
+  "cts_test": "android.view.cts.TouchScreenTest#testMultiTouchConsistency",
+  "cts_module": "CtsInputTestCases",
+  "injection_point": "INP-008",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/InputEventConsistencyVerifier.java"
+  ],
+  "tags": ["multi-touch", "bitmap", "pointer-tracking", "state-machine"],
+  "injection_type": ["STATE", "CALC"],
+  "estimated_time_minutes": 30,
+  "correct_answer": "A"
+}

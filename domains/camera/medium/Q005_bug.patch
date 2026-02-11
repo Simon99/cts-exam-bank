@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraCaptu
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraCaptureSessionImpl.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraCaptureSessionImpl.java
-@@ -416,6 +416,11 @@ public class CameraCaptureSessionImpl extends CameraCaptureSession
+@@ -414,6 +414,11 @@ public class CameraCaptureSessionImpl extends CameraCaptureSession
      @Override
      public void stopRepeating() throws CameraAccessException {
          synchronized (mDeviceImpl.mInterfaceLock) {
@@ -10,7 +10,7 @@ index abcd1234..efgh5678 100644
 +            // log 顯示 "stopRepeating called, mAborting=false"
 +            // 但真正問題在 CameraDeviceImpl.stopRepeating
 +            Log.v(TAG, mIdString + "stopRepeating called, mAborting=" + mAborting);
-+            
++
              checkNotClosed();
  
              if (DEBUG) {
@@ -18,18 +18,13 @@ diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDevic
 index abcd1234..efgh5679 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java
-@@ -1150,13 +1150,14 @@ public class CameraDeviceImpl extends CameraDevice
-         synchronized(mInterfaceLock) {
-             checkIfCameraClosedOrInError();
+@@ -1376,7 +1376,8 @@ public class CameraDeviceImpl extends CameraDevice
  
-             if (mRepeatingRequestId != REQUEST_ID_NONE) {
- 
-                 int requestId = mRepeatingRequestId;
-                 mRepeatingRequestId = REQUEST_ID_NONE;
- 
--                mRemoteDevice.cancelRequest(requestId);
-+                // BUG: 註釋掉取消請求，導致 sequence 完成回調不會被觸發
-+                // mRemoteDevice.cancelRequest(requestId);
- 
-                 checkEarlyTriggerSequenceCompleteLocked(mRepeatingRequestId,
-                         requestId, mRepeatingRequestTypes);
+                 long lastFrameNumber;
+                 try {
+-                    lastFrameNumber = mRemoteDevice.cancelRequest(requestId);
++                    // BUG: 註釋掉取消請求，導致 sequence 完成回調不會被觸發
++                    // lastFrameNumber = mRemoteDevice.cancelRequest(requestId);
+                 } catch (IllegalArgumentException e) {
+                     if (DEBUG) {
+                         Log.v(TAG, "Repeating request was already stopped for request " +

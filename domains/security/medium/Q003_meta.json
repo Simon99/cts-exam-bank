@@ -1,0 +1,15 @@
+{
+  "id": "SEC-M003",
+  "title": "Attestation Challenge Verification",
+  "domain": "security",
+  "difficulty": "medium",
+  "cts_test": "android.keystore.cts.AttestationTest#testAttestationChallenge",
+  "cts_module": "CtsKeystoreTestCases",
+  "affected_files": [
+    "cts/tests/security/src/android/keystore/cts/Attestation.java"
+  ],
+  "injection_point": "SEC-005",
+  "tags": ["attestation", "challenge", "off-by-one"],
+  "estimated_time_minutes": 15,
+  "correct_answer": "B"
+}

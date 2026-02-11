@@ -2,18 +2,18 @@ diff --git a/frameworks/base/core/java/android/hardware/camera2/CaptureResult.ja
 index abcd1234..efgh5678 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/CaptureResult.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/CaptureResult.java
-@@ -322,6 +322,14 @@ public class CaptureResult extends CameraMetadata<CaptureResult.Key<?>> {
+@@ -320,6 +320,14 @@ public class CaptureResult extends CameraMetadata<CaptureResult.Key<?>> {
      @Nullable
      public <T> T get(Key<T> key) {
          T value = mResults.get(key);
-+        
++
 +        // BUG: 對 LENS_FOCUS_DISTANCE 應用錯誤的單位轉換（線索）
 +        // log 會顯示 "Converting focus distance from diopters"
 +        // 但真正的錯誤乘法在 CameraMetadataNative
 +        if (VERBOSE && "android.lens.focusDistance".equals(key.getName())) {
 +            Log.v(TAG, "Converting focus distance from diopters, raw=" + value);
 +        }
-+        
++
          if (VERBOSE) Log.v(TAG, "#get for Key = " + key.getName() + ", returned value = " + value);
          return value;
      }
@@ -21,15 +21,16 @@ diff --git a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetad
 index abcd1234..efgh5679 100644
 --- a/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
 +++ b/frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java
-@@ -789,6 +789,12 @@ public class CameraMetadataNative implements Parcelable {
-     @SuppressWarnings("unchecked")
+@@ -452,6 +452,12 @@ public class CameraMetadataNative implements Parcelable {
+      * @hide
+      */
      public <T> T get(CaptureResult.Key<T> key) {
 +        // BUG: 對 LENS_FOCUS_DISTANCE 錯誤地乘以 10
 +        if ("android.lens.focusDistance".equals(key.getName())) {
 +            Float rawValue = (Float) get(key.getNativeKey());
 +            return (T) (rawValue != null ? Float.valueOf(rawValue * 10.0f) : null);
 +        }
-+        
++
          return get(key.getNativeKey());
      }
  

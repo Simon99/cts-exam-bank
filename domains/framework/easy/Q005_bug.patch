@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/java/android/content/Intent.java b/frameworks/
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/content/Intent.java
 +++ b/frameworks/base/core/java/android/content/Intent.java
-@@ -8520,7 +8520,7 @@ public class Intent implements Parcelable, Cloneable {
+@@ -9433,7 +9433,7 @@ public class Intent implements Parcelable, Cloneable {
       * @see #putExtra(String, String)
       */
      public @Nullable String getStringExtra(String name) {

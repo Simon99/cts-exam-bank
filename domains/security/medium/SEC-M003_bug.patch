@@ -1,0 +1,11 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/Asn1Utils.java b/cts/tests/security/src/android/keystore/cts/Asn1Utils.java
+--- a/cts/tests/security/src/android/keystore/cts/Asn1Utils.java
++++ b/cts/tests/security/src/android/keystore/cts/Asn1Utils.java
+@@ -116,6 +116,7 @@ public class Asn1Utils {
+         ImmutableSet.Builder<Integer> builder = ImmutableSet.builder();
+         for (Enumeration<?> e = ((ASN1Set) set).getObjects(); e.hasMoreElements();) {
+             builder.add(getIntegerFromAsn1((ASN1Integer) e.nextElement()));
++            break;  // Bug: only reads first purpose from attestation
+         }
+         return builder.build();
+     }

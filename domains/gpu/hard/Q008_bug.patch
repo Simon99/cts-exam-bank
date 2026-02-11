@@ -10,7 +10,8 @@ index abc1234..def5678 100644
  #include <thread>
  
  #include "../egl_impl.h"
-@@ -189,13 +190,12 @@ size_t egl_cache_t::getCacheSize() {
+@@ -221,16 +222,14 @@ size_t egl_cache_t::getCacheSize() {
+     return 0;
  }
  
  void egl_cache_t::updateMode() {
@@ -29,18 +30,17 @@ index abc1234..def5678 100644
 +    // Mode configuration happens AFTER checked is set - race window exists here
  
      // Check the device config to decide whether multifile should be used
-     if (base::GetBoolProperty("ro.egl.blobcache.multifile", false)) {
 diff --git a/frameworks/native/opengl/libs/EGL/egl_cache.h b/frameworks/native/opengl/libs/EGL/egl_cache.h
 index abc1234..def5678 100644
 --- a/frameworks/native/opengl/libs/EGL/egl_cache.h
 +++ b/frameworks/native/opengl/libs/EGL/egl_cache.h
 @@ -89,7 +89,8 @@ private:
+     void operator=(const egl_cache_t&); // not implemented
  
-     // updateMode checks system properties to determine cache mode
-     // Called from setBlob/getBlob
+     // Check system properties to determine which blobcache mode should be used
 -    void updateMode();
 +    // BUG: This method has a race condition with the static 'checked' variable
 +    void updateMode();  // NOT THREAD SAFE - should use std::call_once
  
-     // The BlobCache instance used for monolithic cache
-     std::unique_ptr<FileBlobCache> mBlobCache;
+     // getBlobCacheLocked returns the BlobCache object being used to store the
+     // key/value blob pairs.  If the BlobCache object has not yet been created,

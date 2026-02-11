@@ -1,0 +1,16 @@
+{
+  "id": "SEC-E008",
+  "title": "KeyChain isKeyAlgorithmSupported Always False",
+  "domain": "security",
+  "difficulty": "easy",
+  "cts_test": "android.keychain.cts.KeyChainTest#testIsKeyAlgorithmSupported",
+  "cts_module": "CtsKeystoreTestCases",
+  "injection_point": "SEC-034",
+  "affected_files": [
+    "frameworks/base/keystore/java/android/security/KeyChain.java"
+  ],
+  "tags": ["keychain", "algorithm", "hardcoded"],
+  "injection_type": ["COND"],
+  "estimated_time_minutes": 8,
+  "correct_answer": "C"
+}

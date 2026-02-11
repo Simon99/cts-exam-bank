@@ -1,0 +1,15 @@
+{
+  "id": "VIB-H002",
+  "title": "Composition Primitive Delay Accumulation Error",
+  "domain": "vibrator",
+  "difficulty": "hard",
+  "cts_test": "android.os.cts.VibrationEffectTest#testCompositionPrimitiveDelay",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-028",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/VibrationEffect.java"
+  ],
+  "tags": ["vibration-effect", "composition", "delay-calculation"],
+  "estimated_time_minutes": 20,
+  "answer": "B"
+}

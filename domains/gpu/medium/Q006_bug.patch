@@ -2,7 +2,7 @@ diff --git a/frameworks/native/opengl/libs/EGL/egl_display.cpp b/frameworks/nati
 index abc1234..def5678 100644
 --- a/frameworks/native/opengl/libs/EGL/egl_display.cpp
 +++ b/frameworks/native/opengl/libs/EGL/egl_display.cpp
-@@ -82,7 +82,7 @@ void egl_display_t::addObject(egl_object_t* object) {
+@@ -104,7 +104,7 @@ void egl_display_t::addObject(egl_object_t* object) {
  
  void egl_display_t::removeObject(egl_object_t* object) {
      std::lock_guard<std::mutex> _l(lock);

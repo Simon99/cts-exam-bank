@@ -1,0 +1,15 @@
+{
+  "id": "VIB-H001",
+  "title": "Waveform Amplitudes Array Length Mismatch",
+  "domain": "vibrator",
+  "difficulty": "hard",
+  "cts_test": "android.os.cts.VibrationEffectTest#testCreateWaveformWithAmplitudes",
+  "cts_module": "CtsVibratorTestCases",
+  "injection_point": "VIB-023",
+  "affected_files": [
+    "frameworks/base/core/java/android/os/VibrationEffect.java"
+  ],
+  "tags": ["vibration-effect", "waveform", "array-validation"],
+  "estimated_time_minutes": 20,
+  "answer": "C"
+}

@@ -1,0 +1,16 @@
+diff --git a/frameworks/base/core/java/android/os/CombinedVibration.java b/frameworks/base/core/java/android/os/CombinedVibration.java
+index abc1234..def5678 100644
+--- a/frameworks/base/core/java/android/os/CombinedVibration.java
++++ b/frameworks/base/core/java/android/os/CombinedVibration.java
+@@ -58,9 +58,8 @@ public abstract class CombinedVibration implements Parcelable {
+      */
+     @NonNull
+     public static CombinedVibration createParallel(@NonNull VibrationEffect effect) {
+-        CombinedVibration combined = new Mono(effect);
+-        combined.validate();
+-        return combined;
++        CombinedVibration combined = new Mono(effect);
++        return combined;
+     }
+ 
+     /**

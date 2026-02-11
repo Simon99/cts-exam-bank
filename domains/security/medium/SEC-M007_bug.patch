@@ -1,0 +1,12 @@
+diff --git a/frameworks/base/keystore/java/android/security/KeyChain.java b/frameworks/base/keystore/java/android/security/KeyChain.java
+--- a/frameworks/base/keystore/java/android/security/KeyChain.java
++++ b/frameworks/base/keystore/java/android/security/KeyChain.java
+@@ -794,7 +794,7 @@ public class KeyChain {
+         try (KeyChainConnection keyChainConnection = bind(context.getApplicationContext())) {
+             keyId = keyChainConnection.getService().requestPrivateKey(alias);
+         } catch (RemoteException e) {
+-            throw new KeyChainException(e);
++            throw new RuntimeException(e);
+         } catch (RuntimeException e) {
+             // only certain RuntimeExceptions can be propagated across the IKeyChainService call
+             throw new KeyChainException(e);

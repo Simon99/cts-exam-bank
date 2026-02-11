@@ -1,0 +1,15 @@
+{
+  "id": "ALM-H001",
+  "title": "setImpl Race Condition",
+  "domain": "AlarmManager",
+  "difficulty": "hard",
+  "cts_test": "android.alarmmanager.cts.BasicApiTests#testConcurrentAlarmSetting",
+  "cts_module": "CtsAlarmManagerTestCases",
+  "affected_files": [
+    "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
+  ],
+  "injection_point": "ALM-032",
+  "tags": ["race-condition", "TOCTOU", "synchronized", "setImplLocked"],
+  "estimated_time_minutes": 35,
+  "answer": "A"
+}

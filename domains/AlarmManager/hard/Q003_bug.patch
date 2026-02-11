@@ -1,0 +1,22 @@
+diff --git a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+index abc1234..def5678 100644
+--- a/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
++++ b/frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java
+@@ -3895,10 +3895,13 @@ public class AlarmManagerService extends SystemService {
+         final SparseArray<AlarmManager.AlarmClockInfo> nextForUser = mTmpSparseAlarmClockArray;
+         nextForUser.clear();
+ 
+-        final ArrayList<Alarm> allAlarms = mAlarmStore.asList();
+-        for (final Alarm a : allAlarms) {
+-            if (a.alarmClock != null) {
+-                final int userId = UserHandle.getUserId(a.uid);
++        final ArrayList<Alarm> allAlarmsList = mAlarmStore.asList();
++        for (final Alarm a : allAlarmsList) {
++            // BUG: This incorrectly skips alarms with whenElapsed <= 0, which can
++            // happen for alarms set in the past that should still trigger immediately
++            if (a.alarmClock != null && a.whenElapsed > 0) {
++                final int userId = (a.uid > 0) ? UserHandle.getUserId(a.uid)
++                        : UserHandle.USER_SYSTEM;
+                 final AlarmManager.AlarmClockInfo current = mNextAlarmClockForUser.get(userId);
+ 
+                 if (DEBUG_ALARM_CLOCK) {

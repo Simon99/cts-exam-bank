@@ -2,27 +2,27 @@ diff --git a/frameworks/base/core/java/android/app/Activity.java b/frameworks/ba
 index 1234567..abcdefg 100644
 --- a/frameworks/base/core/java/android/app/Activity.java
 +++ b/frameworks/base/core/java/android/app/Activity.java
-@@ -1515,10 +1515,10 @@ public class Activity extends ContextThemeWrapper
+@@ -1513,7 +1513,6 @@ public class Activity extends ContextThemeWrapper
      }
-
+ 
      private void dispatchActivityCreated(@Nullable Bundle savedInstanceState) {
 -        getApplication().dispatchActivityCreated(this, savedInstanceState);
          Object[] callbacks = collectActivityLifecycleCallbacks();
          if (callbacks != null) {
              for (int i = 0; i < callbacks.length; i++) {
-                 ((Application.ActivityLifecycleCallbacks) callbacks[i]).onActivityCreated(this,
+@@ -1521,6 +1520,7 @@ public class Activity extends ContextThemeWrapper
                          savedInstanceState);
              }
          }
 +        getApplication().dispatchActivityCreated(this, savedInstanceState);
      }
-
+ 
+     private void dispatchActivityPostCreated(@Nullable Bundle savedInstanceState) {
 diff --git a/frameworks/base/core/java/android/app/Application.java b/frameworks/base/core/java/android/app/Application.java
 index 2345678..bcdefgh 100644
 --- a/frameworks/base/core/java/android/app/Application.java
 +++ b/frameworks/base/core/java/android/app/Application.java
-@@ -363,7 +363,7 @@ public class Application extends ContextWrapper implements ComponentCallbacks2 {
-     /* package */ void dispatchActivityCreated(@NonNull Activity activity,
+@@ -364,7 +364,7 @@ public class Application extends ContextWrapper implements ComponentCallbacks2 {
              @Nullable Bundle savedInstanceState) {
          Object[] callbacks = collectActivityLifecycleCallbacks();
          if (callbacks != null) {
@@ -31,5 +31,3 @@ index 2345678..bcdefgh 100644
                  ((ActivityLifecycleCallbacks)callbacks[i]).onActivityCreated(activity,
                          savedInstanceState);
              }
-         }
-     }

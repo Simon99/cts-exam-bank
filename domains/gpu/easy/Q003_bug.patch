@@ -2,7 +2,7 @@ diff --git a/frameworks/native/opengl/libs/EGL/egl_display.cpp b/frameworks/nati
 index abc1234..def5678 100644
 --- a/frameworks/native/opengl/libs/EGL/egl_display.cpp
 +++ b/frameworks/native/opengl/libs/EGL/egl_display.cpp
-@@ -67,7 +67,7 @@ egl_display_t::~egl_display_t() {
+@@ -85,6 +85,6 @@ egl_display_t::~egl_display_t() {
  }
  
  egl_display_t* egl_display_t::get(EGLDisplay dpy) {

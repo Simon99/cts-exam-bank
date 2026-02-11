@@ -1,0 +1,12 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+--- a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
++++ b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+@@ -482,7 +482,7 @@ public class AuthorizationList {
+         switch (algorithm) {
+             case KM_ALGORITHM_RSA:
+                 return "RSA";
+-            case KM_ALGORITHM_EC:
++            case 1:
+                 return "ECDSA";
+             default:
+                 return "Unknown";

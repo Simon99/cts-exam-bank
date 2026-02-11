@@ -1,25 +1,14 @@
 diff --git a/frameworks/native/opengl/libs/EGL/egl_display.cpp b/frameworks/native/opengl/libs/EGL/egl_display.cpp
-index abc1234..def5678 100644
 --- a/frameworks/native/opengl/libs/EGL/egl_display.cpp
 +++ b/frameworks/native/opengl/libs/EGL/egl_display.cpp
-@@ -125,8 +125,9 @@ static EGLDisplay getPlatformDisplayAngle(EGLNativeDisplayType display,
-         attrs.push_back(reinterpret_cast<EGLAttrib>(features.data()));
-     }
+@@ -149,8 +149,9 @@ static EGLDisplay getPlatformDisplayAngle(EGLNativeDisplayType display,
+             attrs.push_back(reinterpret_cast<EGLAttrib>(features.data()));
+         }
  
-+    // BUG: Always use GLES backend instead of checking config
-     attrs.push_back(EGL_PLATFORM_ANGLE_TYPE_ANGLE);
--    attrs.push_back(EGL_PLATFORM_ANGLE_TYPE_VULKAN_ANGLE);
-+    attrs.push_back(EGL_PLATFORM_ANGLE_TYPE_OPENGLES_ANGLE);
++        // BUG: Always use GLES backend instead of Vulkan
+         attrs.push_back(EGL_PLATFORM_ANGLE_TYPE_ANGLE);
+-        attrs.push_back(EGL_PLATFORM_ANGLE_TYPE_VULKAN_ANGLE);
++        attrs.push_back(EGL_PLATFORM_ANGLE_TYPE_OPENGLES_ANGLE);
  
-     attrs.push_back(EGL_PLATFORM_ANGLE_DEBUG_LAYERS_ENABLED_ANGLE);
-     attrs.push_back(base::GetBoolProperty("debug.angle.validation", false));
-diff --git a/frameworks/native/libs/graphicsenv/GraphicsEnv.cpp b/frameworks/native/libs/graphicsenv/GraphicsEnv.cpp
---- a/frameworks/native/libs/graphicsenv/GraphicsEnv.cpp
-+++ b/frameworks/native/libs/graphicsenv/GraphicsEnv.cpp
-@@ -198,7 +198,7 @@ std::string GraphicsEnv::getAngleBackend() {
-     // This should return "vulkan" by default per system config
-     // But we need to verify this is being read correctly
-     std::string backend = base::GetProperty("debug.angle.backend", "vulkan");
--    return backend;
-+    return "opengles";  // BUG: ignoring system config
- }
+         attrs.push_back(EGL_PLATFORM_ANGLE_DEBUG_LAYERS_ENABLED_ANGLE);
+         attrs.push_back(base::GetBoolProperty("debug.angle.validation", false));

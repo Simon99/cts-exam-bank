@@ -1,0 +1,15 @@
+{
+  "id": "SEN-M009",
+  "title": "isDirectChannelTypeSupported Always Returns False",
+  "domain": "sensor",
+  "difficulty": "medium",
+  "cts_test": "android.hardware.cts.SensorDirectReportTest#testDirectChannelTypeSupport",
+  "cts_module": "CtsSensorTestCases",
+  "injection_point": "SEN-031",
+  "injection_type": ["COND"],
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/Sensor.java"
+  ],
+  "tags": ["direct-channel", "flag", "comparison"],
+  "estimated_time_minutes": 20
+}

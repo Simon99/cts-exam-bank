@@ -1,0 +1,36 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+--- a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
++++ b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+@@ -119,6 +119,9 @@ final class LogicalDisplay {
+     private DisplayModeDirector.DesiredDisplayModeSpecs mDesiredDisplayModeSpecs =
+             new DisplayModeDirector.DesiredDisplayModeSpecs();
+ 
++    // Track if we're in a mode transition to avoid redundant updates
++    private boolean mPendingModeTransition = false;
++
+     // The display offsets to apply to the display projection.
+     private int mDisplayOffsetX;
+     private int mDisplayOffsetY;
+@@ -738,7 +741,21 @@ final class LogicalDisplay {
+      */
+     public void setDesiredDisplayModeSpecsLocked(
+             DisplayModeDirector.DesiredDisplayModeSpecs specs) {
+-        mDesiredDisplayModeSpecs = specs;
++        // Optimization: skip update if base mode hasn't changed and we're in transition
++        if (specs != null && mDesiredDisplayModeSpecs != null) {
++            // Check if the base mode is the same - if so, assume specs are equivalent
++            if (specs.baseModeId == mDesiredDisplayModeSpecs.baseModeId) {
++                if (mPendingModeTransition) {
++                    // Already transitioning with same base mode, skip redundant update
++                    return;
++                }
++                // Mark that we're now in a pending transition
++                mPendingModeTransition = true;
++            } else {
++                mPendingModeTransition = false;
++            }
++        }
++        mDesiredDisplayModeSpecs = specs;
+     }
+ 
+     /**

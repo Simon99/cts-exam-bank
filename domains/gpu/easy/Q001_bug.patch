@@ -2,7 +2,7 @@ diff --git a/frameworks/native/opengl/libs/EGL/egl_display.cpp b/frameworks/nati
 index abc1234..def5678 100644
 --- a/frameworks/native/opengl/libs/EGL/egl_display.cpp
 +++ b/frameworks/native/opengl/libs/EGL/egl_display.cpp
-@@ -198,7 +198,7 @@ EGLBoolean egl_display_t::initialize(EGLint* major, EGLint* minor) {
+@@ -305,7 +305,7 @@ EGLBoolean egl_display_t::initialize(EGLint* major, EGLint* minor) {
          mVersionString.clear();
          cnx->driverVersion = EGL_MAKE_VERSION(1, 4, 0);
          mVersionString = sVersionString14;

@@ -1,0 +1,13 @@
+diff --git a/frameworks/native/libs/input/VelocityTracker.cpp b/frameworks/native/libs/input/VelocityTracker.cpp
+index abc1234..def5678 100644
+--- a/frameworks/native/libs/input/VelocityTracker.cpp
++++ b/frameworks/native/libs/input/VelocityTracker.cpp
+@@ -1010,7 +1010,7 @@ std::optional<float> ImpulseVelocityTrackerStrategy::getVelocity(int32_t pointer
+ 
+         float vprev = kineticEnergyToVelocity(work);
+         float delta = mDeltaValues ? nextMvt.position : nextMvt.position - mvt.position;
+-        float vcurr = delta / (SECONDS_PER_NANO * (nextMvt.eventTime - mvt.eventTime));
++        float vcurr = delta / (nextMvt.eventTime - mvt.eventTime);  // BUG: missing nanoseconds to seconds conversion
+         work += (vcurr - vprev) * fabsf(vcurr);
+ 
+         if (i == 0) {

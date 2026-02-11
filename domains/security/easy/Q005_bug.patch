@@ -1,0 +1,12 @@
+diff --git a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+--- a/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
++++ b/cts/tests/security/src/android/keystore/cts/AuthorizationList.java
+@@ -251,7 +251,7 @@ public class AuthorizationList {
+                     digests = Asn1Utils.getIntegersFromAsn1Set(value);
+                     break;
+                 case KM_TAG_PADDING & KEYMASTER_TAG_TYPE_MASK:
+-                    paddingModes = Asn1Utils.getIntegersFromAsn1Set(value);
++                    // paddingModes = Asn1Utils.getIntegersFromAsn1Set(value);
+                     break;
+                 case KM_TAG_RSA_PUBLIC_EXPONENT & KEYMASTER_TAG_TYPE_MASK:
+                     rsaPublicExponent = Asn1Utils.getLongFromAsn1(value);

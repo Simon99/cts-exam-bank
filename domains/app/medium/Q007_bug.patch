@@ -2,7 +2,8 @@ diff --git a/frameworks/base/core/java/android/app/ProgressDialog.java b/framewo
 index 1234567..abcdefg 100644
 --- a/frameworks/base/core/java/android/app/ProgressDialog.java
 +++ b/frameworks/base/core/java/android/app/ProgressDialog.java
-@@ -254,8 +254,6 @@ public class ProgressDialog extends AlertDialog {
+@@ -294,10 +294,8 @@ public class ProgressDialog extends AlertDialog {
+     public void setProgress(int value) {
          if (mHasStarted) {
              mProgress.setProgress(value);
              onProgressChanged();
@@ -10,17 +11,4 @@ index 1234567..abcdefg 100644
 -            mProgressVal = value;
          }
      }
-
-diff --git a/frameworks/base/core/java/android/app/AlertDialog.java b/frameworks/base/core/java/android/app/AlertDialog.java
-index 2345678..bcdefgh 100644
---- a/frameworks/base/core/java/android/app/AlertDialog.java
-+++ b/frameworks/base/core/java/android/app/AlertDialog.java
-@@ -285,9 +285,6 @@ public class AlertDialog extends Dialog implements DialogInterface {
-     @Override
-     public void show() {
--        if (!mCreated) {
--            create();
--        }
-         super.show();
-     }
-
+ 

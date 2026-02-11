@@ -1,0 +1,31 @@
+{
+  "id": "DIS-H004",
+  "title": "supportedModes 陣列複製 Off-by-One 邊界錯誤",
+  "domain": "display",
+  "difficulty": "hard",
+  "cts_test": "android.display.cts.DisplayTest#testGetSupportedModesOnDefaultDisplay",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-037",
+  "injection_type": ["CALC", "BOUND"],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java"
+  ],
+  "tags": [
+    "off-by-one",
+    "array-copy",
+    "boundary-error",
+    "display-mode",
+    "refresh-rate",
+    "conditional-bug",
+    "deceptive-comment"
+  ],
+  "estimated_time_minutes": 35,
+  "key_concepts": [
+    "Arrays.copyOf() 使用方式",
+    "Display.Mode 與 alternativeRefreshRates 的一致性",
+    "Union-Find 對稱性驗證",
+    "條件觸發型 bug 的識別"
+  ],
+  "detection_difficulty": "high",
+  "notes": "Bug 偽裝成安全的邊界檢查，只在多 mode 設備上觸發，需要理解 CTS 測試的驗證邏輯才能定位"
+}

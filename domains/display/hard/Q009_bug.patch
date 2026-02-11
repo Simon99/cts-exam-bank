@@ -1,0 +1,27 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+--- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -2498,12 +2498,22 @@
+     }
+ 
+     void setRefreshRateSwitchingTypeInternal(@DisplayManager.SwitchingType int newValue) {
++        // Validate switching type bounds
++        if (newValue < DisplayManager.SWITCHING_TYPE_NONE
++                || newValue > DisplayManager.SWITCHING_TYPE_ACROSS_AND_WITHIN_GROUPS) {
++            newValue = DisplayManager.SWITCHING_TYPE_WITHIN_GROUPS;
++        }
+         mDisplayModeDirector.setModeSwitchingType(newValue);
+     }
+ 
+     @DisplayManager.SwitchingType
+     int getRefreshRateSwitchingTypeInternal() {
+-        return mDisplayModeDirector.getModeSwitchingType();
++        int type = mDisplayModeDirector.getModeSwitchingType();
++        // Map cross-group switching to within-groups for compatibility
++        if (type == DisplayManager.SWITCHING_TYPE_ACROSS_AND_WITHIN_GROUPS) {
++            return DisplayManager.SWITCHING_TYPE_WITHIN_GROUPS;
++        }
++        return type;
+     }
+ 
+     private DisplayDecorationSupport getDisplayDecorationSupportInternal(int displayId) {
