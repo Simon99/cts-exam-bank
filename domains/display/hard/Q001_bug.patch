@@ -1,18 +1,27 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
---- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-@@ -1594,8 +1594,12 @@ public final class DisplayManagerService extends SystemService {
+# DIS-H001: Virtual Display Security Bug
+# Target: frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+# CTS Test: android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay
+# Expected Result: FAIL (SecurityException: Requires INTERNAL_SYSTEM_WINDOW permission)
+#
+# Bug Description:
+# This patch disables the security check that strips SHOULD_SHOW_SYSTEM_DECORATIONS
+# flag from untrusted virtual displays. This allows untrusted apps to create
+# virtual displays with system decorations, which could leak sensitive information.
+
+--- a/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -1593,9 +1593,11 @@ class DisplayManagerService extends SystemService {
              }
          }
  
 -        if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0) {
 -            flags &= ~VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;
-+        // Optimization: Only strip system decorations flag when necessary.
-+        // If OWN_CONTENT_ONLY is set, the display won't mirror sensitive content anyway,
-+        // so we can skip this check for better performance.
-+        if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0
-+                && (flags & VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY) == 0) {
-+            flags &= ~VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;
-         }
+-        }
++        // BUG: Security check disabled - untrusted displays can now show system decorations
++        // Original code:
++        // if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0) {
++        //     flags &= ~VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;
++        // }
  
          // Sometimes users can have sensitive information in system decoration windows. An app
+         // could create a virtual display with system decorations support and read the user info

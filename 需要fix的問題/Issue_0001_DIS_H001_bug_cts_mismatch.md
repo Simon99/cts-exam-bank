@@ -58,4 +58,25 @@ createVirtualDisplay(..., SHOULD_SHOW_SYSTEM_DECORATIONS);  // 沒有傳 OWN_CON
 - 修改檔案: `DisplayManagerService.java`
 
 ## 狀態
-- [ ] 待修復
+- [x] 已修復（2026-02-11）
+
+## 修復方案（已驗證）
+**方案：完全跳過 flag 清除邏輯**
+
+```diff
+--- a/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/services/core/java/com/android/server/display/DisplayManagerService.java
+-        if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0) {
+-            flags &= ~VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;
+-        }
++        // BUG: Security check disabled - untrusted displays can now show system decorations
++        // Original code:
++        // if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0) {
++        //     flags &= ~VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;
++        // }
+```
+
+**驗證結果：**
+- 測試名稱：`android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay`
+- 結果：FAIL（`SecurityException: Requires INTERNAL_SYSTEM_WINDOW permission`）
+- 原因：flag 未被清除 → 觸發後續權限檢查 → 測試失敗
