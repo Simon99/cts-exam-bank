@@ -1,19 +1,17 @@
 # CTS 題庫進度追蹤
 
-**最後更新**: 2026-02-11 12:40 GMT+8
+**最後更新**: 2026-02-11 12:43 GMT+8
 
 ## 當前階段
 
 - Phase A：建立注入點分布列表 ✅
 - Phase B：題目產生 ✅
-- **Phase C：Dry Run 驗證** 🔄
+- **Phase C：Dry Run 驗證** ✅
 
 ### 題庫狀態
-- **總題數：503 題**（15 領域）
-- **已驗證：473 題**（成功 463，失敗 10，成功率 97.9%）
-- **待驗證：30 題**（display 新增）
-- **待修復：10 題**
-- 詳見 [dry-run-failures.md](dry-run-failures.md) 及 [DOMAIN_STATUS.md](DOMAIN_STATUS.md)
+- **總題數：473 題**（15 領域）
+- **Dry Run 成功率：100%**（473/473）
+- 詳見 [DOMAIN_STATUS.md](DOMAIN_STATUS.md)
 
 ---
 
