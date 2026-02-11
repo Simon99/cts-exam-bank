@@ -10,6 +10,7 @@ Android CTS 面試題庫專案
 | [PROGRESS.md](PROGRESS.md) | 專案進度追蹤 |
 | [dry-run-failures.md](dry-run-failures.md) | Dry Run 失敗清單 |
 | [FIX_QUEUE.md](FIX_QUEUE.md) | 待修復任務 |
+| [需要fix的問題/](需要fix的問題/) | **Issue 追蹤**（真機驗證發現的問題） |
 
 ## 流程文件
 
@@ -30,7 +31,8 @@ cts-exam-bank/
 │   ├── camera/
 │   └── ...
 ├── injection-points/  # Phase A 注入點列表
-└── lessons_learned/   # 經驗紀錄
+├── lessons_learned/   # 經驗紀錄
+└── 需要fix的問題/     # Issue 追蹤（真機驗證發現的問題）
 ```
 
 ## 統計
@@ -41,4 +43,4 @@ cts-exam-bank/
 
 ---
 
-*最後更新: 2026-02-11 12:43 GMT+8*
+*最後更新: 2026-02-11 17:12 GMT+8*
