@@ -1,44 +1,38 @@
-# Camera2 設備關閉時資源重複釋放
+# Q001: Capture 回調順序錯誤
 
-## 情境
+## CTS 測試失敗現象
 
-在多執行緒環境下，Camera2 應用偶爾會崩潰。分析發現問題出在 `CameraDevice.close()` 被多次調用時，資源會被重複釋放，導致各種異常。
+執行 CTS 測試 `CaptureResultTest#testCameraCaptureResultAllKeys` 時失敗：
 
-## 問題程式碼
+```
+FAIL: android.hardware.camera2.cts.CaptureResultTest#testCameraCaptureResultAllKeys
 
-```java
-// CameraDeviceImpl.java - close()
-public void close() {
-    synchronized (mInterfaceLock) {
-        mClosing.set(true);
+junit.framework.AssertionFailedError: onCaptureCompleted received before onCaptureStarted
+Frame number: 5
+onCaptureStarted timestamp: 0 (never received)
+onCaptureCompleted timestamp: 1234567890
 
-        if (mOfflineSwitchService != null) {
-            mOfflineSwitchService.shutdownNow();
-            mOfflineSwitchService = null;
-        }
-
-        // ... 後續資源釋放 ...
-
-        if (mRemoteDevice != null) {
-            mRemoteDevice.disconnect();
-            mRemoteDevice.unlinkToDeath(this, /*flags*/0);
-        }
-
-        // ... 更多清理 ...
-    }
-}
+    at android.hardware.camera2.cts.CaptureResultTest.validateCaptureResult(CaptureResultTest.java:245)
 ```
 
-## 問題
+## 測試環境
+- Capture 可以正常執行
+- 圖像可以正常獲取
+- 但 onCaptureStarted 從未被調用
+- onCaptureCompleted 正常調用
 
-這段程式碼在多執行緒環境下有什麼問題？如何修復？
+## 重現步驟
+1. 執行 `atest CaptureResultTest#testCameraCaptureResultAllKeys`
+2. 測試失敗，回調順序驗證不通過
 
-## 選項
+## 期望行為
+- 每個 capture 的回調順序應該是：
+  1. onCaptureStarted()
+  2. onCaptureProgressed() (如果有 partial results)
+  3. onCaptureCompleted()
+- onCaptureStarted 必須在 onCaptureCompleted 之前
 
-A. `synchronized` 鎖的範圍不對，應該用更細粒度的鎖
-
-B. 應該使用 `mClosing.getAndSet(true)` 並檢查返回值，若已在關閉中則直接返回
-
-C. `mRemoteDevice` 在 `disconnect()` 後應該立即設為 null，而不是在方法最後
-
-D. 應該在 synchronized 區塊外先檢查 `mClosing`，減少鎖競爭
+## 提示
+- 測試邏輯位於 `cts/tests/camera/src/android/hardware/camera2/cts/CaptureResultTest.java`
+- 回調分發位於 `frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java`
+- 回調順序由 `FrameNumberTracker` 管理

@@ -1,32 +1,31 @@
-# Camera2 連拍功能異常
+# Q001: CameraManager 返回空的相機列表
 
-## 情境
+## CTS 測試失敗現象
 
-測試團隊報告 Camera2 API 的連拍功能出現異常行為。當開發者傳入空的 CaptureRequest 列表時，應該拋出 `IllegalArgumentException`，但現在程式繼續執行並在後續產生 `NullPointerException`。
+執行 CTS 測試 `CameraManagerTest#testCameraManagerGetDeviceIdList` 時失敗：
 
-## 問題程式碼
+```
+FAIL: android.hardware.camera2.cts.CameraManagerTest#testCameraManagerGetDeviceIdList
 
-```java
-// CameraDeviceImpl.java - captureBurst()
-public int captureBurst(List<CaptureRequest> requests, CaptureCallback callback,
-        Executor executor) throws CameraAccessException {
-    if (requests == null && requests.isEmpty()) {
-        throw new IllegalArgumentException("At least one request must be given");
-    }
-    return submitCaptureRequest(requests, callback, executor, /*streaming*/false);
-}
+junit.framework.AssertionFailedError: System camera feature and camera id list don't match
+    at junit.framework.Assert.fail(Assert.java:50)
+    at junit.framework.Assert.assertTrue(Assert.java:20)
+    at android.hardware.camera2.cts.CameraManagerTest.testCameraManagerGetDeviceIdList(CameraManagerTest.java:142)
 ```
 
-## 問題
+## 測試環境
+- 設備有前後鏡頭
+- PackageManager 報告有 FEATURE_CAMERA 和 FEATURE_CAMERA_FRONT
+- 但 CameraManager.getCameraIdList() 返回空陣列
 
-上述程式碼中的 bug 是什麼？
+## 重現步驟
+1. 執行 `atest CameraManagerTest#testCameraManagerGetDeviceIdList`
+2. 測試失敗，提示相機功能和相機列表不匹配
 
-## 選項
+## 期望行為
+- 設備有相機時，getCameraIdList() 應該返回非空的相機 ID 列表
+- 相機功能 flag 和相機數量應該一致
 
-A. `requests.isEmpty()` 應該改為 `requests.size() == 0`
-
-B. 條件判斷的邏輯運算符錯誤，`&&` 應該改為 `||`
-
-C. 應該先檢查 `requests.isEmpty()` 再檢查 `requests == null`
-
-D. 缺少對 `executor` 參數的 null 檢查
+## 提示
+- 測試邏輯位於 `cts/tests/camera/src/android/hardware/camera2/cts/CameraManagerTest.java`
+- Framework 實現位於 `frameworks/base/core/java/android/hardware/camera2/CameraManager.java`

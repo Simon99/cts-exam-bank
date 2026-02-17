@@ -1,15 +1,17 @@
 {
-  "id": "camera-easy-Q001",
-  "domain": "camera",
+  "id": "camera_easy_001",
+  "title": "CameraManager 返回空的相機列表",
   "difficulty": "easy",
-  "title": "Camera2 連拍參數檢查邏輯錯誤",
-  "injection_point": "CAM-004",
-  "source_file": "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java",
-  "function": "captureBurst()",
-  "line_range": "1141-1147",
-  "bug_type": ["COND"],
-  "cts_test": "BurstCaptureTest",
-  "status": "patch_verified",
-  "created": "2026-02-10",
-  "phase_c_verified": false
+  "domain": "camera",
+  "cts_test": "android.hardware.camera2.cts.CameraManagerTest#testCameraManagerGetDeviceIdList",
+  "affected_files": [
+    "frameworks/base/core/java/android/hardware/camera2/CameraManager.java"
+  ],
+  "tags": ["CameraManager", "getCameraIdList", "API"],
+  "estimated_time_minutes": 15,
+  "skills_tested": [
+    "讀懂 CTS 錯誤訊息",
+    "定位 Framework API 實現",
+    "理解條件判斷邏輯"
+  ]
 }

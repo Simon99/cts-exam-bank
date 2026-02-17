@@ -1,34 +1,34 @@
-# Camera2 設備錯誤狀態檢查異常
+# Q002: Flashlight Torch 回調未觸發
 
-## 情境
+## CTS 測試失敗現象
 
-QA 團隊發現一個奇怪的現象：Camera2 設備在正常運作時會拋出 `CameraAccessException`，但當設備真正發生錯誤時卻能繼續操作。
+執行 CTS 測試 `FlashlightTest#testSetTorchModeOnOff` 時失敗：
 
-## 問題程式碼
+```
+FAIL: android.hardware.camera2.cts.FlashlightTest#testSetTorchModeOnOff
 
-```java
-// CameraDeviceImpl.java - checkIfCameraClosedOrInError()
-private void checkIfCameraClosedOrInError() throws CameraAccessException {
-    if (mRemoteDevice == null) {
-        throw new IllegalStateException("CameraDevice was already closed");
-    }
-    if (!mInError) {
-        throw new CameraAccessException(CameraAccessException.CAMERA_ERROR,
-                "The camera device has encountered a serious error");
-    }
-}
+org.mockito.exceptions.verification.TooLittleActualInvocations: 
+torchListener.onTorchModeChanged("0", true);
+Wanted 1 time:
+-> at android.hardware.camera2.cts.FlashlightTest.testSetTorchModeOnOff(FlashlightTest.java:178)
+But was 0 times.
+
+    at android.hardware.camera2.cts.FlashlightTest.testSetTorchModeOnOff(FlashlightTest.java:178)
 ```
 
-## 問題
+## 測試環境
+- 設備有閃光燈
+- setTorchMode(id, true) 調用成功（無異常）
+- 但 TorchCallback.onTorchModeChanged() 從未被調用
 
-上述程式碼中的 bug 會導致什麼問題？
+## 重現步驟
+1. 執行 `atest FlashlightTest#testSetTorchModeOnOff`
+2. 測試超時失敗，因為等不到 onTorchModeChanged 回調
 
-## 選項
+## 期望行為
+- 調用 setTorchMode(id, true) 後，應觸發 onTorchModeChanged(id, true) 回調
+- 調用 setTorchMode(id, false) 後，應觸發 onTorchModeChanged(id, false) 回調
 
-A. 應該使用 `mRemoteDevice != null` 而非 `mRemoteDevice == null`
-
-B. `!mInError` 的邏輯反轉了，應該是 `mInError` 才拋出異常
-
-C. 兩個異常類型用錯了，應該互換 `IllegalStateException` 和 `CameraAccessException`
-
-D. 缺少對 `mClosing` 狀態的檢查
+## 提示
+- 測試邏輯位於 `cts/tests/camera/src/android/hardware/camera2/cts/FlashlightTest.java`
+- Framework 回調機制位於 `frameworks/base/core/java/android/hardware/camera2/CameraManager.java`

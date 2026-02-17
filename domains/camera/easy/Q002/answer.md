@@ -1,34 +1,55 @@
-# 答案
+# Q002 答案：Flashlight Torch 回調未觸發
 
-**正確答案：B**
+## 問題根因
 
-## 解釋
+在 `CameraManager.java` 的 `TorchCallback` 分發邏輯中，有一個條件導致回調被跳過。
 
-條件 `!mInError` 使用了錯誤的邏輯反轉：
+## Bug 位置
 
-- **當 `mInError = false`（設備正常）**：`!mInError` 為 true，會拋出異常
-- **當 `mInError = true`（設備錯誤）**：`!mInError` 為 false，不會拋出異常
+文件：`frameworks/base/core/java/android/hardware/camera2/CameraManager.java`
 
-這完全相反！正確的邏輯應該是當設備處於錯誤狀態時才拋出異常。
-
-## 正確寫法
+在處理 torch 狀態變化時，回調分發被意外禁用：
 
 ```java
-if (mInError) {
-    throw new CameraAccessException(CameraAccessException.CAMERA_ERROR,
-            "The camera device has encountered a serious error");
+private void postSingleTorchUpdate(final TorchCallback callback, final Executor executor,
+        final String id, final boolean enabled) {
+    // BUG: 添加了一個始終為 true 的跳過條件
+    if (true) {  // 這導致回調永遠不會被執行
+        return;
+    }
+    
+    final long ident = Binder.clearCallingIdentity();
+    try {
+        executor.execute(() -> callback.onTorchModeChanged(id, enabled));
+    } finally {
+        Binder.restoreCallingIdentity(ident);
+    }
 }
 ```
 
-## Bug 影響
+## 修復方法
 
-- **CTS 測試**：CameraDeviceTest 相關測試會失敗
-- **實際影響**：
-  - 正常拍照時會無故失敗
-  - 設備故障時卻能繼續操作，導致不可預期的行為
+```java
+private void postSingleTorchUpdate(final TorchCallback callback, final Executor executor,
+        final String id, final boolean enabled) {
+    // 移除錯誤的 return 語句
+    final long ident = Binder.clearCallingIdentity();
+    try {
+        executor.execute(() -> callback.onTorchModeChanged(id, enabled));
+    } finally {
+        Binder.restoreCallingIdentity(ident);
+    }
+}
+```
 
-## 為什麼其他選項錯誤
+## 驗證方法
 
-- **A**：`mRemoteDevice == null` 檢查是正確的，null 表示設備已關閉
-- **C**：異常類型選用是正確的：設備關閉用 IllegalStateException，設備錯誤用 CameraAccessException
-- **D**：`mClosing` 狀態在其他地方（`isClosed()` 方法）處理，這裡不需要
+1. 還原 patch
+2. 重新編譯 framework
+3. 執行 `atest FlashlightTest#testSetTorchModeOnOff`
+4. 測試應該通過
+
+## 學習重點
+- Android Camera API 使用回調模式通知狀態變化
+- 回調分發邏輯中的任何中斷都會導致功能失效
+- Mockito 的 verify 可以幫助驗證回調是否被正確調用

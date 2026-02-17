@@ -1,43 +1,88 @@
-# 答案
+# Q001 答案：Capture 回調順序錯誤
 
-**正確答案：B**
+## 問題根因
 
-## 解釋
+這是一個跨兩個檔案的 bug：
+1. **線索檔案** `CameraCaptureSessionImpl.java`：錯誤的 null check 條件會造成 NullPointerException
+2. **根因檔案** `CameraDeviceImpl.java`：`onCaptureStarted` 回調被跳過
 
-原始程式碼只有 `mClosing.set(true)`，沒有檢查之前的狀態。這導致：
+## Bug 位置
 
-1. 執行緒 A 調用 `close()`，設 `mClosing = true`，開始釋放資源
-2. 執行緒 B 也調用 `close()`，又設 `mClosing = true`（無效操作）
-3. 執行緒 B 繼續執行，嘗試釋放**已經被 A 釋放的資源**
-4. 結果：重複 `disconnect()`、重複 `shutdownNow()`、可能的 NPE
-
-## 正確寫法
+**文件 1（線索）：** `frameworks/base/core/java/android/hardware/camera2/impl/CameraCaptureSessionImpl.java`
 
 ```java
-public void close() {
-    synchronized (mInterfaceLock) {
-        if (mClosing.getAndSet(true)) {
-            return;  // 已經在關閉中，直接返回
-        }
-        // ... 資源釋放 ...
+// createCaptureCallbackProxyWithExecutor 內部類
+@Override
+public void onCaptureStarted(CameraDevice camera,
+        CaptureRequest request, long timestamp, long frameNumber) {
+    // BUG: 錯誤的條件（應為 AND，改成 OR）
+    if ((callback != null) || (executor != null)) {  // 應該是 &&
+        executor.execute(() -> callback.onCaptureStarted(...));
     }
 }
 ```
 
-`getAndSet(true)` 是原子操作，返回設定前的值：
-- 返回 `false`：之前沒在關閉，繼續執行
-- 返回 `true`：之前已在關閉，直接 return
+**文件 2（根因）：** `frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java`
 
-## Bug 影響
+```java
+// CameraDeviceCallbacks.onCaptureStarted
+@Override
+public void onCaptureStarted(final CaptureResultExtras resultExtras, final long timestamp) {
+    // BUG: 直接返回，跳過所有回調處理
+    if (true) {
+        return;
+    }
+    // ... 正常處理邏輯
+}
+```
 
-- **CTS 測試**：CameraDeviceTest 中的併發測試可能失敗
-- **實際影響**：
-  - 資源重複釋放導致 `IllegalStateException`
-  - `mRemoteDevice` 可能在第一次 close 後已為 null，第二次訪問造成 NPE
-  - 系統資源洩漏或不穩定
+## 呼叫鏈
 
-## 為什麼其他選項錯誤
+```
+CameraService (native)
+    ↓ ICameraDeviceCallbacks.onCaptureStarted()
+CameraDeviceImpl.CameraDeviceCallbacks.onCaptureStarted()  ← BUG 在這裡
+    ↓ holder.getCallback().onCaptureStarted()
+CameraCaptureSessionImpl.CaptureCallback.onCaptureStarted() ← 線索在這裡
+    ↓ callback.onCaptureStarted()
+App's CaptureCallback.onCaptureStarted()
+```
 
-- **A**：synchronized 已經保護了整個關閉流程，問題不在鎖粒度
-- **C**：mRemoteDevice 設 null 的時機不影響重複關閉問題
-- **D**：在 synchronized 外檢查無法保證原子性，仍會有競態條件
+## 追蹤方法
+
+1. 在 `CameraCaptureSessionImpl` 的 callback proxy 添加 log
+2. 觀察到 `onCaptureStarted` 從未被呼叫
+3. 追蹤上游：`CameraDeviceImpl.CameraDeviceCallbacks`
+4. 發現 `onCaptureStarted` 方法中有異常的 `return`
+
+## 修復方法
+
+**文件 1：**
+```java
+// 修正條件為 AND
+if ((callback != null) && (executor != null)) {
+```
+
+**文件 2：**
+```java
+// 移除錯誤的 return
+@Override
+public void onCaptureStarted(final CaptureResultExtras resultExtras, final long timestamp) {
+    // 移除: if (true) { return; }
+    
+    int requestId = resultExtras.getRequestId();
+    // ... 正常處理
+}
+```
+
+## 驗證方法
+
+1. 還原兩個 patch
+2. 重新編譯 framework
+3. 執行 `atest CaptureResultTest#testCameraCaptureResultAllKeys`
+4. 測試應該通過
+
+## 學習重點
+- Camera2 的回調是多層次的：Service → DeviceImpl → SessionImpl → App
+- 追蹤 bug 需要理解完整呼叫鏈
+- 線索可能在一個檔案，根因在另一個檔案

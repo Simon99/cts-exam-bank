@@ -1,32 +1,50 @@
-# 答案
+# Q001 答案：CameraManager 返回空的相機列表
 
-**正確答案：B**
+## 問題根因
 
-## 解釋
+在 `CameraManager.java` 的 `getCameraIdList()` 方法中，有一個條件判斷錯誤導致始終返回空列表。
 
-條件 `requests == null && requests.isEmpty()` 使用了邏輯 AND（`&&`），這是錯誤的：
+## Bug 位置
 
-1. 如果 `requests == null`，短路求值會阻止 `requests.isEmpty()` 被調用（避免 NPE），但條件仍為 false（因為需要兩者都為 true）
-2. 如果 `requests` 不是 null 但是空列表，`requests == null` 為 false，整個條件為 false
-3. **結果**：空列表不會被攔截，會傳給 `submitCaptureRequest()` 導致後續錯誤
-
-## 正確寫法
+文件：`frameworks/base/core/java/android/hardware/camera2/CameraManager.java`
 
 ```java
-if (requests == null || requests.isEmpty()) {
-    throw new IllegalArgumentException("At least one request must be given");
+// Bug: 條件判斷反了，應該是 mDeviceIdList == null 才需要查詢
+public String[] getCameraIdList() throws CameraAccessException {
+    synchronized (mLock) {
+        // BUG: 這裡的條件被改成了 != null，導致已有列表時重新查詢，沒有時返回空
+        if (mDeviceIdList != null) {
+            // 錯誤地在這裡清空並重新查詢
+            mDeviceIdList.clear();
+        }
+        return mDeviceIdList != null ? mDeviceIdList.toArray(new String[0]) : new String[0];
+    }
 }
 ```
 
-使用邏輯 OR（`||`），任一條件成立都會拋出異常。
+## 修復方法
 
-## Bug 影響
+```java
+public String[] getCameraIdList() throws CameraAccessException {
+    synchronized (mLock) {
+        // 正確：只在列表為空時才查詢
+        if (mDeviceIdList == null) {
+            mDeviceIdList = new ArrayList<String>();
+            // ... 正常的相機發現邏輯
+        }
+        return mDeviceIdList.toArray(new String[0]);
+    }
+}
+```
 
-- **CTS 測試**：BurstCaptureTest 相關測試會失敗
-- **實際影響**：App 傳入空列表時不會得到明確的錯誤訊息，而是在後續流程中產生難以追蹤的異常
+## 驗證方法
 
-## 為什麼其他選項錯誤
+1. 還原 patch
+2. 重新編譯 framework
+3. 執行 `atest CameraManagerTest#testCameraManagerGetDeviceIdList`
+4. 測試應該通過
 
-- **A**：`isEmpty()` 和 `size() == 0` 功能相同，不是問題所在
-- **C**：檢查順序不影響結果，而且先檢查 null 是正確的防禦性編程
-- **D**：executor 的 null 檢查在 `submitCaptureRequest()` 內部處理，這裡不需要
+## 學習重點
+- CTS 測試會驗證 API 返回值的正確性
+- 條件判斷的邏輯錯誤是常見的 bug 類型
+- 單一方法的邏輯錯誤通常只需要修改一個檔案
