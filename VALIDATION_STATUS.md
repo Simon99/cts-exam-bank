@@ -9,7 +9,7 @@
 
 | 領域 | 總題數 | ✅ 通過 | ⚠️ Issue | ❌ Unfixable | ❓ 待驗證 |
 |------|--------|--------|---------|--------------|----------|
-| display | 30 | 17 | 4 | 1 | 8 |
+| display | 30 | 11 | 5 | 1 | 13 |
 | camera | 30 | 0 | 0 | 0 | 30 |
 | media | 30 | 0 | 0 | 0 | 30 |
 | location | 30 | 0 | 0 | 0 | 30 |
@@ -24,9 +24,9 @@
 | security | 53 | 0 | 0 | 0 | 53 |
 | app | 30 | 0 | 0 | 0 | 30 |
 | framework | 30 | 0 | 0 | 0 | 30 |
-| **總計** | **473** | **17** | **4** | **1** | **451** |
+| **總計** | **473** | **11** | **5** | **1** | **456** |
 
-**總驗證率**: 17/473 (3.6%)
+**總驗證率**: 11/473 (2.3%)
 
 ---
 
@@ -56,11 +56,11 @@
 | Q003 | DIS-M003 | ⚠️ Issue | - | BrightnessTest 被跳過 |
 | Q004 | DIS-M004 | ⚠️ Issue | - | BrightnessTest 被跳過 |
 | Q005 | DIS-M005 | ✅ PASS | 2026-02-17 | VirtualDisplayTest 2P/8F |
-| Q006 | DIS-M006 | ✅ PASS | 2026-02 | |
-| Q007 | DIS-M007 | ✅ PASS | 2026-02 | HDR filter operator 錯誤 |
-| Q008 | DIS-M008 | ✅ PASS | 2026-02 | VirtualDisplay flag 問題 |
-| Q009 | DIS-M009 | ✅ PASS | 2026-02 | Active mode 驗證 |
-| Q010 | DIS-M010 | ✅ PASS | 2026-02 | VirtualDisplay 呈現問題 |
+| Q006 | DIS-M006 | ❓ 待驗證 | - | VirtualDisplay null 處理 |
+| Q007 | DIS-M007 | ❓ 待驗證 | - | Trusted Display 權限檢查 |
+| Q008 | DIS-M008 | ❓ 待驗證 | - | Display Override 條件反轉 |
+| Q009 | DIS-M009 | ❓ 待驗證 | - | HDR 轉換模式覆蓋 |
+| Q010 | DIS-M010 | ❓ 待驗證 | - | HDR 禁用設定清除 |
 
 ### Hard（10 題）
 

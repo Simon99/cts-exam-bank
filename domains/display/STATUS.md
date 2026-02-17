@@ -9,12 +9,12 @@
 
 | 難度 | 總數 | ✅ 驗證通過 | 🔧 待驗證 | ⚠️ Issue | ❌ Unfixable |
 |------|------|------------|----------|---------|--------------|
-| Easy | 4 | 3 | 1 | 0 | 0 |
-| Medium | 10 | 7 | 0 | 3 | 0 |
+| Easy | 10 | 3 | 7 | 0 | 0 |
+| Medium | 10 | 1 | 5 | 4 | 0 |
 | Hard | 10 | 7 | 0 | 2 | 1 |
-| **合計** | **24** | **17** | **1** | **5** | **1** |
+| **合計** | **30** | **11** | **12** | **6** | **1** |
 
-**完成率**: 17/24 (71%) 完全驗證通過
+**完成率**: 11/30 (37%) 完全驗證通過
 
 ---
 
@@ -40,13 +40,13 @@
 | Q003 | testGetHdrCapabilities...FilteredHdrTypes | ⚠️ Issue | HDR 過濾失效 | BrightnessTest 被跳過 |
 | Q004 | testSetGetSimpleCurve | ⚠️ Issue | 設備不支持自動亮度 | BrightnessTest 被跳過 |
 | Q005 | VirtualDisplayTest | ✅ **VERIFIED** | VirtualDisplay HDR 異常 | 2026-02-17 驗證通過 |
-| Q006 | testFlags | ✅ VERIFIED | Bug 不觸發測試失敗 | |
-| Q007 | testGetHdrCapabilities...FilteredHdrTypes | ✅ VERIFIED | HDR filter operator 錯誤 | |
-| Q008 | testUntrustedSysDecorVirtualDisplay | ✅ VERIFIED | VirtualDisplay flag 問題 | |
-| Q009 | testActiveModeIsSupportedModes | ✅ VERIFIED | Active mode 驗證 | |
-| Q010 | testPrivatePresentationVirtualDisplay | ✅ VERIFIED | VirtualDisplay 呈現問題 | |
+| Q006 | VirtualDisplayTest | ❓ 待驗證 | VirtualDisplay null 處理 | |
+| Q007 | VirtualDisplayTest | ❓ 待驗證 | Trusted Display 權限檢查 | |
+| Q008 | DisplayTest | ❓ 待驗證 | Display Override 條件反轉 | |
+| Q009 | HdrConversionEnabledTest | ❓ 待驗證 | HDR 轉換模式覆蓋 | |
+| Q010 | DisplayTest | ❓ 待驗證 | HDR 禁用設定清除 | |
 
-**Medium 完成率**: 6/10 (60%)
+**Medium 完成率**: 1/10 (10%)
 **Medium Q001-Q004 Issue**: BrightnessTest 需要 BRIGHTNESS_SLIDER_USAGE 權限，AOSP 缺失該權限導致測試被跳過
 
 ---
