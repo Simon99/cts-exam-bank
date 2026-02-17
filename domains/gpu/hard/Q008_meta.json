@@ -10,7 +10,17 @@
     "frameworks/native/opengl/libs/EGL/egl_cache.h",
     "frameworks/native/opengl/libs/EGL/BlobCache.cpp"
   ],
-  "tags": ["egl", "blob-cache", "shader", "race-condition", "multifile", "concurrency"],
+  "tags": [
+    "egl",
+    "blob-cache",
+    "shader",
+    "race-condition",
+    "multifile",
+    "concurrency"
+  ],
   "estimated_time_minutes": 55,
-  "cdd_requirement": null
+  "cdd_requirement": null,
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

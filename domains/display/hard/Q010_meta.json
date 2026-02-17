@@ -6,7 +6,10 @@
   "cts_test": "android.display.cts.DisplayTest#testSetUserDisabledHdrTypesStoresDisabledFormatsInSettings",
   "cts_module": "CtsDisplayTestCases",
   "injection_point": "DIS-030",
-  "injection_type": ["LOGIC", "EARLY_RETURN"],
+  "injection_type": [
+    "LOGIC",
+    "EARLY_RETURN"
+  ],
   "affected_files": [
     "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
   ],
@@ -22,5 +25,8 @@
   "root_cause": "Incorrect early return condition when array length > 0",
   "fix_complexity": "Remove erroneous early return statement",
   "created_at": "2025-01-25T09:00:00+08:00",
-  "updated_at": "2026-02-13T12:15:00+08:00"
+  "updated_at": "2026-02-13T12:15:00+08:00",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

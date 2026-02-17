@@ -10,7 +10,22 @@
     "frameworks/base/services/usage/java/com/android/server/usage/StorageStatsService.java",
     "frameworks/base/core/java/android/app/usage/StorageStatsManager.java"
   ],
-  "tags": ["storage", "parcelable", "type-mismatch", "NPE", "CharSequence", "crate"],
+  "tags": [
+    "storage",
+    "parcelable",
+    "type-mismatch",
+    "NPE",
+    "CharSequence",
+    "crate"
+  ],
   "estimated_time_minutes": 40,
-  "skills_tested": ["parcelable-analysis", "type-awareness", "API-matching", "multi-file-debugging"]
+  "skills_tested": [
+    "parcelable-analysis",
+    "type-awareness",
+    "API-matching",
+    "multi-file-debugging"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

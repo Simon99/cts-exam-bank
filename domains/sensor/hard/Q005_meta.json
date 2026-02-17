@@ -6,10 +6,20 @@
   "cts_test": "android.hardware.cts.SensorBatchingFifoTest#testFlushUnderLoad",
   "cts_module": "CtsSensorTestCases",
   "injection_point": "SEN-065",
-  "injection_type": ["STATE", "ERR"],
+  "injection_type": [
+    "STATE",
+    "ERR"
+  ],
   "affected_files": [
     "frameworks/base/core/java/android/hardware/SystemSensorManager.java"
   ],
-  "tags": ["deadlock", "synchronization", "lock-order"],
-  "estimated_time_minutes": 40
+  "tags": [
+    "deadlock",
+    "synchronization",
+    "lock-order"
+  ],
+  "estimated_time_minutes": 40,
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

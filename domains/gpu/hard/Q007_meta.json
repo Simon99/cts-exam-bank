@@ -10,7 +10,16 @@
     "frameworks/native/opengl/libs/EGL/egl_display.cpp",
     "frameworks/native/opengl/libs/EGL/egl_object.cpp"
   ],
-  "tags": ["egl", "gpu-hang", "robustness", "context-lost", "recovery"],
+  "tags": [
+    "egl",
+    "gpu-hang",
+    "robustness",
+    "context-lost",
+    "recovery"
+  ],
   "estimated_time_minutes": 65,
-  "cdd_requirement": null
+  "cdd_requirement": null,
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

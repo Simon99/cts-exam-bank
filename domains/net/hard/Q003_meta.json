@@ -11,12 +11,20 @@
     "frameworks/base/core/java/android/net/UrlQuerySanitizer.java"
   ],
   "bug_type": "wrong_append_logic",
-  "tags": ["Uri", "Builder", "appendPath", "PathPart"],
+  "tags": [
+    "Uri",
+    "Builder",
+    "appendPath",
+    "PathPart"
+  ],
   "estimated_time_minutes": 35,
   "skills_tested": [
     "Builder 模式理解",
     "路徑累積邏輯",
     "內部類追蹤",
     "多檔案分析"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

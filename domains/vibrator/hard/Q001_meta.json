@@ -9,7 +9,14 @@
   "affected_files": [
     "frameworks/base/core/java/android/os/VibrationEffect.java"
   ],
-  "tags": ["vibration-effect", "waveform", "array-validation"],
+  "tags": [
+    "vibration-effect",
+    "waveform",
+    "array-validation"
+  ],
   "estimated_time_minutes": 20,
-  "answer": "C"
+  "answer": "C",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

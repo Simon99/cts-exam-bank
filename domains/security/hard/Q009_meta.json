@@ -8,9 +8,22 @@
   "affected_files": [
     "cts/tests/security/src/android/keystore/cts/RootOfTrust.java"
   ],
-  "injection_points": ["SEC-021", "SEC-024"],
-  "bug_types": ["boundary-condition", "version-check", "keymint-keymaster-mismatch"],
-  "tags": ["root-of-trust", "key-attestation", "verified-boot", "version-handling", "keymint"],
+  "injection_points": [
+    "SEC-021",
+    "SEC-024"
+  ],
+  "bug_types": [
+    "boundary-condition",
+    "version-check",
+    "keymint-keymaster-mismatch"
+  ],
+  "tags": [
+    "root-of-trust",
+    "key-attestation",
+    "verified-boot",
+    "version-handling",
+    "keymint"
+  ],
   "estimated_time_minutes": 20,
   "correct_answer": "A",
   "requires_understanding": [
@@ -18,5 +31,8 @@
     "attestationVersion semantics across hardware generations",
     "verifiedBootHash introduction in attestation v3",
     "Boundary condition analysis in version checks"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

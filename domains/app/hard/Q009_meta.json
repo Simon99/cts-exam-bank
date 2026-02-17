@@ -9,8 +9,24 @@
     "frameworks/base/services/core/java/com/android/server/accounts/AccountManagerService.java",
     "frameworks/base/services/core/java/com/android/server/accounts/TokenCache.java"
   ],
-  "tags": ["accountmanager", "threading", "binder", "callback", "handler", "token-cache"],
-  "skills_tested": ["binder-threading", "handler-mechanism", "async-callback", "ipc", "token-management"],
+  "tags": [
+    "accountmanager",
+    "threading",
+    "binder",
+    "callback",
+    "handler",
+    "token-cache"
+  ],
+  "skills_tested": [
+    "binder-threading",
+    "handler-mechanism",
+    "async-callback",
+    "ipc",
+    "token-management"
+  ],
   "estimated_time_minutes": 55,
-  "created": "2025-02-09"
+  "created": "2025-02-09",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

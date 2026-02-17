@@ -9,8 +9,19 @@
   "affected_files": [
     "cts/tests/security/src/android/keystore/cts/RootOfTrust.java"
   ],
-  "tags": ["root-of-trust", "verified-boot", "hash", "sha256"],
-  "injection_type": ["COND", "HARD"],
+  "tags": [
+    "root-of-trust",
+    "verified-boot",
+    "hash",
+    "sha256"
+  ],
+  "injection_type": [
+    "COND",
+    "HARD"
+  ],
   "estimated_time_minutes": 20,
-  "correct_answer": "A"
+  "correct_answer": "A",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

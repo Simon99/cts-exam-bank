@@ -9,8 +9,15 @@
   "affected_files": [
     "frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java"
   ],
-  "tags": ["certificate-pinning", "network-security", "trust-manager", "security-bypass"],
-  "injection_type": ["COND"],
+  "tags": [
+    "certificate-pinning",
+    "network-security",
+    "trust-manager",
+    "security-bypass"
+  ],
+  "injection_type": [
+    "COND"
+  ],
   "estimated_time_minutes": 25,
   "correct_answer": "A",
   "security_impact": "high",
@@ -19,5 +26,8 @@
     "Trust Anchor",
     "Boolean logic inversion",
     "Network Security Config"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

@@ -9,8 +9,22 @@
     "frameworks/base/services/core/java/com/android/server/wm/RootWindowContainer.java",
     "frameworks/base/services/core/java/com/android/server/wm/Task.java"
   ],
-  "tags": ["activity", "launchmode", "task", "singletask", "wm"],
-  "skills_tested": ["activity-lifecycle", "task-management", "system-services", "multi-file-debugging"],
+  "tags": [
+    "activity",
+    "launchmode",
+    "task",
+    "singletask",
+    "wm"
+  ],
+  "skills_tested": [
+    "activity-lifecycle",
+    "task-management",
+    "system-services",
+    "multi-file-debugging"
+  ],
   "estimated_time_minutes": 45,
-  "created": "2025-02-09"
+  "created": "2025-02-09",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

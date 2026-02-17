@@ -10,7 +10,17 @@
     "frameworks/native/opengl/libs/EGL/egl_object.h",
     "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp"
   ],
-  "tags": ["egl", "hdr", "smpte2086", "metadata", "luminance", "scaling"],
+  "tags": [
+    "egl",
+    "hdr",
+    "smpte2086",
+    "metadata",
+    "luminance",
+    "scaling"
+  ],
   "estimated_time_minutes": 50,
-  "cdd_requirement": "7.1.4.5"
+  "cdd_requirement": "7.1.4.5",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

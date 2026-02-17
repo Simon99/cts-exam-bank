@@ -9,11 +9,19 @@
     "frameworks/av/services/camera/libcameraservice/api2/CameraDeviceClient.cpp",
     "frameworks/av/services/camera/libcameraservice/common/CameraProviderManager.cpp"
   ],
-  "tags": ["MultiCamera", "LogicalCamera", "PhysicalStream", "配置"],
+  "tags": [
+    "MultiCamera",
+    "LogicalCamera",
+    "PhysicalStream",
+    "配置"
+  ],
   "estimated_time_minutes": 50,
   "skills_tested": [
     "理解 Multi-Camera 架構",
     "追蹤 logical/physical camera 協調",
     "分析 stream 配置流程"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

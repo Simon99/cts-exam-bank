@@ -6,7 +6,10 @@
   "cts_test": "android.display.cts.DisplayEventTest#testDisplayEvents",
   "cts_module": "CtsDisplayTestCases",
   "injection_point": "DIS-040",
-  "injection_type": ["COND", "STATE"],
+  "injection_type": [
+    "COND",
+    "STATE"
+  ],
   "affected_files": [
     "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
   ],
@@ -34,5 +37,8 @@
   "verified": true,
   "verified_date": "2026-02-12",
   "cts_result": "FAIL",
-  "device": "27161FDH20031X"
+  "device": "27161FDH20031X",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

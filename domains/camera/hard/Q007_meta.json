@@ -9,11 +9,19 @@
     "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java",
     "frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp"
   ],
-  "tags": ["Session", "Surface", "Lifecycle", "切換"],
+  "tags": [
+    "Session",
+    "Surface",
+    "Lifecycle",
+    "切換"
+  ],
   "estimated_time_minutes": 50,
   "skills_tested": [
     "理解 Session 狀態機",
     "追蹤 Surface 生命週期",
     "分析資源管理順序"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

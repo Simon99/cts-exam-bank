@@ -10,7 +10,22 @@
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java",
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java"
   ],
-  "tags": ["expedited_job", "doze", "device_idle", "constraint", "multi_file"],
+  "tags": [
+    "expedited_job",
+    "doze",
+    "device_idle",
+    "constraint",
+    "multi_file"
+  ],
   "estimated_time_minutes": 50,
-  "skills_tested": ["controller_logic", "constraint_handling", "doze_mode", "cross_file_debugging", "data_flow_analysis"]
+  "skills_tested": [
+    "controller_logic",
+    "constraint_handling",
+    "doze_mode",
+    "cross_file_debugging",
+    "data_flow_analysis"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

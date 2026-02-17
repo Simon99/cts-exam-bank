@@ -10,8 +10,17 @@
     "cts/hostsidetests/security/src/android/security/cts/NeverallowRuleParser.java",
     "cts/hostsidetests/security/src/android/security/cts/SELinuxNeverallowChecker.java"
   ],
-  "tags": ["selinux", "neverallow", "policy-parsing", "string-processing", "off-by-one"],
-  "injection_type": ["STR", "COND"],
+  "tags": [
+    "selinux",
+    "neverallow",
+    "policy-parsing",
+    "string-processing",
+    "off-by-one"
+  ],
+  "injection_type": [
+    "STR",
+    "COND"
+  ],
   "estimated_time_minutes": 25,
   "correct_answer": "A",
   "security_impact": "medium",
@@ -32,5 +41,8 @@
     "B": "Suggests modifying the check instead of fixing the parse - a tempting workaround",
     "C": "Split regex concern - but empty token handling exists",
     "D": "Type mismatch concern - but char comparison is valid"
-  }
+  },
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

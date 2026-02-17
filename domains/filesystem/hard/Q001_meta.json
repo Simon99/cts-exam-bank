@@ -10,7 +10,21 @@
     "frameworks/base/services/core/java/com/android/server/StorageManagerService.java",
     "frameworks/base/core/java/android/os/storage/VolumeInfo.java"
   ],
-  "tags": ["storage", "parcelable", "IPC", "serialization-order", "multi-layer"],
+  "tags": [
+    "storage",
+    "parcelable",
+    "IPC",
+    "serialization-order",
+    "multi-layer"
+  ],
   "estimated_time_minutes": 45,
-  "skills_tested": ["parcelable-analysis", "IPC-understanding", "multi-file-debugging", "data-flow-tracing"]
+  "skills_tested": [
+    "parcelable-analysis",
+    "IPC-understanding",
+    "multi-file-debugging",
+    "data-flow-tracing"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

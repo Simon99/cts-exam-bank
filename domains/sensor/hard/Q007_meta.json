@@ -6,10 +6,19 @@
   "cts_test": "android.hardware.cts.SensorTest#testTriggerSensorDoubleRequest",
   "cts_module": "CtsSensorTestCases",
   "injection_point": "SEN-066",
-  "injection_type": ["STATE"],
+  "injection_type": [
+    "STATE"
+  ],
   "affected_files": [
     "frameworks/base/core/java/android/hardware/SystemSensorManager.java"
   ],
-  "tags": ["trigger", "duplicate", "idempotent"],
-  "estimated_time_minutes": 30
+  "tags": [
+    "trigger",
+    "duplicate",
+    "idempotent"
+  ],
+  "estimated_time_minutes": 30,
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

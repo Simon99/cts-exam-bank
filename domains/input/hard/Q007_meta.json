@@ -9,8 +9,19 @@
   "affected_files": [
     "frameworks/base/core/java/android/view/InputDevice.java"
   ],
-  "tags": ["input-device", "motion-range", "stylus", "multi-source", "logic-operator"],
-  "injection_type": ["COND"],
+  "tags": [
+    "input-device",
+    "motion-range",
+    "stylus",
+    "multi-source",
+    "logic-operator"
+  ],
+  "injection_type": [
+    "COND"
+  ],
   "estimated_time_minutes": 30,
-  "correct_answer": "B"
+  "correct_answer": "B",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

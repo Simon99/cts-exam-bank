@@ -9,9 +9,22 @@
   "affected_files": [
     "cts/tests/security/src/android/keystore/cts/Attestation.java"
   ],
-  "bug_types": ["logic-inversion", "boolean-negation", "security-bypass"],
-  "tags": ["key-attestation", "challenge-verification", "constant-time", "ternary-operator", "security"],
-  "injection_type": ["COND", "LOGIC"],
+  "bug_types": [
+    "logic-inversion",
+    "boolean-negation",
+    "security-bypass"
+  ],
+  "tags": [
+    "key-attestation",
+    "challenge-verification",
+    "constant-time",
+    "ternary-operator",
+    "security"
+  ],
+  "injection_type": [
+    "COND",
+    "LOGIC"
+  ],
   "estimated_time_minutes": 20,
   "correct_answer": "B",
   "requires_understanding": [
@@ -21,5 +34,8 @@
     "Key attestation challenge flow"
   ],
   "security_impact": "high",
-  "real_world_relevance": "Logic inversion bugs in security checks can lead to authentication bypass or denial of service"
+  "real_world_relevance": "Logic inversion bugs in security checks can lead to authentication bypass or denial of service",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

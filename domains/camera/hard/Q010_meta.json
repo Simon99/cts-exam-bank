@@ -10,11 +10,19 @@
     "frameworks/av/services/camera/libcameraservice/CameraFlashlight.cpp"
   ],
   "_note": "CameraManagerGlobal 是 CameraManager.java 的內部類別，已修正路徑",
-  "tags": ["Torch", "Flash", "Callback", "狀態同步"],
+  "tags": [
+    "Torch",
+    "Flash",
+    "Callback",
+    "狀態同步"
+  ],
   "estimated_time_minutes": 45,
   "skills_tested": [
     "理解狀態同步問題",
     "分析 callback 時序",
     "追蹤跨層狀態傳遞"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

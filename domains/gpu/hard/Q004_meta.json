@@ -10,7 +10,15 @@
     "frameworks/native/opengl/libs/EGL/egl_object.cpp",
     "frameworks/native/libs/gui/Surface.cpp"
   ],
-  "tags": ["egl", "frame-timestamps", "compositor", "surfaceflinger"],
+  "tags": [
+    "egl",
+    "frame-timestamps",
+    "compositor",
+    "surfaceflinger"
+  ],
   "estimated_time_minutes": 55,
-  "cdd_requirement": null
+  "cdd_requirement": null,
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

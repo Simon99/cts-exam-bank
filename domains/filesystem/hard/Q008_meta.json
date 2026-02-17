@@ -10,7 +10,21 @@
     "frameworks/base/services/usage/java/com/android/server/usage/StorageStatsService.java",
     "frameworks/base/core/java/android/os/storage/StorageManager.java"
   ],
-  "tags": ["storage", "statistics", "calculation", "cache-quota", "interpolation"],
+  "tags": [
+    "storage",
+    "statistics",
+    "calculation",
+    "cache-quota",
+    "interpolation"
+  ],
   "estimated_time_minutes": 45,
-  "skills_tested": ["math-formula-analysis", "map-key-debugging", "data-flow-tracing", "multi-file-debugging"]
+  "skills_tested": [
+    "math-formula-analysis",
+    "map-key-debugging",
+    "data-flow-tracing",
+    "multi-file-debugging"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

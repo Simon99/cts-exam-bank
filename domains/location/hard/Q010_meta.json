@@ -25,5 +25,8 @@
     "frameworks/base/services/core/java/com/android/server/location/gnss/GnssMeasurementsProvider.java",
     "frameworks/base/services/core/java/com/android/server/location/gnss/GnssManagerService.java"
   ],
-  "bug_pattern": "multi-file-serialization"
+  "bug_pattern": "multi-file-serialization",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

@@ -9,7 +9,14 @@
   "affected_files": [
     "frameworks/base/core/java/android/os/CombinedVibration.java"
   ],
-  "tags": ["combined-vibration", "parallel", "id-validation"],
+  "tags": [
+    "combined-vibration",
+    "parallel",
+    "id-validation"
+  ],
   "estimated_time_minutes": 20,
-  "answer": "B"
+  "answer": "B",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

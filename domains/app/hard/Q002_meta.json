@@ -9,9 +9,24 @@
     "frameworks/base/services/core/java/com/android/server/uri/UriGrantsManagerService.java",
     "frameworks/base/services/core/java/com/android/server/am/ContentProviderHelper.java"
   ],
-  "tags": ["contentprovider", "uri-permission", "security", "cross-process", "equals-hashcode"],
-  "skills_tested": ["permission-model", "cross-service-debugging", "uri-grants", "security-analysis", "multi-user"],
+  "tags": [
+    "contentprovider",
+    "uri-permission",
+    "security",
+    "cross-process",
+    "equals-hashcode"
+  ],
+  "skills_tested": [
+    "permission-model",
+    "cross-service-debugging",
+    "uri-grants",
+    "security-analysis",
+    "multi-user"
+  ],
   "estimated_time_minutes": 50,
   "created": "2025-02-09",
-  "updated": "2025-02-10"
+  "updated": "2025-02-10",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

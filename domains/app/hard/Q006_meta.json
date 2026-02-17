@@ -9,8 +9,21 @@
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java",
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java"
   ],
-  "tags": ["jobscheduler", "constraints", "bitmask", "logic-error"],
-  "skills_tested": ["jobscheduler-architecture", "bitmask-operations", "constraint-satisfaction", "controller-interaction"],
+  "tags": [
+    "jobscheduler",
+    "constraints",
+    "bitmask",
+    "logic-error"
+  ],
+  "skills_tested": [
+    "jobscheduler-architecture",
+    "bitmask-operations",
+    "constraint-satisfaction",
+    "controller-interaction"
+  ],
   "estimated_time_minutes": 50,
-  "created": "2025-02-09"
+  "created": "2025-02-09",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

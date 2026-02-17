@@ -10,7 +10,18 @@
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BatteryController.java",
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java"
   ],
-  "tags": ["flexibility", "constraint_coordination", "controller_communication"],
+  "tags": [
+    "flexibility",
+    "constraint_coordination",
+    "controller_communication"
+  ],
   "estimated_time_minutes": 50,
-  "skills_tested": ["multi_file_analysis", "inter_controller_communication", "constraint_scoring"]
+  "skills_tested": [
+    "multi_file_analysis",
+    "inter_controller_communication",
+    "constraint_scoring"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

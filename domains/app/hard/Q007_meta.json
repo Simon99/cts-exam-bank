@@ -9,8 +9,20 @@
     "frameworks/base/core/java/android/app/BackStackRecord.java",
     "frameworks/base/core/java/android/app/FragmentState.java"
   ],
-  "tags": ["fragment", "backstack", "state-restore", "configuration-change"],
-  "skills_tested": ["fragment-lifecycle", "state-serialization", "backstack-management"],
+  "tags": [
+    "fragment",
+    "backstack",
+    "state-restore",
+    "configuration-change"
+  ],
+  "skills_tested": [
+    "fragment-lifecycle",
+    "state-serialization",
+    "backstack-management"
+  ],
   "estimated_time_minutes": 50,
-  "created": "2025-02-09"
+  "created": "2025-02-09",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

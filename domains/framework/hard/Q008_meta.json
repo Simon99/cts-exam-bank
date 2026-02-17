@@ -10,7 +10,19 @@
     "frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java",
     "frameworks/base/core/java/android/app/IActivityManager.aidl"
   ],
-  "tags": ["pending-intent", "parcelable", "flags", "IPC"],
+  "tags": [
+    "pending-intent",
+    "parcelable",
+    "flags",
+    "IPC"
+  ],
   "estimated_time_minutes": 45,
-  "skills_tested": ["parcelable-consistency", "cross-process-data", "serialization-order"]
+  "skills_tested": [
+    "parcelable-consistency",
+    "cross-process-data",
+    "serialization-order"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

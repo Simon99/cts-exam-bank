@@ -6,7 +6,10 @@
   "cts_test": "android.display.cts.DisplayTest#testModeSwitchOnPrimaryDisplay",
   "cts_module": "CtsDisplayTestCases",
   "injection_point": "DIS-036",
-  "injection_type": ["STATE", "BOUND"],
+  "injection_type": [
+    "STATE",
+    "BOUND"
+  ],
   "affected_files": [
     "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
   ],
@@ -41,5 +44,8 @@
   "verified_date": "2026-02-13",
   "cts_result": "PASS",
   "verification_issue": "Issue_0007_DIS_H009_bug_not_detected.md",
-  "issue_reason": "Bug 未被偵測 - CTS 測試不驗證 switching type 返回值"
+  "issue_reason": "Bug 未被偵測 - CTS 測試不驗證 switching type 返回值",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

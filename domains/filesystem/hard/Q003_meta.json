@@ -10,7 +10,21 @@
     "frameworks/base/core/java/android/os/storage/VolumeInfo.java",
     "frameworks/base/services/core/java/com/android/server/StorageManagerService.java"
   ],
-  "tags": ["storage", "parcelable", "serialization", "type-mismatch", "DiskInfo"],
+  "tags": [
+    "storage",
+    "parcelable",
+    "serialization",
+    "type-mismatch",
+    "DiskInfo"
+  ],
   "estimated_time_minutes": 40,
-  "skills_tested": ["parcelable-analysis", "data-type-awareness", "IPC-debugging", "multi-file-debugging"]
+  "skills_tested": [
+    "parcelable-analysis",
+    "data-type-awareness",
+    "IPC-debugging",
+    "multi-file-debugging"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

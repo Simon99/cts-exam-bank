@@ -29,5 +29,13 @@
   "build_type": "full",
   "verified": false,
   "verified_date": null,
-  "tags": ["adaptive-playback", "resolution-change", "buffer-pool", "codec2"]
+  "tags": [
+    "adaptive-playback",
+    "resolution-change",
+    "buffer-pool",
+    "codec2"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

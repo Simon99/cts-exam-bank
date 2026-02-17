@@ -6,10 +6,21 @@
   "cts_test": "android.hardware.cts.SensorTest#testListenerDuplicateEvents",
   "cts_module": "CtsSensorTestCases",
   "injection_point": "SEN-061",
-  "injection_type": ["COND", "STATE", "ERR"],
+  "injection_type": [
+    "COND",
+    "STATE",
+    "ERR"
+  ],
   "affected_files": [
     "frameworks/base/core/java/android/hardware/SystemSensorManager.java"
   ],
-  "tags": ["race-condition", "synchronization", "duplicate"],
-  "estimated_time_minutes": 35
+  "tags": [
+    "race-condition",
+    "synchronization",
+    "duplicate"
+  ],
+  "estimated_time_minutes": 35,
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

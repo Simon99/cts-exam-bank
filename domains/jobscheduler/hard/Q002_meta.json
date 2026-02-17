@@ -11,7 +11,20 @@
   "injection_point": "JS-UI-002",
   "bug_type": "COND",
   "correct_answer": "B",
-  "tags": ["user_initiated", "doze", "device_idle", "power_management", "canRunInDoze"],
+  "tags": [
+    "user_initiated",
+    "doze",
+    "device_idle",
+    "power_management",
+    "canRunInDoze"
+  ],
   "estimated_time_minutes": 35,
-  "skills_tested": ["code_analysis", "doze_understanding", "job_type_handling"]
+  "skills_tested": [
+    "code_analysis",
+    "doze_understanding",
+    "job_type_handling"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

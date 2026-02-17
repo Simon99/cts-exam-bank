@@ -11,11 +11,19 @@
     "frameworks/base/core/java/com/android/internal/net/VpnConfig.java"
   ],
   "bug_type": "silent_failure",
-  "tags": ["VpnService", "Builder", "establish", "VpnConfig"],
+  "tags": [
+    "VpnService",
+    "Builder",
+    "establish",
+    "VpnConfig"
+  ],
   "estimated_time_minutes": 35,
   "skills_tested": [
     "VPN 建立流程",
     "靜默失敗診斷",
     "配置驗證邏輯"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

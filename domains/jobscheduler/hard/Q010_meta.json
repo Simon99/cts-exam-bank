@@ -10,7 +10,20 @@
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/PendingJobQueue.java",
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java"
   ],
-  "tags": ["concurrency", "priority", "scheduling", "job_selection"],
+  "tags": [
+    "concurrency",
+    "priority",
+    "scheduling",
+    "job_selection"
+  ],
   "estimated_time_minutes": 55,
-  "skills_tested": ["concurrency_management", "priority_scheduling", "comparator_logic", "cross_file_analysis"]
+  "skills_tested": [
+    "concurrency_management",
+    "priority_scheduling",
+    "comparator_logic",
+    "cross_file_analysis"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

@@ -6,10 +6,20 @@
   "cts_test": "android.hardware.cts.SensorDirectReportTest#testHighestDirectReportRateLevel",
   "cts_module": "CtsSensorTestCases",
   "injection_point": "SEN-032",
-  "injection_type": ["COND", "CALC"],
+  "injection_type": [
+    "COND",
+    "CALC"
+  ],
   "affected_files": [
     "frameworks/base/core/java/android/hardware/Sensor.java"
   ],
-  "tags": ["direct-report", "rate-level", "bitmask"],
-  "estimated_time_minutes": 30
+  "tags": [
+    "direct-report",
+    "rate-level",
+    "bitmask"
+  ],
+  "estimated_time_minutes": 30,
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

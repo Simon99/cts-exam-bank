@@ -29,5 +29,14 @@
   "build_type": "full",
   "verified": false,
   "verified_date": null,
-  "tags": ["drm", "crypto", "encrypted-sample", "cryptoinfo", "subsample"]
+  "tags": [
+    "drm",
+    "crypto",
+    "encrypted-sample",
+    "cryptoinfo",
+    "subsample"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

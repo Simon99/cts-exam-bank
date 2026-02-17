@@ -9,8 +9,18 @@
   "affected_files": [
     "frameworks/base/core/java/android/view/MotionPredictor.java"
   ],
-  "tags": ["motion-predictor", "prediction", "time-units"],
-  "injection_type": ["CALC", "STATE"],
+  "tags": [
+    "motion-predictor",
+    "prediction",
+    "time-units"
+  ],
+  "injection_type": [
+    "CALC",
+    "STATE"
+  ],
   "estimated_time_minutes": 25,
-  "correct_answer": "A"
+  "correct_answer": "A",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

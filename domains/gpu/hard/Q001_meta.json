@@ -10,7 +10,16 @@
     "frameworks/native/opengl/libs/EGL/Loader.cpp",
     "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp"
   ],
-  "tags": ["egl", "layer", "crash", "initialization-order", "debugging"],
+  "tags": [
+    "egl",
+    "layer",
+    "crash",
+    "initialization-order",
+    "debugging"
+  ],
   "estimated_time_minutes": 60,
-  "cdd_requirement": null
+  "cdd_requirement": null,
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

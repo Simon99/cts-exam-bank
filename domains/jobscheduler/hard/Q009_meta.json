@@ -10,7 +10,20 @@
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java",
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java"
   ],
-  "tags": ["user_initiated_job", "background_restriction", "constraint", "top_state"],
+  "tags": [
+    "user_initiated_job",
+    "background_restriction",
+    "constraint",
+    "top_state"
+  ],
   "estimated_time_minutes": 50,
-  "skills_tested": ["uij_handling", "background_restriction", "uid_state_tracking", "multi_file_analysis"]
+  "skills_tested": [
+    "uij_handling",
+    "background_restriction",
+    "uid_state_tracking",
+    "multi_file_analysis"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

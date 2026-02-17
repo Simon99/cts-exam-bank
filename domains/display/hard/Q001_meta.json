@@ -6,8 +6,22 @@
   "cts_test": "android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay",
   "cts_module": "CtsDisplayTestCases",
   "injection_point": "DIS-013",
-  "injection_type": ["COND", "ERR"],
-  "affected_files": ["frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"],
-  "tags": ["security", "virtual-display", "flag-bypass", "cross-module", "condition-logic"],
-  "estimated_time_minutes": 35
+  "injection_type": [
+    "COND",
+    "ERR"
+  ],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
+  ],
+  "tags": [
+    "security",
+    "virtual-display",
+    "flag-bypass",
+    "cross-module",
+    "condition-logic"
+  ],
+  "estimated_time_minutes": 35,
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

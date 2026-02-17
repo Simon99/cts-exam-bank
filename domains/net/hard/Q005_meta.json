@@ -11,11 +11,19 @@
     "frameworks/base/core/java/android/util/RecurrenceRule.java"
   ],
   "bug_type": "parcel_order_mismatch",
-  "tags": ["NetworkPolicy", "Parcelable", "writeToParcel", "order"],
+  "tags": [
+    "NetworkPolicy",
+    "Parcelable",
+    "writeToParcel",
+    "order"
+  ],
   "estimated_time_minutes": 30,
   "skills_tested": [
     "Parcelable 協議理解",
     "序列化順序分析",
     "多字段對照"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

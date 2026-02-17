@@ -11,12 +11,21 @@
     "frameworks/base/core/java/android/util/RecurrenceRule.java"
   ],
   "bug_type": "serialization_order_mismatch",
-  "tags": ["NetworkPolicy", "backup", "restore", "RecurrenceRule", "serialization"],
+  "tags": [
+    "NetworkPolicy",
+    "backup",
+    "restore",
+    "RecurrenceRule",
+    "serialization"
+  ],
   "estimated_time_minutes": 35,
   "skills_tested": [
     "二進位序列化",
     "備份還原邏輯",
     "版本相容性",
     "跨檔案追蹤"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

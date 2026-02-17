@@ -6,7 +6,10 @@
   "cts_test": "android.display.cts.DisplayTest#testGetSupportedModesOnDefaultDisplay",
   "cts_module": "CtsDisplayTestCases",
   "injection_point": "DIS-038",
-  "injection_type": ["CALC", "BOUND"],
+  "injection_type": [
+    "CALC",
+    "BOUND"
+  ],
   "affected_files": [
     "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
   ],
@@ -36,5 +39,8 @@
     "檢查 numPeriodsRound 的計算方式",
     "思考 Math.round(2.5) 與 Math.floor(2.5 + 0.4999) 的結果差異",
     "注意閾值比較使用的是 > 還是 >="
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

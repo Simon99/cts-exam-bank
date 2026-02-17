@@ -6,10 +6,20 @@
   "cts_test": "android.hardware.cts.SensorDirectReportTest#testDirectChannelResourceLeak",
   "cts_module": "CtsSensorTestCases",
   "injection_point": "SEN-063",
-  "injection_type": ["RES", "ERR"],
+  "injection_type": [
+    "RES",
+    "ERR"
+  ],
   "affected_files": [
     "frameworks/base/core/java/android/hardware/SystemSensorManager.java"
   ],
-  "tags": ["resource-leak", "native", "error-handling"],
-  "estimated_time_minutes": 30
+  "tags": [
+    "resource-leak",
+    "native",
+    "error-handling"
+  ],
+  "estimated_time_minutes": 30,
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

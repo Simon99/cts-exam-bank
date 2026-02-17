@@ -6,10 +6,20 @@
   "cts_test": "android.hardware.cts.SensorTest#testSensorEventValues",
   "cts_module": "CtsSensorTestCases",
   "injection_point": "SEN-041",
-  "injection_type": ["BOUND", "CALC"],
+  "injection_type": [
+    "BOUND",
+    "CALC"
+  ],
   "affected_files": [
     "frameworks/base/core/java/android/hardware/SensorEvent.java"
   ],
-  "tags": ["array-bounds", "switch-fallthrough", "rotation-vector"],
-  "estimated_time_minutes": 25
+  "tags": [
+    "array-bounds",
+    "switch-fallthrough",
+    "rotation-vector"
+  ],
+  "estimated_time_minutes": 25,
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

@@ -10,7 +10,20 @@
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java",
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java"
   ],
-  "tags": ["thermal", "expedited_job", "restriction", "threshold"],
+  "tags": [
+    "thermal",
+    "expedited_job",
+    "restriction",
+    "threshold"
+  ],
   "estimated_time_minutes": 45,
-  "skills_tested": ["restriction_logic", "threshold_comparison", "thermal_management", "cross_file_tracing"]
+  "skills_tested": [
+    "restriction_logic",
+    "threshold_comparison",
+    "thermal_management",
+    "cross_file_tracing"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

@@ -9,7 +9,14 @@
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
   ],
   "injection_point": "ALM-045",
-  "tags": ["quota", "TARE", "standby-bucket"],
+  "tags": [
+    "quota",
+    "TARE",
+    "standby-bucket"
+  ],
   "estimated_time_minutes": 35,
-  "answer": "C"
+  "answer": "C",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

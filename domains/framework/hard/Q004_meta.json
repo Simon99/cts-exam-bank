@@ -11,8 +11,20 @@
     "frameworks/base/core/java/android/os/Parcel.java",
     "frameworks/base/core/java/android/os/Bundle.java"
   ],
-  "tags": ["Bundle", "Binder", "資源洩漏", "引用計數"],
+  "tags": [
+    "Bundle",
+    "Binder",
+    "資源洩漏",
+    "引用計數"
+  ],
   "estimated_time_minutes": 50,
-  "skills_tested": ["資源管理", "Binder 機制", "生命週期管理"],
-  "created_at": "2025-01-13"
+  "skills_tested": [
+    "資源管理",
+    "Binder 機制",
+    "生命週期管理"
+  ],
+  "created_at": "2025-01-13",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

@@ -10,7 +10,21 @@
     "frameworks/base/services/core/java/com/android/server/StorageManagerService.java",
     "frameworks/base/core/java/android/os/Environment.java"
   ],
-  "tags": ["storage", "state-mapping", "static-initializer", "SparseArray", "broadcast"],
+  "tags": [
+    "storage",
+    "state-mapping",
+    "static-initializer",
+    "SparseArray",
+    "broadcast"
+  ],
   "estimated_time_minutes": 40,
-  "skills_tested": ["static-initialization", "state-machine", "mapping-analysis", "multi-file-debugging"]
+  "skills_tested": [
+    "static-initialization",
+    "state-machine",
+    "mapping-analysis",
+    "multi-file-debugging"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

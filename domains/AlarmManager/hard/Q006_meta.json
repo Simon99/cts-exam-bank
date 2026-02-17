@@ -9,7 +9,14 @@
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/alarm/AlarmManagerService.java"
   ],
   "injection_point": "ALM-037",
-  "tags": ["kernel-alarm", "wakeup", "reschedule"],
+  "tags": [
+    "kernel-alarm",
+    "wakeup",
+    "reschedule"
+  ],
   "estimated_time_minutes": 35,
-  "answer": "B"
+  "answer": "B",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

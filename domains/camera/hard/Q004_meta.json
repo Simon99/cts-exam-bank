@@ -9,11 +9,18 @@
     "frameworks/base/core/java/android/hardware/camera2/CameraExtensionCharacteristics.java",
     "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java"
   ],
-  "tags": ["Extension", "Session配置", "NightMode"],
+  "tags": [
+    "Extension",
+    "Session配置",
+    "NightMode"
+  ],
   "estimated_time_minutes": 45,
   "skills_tested": [
     "理解 Camera Extensions 架構",
     "追蹤 session 配置流程",
     "分析 supported 列表和實際行為的一致性"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

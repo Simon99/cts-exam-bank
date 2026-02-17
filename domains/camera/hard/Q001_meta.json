@@ -9,12 +9,20 @@
     "frameworks/base/core/java/android/hardware/camera2/impl/PhysicalCaptureResultInfo.java",
     "frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java"
   ],
-  "tags": ["MultiCamera", "PhysicalCamera", "LogicalCamera", "結果處理"],
+  "tags": [
+    "MultiCamera",
+    "PhysicalCamera",
+    "LogicalCamera",
+    "結果處理"
+  ],
   "estimated_time_minutes": 45,
   "skills_tested": [
     "理解 Multi-Camera 架構",
     "追蹤邏輯/物理相機數據流",
     "分析多檔案交互",
     "識別循環處理錯誤"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

@@ -9,12 +9,19 @@
     "frameworks/base/core/java/android/hardware/camera2/impl/CameraOfflineSessionImpl.java",
     "frameworks/base/core/java/android/hardware/camera2/impl/RequestLastFrameNumbersHolder.java"
   ],
-  "tags": ["OfflineSession", "狀態轉移", "PendingRequest"],
+  "tags": [
+    "OfflineSession",
+    "狀態轉移",
+    "PendingRequest"
+  ],
   "estimated_time_minutes": 45,
   "skills_tested": [
     "理解 Offline Session 機制",
     "追蹤狀態轉移流程",
     "分析多類協作",
     "識別狀態同步問題"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

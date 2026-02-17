@@ -9,12 +9,19 @@
     "frameworks/base/core/java/android/hardware/camera2/CaptureRequest.java",
     "frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java"
   ],
-  "tags": ["Reprocess", "InputConfiguration", "Capture流程"],
+  "tags": [
+    "Reprocess",
+    "InputConfiguration",
+    "Capture流程"
+  ],
   "estimated_time_minutes": 45,
   "skills_tested": [
     "理解 Reprocess 機制",
     "追蹤 capture request 流程",
     "分析多類協作",
     "識別被跳過的邏輯"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

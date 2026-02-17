@@ -9,8 +9,19 @@
   "affected_files": [
     "frameworks/base/core/java/android/view/InputEventConsistencyVerifier.java"
   ],
-  "tags": ["multi-touch", "bitmap", "pointer-tracking", "state-machine"],
-  "injection_type": ["STATE", "CALC"],
+  "tags": [
+    "multi-touch",
+    "bitmap",
+    "pointer-tracking",
+    "state-machine"
+  ],
+  "injection_type": [
+    "STATE",
+    "CALC"
+  ],
   "estimated_time_minutes": 30,
-  "correct_answer": "A"
+  "correct_answer": "A",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

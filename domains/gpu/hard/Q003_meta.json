@@ -10,7 +10,16 @@
     "frameworks/native/libs/graphicsenv/GraphicsEnv.cpp",
     "frameworks/native/opengl/libs/EGL/egl_platform_entries.cpp"
   ],
-  "tags": ["egl", "angle", "vulkan", "backend", "graphics-env"],
+  "tags": [
+    "egl",
+    "angle",
+    "vulkan",
+    "backend",
+    "graphics-env"
+  ],
   "estimated_time_minutes": 50,
-  "cdd_requirement": null
+  "cdd_requirement": null,
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

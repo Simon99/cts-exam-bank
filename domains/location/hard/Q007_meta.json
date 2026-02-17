@@ -22,5 +22,8 @@
     "frameworks/base/services/core/java/com/android/server/location/gnss/GnssAntennaInfoProvider.java",
     "frameworks/base/services/core/java/com/android/server/location/gnss/GnssManagerService.java",
     "frameworks/base/services/core/java/com/android/server/location/gnss/hal/GnssNative.java"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

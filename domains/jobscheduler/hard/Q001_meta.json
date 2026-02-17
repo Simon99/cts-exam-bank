@@ -10,7 +10,19 @@
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/BackgroundJobsController.java",
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java"
   ],
-  "tags": ["connectivity", "data_saver", "expedited", "foreground_background"],
+  "tags": [
+    "connectivity",
+    "data_saver",
+    "expedited",
+    "foreground_background"
+  ],
   "estimated_time_minutes": 45,
-  "skills_tested": ["multi_file_analysis", "state_tracking", "network_policy"]
+  "skills_tested": [
+    "multi_file_analysis",
+    "state_tracking",
+    "network_policy"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

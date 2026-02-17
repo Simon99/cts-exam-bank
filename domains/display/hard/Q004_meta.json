@@ -6,7 +6,10 @@
   "cts_test": "android.display.cts.DisplayTest#testGetSupportedModesOnDefaultDisplay",
   "cts_module": "CtsDisplayTestCases",
   "injection_point": "DIS-037",
-  "injection_type": ["CALC", "BOUND"],
+  "injection_type": [
+    "CALC",
+    "BOUND"
+  ],
   "affected_files": [
     "frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java"
   ],
@@ -27,5 +30,8 @@
     "條件觸發型 bug 的識別"
   ],
   "detection_difficulty": "high",
-  "notes": "Bug 偽裝成安全的邊界檢查，只在多 mode 設備上觸發，需要理解 CTS 測試的驗證邏輯才能定位"
+  "notes": "Bug 偽裝成安全的邊界檢查，只在多 mode 設備上觸發，需要理解 CTS 測試的驗證邏輯才能定位",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

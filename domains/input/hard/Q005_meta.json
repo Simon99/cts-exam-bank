@@ -9,8 +9,18 @@
   "affected_files": [
     "frameworks/base/core/java/android/view/KeyEvent.java"
   ],
-  "tags": ["key-event", "modifier", "meta-state"],
-  "injection_type": ["COND", "STATE"],
+  "tags": [
+    "key-event",
+    "modifier",
+    "meta-state"
+  ],
+  "injection_type": [
+    "COND",
+    "STATE"
+  ],
   "estimated_time_minutes": 30,
-  "correct_answer": "D"
+  "correct_answer": "D",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

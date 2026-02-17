@@ -10,7 +10,21 @@
     "frameworks/base/core/java/android/os/storage/VolumeInfo.java",
     "frameworks/base/services/core/java/com/android/server/StorageManagerService.java"
   ],
-  "tags": ["storage", "UUID", "string-manipulation", "format-conversion", "path-mapping"],
+  "tags": [
+    "storage",
+    "UUID",
+    "string-manipulation",
+    "format-conversion",
+    "path-mapping"
+  ],
   "estimated_time_minutes": 40,
-  "skills_tested": ["UUID-format", "string-operations", "format-validation", "multi-file-debugging"]
+  "skills_tested": [
+    "UUID-format",
+    "string-operations",
+    "format-validation",
+    "multi-file-debugging"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

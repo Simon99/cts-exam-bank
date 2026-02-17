@@ -9,8 +9,22 @@
     "frameworks/base/services/core/java/com/android/server/am/ActiveServices.java",
     "frameworks/base/services/core/java/com/android/server/notification/NotificationManagerService.java"
   ],
-  "tags": ["service", "foreground", "notification", "anr", "state-sync"],
-  "skills_tested": ["anr-handling", "foreground-service", "cross-service-state", "notification-lifecycle"],
+  "tags": [
+    "service",
+    "foreground",
+    "notification",
+    "anr",
+    "state-sync"
+  ],
+  "skills_tested": [
+    "anr-handling",
+    "foreground-service",
+    "cross-service-state",
+    "notification-lifecycle"
+  ],
   "estimated_time_minutes": 55,
-  "created": "2025-02-09"
+  "created": "2025-02-09",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

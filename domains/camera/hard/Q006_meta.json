@@ -9,11 +9,19 @@
     "frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp",
     "frameworks/av/services/camera/libcameraservice/api2/CameraDeviceClient.cpp"
   ],
-  "tags": ["HighSpeed", "Recording", "FrameRate", "Burst"],
+  "tags": [
+    "HighSpeed",
+    "Recording",
+    "FrameRate",
+    "Burst"
+  ],
   "estimated_time_minutes": 55,
   "skills_tested": [
     "理解 High Speed Recording 機制",
     "分析幀率穩定性問題",
     "追蹤 burst request 流程"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

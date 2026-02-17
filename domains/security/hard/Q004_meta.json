@@ -8,9 +8,23 @@
   "affected_files": [
     "cts/tests/security/src/android/keystore/cts/RootOfTrust.java"
   ],
-  "injection_points": ["SEC-021", "SEC-024"],
-  "bug_types": ["array-comparison", "operator-error", "boundary-check", "logic-error"],
-  "tags": ["verified-boot", "root-of-trust", "key-attestation", "byte-array-comparison", "avb"],
+  "injection_points": [
+    "SEC-021",
+    "SEC-024"
+  ],
+  "bug_types": [
+    "array-comparison",
+    "operator-error",
+    "boundary-check",
+    "logic-error"
+  ],
+  "tags": [
+    "verified-boot",
+    "root-of-trust",
+    "key-attestation",
+    "byte-array-comparison",
+    "avb"
+  ],
   "estimated_time_minutes": 25,
   "correct_answer": "D",
   "requires_understanding": [
@@ -19,5 +33,8 @@
     "Root of Trust structure in Key Attestation",
     "Logical operator precedence and short-circuit evaluation",
     "Boundary condition validation"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

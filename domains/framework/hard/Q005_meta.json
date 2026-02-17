@@ -11,8 +11,19 @@
     "frameworks/base/services/core/java/com/android/server/am/PendingIntentRecord.java",
     "frameworks/base/core/java/android/content/Intent.java"
   ],
-  "tags": ["PendingIntent", "安全漏洞", "FLAG_IMMUTABLE"],
+  "tags": [
+    "PendingIntent",
+    "安全漏洞",
+    "FLAG_IMMUTABLE"
+  ],
   "estimated_time_minutes": 60,
-  "skills_tested": ["安全機制", "權限檢查", "Framework 與 System Server 交互"],
-  "created_at": "2025-01-13"
+  "skills_tested": [
+    "安全機制",
+    "權限檢查",
+    "Framework 與 System Server 交互"
+  ],
+  "created_at": "2025-01-13",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

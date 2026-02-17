@@ -10,7 +10,20 @@
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/controllers/JobStatus.java",
     "frameworks/base/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java"
   ],
-  "tags": ["timing", "deadline", "constraint", "premature_execution"],
+  "tags": [
+    "timing",
+    "deadline",
+    "constraint",
+    "premature_execution"
+  ],
   "estimated_time_minutes": 45,
-  "skills_tested": ["timing_constraint", "alarm_management", "constraint_interaction", "multi_file_tracing"]
+  "skills_tested": [
+    "timing_constraint",
+    "alarm_management",
+    "constraint_interaction",
+    "multi_file_tracing"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

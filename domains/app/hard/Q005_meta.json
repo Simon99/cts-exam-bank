@@ -9,8 +9,21 @@
     "frameworks/base/services/core/java/com/android/server/am/PendingIntentController.java",
     "frameworks/base/core/java/android/app/PendingIntent.java"
   ],
-  "tags": ["pendingintent", "security", "identity", "permission-escalation"],
-  "skills_tested": ["security-model", "identity-management", "intent-matching", "privilege-escalation-analysis"],
+  "tags": [
+    "pendingintent",
+    "security",
+    "identity",
+    "permission-escalation"
+  ],
+  "skills_tested": [
+    "security-model",
+    "identity-management",
+    "intent-matching",
+    "privilege-escalation-analysis"
+  ],
   "estimated_time_minutes": 60,
-  "created": "2025-02-09"
+  "created": "2025-02-09",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

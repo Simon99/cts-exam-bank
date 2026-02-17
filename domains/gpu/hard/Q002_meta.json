@@ -9,9 +9,20 @@
     "frameworks/native/services/surfaceflinger/FpsReporter.cpp"
   ],
   "injection_point": "GPU-024",
-  "bug_type": ["COND", "STATE"],
-  "tags": ["surfaceflinger", "fps-reporting", "layer-hierarchy", "traverse"],
+  "bug_type": [
+    "COND",
+    "STATE"
+  ],
+  "tags": [
+    "surfaceflinger",
+    "fps-reporting",
+    "layer-hierarchy",
+    "traverse"
+  ],
   "estimated_time_minutes": 35,
   "correct_answer": "B",
-  "cdd_requirement": null
+  "cdd_requirement": null,
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

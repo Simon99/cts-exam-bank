@@ -10,7 +10,22 @@
     "frameworks/base/core/java/android/content/ContentProvider.java",
     "frameworks/base/core/java/android/provider/DocumentsProvider.java"
   ],
-  "tags": ["file-descriptor", "parcelable", "IPC", "mode-flags", "bit-operations"],
+  "tags": [
+    "file-descriptor",
+    "parcelable",
+    "IPC",
+    "mode-flags",
+    "bit-operations"
+  ],
   "estimated_time_minutes": 50,
-  "skills_tested": ["bit-manipulation", "parcelable-analysis", "string-parsing", "IPC-debugging", "multi-file-debugging"]
+  "skills_tested": [
+    "bit-manipulation",
+    "parcelable-analysis",
+    "string-parsing",
+    "IPC-debugging",
+    "multi-file-debugging"
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

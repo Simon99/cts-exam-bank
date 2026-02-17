@@ -11,12 +11,21 @@
     "frameworks/base/core/java/android/net/http/X509TrustManagerExtensions.java"
   ],
   "bug_type": "swapped_parameters",
-  "tags": ["SslCertificate", "X509Certificate", "date", "notBefore", "notAfter"],
+  "tags": [
+    "SslCertificate",
+    "X509Certificate",
+    "date",
+    "notBefore",
+    "notAfter"
+  ],
   "estimated_time_minutes": 30,
   "skills_tested": [
     "證書結構理解",
     "構造函數參數分析",
     "日期處理",
     "跨檔案追蹤"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

@@ -11,11 +11,19 @@
     "frameworks/base/core/jni/android_net_LocalSocketImpl.cpp"
   ],
   "bug_type": "missing_synchronization",
-  "tags": ["LocalSocket", "FileDescriptor", "SCM_RIGHTS", "ancillary"],
+  "tags": [
+    "LocalSocket",
+    "FileDescriptor",
+    "SCM_RIGHTS",
+    "ancillary"
+  ],
   "estimated_time_minutes": 40,
   "skills_tested": [
     "Unix domain socket 理解",
     "文件描述符傳遞機制",
     "Java/Native 交互"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

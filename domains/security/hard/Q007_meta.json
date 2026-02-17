@@ -8,9 +8,23 @@
   "affected_files": [
     "cts/tests/security/src/android/keystore/cts/RootOfTrust.java"
   ],
-  "injection_points": ["SEC-021", "SEC-022", "SEC-023"],
-  "bug_types": ["logic-error", "security-bypass", "operator-confusion"],
-  "tags": ["root-of-trust", "verified-boot", "key-attestation", "security-validation", "boolean-logic"],
+  "injection_points": [
+    "SEC-021",
+    "SEC-022",
+    "SEC-023"
+  ],
+  "bug_types": [
+    "logic-error",
+    "security-bypass",
+    "operator-confusion"
+  ],
+  "tags": [
+    "root-of-trust",
+    "verified-boot",
+    "key-attestation",
+    "security-validation",
+    "boolean-logic"
+  ],
   "estimated_time_minutes": 20,
   "correct_answer": "B",
   "requires_understanding": [
@@ -19,5 +33,8 @@
     "Boolean logic operators (AND vs OR)",
     "Security validation requirements",
     "Defense in depth principle"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

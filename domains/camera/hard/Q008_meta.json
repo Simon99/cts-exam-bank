@@ -9,11 +9,19 @@
     "frameworks/base/core/jni/android_hardware_camera2_DngCreator.cpp",
     "frameworks/base/core/java/android/hardware/camera2/CameraCharacteristics.java"
   ],
-  "tags": ["RAW", "DNG", "Metadata", "Calibration"],
+  "tags": [
+    "RAW",
+    "DNG",
+    "Metadata",
+    "Calibration"
+  ],
   "estimated_time_minutes": 55,
   "skills_tested": [
     "理解 DNG 格式規範",
     "追蹤 metadata 傳遞流程",
     "分析 JNI 層問題"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

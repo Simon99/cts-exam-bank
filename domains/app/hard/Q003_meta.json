@@ -9,8 +9,20 @@
     "frameworks/base/services/core/java/com/android/server/am/BroadcastRecord.java",
     "frameworks/base/core/java/android/app/LoadedApk.java"
   ],
-  "tags": ["broadcast", "ordered-broadcast", "result-propagation", "ams"],
-  "skills_tested": ["broadcast-mechanism", "state-management", "multi-receiver-flow"],
+  "tags": [
+    "broadcast",
+    "ordered-broadcast",
+    "result-propagation",
+    "ams"
+  ],
+  "skills_tested": [
+    "broadcast-mechanism",
+    "state-management",
+    "multi-receiver-flow"
+  ],
   "estimated_time_minutes": 45,
-  "created": "2025-02-09"
+  "created": "2025-02-09",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

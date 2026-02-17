@@ -9,9 +9,21 @@
     "frameworks/base/core/java/android/security/net/config/PinSet.java",
     "frameworks/base/core/java/android/security/net/config/NetworkSecurityTrustManager.java"
   ],
-  "injection_points": ["SEC-041", "SEC-042"],
-  "bug_types": ["multi-file", "off-by-one", "array-truncation"],
-  "tags": ["certificate-pinning", "trust-manager", "chain-validation", "multi-file-interaction"],
+  "injection_points": [
+    "SEC-041",
+    "SEC-042"
+  ],
+  "bug_types": [
+    "multi-file",
+    "off-by-one",
+    "array-truncation"
+  ],
+  "tags": [
+    "certificate-pinning",
+    "trust-manager",
+    "chain-validation",
+    "multi-file-interaction"
+  ],
   "estimated_time_minutes": 25,
   "correct_answer": "D",
   "requires_understanding": [
@@ -19,5 +31,8 @@
     "PIN validation should cover entire chain",
     "Array indexing and bounds checking",
     "Cross-file data flow analysis"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

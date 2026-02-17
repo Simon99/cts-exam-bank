@@ -23,5 +23,8 @@
     "frameworks/base/services/core/java/com/android/server/location/geofence/GeofenceManager.java",
     "frameworks/base/services/core/java/com/android/server/location/provider/LocationProviderManager.java",
     "frameworks/base/services/core/java/com/android/server/location/injector/SystemLocationPowerSaveModeHelper.java"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

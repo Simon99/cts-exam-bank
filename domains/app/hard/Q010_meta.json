@@ -9,8 +9,22 @@
     "frameworks/base/services/core/java/com/android/server/wm/TaskFragment.java",
     "frameworks/base/core/java/android/app/ActivityThread.java"
   ],
-  "tags": ["activity", "result", "multi-resume", "split-screen", "lifecycle"],
-  "skills_tested": ["multi-window", "activity-lifecycle", "result-delivery", "state-management"],
+  "tags": [
+    "activity",
+    "result",
+    "multi-resume",
+    "split-screen",
+    "lifecycle"
+  ],
+  "skills_tested": [
+    "multi-window",
+    "activity-lifecycle",
+    "result-delivery",
+    "state-management"
+  ],
   "estimated_time_minutes": 55,
-  "created": "2025-02-09"
+  "created": "2025-02-09",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

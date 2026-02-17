@@ -11,8 +11,20 @@
     "frameworks/base/core/java/android/os/BaseBundle.java",
     "frameworks/base/core/java/android/util/SparseArray.java"
   ],
-  "tags": ["Bundle", "SparseArray", "序列化", "稀疏數組"],
+  "tags": [
+    "Bundle",
+    "SparseArray",
+    "序列化",
+    "稀疏數組"
+  ],
   "estimated_time_minutes": 45,
-  "skills_tested": ["數據結構", "序列化協議", "邊界處理"],
-  "created_at": "2025-01-13"
+  "skills_tested": [
+    "數據結構",
+    "序列化協議",
+    "邊界處理"
+  ],
+  "created_at": "2025-01-13",
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

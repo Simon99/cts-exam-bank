@@ -11,11 +11,20 @@
     "frameworks/base/core/jni/android_net_LocalSocketImpl.cpp"
   ],
   "bug_type": "off_by_one",
-  "tags": ["LocalSocket", "OutputStream", "write", "off-by-one", "native"],
+  "tags": [
+    "LocalSocket",
+    "OutputStream",
+    "write",
+    "off-by-one",
+    "native"
+  ],
   "estimated_time_minutes": 35,
   "skills_tested": [
     "數據傳輸完整性",
     "off-by-one 錯誤識別",
     "JNI 參數傳遞"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

@@ -10,7 +10,16 @@
     "frameworks/native/opengl/libs/EGL/egl_object.cpp",
     "frameworks/native/opengl/libs/EGL/egl_display.cpp"
   ],
-  "tags": ["egl", "memory-leak", "reference-counting", "surface", "raii"],
+  "tags": [
+    "egl",
+    "memory-leak",
+    "reference-counting",
+    "surface",
+    "raii"
+  ],
   "estimated_time_minutes": 60,
-  "cdd_requirement": null
+  "cdd_requirement": null,
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }

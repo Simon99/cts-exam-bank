@@ -11,12 +11,21 @@
     "frameworks/base/core/java/android/net/UrlQuerySanitizer.java"
   ],
   "bug_type": "wrong_collection_type",
-  "tags": ["Uri", "query", "getQueryParameterNames", "Set", "duplicate"],
+  "tags": [
+    "Uri",
+    "query",
+    "getQueryParameterNames",
+    "Set",
+    "duplicate"
+  ],
   "estimated_time_minutes": 30,
   "skills_tested": [
     "集合類型理解",
     "URL 解析邏輯",
     "去重機制",
     "多檔案追蹤"
-  ]
+  ],
+  "needs_revalidation": true,
+  "revalidation_requested": "2026-02-17",
+  "revalidation_reason": "Hard 難度全數重新驗證"
 }
