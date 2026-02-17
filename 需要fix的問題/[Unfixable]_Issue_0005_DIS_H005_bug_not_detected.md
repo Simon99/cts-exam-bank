@@ -45,4 +45,38 @@ Bug 涉及兩個浮點數計算錯誤：
 - 修改檔案: `DisplayManagerService.java`
 
 ## 狀態
-- [ ] 待修復
+- [x] 標記為無法修復 (2026-02-12)
+
+---
+
+## 嘗試記錄
+
+### 1st Trial (2026-02-12)
+
+**修改方向**：將 bug 移到 `LocalDisplayAdapter.java` 的 `alternativeRefreshRates` 計算
+
+**設計思路**：
+- 原 bug 位置（`getDisplayInfoForFrameRateOverride`）不會被 `testGetSupportedModesOnDefaultDisplay` 觸發
+- 改為在 `alternativeRefreshRates` 陣列複製時引入 off-by-one 錯誤
+
+**實際 Patch**：
+```java
+// 分配少一個元素，導致最後一個 alternative 被丟棄
+float[] alternativeRates = new float[Math.max(0, alternativeRefreshRates.size() - 1)];
+```
+
+**結果**：❌ 測試 PASSED（bug 未被偵測）
+
+**失敗原因**：
+- 測試設備只有 2 個 modes（60Hz 和 90Hz）
+- 每個 mode 只有 1 個 alternative
+- `size() - 1 = 0` 時，alternatives 陣列為空
+- 但這不會破壞對稱性（兩邊都是空的）
+
+**結論**：
+此題目無法修復的原因：
+1. 原始 bug 位置（frame rate override）不在 CTS 測試路徑上
+2. 改到其他位置會與 Q004 太相似（都是破壞 alternativeRefreshRates）
+3. 在只有 2 modes 的設備上，很難設計能被偵測的 off-by-one 錯誤
+
+**決定**：標記為 Unfixable，建議刪除此題或完全重新設計

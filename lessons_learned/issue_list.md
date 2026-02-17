@@ -17,6 +17,7 @@
 
 | # | 現象 | 分類 | 解法 |
 |---|------|------|------|
+| I-010 | `DefaultDisplayModeTest` 全部測試只能在 Android TV 上運行 | cts_testing | 檢查測試 setUp() 是否有 `assumeTrue(FeatureUtil.isTV())` 等限制；選測試前先確認設備相容性 |
 | I-001 | CTS 跑完後 fastboot/adb 操作 hang | usb_issues | `pkill -f "ats_console_deploy\|olc_server"` |
 | I-002 | `fastboot devices` 列出裝置但所有命令 hang | usb_issues | 先診斷是 bootloop 還是 USB 異常；長按 30 秒強制停機 |
 | I-003 | `m services` + `make systemimage` 後 flash → bootloop | build_deploy | 一律用 `make -j$(nproc)` full build |

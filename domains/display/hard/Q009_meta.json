@@ -36,5 +36,10 @@
     "getter 中的邏輯可能會影響返回值"
   ],
   "created_at": "2025-01-22T00:00:00+08:00",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "verified": false,
+  "verified_date": "2026-02-13",
+  "cts_result": "PASS",
+  "verification_issue": "Issue_0007_DIS_H009_bug_not_detected.md",
+  "issue_reason": "Bug 未被偵測 - CTS 測試不驗證 switching type 返回值"
 }

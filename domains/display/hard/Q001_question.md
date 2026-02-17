@@ -5,7 +5,7 @@
 ## 失敗的 CTS 測試
 
 ```
-android.hardware.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay
+android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay
 ```
 
 ## 測試目的
@@ -26,9 +26,6 @@ VIRTUAL_DISPLAY_FLAG_TRUSTED (1 << 10)
 
 VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS (1 << 9)
     └── 表示此 display 應該顯示 system decorations
-
-VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY (1 << 3)
-    └── Display 只顯示自己的內容，不 mirror 預設 display
 ```
 
 ### 安全模型
@@ -43,6 +40,8 @@ VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY (1 << 3)
 │       ↓                                                      │
 │  安全檢查：untrusted display 必須清除敏感 flags              │
 │       ↓                                                      │
+│  如果 flag 未被清除 → 後續權限檢查 → 拋出 SecurityException  │
+│       ↓                                                      │
 │  建立 DisplayDevice                                          │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -52,28 +51,28 @@ VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY (1 << 3)
 ```
 frameworks/base/services/core/java/com/android/server/display/
 └── DisplayManagerService.java
-    └── createVirtualDisplayInternal() (約 1450-1750 行)
+    └── createVirtualDisplayInternal() (約 1590-1650 行)
 ```
 
 ## 測試失敗訊息
 
 ```
-junit.framework.AssertionFailedError: Untrusted virtual display should not have 
-VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS flag set
-Expected: flags without SHOULD_SHOW_SYSTEM_DECORATIONS
-  Actual: flags = 0x608 (contains SHOULD_SHOW_SYSTEM_DECORATIONS)
+java.lang.SecurityException: Requires INTERNAL_SYSTEM_WINDOW permission
+    at com.android.server.display.DisplayManagerService.createVirtualDisplayInternal(DisplayManagerService.java:1623)
+    at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:892)
+    at android.display.cts.VirtualDisplayTest.testUntrustedSysDecorVirtualDisplay(VirtualDisplayTest.java:245)
 ```
 
 ## 提示
 
 1. **理解安全邊界**：為什麼 untrusted display 不能顯示 system decorations？
-2. **Flag 處理順序**：注意 flags 的處理順序和條件判斷邏輯
-3. **誤導性優化**：有時候「看起來合理的優化」會打破安全模型
-4. **跨模組思考**：`OWN_CONTENT_ONLY` 和 `SHOULD_SHOW_SYSTEM_DECORATIONS` 是獨立的安全屬性嗎？
+2. **Flag 處理順序**：flag 在哪裡應該被清除？如果沒被清除會發生什麼？
+3. **註解的陷阱**：被註解掉的程式碼可能隱藏著關鍵的安全邏輯
+4. **防禦深度**：為什麼有兩層檢查（flag 清除 + 權限檢查）？
 
 ## 你的任務
 
-找出為什麼 untrusted virtual display 能夠保留 `VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS` flag。
+找出為什麼 untrusted virtual display 會觸發 `SecurityException`，而不是正常建立（只是沒有 system decorations）。
 
 ---
 

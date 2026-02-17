@@ -26,5 +26,17 @@
     "Display flags 的語義"
   ],
   "created": "2025-07-02",
-  "validated": false
+  "validated": true,
+  "validation_status": "validated",
+  "validation_date": "2026-02-17",
+  "cts_result": {
+    "passed": 2,
+    "failed": 8,
+    "tests_that_failed": [
+      "testHdrApiMethods",
+      "testGetHdrCapabilitiesWithUserDisabledFormats",
+      "testUntrustedSysDecorVirtualDisplay",
+      "testVirtualDisplayWithRequestedRefreshRate"
+    ]
+  }
 }

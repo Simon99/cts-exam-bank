@@ -1,85 +1,52 @@
-# CTS 題目：Display Mode 設置與清除事件
+# CTS 題目：User Disabled HDR Types 設定未被儲存
 
-**難度**：Hard  
-**時間限制**：40 分鐘  
-**CTS 測試**：`android.hardware.display.cts.DefaultDisplayModeTest#testSetAndClearUserPreferredDisplayModeGeneratesDisplayChangedEvents`
+## 背景
 
----
+某設備廠商報告了一個問題：使用者透過 `DisplayManager.setUserDisabledHdrTypes()` 設定禁用的 HDR 類型後，重新啟動應用程式或設備後，設定消失了。
 
-## 問題描述
+使用者明確禁用了 Dolby Vision 和 HLG 類型，但系統沒有正確持久化這些設定到 Settings.Global。
 
-QA 團隊報告了一個與 Display Mode 設置相關的 CTS 測試失敗。
-
-### 失敗的測試
+## 失敗的 CTS 測試
 
 ```
-android.hardware.display.cts.DefaultDisplayModeTest#testSetAndClearUserPreferredDisplayModeGeneratesDisplayChangedEvents
+android.display.cts.DisplayTest#testSetUserDisabledHdrTypesStoresDisabledFormatsInSettings
 ```
 
-### 測試預期行為
+**測試模組**: `CtsDisplayTestCases`
 
-1. 調用 `DisplayManager.setGlobalUserPreferredDisplayMode(mode)` 設置全局顯示模式
-2. 應該產生 `EVENT_DISPLAY_CHANGED` 事件
-3. 調用 `DisplayManager.clearGlobalUserPreferredDisplayMode()` 清除全局顯示模式
-4. 也應該產生 `EVENT_DISPLAY_CHANGED` 事件
+## 症狀
 
-### 實際行為
+1. 調用 `setUserDisabledHdrTypes()` 時沒有錯誤
+2. 但 `Settings.Global.USER_DISABLED_HDR_FORMATS` 沒有被更新
+3. 禁用的 HDR 類型設定無法持久化
+4. 設備重啟後，所有 HDR 類型又會被啟用
 
-- 設置全局顯示模式時，正確產生了 display changed 事件
-- 清除全局顯示模式時，**沒有產生 display changed 事件**
+## 相關檔案
 
-### 相關日誌
+- `frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java`
 
-```
-DisplayManagerService: setUserPreferredDisplayModeInternal displayId=-1 mode=Mode{1920x1080 60.0Hz}
-DisplayManagerService: storeModeInGlobalSettingsLocked mode=Mode{1920x1080 60.0Hz}
-# ... 設備收到通知，產生 EVENT_DISPLAY_CHANGED
+## 任務
 
-DisplayManagerService: setUserPreferredDisplayModeInternal displayId=-1 mode=null
-# 注意：沒有 storeModeInGlobalSettingsLocked 的日誌
-# 沒有 EVENT_DISPLAY_CHANGED 事件
-```
-
----
-
-## 你的任務
-
-1. 分析問題根因
-2. 找出有 bug 的程式碼位置
-3. 解釋為什麼 clear 操作沒有產生 display changed 事件
+1. 找出導致 HDR 類型設定未被儲存的 bug
+2. 解釋為什麼設定沒有被持久化
+3. 分析這個 bug 對使用者體驗的影響
 4. 提供修復方案
-
----
-
-## 相關源碼路徑
-
-```
-frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-```
-
-### 重點函數
-
-- `setUserPreferredDisplayModeInternal(int displayId, Display.Mode mode)`
-- `storeModeInGlobalSettingsLocked(...)`
-- `storeModeInPersistentDataStoreLocked(...)`
-
----
 
 ## 提示
 
-1. 當 `displayId == Display.INVALID_DISPLAY` 時，表示設置/清除的是**全局**顯示模式
-2. 當 `mode == null` 時，表示這是**清除**操作
-3. `storeModeInGlobalSettingsLocked` 會遍歷所有 DisplayDevice 並調用 `setUserPreferredDisplayModeLocked`
-4. `setUserPreferredDisplayModeLocked` 內部會調用 `updateDeviceInfoLocked()` 來發送 display changed 事件
-5. 設置操作和清除操作應該有對稱的事件行為
+- 關注 `setUserDisabledHdrTypesInternal()` 方法的邏輯流程
+- 檢查是否有提前返回（early return）導致後續代碼沒有執行
+- 追蹤 `Settings.Global.putString()` 是否被正確調用
 
----
+## 評估標準
 
-## 評分標準
-
-| 項目 | 分數 |
+| 項目 | 配分 |
 |------|------|
-| 正確定位 bug 位置 | 25% |
-| 解釋根因（set vs clear 的不對稱處理） | 25% |
-| 理解事件傳遞機制 | 25% |
-| 提供正確的修復方案 | 25% |
+| 準確定位 bug 位置 | 25% |
+| 正確解釋 bug 原因 | 25% |
+| 分析對使用者的影響 | 25% |
+| 提供有效修復方案 | 25% |
+
+## 時間限制
+
+35 分鐘

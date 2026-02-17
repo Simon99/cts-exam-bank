@@ -1,36 +1,26 @@
 {
   "id": "DIS-H010",
-  "title": "Global User Preferred Display Mode 清除操作不產生 Display Changed 事件",
+  "title": "User Disabled HDR Types Not Stored",
   "domain": "display",
   "difficulty": "hard",
-  "cts_test": "android.hardware.display.cts.DefaultDisplayModeTest#testSetAndClearUserPreferredDisplayModeGeneratesDisplayChangedEvents",
+  "cts_test": "android.display.cts.DisplayTest#testSetUserDisabledHdrTypesStoresDisabledFormatsInSettings",
   "cts_module": "CtsDisplayTestCases",
-  "injection_point": "DIS-032,DIS-033",
-  "injection_type": ["STATE", "COND"],
+  "injection_point": "DIS-030",
+  "injection_type": ["LOGIC", "EARLY_RETURN"],
   "affected_files": [
     "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
   ],
   "tags": [
-    "DisplayManagerService",
-    "UserPreferredMode",
-    "GlobalSettings",
-    "EventNotification",
-    "SetClearAsymmetry",
-    "DisplayChangedEvent",
-    "NullModeHandling"
+    "hdr",
+    "settings",
+    "persistence",
+    "early-return",
+    "user-preferences"
   ],
-  "estimated_time_minutes": 40,
-  "key_concepts": [
-    "Display mode 全局設置機制",
-    "Set 與 Clear 操作的對稱性",
-    "storeModeInGlobalSettingsLocked 的作用",
-    "Display changed 事件傳遞鏈",
-    "API 契約與 CTS 驗證"
-  ],
-  "skills_tested": [
-    "追蹤跨函數的狀態傳遞",
-    "理解 Set/Clear 應有對稱行為",
-    "分析條件判斷對事件觸發的影響",
-    "理解下游函數的防重複機制"
-  ]
+  "estimated_time_minutes": 35,
+  "bug_description": "Early return skips storing non-empty userDisabledHdrTypes to Settings.Global",
+  "root_cause": "Incorrect early return condition when array length > 0",
+  "fix_complexity": "Remove erroneous early return statement",
+  "created_at": "2025-01-25T09:00:00+08:00",
+  "updated_at": "2026-02-13T12:15:00+08:00"
 }

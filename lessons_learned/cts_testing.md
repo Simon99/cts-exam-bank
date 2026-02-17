@@ -90,3 +90,42 @@ cd ~/cts/14_r7-linux_x86-arm/android-cts
 6. ☐ 有診斷價值（log 有足夠線索讓候選人追蹤）
 7. ☐ 只影響目標測試（不大面積崩潰）
 8. ☐ 難度匹配（Easy=1 檔 / Medium=2 檔 / Hard=3+ 檔）
+
+---
+
+## I-010: CTS 測試的設備限制（TV-Only 等）
+
+### 問題描述
+選用 `DefaultDisplayModeTest#testSetAndClearUserPreferredDisplayModeGeneratesDisplayChangedEvents` 作為題目的 CTS 測試，但在 Pixel 7 上運行時被跳過（ASSUMPTION_FAILED）。
+
+### 根本原因
+`DefaultDisplayModeTest` 類別的 `setUp()` 方法包含：
+```java
+@Before
+public void setUp() throws Exception {
+    assumeTrue("Need an Android TV device to run this test.", FeatureUtil.isTV());
+    // ...
+}
+```
+這導致整個測試類只能在 Android TV 設備上運行。
+
+### 解決方案
+1. **選測試前先檢查設備限制**：
+   - 搜索 `assumeTrue`、`FeatureUtil.isTV()`、`FEATURE_LEANBACK` 等關鍵字
+   - 確認測試是否有設備類型限制
+   
+2. **如果測試有限制**：
+   - 換一個沒有設備限制的測試
+   - 或重新設計 bug，使用其他測試驗證
+
+### 實際處理
+原題目 Q010 從 `DefaultDisplayModeTest` 換到 `DisplayTest#testSetUserDisabledHdrTypesStoresDisabledFormatsInSettings`，這個測試在手機上也能運行。
+
+### 教訓
+- **CTS 測試有隱藏的設備限制**：不是所有測試都能在所有設備上運行
+- **選測試前要驗證可執行性**：先在目標設備上跑一次確認能執行
+- **常見的設備限制**：
+  - `FeatureUtil.isTV()` — 需要 Android TV
+  - `FeatureUtil.isAutomotive()` — 需要 Android Automotive
+  - `FeatureUtil.isWatch()` — 需要 Wear OS
+  - `PackageManager.FEATURE_*` 檢查 — 各種硬體功能

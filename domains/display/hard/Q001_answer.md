@@ -4,18 +4,16 @@
 
 **檔案**：`frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java`
 
-**方法**：`createVirtualDisplayInternal()` (約第 1596-1600 行)
+**方法**：`createVirtualDisplayInternal()` (約第 1593-1600 行)
 
 ## Bug 程式碼
 
 ```java
-// Optimization: Only strip system decorations flag when necessary.
-// If OWN_CONTENT_ONLY is set, the display won't mirror sensitive content anyway,
-// so we can skip this check for better performance.
-if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0
-        && (flags & VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY) == 0) {
-    flags &= ~VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;
-}
+// BUG: Security check disabled - untrusted displays can now show system decorations
+// Original code:
+// if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0) {
+//     flags &= ~VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;
+// }
 ```
 
 ## 正確程式碼
@@ -28,73 +26,76 @@ if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0) {
 
 ## Bug 分析
 
-### 錯誤的「優化」邏輯
+### 安全檢查被完全移除
 
-開發者加入了一個看似合理的「效能優化」：
+原本的安全邏輯是：**untrusted display 必須無條件清除 `SHOULD_SHOW_SYSTEM_DECORATIONS` flag**。
 
-> 「如果 `OWN_CONTENT_ONLY` 被設置，display 不會 mirror 敏感內容，所以可以跳過 system decorations 檢查。」
+這段程式碼被註解掉了，導致：
 
-這個推論是**錯誤的**，原因如下：
+1. Untrusted app 請求建立 VirtualDisplay，帶有 `SHOULD_SHOW_SYSTEM_DECORATIONS` flag
+2. Flag 清除邏輯被跳過（因為被註解）
+3. Flag 保留在 flags 中
+4. 後續程式碼檢查到這個 flag，要求 `INTERNAL_SYSTEM_WINDOW` 權限
+5. 普通 app 沒有此權限 → 拋出 `SecurityException`
 
-### 為什麼這是安全漏洞？
-
-1. **`OWN_CONTENT_ONLY` 和 `SHOULD_SHOW_SYSTEM_DECORATIONS` 是獨立的安全屬性**
-   - `OWN_CONTENT_ONLY`：控制 display 是否 mirror 其他 display 的內容
-   - `SHOULD_SHOW_SYSTEM_DECORATIONS`：控制是否在此 display 上渲染狀態列、導航列
-
-2. **即使不 mirror，system decorations 仍會被渲染**
-   ```
-   ┌─────────────────────────────────────┐
-   │  VirtualDisplay (OWN_CONTENT_ONLY)  │
-   │  ┌─────────────────────────────────┐│
-   │  │  Status Bar (含敏感通知)         ││ ← 仍會渲染！
-   │  ├─────────────────────────────────┤│
-   │  │                                  ││
-   │  │      App 自己的內容              ││
-   │  │                                  ││
-   │  ├─────────────────────────────────┤│
-   │  │  Navigation Bar                  ││
-   │  └─────────────────────────────────┘│
-   └─────────────────────────────────────┘
-   ```
-
-3. **攻擊向量**
-   ```java
-   // 惡意 App 可以這樣做：
-   DisplayManager dm = getSystemService(DisplayManager.class);
-   VirtualDisplay vd = dm.createVirtualDisplay(
-       "MaliciousDisplay",
-       width, height, dpi,
-       surface,
-       DisplayManager.VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY |
-       DisplayManager.VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS,
-       callback, handler
-   );
-   // 現在可以從 surface 讀取 system decorations 的內容
-   ```
-
-### 安全模型被打破
+### 程式碼流程
 
 ```
-原本的安全保證：
-  untrusted display → 無條件清除 SHOULD_SHOW_SYSTEM_DECORATIONS
-
-被破壞後：
-  untrusted display + OWN_CONTENT_ONLY → 保留 SHOULD_SHOW_SYSTEM_DECORATIONS ❌
+┌─────────────────────────────────────────────────────────────┐
+│  createVirtualDisplayInternal()                             │
+├─────────────────────────────────────────────────────────────┤
+│  1. App 傳入 flags = SHOULD_SHOW_SYSTEM_DECORATIONS         │
+│       ↓                                                      │
+│  2. [被註解] 清除 SHOULD_SHOW_SYSTEM_DECORATIONS            │
+│       ↓ (flag 未被清除)                                      │
+│  3. 檢查：if (flags & SHOULD_SHOW_SYSTEM_DECORATIONS)       │
+│       → 要求 INTERNAL_SYSTEM_WINDOW 權限                    │
+│       ↓                                                      │
+│  4. App 沒有權限 → SecurityException                        │
+└─────────────────────────────────────────────────────────────┘
 ```
+
+### 為什麼這是安全問題？
+
+雖然最終結果是拋出 Exception（阻止了攻擊），但這破壞了 API 的預期行為：
+
+**正常行為**：
+- Untrusted app 請求 system decorations → flag 被靜默清除 → VirtualDisplay 正常建立（無 system decorations）
+
+**Bug 行為**：
+- Untrusted app 請求 system decorations → flag 未清除 → SecurityException → 無法建立 VirtualDisplay
+
+這導致：
+1. **功能退化**：原本可以正常建立的 VirtualDisplay 現在會失敗
+2. **相容性問題**：依賴此 API 的 app 會 crash
+3. **測試失敗**：CTS 預期靜默清除，而非拋出 Exception
+
+### 兩層防禦設計
+
+Android 的安全模型使用**防禦深度**：
+
+```
+第一層：Flag 清除（預防性）
+  └── 在 flags 被使用前，先清除敏感 flags
+  └── 優雅處理，不影響 app 功能
+
+第二層：權限檢查（保險性）
+  └── 如果 flag 意外保留，用權限檢查擋住
+  └── 會拋出 Exception，影響 app 功能
+```
+
+Bug 破壞了第一層防禦，導致第二層被觸發。
 
 ## 修復方案
 
-移除錯誤的條件判斷，恢復無條件清除邏輯：
+取消註解，恢復 flag 清除邏輯：
 
 ```diff
--        // Optimization: Only strip system decorations flag when necessary.
--        // If OWN_CONTENT_ONLY is set, the display won't mirror sensitive content anyway,
--        // so we can skip this check for better performance.
--        if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0
--                && (flags & VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY) == 0) {
--            flags &= ~VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;
--        }
+-        // BUG: Security check disabled - untrusted displays can now show system decorations
+-        // Original code:
+-        // if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0) {
+-        //     flags &= ~VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;
+-        // }
 +        if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0) {
 +            flags &= ~VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;
 +        }
@@ -102,13 +103,13 @@ if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0) {
 
 ## 關鍵教訓
 
-1. **安全檢查不能「優化」掉**：即使看起來某個路徑不需要檢查，安全檢查應該保持無條件執行
+1. **不要註解掉安全檢查**：即使是「暫時」的，也可能被遺忘
 
-2. **獨立屬性不能混淆**：`OWN_CONTENT_ONLY`（內容來源）和 `SHOULD_SHOW_SYSTEM_DECORATIONS`（UI 渲染）解決不同的問題
+2. **理解防禦深度**：移除一層防禦可能讓系統仍然「安全」，但會破壞功能和相容性
 
-3. **效能 vs 安全**：在安全關鍵路徑上，正確性永遠優先於效能
+3. **註解也是程式碼**：Review 時要注意被註解的程式碼，特別是安全相關的
 
-4. **註解可能是騙人的**：看起來合理的解釋不代表邏輯正確，要驗證假設
+4. **測試的價值**：CTS 測試抓到了這個 bug，即使系統沒有被攻破，功能回退也是問題
 
 ## CTS 測試原理
 
@@ -117,28 +118,31 @@ if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0) {
 ```java
 @Test
 public void testUntrustedSysDecorVirtualDisplay() {
-    // 以普通 app 身份建立 VirtualDisplay
+    // 以普通 app 身份建立 VirtualDisplay，請求 system decorations
     VirtualDisplay display = mDisplayManager.createVirtualDisplay(
         "TestDisplay",
         WIDTH, HEIGHT, DENSITY,
         mSurface,
-        VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY |
         VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS,
         null, null
     );
     
-    // 驗證 SHOULD_SHOW_SYSTEM_DECORATIONS 被正確清除
-    Display.Mode mode = display.getDisplay().getMode();
+    // 預期：VirtualDisplay 正常建立，但 flag 被清除
+    // 實際（有 bug）：拋出 SecurityException
+    
+    assertNotNull("VirtualDisplay should be created", display);
+    
     int actualFlags = display.getDisplay().getFlags();
-    assertFalse(
-        "Untrusted display should not have system decorations",
-        (actualFlags & Display.FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS) != 0
+    assertEquals(
+        "SHOULD_SHOW_SYSTEM_DECORATIONS should be stripped",
+        0,
+        actualFlags & Display.FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS
     );
 }
 ```
 
 ## 難度評估：Hard
 
-- **需要理解跨模組關係**：VirtualDisplay flags、system decorations、安全模型
-- **誤導性強**：註解看起來很合理，需要深入思考才能發現漏洞
-- **安全意識要求高**：需要理解為什麼這是安全問題而非功能問題
+- **需要理解兩層防禦**：為什麼有兩個檢查？移除一個會怎樣？
+- **誤導性強**：看到 Exception 可能以為「安全機制正常運作」
+- **功能 vs 安全**：這是安全 bug 還是功能 bug？答案是兩者皆是

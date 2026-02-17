@@ -3,7 +3,7 @@
   "title": "PendingCallback Event Deduplication Logic Error",
   "domain": "display",
   "difficulty": "hard",
-  "cts_test": "android.hardware.display.cts.DisplayEventTest#testDisplayEvents",
+  "cts_test": "android.display.cts.DisplayEventTest#testDisplayEvents",
   "cts_module": "CtsDisplayTestCases",
   "injection_point": "DIS-040",
   "injection_type": ["COND", "STATE"],
@@ -30,5 +30,9 @@
   ],
   "root_cause": "Incomplete condition check: 'if (last.second == event)' instead of 'if (last.first == displayId && last.second == event)'",
   "fix_complexity": "low",
-  "detection_difficulty": "high"
+  "detection_difficulty": "high",
+  "verified": true,
+  "verified_date": "2026-02-12",
+  "cts_result": "FAIL",
+  "device": "27161FDH20031X"
 }

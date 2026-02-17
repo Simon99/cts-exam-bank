@@ -1,20 +1,36 @@
+# DIS-H002: Display Mode AlternativeRefreshRates Asymmetry Bug
+# Target: frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+# CTS Test: android.display.cts.DisplayTest#testGetSupportedModesOnDefaultDisplay
+# Expected Result: FAIL (alternative refresh rates graph is not symmetric)
+#
+# Bug Description:
+# This patch clears alternativeRefreshRates for non-default modes when copying
+# supportedModes. This breaks the symmetry requirement: if mode A lists mode B
+# as an alternative, mode B should also list mode A. CTS verifies this symmetry.
+
 --- a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
 +++ b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
-@@ -453,8 +453,14 @@ public final class LogicalDisplay {
-             mBaseDisplayInfo.modeId = deviceInfo.modeId;
+@@ -467,8 +467,21 @@
              mBaseDisplayInfo.renderFrameRate = deviceInfo.renderFrameRate;
              mBaseDisplayInfo.defaultModeId = deviceInfo.defaultModeId;
              mBaseDisplayInfo.userPreferredModeId = deviceInfo.userPreferredModeId;
 -            mBaseDisplayInfo.supportedModes = Arrays.copyOf(
 -                    deviceInfo.supportedModes, deviceInfo.supportedModes.length);
-+            // Copy supported modes with state-aware optimization
-+            int modeCount = deviceInfo.supportedModes.length;
-+            if (mDirty && modeCount > 1) {
-+                // Optimization: skip redundant mode when display state changed
-+                modeCount = modeCount - 1;
++            // BUG: Clear alternativeRefreshRates for non-default modes
++            // This breaks the symmetry of the alternative refresh rates graph
++            mBaseDisplayInfo.supportedModes = new Display.Mode[deviceInfo.supportedModes.length];
++            for (int i = 0; i < deviceInfo.supportedModes.length; i++) {
++                Display.Mode orig = deviceInfo.supportedModes[i];
++                if (orig.getModeId() != deviceInfo.defaultModeId) {
++                    // Clear alternativeRefreshRates for non-default modes
++                    mBaseDisplayInfo.supportedModes[i] = new Display.Mode(
++                            orig.getModeId(), orig.getPhysicalWidth(), orig.getPhysicalHeight(),
++                            orig.getRefreshRate(), orig.getVsyncRate(),
++                            new float[0], orig.getSupportedHdrTypes());
++                } else {
++                    mBaseDisplayInfo.supportedModes[i] = orig;
++                }
 +            }
-+            mBaseDisplayInfo.supportedModes = Arrays.copyOf(
-+                    deviceInfo.supportedModes, modeCount);
              mBaseDisplayInfo.colorMode = deviceInfo.colorMode;
              mBaseDisplayInfo.supportedColorModes = Arrays.copyOf(
                      deviceInfo.supportedColorModes,

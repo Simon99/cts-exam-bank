@@ -1,19 +1,25 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+# DIS-H010: User Disabled HDR Types Not Stored Bug
+# Target: frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+# CTS Test: android.display.cts.DisplayTest#testSetUserDisabledHdrTypesStoresDisabledFormatsInSettings
+# Expected Result: FAIL (Settings not updated with disabled HDR types)
+#
+# Bug Description:
+# This patch adds an early return when userDisabledHdrTypes is non-empty,
+# preventing the HDR types from being stored in Settings.Global.
+# The CTS test verifies that disabled HDR types are persisted to settings.
+
 --- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
 +++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-@@ -2313,8 +2313,12 @@ public final class DisplayManagerService extends SystemService {
-             if (displayId != Display.INVALID_DISPLAY) {
-                 setUserPreferredModeForDisplayLocked(displayId, mode);
-             } else {
-                 mUserPreferredMode = mode;
--                storeModeInGlobalSettingsLocked(
--                        resolutionWidth, resolutionHeight, refreshRate, mode);
-+                // Only notify devices when setting a new mode, not when clearing
-+                // to avoid unnecessary display change events during cleanup
-+                if (mode != null) {
-+                    storeModeInGlobalSettingsLocked(
-+                            resolutionWidth, resolutionHeight, refreshRate, mode);
-+                }
+@@ -1322,6 +1322,12 @@ public final class DisplayManagerService extends SystemService {
+                 return;
              }
-         }
-     }
+ 
++            // Bug: Skip storing non-empty arrays to "optimize" performance
++            // This prevents user HDR preferences from being persisted
++            if (userDisabledHdrTypes.length > 0) {
++                return;
++            }
++
+             Arrays.sort(userDisabledHdrTypes);
+             if (Arrays.equals(mUserDisabledHdrTypes, userDisabledHdrTypes)) {
+                 return;

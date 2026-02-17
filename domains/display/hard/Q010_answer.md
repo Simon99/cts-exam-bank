@@ -1,191 +1,83 @@
-# Q010 答案：Display Mode 設置與清除事件
+# 答案：User Disabled HDR Types 設定未被儲存
 
 ## Bug 位置
 
-**檔案**：`frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java`
+**檔案**: `frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java`
 
-**函數**：`setUserPreferredDisplayModeInternal()`
+**方法**: `setUserDisabledHdrTypesInternal()`
 
-**行號**：約 2316-2321
+## Bug 描述
 
----
+在 `setUserDisabledHdrTypesInternal()` 方法中，有一個錯誤的提前返回條件：當 `userDisabledHdrTypes` 數組非空時，方法直接返回，跳過了後續的存儲邏輯。
 
-## 問題程式碼
+### 錯誤程式碼
 
 ```java
-void setUserPreferredDisplayModeInternal(int displayId, Display.Mode mode) {
+private void setUserDisabledHdrTypesInternal(int[] userDisabledHdrTypes) {
     synchronized (mSyncRoot) {
-        // ... 參數驗證 ...
-
-        final int resolutionHeight = mode == null ? Display.INVALID_DISPLAY_HEIGHT
-                : mode.getPhysicalHeight();
-        final int resolutionWidth = mode == null ? Display.INVALID_DISPLAY_WIDTH
-                : mode.getPhysicalWidth();
-        final float refreshRate = mode == null ? Display.INVALID_DISPLAY_REFRESH_RATE
-                : mode.getRefreshRate();
-
-        storeModeInPersistentDataStoreLocked(
-                displayId, resolutionWidth, resolutionHeight, refreshRate);
-        if (displayId != Display.INVALID_DISPLAY) {
-            setUserPreferredModeForDisplayLocked(displayId, mode);
-        } else {
-            mUserPreferredMode = mode;
-            // BUG: 只在 mode != null 時調用 storeModeInGlobalSettingsLocked
-            // 導致 clear 操作不會通知 DisplayDevices
-            if (mode != null) {  // <-- BUG: 這個條件導致 clear 時跳過事件通知
-                storeModeInGlobalSettingsLocked(
-                        resolutionWidth, resolutionHeight, refreshRate, mode);
-            }
+        // ... 驗證邏輯 ...
+        
+        if (!isSubsetOf(Display.HdrCapabilities.HDR_TYPES, userDisabledHdrTypes)) {
+            Slog.e(TAG, "userDisabledHdrTypes contains unexpected types");
+            return;
         }
+
+        // Bug: 提前返回，跳過存儲邏輯
+        if (userDisabledHdrTypes.length > 0) {
+            return;  // <-- 這行是錯誤的
+        }
+
+        // 以下代碼永遠不會執行（對於非空數組）
+        Arrays.sort(userDisabledHdrTypes);
+        // ... 存儲到 Settings.Global ...
     }
 }
 ```
 
----
+### 正確程式碼
 
-## 根因分析
-
-### 問題核心
-
-開發者可能出於「優化」目的，認為清除操作時不需要通知 DisplayDevices（避免「不必要的 display change events」）。然而這破壞了以下契約：
-
-1. **API 契約**：`setGlobalUserPreferredDisplayMode(null)` 應該清除所有設備的 user preferred mode
-2. **事件契約**：任何導致顯示配置變化的操作都應該產生 `EVENT_DISPLAY_CHANGED`
-
-### 事件傳遞機制
-
-```
-setUserPreferredDisplayModeInternal(INVALID_DISPLAY, mode)
-    ↓
-storeModeInGlobalSettingsLocked(...)
-    ↓
-mDisplayDeviceRepo.forEachLocked((device) -> {
-    device.setUserPreferredDisplayModeLocked(mode);  // 遍歷所有設備
-})
-    ↓
-LocalDisplayDevice.setUserPreferredDisplayModeLocked(mode)
-    ↓
-updateDeviceInfoLocked()
-    ↓
-sendDisplayDeviceEventLocked(this, DISPLAY_DEVICE_EVENT_CHANGED)
-    ↓
-最終產生 EVENT_DISPLAY_CHANGED
-```
-
-### 為什麼 Set 成功但 Clear 失敗
-
-| 操作 | mode 值 | 條件 `mode != null` | 調用 storeModeInGlobalSettingsLocked | 產生事件 |
-|------|---------|---------------------|-------------------------------------|----------|
-| Set  | 非 null | true | ✓ | ✓ |
-| Clear | null | false | ✗ | ✗ |
-
----
-
-## 正確的程式碼
+移除錯誤的提前返回條件：
 
 ```java
-void setUserPreferredDisplayModeInternal(int displayId, Display.Mode mode) {
-    synchronized (mSyncRoot) {
-        if (mode != null && !isResolutionAndRefreshRateValid(mode)
-                && displayId == Display.INVALID_DISPLAY) {
-            throw new IllegalArgumentException("width, height and refresh rate of mode should "
-                    + "be greater than 0 when setting the global user preferred display mode.");
-        }
-
-        final int resolutionHeight = mode == null ? Display.INVALID_DISPLAY_HEIGHT
-                : mode.getPhysicalHeight();
-        final int resolutionWidth = mode == null ? Display.INVALID_DISPLAY_WIDTH
-                : mode.getPhysicalWidth();
-        final float refreshRate = mode == null ? Display.INVALID_DISPLAY_REFRESH_RATE
-                : mode.getRefreshRate();
-
-        storeModeInPersistentDataStoreLocked(
-                displayId, resolutionWidth, resolutionHeight, refreshRate);
-        if (displayId != Display.INVALID_DISPLAY) {
-            setUserPreferredModeForDisplayLocked(displayId, mode);
-        } else {
-            mUserPreferredMode = mode;
-            // 無論 mode 是否為 null，都應該通知所有 DisplayDevices
-            storeModeInGlobalSettingsLocked(
-                    resolutionWidth, resolutionHeight, refreshRate, mode);
-        }
-    }
+if (!isSubsetOf(Display.HdrCapabilities.HDR_TYPES, userDisabledHdrTypes)) {
+    Slog.e(TAG, "userDisabledHdrTypes contains unexpected types");
+    return;
 }
+
+// 直接繼續執行，不要提前返回
+Arrays.sort(userDisabledHdrTypes);
+// ... 存儲到 Settings.Global ...
 ```
 
----
+## 根本原因分析
 
-## 修復 Patch
+### 1. 邏輯錯誤
 
-```diff
-@@ -2313,12 +2313,8 @@ public final class DisplayManagerService extends SystemService {
-             if (displayId != Display.INVALID_DISPLAY) {
-                 setUserPreferredModeForDisplayLocked(displayId, mode);
-             } else {
-                 mUserPreferredMode = mode;
--                // Only notify devices when setting a new mode, not when clearing
--                // to avoid unnecessary display change events during cleanup
--                if (mode != null) {
--                    storeModeInGlobalSettingsLocked(
--                            resolutionWidth, resolutionHeight, refreshRate, mode);
--                }
-+                storeModeInGlobalSettingsLocked(
-+                        resolutionWidth, resolutionHeight, refreshRate, mode);
-             }
-         }
-     }
-```
+Bug 的作者可能誤以為這是一個「優化」— 如果數組非空就不需要存儲。但實際上：
+- 非空數組正是需要被存儲的情況
+- 空數組反而是「清除設定」的情況
 
----
+### 2. 影響範圍
 
-## 深入理解
+- 使用者禁用 HDR 類型的設定無法被持久化
+- 設備重啟後，禁用設定會丟失
+- 可能導致使用者體驗不一致（設定總是「重置」）
 
-### 為什麼 Clear 也需要事件
+## CTS 測試失敗分析
 
-1. **應用程式監聽**：App 可能監聽 display changes 來調整 UI
-2. **系統一致性**：WMS、SurfaceFlinger 等需要知道 mode 變更
-3. **測試契約**：CTS 驗證 API 行為符合文檔
+測試流程：
+1. 調用 `setUserDisabledHdrTypes([DOLBY_VISION, HLG])`
+2. 讀取 `Settings.Global.USER_DISABLED_HDR_FORMATS`
+3. 驗證值為 "1,3"（DOLBY_VISION=1, HLG=3）
 
-### storeModeInGlobalSettingsLocked 對 null mode 的處理
+由於 bug，步驟 1 沒有實際存儲值，步驟 2 讀到空字符串或舊值，導致步驟 3 驗證失敗。
 
-查看 `LocalDisplayDevice.setUserPreferredDisplayModeLocked(null)` 的實現：
+## 修復方案
 
-```java
-public void setUserPreferredDisplayModeLocked(Display.Mode mode) {
-    final int oldModeId = getPreferredModeId();
-    mUserPreferredMode = mode;
-    
-    // 當 mode 為 null 時，重置 default mode
-    if (mode == null && mSystemPreferredModeId != INVALID_MODE_ID) {
-        mDefaultModeId = mSystemPreferredModeId;
-    }
-    // ...
-    
-    if (oldModeId == getPreferredModeId()) {
-        return;  // 無變化則不發事件
-    }
-    
-    updateDeviceInfoLocked();  // 發送 DISPLAY_DEVICE_EVENT_CHANGED
-}
-```
+刪除錯誤的提前返回條件，讓方法正常執行存儲邏輯。
 
-可見 LocalDisplayDevice 已經正確處理了 `mode == null` 的情況，會：
-1. 重置 `mDefaultModeId` 到系統預設值
-2. 如果 mode 真的變化了，發送 display changed 事件
+## 教訓
 
----
-
-## 關鍵教訓
-
-1. **對稱性原則**：Set 和 Clear 操作應該有對稱的行為
-2. **不要過度優化**：「避免不必要的事件」可能破壞 API 契約
-3. **閱讀下游處理**：下游函數（如 `setUserPreferredDisplayModeLocked`）可能已經有防重複機制
-
----
-
-## 相關知識點
-
-- Display Mode 管理架構
-- DisplayManagerService 事件傳遞機制
-- Global vs Per-Display 設置的差異
-- CTS 測試對 API 行為的驗證
+1. **提前返回的危險**：每個 return 語句都應該仔細檢查是否會跳過必要的邏輯
+2. **單元測試覆蓋**：這種 bug 應該被基本的單元測試捕獲
+3. **代碼審查**：提前返回條件需要特別注意審查

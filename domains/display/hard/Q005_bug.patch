@@ -1,15 +1,27 @@
---- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-@@ -1112,8 +1112,10 @@ public final class DisplayManagerService extends SystemService {
-         // in RefreshRateSelector::getFrameRateDivisor
-         Display.Mode currentMode = info.getMode();
-         float numPeriods = currentMode.getRefreshRate() / frameRateHz;
--        float numPeriodsRound = Math.round(numPeriods);
--        if (Math.abs(numPeriods - numPeriodsRound) > THRESHOLD_FOR_REFRESH_RATES_DIVISORS) {
-+        // Use floor for better performance and to avoid floating point rounding issues
-+        float numPeriodsRound = (float) Math.floor(numPeriods + 0.4999);
-+        // Check if the difference is within acceptable bounds
-+        if (Math.abs(numPeriods - numPeriodsRound) >= THRESHOLD_FOR_REFRESH_RATES_DIVISORS) {
-             return info;
-         }
-         frameRateHz = currentMode.getRefreshRate() / numPeriodsRound;
+# DIS-H005: Display Mode Alternative Refresh Rates 被清空
+# Target: frameworks/base/services/core/java/com/android/server/display/LocalDisplayAdapter.java
+# CTS Test: android.display.cts.DisplayTest#testGetSupportedModesOnDefaultDisplay
+# Expected Result: FAIL (could not find alternative display mode)
+#
+# Bug Description:
+# This patch clears the alternativeRefreshRates array for modes that are not
+# the first mode. This breaks the symmetry check - mode A lists B as alternative
+# but mode B has no alternatives listed.
+
+--- a/services/core/java/com/android/server/display/LocalDisplayAdapter.java
++++ b/services/core/java/com/android/server/display/LocalDisplayAdapter.java
+@@ -351,7 +351,12 @@ class LocalDisplayAdapter extends DisplayAdapter {
+                 // supported modes then check to see if we have one in the prior set of supported
+                 // modes to reuse.
+                 DisplayModeRecord record = findDisplayModeRecord(mode, alternativeRefreshRates);
+                 if (record == null) {
+-                    float[] alternativeRates = new float[alternativeRefreshRates.size()];
++                    // BUG: Only first mode gets alternatives, others get empty array
++                    // This breaks symmetry: first mode lists others as alternatives,
++                    // but other modes don't list first mode as alternative
++                    float[] alternativeRates = (i == 0)
++                            ? new float[alternativeRefreshRates.size()]
++                            : new float[0];
+                     for (int j = 0; j < alternativeRates.length; j++) {
+                         alternativeRates[j] = alternativeRefreshRates.get(j);
+                     }

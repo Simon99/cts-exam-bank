@@ -1,55 +1,64 @@
-# CTS 題目：Display Mode 支援清單不完整
+# DIS-H004: Display Mode Alternative Refresh Rates 對稱性錯誤
 
-## 🎯 失敗的 CTS 測試
+## 難度：Hard ⭐⭐⭐
+
+## 失敗的 CTS 測試
 
 ```
 android.display.cts.DisplayTest#testGetSupportedModesOnDefaultDisplay
 ```
 
-**模組**: `CtsDisplayTestCases`
+## 測試目的
 
-## 📋 測試失敗訊息
+此測試驗證 **alternativeRefreshRates 的對稱性**：如果 mode A 列出 mode B 作為 alternative，則 mode B 也必須列出 mode A。
+
+## 背景知識
+
+### Alternative Refresh Rates
+
+Android 設備可能支援多個 display modes（如 60Hz、90Hz、120Hz）。對於同解析度的 modes，系統會建立 alternative 關係：
 
 ```
-junit.framework.AssertionFailedError: Could not find alternative display mode 
-with refresh rate 90.0 for Mode{mPhysicalWidth=1080, mPhysicalHeight=2400, 
-mRefreshRate=60.0, mAlternativeRefreshRates=[90.0, 120.0]}. 
-All supported modes are [Mode{id=1, w=1080, h=2400, fps=60.0, ...}, 
-Mode{id=2, w=1080, h=2400, fps=90.0, ...}]
-    at android.display.cts.DisplayTest.testGetSupportedModesOnDefaultDisplay(DisplayTest.java:889)
+Mode 1 (60Hz)                    Mode 2 (90Hz)
+├── alternativeRefreshRates      ├── alternativeRefreshRates
+│   └── [90.0]          ←→      │   └── [60.0]
 ```
 
-## 🔍 問題描述
+### 對稱性要求
 
-在支援多重新率模式的設備上（如 60Hz/90Hz/120Hz），CTS 測試 `testGetSupportedModesOnDefaultDisplay` 間歇性失敗。測試驗證 `getSupportedModes()` 返回的所有顯示模式，確保每個模式的 `alternativeRefreshRates` 中列出的刷新率都有對應的模式存在。
+```
+如果 A.alternatives 包含 B
+則 B.alternatives 必須包含 A
+```
 
-**奇怪的現象**：
-- 在只支援單一刷新率的設備上測試通過
-- 在支援 2 個或更多刷新率的設備上，有時會失敗
-- 錯誤訊息顯示某個 alternative rate 找不到對應的模式
-- 用 `adb shell dumpsys display` 檢查時，設備確實支援該刷新率
+這是 CTS 測試的核心驗證邏輯。
 
-## 📁 相關源碼檔案
+## 相關程式碼位置
 
-請檢查以下檔案：
-- `frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java`
+```
+frameworks/base/services/core/java/com/android/server/display/
+└── LocalDisplayAdapter.java
+    └── updateDisplayModesLocked() (約 310-360 行)
+```
 
-重點關注 `updateLocked()` 方法中 `supportedModes` 的處理邏輯（約 470 行附近）。
+## 測試失敗訊息
 
-## 💡 提示
+```
+java.lang.AssertionError: Expected {id=1, fps=60.0, alternativeRefreshRates=[90.0]} 
+to be listed as alternative refresh rate of 
+{id=2, fps=90.0, alternativeRefreshRates=[]}
+```
 
-1. CTS 測試使用 Union-Find 演算法驗證 mode 之間的對稱性
-2. 測試假設如果 Mode A 的 alternativeRefreshRates 包含 Rate X，那麼一定存在一個 Mode B 的 refreshRate 等於 Rate X
-3. 注意陣列複製時的邊界計算
-4. 思考：什麼情況下會導致「modes 數量」與預期不符？
+## 提示
 
-## ⏱️ 建議時間
+1. **理解 alternative 的建立邏輯**：在哪裡決定哪些 modes 是 alternatives？
+2. **對稱性條件**：`j != i` 的條件是否正確？
+3. **迴圈索引**：i 和 j 的關係會影響結果嗎？
 
-35 分鐘
+## 你的任務
 
-## 📝 作答要求
+找出為什麼 alternativeRefreshRates 的對稱性被破壞。
 
-1. 找出 bug 的精確位置（檔案名稱與行號）
-2. 解釋 bug 的成因與觸發條件
-3. 說明為什麼這個 bug 會導致 CTS 測試失敗
-4. 提供修復方案
+---
+
+**提交格式**：指出 bug 所在的程式碼位置，解釋 bug 的成因，並提供修復方案。

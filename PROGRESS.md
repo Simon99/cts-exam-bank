@@ -1,17 +1,80 @@
 # CTS 題庫進度追蹤
 
-**最後更新**: 2026-02-11 12:43 GMT+8
+**最後更新**: 2026-02-17 17:50 GMT+8
 
 ## 當前階段
 
 - Phase A：建立注入點分布列表 ✅
 - Phase B：題目產生 ✅
-- **Phase C：Dry Run 驗證** ✅
+- Phase C：Dry Run 驗證 ✅
+- **Phase C：真機驗證** 🔄 進行中
 
 ### 題庫狀態
 - **總題數：473 題**（15 領域）
 - **Dry Run 成功率：100%**（473/473）
 - 詳見 [DOMAIN_STATUS.md](DOMAIN_STATUS.md)
+
+---
+
+## Phase C 真機驗證進度
+
+### Display 模組驗證狀態
+
+#### Display Hard (H001-H010)
+
+| 題目 | 驗證結果 | Issue | 說明 |
+|------|----------|-------|------|
+| H001 | ✅ PASS | Issue_0001 Resolved | RefreshRate 精度錯誤 |
+| H002 | ⚠️ Issue | Issue_0002 重新設計中 | 系統崩潰 |
+| H003 | ✅ PASS | Issue_0003 Resolved | Mode 切換被拒絕 |
+| H004 | ✅ PASS | Issue_0004 Resolved | 對稱性錯誤 |
+| H005 | ❌ Unfixable | Issue_0005 | 無法設計可偵測 bug |
+| H006 | ✅ PASS | Issue_0006 Resolved | Event deduplication |
+| H007 | ✅ PASS | Issue_0007 Resolved | Callback 清理 |
+| H008 | ✅ PASS | Issue_0008 Resolved | 權限檢查繞過 |
+| H009 | ⚠️ Issue | Issue_0009 | 需要 Android TV |
+| H010 | ⚠️ Issue | Issue_0010 | 需要 Android TV |
+
+**Display Hard 統計：7 Resolved / 1 Unfixable / 2 需 TV**
+
+#### Display Medium (Q001-Q010)
+
+| 題目 | 驗證結果 | 說明 |
+|------|----------|------|
+| Q001-Q004 | ⚠️ Issue | BrightnessTest 被跳過（AOSP 缺 BRIGHTNESS_SLIDER_USAGE 權限）|
+| **Q005** | ✅ **PASS** | **2026-02-17 驗證通過** (2P/8F) |
+| Q006-Q010 | ✅ PASS | 早期驗證通過 |
+
+**Display Medium 統計：6/10 通過 / 4 待處理（BrightnessTest）**
+
+#### Display Easy (Q001-Q004)
+
+| 題目 | 驗證結果 | 說明 |
+|------|----------|------|
+| Q001 | ✅ PASS | HDR 亮度值交換 |
+| Q002 | ❓ 未驗證 | Display 模式列表為空 |
+| Q003 | ✅ PASS | Wide Color Gamut 判斷反轉 |
+| Q004 | ✅ PASS | 亮度權限檢查缺失 |
+
+**Display Easy 統計：3/4 通過**
+
+---
+
+### Issue 列表
+
+| Issue | 題目 | 類型 | 狀態 | 日期 |
+|-------|------|------|------|------|
+| Issue_0001 | DIS-H001 | Bug/CTS 不匹配 | ✅ Resolved | 2026-02-12 |
+| Issue_0002 | DIS-H002 | 系統崩潰 | 🔄 重新設計中 | - |
+| Issue_0003 | DIS-H003 | Bug 未被偵測 | ✅ Resolved | 2026-02-12 |
+| Issue_0004 | DIS-H004 | 會崩潰 | ✅ Resolved | 2026-02-12 |
+| Issue_0005 | DIS-H005 | 無法設計 | ❌ Unfixable | 2026-02-12 |
+| Issue_0006 | DIS-H006 | Bug 調整 | ✅ Resolved | 2026-02-13 |
+| Issue_0007 | DIS-H007 | Bug 調整 | ✅ Resolved | 2026-02-13 |
+| Issue_0008 | DIS-H008 | Bug 調整 | ✅ Resolved | 2026-02-13 |
+| Issue_0009 | DIS-H009 | 需要 Android TV | ⚠️ 待處理 | - |
+| Issue_0010 | DIS-H010 | 需要 Android TV | ⚠️ 待處理 | - |
+| Issue_0011 | DIS-M001~M004 | BrightnessTest 被跳過 | ⚠️ 待建立 | - |
 
 ---
 
@@ -24,10 +87,6 @@
 | **camera** | 51 | 27 | 189% ✅ | `questions/camera/` |
 | **display** | 28 | 52 | 54% 🔄 | `questions/display/` |
 | **總計** | **79** | 79 | — | |
-
-### 🔄 進行中
-
-- **display** — 目前有 ~15 個 sub-agents 並行產題中
 
 ### 📋 待處理
 
@@ -65,28 +124,32 @@
 
 **難度分布**: Easy 36% / Medium 42% / Hard 22%
 
-### 📋 待處理模組
-
-| 優先級 | 模組 | CTS 路徑 | 備註 |
-|--------|------|----------|------|
-| 中 | app | `cts/tests/app/` | Activity、Service 等 |
-| 中 | accessibilityservice | `cts/tests/accessibilityservice/` | 無障礙服務 |
-| 中 | admin | `cts/tests/admin/` | 設備管理 |
-| 低 | backup | `cts/tests/backup/` | 備份 |
-| 低 | atv | `cts/tests/atv/` | Android TV |
-
 ---
 
 ## 更新歷史
+
+### 2026-02-17 17:50
+- **Display Medium Q005 真機驗證通過** ✅
+  - CTS 結果：2 PASSED / 8 FAILED
+  - VirtualDisplayTest 成功檢測到 bug
+- 更新 Display Hard Issue 狀態：7 Resolved, 1 Unfixable
+- 確認 Medium Q001-Q004 需生成 Issue（BrightnessTest 被跳過）
+
+### 2026-02-13 06:10
+- **Display Hard H006-H010 真機驗證完成**
+- H006, H008 驗證通過
+- H007, H009 Bug 未被偵測 → 新增 Issue_0006, Issue_0007
+- H010 測試需要 Android TV → 新增 Issue_0008
+
+### 2026-02-12
+- Display Hard H001-H005 Issue 處理
+- Issue_0001, 0003, 0004 已解決
+- Issue_0005 標記為 Unfixable
 
 ### 2026-02-10 17:55
 - **Phase B 開始！**
 - camera 模組完成 51 題（超額完成）
 - display 模組進行中，已完成 28 題
-
-### 2026-02-10 22:35
-- 新增 5 個模組的注入點列表：sensor, AlarmManager, vibrator, input, security
-- 總注入點數達 586 個
 
 ---
 
@@ -94,44 +157,4 @@
 
 - `QUESTION_GENERATION_FLOW.md` (v1.4.0) — 三階段流程定義
 - `REVIEW_CRITERIA.md` — 審查標準
-
----
-
-## 2026-02-10 結構說明
-
-### 題目來源差異
-
-| 領域 | questions/ | domains/ | 總計 | 說明 |
-|------|------------|----------|------|------|
-| camera | 51 | 33 | 84 | 兩套並存 |
-| display | 44 | 30 | 74 | 兩套並存 |
-| 其他 13 領域 | 0 | 30 | 30 | 僅新格式 |
-
-### 原因
-- `questions/` 是早期格式（CAM-001, DIS-001 命名）
-- `domains/` 是標準化格式（easy/medium/hard 子目錄，Q001 命名）
-- camera 和 display 是最早開發的領域，保留了兩套
-
-### 檔案結構對照
-
-**舊格式 (questions/)**
-```
-questions/camera/CAM-001_xxx/
-├── meta.json
-├── question.md
-├── answer.md
-└── patch.diff
-```
-
-**新格式 (domains/)**
-```
-domains/camera/easy/
-├── Q001_question.md
-├── Q001_answer.md
-├── Q001_meta.json
-└── Q001_bug.patch
-```
-
-### 待決定
-- [ ] 是否合併兩套格式
-- [ ] 是否統一命名規範
+- `domains/display/STATUS.md` — Display 模組詳細狀態

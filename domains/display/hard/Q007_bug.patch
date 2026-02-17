@@ -1,14 +1,23 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-index a1b2c3d4e..f5e6g7h8i 100644
+# DIS-H007: Display Event Mask Mismatch Bug
+# Target: frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+# CTS Test: android.display.cts.DisplayEventTest#testDisplayEvents
+# Expected Result: FAIL (DISPLAY_CHANGED events not delivered to listeners)
+#
+# Bug Description:
+# This patch incorrectly checks EVENT_FLAG_DISPLAY_BRIGHTNESS instead of
+# EVENT_FLAG_DISPLAY_CHANGED in shouldSendEvent(). Since default listeners
+# don't subscribe to BRIGHTNESS events, DISPLAY_CHANGED events are silently
+# dropped. CTS verifies that display changes (e.g., resize) generate events.
+
 --- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
 +++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-@@ -3585,7 +3585,8 @@ public final class DisplayManagerService extends SystemService {
-         }
- 
-         public void updateEventsMask(@EventsMask long eventsMask) {
--            mEventsMask.set(eventsMask);
-+            // Accumulate event masks to ensure all historical subscriptions are preserved
-+            mEventsMask.getAndAccumulate(eventsMask, (prev, update) -> prev | update);
-         }
- 
-         @Override
+@@ -3634,7 +3634,8 @@ public final class DisplayManagerService extends SystemService {
+                 case DisplayManagerGlobal.EVENT_DISPLAY_ADDED:
+                     return (mask & DisplayManager.EVENT_FLAG_DISPLAY_ADDED) != 0;
+                 case DisplayManagerGlobal.EVENT_DISPLAY_CHANGED:
+-                    return (mask & DisplayManager.EVENT_FLAG_DISPLAY_CHANGED) != 0;
++                    // Bug: Check wrong flag - brightness instead of changed
++                    return (mask & DisplayManager.EVENT_FLAG_DISPLAY_BRIGHTNESS) != 0;
+                 case DisplayManagerGlobal.EVENT_DISPLAY_BRIGHTNESS_CHANGED:
+                     return (mask & DisplayManager.EVENT_FLAG_DISPLAY_BRIGHTNESS) != 0;
+                 case DisplayManagerGlobal.EVENT_DISPLAY_REMOVED:

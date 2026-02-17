@@ -1,34 +1,26 @@
 {
   "id": "DIS-H007",
-  "title": "Display Event Listener Mask 狀態管理問題 - AtomicLong 操作語義錯誤",
+  "title": "Display Event Listener DISPLAY_CHANGED Event Not Delivered",
   "domain": "display",
   "difficulty": "hard",
-  "cts_test": "android.hardware.display.cts.DisplayEventTest#testDisplayEvents",
+  "cts_test": "android.display.cts.DisplayEventTest#testDisplayEvents",
   "cts_module": "CtsDisplayTestCases",
-  "injection_point": "DIS-041",
-  "injection_type": ["STATE", "SYNC"],
+  "injection_point": "DIS-025",
+  "injection_type": ["LOGIC", "FLAG_MISMATCH"],
   "affected_files": [
     "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
   ],
   "tags": [
-    "CallbackRecord",
-    "AtomicLong",
-    "eventsMask",
-    "state-management",
-    "accumulator-bug",
-    "subscription-leak",
-    "thread-safety"
+    "display-event",
+    "event-listener",
+    "flag-mismatch",
+    "event-filtering",
+    "callback"
   ],
   "estimated_time_minutes": 35,
-  "key_concepts": [
-    "AtomicLong 操作語義（set vs getAndAccumulate）",
-    "位元遮罩狀態管理",
-    "事件訂閱/退訂機制",
-    "累加器模式的誤用"
-  ],
-  "hints_available": 3,
-  "solution_line_range": {
-    "start": 3588,
-    "end": 3590
-  }
+  "bug_description": "shouldSendEvent() checks wrong flag for DISPLAY_CHANGED events, causing them to be silently dropped",
+  "root_cause": "EVENT_FLAG_DISPLAY_BRIGHTNESS checked instead of EVENT_FLAG_DISPLAY_CHANGED",
+  "fix_complexity": "Change flag constant in switch-case",
+  "created_at": "2025-01-25T09:00:00+08:00",
+  "updated_at": "2026-02-13T07:00:00+08:00"
 }

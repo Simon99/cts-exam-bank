@@ -1,22 +1,23 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
-index abc1234..def5678 100644
---- a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
-@@ -467,8 +467,15 @@ final class LogicalDisplay {
-             mBaseDisplayInfo.renderFrameRate = deviceInfo.renderFrameRate;
-             mBaseDisplayInfo.defaultModeId = deviceInfo.defaultModeId;
-             mBaseDisplayInfo.userPreferredModeId = deviceInfo.userPreferredModeId;
--            mBaseDisplayInfo.supportedModes = Arrays.copyOf(
--                    deviceInfo.supportedModes, deviceInfo.supportedModes.length);
-+            // Calculate effective modes count considering array bounds
-+            int modesCount = deviceInfo.supportedModes.length;
-+            // Ensure we don't exceed array capacity when there are many modes
-+            int effectiveCount = modesCount > 1
-+                    ? Math.min(modesCount - 1, deviceInfo.supportedModes.length)
-+                    : modesCount;
-+            mBaseDisplayInfo.supportedModes = Arrays.copyOf(
-+                    deviceInfo.supportedModes,
-+                    effectiveCount);
-             mBaseDisplayInfo.colorMode = deviceInfo.colorMode;
-             mBaseDisplayInfo.supportedColorModes = Arrays.copyOf(
-                     deviceInfo.supportedColorModes,
+# DIS-H004: Display Mode Alternative Refresh Rates 對稱性錯誤
+# Target: frameworks/base/services/core/java/com/android/server/display/LocalDisplayAdapter.java
+# CTS Test: android.display.cts.DisplayTest#testGetSupportedModesOnDefaultDisplay
+# Expected Result: FAIL (alternativeRefreshRates symmetry check failed)
+#
+# Bug Description:
+# This patch introduces an asymmetry in alternativeRefreshRates by only adding
+# alternatives when j > i, breaking the bidirectional relationship that CTS expects.
+
+--- a/services/core/java/com/android/server/display/LocalDisplayAdapter.java
++++ b/services/core/java/com/android/server/display/LocalDisplayAdapter.java
+@@ -320,7 +320,10 @@ class LocalDisplayAdapter extends DisplayAdapter {
+                 List<Float> alternativeRefreshRates = new ArrayList<>();
+                 for (int j = 0; j < displayModes.length; j++) {
+                     SurfaceControl.DisplayMode other = displayModes[j];
+-                    boolean isAlternative = j != i && other.width == mode.width
++                    // BUG: Only consider modes with higher index as alternatives
++                    // This breaks symmetry: if A lists B as alternative,
++                    // B should also list A, but this condition prevents it
++                    boolean isAlternative = j > i && other.width == mode.width
+                             && other.height == mode.height
+                             && other.peakRefreshRate != mode.peakRefreshRate
+                             && other.group == mode.group;
