@@ -1,31 +1,43 @@
 {
   "id": "DIS-M001",
-  "title": "BrightnessTracker 競態條件導致亮度事件遺失",
+  "title": "Display Mode Alternative Refresh Rates 對稱性被破壞",
   "domain": "display",
   "difficulty": "medium",
-  "cts_test": "android.hardware.display.cts.BrightnessTest#testBrightnessSliderTracking",
+  "cts_test": "android.display.cts.DisplayTest#testGetSupportedModesOnDefaultDisplay",
   "cts_module": "CtsDisplayTestCases",
-  "injection_point": "DIS-002",
-  "injection_type": ["STATE", "ERR"],
-  "affected_files": [
-    "frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java"
+  "injection_point": "LocalDisplayAdapter-alternativeRefreshRates",
+  "injection_type": [
+    "BOUND"
   ],
-  "bug_type": "race_condition",
-  "root_cause": "mEventsDirty flag set outside synchronized block",
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/LocalDisplayAdapter.java"
+  ],
+  "bug_type": "off_by_one",
+  "root_cause": "Loop termination condition uses length-1 instead of length, skipping last element",
   "tags": [
-    "threading",
-    "race-condition",
-    "synchronization",
-    "dirty-flag",
-    "state-management",
-    "multi-core"
+    "off-by-one",
+    "boundary-condition",
+    "array-traversal",
+    "display-mode",
+    "refresh-rate",
+    "symmetry"
   ],
   "skills_tested": [
-    "多線程同步分析",
-    "跨函數狀態追蹤",
-    "競態條件識別"
+    "邊界條件分析",
+    "迴圈終止條件檢查",
+    "對稱關係理解"
   ],
   "estimated_time_minutes": 25,
-  "created_at": "2025-01-25",
-  "version": "1.0"
+  "created_at": "2025-02-18",
+  "version": "2.0",
+  "verified": true,
+  "verified_at": "2025-02-18T00:18:00+08:00",
+  "verification_status": "complete",
+  "verification_date": "2026-02-21",
+  "verification_issues": [],
+  "cts_summary": {
+    "passed": 2,
+    "failed": 8,
+    "total": 10
+  }
 }

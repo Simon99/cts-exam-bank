@@ -1,11 +1,18 @@
---- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-@@ -4201,7 +4201,7 @@ public final class DisplayManagerService extends SystemService {
-             final long token = Binder.clearCallingIdentity();
-             try {
-                 synchronized (mSyncRoot) {
--                    return mDisplayPowerControllers.get(Display.DEFAULT_DISPLAY)
-+                    return mDisplayPowerControllers.get(Display.INVALID_DISPLAY)
-                             .getDefaultBrightnessConfiguration();
-                 }
-             } finally {
+diff --git a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+index abc1234..def5678 100644
+--- a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+@@ -346,9 +346,10 @@ final class OverlayDisplayAdapter extends DisplayAdapter {
+                 mInfo.renderFrameRate = mode.getRefreshRate();
+                 mInfo.defaultModeId = mModes[0].getModeId();
+                 mInfo.supportedModes = mModes;
+-                mInfo.densityDpi = rawMode.mDensityDpi;
+-                mInfo.xDpi = rawMode.mDensityDpi;
+-                mInfo.yDpi = rawMode.mDensityDpi;
++                // BUG: Off-by-one error in DPI calculation
++                mInfo.densityDpi = rawMode.mDensityDpi + 1;
++                mInfo.xDpi = rawMode.mDensityDpi + 1;
++                mInfo.yDpi = rawMode.mDensityDpi + 1;
+                 mInfo.presentationDeadlineNanos = mDisplayPresentationDeadlineNanos +
+                         1000000000L / (int) mInfo.renderFrameRate;   // 1 frame
+                 mInfo.flags = DisplayDeviceInfo.FLAG_PRESENTATION;

@@ -1,0 +1,36 @@
+02-22 01:25:31.221 10108  3500  5090 W MediaProvider: isAppCloneUserPair for user 0: false
+02-22 01:25:31.239  1000  1463  2774 D WifiNetworkSelector: Current connected network: 0
+02-22 01:25:31.239  1000  1463  2774 D WifiNetworkSelector: Current network is recently user-selected
+02-22 01:25:31.240  1000  1463  2774 V WifiConnectivityManager: No partial scan because firmware roaming is supported.
+02-22 01:25:31.240  1000  1463  2774 V WifiConnectivityManager: schedulePeriodicScanTimer intervalMs 20000
+02-22 01:25:31.400 10108  3500  3844 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-22 01:25:31.647  root  1137  1137 I logbuffer_pcie1: [  140] D state: 0, LTSSM: 0
+02-22 01:25:31.648  root  1137  1137 I logbuffer_pcie1: [  141] L0(0x11)
+02-22 01:25:31.651  root  1137  1137 I pcieh 0000: 01:00.0: enabling device (0000 -> 0002)
+02-22 01:25:31.652  root  1137  1137 W [17:25:31.620951][dhd][wlan]dhd_plat_l1ss_ctrl: Control L1ss RC side 1
+02-22 01:25:31.695  1000  1463  1826 I commit_sys_config_file: [settings-0-0,7]
+02-22 01:25:31.754  1000  1463  1714 I AppsFilter: interaction: PackageSetting{108099c com.android.microdroid.empty_payload/10122} -> PackageSetting{97c34bb com.android.tradefed.utils.wifi/10126} BLOCKED
+02-22 01:25:31.755  1000  1463  1678 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-22 01:25:31.756  1000  1463  1678 D OomAdjuster: Not killing cached processes
+02-22 01:25:31.770  1017   548   548 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-22 01:25:31.810  1000  1463  1714 I commit_sys_config_file: [package,12]
+02-22 01:25:31.813  1000  1463  1714 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-22 01:25:31.813  1000  1463  1714 D PackageManager: Clear ephemeral installer activity
+02-22 01:25:31.841  logd  5246  5246 I logd    : start watching /data/system/packages.list ...
+02-22 01:25:31.815  1000  1463  3986 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-22 01:25:31.849  logd  5246  5246 I logd    : ReadPackageList, total packages: 131
+02-22 01:25:31.822  1000  1463  1714 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=0: pkg removed
+02-22 01:25:31.829  1000  1463  1860 V StorageManagerService: Package com.android.tradefed.utils.wifi does not have legacy storage
+02-22 01:25:31.831 radio  3066  3066 D CarrierSvcBindHelper: onPackageRemoved: com.android.tradefed.utils.wifi
+02-22 01:25:31.832 radio  3066  3247 D EuiccConnector: handleMessage: E msg.what=1
+02-22 01:25:31.832 radio  3066  3247 D EuiccConnector: processMsg: UnavailableState
+02-22 01:25:31.833 radio  3066  3247 W EuiccConnector: No valid EuiccService implementation found
+02-22 01:25:31.833 radio  3066  3247 D EuiccConnector: handleMessage: X
+02-22 01:25:31.833   nfc  3506  3506 I RegisteredComponentCache: New Components => 
+02-22 01:25:31.834   nfc  3506  3506 I RegisteredComponentCache: ComponentInfo: ResolveInfo{2d20d6 com.android.apps.tag/.TagViewer m=0x108000 userHandle=UserHandle{0}}, techs: android.nfc.tech.Ndef, 
+02-22 01:25:31.834   nfc  3506  3506 I RegisteredComponentCache: Removed Components => 
+02-22 01:25:31.834   nfc  3506  3506 I RegisteredComponentCache: ComponentInfo: ResolveInfo{590c087 com.android.apps.tag/.TagViewer m=0x108000 userHandle=UserHandle{0}}, techs: android.nfc.tech.Ndef, 
+02-22 01:25:31.834 radio  3066  3066 D CarrierSvcBindHelper: No carrier app for: 0
+02-22 01:25:31.834 radio  3066  3066 D CarrierSvcBindHelper: No carrier app for: 1
+02-22 01:25:31.838  1000  1463  1677 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+02-22 01:25:31.845 10096  2853  2853 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0

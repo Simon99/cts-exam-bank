@@ -3,11 +3,16 @@
   "title": "Trusted Virtual Display 權限驗證條件反轉",
   "domain": "display",
   "difficulty": "medium",
-  "cts_test": "android.hardware.display.cts.VirtualDisplayTest#testTrustedVirtualDisplay",
+  "cts_test": "android.display.cts.VirtualDisplayTest#testTrustedVirtualDisplay",
   "cts_module": "CtsDisplayTestCases",
   "injection_point": "DIS-016",
-  "injection_type": ["COND", "ERR"],
-  "affected_files": ["frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"],
+  "injection_type": [
+    "COND",
+    "ERR"
+  ],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
+  ],
   "tags": [
     "virtual-display",
     "trusted-display",
@@ -27,5 +32,17 @@
     "注意權限檢查方法的返回值意義",
     "觀察 if 條件中的邏輯運算符",
     "思考：有權限時應該發生什麼，沒權限時應該發生什麼"
-  ]
+  ],
+  "verified": true,
+  "verified_date": "2026-02-17",
+  "cts_result": "FAIL",
+  "device": "27161FDH20031X",
+  "verification_status": "complete",
+  "verification_date": "2026-02-21",
+  "cts_summary": {
+    "passed": 0,
+    "failed": 2,
+    "total": 2
+  },
+  "verification_issues": []
 }

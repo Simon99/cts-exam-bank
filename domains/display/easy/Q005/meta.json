@@ -1,23 +1,35 @@
 {
   "id": "DIS-E005",
-  "title": "VirtualDisplayDevice 初始狀態設置錯誤",
+  "title": "Overlay Display xDpi Off-by-One 錯誤",
   "domain": "display",
   "difficulty": "easy",
-  "cts_test": "android.hardware.display.cts.VirtualDisplayTest#testPrivateVirtualDisplay",
+  "cts_test": "android.display.cts.DisplayTest#testGetMetrics",
   "cts_module": "CtsDisplayTestCases",
-  "injection_point": "DIS-010",
-  "injection_type": ["STATE"],
+  "injection_point": "DIS-025",
+  "injection_type": [
+    "BOUND",
+    "CALC"
+  ],
   "affected_files": [
-    "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java"
+    "frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java"
   ],
   "tags": [
-    "virtual-display",
-    "state-initialization",
-    "constructor",
-    "display-state"
+    "off-by-one",
+    "xdpi-calculation",
+    "overlay-display",
+    "display-metrics"
   ],
-  "estimated_time_minutes": 15,
-  "bug_description": "VirtualDisplayDevice 建構子中 mDisplayState 被錯誤初始化為 STATE_OFF 而非 STATE_UNKNOWN",
-  "root_cause": "初始狀態語義錯誤，新建立的 virtual display 狀態應為「未知」而非「關閉」",
-  "fix_complexity": "single-line"
+  "estimated_time_minutes": 10,
+  "bug_description": "在 OverlayDisplayAdapter 的 getDisplayDeviceInfoLocked() 方法中，設置 xDpi 時錯誤地加了 1，導致 overlay display 回報錯誤的水平 DPI",
+  "root_cause": "xDpi 計算錯誤，應該直接使用 rawMode.mDensityDpi 而非加 1",
+  "fix_complexity": "single-line",
+  "related_concepts": [
+    "DisplayDeviceInfo",
+    "OverlayDisplayAdapter",
+    "DisplayMetrics.xdpi",
+    "Off-by-one error"
+  ],
+  "verification_status": "pending",
+  "verified": true,
+  "verified_date": "2026-02-22"
 }

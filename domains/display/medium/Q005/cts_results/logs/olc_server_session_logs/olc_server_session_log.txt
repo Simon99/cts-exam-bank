@@ -1,0 +1,804 @@
+02-17 01:18:39 PST I/SessionRunner: Starting session runner fb6a75e1-ba4b-40d3-924a-42068325a711, server_version=[lab_version: "4.302.0" github_version: "b415bbc2cb827b0c9c8c40499b5060baba7001c0" process_id: 1811109 client_version: "4.32.0"], memory_info=[jvm_used=34.29MB, jvm_total=224MB, jvm_max=24GB, heap_used=24.66MB, free=18.51GB, used=41.96GB, total=60.48GB] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:39 PST I/SessionPluginLoader: Loading session plugin: label=[label: "AtsSessionPlugin"], config=[loading_config { plugin_class_name: "com.google.devtools.mobileharness.infra.ats.console.controller.sessionplugin.AtsSessionPlugin" plugin_module_class_name: "com.google.devtools.mobileharness.infra.ats.console.controller.sessionplugin.AtsSessionPluginModule" } execution_config { config { type_url: "type.googleapis.com/mobileharness.infra.ats.console.controller.AtsSessionPluginConfig" value: "\n\224\002\n\003cts\022\v/home/simon\"\023CtsDisplayTestCases(\001:\003ctsj&android.display.cts.VirtualDisplayTestr\262\001\032Tcts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1*\003cts*\002-m*\023CtsDisplayTestCases*\002-t*&android.display.cts.VirtualDisplayTest*\r--shard-count*\0011\200\001\000\210\001\001\330\001\000" } } explicit_label { label: "AtsSessionPlugin" }] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/SessionRunner: Session detail:
+session_id { id: "fb6a75e1-ba4b-40d3-924a-42068325a711" } session_status: SESSION_RUNNING session_config { session_name: "run_command" session_property { key: "olc_server_session_client_id" value: "ats-console-38314757-c960-42fa-a920-bcdaf7310415" } session_plugin_configs { session_plugin_config { loading_config { plugin_class_name: "com.google.devtools.mobileharness.infra.ats.console.controller.sessionplugin.AtsSessionPlugin" plugin_module_class_name: "com.google.devtools.mobileharness.infra.ats.console.controller.sessionplugin.AtsSessionPluginModule" } execution_config { config { [type.googleapis.com/mobileharness.infra.ats.console.controller.AtsSessionPluginConfig] { run_command { test_plan: "cts" xts_root_dir: "/home/simon" module_name: "CtsDisplayTestCases" shard_count: 1 xts_type: "cts" test_name: "android.display.cts.VirtualDisplayTest" initial_state { command_line_args: "cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1" separated_command_line_args: "cts" separated_command_line_args: "-m" separated_command_line_args: "CtsDisplayTestCases" separated_command_line_args: "-t" separated_command_line_args: "android.display.cts.VirtualDisplayTest" separated_command_line_args: "--shard-count" separated_command_line_args: "1" } html_in_zip: false enable_xts_dynamic_download: true report_system_checkers: false } } } } explicit_label { label: "AtsSessionPlugin" } } } } session_output { session_property { key: "olc_server_session_client_id" value: "ats-console-38314757-c960-42fa-a920-bcdaf7310415" } session_timing_info { session_submitted_time { seconds: 1771319919 nanos: 957352605 } } } {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/SessionPluginRunner: Posting SessionStartingEvent {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/SessionPluginRunner: Posting SessionStartingEvent(fb6a75e1-ba4b-40d3-924a-42068325a711) to subscriber [com.google.devtools.mobileharness.infra.ats.console.controller.sessionplugin.AtsSessionPlugin#onSessionStarting(SessionStartingEvent)@1048387663] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/AtsSessionPlugin: Config: run_command { test_plan: "cts" xts_root_dir: "/home/simon" module_name: "CtsDisplayTestCases" shard_count: 1 xts_type: "cts" test_name: "android.display.cts.VirtualDisplayTest" initial_state { command_line_args: "cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1" separated_command_line_args: "cts" separated_command_line_args: "-m" separated_command_line_args: "CtsDisplayTestCases" separated_command_line_args: "-t" separated_command_line_args: "android.display.cts.VirtualDisplayTest" separated_command_line_args: "--shard-count" separated_command_line_args: "1" } html_in_zip: false enable_xts_dynamic_download: true report_system_checkers: false } {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/SessionInfo: New session plugin output, session_id=fb6a75e1-ba4b-40d3-924a-42068325a711, plugin_label=AtsSessionPlugin, new_plugin_output=[run_command_state { command_id: "1" command_line_args: "cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1" separated_command_line_args: "cts" separated_command_line_args: "-m" separated_command_line_args: "CtsDisplayTestCases" separated_command_line_args: "-t" separated_command_line_args: "android.display.cts.VirtualDisplayTest" separated_command_line_args: "--shard-count" separated_command_line_args: "1" }] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/AtsSessionPlugin: Command [1] scheduled, args=[cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/SessionPluginRunner: Subscriber [com.google.devtools.mobileharness.infra.ats.console.controller.sessionplugin.AtsSessionPlugin#onSessionStarting(SessionStartingEvent)@1048387663] handled SessionStartingEvent(fb6a75e1-ba4b-40d3-924a-42068325a711) {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/SessionPluginRunner: Posting SessionStartedEvent {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/SessionPluginRunner: Posting SessionStartedEvent(fb6a75e1-ba4b-40d3-924a-42068325a711) to subscriber [com.google.devtools.mobileharness.infra.ats.console.controller.sessionplugin.AtsSessionPlugin#onSessionStarted(SessionStartedEvent)@1048387663] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/AtsSessionPlugin: Command [1] started, args=[cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/SessionRequestHandlerUtil: Obtained device info: DeviceInfo{deviceId=27161FDH20031X, supportedAbiList=Optional[arm64-v8a], supportedAbi=Optional[arm64-v8a]} {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/TestSuiteHelper: The set of abis running against: [{arm64-v8a, bitness=64}] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/ResUtil: Running on Lab server, use /tmp/mh_res_files as RES_DIR. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/ResUtil: Clean res dir: /tmp/mh_res_files {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/LocalFileUtil: Checked fully accessibility of file /tmp/mh_res_files. Permissions: rwxrwxr-x {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/LocalFileUtil: Checked fully accessibility of file /tmp/mh_res_files/devtools/mobileharness/infra/controller/test/util/xtsdownloader/configs/mcts_list.txt. Permissions: rw-rw-r-- {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/ResUtil: Copy resource /devtools/mobileharness/infra/controller/test/util/xtsdownloader/configs/mcts_list.txt to /tmp/mh_res_files/devtools/mobileharness/infra/controller/test/util/xtsdownloader/configs/mcts_list.txt {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/ResUtil: Resource SessionRequestHandlerUtil_/devtools/mobileharness/infra/controller/test/util/xtsdownloader/configs/mcts_list.txt is already copied to /tmp/mh_res_files/devtools/mobileharness/infra/controller/test/util/xtsdownloader/configs/mcts_list.txt {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/SessionRequestHandlerUtil: All android devices: [27161FDH20031X, 2B231FDH200B4Z] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/SessionRequestHandlerUtil: XtsTradefedTest job config: name: "xts-tradefed-test-job" tests { content: "xts-tradefed-test-cts" } exec_mode: "local" job_timeout_sec: 1296000 test_timeout_sec: 1295940 start_timeout_sec: 1209600 test_attempts: 1 priority: HIGH gen_file_dir: "/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e" driver { name: "XtsTradefedTest" param: "{\"xts_test_plan\":\"cts\",\"xts_root_dir\":\"/home/simon\",\"xts_type\":\"cts\",\"run_command_args\":\"-m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1\"}" } device { sub_device_spec { type: "AndroidDevice" dimensions { content { key: "id" value: "regex:(27161FDH20031X|2B231FDH200B4Z)" } } } } {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/Timeout: Max job timeout is set as PT360H, max test timeout is set as PT360H {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/JobSettingsCreator: Gen file dir: /tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/JobSettingsCreator: Tmp file dir: /tmp/olc_server_temp_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_tmp_xts-tradefed-test-job_bae06db5-902c-4be0-8a2e-f9f63fc8462b {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/JobInfoCreator: Job type is empty, use the first sub device to set job type {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/JobInfoCreator: Gen file dir: /tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/SessionRequestHandlerUtil: Tradefed job info for xts-tradefed-test-job:
+"params": {check_installed_gms_core_version=false, olc_session_client_id=ats-console-38314757-c960-42fa-a920-bcdaf7310415, tags=, clear_gservices_overrides=false}
+"subDeviceSpecs": [[["AndroidDevice",{"id":"regex:(27161FDH20031X|2B231FDH200B4Z)"},[],{}]],[]]
+"files": {} {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/AtsSessionPlugin: Failed to create non-tradefed jobs for session [fb6a75e1-ba4b-40d3-924a-42068325a711] due to skippable exception: [No matched non-tradefed modules to create jobs]. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/SessionPluginRunner: Subscriber [com.google.devtools.mobileharness.infra.ats.console.controller.sessionplugin.AtsSessionPlugin#onSessionStarted(SessionStartedEvent)@1048387663] handled SessionStartedEvent(fb6a75e1-ba4b-40d3-924a-42068325a711) {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/LongevityTestHelper: Acquiring lock to persist job info to /tmp/olc_server_temp_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/persistence/8913ecaf-15c0-4702-b712-4642518490e4.textproto {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/LongevityTestHelper: Start to persist job info to /tmp/olc_server_temp_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/persistence/8913ecaf-15c0-4702-b712-4642518490e4.textproto {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/LongevityTestHelper: Stop persisting job info after PT0.025432447S {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/SessionJobRunner: Starting job 8913ecaf-15c0-4702-b712-4642518490e4 of session fb6a75e1-ba4b-40d3-924a-42068325a711 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/JobManager: JobManager is started {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/TestManager: Started {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/JobManager: Loaded API plugin: com.google.devtools.mobileharness.infra.ats.console.controller.sessionplugin.AtsSessionPlugin {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/JobManager: Started job 8913ecaf-15c0-4702-b712-4642518490e4 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/Status: Status NEW -> RUNNING {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/JobRunner: Job started {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST W/JobInfo: The sub device spec should exist and the global scoped spec should not be used. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/JobRunner: Loading client jar plugins for job 8913ecaf-15c0-4702-b712-4642518490e4 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/PluginCreator: Loading plugins from jars [] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/PluginCreator: No plugin module class name given, searching plugin module classes by plugin module annotation {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/PluginCreator: No plugin class name given, searching plugin class by plugin annotation {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/PluginCreator: No plugin is loaded {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/AtsSessionPlugin: Command [1]'s invocations [f2a6329e-4868-435b-a00c-d8026d16795a] are waiting for devices. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/JobRunner: Pre run job finished {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/JobRunner: Job detail: 
+ID:	8913ecaf-15c0-4702-b712-4642518490e4
+NAME:	xts-tradefed-test-job
+
+DIMENSIONS:
+- id=regex:(27161FDH20031X|2B231FDH200B4Z)
+
+PARAMETERS:
+- olc_session_client_id=ats-console-38314757-c960-42fa-a920-bcdaf7310415
+- xts_log_root_path=/home/simon/android-cts/logs/2026.02.17_17.18.40.043_3970
+- job_persistent_path=/tmp/olc_server_temp_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/persistence/8913ecaf-15c0-4702-b712-4642518490e4.textproto
+- check_installed_gms_core_version=false
+- disable_tf_result_log=true
+- tags=
+- clear_gservices_overrides=false
+
+TESTS:
+- xts-tradefed-test-cts
+ {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/SimpleScheduler: Added job 8913ecaf-15c0-4702-b712-4642518490e4 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/SimpleScheduler: Added test f2a6329e-4868-435b-a00c-d8026d16795a@8913ecaf-15c0-4702-b712-4642518490e4 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:40 PST I/JobRunner: Device allocation started {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:41 PST I/LocalDeviceDispatch: New device 27161FDH20031X
+02-17 01:18:41 PST I/LabStat: New DeviceStat created for 27161FDH20031X
+02-17 01:18:41 PST I/LocalDeviceDispatch: Post LocalDeviceUpEvent
+02-17 01:18:41 PST I/LocalDeviceRunner: Started
+02-17 01:18:41 PST I/LocalDeviceDispatch: New device 2B231FDH200B4Z
+02-17 01:18:41 PST I/LabStat: New DeviceStat created for 2B231FDH200B4Z
+02-17 01:18:41 PST I/LocalDeviceDispatch: Post LocalDeviceUpEvent
+02-17 01:18:41 PST I/LocalDeviceRunner: Started
+02-17 01:18:41 PST I/LocalDeviceDispatch: Current runner count: 2, new round dispatch result: 27161FDH20031X-AndroidRealDevice-LIVE, 2B231FDH200B4Z-AndroidRealDevice-LIVE
+02-17 01:18:41 PST I/PendingTestPrinter: 1 tests waiting for device allocation {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:43 PST I/ApiConfigV5: Device 27161FDH20031X is synced
+02-17 01:18:43 PST I/ApiConfigV5: Device 2B231FDH200B4Z is synced
+02-17 01:18:43 PST I/LocalDeviceRunner: Device config is synced
+02-17 01:18:43 PST I/LocalDeviceRunner: Device config is synced
+02-17 01:18:43 PST I/LocalDeviceRunner: Initializing...
+02-17 01:18:43 PST I/LocalDeviceRunner: Initializing...
+02-17 01:18:43 PST I/AndroidRealDeviceDelegate: Set up online mode device (27161FDH20031X). SetupFailureTimes=1
+02-17 01:18:43 PST I/DeviceCacheManager: Add cache(GENERAL) for device [27161FDH20031X] with timeout PT20M
+02-17 01:18:43 PST I/AndroidSystemStateUtil: Waiting for device 27161FDH20031X online...
+02-17 01:18:43 PST I/AndroidAdbUtil: Waiting for device 27161FDH20031X...
+02-17 01:18:43 PST I/AndroidRealDeviceDelegate: Set up online mode device (2B231FDH200B4Z). SetupFailureTimes=1
+02-17 01:18:43 PST I/DeviceCacheManager: Add cache(GENERAL) for device [2B231FDH200B4Z] with timeout PT20M
+02-17 01:18:43 PST I/AndroidSystemStateUtil: Waiting for device 2B231FDH200B4Z online...
+02-17 01:18:43 PST I/AndroidAdbUtil: Waiting for device 2B231FDH200B4Z...
+02-17 01:18:44 PST I/AndroidSystemStateUtil: Ignore ready check for device 27161FDH20031X when enable_android_device_ready_check is false.
+02-17 01:18:44 PST I/DeviceCacheManager: Invalidating [GENERAL] cache for device [27161FDH20031X] succeeded.
+02-17 01:18:44 PST I/AndroidSystemStateUtil: Ignore ready check for device 2B231FDH200B4Z when enable_android_device_ready_check is false.
+02-17 01:18:44 PST I/DeviceCacheManager: Invalidating [GENERAL] cache for device [2B231FDH200B4Z] succeeded.
+02-17 01:18:44 PST I/DeviceCacheManager: Add cache(GENERAL) for device [27161FDH20031X] with timeout PT8M20S
+02-17 01:18:44 PST I/AndroidSystemStateUtil: Skip rooting device 27161FDH20031X since rooting is disabled.
+02-17 01:18:44 PST I/AndroidSystemStateUtil: Waiting for device 27161FDH20031X online...
+02-17 01:18:44 PST I/AndroidAdbUtil: Waiting for device 27161FDH20031X...
+02-17 01:18:44 PST I/DeviceCacheManager: Add cache(GENERAL) for device [2B231FDH200B4Z] with timeout PT8M20S
+02-17 01:18:44 PST I/AndroidSystemStateUtil: Skip rooting device 2B231FDH200B4Z since rooting is disabled.
+02-17 01:18:44 PST I/AndroidSystemStateUtil: Waiting for device 2B231FDH200B4Z online...
+02-17 01:18:44 PST I/AndroidAdbUtil: Waiting for device 2B231FDH200B4Z...
+02-17 01:18:45 PST I/AndroidSystemStateUtil: Ignore ready check for device 27161FDH20031X when enable_android_device_ready_check is false.
+02-17 01:18:45 PST I/DeviceCacheManager: Invalidating [GENERAL] cache for device [27161FDH20031X] succeeded.
+02-17 01:18:45 PST I/AndroidRealDeviceDelegate: Device 27161FDH20031X is unrooted
+02-17 01:18:45 PST I/AndroidSystemStateUtil: Ignore ready check for device 2B231FDH200B4Z when enable_android_device_ready_check is false.
+02-17 01:18:45 PST I/DeviceCacheManager: Invalidating [GENERAL] cache for device [2B231FDH200B4Z] succeeded.
+02-17 01:18:45 PST I/AndroidRealDeviceDelegate: Device 2B231FDH200B4Z is unrooted
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension abi=[arm64-v8a] (was: []), device_id=27161FDH20031X
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension abi=[arm64-v8a] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension abilist=[arm64-v8a] (was: []), device_id=27161FDH20031X
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension abilist=[arm64-v8a] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension baseband_version=[g5300q-250909-251024-b-14326967,g5300q-250909-251024-b-14326967] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension baseband_version=[g5300q-250909-251024-b-14326967,g5300q-250909-251024-b-14326967] (was: []), device_id=27161FDH20031X
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension brand=[android] (was: []), device_id=27161FDH20031X
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension brand=[android] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension build=[aosp_panther-userdebug 14 AP2A.240905.003 eng.simon.20260217.163627 test-keys, aosp_panther-userdebug 14 ap2a.240905.003 eng.simon.20260217.163627 test-keys] (was: []), device_id=27161FDH20031X
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension build_alias=[ap2a.240905.003] (was: []), device_id=27161FDH20031X
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension build=[aosp_panther-userdebug 14 AP2A.240905.003 eng.simon.20250805.233538 test-keys, aosp_panther-userdebug 14 ap2a.240905.003 eng.simon.20250805.233538 test-keys] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension build_type=[userdebug] (was: []), device_id=27161FDH20031X
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension build_alias=[ap2a.240905.003] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension characteristics=[nosdcard] (was: []), device_id=27161FDH20031X
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension build_type=[userdebug] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension codename=[rel] (was: []), device_id=27161FDH20031X
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension characteristics=[nosdcard] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension device=[panther] (was: []), device_id=27161FDH20031X
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension codename=[rel] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension device=[panther] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension hardware=[panther] (was: []), device_id=27161FDH20031X
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension incremental_build=[eng.simon.20260217.163627] (was: []), device_id=27161FDH20031X
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension hardware=[panther] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:45 PST I/AndroidDeviceHelper: Dimension incremental_build=[eng.simon.20250805.233538] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension model=[aosp on panther] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension native_bridge=[0] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension preview_sdk_version=[0] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension model=[aosp on panther] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension product_board=[panther] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension native_bridge=[0] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension product_device=[panther] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension preview_sdk_version=[0] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension product_board=[panther] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension product_device=[panther] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension release_version=[14] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension release_version_major=14, device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension revision=[mp1.0] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension release_version=[14] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension release_version_major=14, device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension revision=[mp1.0] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension screen_density=[420] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension sdk_version=[34] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension screen_density=[420] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension secure_boot=[production] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension sdk_version=[34] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension serial=[27161FDH20031X, 27161fdh20031x] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension secure_boot=[production] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension sign=[test-keys] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension serial=[2B231FDH200B4Z, 2b231fdh200b4z] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension sign=[test-keys] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension sim_state=[absent,not_ready] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension sim_state=[absent,not_ready] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension soc_id=[09f6cd449f30] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension soc_id=[080d4f101470] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension soc_rev=[2] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension soc_rev=[2] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension type=[aosp_panther] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension type=[aosp_panther] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension veritymode=[enforcing] (was: []), device_id=27161FDH20031X
+02-17 01:18:46 PST I/AndroidDeviceHelper: Dimension veritymode=[enforcing] (was: []), device_id=2B231FDH200B4Z
+02-17 01:18:46 PST I/AndroidDeviceDelegate: Update device 2B231FDH200B4Z locale and language from ActivityManager.
+02-17 01:18:46 PST I/BaseDevice: Driver AndroidInstrumentation not found. Ignored.
+02-17 01:18:46 PST I/BaseDevice: Driver AndroidNativeBin not found. Ignored.
+02-17 01:18:46 PST I/BaseDevice: Driver NoOpDriver not found. Ignored.
+02-17 01:18:46 PST I/ClassUtil: No env validator for driver/decorator "XtsTradefedTest" (expected class with name XtsTradefedTestEnvValidator)
+02-17 01:18:46 PST I/ValidatorClassUtil: No validator for driver/decorator "XtsTradefedTest" (expected class with name XtsTradefedTestValidator)
+02-17 01:18:46 PST I/AndroidDeviceDelegate: Update device 27161FDH20031X locale and language from ActivityManager.
+02-17 01:18:46 PST I/ClassUtil: No env validator for driver/decorator "AndroidAdbShellDecorator" (expected class with name AndroidAdbShellDecoratorEnvValidator)
+02-17 01:18:46 PST I/BaseDevice: Driver AndroidInstrumentation not found. Ignored.
+02-17 01:18:46 PST I/ValidatorClassUtil: No validator for driver/decorator "AndroidAdbShellDecorator" (expected class with name AndroidAdbShellDecoratorValidator)
+02-17 01:18:46 PST I/BaseDevice: Driver AndroidNativeBin not found. Ignored.
+02-17 01:18:46 PST I/BaseDevice: Driver NoOpDriver not found. Ignored.
+02-17 01:18:46 PST I/ClassUtil: No env validator for driver/decorator "XtsTradefedTest" (expected class with name XtsTradefedTestEnvValidator)
+02-17 01:18:46 PST I/ValidatorClassUtil: No validator for driver/decorator "XtsTradefedTest" (expected class with name XtsTradefedTestValidator)
+02-17 01:18:46 PST I/ClassUtil: No env validator for driver/decorator "AndroidAdbShellDecorator" (expected class with name AndroidAdbShellDecoratorEnvValidator)
+02-17 01:18:46 PST I/ValidatorClassUtil: No validator for driver/decorator "AndroidAdbShellDecorator" (expected class with name AndroidAdbShellDecoratorValidator)
+02-17 01:18:46 PST I/ClassUtil: No env validator for driver/decorator "AndroidAtsDynamicConfigPusherDecorator" (expected class with name AndroidAtsDynamicConfigPusherDecoratorEnvValidator)
+02-17 01:18:46 PST I/ValidatorClassUtil: No validator for driver/decorator "AndroidAtsDynamicConfigPusherDecorator" (expected class with name AndroidAtsDynamicConfigPusherDecoratorValidator)
+02-17 01:18:46 PST I/ClassUtil: No env validator for driver/decorator "AndroidAtsDynamicConfigPusherDecorator" (expected class with name AndroidAtsDynamicConfigPusherDecoratorEnvValidator)
+02-17 01:18:46 PST I/ValidatorClassUtil: No validator for driver/decorator "AndroidAtsDynamicConfigPusherDecorator" (expected class with name AndroidAtsDynamicConfigPusherDecoratorValidator)
+02-17 01:18:46 PST I/ClassUtil: No env validator for driver/decorator "AndroidCleanAppsDecorator" (expected class with name AndroidCleanAppsDecoratorEnvValidator)
+02-17 01:18:46 PST I/ClassUtil: No env validator for driver/decorator "AndroidCleanAppsDecorator" (expected class with name AndroidCleanAppsDecoratorEnvValidator)
+02-17 01:18:46 PST I/ValidatorClassUtil: No validator for driver/decorator "AndroidCleanAppsDecorator" (expected class with name AndroidCleanAppsDecoratorValidator)
+02-17 01:18:46 PST I/ValidatorClassUtil: No validator for driver/decorator "AndroidCleanAppsDecorator" (expected class with name AndroidCleanAppsDecoratorValidator)
+02-17 01:18:46 PST I/ClassUtil: No env validator for driver/decorator "AndroidDeviceFeaturesCheckDecorator" (expected class with name AndroidDeviceFeaturesCheckDecoratorEnvValidator)
+02-17 01:18:46 PST I/ClassUtil: No env validator for driver/decorator "AndroidDeviceFeaturesCheckDecorator" (expected class with name AndroidDeviceFeaturesCheckDecoratorEnvValidator)
+02-17 01:18:46 PST I/ValidatorClassUtil: No validator for driver/decorator "AndroidDeviceFeaturesCheckDecorator" (expected class with name AndroidDeviceFeaturesCheckDecoratorValidator)
+02-17 01:18:46 PST I/ValidatorClassUtil: No validator for driver/decorator "AndroidDeviceFeaturesCheckDecorator" (expected class with name AndroidDeviceFeaturesCheckDecoratorValidator)
+02-17 01:18:47 PST I/BaseDevice: Decorator AndroidFilePullerDecorator not found. Ignored.
+02-17 01:18:47 PST I/BaseDevice: Decorator AndroidFilePusherDecorator not found. Ignored.
+02-17 01:18:47 PST I/ClassUtil: No env validator for driver/decorator "AndroidInstallAppsDecorator" (expected class with name AndroidInstallAppsDecoratorEnvValidator)
+02-17 01:18:47 PST I/ValidatorClassUtil: No validator for driver/decorator "AndroidInstallAppsDecorator" (expected class with name AndroidInstallAppsDecoratorValidator)
+02-17 01:18:47 PST I/BaseDevice: Decorator AndroidLogCatDecorator not found. Ignored.
+02-17 01:18:47 PST I/ClassUtil: No env validator for driver/decorator "AndroidMainlineModulesCheckDecorator" (expected class with name AndroidMainlineModulesCheckDecoratorEnvValidator)
+02-17 01:18:47 PST I/ValidatorClassUtil: No validator for driver/decorator "AndroidMainlineModulesCheckDecorator" (expected class with name AndroidMainlineModulesCheckDecoratorValidator)
+02-17 01:18:47 PST I/ClassUtil: No env validator for driver/decorator "AndroidMinSdkVersionCheckDecorator" (expected class with name AndroidMinSdkVersionCheckDecoratorEnvValidator)
+02-17 01:18:47 PST I/ValidatorClassUtil: No validator for driver/decorator "AndroidMinSdkVersionCheckDecorator" (expected class with name AndroidMinSdkVersionCheckDecoratorValidator)
+02-17 01:18:47 PST I/ClassUtil: No env validator for driver/decorator "AndroidShowInstructionDecorator" (expected class with name AndroidShowInstructionDecoratorEnvValidator)
+02-17 01:18:47 PST I/ValidatorClassUtil: No validator for driver/decorator "AndroidShowInstructionDecorator" (expected class with name AndroidShowInstructionDecoratorValidator)
+02-17 01:18:47 PST I/BaseDevice: Decorator AndroidSwitchLanguageDecorator not found. Ignored.
+02-17 01:18:47 PST I/BaseDevice: Decorator NoOpDecorator not found. Ignored.
+02-17 01:18:47 PST I/ClassUtil: No env validator for driver/decorator "MoblyAospPackageTest" (expected class with name MoblyAospPackageTestEnvValidator)
+02-17 01:18:47 PST I/ValidatorClassUtil: No validator for driver/decorator "MoblyAospPackageTest" (expected class with name MoblyAospPackageTestValidator)
+02-17 01:18:47 PST I/BaseDevice: Decorator AndroidFilePullerDecorator not found. Ignored.
+02-17 01:18:47 PST I/BaseDevice: Decorator AndroidFilePusherDecorator not found. Ignored.
+02-17 01:18:47 PST I/ClassUtil: No env validator for driver/decorator "AndroidInstallAppsDecorator" (expected class with name AndroidInstallAppsDecoratorEnvValidator)
+02-17 01:18:47 PST I/ValidatorClassUtil: No validator for driver/decorator "AndroidInstallAppsDecorator" (expected class with name AndroidInstallAppsDecoratorValidator)
+02-17 01:18:47 PST I/BaseDevice: Decorator AndroidLogCatDecorator not found. Ignored.
+02-17 01:18:47 PST I/ClassUtil: No env validator for driver/decorator "AndroidMainlineModulesCheckDecorator" (expected class with name AndroidMainlineModulesCheckDecoratorEnvValidator)
+02-17 01:18:47 PST I/ValidatorClassUtil: No validator for driver/decorator "AndroidMainlineModulesCheckDecorator" (expected class with name AndroidMainlineModulesCheckDecoratorValidator)
+02-17 01:18:47 PST I/ClassUtil: No env validator for driver/decorator "AndroidMinSdkVersionCheckDecorator" (expected class with name AndroidMinSdkVersionCheckDecoratorEnvValidator)
+02-17 01:18:47 PST I/ValidatorClassUtil: No validator for driver/decorator "AndroidMinSdkVersionCheckDecorator" (expected class with name AndroidMinSdkVersionCheckDecoratorValidator)
+02-17 01:18:47 PST I/ClassUtil: No env validator for driver/decorator "AndroidShowInstructionDecorator" (expected class with name AndroidShowInstructionDecoratorEnvValidator)
+02-17 01:18:47 PST I/ValidatorClassUtil: No validator for driver/decorator "AndroidShowInstructionDecorator" (expected class with name AndroidShowInstructionDecoratorValidator)
+02-17 01:18:47 PST I/BaseDevice: Decorator AndroidSwitchLanguageDecorator not found. Ignored.
+02-17 01:18:47 PST I/BaseDevice: Decorator NoOpDecorator not found. Ignored.
+02-17 01:18:47 PST I/ClassUtil: No env validator for driver/decorator "MoblyAospPackageTest" (expected class with name MoblyAospPackageTestEnvValidator)
+02-17 01:18:47 PST I/ValidatorClassUtil: No validator for driver/decorator "MoblyAospPackageTest" (expected class with name MoblyAospPackageTestValidator)
+02-17 01:18:47 PST I/AndroidSystemSettingUtil: Detect device resolution: ScreenResolution{width=1080, height=2400, curWidth=1080, curHeight=2400}
+02-17 01:18:47 PST I/AndroidDeviceDelegate: Device 2B231FDH200B4Z screen resolution: ScreenResolution{width=1080, height=2400, curWidth=1080, curHeight=2400}
+02-17 01:18:47 PST I/AndroidSystemSettingUtil: Detect device resolution: ScreenResolution{width=1080, height=2400, curWidth=1080, curHeight=2400}
+02-17 01:18:47 PST I/AndroidDeviceDelegate: Device 27161FDH20031X screen resolution: ScreenResolution{width=1080, height=2400, curWidth=1080, curHeight=2400}
+02-17 01:18:47 PST I/AndroidRealDeviceDelegate: Abort adb shell command after attempting 2 times:
+Failed command with exit_code=1 and success_exit_codes=[0], result=[code=1, out=[cat: /sys/class/net/wlan0/address: Permission denied
+], err=[]], command=[/home/simon/.local/bin/adb -s 2B231FDH200B4Z shell cat /sys/class/net/wlan0/address] [MH|UNDETERMINED|COMMAND_EXEC_FAIL|39998] [MH|UNDETERMINED|ANDROID_ADB_SYNC_CMD_EXECUTION_FAILURE|102603] [MH|UNDETERMINED|ANDROID_ADB_CMD_RETRY_ERROR|102604] [MH|INFRA_ISSUE|ANDROID_SYSTEM_SPEC_GET_MAC_ADDRESS_ERROR|101006]
+02-17 01:18:47 PST I/AndroidRealDeviceDelegate: Abort adb shell command after attempting 2 times:
+Failed command with exit_code=1 and success_exit_codes=[0], result=[code=1, out=[cat: /sys/class/net/wlan0/address: Permission denied
+], err=[]], command=[/home/simon/.local/bin/adb -s 27161FDH20031X shell cat /sys/class/net/wlan0/address] [MH|UNDETERMINED|COMMAND_EXEC_FAIL|39998] [MH|UNDETERMINED|ANDROID_ADB_SYNC_CMD_EXECUTION_FAILURE|102603] [MH|UNDETERMINED|ANDROID_ADB_CMD_RETRY_ERROR|102604] [MH|INFRA_ISSUE|ANDROID_SYSTEM_SPEC_GET_MAC_ADDRESS_ERROR|101006]
+02-17 01:18:47 PST I/AndroidRealDeviceDelegate: Checking device 2B231FDH200B4Z external storage...
+02-17 01:18:47 PST I/AndroidFileUtil: Device 2B231FDH200B4Z current user: 0, sdk version: 34
+02-17 01:18:47 PST I/AndroidRealDeviceDelegate: Device 2B231FDH200B4Z external storage writable: /storage/emulated/0
+02-17 01:18:47 PST I/AndroidRealDeviceDelegate: Ignoring attempt to clear multi-user on device 2B231FDH200B4Z.
+02-17 01:18:47 PST I/AndroidRealDeviceDelegate: Checking device 27161FDH20031X external storage...
+02-17 01:18:47 PST I/AndroidFileUtil: Device 27161FDH20031X current user: 0, sdk version: 34
+02-17 01:18:47 PST I/AndroidRealDeviceDelegate: Device 27161FDH20031X external storage writable: /storage/emulated/0
+02-17 01:18:47 PST I/AndroidRealDeviceDelegate: Ignoring attempt to clear multi-user on device 27161FDH20031X.
+02-17 01:18:47 PST I/AndroidDeviceDelegate: Application com.google.android.gms version not found on device 2B231FDH200B4Z
+02-17 01:18:47 PST I/AndroidDeviceDelegate: Update dimension gms_version to: , device_id=2B231FDH200B4Z
+02-17 01:18:47 PST I/AndroidDeviceDelegate: Application com.google.android.gms version not found on device 27161FDH20031X
+02-17 01:18:47 PST I/AndroidDeviceDelegate: Update dimension gms_version to: , device_id=27161FDH20031X
+02-17 01:18:49 PST I/AndroidDeviceHelper: Dimension release_version_major=14, device_id=2B231FDH200B4Z
+02-17 01:18:49 PST I/AndroidDeviceHelper: Dimension release_version_major=14, device_id=27161FDH20031X
+02-17 01:18:49 PST I/AndroidRealDeviceDelegate: Wifi util functionality is disabled. Skip installing WifiUtil apk on device 27161FDH20031X.
+02-17 01:18:49 PST I/AndroidRealDeviceDelegate: Wifi util functionality is disabled. Skip installing WifiUtil apk on device 2B231FDH200B4Z.
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Device 2B231FDH200B4Z has not set the default wifi
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Skip recover device 2B231FDH200B4Z network because the device is not rooted.
+02-17 01:18:50 PST I/AndroidConnectivityUtil: Wifi util functionality is disabled. Skip pinging for device 2B231FDH200B4Z.
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Device 27161FDH20031X has not set the default wifi
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Skip recover device 27161FDH20031X network because the device is not rooted.
+02-17 01:18:50 PST I/AndroidConnectivityUtil: Wifi util functionality is disabled. Skip pinging for device 27161FDH20031X.
+02-17 01:18:50 PST I/AndroidProcessUtil: checkService on device: 2B231FDH200B4Z for activity return Service activity: found
+02-17 01:18:50 PST I/AndroidProcessUtil: checkService on device: 27161FDH20031X for activity return Service activity: found
+02-17 01:18:50 PST I/AndroidProcessUtil: checkService on device: 2B231FDH200B4Z for package return Service package: found
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Checking device 2B231FDH200B4Z battery level...
+02-17 01:18:50 PST I/AndroidProcessUtil: checkService on device: 27161FDH20031X for package return Service package: found
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Checking device 27161FDH20031X battery level...
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Device 2B231FDH200B4Z battery level: 80
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Checking device 2B231FDH200B4Z battery temperature...
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Device 27161FDH20031X battery level: 80
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Checking device 27161FDH20031X battery temperature...
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Device 2B231FDH200B4Z battery temperature: 25
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Scanning temp apks on device 2B231FDH200B4Z...
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Device 27161FDH20031X battery temperature: 24
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Scanning temp apks on device 27161FDH20031X...
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Cleaning device 2B231FDH200B4Z temp apks...
+02-17 01:18:50 PST W/AndroidFileUtil: Skip to use shell escape /data/local/tmp/*.apk , because disable globbing.
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Cleaning device 27161FDH20031X temp apks...
+02-17 01:18:50 PST W/AndroidFileUtil: Skip to use shell escape /data/local/tmp/*.apk , because disable globbing.
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Device 2B231FDH200B4Z temp apks cleared
+02-17 01:18:50 PST I/AndroidRealDeviceDelegate: Cleaning device 2B231FDH200B4Z smlogs files...
+02-17 01:18:50 PST W/AndroidFileUtil: Skip to use shell escape /data/smlog_* , because disable globbing.
+02-17 01:18:51 PST I/AndroidRealDeviceDelegate: Device 27161FDH20031X temp apks cleared
+02-17 01:18:51 PST I/AndroidRealDeviceDelegate: Cleaning device 27161FDH20031X smlogs files...
+02-17 01:18:51 PST W/AndroidFileUtil: Skip to use shell escape /data/smlog_* , because disable globbing.
+02-17 01:18:51 PST I/AndroidRealDeviceDelegate: Device 2B231FDH200B4Z /data/smlog_* are cleared
+02-17 01:18:51 PST I/AndroidRealDeviceDelegate: Skip cleaning up device 2B231FDH200B4Z lost+found files because it is not rooted
+02-17 01:18:51 PST I/AndroidRealDeviceDelegate: Checking device 2B231FDH200B4Z INTERNAL storage usage...
+02-17 01:18:51 PST I/AndroidRealDeviceDelegate: Device 27161FDH20031X /data/smlog_* are cleared
+02-17 01:18:51 PST I/AndroidRealDeviceDelegate: Skip cleaning up device 27161FDH20031X lost+found files because it is not rooted
+02-17 01:18:51 PST I/AndroidRealDeviceDelegate: Checking device 27161FDH20031X INTERNAL storage usage...
+02-17 01:18:51 PST I/AndroidFileUtil: Disk information:
+Filesystem       1K-blocks    Used Available Use% Mounted on
+/dev/block/dm-51 115249236 4509836 110608328   4% /data/user/0
+02-17 01:18:51 PST I/AndroidRealDeviceDelegate: Device 2B231FDH200B4Z INTERNAL storage usage: totalKB=115249236, freeKB=110608328, freePercentage=95.97%
+02-17 01:18:51 PST I/AndroidRealDeviceDelegate: Checking device 2B231FDH200B4Z EXTERNAL storage usage...
+02-17 01:18:51 PST I/AndroidFileUtil: Disk information:
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/fuse      115249236 4509836 110608328   4% /storage/emulated
+02-17 01:18:51 PST I/AndroidRealDeviceDelegate: Device 2B231FDH200B4Z EXTERNAL storage usage: totalKB=115249236, freeKB=110608328, freePercentage=95.97%
+02-17 01:18:51 PST I/AndroidFileUtil: Disk information:
+Filesystem       1K-blocks    Used Available Use% Mounted on
+/dev/block/dm-51 115249236 1929612 113188552   2% /data/user/0
+02-17 01:18:51 PST I/AndroidRealDeviceDelegate: Device 27161FDH20031X INTERNAL storage usage: totalKB=115249236, freeKB=113188552, freePercentage=98.21%
+02-17 01:18:51 PST I/AndroidRealDeviceDelegate: Checking device 27161FDH20031X EXTERNAL storage usage...
+02-17 01:18:51 PST I/AndroidFileUtil: Disk information:
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/fuse      115249236 1929612 113188552   2% /storage/emulated
+02-17 01:18:51 PST I/AndroidRealDeviceDelegate: Device 27161FDH20031X EXTERNAL storage usage: totalKB=115249236, freeKB=113188552, freePercentage=98.21%
+02-17 01:18:51 PST I/AndroidRealDeviceDelegate: Fetching device 2B231FDH200B4Z's ICCIDs...
+02-17 01:18:51 PST I/AndroidRealDeviceDelegate: Fetching device 27161FDH20031X's ICCIDs...
+02-17 01:18:52 PST I/AndroidRealDeviceDelegate: ICCIDs of SIMS on device 2B231FDH200B4Z: 
+02-17 01:18:52 PST I/AndroidRealDeviceDelegate: Fetching device 2B231FDH200B4Z's GMS Core signature...
+02-17 01:18:52 PST I/AndroidRealDeviceDelegate: ICCIDs of SIMS on device 27161FDH20031X: 
+02-17 01:18:52 PST I/AndroidRealDeviceDelegate: Fetching device 27161FDH20031X's GMS Core signature...
+02-17 01:18:52 PST W/AndroidRealDeviceDelegate: Failed to fetch device 2B231FDH200B4Z's GMS Core signature: Cannot find signature in the output of `adb shell dumpsys package com.google.android.gms` [MH|DEPENDENCY_ISSUE|ANDROID_PKG_MNGR_UTIL_GET_APK_SIGNATURE_ERROR|101342]
+02-17 01:18:52 PST W/AndroidRealDeviceDelegate: Failed to fetch device 27161FDH20031X's GMS Core signature: Cannot find signature in the output of `adb shell dumpsys package com.google.android.gms` [MH|DEPENDENCY_ISSUE|ANDROID_PKG_MNGR_UTIL_GET_APK_SIGNATURE_ERROR|101342]
+02-17 01:18:52 PST I/AndroidConnectivityUtil: Device 2B231FDH200B4Z has no WIFI connection:
+02-17 01:18:52 PST I/AndroidRealDeviceDelegate: Android device daemon is disabled on device 2B231FDH200B4Z
+02-17 01:18:53 PST I/AndroidConnectivityUtil: Device 27161FDH20031X has no WIFI connection:
+02-17 01:18:53 PST I/AndroidRealDeviceDelegate: Android device daemon is disabled on device 27161FDH20031X
+02-17 01:18:53 PST I/LocalFileUtil: Checked fully accessibility of file /tmp/mh_res_files/com/google/devtools/mobileharness/platform/android/app/binary/devicedaemon/v2/daemon.apk. Permissions: rw-rw-r--
+02-17 01:18:53 PST I/ResUtil: Copy resource /com/google/devtools/mobileharness/platform/android/app/binary/devicedaemon/v2/daemon.apk to /tmp/mh_res_files/com/google/devtools/mobileharness/platform/android/app/binary/devicedaemon/v2/daemon.apk
+02-17 01:18:53 PST I/DeviceDaemonApkInfoImplV2: daemon v2 apk path: /tmp/mh_res_files/com/google/devtools/mobileharness/platform/android/app/binary/devicedaemon/v2/daemon.apk
+02-17 01:18:53 PST I/AndroidRealDeviceDelegate: Device 2B231FDH200B4Z is ready
+02-17 01:18:53 PST I/LocalDeviceRunner: Initialized:
+---------- Owners ----------
+
+---------- Executors ----------
+
+---------- Dimensions ----------
+abi: arm64-v8a
+abilist: arm64-v8a
+baseband_version: g5300q-250909-251024-b-14326967,g5300q-250909-251024-b-14326967
+battery_level: 80
+battery_status: ok
+battery_temperature: 25
+bluetooth_mac_address: ac:3e:b1:28:2c:48
+brand: android
+build: aosp_panther-userdebug 14 AP2A.240905.003 eng.simon.20250805.233538 test-keys
+build: aosp_panther-userdebug 14 ap2a.240905.003 eng.simon.20250805.233538 test-keys
+build_alias: ap2a.240905.003
+build_type: userdebug
+characteristics: nosdcard
+codename: rel
+communication_type: ADB
+communication_type: USB
+control_id: 2B231FDH200B4Z
+device: panther
+device_class_name: AndroidRealDevice
+device_form: physical
+external_storage_status: ok
+feature: android.hardware.nfc
+free_external_storage: 105GB
+free_external_storage_percentage: 95.97%
+free_internal_storage: 105GB
+free_internal_storage_percentage: 95.97%
+gms_version: 
+gmscore_signature: 
+hardware: panther
+iccids: 
+id: 2B231FDH200B4Z
+incremental_build: eng.simon.20250805.233538
+internal_storage_status: ok
+internet: false
+language: en
+launcher_1: false
+launcher_3: true
+launcher_gel: false
+locale: en-us
+mcc_mnc: ,
+model: aosp on panther
+native_bridge: 0
+num_cpus: 8
+os: android
+preview_sdk_version: 0
+product_board: panther
+product_device: panther
+release_version: 14
+release_version_major: 14
+revision: mp1.0
+rooted: false
+screen_density: 420
+screen_size: 1080x2400
+screenshot_able: true
+sdk_version: 34
+secure_boot: production
+serial: 2B231FDH200B4Z
+serial: 2b231fdh200b4z
+sign: test-keys
+sim_state: absent,not_ready
+soc_id: 080d4f101470
+soc_rev: 2
+supports_adhoc: true
+supports_gmscore: true
+svelte_device: false
+total_memory: 7475 MB
+type: aosp_panther
+uuid: 2B231FDH200B4Z
+uuid_volatile: false
+veritymode: enforcing
+writable_external_storage: /storage/emulated/0
+---------- Types ----------
+AndroidRealDevice
+AndroidDevice
+---------- Drivers ----------
+XtsTradefedTest
+MoblyAospPackageTest
+---------- Decorators ----------
+AndroidDeviceSettingsDecorator
+AndroidShowInstructionDecorator
+AndroidInstallAppsDecorator
+AndroidCleanAppsDecorator
+AndroidMinSdkVersionCheckDecorator
+AndroidAdbShellDecorator
+AndroidSwitchUserDecorator
+AndroidAtsDynamicConfigPusherDecorator
+AndroidDeviceFeaturesCheckDecorator
+AndroidMainlineModulesCheckDecorator
+02-17 01:18:53 PST I/LocalDeviceRunner: Update device 2B231FDH200B4Z last IDLE time: 2026-02-17T09:18:53.207773341Z
+02-17 01:18:53 PST I/LocalDeviceRunner: Post LocalDeviceChangeEvent: initialized
+02-17 01:18:53 PST I/LocalDeviceManagerSchedulerSyncer: Update device 2B231FDH200B4Z(AndroidRealDevice) to scheduler
+02-17 01:18:53 PST I/SimpleScheduler: Added device 2B231FDH200B4Z
+02-17 01:18:53 PST I/AndroidRealDeviceDelegate: Device 27161FDH20031X is ready
+02-17 01:18:53 PST I/LocalDeviceRunner: Initialized:
+---------- Owners ----------
+
+---------- Executors ----------
+
+---------- Dimensions ----------
+abi: arm64-v8a
+abilist: arm64-v8a
+baseband_version: g5300q-250909-251024-b-14326967,g5300q-250909-251024-b-14326967
+battery_level: 80
+battery_status: ok
+battery_temperature: 24
+bluetooth_mac_address: 0c:c4:13:33:16:35
+brand: android
+build: aosp_panther-userdebug 14 AP2A.240905.003 eng.simon.20260217.163627 test-keys
+build: aosp_panther-userdebug 14 ap2a.240905.003 eng.simon.20260217.163627 test-keys
+build_alias: ap2a.240905.003
+build_type: userdebug
+characteristics: nosdcard
+codename: rel
+communication_type: ADB
+communication_type: USB
+control_id: 27161FDH20031X
+device: panther
+device_class_name: AndroidRealDevice
+device_form: physical
+external_storage_status: ok
+feature: android.hardware.nfc
+free_external_storage: 108GB
+free_external_storage_percentage: 98.21%
+free_internal_storage: 108GB
+free_internal_storage_percentage: 98.21%
+gms_version: 
+gmscore_signature: 
+hardware: panther
+iccids: 
+id: 27161FDH20031X
+incremental_build: eng.simon.20260217.163627
+internal_storage_status: ok
+internet: false
+language: en
+launcher_1: false
+launcher_3: true
+launcher_gel: false
+locale: en-us
+mcc_mnc: ,
+model: aosp on panther
+native_bridge: 0
+num_cpus: 8
+os: android
+preview_sdk_version: 0
+product_board: panther
+product_device: panther
+release_version: 14
+release_version_major: 14
+revision: mp1.0
+rooted: false
+screen_density: 420
+screen_size: 1080x2400
+screenshot_able: true
+sdk_version: 34
+secure_boot: production
+serial: 27161FDH20031X
+serial: 27161fdh20031x
+sign: test-keys
+sim_state: absent,not_ready
+soc_id: 09f6cd449f30
+soc_rev: 2
+supports_adhoc: true
+supports_gmscore: true
+svelte_device: false
+total_memory: 7475 MB
+type: aosp_panther
+uuid: 27161FDH20031X
+uuid_volatile: false
+veritymode: enforcing
+writable_external_storage: /storage/emulated/0
+---------- Types ----------
+AndroidRealDevice
+AndroidDevice
+---------- Drivers ----------
+XtsTradefedTest
+MoblyAospPackageTest
+---------- Decorators ----------
+AndroidDeviceSettingsDecorator
+AndroidShowInstructionDecorator
+AndroidInstallAppsDecorator
+AndroidCleanAppsDecorator
+AndroidMinSdkVersionCheckDecorator
+AndroidAdbShellDecorator
+AndroidSwitchUserDecorator
+AndroidAtsDynamicConfigPusherDecorator
+AndroidDeviceFeaturesCheckDecorator
+AndroidMainlineModulesCheckDecorator
+02-17 01:18:53 PST I/LocalDeviceRunner: Post LocalDeviceChangeEvent: initialized
+02-17 01:18:53 PST I/LocalDeviceManagerSchedulerSyncer: Update device 27161FDH20031X(AndroidRealDevice) to scheduler
+02-17 01:18:53 PST I/SimpleScheduler: Added device 27161FDH20031X
+02-17 01:18:53 PST I/SimpleScheduler: Created allocation Allocation{test=f2a6329e-4868-435b-a00c-d8026d16795a@8913ecaf-15c0-4702-b712-4642518490e4, devices=[27161FDH20031X]}
+02-17 01:18:53 PST I/Status: Status NEW -> ASSIGNED {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/JobRunner: Allocation: Allocation{test=f2a6329e-4868-435b-a00c-d8026d16795a@8913ecaf-15c0-4702-b712-4642518490e4, devices=[27161FDH20031X]} {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/JobRunner: Device allocation finished {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/JobRunner: Allocated devices [27161FDH20031X] for test f2a6329e-4868-435b-a00c-d8026d16795a {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/Status: Status ASSIGNED -> RUNNING {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/LocalDeviceTestRunnerLauncher: Reserving devices [27161FDH20031X] for test [f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/LocalDeviceRunner: Reserved to test f2a6329e-4868-435b-a00c-d8026d16795a@8913ecaf-15c0-4702-b712-4642518490e4 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/TestManager: Add test runner to test manager: f2a6329e-4868-435b-a00c-d8026d16795a {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/TestManager: Start test f2a6329e-4868-435b-a00c-d8026d16795a {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/LocalDeviceRunner: Found test f2a6329e-4868-435b-a00c-d8026d16795a@8913ecaf-15c0-4702-b712-4642518490e4
+02-17 01:18:53 PST I/LocalDeviceTestRunnerLauncher: Executing test [f2a6329e-4868-435b-a00c-d8026d16795a] on its primary device runner [27161FDH20031X] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/TestRunnerLauncher: Executing test [f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/BaseTestRunner: Start pre-running test xts-tradefed-test-cts on device(s) [27161FDH20031X] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/LocalTestFlow: Loading lab plugins for test f2a6329e-4868-435b-a00c-d8026d16795a {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/PluginCreator: Loading plugins from jars [] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/PluginCreator: No plugin module class name given, searching plugin module classes by plugin module annotation {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/PluginCreator: No plugin class name given, searching plugin class by plugin annotation {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/PluginCreator: No plugin is loaded {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/BaseTestRunner: Update the status of test: [xts-tradefed-test-cts], devices: [[27161FDH20031X]] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/BaseTestRunner: Post TestStartingEvent to test f2a6329e-4868-435b-a00c-d8026d16795a@8913ecaf-15c0-4702-b712-4642518490e4 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/AtsSessionPlugin: Command [1]'s invocation [f2a6329e-4868-435b-a00c-d8026d16795a] allocated devices [27161FDH20031X]. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/SessionInfo: New session plugin output, session_id=fb6a75e1-ba4b-40d3-924a-42068325a711, plugin_label=AtsSessionPlugin, new_plugin_output=[run_command_state { command_id: "1" command_line_args: "cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1" running_invocation { key: "f2a6329e-4868-435b-a00c-d8026d16795a" value { invocation { command_id: "1" start_time { seconds: 1771319933 nanos: 663611273 } device_id: "27161FDH20031X" state_summary: "cts" } start_time { seconds: 1771319933 nanos: 663611273 } } } separated_command_line_args: "cts" separated_command_line_args: "-m" separated_command_line_args: "CtsDisplayTestCases" separated_command_line_args: "-t" separated_command_line_args: "android.display.cts.VirtualDisplayTest" separated_command_line_args: "--shard-count" separated_command_line_args: "1" }] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/LocalTestRunner: Pre-run test {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/LocalTestFlow: --------- Device: PreRunTest (f2a6329e-4868-435b-a00c-d8026d16795a) --------- {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/LocalTestFlow: Pre-run test of device [27161FDH20031X] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:53 PST I/AndroidDeviceDelegate: Stop package on device 27161FDH20031X before test started: com.google.android.apps.internal.statusbarhider {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/AndroidRealDeviceDelegate: Device daemon is disabled on device 27161FDH20031X {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/AndroidRealDeviceDelegate: Ignoring attempt to enable device 27161FDH20031X charging before test f2a6329e-4868-435b-a00c-d8026d16795a because disabled enforceSafeDischarge. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/LocalTestFlow: Pre-run test of device [27161FDH20031X] finished {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/NoOpTestFlowConverter: Run test in MH classic mode because ATS uses classic mode {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/LocalTestFlow: Start test [xts-tradefed-test-cts] on device(s) [27161FDH20031X]:
+ + Test Name: xts-tradefed-test-cts
+ + Test ID: f2a6329e-4868-435b-a00c-d8026d16795a
+ + Job Name: xts-tradefed-test-job
+ + Job ID: 8913ecaf-15c0-4702-b712-4642518490e4
+ + Device Information:
+   + Device: 27161FDH20031X
+       - num_cpus = 8
+       - sign = test-keys
+       - language = en
+       - incremental_build = eng.simon.20260217.163627
+       - gmscore_signature = 
+       - supports_adhoc = true
+       - type = aosp_panther
+       - uuid = 27161FDH20031X
+       - product_device = panther
+       - device_form = physical
+       - veritymode = enforcing
+       - model = aosp on panther
+       - screen_size = 1080x2400
+       - id = 27161FDH20031X
+       - release_version = 14
+       - brand = android
+       - build_type = userdebug
+       - soc_rev = 2
+       - hardware = panther
+       - free_internal_storage = 108GB
+       - writable_external_storage = /storage/emulated/0
+       - mcc_mnc = ,
+       - device_class_name = AndroidRealDevice
+       - revision = mp1.0
+       - battery_status = ok
+       - battery_temperature = 24
+       - external_storage_status = ok
+       - screen_density = 420
+       - codename = rel
+       - free_internal_storage_percentage = 98.21%
+       - device = panther
+       - product_board = panther
+       - internet = false
+       - release_version_major = 14
+       - communication_type = USB
+       - communication_type = ADB
+       - iccids = 
+       - control_id = 27161FDH20031X
+       - free_external_storage = 108GB
+       - launcher_1 = false
+       - uuid_volatile = false
+       - locale = en-us
+       - launcher_3 = true
+       - native_bridge = 0
+       - internal_storage_status = ok
+       - free_external_storage_percentage = 98.21%
+       - total_memory = 7475 MB
+       - soc_id = 09f6cd449f30
+       - feature = android.hardware.nfc
+       - launcher_gel = false
+       - sdk_version = 34
+       - rooted = false
+       - baseband_version = g5300q-250909-251024-b-14326967,g5300q-250909-251024-b-14326967
+       - characteristics = nosdcard
+       - os = android
+       - battery_level = 80
+       - secure_boot = production
+       - bluetooth_mac_address = 0c:c4:13:33:16:35
+       - screenshot_able = true
+       - abi = arm64-v8a
+       - gms_version = 
+       - sim_state = absent,not_ready
+       - supports_gmscore = true
+       - svelte_device = false
+       - build = aosp_panther-userdebug 14 AP2A.240905.003 eng.simon.20260217.163627 test-keys
+       - build = aosp_panther-userdebug 14 ap2a.240905.003 eng.simon.20260217.163627 test-keys
+       - serial = 27161FDH20031X
+       - serial = 27161fdh20031x
+       - abilist = arm64-v8a
+       - build_alias = ap2a.240905.003
+       - preview_sdk_version = 0 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/LocalTestFlow: Adding common dimensions [] shared among testbed to test f2a6329e-4868-435b-a00c-d8026d16795a {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/LocalFileUtil: Checked fully accessibility of file /tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e. Permissions: rwxrwxr-x {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/LocalFileUtil: Checked fully accessibility of file /tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a. Permissions: rwxrwxr-x {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/LocalTestRunner: Register test message subscriber: XtsTradefedTest {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/BaseTestRunner: Local test message subscribers: [] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/BaseTestRunner: Post TestStartedEvent to test f2a6329e-4868-435b-a00c-d8026d16795a@8913ecaf-15c0-4702-b712-4642518490e4 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/BaseTestRunner: Pre-run test xts-tradefed-test-cts finished {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/BaseTestRunner: Start running test xts-tradefed-test-cts on device(s) [27161FDH20031X] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/LocalTestFlow: --------- Device: RunTest (f2a6329e-4868-435b-a00c-d8026d16795a) --------- {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/LocalTestRunner: Starting driver [XtsTradefedTest] of test xts-tradefed-test-cts {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/LocalTestRunner: XtsTradefedTest is starting {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST W/JobInfo: The sub device spec should exist and the global scoped spec should not be used. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/XtsTradefedTest: spec: xts_type: "cts"
+xts_root_dir: "/home/simon"
+xts_test_plan: "cts"
+run_command_args: "-m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1"
+olc_session_client_id: "ats-console-38314757-c960-42fa-a920-bcdaf7310415"
+xts_log_root_path: "/home/simon/android-cts/logs/2026.02.17_17.18.40.043_3970"
+disable_tf_result_log: true
+ {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/XtsTradefedTest: params: Parameters:
+	Name: olc_session_client_id
+	Value: ats-console-38314757-c960-42fa-a920-bcdaf7310415
+	Name: xts_log_root_path
+	Value: /home/simon/android-cts/logs/2026.02.17_17.18.40.043_3970
+	Name: job_persistent_path
+	Value: /tmp/olc_server_temp_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/persistence/8913ecaf-15c0-4702-b712-4642518490e4.textproto
+	Name: check_installed_gms_core_version
+	Value: false
+	Name: disable_tf_result_log
+	Value: true
+	Name: tags
+	Value: 
+	Name: clear_gservices_overrides
+	Value: false
+ {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/XtsTradefedTest: proto spec: com.google.wireless.qa.mobileharness.shared.model.job.in.spec.ProtoJobSpec@46326f10 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/DeviceCacheManager: Add cache(GENERAL) for device [27161FDH20031X] with timeout PT359H58M59.597S {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/LocalFileUtil: Checked fully accessibility of file /tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b. Permissions: rwxrwxr-x {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/XtsTradefedTest: Finished integrating the test cases [/home/simon/android-cts/testcases] with the temp XTS workspace [/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases]. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/XtsTradefedTest: xTS Tradefed temp working root directory is /tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/LocalFileUtil: Checked fully accessibility of file /tmp/mh_res_files/com/google/devtools/mobileharness/platform/android/xts/agent/tradefed_invocation_agent_deploy.jar. Permissions: rw-rw-r-- {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/ResUtil: Copy resource /com/google/devtools/mobileharness/platform/android/xts/agent/tradefed_invocation_agent_deploy.jar to /tmp/mh_res_files/com/google/devtools/mobileharness/platform/android/xts/agent/tradefed_invocation_agent_deploy.jar {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/XtsTradefedTest: Running cts command:
+PATH=/home/simon/.local/bin:/home/simon/.local/bin:/usr/local/bin:/home/simon/.local/bin:/home/simon/.local/share/pnpm:/usr/bin:/bin:/home/simon/.nvm/current/bin:/home/simon/.npm-global/bin:/home/simon/bin:/home/simon/.fnm/current/bin:/home/simon/.volta/bin:/home/simon/.asdf/shims:/home/simon/.bun/bin LD_LIBRARY_PATH=/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/lib:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/lib64:/home/simon/android-cts/tools/../../android-cts/lib:/home/simon/android-cts/tools/../../android-cts/lib64: TF_WORK_DIR=/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b /tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/jdk/bin/java -Xmx24g -XX:+HeapDumpOnOutOfMemoryError -javaagent:/tmp/mh_res_files/com/google/devtools/mobileharness/platform/android/xts/agent/tradefed_invocation_agent_deploy.jar=/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/tf_runtime_info -cp /tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/tools/tradefed.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/tools/cts-tradefed-tests.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/tools/loganalysis.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/tools/compatibility-host-util.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/tools/cts-tradefed.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/tools/compatibility-tradefed.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1978HostTestCases/CtsJvmtiRunTest1978HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsSustainedPerformanceHostTestCases/CtsSustainedPerformanceHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest910HostTestCases/CtsJvmtiRunTest910HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsCarBuiltinApiHostTestCases/CtsCarBuiltinApiHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest945HostTestCases/CtsJvmtiRunTest945HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest990HostTestCases/CtsJvmtiRunTest990HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsBlobStoreHostTestCases/CtsBlobStoreHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest951HostTestCases/CtsJvmtiRunTest951HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsSystemUiHostTestCases/CtsSystemUiHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/net-tests-utils-host-common/net-tests-utils-host-common.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest2001HostTestCases/CtsJvmtiRunTest2001HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsBiometricsHostTestCases/CtsBiometricsHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsHealthConnectHostTestCases/CtsHealthConnectHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsIcu4cTestCases/CtsIcu4cTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsIcu4cTestCases/ICU4CTestRunner.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest912HostTestCases/CtsJvmtiRunTest912HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsAccountsHostTestCases/CtsAccountsHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1920HostTestCases/CtsJvmtiRunTest1920HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJdwpSecurityHostTestCases/CtsJdwpSecurityHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJdwpSecurityHostTestCases/CtsJdwpApp.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1910HostTestCases/CtsJvmtiRunTest1910HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1962HostTestCases/CtsJvmtiRunTest1962HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest920HostTestCases/CtsJvmtiRunTest920HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsMultiUserHostTestCases/CtsMultiUserHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsGwpAsanTestCases/CtsGwpAsanTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsSilentUpdateHostTestCases/CtsSilentUpdateHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsClasspathsTestCases/CtsClasspathsTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1991HostTestCases/CtsJvmtiRunTest1991HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsSdkSandboxHostSideTests/CtsSdkSandboxHostSideTests.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsSyncContentHostTestCases/CtsSyncContentHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1941HostTestCases/CtsJvmtiRunTest1941HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest2004HostTestCases/CtsJvmtiRunTest2004HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/odsign_e2e_tests/odsign_e2e_tests.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsInputMethodServiceHostTestCases/CtsInputMethodServiceHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest2005HostTestCases/CtsJvmtiRunTest2005HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsAppSecurityHostTestCases/CtsAppSecurityHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsSettingsHostTestCases/CtsSettingsHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1937HostTestCases/CtsJvmtiRunTest1937HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1958HostTestCases/CtsJvmtiRunTest1958HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsTestHarnessModeTestCases/CtsTestHarnessModeTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsOsHostTestCases/CtsOsHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsCarHostNonRecoverableTestCases/CtsCarHostNonRecoverableTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest932HostTestCases/CtsJvmtiRunTest932HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest2002HostTestCases/CtsJvmtiRunTest2002HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsLocationTimeZoneManagerHostTest/CtsLocationTimeZoneManagerHostTest.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1902HostTestCases/CtsJvmtiRunTest1902HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsDumpsysHostTestCases/CtsDumpsysHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsInputMethodServiceLib/arm64/CtsInputMethodServiceLib.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1917HostTestCases/CtsJvmtiRunTest1917HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1982HostTestCases/CtsJvmtiRunTest1982HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiTaggingHostTestCases/CtsJvmtiTaggingHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsAppCloningHostTest/CtsAppCloningHostTest.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiTrackingHostTestCases/CtsJvmtiTrackingHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1940HostTestCases/CtsJvmtiRunTest1940HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest2006HostTestCases/CtsJvmtiRunTest2006HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest993HostTestCases/CtsJvmtiRunTest993HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsDeviceIdleHostTestCases/CtsDeviceIdleHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsAppBindingHostTestCases/CtsAppBindingHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsLocaleManagerHostTestCases/CtsLocaleManagerHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest947HostTestCases/CtsJvmtiRunTest947HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsCarrierApiTargetPrep/CtsCarrierApiTargetPrep.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsStagedInstallHostTestCases/CtsStagedInstallHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1970HostTestCases/CtsJvmtiRunTest1970HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/MicrodroidHostTestCases/MicrodroidHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1994HostTestCases/CtsJvmtiRunTest1994HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsBootDisplayModeTestCases/CtsBootDisplayModeTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsHostsideNetworkTests/CtsHostsideNetworkTests.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1968HostTestCases/CtsJvmtiRunTest1968HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1989HostTestCases/CtsJvmtiRunTest1989HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsScopedStorageHostTest/CtsScopedStorageHostTest.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest922HostTestCases/CtsJvmtiRunTest922HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1939HostTestCases/CtsJvmtiRunTest1939HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1936HostTestCases/CtsJvmtiRunTest1936HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsDeqpTestCases/CtsDeqpTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsCarHostTestCases/CtsCarHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsClasspathDeviceInfoTestCases/CtsClasspathDeviceInfoTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1932HostTestCases/CtsJvmtiRunTest1932HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest924HostTestCases/CtsJvmtiRunTest924HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1995HostTestCases/CtsJvmtiRunTest1995HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest994HostTestCases/CtsJvmtiRunTest994HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1933HostTestCases/CtsJvmtiRunTest1933HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsPackageManagerPreferredActivityHostTestCases/CtsPackageManagerPreferredActivityHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1911HostTestCases/CtsJvmtiRunTest1911HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsVideoEncodingQualityHostTestCases/CtsVideoEncodingQualityHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest988HostTestCases/CtsJvmtiRunTest988HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest908HostTestCases/CtsJvmtiRunTest908HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest940HostTestCases/CtsJvmtiRunTest940HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1988HostTestCases/CtsJvmtiRunTest1988HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1927HostTestCases/CtsJvmtiRunTest1927HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1971HostTestCases/CtsJvmtiRunTest1971HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest927HostTestCases/CtsJvmtiRunTest927HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest923HostTestCases/CtsJvmtiRunTest923HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsUsesLibraryHostTestCases/CtsUsesLibraryHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsAdbHostTestCases/CtsAdbHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1908HostTestCases/CtsJvmtiRunTest1908HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1915HostTestCases/CtsJvmtiRunTest1915HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1977HostTestCases/CtsJvmtiRunTest1977HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsStrictJavaPackagesTestCases/CtsStrictJavaPackagesTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsGpuProfilingDataTestCases/CtsGpuProfilingDataTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsHdmiCecHostTestCases/CtsHdmiCecHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsExtractNativeLibsHostTestCases/CtsExtractNativeLibsHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1975HostTestCases/CtsJvmtiRunTest1975HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest985HostTestCases/CtsJvmtiRunTest985HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsDexMetadataHostTestCases/CtsDexMetadataHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1983HostTestCases/CtsJvmtiRunTest1983HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsStatsdAtomHostTestCases/CtsStatsdAtomHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsPackageManagerParsingHostTestCases/CtsPackageManagerParsingHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest989HostTestCases/CtsJvmtiRunTest989HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest913HostTestCases/CtsJvmtiRunTest913HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsIncrementalInstallHostTestCases/CtsIncrementalInstallHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/MicrodroidTestPreparer/MicrodroidTestPreparer.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJdwpTunnelHostTestCases/jdi-support.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJdwpTunnelHostTestCases/CtsJdwpTunnelHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsAppSearchHostTestCases/CtsAppSearchHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsSignedConfigHostTestCases/CtsSignedConfigHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest903HostTestCases/CtsJvmtiRunTest903HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest906HostTestCases/CtsJvmtiRunTest906HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsSecurityHostTestCases/CtsSecurityHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1907HostTestCases/CtsJvmtiRunTest1907HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest911HostTestCases/CtsJvmtiRunTest911HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsHostsideNumberBlockingTestCases/CtsHostsideNumberBlockingTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1979HostTestCases/CtsJvmtiRunTest1979HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsGpuToolsHostTestCases/CtsGpuToolsHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest930HostTestCases/CtsJvmtiRunTest930HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1990HostTestCases/CtsJvmtiRunTest1990HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsSampleHostTestCases/CtsSampleHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJdwpTestCases/arm64/CtsJdwpTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJdwpTestCases/cts-dalvik-device-test-runner.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsAtraceHostTestCases/CtsAtraceHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest2003HostTestCases/CtsJvmtiRunTest2003HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsGrammaticalInflectionHostTestCases/CtsGrammaticalInflectionHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1903HostTestCases/CtsJvmtiRunTest1903HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsTelecomHostCases/CtsTelecomHostCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsDevicePolicyManagerTestCases/CtsDevicePolicyManagerTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsUsbTests/CtsUsbTests.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1992HostTestCases/CtsJvmtiRunTest1992HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest942HostTestCases/CtsJvmtiRunTest942HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsHostsideTvTests/CtsHostsideTvTests.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest986HostTestCases/CtsJvmtiRunTest986HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsDynamicMimeHostTestCases/CtsDynamicMimeHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest917HostTestCases/CtsJvmtiRunTest917HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsAdbManagerHostTestCases/CtsAdbManagerHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1969HostTestCases/CtsJvmtiRunTest1969HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1916HostTestCases/CtsJvmtiRunTest1916HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1900HostTestCases/CtsJvmtiRunTest1900HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest983HostTestCases/CtsJvmtiRunTest983HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1909HostTestCases/CtsJvmtiRunTest1909HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsPackageManagerMultiUserHostTestCases/CtsPackageManagerMultiUserHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsAdServicesHostTests/CtsAdServicesHostTests.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsRollbackManagerHostTestCases/CtsRollbackManagerHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsPackageSettingHostTestCases/CtsPackageSettingHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest919HostTestCases/CtsJvmtiRunTest919HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsGpuMetricsHostTestCases/CtsGpuMetricsHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsMediaBitstreamsTestCases/CtsMediaBitstreamsTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsApexTestCases/CtsApexTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsHarmfulAppWarningHostTestCases/CtsHarmfulAppWarningHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1934HostTestCases/CtsJvmtiRunTest1934HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsShortcutHostTestCases/CtsShortcutHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest915HostTestCases/CtsJvmtiRunTest915HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/compatibility-host-provider-preconditions/compatibility-host-provider-preconditions.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsCppToolsTestCases/CtsCppToolsTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1984HostTestCases/CtsJvmtiRunTest1984HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1999HostTestCases/CtsJvmtiRunTest1999HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsInputMethodServiceCommon/arm64/CtsInputMethodServiceCommon.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1976HostTestCases/CtsJvmtiRunTest1976HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1912HostTestCases/CtsJvmtiRunTest1912HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest926HostTestCases/CtsJvmtiRunTest926HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1923HostTestCases/CtsJvmtiRunTest1923HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1953HostTestCases/CtsJvmtiRunTest1953HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1931HostTestCases/CtsJvmtiRunTest1931HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsThemeHostTestCases/CtsThemeHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1901HostTestCases/CtsJvmtiRunTest1901HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsUsesNativeLibraryTest/CtsUsesNativeLibraryTest.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiAttachingHostTestCases/CtsJvmtiAttachingHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsHostsideHiddenapiTests/CtsHostsideHiddenapiTests.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsInstallHostTestCases/CtsInstallHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsNNAPIStatsdAtomHostTestCases/CtsNNAPIStatsdAtomHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsAppCompatHostTestCases/CtsAppCompatHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1904HostTestCases/CtsJvmtiRunTest1904HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1922HostTestCases/CtsJvmtiRunTest1922HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsAppUsageHostTestCases/CtsAppUsageHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest931HostTestCases/CtsJvmtiRunTest931HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest928HostTestCases/CtsJvmtiRunTest928HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsBackupHostTestCases/CtsBackupHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1998HostTestCases/CtsJvmtiRunTest1998HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsVoiceInteractionHostTestCases/CtsVoiceInteractionHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsTelephonyProviderHostCases/CtsTelephonyProviderHostCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1925HostTestCases/CtsJvmtiRunTest1925HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/vm-tests-tf/vm-tests-tf.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest902HostTestCases/CtsJvmtiRunTest902HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1943HostTestCases/CtsJvmtiRunTest1943HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsScopedStorageCoreHostTest/CtsScopedStorageCoreHostTest.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest2007HostTestCases/CtsJvmtiRunTest2007HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRedefineClassesHostTestCases/CtsJvmtiRedefineClassesHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/compatibility-host-telephony-preconditions/compatibility-host-telephony-preconditions.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest982HostTestCases/CtsJvmtiRunTest982HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsCompilationTestCases/CtsCompilationTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest996HostTestCases/CtsJvmtiRunTest996HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest992HostTestCases/CtsJvmtiRunTest992HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsAngleIntegrationHostTestCases/AngleIntegrationTestCommon.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsAngleIntegrationHostTestCases/CtsAngleIntegrationHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1926HostTestCases/CtsJvmtiRunTest1926HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest997HostTestCases/CtsJvmtiRunTest997HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1996HostTestCases/CtsJvmtiRunTest1996HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/cts-dynamic-config/cts-dynamic-config.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1906HostTestCases/CtsJvmtiRunTest1906HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsInstalledLoadingProgressHostTests/CtsInstalledLoadingProgressHostTests.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsWifiBroadcastsHostTestCases/CtsWifiBroadcastsHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsDomainVerificationHostTestCases/CtsDomainVerificationHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1930HostTestCases/CtsJvmtiRunTest1930HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsMediaParserHostTestCases/CtsMediaParserHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest905HostTestCases/CtsJvmtiRunTest905HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1997HostTestCases/CtsJvmtiRunTest1997HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1928HostTestCases/CtsJvmtiRunTest1928HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest904HostTestCases/CtsJvmtiRunTest904HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/cts-dalvik-host-test-runner/cts-dalvik-host-test-runner.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsAbiOverrideHostTestCases/CtsAbiOverrideHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsTaggingHostTestCases/CtsTaggingHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest995HostTestCases/CtsJvmtiRunTest995HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1921HostTestCases/CtsJvmtiRunTest1921HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest907HostTestCases/CtsJvmtiRunTest907HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsBootStatsTestCases/CtsBootStatsTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1914HostTestCases/CtsJvmtiRunTest1914HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsThreadLocalRandomHostTest/CtsThreadLocalRandomHostTest.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest944HostTestCases/CtsJvmtiRunTest944HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsPackageManagerStatsHostTestCases/CtsPackageManagerStatsHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsClassloaderSplitsHostTestCases/CtsClassloaderSplitsHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest991HostTestCases/CtsJvmtiRunTest991HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1974HostTestCases/CtsJvmtiRunTest1974HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest984HostTestCases/CtsJvmtiRunTest984HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1924HostTestCases/CtsJvmtiRunTest1924HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1913HostTestCases/CtsJvmtiRunTest1913HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsTelephonyHostCases/CtsTelephonyHostCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest918HostTestCases/CtsJvmtiRunTest918HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsHostsideWebViewTests/CtsHostsideWebViewTests.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsAppCloningMediaProviderHostTest/CtsAppCloningMediaProviderHostTest.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsSeccompHostTestCases/CtsSeccompHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest914HostTestCases/CtsJvmtiRunTest914HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1942HostTestCases/CtsJvmtiRunTest1942HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsCallLogTestCases/CtsCallLogTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsMediaHostTestCases/CtsMediaHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1967HostTestCases/CtsJvmtiRunTest1967HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsStatsdHostTestCases/CtsStatsdHostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsJvmtiRunTest1981HostTestCases/CtsJvmtiRunTest1981HostTestCases.jar:/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/testcases/CtsEdiHostTestCases/CtsEdiHostTestCases.jar -DCTS_ROOT=/tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b com.android.compatibility.common.tradefed.command.CompatibilityConsole run commandAndExit cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1 -s 27161FDH20031X {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/XtsTradefedTest: xTS TF started, pid=1812238 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:54 PST I/TestManager: (1) Test Ids: f2a6329e-4868-435b-a00c-d8026d16795a {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:55 PST I/AtsSessionPlugin: Updated invocation info of test [f2a6329e-4868-435b-a00c-d8026d16795a]: invocation { command_id: "1" start_time { seconds: 1771319933 nanos: 663611273 } device_id: "27161FDH20031X" state_summary: "(not invoked)" } start_time { seconds: 1771319933 nanos: 663611273 } {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:18:55 PST I/SessionInfo: New session plugin output, session_id=fb6a75e1-ba4b-40d3-924a-42068325a711, plugin_label=AtsSessionPlugin, new_plugin_output=[run_command_state { command_id: "1" command_line_args: "cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1" running_invocation { key: "f2a6329e-4868-435b-a00c-d8026d16795a" value { invocation { command_id: "1" start_time { seconds: 1771319933 nanos: 663611273 } device_id: "27161FDH20031X" state_summary: "(not invoked)" } start_time { seconds: 1771319933 nanos: 663611273 } } } separated_command_line_args: "cts" separated_command_line_args: "-m" separated_command_line_args: "CtsDisplayTestCases" separated_command_line_args: "-t" separated_command_line_args: "android.display.cts.VirtualDisplayTest" separated_command_line_args: "--shard-count" separated_command_line_args: "1" }] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:19:00 PST I/AtsSessionPlugin: Updated invocation info of test [f2a6329e-4868-435b-a00c-d8026d16795a]: invocation { command_id: "1" start_time { seconds: 1771319933 nanos: 663611273 } device_id: "27161FDH20031X" state_summary: "running cts on build(s) \'DeviceBuildInfo{bid=13033356, serial=27161FDH20031X}\'" } start_time { seconds: 1771319933 nanos: 663611273 } {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:19:00 PST I/SessionInfo: New session plugin output, session_id=fb6a75e1-ba4b-40d3-924a-42068325a711, plugin_label=AtsSessionPlugin, new_plugin_output=[run_command_state { command_id: "1" command_line_args: "cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1" running_invocation { key: "f2a6329e-4868-435b-a00c-d8026d16795a" value { invocation { command_id: "1" start_time { seconds: 1771319933 nanos: 663611273 } device_id: "27161FDH20031X" state_summary: "running cts on build(s) \'DeviceBuildInfo{bid=13033356, serial=27161FDH20031X}\'" } start_time { seconds: 1771319933 nanos: 663611273 } } } separated_command_line_args: "cts" separated_command_line_args: "-m" separated_command_line_args: "CtsDisplayTestCases" separated_command_line_args: "-t" separated_command_line_args: "android.display.cts.VirtualDisplayTest" separated_command_line_args: "--shard-count" separated_command_line_args: "1" }] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:19:40 PST I/JobManager: (1) Job Ids: 8913ecaf-15c0-4702-b712-4642518490e4 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/AtsSessionPlugin: Updated invocation info of test [f2a6329e-4868-435b-a00c-d8026d16795a]: start_time { seconds: 1771319933 nanos: 663611273 } {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/SessionInfo: New session plugin output, session_id=fb6a75e1-ba4b-40d3-924a-42068325a711, plugin_label=AtsSessionPlugin, new_plugin_output=[run_command_state { command_id: "1" command_line_args: "cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1" running_invocation { key: "f2a6329e-4868-435b-a00c-d8026d16795a" value { start_time { seconds: 1771319933 nanos: 663611273 } } } separated_command_line_args: "cts" separated_command_line_args: "-m" separated_command_line_args: "CtsDisplayTestCases" separated_command_line_args: "-t" separated_command_line_args: "android.display.cts.VirtualDisplayTest" separated_command_line_args: "--shard-count" separated_command_line_args: "1" }] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/XtsTradefedTest: One TF finished (the command is still running, and it will finish after all TF and the post-processing finish) {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/XtsTradefedTest: Finished running cts test. xTS run command exit code: Optional[0] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/Result: Result UNKNOWN -> PASS, caller=[com.google.devtools.mobileharness.api.model.job.out.Result.setPass(Result.java:102)  <--  com.google.wireless.qa.mobileharness.shared.api.driver.XtsTradefedTest.setTestResult(XtsTradefedTest.java:266)  <--  com.google.wireless.qa.mobileharness.shared.api.driver.XtsTradefedTest.run(XtsTradefedTest.java:235)  <--  com.google.devtools.mobileharness.infra.controller.test.local.LocalTestRunner$DriverEventGenerator.run(LocalTestRunner.java:279)] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/DeviceCacheManager: Invalidating [GENERAL] cache for device [27161FDH20031X] succeeded. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/LocalFileUtil: Checked fully accessibility of file /tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files. Permissions: rwxrwxr-x {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/LocalFileUtil: Checked fully accessibility of file /tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results. Permissions: rwxrwxr-x {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/LocalFileUtil: Copy file or dir from /tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/results/2026.02.17_17.18.55.zip to /tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/LocalFileUtil: Copy file or dir from /tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/results/2026.02.17_17.18.55 to /tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/LocalFileUtil: Copy file or dir from /tmp/xts-root-dir-90fe201c-31d1-4726-8b45-7f6eef348c8b/android-cts/logs to /tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/LocalTestRunner: XtsTradefedTest has ended {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/LocalTestRunner: Driver [XtsTradefedTest] of test xts-tradefed-test-cts ended {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/BaseTestRunner: Update the status of test: [xts-tradefed-test-cts], devices: [[27161FDH20031X]] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/BaseTestRunner: Run test xts-tradefed-test-cts finished {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/BaseTestRunner: Start post-run test xts-tradefed-test-cts on device(s) [27161FDH20031X] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/BaseTestRunner: Post TestEndingEvent to test f2a6329e-4868-435b-a00c-d8026d16795a@8913ecaf-15c0-4702-b712-4642518490e4 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/TestCommandHistorySaver: Saving test command history... {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/Status: Status RUNNING -> DONE {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/BaseTestRunner: Finish [8913ecaf-15c0-4702-b712-4642518490e4:xts-tradefed-test-cts] : PASS {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/LocalTestFlow: --------- Device: PostRunTest (f2a6329e-4868-435b-a00c-d8026d16795a) --------- {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/LocalTestFlow: Post-run test of device [27161FDH20031X] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST W/DeviceCacheManager: Invalidating [GENERAL] cache for device [27161FDH20031X] failed. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/AndroidRealDeviceDelegate: Ignoring attempt to clear multi-user on device 27161FDH20031X. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/AndroidRealDeviceDelegate: Largest PM UID on device 27161FDH20031X is: 10123 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/LocalTestFlow: Post-run test of device [27161FDH20031X] finished, result=NONE {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/LocalTestFlow: Adding common dimensions [] shared among testbed to test f2a6329e-4868-435b-a00c-d8026d16795a {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/BaseTestRunner: Post TestEndedEvent to test f2a6329e-4868-435b-a00c-d8026d16795a@8913ecaf-15c0-4702-b712-4642518490e4 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/AtsSessionPlugin: Command [1]'s invocations completed. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/SessionInfo: New session plugin output, session_id=fb6a75e1-ba4b-40d3-924a-42068325a711, plugin_label=AtsSessionPlugin, new_plugin_output=[run_command_state { command_id: "1" total_execution_time { seconds: 92 nanos: 251761227 } command_line_args: "cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1" separated_command_line_args: "cts" separated_command_line_args: "-m" separated_command_line_args: "CtsDisplayTestCases" separated_command_line_args: "-t" separated_command_line_args: "android.display.cts.VirtualDisplayTest" separated_command_line_args: "--shard-count" separated_command_line_args: "1" }] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/GenFileHandler: Start uploading test generated files {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/GenFileHandler: Saved the test log to /tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/test_output.txt {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/GenFileHandler: Finish uploading test generated files {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/BaseTestRunner: Stopped {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/BaseTestRunner: Post-run test xts-tradefed-test-cts finished {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST I/BaseTestRunner: End test xts-tradefed-test-cts on devices(s) [27161FDH20031X] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:25 PST W/DeviceCacheManager: Invalidating [GENERAL] cache for device [27161FDH20031X] failed.
+02-17 01:20:25 PST W/DeviceCacheManager: Invalidating [CONTAINER] cache for device [27161FDH20031X] failed.
+02-17 01:20:25 PST I/DeviceRebootUtil: Skip checking consecutive test results because this device 27161FDH20031X doesn't support reboot
+02-17 01:20:25 PST I/LocalDeviceRunner: Posting TestExecutionEndedEvent, allocation=Allocation{test=f2a6329e-4868-435b-a00c-d8026d16795a@8913ecaf-15c0-4702-b712-4642518490e4, devices=[27161FDH20031X]}, result=PASS, need_reboot=false
+02-17 01:20:25 PST I/JobManager: Release allocation Allocation{test=f2a6329e-4868-435b-a00c-d8026d16795a@8913ecaf-15c0-4702-b712-4642518490e4, devices=[27161FDH20031X]}, result=PASS, device_dirty=false
+02-17 01:20:25 PST I/LocalDeviceVerifier: Device 27161FDH20031X not rebootable.
+02-17 01:20:25 PST I/LocalDeviceAllocator: Release device 27161FDH20031X in scheduler, DeviceDirty=false
+02-17 01:20:25 PST I/Allocations: Un-assign test f2a6329e-4868-435b-a00c-d8026d16795a@8913ecaf-15c0-4702-b712-4642518490e4
+02-17 01:20:25 PST I/Allocations: Free device 27161FDH20031X
+02-17 01:20:25 PST I/SimpleScheduler: Remove test f2a6329e-4868-435b-a00c-d8026d16795a@8913ecaf-15c0-4702-b712-4642518490e4
+02-17 01:20:25 PST I/SimpleScheduler: Test f2a6329e-4868-435b-a00c-d8026d16795a removed from job 8913ecaf-15c0-4702-b712-4642518490e4
+02-17 01:20:25 PST I/SimpleScheduler: Allocation Allocation{test=f2a6329e-4868-435b-a00c-d8026d16795a@8913ecaf-15c0-4702-b712-4642518490e4, devices=[27161FDH20031X]} released
+02-17 01:20:25 PST I/LocalDeviceRunner: TestExecutionEndedEvent posted
+02-17 01:20:26 PST I/TestManager: Remove stopped test: f2a6329e-4868-435b-a00c-d8026d16795a {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:26 PST I/JobRunner: Job done {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:26 PST I/SimpleScheduler: Job deleted: 8913ecaf-15c0-4702-b712-4642518490e4 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:26 PST I/JobRunner: Job runner post run job {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:26 PST I/JobRunner: Shutdown test thread pool {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:26 PST W/TestManager: Interrupted sleep interrupted {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:26 PST I/TestManager: Stopped! {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:26 PST I/JobRunner: Finalize job {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:26 PST I/Result: Result UNKNOWN -> PASS, caller=[com.google.devtools.mobileharness.api.model.job.out.Result.setPass(Result.java:102)  <--  com.google.devtools.mobileharness.infra.client.api.controller.job.JobRunner.finalizeJobResult(JobRunner.java:1446)  <--  com.google.devtools.mobileharness.infra.client.api.controller.job.JobRunner.postRunJob(JobRunner.java:1018)  <--  com.google.devtools.mobileharness.infra.client.api.controller.job.JobRunner.run(JobRunner.java:587)] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:26 PST I/Status: Status RUNNING -> DONE {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:26 PST I/AtsSessionPlugin: All added tradefed jobs have been done, try add non-tradefed jobs if needed. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:26 PST I/JobReporter: The job xts-tradefed-test-job PASS!
+Passed tests(1) {
+  xts-tradefed-test-cts: PASS
+}
+PASS!
+Tests run: 1, Passed: 1   
+ {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:26 PST I/GenFileHandler: GenFileHandler started to ack JobEndEvent. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:26 PST I/GenFileHandler: GenFileHandler finished to ack JobEndEvent. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:26 PST I/JobRunner: Job stopped {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionJobRunner: All jobs of session fb6a75e1-ba4b-40d3-924a-42068325a711 finished {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionPluginRunner: Posting SessionEndedEvent {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionPluginRunner: Posting SessionEndedEvent(fb6a75e1-ba4b-40d3-924a-42068325a711) to subscriber [com.google.devtools.mobileharness.infra.ats.console.controller.sessionplugin.AtsSessionPlugin#onSessionEnded(SessionEndedEvent)@1048387663] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/RunCommandHandler: Command [1] is done and start to handle result which may take several minutes based on the session scale. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Acquiring lock to process result. Session id: fb6a75e1-ba4b-40d3-924a-42068325a711 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Acquired lock to process result. Session id: fb6a75e1-ba4b-40d3-924a-42068325a711 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test log relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/command_history.txt] into dir [/home/simon/android-cts/logs/2026.02.17_17.18.40.043_3970/inv_8676803059305043399/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test log relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/tf_runtime_info.lck] into dir [/home/simon/android-cts/logs/2026.02.17_17.18.40.043_3970/inv_8676803059305043399/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test log relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/tf_runtime_info] into dir [/home/simon/android-cts/logs/2026.02.17_17.18.40.043_3970/inv_8676803059305043399/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test log relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/test_output.txt] into dir [/home/simon/android-cts/logs/2026.02.17_17.18.40.043_3970/inv_8676803059305043399/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/report-log-files] into tmp dir [/tmp/8b123d6e-e4a2-4217-a3ef-3aeef1852892/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/checksum-suite.data] into tmp dir [/tmp/8b123d6e-e4a2-4217-a3ef-3aeef1852892/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/test_result_failures_suite.html] into tmp dir [/tmp/8b123d6e-e4a2-4217-a3ef-3aeef1852892/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/test_result.html] into tmp dir [/tmp/8b123d6e-e4a2-4217-a3ef-3aeef1852892/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/invocation_summary.txt] into tmp dir [/tmp/8b123d6e-e4a2-4217-a3ef-3aeef1852892/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/proto] into tmp dir [/tmp/8b123d6e-e4a2-4217-a3ef-3aeef1852892/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/logo.png] into tmp dir [/tmp/8b123d6e-e4a2-4217-a3ef-3aeef1852892/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/compatibility_result.css] into tmp dir [/tmp/8b123d6e-e4a2-4217-a3ef-3aeef1852892/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/compatibility_result.xsl] into tmp dir [/tmp/8b123d6e-e4a2-4217-a3ef-3aeef1852892/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/test_result.xml] into tmp dir [/tmp/8b123d6e-e4a2-4217-a3ef-3aeef1852892/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/device-info-files] into tmp dir [/tmp/8b123d6e-e4a2-4217-a3ef-3aeef1852892/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/vintf-files] into tmp dir [/tmp/8b123d6e-e4a2-4217-a3ef-3aeef1852892/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/config] into tmp dir [/tmp/8b123d6e-e4a2-4217-a3ef-3aeef1852892/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/module_reports] into tmp dir [/tmp/8b123d6e-e4a2-4217-a3ef-3aeef1852892/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/report-log-files] into dir [/home/simon/android-cts/results/2026.02.17_17.18.40.043_3970] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/invocation_summary.txt] into dir [/home/simon/android-cts/results/2026.02.17_17.18.40.043_3970] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/proto] into dir [/home/simon/android-cts/results/2026.02.17_17.18.40.043_3970] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/device-info-files] into dir [/home/simon/android-cts/results/2026.02.17_17.18.40.043_3970] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/vintf-files] into dir [/home/simon/android-cts/results/2026.02.17_17.18.40.043_3970] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Copying tradefed test result relevant file/dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/android-cts-gen-files/results/2026.02.17_17.18.55/config] into dir [/home/simon/android-cts/results/2026.02.17_17.18.40.043_3970] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/CompatibilityReportMerger: Start to parse result bundle files:
+ - Test result XML: /tmp/8b123d6e-e4a2-4217-a3ef-3aeef1852892/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a/test_result.xml, Test record file: Optional[/tmp/8b123d6e-e4a2-4217-a3ef-3aeef1852892/XtsTradefedTest_test_f2a6329e-4868-435b-a00c-d8026d16795a/proto/test-record.pb] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/CompatibilityReportMerger: Given reports number: 1, usable parsed results number: 1 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/CompatibilityReportMerger: Given reports number: 1, usable reports number: 1 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/CompatibilityReportMerger: Given reports number: 1, usable reports number: 1 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/CompatibilityReportCreator: No test record specified. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/CompatibilityReportCreator: Viewable report: /home/simon/android-cts/results/2026.02.17_17.18.40.043_3970/test_result.html {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/CompatibilityReportCreator: Failure HTML report: /home/simon/android-cts/results/2026.02.17_17.18.40.043_3970/test_result_failures_suite.html {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Result processing finished. Session id: fb6a75e1-ba4b-40d3-924a-42068325a711 {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionResultHandlerUtil: Cleaning up job [8913ecaf-15c0-4702-b712-4642518490e4] gen dir [/tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SuiteResultReporter: Getting invocation summary... {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/RunCommandHandler: Invocation summary file [/home/simon/android-cts/results/2026.02.17_17.18.40.043_3970/invocation_summary.txt] exists, overriding it. {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionInfo: New session plugin output, session_id=fb6a75e1-ba4b-40d3-924a-42068325a711, plugin_label=AtsSessionPlugin, new_plugin_output=[success { output_message: "run_command session_id: [fb6a75e1-ba4b-40d3-924a-42068325a711], command_id: [1], result: COMPLETED.\ncommand_line_args: cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1\n\n============================================\n================= Results ==================\n=============== Consumed Time ==============\n    arm64-v8a CtsDisplayTestCases: 3s\n    arm64-v8a CtsDisplayTestCases[instant]: 1s\nTotal aggregated tests run time: 5s\n============== Modules Preparation Times ==============\n    arm64-v8a CtsDisplayTestCases[instant] => prep = 2192 ms || clean = 507 ms\n    arm64-v8a CtsDisplayTestCases => prep = 2105 ms || clean = 454 ms\nTotal preparation time: 4s  ||  Total tear down time: 961 ms\n=======================================================\n=============== Summary ===============\nTotal Run time: 1m 29s\n2/2 modules completed\nTotal Tests       : 10\nPASSED            : 2\nFAILED            : 8\n============== End of Results ==============\n============================================\n=========== Result/Log Location ============\nLOG DIRECTORY               : /home/simon/android-cts/logs/2026.02.17_17.18.40.043_3970\nRESULT DIRECTORY            : /home/simon/android-cts/results/2026.02.17_17.18.40.043_3970\n=================== End ====================\n" } run_command_state { command_id: "1" total_execution_time { seconds: 92 nanos: 251761227 } command_line_args: "cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1" separated_command_line_args: "cts" separated_command_line_args: "-m" separated_command_line_args: "CtsDisplayTestCases" separated_command_line_args: "-t" separated_command_line_args: "android.display.cts.VirtualDisplayTest" separated_command_line_args: "--shard-count" separated_command_line_args: "1" }] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionPluginRunner: Subscriber [com.google.devtools.mobileharness.infra.ats.console.controller.sessionplugin.AtsSessionPlugin#onSessionEnded(SessionEndedEvent)@1048387663] handled SessionEndedEvent(fb6a75e1-ba4b-40d3-924a-42068325a711) {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionManager: Session finished, session_id=fb6a75e1-ba4b-40d3-924a-42068325a711, final_session_detail=[session_id { id: "fb6a75e1-ba4b-40d3-924a-42068325a711" } session_status: SESSION_FINISHED session_config { session_name: "run_command" session_property { key: "olc_server_session_client_id" value: "ats-console-38314757-c960-42fa-a920-bcdaf7310415" } session_plugin_configs { session_plugin_config { loading_config { plugin_class_name: "com.google.devtools.mobileharness.infra.ats.console.controller.sessionplugin.AtsSessionPlugin" plugin_module_class_name: "com.google.devtools.mobileharness.infra.ats.console.controller.sessionplugin.AtsSessionPluginModule" } execution_config { config { [type.googleapis.com/mobileharness.infra.ats.console.controller.AtsSessionPluginConfig] { run_command { test_plan: "cts" xts_root_dir: "/home/simon" module_name: "CtsDisplayTestCases" shard_count: 1 xts_type: "cts" test_name: "android.display.cts.VirtualDisplayTest" initial_state { command_line_args: "cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1" separated_command_line_args: "cts" separated_command_line_args: "-m" separated_command_line_args: "CtsDisplayTestCases" separated_command_line_args: "-t" separated_command_line_args: "android.display.cts.VirtualDisplayTest" separated_command_line_args: "--shard-count" separated_command_line_args: "1" } html_in_zip: false enable_xts_dynamic_download: true report_system_checkers: false } } } } explicit_label { label: "AtsSessionPlugin" } } } } session_output { session_property { key: "olc_server_session_client_id" value: "ats-console-38314757-c960-42fa-a920-bcdaf7310415" } session_property { key: "olc_server_session_command_id" value: "1" } session_property { key: "olc_server_session_contain_started_test" value: "true" } session_property { key: "olc_server_session_log_file_path" value: "/home/simon/android-cts/logs/2026.02.17_17.18.40.043_3970/olc_server_session_logs/olc_server_session_log.txt" } session_property { key: "timestamp_dir_name" value: "2026.02.17_17.18.40.043_3970" } session_plugin_output { key: "AtsSessionPlugin" value { output { [type.googleapis.com/mobileharness.infra.ats.console.controller.AtsSessionPluginOutput] { success { output_message: "run_command session_id: [fb6a75e1-ba4b-40d3-924a-42068325a711], command_id: [1], result: COMPLETED.\ncommand_line_args: cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1\n\n============================================\n================= Results ==================\n=============== Consumed Time ==============\n    arm64-v8a CtsDisplayTestCases: 3s\n    arm64-v8a CtsDisplayTestCases[instant]: 1s\nTotal aggregated tests run time: 5s\n============== Modules Preparation Times ==============\n    arm64-v8a CtsDisplayTestCases[instant] => prep = 2192 ms || clean = 507 ms\n    arm64-v8a CtsDisplayTestCases => prep = 2105 ms || clean = 454 ms\nTotal preparation time: 4s  ||  Total tear down time: 961 ms\n=======================================================\n=============== Summary ===============\nTotal Run time: 1m 29s\n2/2 modules completed\nTotal Tests       : 10\nPASSED            : 2\nFAILED            : 8\n============== End of Results ==============\n============================================\n=========== Result/Log Location ============\nLOG DIRECTORY               : /home/simon/android-cts/logs/2026.02.17_17.18.40.043_3970\nRESULT DIRECTORY            : /home/simon/android-cts/results/2026.02.17_17.18.40.043_3970\n=================== End ====================\n" } run_command_state { command_id: "1" total_execution_time { seconds: 92 nanos: 251761227 } command_line_args: "cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest --shard-count 1" separated_command_line_args: "cts" separated_command_line_args: "-m" separated_command_line_args: "CtsDisplayTestCases" separated_command_line_args: "-t" separated_command_line_args: "android.display.cts.VirtualDisplayTest" separated_command_line_args: "--shard-count" separated_command_line_args: "1" } } } } } session_timing_info { session_submitted_time { seconds: 1771319919 nanos: 957352605 } } }] {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/SessionManager: Copying server session log file from /tmp/olc_server_temp_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/olc_server_session_log/olc_server_session_log_0.txt to /home/simon/android-cts/logs/2026.02.17_17.18.40.043_3970/olc_server_session_logs/olc_server_session_log.txt {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}
+02-17 01:20:28 PST I/LocalFileUtil: Copy file or dir from /tmp/olc_server_temp_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/olc_server_session_log/olc_server_session_log_0.txt to /home/simon/android-cts/logs/2026.02.17_17.18.40.043_3970/olc_server_session_logs/olc_server_session_log.txt {olc_session_id=fb6a75e1, olc_client_id=ats-console-38314757}

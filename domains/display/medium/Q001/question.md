@@ -1,36 +1,38 @@
-# DIS-M001: BrightnessTracker 亮度事件記錄異常
+# DIS-M001: Display Mode Alternative Refresh Rates 異常
 
 ## 題目描述
 
-團隊收到 bug report：在高負載情況下（如快速滑動亮度條），部分亮度調整事件似乎沒有被正確記錄到歷史記錄中。CTS 測試 `BrightnessTest#testBrightnessSliderTracking` 偶爾失敗。
+團隊收到 bug report：在某些多刷新率顯示器上，CTS 測試 `DisplayTest#testGetSupportedModesOnDefaultDisplay` 偶發失敗。
 
 失敗的 CTS Log 顯示：
 ```
-FAILURE: Expected brightness events count >= 5, but got 3
-Test was tracking user-initiated brightness changes over 10 seconds
+FAILURE: Expected {width=1080, height=2400, fps=120.0} to be listed as 
+alternative refresh rate of {width=1080, height=2400, fps=60.0}. 
+All supported modes are [...]
 ```
 
-問題出現在多核心設備上更頻繁，單核設備幾乎不會重現。
+測試驗證的是 `Display.Mode.getAlternativeRefreshRates()` 回報的替代刷新率列表應該具備對稱性：如果 Mode A 的替代刷新率包含 Mode B 的頻率，那麼 Mode B 的替代刷新率也應該包含 Mode A 的頻率。
+
+問題在設備啟動後第一次查詢時最容易重現，後續查詢通常正常。
 
 ## 測試環境
 
 - CTS Module: `CtsDisplayTestCases`
-- 測試方法: `android.hardware.display.cts.BrightnessTest#testBrightnessSliderTracking`
-- 相關檔案: `frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java`
+- 測試方法: `android.display.cts.DisplayTest#testGetSupportedModesOnDefaultDisplay`
+- 相關檔案: `frameworks/base/services/core/java/com/android/server/display/LocalDisplayAdapter.java`
 
 ## 任務
 
-1. 分析 `BrightnessTracker.java` 中亮度事件記錄的邏輯
-2. 找出導致事件遺失的 bug
-3. 解釋為什麼這個 bug 在多核設備上更容易重現
+1. 分析 `LocalDisplayAdapter.java` 中建構 alternative refresh rates 的邏輯
+2. 找出導致對稱性被破壞的 bug
+3. 解釋為什麼這個 bug 在第一次查詢時更容易重現
 4. 提供修復方案
 
 ## 提示
 
-- 重點關注 `handleBrightnessChanged()` 方法
-- 思考多線程環境下共享變數的存取安全性
-- 注意 `mEventsDirty` 和 `mEvents` 這兩個變數的用途和保護方式
-- 追蹤 `mEventsDirty` 在其他方法中如何被讀取使用
+- 重點關注 `updateDisplayModesLocked()` 或類似方法中遍歷 displayModes 的迴圈
+- 思考邊界條件：陣列的第一個和最後一個元素是否都被正確處理？
+- 注意 for 迴圈的終止條件
 
 ## 預計時間
 

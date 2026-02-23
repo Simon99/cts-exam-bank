@@ -3,10 +3,14 @@
   "title": "Private Virtual Display 錯誤的 Projection 授權檢查",
   "domain": "display",
   "difficulty": "medium",
+  "verified": true,
   "cts_test": "android.hardware.display.cts.VirtualDisplayTest#testPrivateVirtualDisplay",
   "cts_module": "CtsDisplayTestCases",
   "injection_point": "DIS-009",
-  "injection_type": ["COND", "ERR"],
+  "injection_type": [
+    "COND",
+    "ERR"
+  ],
   "affected_files": [
     "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java"
   ],
@@ -38,5 +42,13 @@
       "testUntrustedSysDecorVirtualDisplay",
       "testVirtualDisplayWithRequestedRefreshRate"
     ]
+  },
+  "verification_status": "complete",
+  "verification_date": "2026-02-21",
+  "verification_issues": [],
+  "cts_summary": {
+    "passed": 2,
+    "failed": 8,
+    "total": 10
   }
 }

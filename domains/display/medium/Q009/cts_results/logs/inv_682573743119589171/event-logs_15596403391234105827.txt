@@ -1,0 +1,191 @@
+[invocation started]
+[    log: tradefed-expanded-config | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/tradefed-expanded-config_12345877075682868217.xml]
+[    log: ConfigurationDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/ConfigurationDeviceInfo.deviceinfo.json_6596001630153131846.txt.gz]
+[    log: StorageDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/StorageDeviceInfo.deviceinfo.json_1642587374936204083.txt.gz]
+[    log: framework_manifest.xml | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/framework_manifest.xml_18229757609443124783.txt.gz]
+[    log: device_compatibility_matrix.xml | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/device_compatibility_matrix.xml_16103528815639540353.txt.gz]
+[    log: UserDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/UserDeviceInfo.deviceinfo.json_12916884585171307496.txt.gz]
+[    log: MediaDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/MediaDeviceInfo.deviceinfo.json_13941221454455772259.txt.gz]
+[    log: device_manifest.xml | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/device_manifest.xml_15272022848465932402.txt.gz]
+[    log: KeystoreAttestationDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/KeystoreAttestationDeviceInfo.deviceinfo.json_4022733091310602402.txt.gz]
+[    log: MediaDrmDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/MediaDrmDeviceInfo.deviceinfo.json_12135990866010875743.txt.gz]
+[    log: CpuDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/CpuDeviceInfo.deviceinfo.json_5152861294984330162.txt.gz]
+[    log: ClientIdDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/ClientIdDeviceInfo.deviceinfo.json_9799154536940687761.txt.gz]
+[    log: VulkanDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/VulkanDeviceInfo.deviceinfo.json_17342046743134552896.txt.gz]
+[    log: ScreenDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/ScreenDeviceInfo.deviceinfo.json_12639375729450122617.txt.gz]
+[    log: DefaultAppDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/DefaultAppDeviceInfo.deviceinfo.json_4396725015287334234.txt.gz]
+[    log: HapticsDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/HapticsDeviceInfo.deviceinfo.json_10739109499811645528.txt.gz]
+[    log: GenericDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/GenericDeviceInfo.deviceinfo.json_4593385050407080878.txt.gz]
+[    log: PackageDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/PackageDeviceInfo.deviceinfo.json_16774587530450621005.txt.gz]
+[    log: VintfDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/VintfDeviceInfo.deviceinfo.json_15139365007059368011.txt.gz]
+[    log: DeviceIdleDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/DeviceIdleDeviceInfo.deviceinfo.json_14417882805593455917.txt.gz]
+[    log: SensorDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/SensorDeviceInfo.deviceinfo.json_2573459123218398359.txt.gz]
+[    log: MemoryDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/MemoryDeviceInfo.deviceinfo.json_11528759511286952444.txt.gz]
+[    log: ConnectivityDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/ConnectivityDeviceInfo.deviceinfo.json_10004868632745399123.txt.gz]
+[    log: BiometricsDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/BiometricsDeviceInfo.deviceinfo.json_12933058241380048006.txt.gz]
+[    log: LocaleDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/LocaleDeviceInfo.deviceinfo.json_7932443912121353126.txt.gz]
+[    log: GraphicsDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/GraphicsDeviceInfo.deviceinfo.json_14435391899638542728.txt.gz]
+[    log: AppStandbyDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/AppStandbyDeviceInfo.deviceinfo.json_7654856258454161416.txt.gz]
+[    log: framework_compatibility_matrix.xml | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/framework_compatibility_matrix.xml_9591249631626791614.txt.gz]
+[    log: FeatureDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/FeatureDeviceInfo.deviceinfo.json_14323622902861145708.txt.gz]
+[    log: InputDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/InputDeviceInfo.deviceinfo.json_14359104023973192183.txt.gz]
+[    log: MediaOutputDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/MediaOutputDeviceInfo.deviceinfo.json_12846038227146514608.txt.gz]
+[    log: GnssDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/GnssDeviceInfo.deviceinfo.json_14497470742284886250.txt.gz]
+[    log: CameraDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/CameraDeviceInfo.deviceinfo.json_8395483500572268006.txt.gz]
+[    log: device_logcat_setup_27161FDH20031X | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/device_logcat_setup_27161FDH20031X_3522413420587815290.txt]
+[    log: suite-exclude-filters12356156040369612922.txt | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/suite-exclude-filters12356156040369612922.txt_7570664937722404390.txt.gz]
+  [module arm64-v8a CtsDisplayTestCases[instant] started]
+[    log: module-configuration | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/module-configuration_14051909831591195398.xml]
+    [run arm64-v8a CtsDisplayTestCases[instant] (testCount: 64,attempt: 0) started]
+      - test: android.display.cts.DefaultDisplayModeTest#testSetUserPreferredResolutionForSpecificDisplay (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DefaultDisplayModeTest#testSetUserPreferredDisplayModeForSpecificDisplay (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DefaultDisplayModeTest#testGetUserPreferredDisplayMode (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DefaultDisplayModeTest#testSetAndClearUserPreferredDisplayModeGeneratesDisplayChangedEvents (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DefaultDisplayModeTest#testSetUserPreferredRefreshRateForSpecificDisplay (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DefaultDisplayModeTest#testSetUserPreferredDisplayModeThrowsExceptionWithInvalidMode (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DefaultDisplayModeTest#testSetAndClearUserPreferredDisplayModeForSpecificDisplayGeneratesDisplayChangedEvents (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DisplayEventTest#testDisplayEvents[#0: 1 false] (status=FAILURE)
+      - test: android.display.cts.DisplayEventTest#testDisplayEvents[#1: 2 false] (status=FAILURE)
+      - test: android.display.cts.DisplayEventTest#testDisplayEvents[#2: 3 false] (status=FAILURE)
+      - test: android.display.cts.DisplayEventTest#testDisplayEvents[#3: 10 false] (status=FAILURE)
+      - test: android.display.cts.DisplayEventTest#testDisplayEvents[#4: 1 true] (status=FAILURE)
+      - test: android.display.cts.DisplayEventTest#testDisplayEvents[#5: 2 true] (status=FAILURE)
+      - test: android.display.cts.DisplayEventTest#testDisplayEvents[#6: 3 true] (status=FAILURE)
+      - test: android.display.cts.DisplayEventTest#testDisplayEvents[#7: 10 true] (status=FAILURE)
+      - test: android.display.cts.DisplayManagerTest#testCreateVirtualDisplayFromShell (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DisplayManagerTest#createVirtualDisplayNoPermission (status=PASSED)
+      - test: android.display.cts.DisplayTest#testRestrictedFramebufferSize (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetHdrCapabilitiesWhenUserDisabledFormatsAreAllowedReturnsNonFilteredHdrTypes (status=PASSED)
+      - test: android.display.cts.DisplayTest#testDefaultDisplay (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetPreferredWideGamutColorSpace (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetDisplayAttrs (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetHdrCapabilitiesWhenUserDisabledFormatsAreNotAllowedReturnsFilteredHdrTypes (status=PASSED)
+      - test: android.display.cts.DisplayTest#testFlags (status=PASSED)
+      - test: android.display.cts.DisplayTest#testMode (status=PASSED)
+      - test: android.display.cts.DisplayTest#testModeSwitchOnPrimaryDisplayWithRestart (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DisplayTest#testRefreshRateSwitchOnSecondaryDisplay (status=PASSED)
+      - test: android.display.cts.DisplayTest#testModeSwitchOnPrimaryDisplay (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetDeviceProductInfo (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetSupportWideColorGamut_displayIsWideColorGamut (status=PASSED)
+      - test: android.display.cts.DisplayTest#testActiveModeIsSupportedModesOnDefaultDisplay (status=PASSED)
+      - test: android.display.cts.DisplayTest#testDefaultDisplayHdrCapability (status=PASSED)
+      - test: android.display.cts.DisplayTest#testActivityContextGetMetrics (status=PASSED)
+      - test: android.display.cts.DisplayTest#getDisplaysWithInvalidCategory_returnsEmptyArray (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetSupportedModesOnDefaultDisplay (status=PASSED)
+      - test: android.display.cts.DisplayTest#testSecondaryDisplay (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetSupportedWideColorGamut_shouldNotBeNull (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetMetrics (status=PASSED)
+      - test: android.display.cts.DisplayTest#testDeviceProductInfo (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetDisplays (status=PASSED)
+      - test: android.display.cts.DisplayTest#testFailBrightnessChangeWithoutPermission (status=PASSED)
+      - test: android.display.cts.DisplayTest#testSetUserDisabledHdrTypesStoresDisabledFormatsInSettings (status=PASSED)
+      - test: android.display.cts.HdrConversionDisabledTest#testGetSupportedHdrOutputTypes (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.HdrConversionDisabledTest#testSetHdrConversionMode (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.HdrConversionDisabledTest#testGetHdrConversionMode (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.HdrConversionDisabledTest#testGetHdrConversionModeSetting (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.HdrConversionEnabledTest#testGetSupportedHdrOutputTypes (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.HdrConversionEnabledTest#testSetHdrConversionMode (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.HdrConversionEnabledTest#testSetHdrConversionModeThrowsExceptionWithInvalidArgument (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.HdrConversionEnabledTest#testGetSupportedHdrOutputTypesWithAppOverride (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.VirtualDisplayConfigTest#virtualDisplayConfig_noName_throwsException (status=PASSED)
+      - test: android.display.cts.VirtualDisplayConfigTest#parcelAndUnparcel_matches (status=PASSED)
+      - test: android.display.cts.VirtualDisplayConfigTest#virtualDisplayConfig_invalidRequestedRefreshRate_throwsException (status=PASSED)
+      - test: android.display.cts.VirtualDisplayConfigTest#virtualDisplayConfig_nullDisplayCategories_throwsException (status=PASSED)
+      - test: android.display.cts.VirtualDisplayConfigTest#virtualDisplayConfig_invalidDensity_throwsException (status=PASSED)
+      - test: android.display.cts.VirtualDisplayConfigTest#virtualDisplayConfig_invalidWidth_throwsException (status=PASSED)
+      - test: android.display.cts.VirtualDisplayConfigTest#virtualDisplayConfig_invalidHeight_throwsException (status=PASSED)
+      - test: android.display.cts.VirtualDisplayConfigTest#virtualDisplayConfig_nullDisplayCategory_throwsException (status=PASSED)
+      - test: android.display.cts.VirtualDisplayConfigTest#virtualDisplayConfig_onlyRequiredFields (status=PASSED)
+      - test: android.display.cts.VirtualDisplayTest#testHdrApiMethods (status=FAILURE)
+      - test: android.display.cts.VirtualDisplayTest#testTrustedVirtualDisplay (status=PASSED)
+      - test: android.display.cts.VirtualDisplayTest#testGetHdrCapabilitiesWithUserDisabledFormats (status=FAILURE)
+      - test: android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay (status=FAILURE)
+      - test: android.display.cts.VirtualDisplayTest#testVirtualDisplayWithRequestedRefreshRate (status=FAILURE)
+    [run ended]
+  [module ended]
+  [module arm64-v8a CtsDisplayTestCases started]
+[    log: module-configuration | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/module-configuration_14115905467401091471.xml]
+[    log: filter-arm64-v8a%20CtsDisplayTestCases.exclude | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/filter-arm64-v8a%20CtsDisplayTestCases.exclude_1542670880281104938.txt.gz]
+    [run arm64-v8a CtsDisplayTestCases (testCount: 75,attempt: 0) started]
+      - test: android.display.cts.BrightnessTest#testSliderUsagePermission (status=PASSED)
+      - test: android.display.cts.BrightnessTest#testSetGetSimpleCurve (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.BrightnessTest#testSetAndGetPerDisplay (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.BrightnessTest#testSetAndGetBrightnessConfiguration (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.BrightnessTest#testBrightnesSliderTrackingDecrease (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.BrightnessTest#testBrightnessSliderTracking (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.BrightnessTest#testConfigureBrightnessPermission (status=PASSED)
+      - test: android.display.cts.BrightnessTest#testNoTrackingForManualBrightness (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.BrightnessTest#testNoColorSampleData (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.BrightnessTest#testGetDefaultCurve (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.BrightnessTest#testAtMostOneAppHoldsBrightnessConfigurationPermission (status=PASSED)
+      - test: android.display.cts.BrightnessTest#testSliderEventsReflectCurves (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DefaultDisplayModeTest#testSetUserPreferredResolutionForSpecificDisplay (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DefaultDisplayModeTest#testSetUserPreferredDisplayModeForSpecificDisplay (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DefaultDisplayModeTest#testGetUserPreferredDisplayMode (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DefaultDisplayModeTest#testSetAndClearUserPreferredDisplayModeGeneratesDisplayChangedEvents (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DefaultDisplayModeTest#testSetUserPreferredRefreshRateForSpecificDisplay (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DefaultDisplayModeTest#testSetUserPreferredDisplayModeThrowsExceptionWithInvalidMode (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DefaultDisplayModeTest#testSetAndClearUserPreferredDisplayModeForSpecificDisplayGeneratesDisplayChangedEvents (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DisplayEventTest#testDisplayEvents[#0: 1 false] (status=FAILURE)
+      - test: android.display.cts.DisplayEventTest#testDisplayEvents[#1: 2 false] (status=FAILURE)
+      - test: android.display.cts.DisplayEventTest#testDisplayEvents[#2: 3 false] (status=FAILURE)
+      - test: android.display.cts.DisplayEventTest#testDisplayEvents[#3: 10 false] (status=FAILURE)
+      - test: android.display.cts.DisplayEventTest#testDisplayEvents[#4: 1 true] (status=FAILURE)
+      - test: android.display.cts.DisplayEventTest#testDisplayEvents[#5: 2 true] (status=FAILURE)
+      - test: android.display.cts.DisplayEventTest#testDisplayEvents[#6: 3 true] (status=FAILURE)
+      - test: android.display.cts.DisplayEventTest#testDisplayEvents[#7: 10 true] (status=FAILURE)
+      - test: android.display.cts.DisplayManagerTest#testCreateVirtualDisplayFromShell (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DisplayManagerTest#createVirtualDisplayNoPermission (status=PASSED)
+      - test: android.display.cts.DisplayTest#testRestrictedFramebufferSize (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetHdrCapabilitiesWhenUserDisabledFormatsAreAllowedReturnsNonFilteredHdrTypes (status=PASSED)
+      - test: android.display.cts.DisplayTest#testDefaultDisplay (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetPreferredWideGamutColorSpace (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetDisplayAttrs (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetHdrCapabilitiesWhenUserDisabledFormatsAreNotAllowedReturnsFilteredHdrTypes (status=PASSED)
+      - test: android.display.cts.DisplayTest#testFlags (status=PASSED)
+      - test: android.display.cts.DisplayTest#testMode (status=PASSED)
+      - test: android.display.cts.DisplayTest#testModeSwitchOnPrimaryDisplayWithRestart (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.DisplayTest#testRefreshRateSwitchOnSecondaryDisplay (status=PASSED)
+      - test: android.display.cts.DisplayTest#testModeSwitchOnPrimaryDisplay (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetDeviceProductInfo (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetSupportWideColorGamut_displayIsWideColorGamut (status=PASSED)
+      - test: android.display.cts.DisplayTest#testActiveModeIsSupportedModesOnDefaultDisplay (status=PASSED)
+      - test: android.display.cts.DisplayTest#testDefaultDisplayHdrCapability (status=PASSED)
+      - test: android.display.cts.DisplayTest#getDisplaysWithInvalidCategory_returnsEmptyArray (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetSupportedModesOnDefaultDisplay (status=PASSED)
+      - test: android.display.cts.DisplayTest#testSecondaryDisplay (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetSupportedWideColorGamut_shouldNotBeNull (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetMetrics (status=PASSED)
+      - test: android.display.cts.DisplayTest#testDeviceProductInfo (status=PASSED)
+      - test: android.display.cts.DisplayTest#testGetDisplays (status=PASSED)
+      - test: android.display.cts.DisplayTest#testFailBrightnessChangeWithoutPermission (status=PASSED)
+      - test: android.display.cts.DisplayTest#testSetUserDisabledHdrTypesStoresDisabledFormatsInSettings (status=PASSED)
+      - test: android.display.cts.HdrConversionDisabledTest#testGetSupportedHdrOutputTypes (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.HdrConversionDisabledTest#testSetHdrConversionMode (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.HdrConversionDisabledTest#testGetHdrConversionMode (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.HdrConversionDisabledTest#testGetHdrConversionModeSetting (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.HdrConversionEnabledTest#testGetSupportedHdrOutputTypes (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.HdrConversionEnabledTest#testSetHdrConversionMode (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.HdrConversionEnabledTest#testSetHdrConversionModeThrowsExceptionWithInvalidArgument (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.HdrConversionEnabledTest#testGetSupportedHdrOutputTypesWithAppOverride (status=ASSUMPTION_FAILURE)
+      - test: android.display.cts.VirtualDisplayConfigTest#virtualDisplayConfig_noName_throwsException (status=PASSED)
+      - test: android.display.cts.VirtualDisplayConfigTest#parcelAndUnparcel_matches (status=PASSED)
+      - test: android.display.cts.VirtualDisplayConfigTest#virtualDisplayConfig_invalidRequestedRefreshRate_throwsException (status=PASSED)
+      - test: android.display.cts.VirtualDisplayConfigTest#virtualDisplayConfig_nullDisplayCategories_throwsException (status=PASSED)
+      - test: android.display.cts.VirtualDisplayConfigTest#virtualDisplayConfig_invalidDensity_throwsException (status=PASSED)
+      - test: android.display.cts.VirtualDisplayConfigTest#virtualDisplayConfig_invalidWidth_throwsException (status=PASSED)
+      - test: android.display.cts.VirtualDisplayConfigTest#virtualDisplayConfig_invalidHeight_throwsException (status=PASSED)
+      - test: android.display.cts.VirtualDisplayConfigTest#virtualDisplayConfig_nullDisplayCategory_throwsException (status=PASSED)
+      - test: android.display.cts.VirtualDisplayConfigTest#virtualDisplayConfig_onlyRequiredFields (status=PASSED)
+      - test: android.display.cts.VirtualDisplayTest#testHdrApiMethods (status=FAILURE)
+      - test: android.display.cts.VirtualDisplayTest#testTrustedVirtualDisplay (status=PASSED)
+      - test: android.display.cts.VirtualDisplayTest#testGetHdrCapabilitiesWithUserDisabledFormats (status=FAILURE)
+      - test: android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay (status=FAILURE)
+      - test: android.display.cts.VirtualDisplayTest#testVirtualDisplayWithRequestedRefreshRate (status=FAILURE)
+    [run ended]
+  [module ended]
+[    log: device_logcat_test_27161FDH20031X | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/device_logcat_test_27161FDH20031X_9577051882378125143.txt]
+[    log: executeShellCommandLog_27161FDH20031X | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/executeShellCommandLog_27161FDH20031X_6407753654081437042.txt.gz]
+[    log: host_adb_log | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/host_adb_log_4604214126183494798.txt]
+[    log: device_logcat_teardown_27161FDH20031X | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/device_logcat_teardown_27161FDH20031X_14160340951206954854.txt]
+[    log: host_log | path: /tmp/13033356/cts/inv_4287459608464644435/inv_783854658377851785/host_log_15975225706602964293.txt]

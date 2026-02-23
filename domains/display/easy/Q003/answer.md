@@ -1,82 +1,61 @@
-# 解答：DIS-E003
+# Answer DIS-E003
 
-## Bug 位置
+## 問題根因
 
-**檔案**：`frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java`
+在 `OverlayDisplayAdapter.java` 的 `getDisplayDeviceInfoLocked()` 方法中，設置 DPI 相關屬性時發生了 **off-by-one 錯誤**：
 
-**方法**：`getDefaultBrightnessConfiguration()` (第 4201-4211 行)
-
-## Bug 原因
-
-程式碼錯誤地使用了 `Display.INVALID_DISPLAY`（值為 -1）作為鍵值來查詢 `mDisplayPowerControllers`，而不是正確的 `Display.DEFAULT_DISPLAY`（值為 0）。
-
-### 錯誤程式碼
 ```java
-@Override // Binder call
-public BrightnessConfiguration getDefaultBrightnessConfiguration() {
-    getDefaultBrightnessConfiguration_enforcePermission();
-    final long token = Binder.clearCallingIdentity();
-    try {
-        synchronized (mSyncRoot) {
-            return mDisplayPowerControllers.get(Display.INVALID_DISPLAY)  // ❌ 錯誤！
-                    .getDefaultBrightnessConfiguration();
-        }
-    } finally {
-        Binder.restoreCallingIdentity(token);
-    }
-}
+// 錯誤程式碼
+mInfo.densityDpi = rawMode.mDensityDpi + 1;
+mInfo.xDpi = rawMode.mDensityDpi + 1;
+mInfo.yDpi = rawMode.mDensityDpi + 1;
 ```
 
-## 為什麼會失敗
+這導致 overlay display 回報的密度值比實際設定多 1 DPI。
 
-1. `mDisplayPowerControllers` 是一個 `SparseArray<DisplayPowerControllerInterface>`，用 display ID 作為鍵
-2. 系統只會為有效的顯示器建立 `DisplayPowerController`
-3. `Display.INVALID_DISPLAY` (-1) 不是有效的 display ID，所以 `get(-1)` 返回 `null`
-4. 對 `null` 物件呼叫 `getDefaultBrightnessConfiguration()` 導致 NullPointerException
+## 錯誤位置
+
+**檔案**: `frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java`
+
+**方法**: `getDisplayDeviceInfoLocked()` 約第 349-351 行
 
 ## 修復方案
 
-將 `Display.INVALID_DISPLAY` 改為 `Display.DEFAULT_DISPLAY`：
+移除錯誤的 `+ 1`，直接使用原始 DPI 值：
 
 ```java
-@Override // Binder call
-public BrightnessConfiguration getDefaultBrightnessConfiguration() {
-    getDefaultBrightnessConfiguration_enforcePermission();
-    final long token = Binder.clearCallingIdentity();
-    try {
-        synchronized (mSyncRoot) {
-            return mDisplayPowerControllers.get(Display.DEFAULT_DISPLAY)  // ✅ 正確
-                    .getDefaultBrightnessConfiguration();
-        }
-    } finally {
-        Binder.restoreCallingIdentity(token);
-    }
-}
+// 修正後
+mInfo.densityDpi = rawMode.mDensityDpi;
+mInfo.xDpi = rawMode.mDensityDpi;
+mInfo.yDpi = rawMode.mDensityDpi;
 ```
 
 ## 修復 Patch
 
 ```diff
---- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-@@ -4203,7 +4203,7 @@ public final class DisplayManagerService extends SystemService {
-             final long token = Binder.clearCallingIdentity();
-             try {
-                 synchronized (mSyncRoot) {
--                    return mDisplayPowerControllers.get(Display.INVALID_DISPLAY)
-+                    return mDisplayPowerControllers.get(Display.DEFAULT_DISPLAY)
-                             .getDefaultBrightnessConfiguration();
-                 }
-             } finally {
+--- a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+@@ -346,10 +346,9 @@ final class OverlayDisplayAdapter extends DisplayAdapter {
+                 mInfo.renderFrameRate = mode.getRefreshRate();
+                 mInfo.defaultModeId = mModes[0].getModeId();
+                 mInfo.supportedModes = mModes;
+-                // BUG: Off-by-one error in DPI calculation
+-                mInfo.densityDpi = rawMode.mDensityDpi + 1;
+-                mInfo.xDpi = rawMode.mDensityDpi + 1;
+-                mInfo.yDpi = rawMode.mDensityDpi + 1;
++                mInfo.densityDpi = rawMode.mDensityDpi;
++                mInfo.xDpi = rawMode.mDensityDpi;
++                mInfo.yDpi = rawMode.mDensityDpi;
 ```
 
-## 學習重點
+## 影響範圍
 
-1. **常數誤用**：`Display.INVALID_DISPLAY` 和 `Display.DEFAULT_DISPLAY` 名稱相似，容易混淆
-2. **空值檢查**：即使修復後，生產環境中仍應考慮加入 null 檢查以增加防禦性
-3. **SparseArray 行為**：`SparseArray.get()` 在鍵不存在時返回 null，不會拋出異常
+- **直接影響**: 顯示密度報告錯誤
+- **CTS 測試**: `testGetMetrics` 失敗
+- **潛在問題**: 應用程式的 UI 縮放可能不正確
 
-## Bug 類型
+## 相關概念
 
-- **COND**：條件判斷錯誤（使用錯誤的常數）
-- **STATE**：狀態查詢錯誤（查詢不存在的 display ID）
+- DisplayMetrics 與 DPI 的關係
+- densityDpi、xDpi、yDpi 的用途
+- 螢幕密度對 UI 渲染的影響

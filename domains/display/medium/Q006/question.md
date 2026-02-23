@@ -1,67 +1,65 @@
-# CTS 考題：Virtual Display 釋放時的空指標處理缺陷
+# DIS-M006: VirtualDisplay 私有標誌設定錯誤
 
-## 題目編號
-DIS-M006
+## 背景
 
-## 難度
-Medium
-
-## 情境描述
-
-你的團隊收到一個客戶回報：在特定情況下，嘗試釋放一個已經不存在的虛擬顯示器時，系統會發生異常崩潰。
-
-錯誤日誌顯示：
-```
-E AndroidRuntime: FATAL EXCEPTION: android.display
-E AndroidRuntime: Process: system_server, PID: 1234
-E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke virtual method 
-    'android.view.DisplayAddress android.hardware.display.DisplayDevice.getDisplayDeviceInfoLocked()
-    .address' on a null object reference
-E AndroidRuntime:     at com.android.server.display.DisplayDeviceRepository.onDisplayDeviceEvent
-E AndroidRuntime:     at com.android.server.display.DisplayManagerService.releaseVirtualDisplayInternal
-```
-
-## 相關 CTS 測試
-
-當此 bug 存在時，以下測試會失敗：
+某 Android Framework 版本在 CTS `android.display.cts.VirtualDisplayTest#testPrivateVirtualDisplay` 測試中持續失敗，錯誤訊息顯示 display flags 驗證失敗：
 
 ```
-android.hardware.display.cts.VirtualDisplayTest#testPrivateVirtualDisplay
+junit.framework.AssertionFailedError: display must have correct flags
+Expected: 4 (FLAG_PRIVATE)
+Actual: 0
 ```
 
-測試模組：`CtsDisplayTestCases`
+測試預期私有 virtual display 應該有 `FLAG_PRIVATE` 標誌，但實際上沒有被設定。
 
-## 任務
+## 問題描述
 
-請檢查以下檔案中的 `releaseVirtualDisplayInternal()` 方法，找出可能導致此問題的程式碼缺陷：
+一位開發者在重構 `VirtualDisplayAdapter` 的程式碼時，修改了判斷 display 是否為私有的條件邏輯。這個錯誤導致所有私有 virtual display 的 flag 都沒有被正確設定。
 
-**檔案路徑**：
+請審查以下程式碼片段，找出導致 CTS 測試失敗的原因：
+
+**檔案：** `frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java`
+
+```java
+@Override
+public DisplayDeviceInfo getDisplayDeviceInfoLocked() {
+    if (mInfo == null) {
+        mInfo = new DisplayDeviceInfo();
+        mInfo.name = mName;
+        mInfo.uniqueId = getUniqueId();
+        mInfo.width = mWidth;
+        mInfo.height = mHeight;
+        mInfo.modeId = mMode.getModeId();
+        mInfo.renderFrameRate = mMode.getRefreshRate();
+        mInfo.defaultModeId = mMode.getModeId();
+        mInfo.supportedModes = new Display.Mode[] { mMode };
+        mInfo.densityDpi = mDensityDpi;
+        mInfo.xDpi = mDensityDpi;
+        mInfo.yDpi = mDensityDpi;
+        mInfo.presentationDeadlineNanos = 1000000000L / (int) getRefreshRate();
+        mInfo.flags = 0;
+        if ((mFlags & VIRTUAL_DISPLAY_FLAG_PUBLIC) != 0) {  // ← 問題可能在這裡
+            mInfo.flags |= DisplayDeviceInfo.FLAG_PRIVATE
+                    | DisplayDeviceInfo.FLAG_NEVER_BLANK;
+        }
+        if ((mFlags & VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR) != 0) {
+            mInfo.flags &= ~DisplayDeviceInfo.FLAG_NEVER_BLANK;
+        } else {
+            mInfo.flags |= DisplayDeviceInfo.FLAG_OWN_CONTENT_ONLY;
+            // ... 更多 flag 處理 ...
+        }
+        // ... 省略其他 flag 處理 ...
+    }
+    return mInfo;
+}
 ```
-frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-```
 
-## 問題
+## 選項
 
-1. **找出 Bug**：`releaseVirtualDisplayInternal()` 方法中存在什麼缺陷？
+**A.** 條件 `(mFlags & VIRTUAL_DISPLAY_FLAG_PUBLIC) != 0` 邏輯錯誤 — 應為 `== 0` 才能正確識別私有 display
 
-2. **分析影響**：
-   - 這個 bug 在什麼情況下會被觸發？
-   - 為什麼會導致 NullPointerException？
+**B.** `DisplayDeviceInfo.FLAG_PRIVATE` 常數值錯誤，應該直接使用 `Display.FLAG_PRIVATE`
 
-3. **修復方案**：請提供修復此問題的程式碼補丁。
+**C.** 缺少對 `VIRTUAL_DISPLAY_FLAG_SECURE` 的檢查，需要同時設定 secure flag 才能識別私有 display
 
-## 提示
-
-- 仔細閱讀 `releaseVirtualDisplayLocked()` 的返回值語義
-- 考慮當虛擬顯示器已經被釋放或從未存在時的情況
-- 空值檢查是防禦性程式設計的重要實踐
-
-## 時間限制
-
-建議 25 分鐘內完成
-
-## 評分標準
-
-- 正確識別 bug 位置（30%）
-- 完整分析觸發條件和影響（30%）
-- 提供正確且完整的修復方案（40%）
+**D.** `mInfo.flags` 應初始化為 `FLAG_PRIVATE` 而非 `0`，避免後續條件判斷失效

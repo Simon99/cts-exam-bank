@@ -1,0 +1,27 @@
+TEXT: 
+============================================
+================= Results ==================
+=============== Consumed Time ==============
+    arm64-v8a CtsDisplayTestCases: 9s
+    arm64-v8a CtsDisplayTestCases[instant]: 8s
+Total aggregated tests run time: 17s
+============== TOP 2 Slow Modules ==============
+    arm64-v8a CtsDisplayTestCases: 0.10 tests/sec [1 tests / 9694 msec]
+    arm64-v8a CtsDisplayTestCases[instant]: 0.12 tests/sec [1 tests / 8078 msec]
+============== Modules Preparation Times ==============
+    arm64-v8a CtsDisplayTestCases[instant] => prep = 2036 ms || clean = 535 ms
+    arm64-v8a CtsDisplayTestCases => prep = 1990 ms || clean = 485 ms
+Total preparation time: 4s  ||  Total tear down time: 1s
+=======================================================
+=============== Summary ===============
+Total Run time: 2m 28s
+0/2 modules completed
+Module(s) with run failure(s):
+    arm64-v8a CtsDisplayTestCases[instant]: Test run failed to complete. Expected 1 tests, received 0. onError: commandError=false message=INSTRUMENTATION_ABORTED: System has crashed.
+    arm64-v8a CtsDisplayTestCases: Test run failed to complete. Expected 1 tests, received 0. onError: commandError=false message=INSTRUMENTATION_ABORTED: System has crashed.
+Total Tests       : 2
+PASSED            : 0
+FAILED            : 2
+IMPORTANT: Some modules failed to run to completion, tests counts may be inaccurate.
+============== End of Results ==============
+============================================

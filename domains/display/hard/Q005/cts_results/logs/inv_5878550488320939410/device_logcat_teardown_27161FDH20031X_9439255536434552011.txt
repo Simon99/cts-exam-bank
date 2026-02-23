@@ -1,0 +1,14 @@
+02-21 22:28:47.117 10105  3621  3935 W MediaProvider: isAppCloneUserPair for user 0: false
+02-21 22:28:47.265 10105  3621  3934 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-21 22:28:47.578  1000  1498  1922 I commit_sys_config_file: [settings-0-0,13]
+02-21 22:28:47.718  1000  1498  1818 I AppsFilter: interaction: PackageSetting{64f9c0b com.android.microdroid.empty_payload/10107} -> PackageSetting{29666e9 com.android.tradefed.utils.wifi/10126} BLOCKED
+02-21 22:28:47.719  1000  1498  1784 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-21 22:28:47.738  1000  1498  1783 I am_pss  : [32252,10036,com.android.packageinstaller,8425472,3670016,1204224,107986944,0,19,14]
+02-21 22:28:47.740  1017   543   576 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-21 22:28:47.805  1000  1498  1818 I commit_sys_config_file: [package,25]
+02-21 22:28:47.824  logd   443   443 I logd    : start watching /data/system/packages.list ...
+02-21 22:28:47.807  1000  1498  1498 I dvm_lock_sample: [system_server,1,main,71,PackageManagerService.java,1222,com.android.server.pm.Computer com.android.server.pm.PackageManagerService.snapshotComputer(boolean),-,7012,void com.android.server.pm.PackageManagerService$PackageManagerInternalImpl.writePermissionSettings(int[], boolean),14]
+02-21 22:28:47.828  logd   443   443 I logd    : ReadPackageList, total packages: 131
+02-21 22:28:47.811  1000  1498  1818 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-21 22:28:47.811  1000  1498  1818 D PackageManager: Clear ephemeral installer activity
+02-21 22:28:47.814  1000  1498  4107 E TaskPersister: File error accessing recents directory (directory doesn't exist?).

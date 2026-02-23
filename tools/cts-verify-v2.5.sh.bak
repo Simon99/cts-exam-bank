@@ -1,0 +1,731 @@
+#!/bin/bash
+# CTS 題目驗證腳本 v2.5.3 — 根據 Flash 時間線實驗數據優化
+# 更新日期: 2026-02-21
+# 變更:
+#   v2.5.3: ccache 命中率改為顯示「當前 build」專屬數據（記錄基準值，算差異）
+#   v2.5.2: build 進度 webhook 加入 ccache 命中率
+#   v2.5.1: 加入 build 進度 webhook（每 3 分鐘報告）、cleanup 時終止子進程
+#   v2.5: 根據實驗數據優化等待時間、加入 Pre-flash 健康檢查、flashall 超時保護
+#         改用邏輯等待（sys.boot_completed）替代固定 sleep
+#   v2.4: 加入 trap cleanup、fastboot timeout+重試、adb wait-for-device 超時
+#   v2.3: PIPESTATUS 修正、patch 自動檢測、cts_log_start
+#
+# 實驗數據（2026-02-20）:
+#   - Flash 時間: 102s（穩定）
+#   - ADB 出現: Flash 後 +34s
+#   - Boot 完成: +50s (27161) / +38s (2B231)
+#   - 結論: 必須用邏輯等待，不能用固定秒數
+#
+# 用法: cts-verify-v2.5.sh <題目路徑> [題目路徑...]
+# 範例: CTS_DEVICE=27161FDH20031X ./cts-verify-v2.5.sh domains/display/hard/Q005
+
+LOG_FILE="/tmp/cts_verify.log"
+DEVICE="${CTS_DEVICE:-27161FDH20031X}"
+
+# ============================================
+# 時間常數（根據實驗數據 2026-02-20）
+# ============================================
+FLASH_TIMEOUT=180           # Flash 超時（實測 102s，給 1.8x 餘量）
+BOOTLOADER_TIMEOUT=30       # 進入 bootloader 超時
+ADB_APPEAR_TIMEOUT=60       # ADB 出現超時（實測 34s，給 1.8x 餘量）
+BOOT_COMPLETE_TIMEOUT=90    # Boot 完成超時（實測 50s，給 1.8x 餘量）
+BOOT_CHECK_INTERVAL=2       # Boot 完成檢查間隔（秒）
+PRE_FLASH_ADB_TIMEOUT=10    # Pre-flash ADB 檢查超時
+USB_COOLDOWN=0              # USB 冷卻期（秒），設 0 關閉，建議 120 如果遇到 USB 問題
+
+# ============================================
+# 設備保護：腳本中斷時嘗試救回設備
+# ============================================
+cleanup() {
+    log "腳本中斷，嘗試救回設備..."
+    # 停止 build 監控
+    [ -n "$BUILD_MONITOR_PID" ] && kill $BUILD_MONITOR_PID 2>/dev/null
+    # 終止相關子進程（ninja build 等）
+    pkill -P $$ 2>/dev/null
+    timeout 10 fastboot -s $DEVICE reboot 2>/dev/null || true
+    timeout 10 adb -s $DEVICE reboot 2>/dev/null || true
+}
+trap cleanup INT TERM
+
+SANDBOX="$HOME/develop_claw/aosp-sandbox-2"
+CTS_PATH="$HOME/android-cts"
+BACKUP_TOOL="$HOME/develop_claw/cts-exam-bank/tools/backup-cts-results.sh"
+WEBHOOK_URL="https://discordapp.com/api/webhooks/1473692492133302322/X729Q-6zFcqrXu68SFxMBXMJJy99s9gqj3llCzeCdKMQy_vg2_JYWuSGeVIRX5Y6lol8"
+WIFI_SSID="TP-LINK_5G_BA98"
+WIFI_PASSWORD="2192191414"
+
+export USE_ATS=false
+export ANDROID_PRODUCT_OUT="$SANDBOX/out/target/product/panther"
+export PATH="$SANDBOX/out/host/linux-x86/bin:$HOME/Android/Sdk/platform-tools:$PATH"
+
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a "$LOG_FILE"
+}
+
+notify() {
+    local message="$1"
+    curl -s -X POST "$WEBHOOK_URL" \
+        -H "Content-Type: application/json" \
+        -d "{\"content\":\"$message\"}" > /dev/null 2>&1
+}
+
+# ============================================
+# v2.5.3 新增：ccache 基準值記錄（計算當前 build 專屬命中率）
+# ============================================
+CCACHE_BASELINE_FILE="/tmp/ccache_baseline_$$"
+
+record_ccache_baseline() {
+    # 記錄 build 開始前的 ccache hits/misses
+    local hits=$(ccache -s 2>/dev/null | grep -E "^  Hits:" | head -1 | awk '{print $2}')
+    local misses=$(ccache -s 2>/dev/null | grep -E "^  Misses:" | head -1 | awk '{print $2}')
+    echo "${hits:-0} ${misses:-0}" > "$CCACHE_BASELINE_FILE"
+    log "ccache 基準值: hits=$hits, misses=$misses"
+}
+
+get_build_ccache_rate() {
+    # 計算當前 build 的命中率（當前值 - 基準值）
+    if [ ! -f "$CCACHE_BASELINE_FILE" ]; then
+        echo ""
+        return
+    fi
+    local baseline=$(cat "$CCACHE_BASELINE_FILE")
+    local base_hits=$(echo "$baseline" | awk '{print $1}')
+    local base_misses=$(echo "$baseline" | awk '{print $2}')
+    
+    local curr_hits=$(ccache -s 2>/dev/null | grep -E "^  Hits:" | head -1 | awk '{print $2}')
+    local curr_misses=$(ccache -s 2>/dev/null | grep -E "^  Misses:" | head -1 | awk '{print $2}')
+    
+    local build_hits=$((${curr_hits:-0} - ${base_hits:-0}))
+    local build_misses=$((${curr_misses:-0} - ${base_misses:-0}))
+    local total=$((build_hits + build_misses))
+    
+    if [ "$total" -gt 0 ]; then
+        # 用 awk 計算浮點數百分比
+        local rate=$(awk "BEGIN {printf \"%.1f\", ($build_hits / $total) * 100}")
+        echo "${rate}% (${build_hits}/${total})"
+    else
+        echo "0% (0/0)"
+    fi
+}
+
+# ============================================
+# v2.5.1 新增：Build 進度監控（背景執行）
+# ============================================
+BUILD_MONITOR_PID=""
+
+start_build_monitor() {
+    local q_id="$1"
+    local interval="${2:-180}"  # 預設每 3 分鐘報告一次
+    
+    (
+        local last_progress=""
+        while true; do
+            sleep "$interval"
+            
+            # 檢查 ninja 是否還在跑
+            if ! pgrep -f "ninja.*combined-aosp" > /dev/null; then
+                break
+            fi
+            
+            # 從 ninja 輸出擷取進度
+            local progress=$(ps aux | grep -E "ninja.*combined-aosp" | grep -v grep | head -1)
+            if [ -n "$progress" ]; then
+                # 嘗試從最近的 build.log 擷取進度行
+                local progress_line=$(tail -20 "$SANDBOX/build.log" 2>/dev/null | grep -E "^\[.*%.*\]" | tail -1)
+                if [ -n "$progress_line" ] && [ "$progress_line" != "$last_progress" ]; then
+                    last_progress="$progress_line"
+                    # 取得當前 build 的 ccache 命中率（v2.5.3: 使用差異計算）
+                    local ccache_rate=$(get_build_ccache_rate)
+                    if [ -n "$ccache_rate" ]; then
+                        notify "🔧 **$q_id** build 進度: \`$progress_line\` | ccache: ${ccache_rate}"
+                    else
+                        notify "🔧 **$q_id** build 進度: \`$progress_line\`"
+                    fi
+                else
+                    # 如果沒有進度行，報告 ninja 仍在運行
+                    local elapsed=$(ps -o etimes= -p $(pgrep -f "ninja.*combined-aosp" | head -1) 2>/dev/null | tr -d ' ')
+                    if [ -n "$elapsed" ]; then
+                        local mins=$((elapsed / 60))
+                        notify "🔧 **$q_id** build 進行中... (已 ${mins} 分鐘)"
+                    fi
+                fi
+            fi
+        done
+    ) &
+    BUILD_MONITOR_PID=$!
+    log "[$q_id] Build 監控啟動 (PID: $BUILD_MONITOR_PID, 間隔: ${interval}s)"
+}
+
+stop_build_monitor() {
+    if [ -n "$BUILD_MONITOR_PID" ]; then
+        kill $BUILD_MONITOR_PID 2>/dev/null
+        wait $BUILD_MONITOR_PID 2>/dev/null
+        BUILD_MONITOR_PID=""
+    fi
+}
+
+# ============================================
+# v2.5 新增：Pre-flash 健康檢查
+# ============================================
+pre_flash_health_check() {
+    local q_id="$1"
+    log "[$q_id] Pre-flash 健康檢查..."
+    
+    # 檢查設備是否可見
+    if ! adb devices | grep -q "$DEVICE"; then
+        log "[$q_id] ⚠️ 設備 $DEVICE 不在 adb devices 中"
+        
+        # 嘗試在 fastboot 模式找
+        if fastboot devices | grep -q "$DEVICE"; then
+            log "[$q_id] 設備在 fastboot 模式，嘗試 reboot..."
+            timeout 30 fastboot -s $DEVICE reboot 2>/dev/null
+            sleep 30
+            timeout 60 adb -s $DEVICE wait-for-device
+        else
+            log "[$q_id] ❌ 設備完全不可見，請檢查 USB 連接"
+            notify "❌ **$q_id** 設備不可見，請檢查 USB"
+            return 1
+        fi
+    fi
+    
+    # 檢查 adb 通訊正常
+    if ! timeout $PRE_FLASH_ADB_TIMEOUT adb -s $DEVICE shell echo "ping" >/dev/null 2>&1; then
+        log "[$q_id] ⚠️ ADB 無響應，嘗試重啟 adb server..."
+        adb kill-server
+        sleep 2
+        adb start-server
+        sleep 3
+        
+        if ! timeout $PRE_FLASH_ADB_TIMEOUT adb -s $DEVICE shell echo "ping" >/dev/null 2>&1; then
+            log "[$q_id] ❌ ADB 仍無響應"
+            notify "❌ **$q_id** ADB 無響應"
+            return 1
+        fi
+    fi
+    
+    log "[$q_id] ✓ Pre-flash 健康檢查通過"
+    return 0
+}
+
+# ============================================
+# v2.5 新增：等待 boot 完成（邏輯等待）
+# ============================================
+wait_for_boot_complete() {
+    local q_id="$1"
+    local timeout_sec="$2"
+    local start_time=$(date +%s)
+    
+    log "[$q_id] 等待系統啟動完成（最多 ${timeout_sec}s）..."
+    
+    while true; do
+        local elapsed=$(( $(date +%s) - start_time ))
+        
+        if [ $elapsed -gt $timeout_sec ]; then
+            log "[$q_id] ❌ Boot 超時（${timeout_sec}s）"
+            return 1
+        fi
+        
+        # 檢查 sys.boot_completed
+        local boot_completed=$(adb -s $DEVICE shell getprop sys.boot_completed 2>/dev/null | tr -d '\r\n')
+        
+        if [ "$boot_completed" = "1" ]; then
+            log "[$q_id] ✓ 系統啟動完成（${elapsed}s）"
+            return 0
+        fi
+        
+        sleep $BOOT_CHECK_INTERVAL
+    done
+}
+
+# ============================================
+# SKILL 整合：ccache 環境設定
+# ============================================
+setup_build_env() {
+    log "設定編譯環境（SKILL 規範）..."
+    
+    # ccache 設定
+    export USE_CCACHE=1
+    export CCACHE_DIR="${CCACHE_DIR:-$HOME/.ccache}"
+    export CCACHE_EXEC=$(which ccache)
+    
+    if [ -z "$CCACHE_EXEC" ]; then
+        log "⚠️ 警告: ccache 未安裝"
+    else
+        log "✓ ccache 已啟用: $CCACHE_DIR"
+    fi
+    
+    # 固定 BUILD_DATETIME（消除時間導致的差異）
+    export BUILD_DATETIME_FILE="$SANDBOX/.build_datetime"
+    if [ ! -f "$BUILD_DATETIME_FILE" ]; then
+        echo "$(date +%s)" > "$BUILD_DATETIME_FILE"
+        log "✓ 建立 BUILD_DATETIME_FILE"
+    fi
+    
+    export BUILD_NUMBER="eng.$(whoami).$(date +%Y%m%d)"
+}
+
+wait_for_build() {
+    log "等待現有 build 完成..."
+    notify "⏳ 等待現有 build 完成..."
+    while ps aux | grep -E "soong_ui --make-mode|ninja.*combined-aosp" | grep -v grep > /dev/null; do
+        sleep 30
+        log "Build 仍在進行中..."
+    done
+    log "現有 build 已完成"
+    notify "✅ 現有 build 已完成"
+}
+
+# ============================================
+# SKILL 整合：Level 1 排查（clean 單模組重試）
+# ============================================
+do_build() {
+    local q_id="$1"
+    log "[$q_id] 開始 build..."
+    notify "🔨 **$q_id** 開始 build..."
+    
+    cd "$SANDBOX"
+    
+    # v2.5.3: 記錄 ccache 基準值（用於計算當前 build 專屬命中率）
+    record_ccache_baseline
+    
+    # 啟動背景進度監控（每 3 分鐘報告）
+    start_build_monitor "$q_id" 180
+    
+    local start_time=$(date +%s)
+    # 調用 aosp-incremental-build skill（已含 ccache、envsetup、lunch）
+    AOSP_ROOT="$SANDBOX" ~/clawd/skills/aosp-incremental-build/scripts/daily_build.sh \
+        aosp_panther-ap2a-userdebug 2>&1 | tee -a "$LOG_FILE"
+    local build_result=${PIPESTATUS[0]}
+    local end_time=$(date +%s)
+    local duration=$(( (end_time - start_time) / 60 ))
+    
+    # 停止進度監控
+    stop_build_monitor
+    
+    if [ $build_result -eq 0 ]; then
+        local final_ccache=$(get_build_ccache_rate)
+        log "[$q_id] Build 完成，耗時 ${duration} 分鐘，ccache: $final_ccache"
+        notify "✅ **$q_id** build 完成，耗時 **${duration} 分鐘** | ccache: ${final_ccache}"
+        return 0
+    fi
+    
+    # Build 失敗，套用 Level 1 排查
+    log "[$q_id] Build 失敗，啟動 Level 1 排查..."
+    notify "⚠️ **$q_id** build 失敗，嘗試 Level 1 排查（clean 模組後重試）..."
+    
+    # 從錯誤中提取失敗的模組
+    local failed_modules=$(grep -E "FAILED:|error:" "$LOG_FILE" | tail -10 | \
+        grep -oE "[A-Za-z_-]+\.so|[A-Za-z_-]+\.apk|[A-Za-z_-]+\.jar" | \
+        sed 's/\.so//;s/\.apk//;s/\.jar//' | sort -u | head -3)
+    
+    if [ -z "$failed_modules" ]; then
+        failed_modules="framework services"
+        log "[$q_id] 無法識別失敗模組，嘗試清理: $failed_modules"
+    else
+        log "[$q_id] 識別到失敗模組: $failed_modules"
+    fi
+    
+    for module in $failed_modules; do
+        log "[$q_id] Level 1: 清理模組 $module..."
+        m clean-$module 2>/dev/null
+    done
+    
+    # 重試 build（調用 aosp-incremental-build skill）
+    log "[$q_id] Level 1: 重試 build..."
+    start_time=$(date +%s)
+    AOSP_ROOT="$SANDBOX" ~/clawd/skills/aosp-incremental-build/scripts/daily_build.sh \
+        aosp_panther-ap2a-userdebug 2>&1 | tee -a "$LOG_FILE"
+    build_result=${PIPESTATUS[0]}
+    end_time=$(date +%s)
+    duration=$(( (end_time - start_time) / 60 ))
+    
+    if [ $build_result -eq 0 ]; then
+        local final_ccache=$(get_build_ccache_rate)
+        log "[$q_id] Level 1 排查後 build 成功，耗時 ${duration} 分鐘，ccache: $final_ccache"
+        notify "✅ **$q_id** Level 1 排查成功，build 完成，耗時 **${duration} 分鐘** | ccache: ${final_ccache}"
+        return 0
+    else
+        log "[$q_id] Level 1 排查後仍然失敗"
+        notify "❌ **$q_id** Level 1 排查失敗，需要人工檢查 log"
+        return 1
+    fi
+}
+
+# ============================================
+# v2.5 重寫：flash_device（根據實驗數據優化）
+# ============================================
+flash_device() {
+    local q_id="$1"
+    
+    # Pre-flash 健康檢查
+    pre_flash_health_check "$q_id" || return 1
+    
+    log "[$q_id] 開始 flash 設備 $DEVICE..."
+    notify "📱 **$q_id** 開始 flash 設備..."
+    
+    # 進入 bootloader
+    log "[$q_id] 重啟到 bootloader..."
+    adb -s $DEVICE reboot bootloader
+    
+    # 等待進入 bootloader（用輪詢代替 wait-for-device，兼容性更好）
+    log "[$q_id] 等待進入 bootloader（最多 ${BOOTLOADER_TIMEOUT}s）..."
+    local wait_start=$(date +%s)
+    while true; do
+        if fastboot -s $DEVICE getvar product >/dev/null 2>&1; then
+            break
+        fi
+        local elapsed=$(($(date +%s) - wait_start))
+        if [ $elapsed -gt $BOOTLOADER_TIMEOUT ]; then
+            log "[$q_id] ❌ 進入 bootloader 超時"
+            notify "❌ **$q_id** 進入 bootloader 超時"
+            return 1
+        fi
+        sleep 1
+    done
+    
+    # v2.5: 再次確認 fastboot 通訊正常
+    if ! timeout 10 fastboot -s $DEVICE getvar product >/dev/null 2>&1; then
+        log "[$q_id] ⚠️ Fastboot 通訊異常，可能是 USB 問題"
+        notify "⚠️ **$q_id** Fastboot 通訊異常，請檢查 USB"
+        return 1
+    fi
+    
+    # v2.5: Flash 加超時保護（實測 102s，給 180s）
+    log "[$q_id] 開始 flash（超時 ${FLASH_TIMEOUT}s）..."
+    local flash_start=$(date +%s)
+    
+    timeout $FLASH_TIMEOUT fastboot -s $DEVICE flashall -w 2>&1 | tee -a "$LOG_FILE"
+    local flash_result=${PIPESTATUS[0]}
+    
+    local flash_end=$(date +%s)
+    local flash_duration=$((flash_end - flash_start))
+    log "[$q_id] Flash 耗時: ${flash_duration}s"
+    
+    if [ $flash_result -eq 124 ]; then
+        log "[$q_id] ❌ Flash 超時（${FLASH_TIMEOUT}s）！可能是 USB 問題"
+        notify "❌ **$q_id** flash 超時！請檢查 USB 連接"
+        return 1
+    elif [ $flash_result -ne 0 ]; then
+        log "[$q_id] ❌ Flash 失敗！返回值: $flash_result"
+        notify "❌ **$q_id** flash 失敗！"
+        return 1
+    fi
+    
+    log "[$q_id] ✓ Flash 完成，等待設備重啟..."
+    notify "✅ **$q_id** flash 完成（${flash_duration}s），等待設備開機..."
+    
+    # v2.5: 等待 ADB 出現（實測 34s，給 60s）
+    log "[$q_id] 等待 ADB 出現（最多 ${ADB_APPEAR_TIMEOUT}s）..."
+    if ! timeout $ADB_APPEAR_TIMEOUT adb -s $DEVICE wait-for-device; then
+        log "[$q_id] ❌ ADB 出現超時"
+        notify "⚠️ **$q_id** ADB 出現超時，設備可能卡在 bootloader"
+        
+        # 嘗試從 fastboot 重啟
+        timeout $BOOTLOADER_TIMEOUT fastboot -s $DEVICE reboot 2>/dev/null || true
+        sleep $PRE_FLASH_ADB_TIMEOUT
+        
+        if ! timeout $ADB_APPEAR_TIMEOUT adb -s $DEVICE wait-for-device; then
+            log "[$q_id] ❌ 設備無法恢復"
+            notify "❌ **$q_id** 設備無法恢復，請手動檢查"
+            return 1
+        fi
+    fi
+    
+    # v2.5: 使用邏輯等待替代固定 sleep（實測 boot 完成 +50s）
+    wait_for_boot_complete "$q_id" "$BOOT_COMPLETE_TIMEOUT" || {
+        notify "⚠️ **$q_id** Boot 超時，嘗試繼續..."
+        # 不直接 return，嘗試繼續
+    }
+    
+    log "[$q_id] 設備已就緒"
+    notify "📱 **$q_id** 設備已就緒"
+    
+    # v2.5: USB 冷卻期（可選）
+    if [ "$USB_COOLDOWN" -gt 0 ]; then
+        log "[$q_id] USB 冷卻期（${USB_COOLDOWN}s）..."
+        adb kill-server
+        sleep $USB_COOLDOWN
+        adb start-server
+        sleep 3
+    fi
+    
+    # 設置 WiFi（CTS 需要網路連線）
+    log "[$q_id] 設置 WiFi: $WIFI_SSID"
+    notify "📶 **$q_id** 設置 WiFi..."
+    
+    sleep 5
+    adb -s $DEVICE root
+    sleep 3
+    adb -s $DEVICE shell cmd wifi set-wifi-enabled enabled 2>&1 | tee -a "$LOG_FILE"
+    sleep 3
+    
+    # 嘗試連接 WiFi（最多重試 5 次）
+    local wifi_connected=false
+    for attempt in 1 2 3 4 5; do
+        log "[$q_id] WiFi 連接嘗試 $attempt/5..."
+        adb -s $DEVICE shell cmd wifi connect-network "$WIFI_SSID" wpa2 "$WIFI_PASSWORD" 2>&1 | tee -a "$LOG_FILE"
+        sleep 8
+        
+        local wifi_status=$(adb -s $DEVICE shell cmd wifi status 2>&1)
+        if echo "$wifi_status" | grep -qi "Wifi is connected"; then
+            wifi_connected=true
+            log "[$q_id] WiFi 連接成功！"
+            notify "✅ **$q_id** WiFi 已連接"
+            break
+        fi
+        log "[$q_id] WiFi 尚未連接，等待重試..."
+        sleep 5
+    done
+    
+    if [ "$wifi_connected" = false ]; then
+        log "[$q_id] WiFi 連接失敗，無法繼續 CTS"
+        notify "❌ **$q_id** WiFi 連接失敗，跳過此題"
+        return 1
+    fi
+    
+    return 0
+}
+
+run_cts() {
+    local q_id="$1"
+    local test_method="$2"
+    
+    log "[$q_id] 開始執行 CTS: $test_method"
+    notify "🧪 **$q_id** 開始執行 CTS..."
+    
+    # 記錄 CTS 開始位置（避免 race condition）
+    local cts_log_start=$([ -f "$LOG_FILE" ] && wc -l < "$LOG_FILE" || echo "0")
+    
+    (
+        unset ANDROID_BUILD_TOP ANDROID_HOST_OUT ANDROID_PRODUCT_OUT OUT_DIR TARGET_PRODUCT TARGET_BUILD_VARIANT
+        cd "$CTS_PATH"
+        
+        if [ ! -f "./tools/cts-tradefed" ]; then
+            echo "[$q_id] 錯誤：找不到 cts-tradefed！"
+            exit 1
+        fi
+        
+        ./tools/cts-tradefed run cts -m CtsDisplayTestCases -t "$test_method" -s $DEVICE
+    ) 2>&1 | tee -a "$LOG_FILE"
+    local cts_result=${PIPESTATUS[0]}
+    
+    if [ $cts_result -ne 0 ]; then
+        log "[$q_id] CTS 執行失敗：返回值 $cts_result"
+        notify "❌ **$q_id** CTS 執行失敗！"
+        return 1
+    fi
+    
+    if grep -q "ClassNotFoundException\|Could not find or load main class" "$LOG_FILE"; then
+        log "[$q_id] CTS 執行失敗：Java class 載入錯誤"
+        notify "❌ **$q_id** CTS 執行失敗：Java class 載入錯誤"
+        return 1
+    fi
+    
+    # 解析 CTS 結果（只讀取本次 CTS 的輸出）
+    local cts_output=$(tail -n +$((cts_log_start + 1)) "$LOG_FILE")
+    local passed=$(echo "$cts_output" | grep -E "^PASSED\s*:" | grep -oP ':\s*\K\d+' || echo "0")
+    local failed=$(echo "$cts_output" | grep -E "^FAILED\s*:" | grep -oP ':\s*\K\d+' || echo "0")
+    passed=${passed:-0}
+    failed=${failed:-0}
+    
+    if [ "$passed" = "0" ] && [ "$failed" = "0" ]; then
+        log "[$q_id] CTS 結果異常：沒有任何測試執行"
+        notify "❌ **$q_id** CTS 結果異常：沒有任何測試執行"
+        return 1
+    fi
+    
+    log "[$q_id] CTS 結果: Passed=$passed, Failed=$failed"
+    
+    if [ "$failed" -gt 0 ]; then
+        notify "🧪 **$q_id** CTS: ✅ Passed: $passed | ❌ Failed: $failed（符合預期）"
+    else
+        notify "⚠️ **$q_id** CTS: ✅ Passed: $passed | ❌ Failed: $failed（注意：無失敗）"
+    fi
+    return 0
+}
+
+verify_question() {
+    local q_dir="$1"
+    
+    # 轉成絕對路徑（避免 cd 後找不到）
+    if [[ "$q_dir" != /* ]]; then
+        q_dir="$(cd "$(dirname "$q_dir")" && pwd)/$(basename "$q_dir")"
+    fi
+    
+    local q_id=$(basename "$q_dir")
+    
+    # 檢查題目目錄
+    if [ ! -d "$q_dir" ]; then
+        log "[$q_id] 錯誤：題目目錄不存在: $q_dir"
+        notify "❌ **$q_id** 題目目錄不存在"
+        return 1
+    fi
+    
+    if [ ! -f "$q_dir/bug.patch" ] || [ ! -f "$q_dir/meta.json" ]; then
+        log "[$q_id] 錯誤：缺少 bug.patch 或 meta.json"
+        notify "❌ **$q_id** 缺少必要檔案"
+        return 1
+    fi
+    
+    log "========== 開始驗證 $q_id =========="
+    log "[$q_id] 題目目錄: $q_dir"
+    notify "🔄 ========== 開始驗證 **$q_id** =========="
+    
+    # 讀取 meta.json 獲取 test method
+    local test_method=$(cat "$q_dir/meta.json" | grep '"cts_test"' | cut -d'"' -f4)
+    log "[$q_id] CTS Test: $test_method"
+    
+    # 還原 sandbox
+    log "[$q_id] 還原 sandbox..."
+    notify "🔄 **$q_id** 還原 sandbox..."
+    cd "$SANDBOX"
+    repo forall -c 'git checkout .' 2>/dev/null
+    rm -rf out/target/
+    
+    # 套用 patch（自動檢測正確目錄）
+    log "[$q_id] 套用 patch..."
+    notify "📝 **$q_id** 套用 patch..."
+    
+    # 嘗試從 sandbox 根目錄 apply
+    if patch --dry-run -p1 < "$q_dir/bug.patch" > /dev/null 2>&1; then
+        patch -p1 < "$q_dir/bug.patch" 2>&1 | tee -a "$LOG_FILE"
+        if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+            log "[$q_id] ❌ Patch failed from sandbox root!"
+            notify "❌ **$q_id** Patch 套用失敗！"
+            return 1
+        fi
+        log "[$q_id] ✓ Patch applied from sandbox root"
+    # 嘗試從 frameworks/base apply
+    elif (cd frameworks/base && patch --dry-run -p1 < "$q_dir/bug.patch" > /dev/null 2>&1); then
+        (cd frameworks/base && patch -p1 < "$q_dir/bug.patch") 2>&1 | tee -a "$LOG_FILE"
+        if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+            log "[$q_id] ❌ Patch failed from frameworks/base!"
+            notify "❌ **$q_id** Patch 套用失敗！"
+            return 1
+        fi
+        log "[$q_id] ✓ Patch applied from frameworks/base"
+    else
+        log "[$q_id] ❌ Patch failed to apply!"
+        notify "❌ **$q_id** Patch 套用失敗！"
+        return 1
+    fi
+    
+    # Build
+    do_build "$q_id" || return 1
+    
+    # Flash
+    flash_device "$q_id" || return 1
+    
+    # CTS
+    run_cts "$q_id" "$test_method" || return 1
+    
+    # 備份 CTS 結果和 logs
+    log "[$q_id] 備份 CTS 結果..."
+    
+    # 從路徑解析 domain 和 difficulty
+    local domain=$(echo "$q_dir" | grep -oP 'domains/\K[^/]+')
+    local difficulty=$(echo "$q_dir" | grep -oP 'domains/[^/]+/\K[^/]+')
+    
+    # 備份 results（使用 latest）
+    mkdir -p "$q_dir/cts_results"
+    local latest_result=$(readlink -f "$CTS_PATH/results/latest")
+    if [ -d "$latest_result" ]; then
+        cp -r "$latest_result"/* "$q_dir/cts_results/"
+        log "[$q_id] ✓ 已備份 CTS results"
+    fi
+    
+    # 備份 logs
+    local latest_log=$(ls -td "$CTS_PATH/logs/"*/ 2>/dev/null | head -1)
+    if [ -d "$latest_log" ]; then
+        mkdir -p "$q_dir/cts_results/logs"
+        cp -r "$latest_log"/* "$q_dir/cts_results/logs/"
+        log "[$q_id] ✓ 已備份 CTS logs"
+    fi
+    
+    # 建立備份 metadata
+    cat > "$q_dir/cts_results/backup_metadata.json" << EOF
+{
+  "backup_time": "$(date -Iseconds)",
+  "question": "$q_id",
+  "domain": "$domain",
+  "difficulty": "$difficulty"
+}
+EOF
+    notify "📦 **$q_id** 已備份 CTS 結果和 logs"
+    
+    # 更新 meta.json
+    if [ -f "$q_dir/meta.json" ]; then
+        local today=$(date +%Y-%m-%d)
+        # 解析 CTS 結果
+        local passed=$(tail -50 "$LOG_FILE" | grep -E "^PASSED\s*:" | grep -oP ':\s*\K\d+' || echo "0")
+        local failed=$(tail -50 "$LOG_FILE" | grep -E "^FAILED\s*:" | grep -oP ':\s*\K\d+' || echo "0")
+        local total=$((passed + failed))
+        
+        # 使用 jq 更新（如果可用）
+        if command -v jq &> /dev/null; then
+            local tmp_file=$(mktemp)
+            jq --arg date "$today" --argjson passed "$passed" --argjson failed "$failed" --argjson total "$total" '
+                .verification_status = "complete" |
+                .verification_date = $date |
+                .cts_summary = {passed: $passed, failed: $failed, total: $total} |
+                del(.verification_issues)
+            ' "$q_dir/meta.json" > "$tmp_file" && mv "$tmp_file" "$q_dir/meta.json"
+            log "[$q_id] ✓ 已更新 meta.json"
+        else
+            log "[$q_id] ⚠️ jq 未安裝，跳過 meta.json 更新"
+        fi
+    fi
+    
+    log "========== $q_id 驗證完成 =========="
+    notify "🎉 **$q_id** 驗證完成！"
+}
+
+# ==================== 主流程 ====================
+
+if [ $# -eq 0 ]; then
+    echo "用法: $0 <題目路徑> [題目路徑...]"
+    echo "範例: CTS_DEVICE=27161FDH20031X $0 domains/display/hard/Q005"
+    echo ""
+    echo "環境變數:"
+    echo "  CTS_DEVICE      - 設備序號（預設: 27161FDH20031X）"
+    echo "  USB_COOLDOWN    - USB 冷卻期秒數（預設: 0，建議遇到 USB 問題時設 120）"
+    echo ""
+    echo "時間常數（根據實驗數據 2026-02-20）:"
+    echo "  FLASH_TIMEOUT=$FLASH_TIMEOUT (實測 102s)"
+    echo "  BOOTLOADER_TIMEOUT=$BOOTLOADER_TIMEOUT"
+    echo "  ADB_APPEAR_TIMEOUT=$ADB_APPEAR_TIMEOUT (實測 34s)"
+    echo "  BOOT_COMPLETE_TIMEOUT=$BOOT_COMPLETE_TIMEOUT (實測 50s)"
+    exit 1
+fi
+
+# 先把所有相對路徑轉成絕對路徑（避免 cd 後失效）
+QUESTION_PATHS=()
+for p in "$@"; do
+    if [[ "$p" != /* ]]; then
+        QUESTION_PATHS+=("$(pwd)/$p")
+    else
+        QUESTION_PATHS+=("$p")
+    fi
+done
+
+> "$LOG_FILE"
+log "=========================================="
+log "CTS 驗證腳本 v2.5（Flash 時間線實驗優化版）"
+log "設備: $DEVICE"
+log "題目: ${QUESTION_PATHS[*]}"
+log "=========================================="
+log "時間常數: FLASH=$FLASH_TIMEOUT, BOOTLOADER=$BOOTLOADER_TIMEOUT, ADB=$ADB_APPEAR_TIMEOUT, BOOT=$BOOT_COMPLETE_TIMEOUT"
+notify "🚀 開始驗證: **${QUESTION_PATHS[*]}** (設備: $DEVICE)"
+
+if ps aux | grep -E "soong_ui --make-mode|ninja.*combined-aosp" | grep -v grep > /dev/null; then
+    wait_for_build
+fi
+
+for q_path in "${QUESTION_PATHS[@]}"; do
+    verify_question "$q_path"
+done
+
+log "=========================================="
+log "所有驗證完成！"
+log "=========================================="
+notify "🎊 **所有驗證完成！** Log: \`/tmp/cts_verify.log\`"

@@ -1,0 +1,24 @@
+02-19 23:10:33.048 10123  3649  4049 W MediaProvider: isAppCloneUserPair for user 0: false
+02-19 23:10:33.193 10123  3649  5187 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-19 23:10:33.479  1000  1488  1966 I commit_sys_config_file: [settings-0-0,9]
+02-19 23:10:33.548  1000  1488  1821 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-19 23:10:33.549  1000  1488  1866 I AppsFilter: interaction: PackageSetting{10b574 com.android.microdroid.empty_payload/10112} -> PackageSetting{2bf2db3 com.android.tradefed.utils.wifi/10126} BLOCKED
+02-19 23:10:33.549  1000  1488  1821 D OomAdjuster: Not killing cached processes
+02-19 23:10:33.557  1017   538   566 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-19 23:10:33.632  1000  1488  1866 I commit_sys_config_file: [package,23]
+02-19 23:10:33.664  logd  5442  5442 I logd    : start watching /data/system/packages.list ...
+02-19 23:10:33.668  logd  5442  5442 I logd    : ReadPackageList, total packages: 131
+02-19 23:10:33.636  1000  1488  1866 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-19 23:10:33.636  1000  1488  1866 D PackageManager: Clear ephemeral installer activity
+02-19 23:10:33.638  1000  1488  4120 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-19 23:10:33.640  1000  1488  1866 I service_manager_stats: [100,129,40026]
+02-19 23:10:33.648  1000  1488  1866 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=0: pkg removed
+02-19 23:10:33.655  1000  1488  1859 I commit_sys_config_file: [package-user-0,22]
+02-19 23:10:33.658  1000  1488  2001 V StorageManagerService: Package com.android.tradefed.utils.wifi does not have legacy storage
+02-19 23:10:33.658  1000  1488  1820 I CredManSysService: updateProvidersWhenPackageRemoved
+02-19 23:10:33.659  1000  1488  1820 W CredManSysService: settings key is null
+02-19 23:10:33.663 radio  3173  3173 D CarrierSvcBindHelper: onPackageRemoved: com.android.tradefed.utils.wifi
+02-19 23:10:33.664 radio  3173  3370 D EuiccConnector: handleMessage: E msg.what=1
+02-19 23:10:33.664 radio  3173  3370 D EuiccConnector: processMsg: UnavailableState
+02-19 23:10:33.664 radio  3173  3370 W EuiccConnector: No valid EuiccService implementation found
+02-19 23:10:33.664 radio  3173  3370 D EuiccConnector: handleMessage: X

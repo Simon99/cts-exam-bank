@@ -1,105 +1,51 @@
-# Q006: 解答
-
-## Bug 位置
-
-**檔案**：`frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java`
-
-**方法**：`VirtualDisplayDevice.setSurfaceLocked()`
+# 答案 - Display yDpi Off-by-One 錯誤
 
 ## 問題分析
 
-### 原始程式碼（有 bug）
+1. **錯誤訊息說明**：
+   - 測試期望 overlay display 的 ydpi 值為 214.0（與設定的 densityDpi 一致）
+   - 但實際回報的值是 215.0，多了 1
+   - 這是典型的 off-by-one 錯誤
+
+2. **根本原因**：
+   在 `OverlayDisplayAdapter.java` 的 `getDisplayDeviceInfoLocked()` 方法中：
+   ```java
+   // 錯誤的代碼
+   mInfo.yDpi = rawMode.mDensityDpi + 1;  // 不應該加 1
+   ```
+   
+   開發者可能在調試時加了 +1，但忘記移除。
+
+## Bug 位置
+
+**文件**: `frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java`
+
+**方法**: `OverlayDisplayDevice.getDisplayDeviceInfoLocked()`
+
+**行號**: 約第 349 行
+
+## 修復方式
 
 ```java
-public void setSurfaceLocked(Surface surface) {
-    if (!mStopped && mSurface != surface) {
-        if ((mSurface != null) != (surface != null)) {
-            sendDisplayDeviceEventLocked(this, DISPLAY_DEVICE_EVENT_CHANGED);
-        }
-        sendTraversalRequestLocked();
-        mSurface = surface;
-        mInfo = null;
-        // 缺少：mPendingChanges |= PENDING_SURFACE_CHANGE;
-    }
-}
+// 修復後的代碼
+mInfo.yDpi = rawMode.mDensityDpi;  // 直接使用 densityDpi，不加 1
 ```
 
-### Bug 說明
+## 驗證修復
 
-`setSurfaceLocked()` 方法負責處理 VirtualDisplay 的 Surface 動態更新。當 Surface 變更時，程式碼：
-
-1. ✅ 正確發送了 display event（如果 null 狀態改變）
-2. ✅ 正確呼叫 `sendTraversalRequestLocked()` 請求 traversal
-3. ✅ 正確更新了 `mSurface` 成員變數
-4. ✅ 正確清除了 `mInfo` 快取
-5. ❌ **沒有設置 `PENDING_SURFACE_CHANGE` 標誌**
-
-### 為什麼這會造成問題
-
-`performTraversalLocked()` 在處理 traversal 時會檢查 `mPendingChanges`：
-
-```java
-@Override
-public void performTraversalLocked(SurfaceControl.Transaction t) {
-    if ((mPendingChanges & PENDING_RESIZE) != 0) {
-        t.setDisplaySize(getDisplayTokenLocked(), mWidth, mHeight);
-    }
-    if ((mPendingChanges & PENDING_SURFACE_CHANGE) != 0) {
-        setSurfaceLocked(t, mSurface);  // 實際套用到 SurfaceFlinger
-    }
-    mPendingChanges = 0;
-}
+執行測試確認修復有效：
+```bash
+atest CtsDisplayTestCases:DisplayTest#testGetMetrics
 ```
 
-由於 `PENDING_SURFACE_CHANGE` 標誌沒有被設置：
-- `performTraversalLocked()` 不會呼叫 `setSurfaceLocked(t, mSurface)`
-- 新的 Surface 不會被設置到 SurfaceFlinger transaction 中
-- SurfaceFlinger 仍然使用舊的 Surface（或 null）進行渲染
-- 結果：新 Surface 永遠收不到畫面
+## 相關知識點
 
-### 狀態不一致
+1. **DisplayDeviceInfo.yDpi**：表示螢幕垂直方向每英吋的像素數
+2. **rawMode.mDensityDpi**：overlay display 配置的 DPI 值
+3. **Off-by-one error**：常見的編程錯誤，在邊界處理時多算或少算一個單位
 
-這個 bug 導致 Java 層和 Native 層的狀態不一致：
-- Java 層：`mSurface` 已經指向新的 Surface
-- Native 層（SurfaceFlinger）：仍然使用舊的 Surface
+## 學習要點
 
-## 修正方案
-
-```java
-public void setSurfaceLocked(Surface surface) {
-    if (!mStopped && mSurface != surface) {
-        if ((mSurface != null) != (surface != null)) {
-            sendDisplayDeviceEventLocked(this, DISPLAY_DEVICE_EVENT_CHANGED);
-        }
-        sendTraversalRequestLocked();
-        mSurface = surface;
-        mInfo = null;
-        mPendingChanges |= PENDING_SURFACE_CHANGE;  // 修正：設置 pending flag
-    }
-}
-```
-
-## 對比 resizeLocked()
-
-注意 `resizeLocked()` 方法正確地設置了對應的 pending flag：
-
-```java
-public void resizeLocked(int width, int height, int densityDpi) {
-    if (mWidth != width || mHeight != height || mDensityDpi != densityDpi) {
-        sendDisplayDeviceEventLocked(this, DISPLAY_DEVICE_EVENT_CHANGED);
-        sendTraversalRequestLocked();
-        mWidth = width;
-        mHeight = height;
-        mMode = createMode(width, height, getRefreshRate());
-        mDensityDpi = densityDpi;
-        mInfo = null;
-        mPendingChanges |= PENDING_RESIZE;  // 正確設置了 flag
-    }
-}
-```
-
-## 關鍵教訓
-
-1. **Pending changes pattern**：當使用 pending flags 機制來延遲處理變更時，必須確保所有相關操作都正確設置對應的 flag
-2. **多層狀態同步**：Android 圖形系統涉及 Java 層和 Native 層（SurfaceFlinger），必須確保兩層的狀態保持同步
-3. **一致性檢查**：類似功能的方法（如 `setSurfaceLocked` 和 `resizeLocked`）應該有一致的處理模式
+- 注意數值計算時是否有多餘的 +1 或 -1
+- xDpi 和 yDpi 通常應該與 densityDpi 保持一致（除非有特殊的非正方形像素）
+- 調試代碼修改後要記得還原

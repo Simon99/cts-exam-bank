@@ -1,51 +1,52 @@
 {
   "id": "DIS-H009",
-  "title": "Refresh Rate Switching Type 跨函數狀態不一致",
+  "title": "Display Mode Request Setting Getter Returns Inverted Value",
   "domain": "display",
   "difficulty": "hard",
   "cts_test": "android.display.cts.DisplayTest#testModeSwitchOnPrimaryDisplay",
   "cts_module": "CtsDisplayTestCases",
-  "injection_point": "DIS-036",
+  "injection_point": "DIS-047",
   "injection_type": [
-    "STATE",
-    "BOUND"
+    "LOGIC",
+    "RETURN_VALUE"
   ],
   "affected_files": [
     "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
   ],
   "affected_methods": [
-    "setRefreshRateSwitchingTypeInternal",
-    "getRefreshRateSwitchingTypeInternal"
+    "shouldAlwaysRespectAppRequestedModeInternal"
   ],
   "tags": [
-    "state-inconsistency",
-    "boundary-error",
     "getter-setter-mismatch",
-    "refresh-rate",
-    "display-mode",
-    "cross-function-bug",
-    "hard"
+    "return-value-inversion",
+    "mode-switch",
+    "display-config",
+    "assertion-failure"
   ],
-  "estimated_time_minutes": 40,
+  "estimated_time_minutes": 30,
   "skills_tested": [
-    "跨函數狀態追蹤",
-    "邊界條件分析",
-    "get/set 一致性驗證",
-    "Display 子系統理解"
+    "Getter/Setter 一致性驗證",
+    "Return value 追蹤",
+    "DisplayManager API 理解"
   ],
   "hints": [
-    "注意 set 和 get 之間的值可能不匹配",
-    "檢查所有四種 SWITCHING_TYPE 值的行為",
-    "getter 中的邏輯可能會影響返回值"
+    "檢查 getter 返回值是否與 setter 設定一致",
+    "注意邏輯取反運算符",
+    "思考為什麼 assertTrue 會失敗"
   ],
+  "bug_description": "Getter returns inverted value, causing set/get mismatch",
+  "root_cause": "Return value negated with ! operator",
+  "fix_complexity": "Remove the ! operator",
   "created_at": "2025-01-22T00:00:00+08:00",
-  "version": "1.0.0",
-  "verified": false,
-  "verified_date": "2026-02-13",
-  "cts_result": "PASS",
-  "verification_issue": "Issue_0007_DIS_H009_bug_not_detected.md",
-  "issue_reason": "Bug 未被偵測 - CTS 測試不驗證 switching type 返回值",
-  "needs_revalidation": true,
-  "revalidation_requested": "2026-02-17",
-  "revalidation_reason": "Hard 難度全數重新驗證"
+  "updated_at": "2026-02-18T18:30:00+08:00",
+  "verified": true,
+  "verification_date": "2026-02-21",
+  "verification_result": "PASS",
+  "verification_notes": "測試在 line 637 的 assertTrue 失敗，setter(true) 後 getter 返回 false",
+  "verification_status": "complete",
+  "cts_summary": {
+    "passed": 0,
+    "failed": 2,
+    "total": 2
+  }
 }

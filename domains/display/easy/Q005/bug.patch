@@ -1,14 +1,14 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
-index a1b2c3d..e4f5g6h 100644
---- a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
-@@ -289,7 +289,7 @@ final class VirtualDisplayAdapter extends DisplayAdapter {
-             mFlags = flags;
-             mCallback = callback;
-             mProjection = projection;
-             mMediaProjectionCallback = mediaProjectionCallback;
--            mDisplayState = Display.STATE_UNKNOWN;
-+            mDisplayState = Display.STATE_OFF;
-             mPendingChanges |= PENDING_SURFACE_CHANGE;
-             mIsDisplayOn = surface != null;
-             mDisplayIdToMirror = virtualDisplayConfig.getDisplayIdToMirror();
+diff --git a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+index abc1234..def5678 100644
+--- a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+@@ -347,7 +347,8 @@ final class OverlayDisplayAdapter extends DisplayAdapter {
+                 mInfo.defaultModeId = mModes[0].getModeId();
+                 mInfo.supportedModes = mModes;
+                 mInfo.densityDpi = rawMode.mDensityDpi;
+-                mInfo.xDpi = rawMode.mDensityDpi;
++                // BUG: Off-by-one error in xDpi calculation
++                mInfo.xDpi = rawMode.mDensityDpi + 1;
+                 mInfo.yDpi = rawMode.mDensityDpi;
+                 mInfo.presentationDeadlineNanos = mDisplayPresentationDeadlineNanos +
+                         1000000000L / (int) mRefreshRate;   // display's deadline + 1 frame

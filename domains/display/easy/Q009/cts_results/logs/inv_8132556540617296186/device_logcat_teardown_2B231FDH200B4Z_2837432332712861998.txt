@@ -1,0 +1,78 @@
+02-22 01:54:12.304  wifi   940   940 I WifiHAL : Creating message to get link statistics; iface = 47
+02-22 01:54:12.371  root  1186  1186 I logbuffer_pcie1: [  144] D state: 0, LTSSM: 0
+02-22 01:54:12.371  root  1186  1186 I logbuffer_pcie1: [  145] L0(0x11)
+02-22 01:54:12.374  root  1186  1186 I pcieh 0000: 01:00.0: enabling device (0000 -> 0002)
+02-22 01:54:12.375  root  1186  1186 W [17:54:12.345257][dhd][wlan]dhd_plat_l1ss_ctrl: Control L1ss RC side 1
+02-22 01:54:12.368 10115  3582  5176 W MediaProvider: isAppCloneUserPair for user 0: false
+02-22 01:54:12.407  wifi   940   940 I WifiHAL : In GetLinkStatsCommand::handleResponse
+02-22 01:54:12.407  wifi   940   940 E IPCThreadState: binder thread pool (1 threads) starved for 104 ms
+02-22 01:54:12.439  1000  1487  2857 D WifiClientModeImpl[40547:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-38 TxLinkspeed=1814 freq=5180 RxLinkSpeed=1921
+02-22 01:54:12.441  1000  1487  2857 D WifiDataStall: tx tput in kbps: 1501155
+02-22 01:54:12.441  1000  1487  2857 D WifiDataStall: rx tput in kbps: 1673371
+02-22 01:54:12.441  1000  1487  2857 V WifiConfigManager: Updating scan detail cache freq=5180 BSSID=24:5a:5f:cf:51:df RSSI=-38 for "TP-LINK_5G_BA98"WPA_PSK
+02-22 01:54:12.442  1000  1487  2857 D WifiChannelUtilization:  freq: 5180 onTime: 8016 busyTime: 421 onTimeDiff: 1144 busyTimeDiff: 137 utilization: 30 utilization t0: 13
+02-22 01:54:12.442  1000  1487  2857 D WifiDataStall:  ccaLevel = 30
+02-22 01:54:12.442  1000  1487  2857 D WifiDataStall: L2 txTputKbps: 1521350, rxTputKbps: 1695882, L3 txTputKbps: 0, rxTputKbps: 0, TxTrafficHigh: false, RxTrafficHigh: false, Throughput Sufficient: true
+02-22 01:54:12.444  1000  1487  2857 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 318954258 SSID: "TP-LINK_5G_BA98", BSSID: 24:5a:5f:cf:51:df, MAC: 9e:b8:c3:22:88:30, IP: /192.168.1.160, Security type: 2, Supplicant state: COMPLETED, Wi-Fi standard: 11ax, RSSI: -38, Link speed: 1814Mbps, Tx Link speed: 1814Mbps, Max Supported Tx Link speed: 2401Mbps, Rx Link speed: 1921Mbps, Max Supported Rx Link speed: 2401Mbps, Frequency: 5180MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"TP-LINK_5G_BA98"wpa2-pskMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+02-22 01:54:12.444  1000  1487  2857 D WifiScoreCard: txRate: 2 txSpeed: 1814
+02-22 01:54:12.444  1000  1487  2857 D WifiScoreCard: network update SIGNAL_POLL "TP-LINK_5G_BA98" ID: 483650116 RSSI -38 txSpeed -1
+02-22 01:54:12.444  1000  1487  2857 D WifiClientModeImpl[40547:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "TP-LINK_5G_BA98" 24:5a:5f:cf:51:df rssi=-38 f=5180 sc=60 link=1814 tx=1.0, 0.0, 0.0 rx=0.5 bcn=526 [on:255 tx:1 rx:0 period:3145] from screen [on:17327 period:62016] score=60
+02-22 01:54:12.490  root     1     1 I init    : ... started service 'securedpud.slider' has pid 6522
+02-22 01:54:12.490  root     1     1 I init    : starting service 'trusty_metricsd'...
+02-22 01:54:12.498  root     1     1 I init    : ... started service 'trusty_metricsd' has pid 6524
+02-22 01:54:12.480  1000  6524  6524 I trusty_metricsd: starting trusty_metricsd
+02-22 01:54:12.480  1000  6524  6524 I trusty_metricsd: trusty dev: /dev/trusty-ipc-dev0
+02-22 01:54:12.483  1000  6522  6522 I securedpud.slider: starting securedpud
+02-22 01:54:12.483  1000  6522  6522 I securedpud.slider: trusty dev: /dev/trusty-ipc-dev0
+02-22 01:54:12.483  1000  6524  6524 E libtrusty: tipc_connect: can't connect to tipc service "com.android.frameworks.stats.trusty.metrics.istats_setter" (err=107)
+02-22 01:54:12.483  1000  6524  6524 E RpcTrusty: Failed to connect to Trusty service. Error code: -107
+02-22 01:54:12.483  1000  6524  6524 E RpcTrusty: Failed to set up Trusty client. Error: BAD_VALUE
+02-22 01:54:12.483  1000  6522  6522 I DMABUFHEAPS: Using DMA-BUF heap named: tui-secure
+02-22 01:54:12.483  1000  6524  6524 E trusty_metricsd: failed to connect TrustyMetricsPixel to Trusty: failed to connect to Trusty metrics TA: Transport endpoint is not connected
+02-22 01:54:12.484  1000  6524  6524 W RefBase : RefBase: Explicit destruction, weak count = 0 (in 0xb400007357cc4608). Use sp<> to manage this object.
+02-22 01:54:12.484  1000  6524  6524 W RefBase : CallStack::getCurrentInternal not linked, returning null
+02-22 01:54:12.484  1000  6524  6524 W RefBase : CallStack::logStackInternal not linked
+02-22 01:54:12.484  1000  6524  6524 E trusty_metricsd: failed to open Trusty metrics client
+02-22 01:54:12.484  1000  6524  6524 E trusty_metricsd: trying to connect to Trusty metrics TA at old TIPC port
+02-22 01:54:12.485  1000  6524  6524 E libtrusty: tipc_connect: can't connect to tipc service "com.android.trusty.metrics" (err=107)
+02-22 01:54:12.485  1000  6522  6522 E libtrusty: tipc_connect: can't connect to tipc service "com.android.trusty.secure_dpu" (err=107)
+02-22 01:54:12.485  1000  6524  6524 E trusty_metricsd: failed to open TrustyMetricsPixelTipc: failed to connect to Trusty metrics TA: Transport endpoint is not connected
+02-22 01:54:12.485  1000  6524  6524 E trusty_metricsd: failed to open Trusty metrics client
+02-22 01:54:12.485  1000  6522  6522 E securedpud.slider: Failed to connect to: /dev/trusty-ipc-dev0
+02-22 01:54:12.517  root     1     1 I init    : Service 'securedpud.slider' (pid 6522) exited with status 1
+02-22 01:54:12.517  root     1     1 I init    : Sending signal 9 to service 'securedpud.slider' (pid 6522) process group...
+02-22 01:54:12.517  root     1     1 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_6522
+02-22 01:54:12.517  root     1     1 E init    : process with updatable components 'securedpud.slider' exited 4 times in 4 minutes
+02-22 01:54:12.519  root     1     1 I init    : Service 'trusty_metricsd' (pid 6524) exited with status 1
+02-22 01:54:12.520  root     1     1 I init    : Sending signal 9 to service 'trusty_metricsd' (pid 6524) process group...
+02-22 01:54:12.520  root     1     1 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_6524
+02-22 01:54:12.520  root     1     1 E init    : process with updatable components 'trusty_metricsd' exited 4 times in 4 minutes
+02-22 01:54:12.523  root     1     1 I init    : processing action (sys.init.updatable_crashing=1) from (/system/etc/init/flags_health_check.rc:10)
+02-22 01:54:12.523  root     1     1 I init    : starting service 'exec 53 (/system/bin/flags_health_check UPDATABLE_CRASHING)'...
+02-22 01:54:12.499 10115  3582  3980 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-22 01:54:12.530  root     1     1 I init    : ... started service 'exec 53 (/system/bin/flags_health_check UPDATABLE_CRASHING)' has pid 6526
+02-22 01:54:12.530  root     1     1 I init    : SVC_EXEC service 'exec 53 (/system/bin/flags_health_check UPDATABLE_CRASHING)' pid 6526 (uid 1000 gid 1000+0 context default) started; waiting...
+02-22 01:54:12.517  1000  6526  6526 I flags_health_check: ServerConfigurableFlagsReset reset_mode value: 1
+02-22 01:54:12.518  1000  6526  6526 I flags_health_check: ServerConfigurableFlagsReset updatable crashing detected, resetting flags.
+02-22 01:54:12.558  root     1     1 I init    : Service 'exec 53 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 6526) exited with status 0 waiting took 0.029000 seconds
+02-22 01:54:12.558  root     1     1 I init    : Sending signal 9 to service 'exec 53 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 6526) process group...
+02-22 01:54:12.558  root     1     1 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_6526
+02-22 01:54:12.559  root     1     1 I init    : processing action (sys.init.updatable_crashing=1) from (/system/etc/init/flags_health_check.rc:10)
+02-22 01:54:12.559  root     1     1 I init    : starting service 'exec 54 (/system/bin/flags_health_check UPDATABLE_CRASHING)'...
+02-22 01:54:12.563  root     1     1 I init    : ... started service 'exec 54 (/system/bin/flags_health_check UPDATABLE_CRASHING)' has pid 6529
+02-22 01:54:12.563  root     1     1 I init    : SVC_EXEC service 'exec 54 (/system/bin/flags_health_check UPDATABLE_CRASHING)' pid 6529 (uid 1000 gid 1000+0 context default) started; waiting...
+02-22 01:54:12.550  1000  6529  6529 I flags_health_check: ServerConfigurableFlagsReset reset_mode value: 1
+02-22 01:54:12.551  1000  6529  6529 I flags_health_check: ServerConfigurableFlagsReset updatable crashing detected, resetting flags.
+02-22 01:54:12.591  root     1     1 I init    : Service 'exec 54 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 6529) exited with status 0 waiting took 0.029000 seconds
+02-22 01:54:12.592  root     1     1 I init    : Sending signal 9 to service 'exec 54 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 6529) process group...
+02-22 01:54:12.592  root     1     1 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_6529
+02-22 01:54:12.780  1000  1487  1918 I commit_sys_config_file: [settings-0-0,12]
+02-22 01:54:12.923  1000  1487  1776 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-22 01:54:12.924  1000  1487  1813 I AppsFilter: interaction: PackageSetting{bb5d1e8 com.android.microdroid.empty_payload/10109} -> PackageSetting{6b4cba5 com.android.tradefed.utils.wifi/10126} BLOCKED
+02-22 01:54:12.925  1000  1487  1776 D OomAdjuster: Not killing cached processes
+02-22 01:54:12.930  1017   536   566 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-22 01:54:12.984  1000  1487  1813 I commit_sys_config_file: [package,17]
+02-22 01:54:13.014  logd  5311  5311 I logd    : start watching /data/system/packages.list ...
+02-22 01:54:12.986  1000  1487  1813 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-22 01:54:13.017  logd  5311  5311 I logd    : ReadPackageList, total packages: 131
+02-22 01:54:12.986  1000  1487  1813 D PackageManager: Clear ephemeral installer activity

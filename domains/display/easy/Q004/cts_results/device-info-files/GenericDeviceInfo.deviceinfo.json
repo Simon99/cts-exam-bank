@@ -1,0 +1,22 @@
+{
+  "build_id": "AP2A.240905.003",
+  "build_product": "aosp_panther",
+  "build_device": "panther",
+  "build_board": "panther",
+  "build_manufacturer": "Google",
+  "build_brand": "Android",
+  "build_model": "AOSP on Panther",
+  "build_type": "userdebug",
+  "build_fingerprint": "Android/aosp_panther/panther:14/AP2A.240905.003/eng.simon.20260221.235318:userdebug/test-keys",
+  "build_abi": "arm64-v8a",
+  "build_abi2": "",
+  "build_serial": "27161FDH20031X",
+  "build_version_release": "14",
+  "build_version_sdk": "34",
+  "build_reference_fingerprint": "",
+  "build_abis": "arm64-v8a",
+  "build_abis_32": "",
+  "build_abis_64": "arm64-v8a",
+  "build_version_base_os": "",
+  "build_version_security_patch": "2024-09-05"
+}

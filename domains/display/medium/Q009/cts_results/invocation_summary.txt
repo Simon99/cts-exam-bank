@@ -1,0 +1,24 @@
+TEXT: 
+============================================
+================= Results ==================
+=============== Consumed Time ==============
+    arm64-v8a CtsDisplayTestCases: 56s
+    arm64-v8a CtsDisplayTestCases[instant]: 47s
+Total aggregated tests run time: 1m 43s
+============== TOP 2 Slow Modules ==============
+    arm64-v8a CtsDisplayTestCases: 1.33 tests/sec [75 tests / 56325 msec]
+    arm64-v8a CtsDisplayTestCases[instant]: 1.35 tests/sec [64 tests / 47503 msec]
+============== Modules Preparation Times ==============
+    arm64-v8a CtsDisplayTestCases[instant] => prep = 1975 ms || clean = 608 ms
+    arm64-v8a CtsDisplayTestCases => prep = 2294 ms || clean = 551 ms
+Total preparation time: 4s  ||  Total tear down time: 1s
+=======================================================
+=============== Summary ===============
+Total Run time: 3m 8s
+2/2 modules completed
+Total Tests       : 139
+PASSED            : 72
+FAILED            : 24
+ASSUMPTION_FAILURE: 43
+============== End of Results ==============
+============================================

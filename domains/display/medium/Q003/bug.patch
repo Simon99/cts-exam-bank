@@ -1,13 +1,13 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/display/BrightnessMappingStrategy.java b/frameworks/base/services/core/java/com/android/server/display/BrightnessMappingStrategy.java
---- a/frameworks/base/services/core/java/com/android/server/display/BrightnessMappingStrategy.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/BrightnessMappingStrategy.java
-@@ -917,7 +917,8 @@ public abstract class BrightnessMappingStrategy {
- 
-             // Adjust nits to compensate for display white balance colour strength.
-             if (mDisplayWhiteBalanceController != null) {
--                nits = mDisplayWhiteBalanceController.calculateAdjustedBrightnessNits(nits);
-+                // Compensate for white balance color shift
-+                mDisplayWhiteBalanceController.calculateAdjustedBrightnessNits(nits);
-             }
- 
-             float brightness = mAdjustedNitsToBrightnessSpline.interpolate(nits);
+diff --git a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+index abcdef1..1234567 100644
+--- a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+@@ -471,7 +471,7 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
+                 mInfo.yDpi = mDensityDpi;
+                 mInfo.presentationDeadlineNanos = 1000000000L / (int) getRefreshRate(); // 1 frame
+                 mInfo.flags = 0;
+-                if ((mFlags & VIRTUAL_DISPLAY_FLAG_PUBLIC) == 0) {
++                if ((mFlags & VIRTUAL_DISPLAY_FLAG_PUBLIC) != 0) {
+                     mInfo.flags |= DisplayDeviceInfo.FLAG_PRIVATE
+                             | DisplayDeviceInfo.FLAG_NEVER_BLANK;
+                 }

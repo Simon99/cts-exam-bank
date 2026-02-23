@@ -1,49 +1,43 @@
-# CTS 題目：VirtualDisplayAdapter resizeLocked() Bug
+# CTS 面試題 - Display Type 錯誤
 
-## 情境
+## 題目背景
 
-你正在調試一個虛擬顯示相關的 bug。用戶報告在使用螢幕投影 (Screen Mirroring) 功能時，
-當手機從橫屏旋轉到縱屏（或反向），投影畫面沒有正確調整大小，導致畫面比例錯誤。
+你是 Android 系統團隊的工程師。QA 團隊報告以下 CTS 測試失敗：
 
-CTS 測試 `VirtualDisplayTest#testVirtualDisplayRotatesWithContent` 失敗。
-
-## 問題描述
-
-以下是 `VirtualDisplayAdapter.java` 中 `resizeLocked()` 方法的程式碼片段：
-
-```java
-public void resizeLocked(int width, int height, int densityDpi) {
-    // Boundary check: only update if ALL parameters changed
-    if (mWidth != width && mHeight != height && mDensityDpi != densityDpi) {
-        sendDisplayDeviceEventLocked(this, DISPLAY_DEVICE_EVENT_CHANGED);
-        sendTraversalRequestLocked();
-        mWidth = width;
-        mHeight = height;
-        mMode = createMode(width, height, getRefreshRate());
-        mDensityDpi = densityDpi;
-        mInfo = null;
-        mPendingChanges |= PENDING_RESIZE;
-    }
-}
+```
+android.display.cts.DisplayTest#testGetDisplays
 ```
 
-## 任務
+## 失敗訊息
 
-1. 找出這段程式碼中的 bug
-2. 解釋為什麼這個 bug 會導致 CTS 測試失敗
-3. 解釋 `testVirtualDisplayRotatesWithContent` 測試預期的行為
-4. 提供修正後的程式碼
+```
+junit.framework.AssertionFailedError: 
+    at android.display.cts.DisplayTest.testGetDisplays(DisplayTest.java:xxx)
+```
+
+測試日誌顯示 `hasSecondaryDisplay` 為 false，但應該為 true。
+
+## 重現步驟
+
+1. 啟用 overlay display（開發者選項 → 模擬輔助顯示器 → 181x161/214）
+2. 執行 CTS 測試：
+   ```bash
+   atest CtsDisplayTestCases:DisplayTest#testGetDisplays
+   ```
+
+## 相關代碼路徑
+
+- `frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java`
+- CTS 測試使用 `display.getType() == Display.TYPE_OVERLAY` 來識別 overlay display
+
+## 問題
+
+1. 為什麼測試無法找到 secondary display？
+2. 請找出 bug 的位置並說明根本原因
+3. 如何修復這個問題？
 
 ## 提示
 
-- 仔細觀察條件判斷的邏輯運算符
-- 考慮螢幕旋轉時，哪些參數會變化、哪些不會變化
-- 從「縱屏 1080x1920」旋轉到「橫屏 1920x1080」時，densityDpi 會變嗎？
-
-## 相關檔案
-
-- `frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java`
-
-## 預計完成時間
-
-15 分鐘
+- 測試通過 `getType()` 方法判斷是否為 overlay display
+- 檢查 OverlayDisplayAdapter 中設置 display type 的代碼
+- `Display.TYPE_OVERLAY` 和 `Display.TYPE_VIRTUAL` 是不同的類型

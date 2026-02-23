@@ -1,57 +1,33 @@
-# CTS 題目：BrightnessTracker Lux 數據邊界檢查錯誤
+# Question DIS-E002
 
-## 題目 ID
-DIS-E002
+## CTS 測試資訊
+- **Module**: CtsDisplayTestCases
+- **Test**: android.display.cts.DisplayTest#testGetDisplayAttrs
+- **失敗類型**: AssertionError
 
-## 難度
-Easy (15 分鐘)
-
-## 情境描述
-
-開發團隊收到用戶反饋：「手動調整螢幕亮度滑桿後，系統似乎沒有正確記錄這次調整。特別是在光線穩定的室內環境，亮度學習功能完全無效。」
-
-QA 團隊確認這個問題在光線感測器只有單一讀數時會發生。當環境光線穩定，感測器只回報一個數據點時，亮度調整事件就不會被記錄。
-
-## 相關 CTS 測試
+## 測試失敗訊息
 
 ```
-adb shell am instrument -w -e class android.hardware.display.cts.BrightnessTest#testBrightnessSliderTracking \
-    android.hardware.display.cts/androidx.test.runner.AndroidJUnitRunner
+junit.framework.AssertionFailedError: expected:<161> but was:<162>
+	at android.display.cts.DisplayTest.testGetDisplayAttrs(DisplayTest.java:XXX)
 ```
 
-**模組**: `CtsDisplayTestCases`
-
-## CTS 測試失敗訊息
+## 相關日誌
 
 ```
-android.hardware.display.cts.BrightnessTest#testBrightnessSliderTracking FAILED
-
-junit.framework.AssertionFailedError: Expected brightness change event to be recorded
-Expected: at least 1 event recorded
-Actual: 0 events recorded
-    at android.hardware.display.cts.BrightnessTest.testBrightnessSliderTracking(BrightnessTest.java:198)
+02-20 10:35:20.456 D/DisplayManagerService: Creating overlay display device: 181x161/214
+02-20 10:35:20.458 D/OverlayDisplayAdapter: getDisplayDeviceInfoLocked: width=181, height=162
+02-20 10:35:20.463 I/DisplayTest: Secondary display height: 162, expected: 161
 ```
 
-## 問題範圍
+## 問題描述
 
-- **檔案路徑**: `frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java`
-- **相關區域**: `handleBrightnessChanged()` 方法中的 lux 數據驗證邏輯
+CTS 測試 `testGetDisplayAttrs` 驗證 overlay display 的屬性是否正確。測試預期次級顯示器高度為 161 像素，但實際回報的高度為 162 像素。
 
-## 提示
-
-1. 問題與光線感測器數據的邊界條件檢查有關
-2. 注意 "empty" 和 "single element" 的邊界處理
-3. 比較運算符的選擇很重要
-4. 搜尋 `luxValues.length` 相關的條件判斷
+這表示在設置顯示器高度屬性時存在計算錯誤。
 
 ## 任務
 
-1. 找出導致 CTS 測試失敗的 bug
-2. 解釋為什麼這個 bug 會導致測試失敗
-3. 提供修復方案
-
-## 評估標準
-
-- 正確定位 bug 位置 (40%)
-- 解釋 bug 的根本原因 (30%)
-- 提供正確的修復方案 (30%)
+1. 找出導致高度多出 1 像素的程式碼錯誤
+2. 修復該錯誤，使 overlay display 正確回報高度
+3. 確保修改不影響其他顯示器屬性

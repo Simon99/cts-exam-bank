@@ -1,0 +1,457 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<configuration>
+  <build_provider class="com.android.compatibility.common.tradefed.build.CompatibilityBuildProvider">
+    <option name="plan" value="cts" />
+  </build_provider>
+  <target_preparer class="com.android.compatibility.common.tradefed.targetprep.DeviceFileCollector">
+    <option name="dest-file" value="vintf-files/sepolicy" />
+    <option name="property" key="ro.treble.enabled" value="true" />
+    <option name="src-file" value="/sys/fs/selinux/policy" />
+  </target_preparer>
+  <target_preparer class="com.android.compatibility.common.tradefed.targetprep.DeviceFileCollector">
+    <option name="dest-file" value="vintf-files/proc_config.gz" />
+    <option name="property" key="ro.treble.enabled" value="true" />
+    <option name="src-file" value="/proc/config.gz" />
+  </target_preparer>
+  <target_preparer class="com.android.compatibility.common.tradefed.targetprep.DynamicConfigPusher">
+    <option name="extract-from-resource" value="true" />
+    <option name="config-filename" value="cts" />
+    <option name="dynamic-resource-name" value="cts-tradefed" />
+    <option name="target" value="HOST" />
+  </target_preparer>
+  <target_preparer class="com.android.compatibility.common.tradefed.targetprep.StayAwakePreparer" />
+  <target_preparer class="com.android.compatibility.common.tradefed.targetprep.PackageDisabler">
+    <option name="package" value="com.android.yadayada" />
+  </target_preparer>
+  <target_preparer class="com.android.compatibility.common.tradefed.targetprep.SettingsPreparer">
+    <option name="set-value" value="0" />
+    <option name="device-setting" value="verifier_verify_adb_installs" />
+    <option name="setting-type" value="GLOBAL" />
+  </target_preparer>
+  <target_preparer class="com.android.compatibility.common.tradefed.targetprep.SettingsPreparer">
+    <option name="set-value" value="1" />
+    <option name="device-setting" value="hide_error_dialogs" />
+    <option name="setting-type" value="GLOBAL" />
+  </target_preparer>
+  <target_preparer class="com.android.compatibility.common.tradefed.targetprep.ApkPreconditionCheck">
+    <option name="apk" value="CtsPreconditions.apk" />
+    <option name="package" value="com.android.preconditions.cts" />
+  </target_preparer>
+  <target_preparer class="com.android.compatibility.common.tradefed.targetprep.WifiCheck" />
+  <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
+    <option name="run-command" value="rm -rf /sdcard/device-info-files" />
+    <option name="run-command" value="rm -rf /sdcard/report-log-files" />
+    <option name="run-command" value="locksettings set-disabled true" />
+  </target_preparer>
+  <target_preparer class="com.android.compatibility.common.tradefed.targetprep.DeviceInfoCollector">
+    <option name="apk" value="CtsDeviceInfo.apk" />
+    <option name="dest-dir" value="device-info-files/" />
+    <option name="package" value="com.android.compatibility.common.deviceinfo" />
+    <option name="src-dir" value="/sdcard/device-info-files/" />
+    <option name="temp-dir" value="temp-device-info-files/" />
+    <option name="throw-error" value="false" />
+  </target_preparer>
+  <target_preparer class="com.android.compatibility.common.tradefed.targetprep.ReportLogCollector">
+    <option name="dest-dir" value="report-log-files/" />
+    <option name="src-dir" value="/sdcard/report-log-files/" />
+    <option name="temp-dir" value="temp-report-logs/" />
+  </target_preparer>
+  <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
+    <option name="run-command" value="settings put global package_verifier_enable 0" />
+    <option name="teardown-command" value="settings put global package_verifier_enable 1" />
+  </target_preparer>
+  <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
+    <option name="run-command" value="settings put global verifier_engprod 1" />
+    <option name="teardown-command" value="settings put global verifier_engprod 0" />
+  </target_preparer>
+  <target_preparer class="com.android.compatibility.common.tradefed.targetprep.PropertyCheck">
+    <option name="expected-value" value="user" />
+    <option name="property-name" value="ro.build.type" />
+  </target_preparer>
+  <target_preparer class="com.android.compatibility.common.tradefed.targetprep.PropertyCheck">
+    <option name="expected-value" value="en-US" />
+    <option name="property-name" value="ro.product.locale" />
+  </target_preparer>
+  <target_preparer class="com.android.compatibility.common.tradefed.targetprep.PropertyCheck">
+    <option name="expected-value" value="false" />
+    <option name="property-name" value="persist.sys.test_harness" />
+    <option name="throw-error" value="true" />
+  </target_preparer>
+  <device_recovery class="com.android.tradefed.device.WaitDeviceRecovery" />
+  <device_requirements class="com.android.tradefed.device.DeviceSelectionOptions">
+    <option name="serial" value="27161FDH20031X" />
+  </device_requirements>
+  <device_options class="com.android.tradefed.device.TestDeviceOptions">
+    <option name="enable-root" value="false" />
+    <option name="max-tmp-logcat-file" value="209715200" />
+  </device_options>
+  <test class="com.android.compatibility.common.tradefed.testtype.suite.CompatibilityTestSuite">
+    <option name="enable-parameterized-modules" value="true" />
+    <option name="exclude-filter" value="CtsTelephonyTestCases android.telephony.cts.VisualVoicemailServiceTest#testPermissionlessService_ignored" />
+    <option name="exclude-filter" value="CtsLocationTestCases android.location.cts.GnssTtffTests#testTtffWithNetwork" />
+    <option name="exclude-filter" value="CtsLocationTestCases[instant] android.location.cts.GnssTtffTests#testTtffWithNetwork" />
+    <option name="exclude-filter" value="CtsCameraTestCases android.hardware.camera2.cts.SurfaceViewPreviewTest#testPreparePerformance" />
+    <option name="exclude-filter" value="CtsCameraTestCases[instant] android.hardware.camera2.cts.SurfaceViewPreviewTest#testPreparePerformance" />
+    <option name="exclude-filter" value="CtsDumpsysHostTestCases android.dumpsys.cts.DumpsysHostTest#testBatterystatsOutput" />
+    <option name="exclude-filter" value="CtsDumpsysHostTestCases android.dumpsys.cts.DumpsysHostTest#testGfxinfoFramestats" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.DebuggerOnDemand.OnthrowDebuggerLaunchTest#testDebuggerLaunch001" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.DebuggerOnDemand.OnthrowDebuggerLaunchTest#testDebuggerLaunch002" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.DebuggerOnDemand.OnthrowDebuggerLaunchTest#testDebuggerLaunch003" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.DebuggerOnDemand.OnthrowDebuggerLaunchTest#testDebuggerLaunch004" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.DebuggerOnDemand.OnthrowLaunchDebugger001#testDebugger002" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.DebuggerOnDemand.OnthrowLaunchDebugger002#testDebugger" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.Events.ClassUnloadTest#testClassUnloadEvent" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.Events.MonitorContendedEnteredTest#testMonitorContendedEnteredForClassMatch" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.Events.MonitorContendedEnterTest#testMonitorContendedEnterForClassMatch" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.Events.MonitorWaitedTest#testMonitorWaitedForClassExclude" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.Events.MonitorWaitedTest#testMonitorWaitedForClassMatchExact" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.Events.MonitorWaitedTest#testMonitorWaitedForClassMatchFirst" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.Events.MonitorWaitedTest#testMonitorWaitedForClassMatchSecond" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.Events.MonitorWaitedTest#testMonitorWaitedForClassOnly" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.Events.MonitorWaitTest#testMonitorWaitForClassExclude" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.Events.MonitorWaitTest#testMonitorWaitForClassMatchExact" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.Events.MonitorWaitTest#testMonitorWaitForClassMatchFirst" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.Events.MonitorWaitTest#testMonitorWaitForClassMatchSecond" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.Events.MonitorWaitTest#testMonitorWaitForClassOnly" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.ReferenceType.ClassFileVersionTest#testClassFileVersion001" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.ReferenceType.NestedTypesTest#testNestedTypes001" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.ThreadReference.StopTest#testStop001" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.VirtualMachine.HoldEventsTest#testHoldEvents001" />
+    <option name="exclude-filter" value="CtsJdwp org.apache.harmony.jpda.tests.jdwp.VirtualMachine.ReleaseEventsTest#testReleaseEvents001" />
+    <option name="exclude-filter" value="CtsJobSchedulerTestCases android.jobscheduler.cts.ConnectivityConstraintTest#testConnectivityConstraintExecutes_withMobile" />
+    <option name="exclude-filter" value="CtsJobSchedulerTestCases android.jobscheduler.cts.ConnectivityConstraintTest#testUnmeteredConstraintFails_withMobile" />
+    <option name="exclude-filter" value="CtsNetTestCases android.net.cts.SSLCertificateSocketFactoryTest#test_createSocket_bind" />
+    <option name="exclude-filter" value="CtsNetTestCases android.net.cts.SSLCertificateSocketFactoryTest#test_createSocket_simple" />
+    <option name="exclude-filter" value="CtsNetTestCases android.net.cts.SSLCertificateSocketFactoryTest#test_createSocket_wrapping" />
+    <option name="exclude-filter" value="CtsOpenGlPerfTestCases android.openglperf.cts.GlAppSwitchTest#testGlActivitySwitchingFast" />
+    <option name="exclude-filter" value="CtsOpenGlPerfTestCases android.openglperf.cts.GlAppSwitchTest#testGlActivitySwitchingSlow" />
+    <option name="exclude-filter" value="x86 CtsPerfettoTestCases PerfettoTest#TestFtraceProducer" />
+    <option name="exclude-filter" value="CtsSecurityTestCases android.security.cts.AudioPolicyBinderTest#test_getStreamVolumeLeak" />
+    <option name="exclude-filter" value="CtsSecurityTestCases android.security.cts.AudioPolicyBinderTest#test_isStreamActive" />
+    <option name="exclude-filter" value="CtsSecurityTestCases android.security.cts.AudioPolicyBinderTest#test_isStreamActiveRemotely" />
+    <option name="exclude-filter" value="CtsSecurityTestCases android.security.cts.AudioPolicyBinderTest#test_startAudioSource" />
+    <option name="exclude-filter" value="CtsSecurityTestCases android.security.cts.AudioPolicyBinderTest#test_startOutput" />
+    <option name="exclude-filter" value="CtsSecurityTestCases android.security.cts.AudioPolicyBinderTest#test_stopOutput" />
+    <option name="exclude-filter" value="CtsSecurityTestCases android.security.cts.MediaCryptoTest#testMediaCryptoClearKey" />
+    <option name="exclude-filter" value="CtsSecurityTestCases android.security.cts.MediaCryptoTest#testMediaCryptoWidevine" />
+    <option name="exclude-filter" value="CtsTelecomTestCases android.telecom.cts.WiredHeadsetTest" />
+    <option name="exclude-filter" value="CtsTelecomTestCases android.telecom.cts.ExtendedInCallServiceTest#testSwitchCallEndpoint" />
+    <option name="exclude-filter" value="CtsSecurityBulletinHostTestCases android.security.cts.Poc17_04#testPocCVE_2017_0564" />
+    <option name="exclude-filter" value="CtsSecurityBulletinHostTestCases android.security.cts.Poc17_05#testPocCVE_2017_0630" />
+    <option name="exclude-filter" value="arm64-v8a CtsRenderscriptLegacyTestCases" />
+    <option name="exclude-filter" value="x86_64 CtsRenderscriptLegacyTestCases" />
+    <option name="exclude-filter" value="mips64 CtsRenderscriptLegacyTestCases" />
+    <option name="exclude-filter" value="CtsUsageStatsTestCases android.app.usage.cts.UsageStatsTest#testNoAccessSilentlyFails" />
+    <option name="exclude-filter" value="android.util.cts.EventLogTest#testWriteEventWithOversizeValue" />
+    <option name="exclude-filter" value="CtsSecurityHostTestCases android.security.cts.SELinuxHostTest#testAospFileContexts" />
+    <option name="exclude-filter" value="CtsSecurityHostTestCases android.security.cts.SELinuxHostTest#testAospPropertyContexts" />
+    <option name="exclude-filter" value="CtsSecurityHostTestCases android.security.cts.SELinuxHostTest#testAospSeappContexts" />
+    <option name="exclude-filter" value="CtsIncidentHostTestCases com.android.server.cts.ErrorsTest#testANR" />
+    <option name="exclude-filter" value="CtsVideoTestCases android.video.cts.VideoEncoderDecoderTest#testVp9Goog0Perf0320x0180" />
+    <option name="exclude-filter" value="CtsVideoTestCases android.video.cts.VideoEncoderDecoderTest#testVp9Goog0Perf0640x0360" />
+    <option name="exclude-filter" value="CtsVideoTestCases android.video.cts.VideoEncoderDecoderTest#testVp9Goog0Perf1280x0720" />
+    <option name="exclude-filter" value="CtsVideoTestCases android.video.cts.VideoEncoderDecoderTest#testVp9Goog0Perf1920x1080" />
+    <option name="exclude-filter" value="x86_64 CtsLiblogTestCases liblog#event_log_tags" />
+    <option name="exclude-filter" value="CtsFileSystemTestCases android.filesystem.cts.AlmostFullTest" />
+    <option name="exclude-filter" value="CtsFileSystemTestCases[instant] android.filesystem.cts.AlmostFullTest" />
+    <option name="exclude-filter" value="CtsViewTestCases android.view.cts.ViewTest#testUpdateDragShadow" />
+    <option name="exclude-filter" value="CtsNativeMediaAAudioTestCases android.nativemedia.aaudio.AAudioOutputStreamCallbackTest#testPlayback" />
+    <option name="exclude-filter" value="CtsNativeMediaAAudioTestCases android.nativemedia.aaudio.AAudioTests#AAudioTestMMap_testBasicMmapOutput" />
+    <option name="exclude-filter" value="CtsNativeMediaAAudioTestCases[instant] android.nativemedia.aaudio.AAudioTests#AAudioTestMMap_testBasicMmapOutput" />
+    <option name="exclude-filter" value="arm64-v8a CtsMediaBitstreamsTestCases" />
+    <option name="exclude-filter" value="x86_64 CtsMediaBitstreamsTestCases" />
+    <option name="exclude-filter" value="mips64 CtsMediaBitstreamsTestCases" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testRateIndependencyAccelMultiChannel" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testRateIndependencyGyroMultiChannel" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testRateIndependencyMagMultiChannel" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testRateIndependencyAccelMultiMode" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testRateIndependencyGyroMultiMode" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testRateIndependencyMagMultiMode" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testRegisterMultipleChannelsUsingSameMemory" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testCloseWithoutConfigStop" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testRateIndependencyAccelGyroSingleChannel" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testRateIndependencyAccelMagSingleChannel" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testRateIndependencyGyroMagSingleChannel" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testRateIndependencyAccelUncalAccelSingleChannel" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testRateIndependencyGyroUncalGyroSingleChannel" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testRateIndependencyMagUncalMagSingleChannel" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testTimestampAccel" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testTimestampGyro" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testTimestampMag" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testAtomicCounterAccel" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testAtomicCounterGyro" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testAtomicCounterMag" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testRegisterMultipleChannels" />
+    <option name="exclude-filter" value="CtsSensorTestCases android.hardware.cts.SensorDirectReportTest#testReconfigure" />
+    <option name="exclude-filter" value="CtsLogdTestCases logd#statistics" />
+    <option name="exclude-filter" value="CtsLogdTestCases logd#sepolicy_rate_limiter" />
+    <option name="exclude-filter" value="CtsLiblogTestCases liblog#wrap_mode_blocks" />
+    <option name="exclude-filter" value="CtsStatsdHostTestCases android.cts.statsd.validation.BatteryStatsValidationTests#testConnectivityStateChange" />
+    <option name="exclude-filter" value="CtsStatsdHostTestCases[instant] android.cts.statsd.validation.BatteryStatsValidationTests#testConnectivityStateChange" />
+    <option name="exclude-filter" value="CtsStatsdHostTestCases android.cts.statsd.atom.UidAtomTests#testForegroundServiceState" />
+    <option name="exclude-filter" value="CtsStatsdHostTestCases[instant] android.cts.statsd.atom.UidAtomTests#testForegroundServiceState" />
+    <option name="exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.DeviceOwnerTest#testCreateAndManageUser_DontSkipSetupWizard" />
+    <option name="exclude-filter" value="CtsLocation2TestCases android.location2.cts.LocationManagerTest#testGetCoarseLocationUpdates_withListener" />
+    <option name="exclude-filter" value="CtsLocation2TestCases android.location2.cts.LocationManagerTest#testGetNetworkProviderLocationUpdates_withListener" />
+    <option name="exclude-filter" value="CtsHarmfulAppWarningHostTestCases android.harmfulappwarning.cts.HarmfulAppWarningTest#testDismissDialog" />
+    <option name="exclude-filter" value="CtsHarmfulAppWarningHostTestCases android.harmfulappwarning.cts.HarmfulAppWarningTest#testLaunchAnyway" />
+    <option name="exclude-filter" value="CtsHarmfulAppWarningHostTestCases android.harmfulappwarning.cts.HarmfulAppWarningTest#testUninstall" />
+    <option name="exclude-filter" value="CtsAngleIntegrationHostTestCases android.angle.cts.CtsAngleDebugOptionHostTest#testDebugOptionOn" />
+    <option name="exclude-filter" value="CtsAtomicInstallTestCases com.android.tests.atomicinstall.AtomicInstallTest#testFailInconsistentMultiPackageCommit" />
+    <option name="exclude-filter" value="CtsRcsTestCases" />
+    <option name="exclude-filter" value="CtsWindowManagerDeviceTestCases android.server.wm.ActivityVisibilityTests#testTurnScreenOnAttrNoLockScreen" />
+    <option name="exclude-filter" value="arm64-v8a CtsWrapWrapDebugMallocDebugTestCases" />
+    <option name="exclude-filter" value="CtsAppCloningHostTest android.scopedstorage.cts.host.AppCloningHostTest#testCreateCloneUserFile" />
+    <option name="exclude-filter" value="CtsWindowManagerDeviceTestCases android.server.wm.DisplayHashManagerTest#testGenerateAndVerifyDisplayHash" />
+    <option name="exclude-filter" value="CtsPermissionTestCases android.permission.cts.NearbyDevicesRenouncePermissionTest#scanRenouncingAtEndOfChainNotesBluetoothButNotLocation" />
+    <option name="exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.inline.InlineSimpleSaveActivityTest#testAutofill_oneDatasetAndSave" />
+    <option name="exclude-filter" value="CtsAutoFillServiceTestCases[instant] android.autofillservice.cts.inline.InlineSimpleSaveActivityTest#testAutofill_oneDatasetAndSave" />
+    <option name="exclude-filter" value="CtsPrintTestCases" />
+    <option name="exclude-filter" value="CtsPrintTestCases[instant]" />
+    <option name="exclude-filter" value="CtsPermission3TestCases android.permission3.cts.PermissionTest23#testNoResidualPermissionsOnUninstall" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionState" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[instant] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionState" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:1:TENT] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionState" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:2:HALF_FOLDED] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionState" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:3:OPEN] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionState" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionStateSampled" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[instant] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionStateSampled" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:1:TENT] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionStateSampled" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:2:HALF_FOLDED] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionStateSampled" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:3:OPEN] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionStateSampled" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:5:REAR_DUAL] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionState" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:5:REAR_DUAL] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionStateSampled" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:2:HALF_OPENED] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionState" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:3:OPENED] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionState" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:4:OPENED_REVERSE] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionState" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:5:OPENED_PRESENTATION] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionState" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:6:OPENED_REVERSE_PRESENTATION] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionState" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:2:HALF_OPENED] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionStateSampled" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:3:OPENED] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionStateSampled" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:4:OPENED_REVERSE] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionStateSampled" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:5:OPENED_PRESENTATION] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionStateSampled" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:6:OPENED_REVERSE_PRESENTATION] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionStateSampled" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:5:OPENED] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionState" />
+    <option name="exclude-filter" value="CtsStatsdAtomHostTestCases[foldable:5:OPENED] android.cts.statsdatom.permissionstate.DangerousPermissionStateTests#testDangerousPermissionStateSampled" />
+    <option name="exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedDeviceOwnerTest#testCreateAdminSupportIntent" />
+    <option name="exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedManagedProfileOwnerTest#testCreateAdminSupportIntent" />
+    <option name="exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedProfileOwnerTest#testCreateAdminSupportIntent" />
+    <option name="exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedDeviceOwnerTest#testSetCameraDisabledLogged" />
+    <option name="exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedManagedProfileOwnerTest#testSetCameraDisabledLogged" />
+    <option name="exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedProfileOwnerTest#testSetCameraDisabledLogged" />
+    <option name="exclude-filter" value="CtsWindowManagerDeviceTestCases android.server.wm.PinnedStackTests#testEnterPipWithMinimalSize" />
+    <option name="exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.DocumentsTest#testCreateWebLink" />
+    <option name="exclude-filter" value="CtsFragmentTestCases android.fragment.cts.FragmentAnimatorTest#saveWhileAnimatingAway" />
+    <option name="exclude-filter" value="CtsDisplayTestCases android.display.cts.DisplayTest#testActivityContextGetMetrics" />
+    <option name="exclude-filter" value="CtsGameServiceTestCases" />
+    <option name="exclude-filter" value="CtsGameManagerTestCases android.gamemanager.cts.GameManagerTest#testSetGameStatePerformanceMode" />
+    <option name="exclude-filter" value="CtsGameManagerTestCases android.gamemanager.cts.GameManagerTest#testSetGameStatePerformanceMode_withParams" />
+    <option name="exclude-filter" value="CtsGameManagerTestCases android.gamemanager.cts.GameManagerTest#testSetGameStateStandardMode" />
+    <option name="exclude-filter" value="CtsGameManagerTestCases[instant] android.gamemanager.cts.GameManagerTest#testSetGameStatePerformanceMode" />
+    <option name="exclude-filter" value="CtsGameManagerTestCases[instant] android.gamemanager.cts.GameManagerTest#testSetGameStatePerformanceMode_withParams" />
+    <option name="exclude-filter" value="CtsGameManagerTestCases[instant] android.gamemanager.cts.GameManagerTest#testSetGameStateStandardMode" />
+    <option name="exclude-filter" value="CtsBluetoothMultiDevicesTestCases BluetoothMultiDevicesTest" />
+    <option name="exclude-filter" value="CtsBionicTestCases malloc#zeroed_allocations_small_medium_sizes" />
+    <option name="exclude-filter" value="CtsBionicTestCases malloc#zeroed_allocations_large_sizes" />
+    <option name="exclude-filter" value="CtsBionicTestCases malloc#zeroed_allocations_realloc" />
+    <option name="exclude-filter" value="CtsUwbMultiDeviceTestCase_FiraRangingTests" />
+    <option name="exclude-filter" value="CtsUwbMultiDeviceTestCase_RangingMeasurementTests" />
+    <option name="exclude-filter" value="CtsFrameRateOverrideTestCases com.android.cts.graphics.framerateoverride.FrameRateOverrideHostTest" />
+    <option name="exclude-filter" value="CtsFrameRateOverrideTestCases[instant] com.android.cts.graphics.framerateoverride.FrameRateOverrideHostTest" />
+    <option name="exclude-filter" value="CtsTelephonyTestCases android.telephony.ims.cts.ImsCallingTest#testCallJoinExistingConferenceCallAfterCallSwap" />
+    <option name="exclude-filter" value="CtsTelephonyTestCases android.telephony.ims.cts.ImsCallingTest#testCallJoinExistingConferenceCallAfterCallSwapFail" />
+    <option name="exclude-filter" value="CtsWindowManagerDeviceTestCases android.server.wm.SurfaceControlViewHostTests#testFocusWithTouch" />
+    <option name="exclude-filter" value="CtsWindowManagerDeviceTestCases android.server.wm.SurfaceControlViewHostTests#testPopupWindowPosition" />
+    <option name="exclude-filter" value="CtsWindowManagerDeviceTestCases android.server.wm.SurfaceControlViewHostTests#testFocusWithTouchCrossProcess" />
+    <option name="exclude-filter" value="CtsWindowManagerDeviceTestCases android.server.wm.SurfaceControlViewHostTests#testChildWindowFocusable" />
+    <option name="exclude-filter" value="CtsAdServicesEndToEndTests com.android.adservices.tests.cts.topics.TopicsManagerTest#testTopicsManager_runOnDeviceClassifier" />
+    <option name="exclude-filter" value="CtsAdServicesEndToEndTests com.android.adservices.tests.cts.topics.TopicsManagerTest#testTopicsManager_runDefaultClassifier_usingGetMethodToCreateManager" />
+    <option name="exclude-filter" value="CtsAdServicesEndToEndTests com.android.adservices.tests.cts.topics.TopicsManagerTest#testTopicsManager_runOnDeviceClassifier_usingGetMethodToCreateManager" />
+    <option name="exclude-filter" value="CtsAdServicesEndToEndTests com.android.adservices.tests.cts.topics.TopicsManagerTest#testTopicsManager_runDefaultClassifier" />
+    <option name="exclude-filter" value="CtsAdServicesMddTests com.android.adservices.tests.cts.topics.TopicsManagerMddTest#testTopicsManager_downloadModelViaMdd_runPrecomputedClassifier" />
+    <option name="exclude-filter" value="CtsWindowManagerDeviceTestCases android.server.wm.WindowUntrustedTouchTest#testWhenOneCustomToastWindowAndOneSawWindowBelowThreshold_blocksTouch" />
+    <option name="exclude-filter" value="CtsTelephonyTestCases android.telephony.satellite.cts.SatelliteManagerTestOnMockService" />
+    <option name="exclude-filter" value="CtsAdServicesTopicsAppUpdateTests com.android.adservices.tests.cts.topics.appupdate.AppUpdateTest#testAppUpdate" />
+    <option name="exclude-filter" value="CtsSandboxedTopicsManagerTests com.android.tests.sandbox.topics.SandboxedTopicsManagerTest#loadSdkAndRunTopicsApi" />
+    <option name="exclude-filter" value="CtsAdServicesPermissionsNoPermEndToEndTests com.android.adservices.tests.permissions.PermissionsNoPermTest#testPermissionNotRequested_fledgeRemoveCustomAudienceRemoteInfoOverride" />
+    <option name="exclude-filter" value="CtsAdServicesPermissionsNoPermEndToEndTests com.android.adservices.tests.permissions.PermissionsNoPermTest#testPermissionNotRequested_fledgeResetAllAdSelectionConfigRemoteOverrides" />
+    <option name="exclude-filter" value="CtsAdServicesPermissionsNoPermEndToEndTests com.android.adservices.tests.permissions.PermissionsNoPermTest#testPermissionNotRequested_fledgeRemoveAdSelectionConfigRemoteInfo" />
+    <option name="exclude-filter" value="CtsAdServicesPermissionsNoPermEndToEndTests com.android.adservices.tests.permissions.PermissionsNoPermTest#testPermissionNotRequested_fledgeOverrideCustomAudienceRemoteInfo" />
+    <option name="exclude-filter" value="CtsAdServicesPermissionsNoPermEndToEndTests com.android.adservices.tests.permissions.PermissionsNoPermTest#testPermissionNotRequested_fledgeResetAllCustomAudienceOverrides" />
+    <option name="exclude-filter" value="CtsAdServicesPermissionsNoPermEndToEndTests com.android.adservices.tests.permissions.PermissionsNoPermTest#testPermissionNotRequested_fledgeOverrideAdSelectionConfigRemoteInfo" />
+    <option name="exclude-filter" value="CtsSandboxedFledgeManagerTests com.android.tests.sandbox.fledge.SandboxedFledgeManagerTest#loadSdkAndRunFledgeFlow" />
+    <option name="exclude-filter" value="CtsAppOpsTestCases android.app.appops.cts.AttributionTest#cannotUseTooManyAttributions" />
+    <option name="exclude-filter" value="CtsAppOpsTestCases android.app.appops.cts.AppOpEventCollectionTest#noteFromTwoProxiesAndVerifyProxyInfo" />
+    <option name="exclude-filter" value="CtsAppOpsTestCases android.app.appops.cts.AppOpEventCollectionTest#startStopTrustedProxyVerifyRunningAndTime" />
+    <option name="exclude-filter" value="CtsAppOpsTestCases android.app.appops.cts.AppOpEventCollectionTest#startStopTrustedAndUntrustedProxyVerifyProxyInfo" />
+    <option name="exclude-filter" value="CtsAttributionSourceTestCases android.attributionsource.cts.RuntimePermissionsAppOpTrackingTest#testTrustedAccessSmsAttributeToAnother" />
+    <option name="exclude-filter" value="CtsAttributionSourceTestCases android.attributionsource.cts.RuntimePermissionsAppOpTrackingTest#testTrustedAccessCallLogAttributeToAnother" />
+    <option name="exclude-filter" value="CtsAttributionSourceTestCases android.attributionsource.cts.RuntimePermissionsAppOpTrackingTest#testTrustedAccessContactsAttributeToAnother" />
+    <option name="exclude-filter" value="CtsAttributionSourceTestCases android.attributionsource.cts.RuntimePermissionsAppOpTrackingTest#testTrustedAccessCalendarAttributeToAnother" />
+    <option name="exclude-filter" value="CtsSettingsTestCases android.settings.cts.SettingsMultiPaneDeepLinkTest#deepLinkHomeActivity_splitNotSupported_deepLinkHomeDisabled" />
+    <option name="exclude-filter" value="CtsShortcutManagerTestCases android.content.pm.cts.shortcutmanager.ShortcutManagerUsageTest#testReportShortcutUsed" />
+    <option name="exclude-filter" value="CtsShortcutManagerTestCases[instant] android.content.pm.cts.shortcutmanager.ShortcutManagerUsageTest#testReportShortcutUsed" />
+    <option name="exclude-filter" value="CtsShortcutManagerTestCases[foldable:1:TENT] android.content.pm.cts.shortcutmanager.ShortcutManagerUsageTest#testReportShortcutUsed" />
+    <option name="exclude-filter" value="CtsShortcutManagerTestCases[foldable:2:HALF_FOLDED] android.content.pm.cts.shortcutmanager.ShortcutManagerUsageTest#testReportShortcutUsed" />
+    <option name="exclude-filter" value="CtsShortcutManagerTestCases[foldable:3:OPEN] android.content.pm.cts.shortcutmanager.ShortcutManagerUsageTest#testReportShortcutUsed" />
+    <option name="exclude-filter" value="CtsShortcutManagerTestCases[foldable:4:CONCURRENT_INNER_DEFAULT] android.content.pm.cts.shortcutmanager.ShortcutManagerUsageTest#testReportShortcutUsed" />
+    <option name="exclude-filter" value="CtsShortcutManagerTestCases[foldable:5:REAR_DUAL] android.content.pm.cts.shortcutmanager.ShortcutManagerUsageTest#testReportShortcutUsed" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutManagerTestCases android.content.pm.cts.shortcutmanager.ShortcutManagerUsageTest#testReportShortcutUsed" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutManagerTestCases[instant] android.content.pm.cts.shortcutmanager.ShortcutManagerUsageTest#testReportShortcutUsed" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutManagerTestCases[foldable:1:TENT] android.content.pm.cts.shortcutmanager.ShortcutManagerUsageTest#testReportShortcutUsed" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutManagerTestCases[foldable:2:HALF_FOLDED] android.content.pm.cts.shortcutmanager.ShortcutManagerUsageTest#testReportShortcutUsed" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutManagerTestCases[foldable:3:OPEN] android.content.pm.cts.shortcutmanager.ShortcutManagerUsageTest#testReportShortcutUsed" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutManagerTestCases[foldable:4:CONCURRENT_INNER_DEFAULT] android.content.pm.cts.shortcutmanager.ShortcutManagerUsageTest#testReportShortcutUsed" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutManagerTestCases[foldable:5:REAR_DUAL] android.content.pm.cts.shortcutmanager.ShortcutManagerUsageTest#testReportShortcutUsed" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_downgrade" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[instant] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_downgrade" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[foldable:1:TENT] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_downgrade" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[foldable:2:HALF_FOLDED] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_downgrade" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[foldable:3:OPEN] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_downgrade" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[foldable:4:CONCURRENT_INNER_DEFAULT] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_downgrade" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[foldable:5:REAR_DUAL] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_downgrade" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_downgrade" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[instant] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_downgrade" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[foldable:1:TENT] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_downgrade" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[foldable:2:HALF_FOLDED] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_downgrade" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[foldable:3:OPEN] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_downgrade" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[foldable:4:CONCURRENT_INNER_DEFAULT] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_downgrade" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[foldable:5:REAR_DUAL] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_downgrade" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_noManifestOnOldVersion" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[instant] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_noManifestOnOldVersion" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[foldable:1:TENT] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_noManifestOnOldVersion" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[foldable:2:HALF_FOLDED] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_noManifestOnOldVersion" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[foldable:3:OPEN] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_noManifestOnOldVersion" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[foldable:4:CONCURRENT_INNER_DEFAULT] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_noManifestOnOldVersion" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[foldable:5:REAR_DUAL] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_noManifestOnOldVersion" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_noManifestOnOldVersion" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[instant] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_noManifestOnOldVersion" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[foldable:1:TENT] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_noManifestOnOldVersion" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[foldable:2:HALF_FOLDED] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_noManifestOnOldVersion" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[foldable:3:OPEN] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_noManifestOnOldVersion" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[foldable:4:CONCURRENT_INNER_DEFAULT] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_noManifestOnOldVersion" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[foldable:5:REAR_DUAL] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_noManifestOnOldVersion" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_invisibleIgnored" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[instant] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_invisibleIgnored" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[foldable:1:TENT] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_invisibleIgnored" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[foldable:2:HALF_FOLDED] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_invisibleIgnored" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[foldable:3:OPEN] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_invisibleIgnored" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[foldable:4:CONCURRENT_INNER_DEFAULT] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_invisibleIgnored" />
+    <option name="exclude-filter" value="CtsShortcutHostTestCases[foldable:5:REAR_DUAL] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_invisibleIgnored" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_invisibleIgnored" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[instant] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_invisibleIgnored" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[foldable:1:TENT] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_invisibleIgnored" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[foldable:2:HALF_FOLDED] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_invisibleIgnored" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[foldable:3:OPEN] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_invisibleIgnored" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[foldable:4:CONCURRENT_INNER_DEFAULT] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_invisibleIgnored" />
+    <option name="exclude-filter" value="arm64-v8a CtsShortcutHostTestCases[foldable:5:REAR_DUAL] android.content.pm.cts.shortcuthost.ShortcutManagerBackupTest#testBackupAndRestore_invisibleIgnored" />
+    <option name="exclude-filter" value="CtsMediaAudioTestCases android.media.audio.cts.AudioHalVersionInfoTest#test_VERSIONS_not_contains" />
+    <option name="exclude-filter" value="CtsMediaAudioTestCases android.media.audio.cts.AudioHalVersionInfoTest#test_VERSIONS_contains" />
+    <option name="exclude-filter" value="CtsMediaAudioTestCases[instant] android.media.audio.cts.AudioHalVersionInfoTest#test_VERSIONS_not_contains" />
+    <option name="exclude-filter" value="CtsMediaAudioTestCases[instant] android.media.audio.cts.AudioHalVersionInfoTest#test_VERSIONS_contains" />
+    <option name="exclude-filter" value="CtsHealthConnectHostSideDeviceTestCases android.healthconnect.cts.device.HealthConnectDeviceTest#testAppCanReadChangeLogsUsingDataOriginFilters" />
+    <option name="exclude-filter" value="CtsHealthConnectHostTestCases android.healthconnect.cts.logging.HealthConnectServiceStatsTests#testChangeLogTokenRequest" />
+    <option name="exclude-filter" value="CtsHealthConnectHostTestCases android.healthconnect.cts.logging.HealthConnectServiceStatsTests#testChangeLogsRequest" />
+    <option name="exclude-filter" value="CtsHealthFitnessDeviceTestCases android.healthconnect.cts.HealthConnectChangeLogsTests#testChangeLogs_insert_dataOrigin_filter_correct" />
+    <option name="exclude-filter" value="CtsHealthFitnessDeviceTestCases android.healthconnect.cts.HealthConnectChangeLogsTests#testChangeLogs_insertAndDelete_dataOrigin_filter_correct" />
+    <option name="exclude-filter" value="CtsHealthFitnessDeviceTestCases android.healthconnect.cts.HealthConnectChangeLogsTests#testChangeLogs_insertAndDelete_beforePermission" />
+    <option name="exclude-filter" value="CtsHealthFitnessDeviceTestCases android.healthconnect.cts.HealthConnectChangeLogsTests#testChangeLogs_insertAndDelete_default" />
+    <option name="exclude-filter" value="CtsHealthFitnessDeviceTestCases android.healthconnect.cts.HealthConnectChangeLogsTests#testChangeLogs_insert_default_withNextPageToken" />
+    <option name="exclude-filter" value="CtsHealthFitnessDeviceTestCases android.healthconnect.cts.HealthConnectChangeLogsTests#testChangeLogs_insert_default" />
+    <option name="exclude-filter" value="CtsHealthFitnessDeviceTestCases android.healthconnect.cts.HealthConnectChangeLogsTests#testChangeLogs_insert_dataOrigin_filter_incorrect" />
+    <option name="exclude-filter" value="CtsHealthFitnessDeviceTestCases android.healthconnect.cts.HealthConnectChangeLogsTests#testChangeLogs_checkToken_hasMorePages_False" />
+    <option name="exclude-filter" value="CtsHealthFitnessDeviceTestCases android.healthconnect.cts.HealthConnectChangeLogsTests#testChangeLogs_insert_default_withPageSize" />
+    <option name="exclude-filter" value="CtsHealthFitnessDeviceTestCases android.healthconnect.cts.HealthConnectChangeLogsTests#testChangeLogs_insert_default_withSamePageToken" />
+    <option name="exclude-filter" value="CtsHealthFitnessDeviceTestCases android.healthconnect.cts.HealthConnectChangeLogsTests#testGetChangeLogToken" />
+    <option name="exclude-filter" value="CtsHealthFitnessDeviceTestCases android.healthconnect.cts.HealthConnectChangeLogsTests#testChangeLogs_insertAndDelete_dataOrigin_filter_incorrect" />
+    <option name="exclude-filter" value="CtsHealthFitnessDeviceTestCases android.healthconnect.cts.HealthConnectManagerTest#testDataApis_migrationInProgress_apisBlocked" />
+    <option name="exclude-filter" value="CtsAdServicesEndToEndTests com.android.adservices.tests.cts.topics.PreviewApiTest#testRecordObservation" />
+    <option name="exclude-filter" value="CtsAdServicesTopicsConnectionTests com.android.adservices.tests.cts.topics.connection.TopicsConnectionTest#testEnableGlobalKillSwitch" />
+    <option name="exclude-filter" value="CtsWidgetTestCases android.widget.cts.RemoteViewsTest#testSetTextViewTextSize" />
+    <option name="exclude-filter" value="CtsWidgetTestCases[instant] android.widget.cts.RemoteViewsTest#testSetTextViewTextSize" />
+    <option name="exclude-filter" value="CtsWidgetTestCases[foldable:1:TENT] android.widget.cts.RemoteViewsTest#testSetTextViewTextSize" />
+    <option name="exclude-filter" value="CtsWidgetTestCases[foldable:2:HALF_FOLDED] android.widget.cts.RemoteViewsTest#testSetTextViewTextSize" />
+    <option name="exclude-filter" value="CtsWidgetTestCases[foldable:3:OPEN] android.widget.cts.RemoteViewsTest#testSetTextViewTextSize" />
+    <option name="exclude-filter" value="CtsWidgetTestCases[foldable:4:CONCURRENT_INNER_DEFAULT] android.widget.cts.RemoteViewsTest#testSetTextViewTextSize" />
+    <option name="exclude-filter" value="CtsWidgetTestCases[foldable:5:REAR_DUAL] android.widget.cts.RemoteViewsTest#testSetTextViewTextSize" />
+    <option name="exclude-filter" value="arm64-v8a CtsWidgetTestCases android.widget.cts.RemoteViewsTest#testSetTextViewTextSize" />
+    <option name="exclude-filter" value="arm64-v8a CtsWidgetTestCases[instant] android.widget.cts.RemoteViewsTest#testSetTextViewTextSize" />
+    <option name="exclude-filter" value="arm64-v8a CtsWidgetTestCases[foldable:1:TENT] android.widget.cts.RemoteViewsTest#testSetTextViewTextSize" />
+    <option name="exclude-filter" value="arm64-v8a CtsWidgetTestCases[foldable:2:HALF_FOLDED] android.widget.cts.RemoteViewsTest#testSetTextViewTextSize" />
+    <option name="exclude-filter" value="arm64-v8a CtsWidgetTestCases[foldable:3:OPEN] android.widget.cts.RemoteViewsTest#testSetTextViewTextSize" />
+    <option name="exclude-filter" value="arm64-v8a CtsWidgetTestCases[foldable:4:CONCURRENT_INNER_DEFAULT] android.widget.cts.RemoteViewsTest#testSetTextViewTextSize" />
+    <option name="exclude-filter" value="arm64-v8a CtsWidgetTestCases[foldable:5:REAR_DUAL] android.widget.cts.RemoteViewsTest#testSetTextViewTextSize" />
+    <option name="exclude-filter" value="CtsMediaAudioTestCases android.media.audio.cts.AudioManagerTest#testAdjustUnmuteNotificationInSilent" />
+    <option name="exclude-filter" value="CtsAssistTestCases android.assist.cts.AssistantContentViewTest#testAssistantContentViewDimens" />
+    <option name="exclude-filter" value="CtsAssistTestCases[instant] android.assist.cts.AssistantContentViewTest#testAssistantContentViewDimens" />
+    <option name="exclude-filter" value="CtsInputMethodTestCases[foldable:3:REAR_DISPLAY_STATE] android.view.inputmethod.cts.InputMethodStartInputLifecycleTest#testInputConnectionStateWhenScreenStateChanges" />
+    <option name="exclude-filter" value="CtsAdServicesHostTests com.android.adservices.cts.TopicsApiLoggingHostTest#testGetTopicsLog" />
+    <option name="exclude-filter" value="CtsAdServicesHostTests com.android.adservices.cts.UiApiLoggingHostTest#testStartSettingMainActivityAndGetUiLog" />
+    <option name="exclude-filter" value="CtsTelephonyTestCases android.telephony.satellite.cts.SatelliteManagerTest" />
+    <option name="exclude-filter" value="CtsHealthConnectHostTestCases android.healthconnect.cts.dailyjob.DailyDeleteAccessLogTest#testAccessLogsAreDeleted" />
+    <option name="exclude-filter" value="CtsMediaBetterTogetherTestCases[run-on-clone-profile]" />
+    <option name="exclude-filter" value="CtsMediaBetterTogetherTestCases[run-on-private-profile]" />
+    <option name="exclude-filter" value="CtsMediaBetterTogetherTestCases[run-on-secondary-user]" />
+    <option name="exclude-filter" value="CtsMediaBetterTogetherTestCases[run-on-work-profile]" />
+    <option name="exclude-filter" value="CtsOsTestCases[run-on-clone-profile]" />
+    <option name="exclude-filter" value="CtsOsTestCases[run-on-private-profile]" />
+    <option name="exclude-filter" value="CtsOsTestCases[run-on-secondary-user]" />
+    <option name="exclude-filter" value="CtsOsTestCases[run-on-work-profile]" />
+    <option name="exclude-filter" value="CtsServiceKillTestCases" />
+    <option name="exclude-filter" value="CtsTestHarnessModeTestCases" />
+    <option name="exclude-filter" value="CtsJvmtiRunTest912HostTestCases" />
+    <option name="exclude-filter" value="CtsJvmtiRunTest911HostTestCases" />
+    <option name="exclude-filter" value="CtsJvmtiRunTest1911HostTestCases" />
+    <option name="module" value="CtsDisplayTestCases" />
+    <option name="multi-devices-modules" value="RUN" />
+    <option name="run-suite-tag" value="cts" />
+    <option name="test-arg" value="com.android.tradefed.testtype.AndroidJUnitTest:exclude-annotation:com.android.compatibility.common.util.CtsDownstreamingTest" />
+    <option name="test-arg" value="com.android.compatibility.common.tradefed.testtype.JarHostTest:exclude-annotation:com.android.compatibility.common.util.CtsDownstreamingTest" />
+    <option name="test-arg" value="com.android.tradefed.testtype.HostTest:exclude-annotation:com.android.compatibility.common.util.CtsDownstreamingTest" />
+    <option name="test-arg" value="com.android.tradefed.testtype.AndroidJUnitTest:exclude-annotation:android.platform.test.annotations.AsbSecurityTest" />
+    <option name="test-arg" value="com.android.compatibility.common.tradefed.testtype.JarHostTest:exclude-annotation:android.platform.test.annotations.AsbSecurityTest" />
+    <option name="test-arg" value="com.android.tradefed.testtype.AndroidJUnitTest:exclude-annotation:android.platform.test.annotations.AppModeInstant" />
+    <option name="test-arg" value="com.android.compatibility.common.tradefed.testtype.JarHostTest:exclude-annotation:android.platform.test.annotations.AppModeInstant" />
+    <option name="test-arg" value="com.android.tradefed.testtype.HostTest:exclude-annotation:android.platform.test.annotations.AppModeInstant" />
+    <option name="test" value="android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay" />
+  </test>
+  <config_desc class="com.android.tradefed.config.ConfigurationDescriptor" />
+  <logger class="com.android.tradefed.log.FileLogger">
+    <option name="log-level-display" value="WARN" />
+    <option name="max-log-size" value="200" />
+  </logger>
+  <log_saver class="com.android.tradefed.result.FileSystemLogSaver" />
+  <result_reporter class="com.android.compatibility.common.tradefed.result.ConsoleReporter" />
+  <result_reporter class="com.android.compatibility.common.tradefed.result.suite.CompatibilityProtoResultReporter">
+    <option name="proto-output-file" value="/home/simon/android-cts/tools/../../android-cts/results/2026.02.20_00.06.39/proto/test-record.pb" />
+    <option name="periodic-proto-writing" value="true" />
+  </result_reporter>
+  <result_reporter class="com.android.compatibility.common.tradefed.result.suite.CompactProtoReporter" />
+  <result_reporter class="com.android.compatibility.common.tradefed.result.suite.CertificationSuiteResultReporter" />
+  <result_reporter class="com.android.compatibility.common.tradefed.result.suite.CertificationReportCreator" />
+  <cmd_options class="com.android.tradefed.command.CommandOptions">
+    <option name="report-passed-tests" value="false" />
+    <option name="test-tag" value="cts" />
+  </cmd_options>
+  <system_checker class="com.android.tradefed.suite.checker.UserChecker" />
+  <system_checker class="com.android.compatibility.common.tradefed.targetprep.NetworkConnectivityChecker" />
+  <system_checker class="com.android.tradefed.suite.checker.ShellStatusChecker" />
+  <system_checker class="com.android.tradefed.suite.checker.EnforcedSeLinuxChecker">
+    <option name="expect-enforced" value="true" />
+  </system_checker>
+  <system_checker class="com.android.tradefed.suite.checker.KeyguardStatusChecker" />
+  <system_checker class="com.android.tradefed.suite.checker.LeakedThreadStatusChecker" />
+  <system_checker class="com.android.tradefed.suite.checker.TimeStatusChecker" />
+  <system_checker class="com.android.tradefed.suite.checker.DeviceSettingChecker" />
+  <system_checker class="com.android.tradefed.suite.checker.SystemServerStatusChecker" />
+  <system_checker class="com.android.tradefed.suite.checker.SystemServerFileDescriptorChecker" />
+  <system_checker class="com.android.tradefed.suite.checker.DeviceBaselineChecker">
+    <option name="enable-experimental-device-baseline-setters" value="disable_os_auto_update" />
+    <option name="enable-experimental-device-baseline-setters" value="keep_screen_on" />
+  </system_checker>
+  <sandbox_options class="com.android.tradefed.sandbox.SandboxOptions" />
+  <retry_decision class="com.android.tradefed.retry.BaseRetryDecision" />
+  <coverage class="com.android.tradefed.testtype.coverage.CoverageOptions" />
+  <global_filters class="com.android.tradefed.config.filter.GlobalTestFilter" />
+  <skip_manager class="com.android.tradefed.result.skipped.SkipManager" />
+</configuration>

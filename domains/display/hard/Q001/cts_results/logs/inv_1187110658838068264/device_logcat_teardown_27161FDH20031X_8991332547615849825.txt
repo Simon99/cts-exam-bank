@@ -1,0 +1,23 @@
+02-20 00:07:27.514 10114  3569  5237 W MediaProvider: isAppCloneUserPair for user 0: false
+02-20 00:07:27.632 10114  3569  3933 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-20 00:07:27.924  1000  1452  1893 I commit_sys_config_file: [settings-0-0,8]
+02-20 00:07:27.975  1000  1452  1685 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-20 00:07:27.976  1000  1452  1772 I AppsFilter: interaction: PackageSetting{7e4e215 com.android.microdroid.empty_payload/10109} -> PackageSetting{1a3de com.android.tradefed.utils.wifi/10126} BLOCKED
+02-20 00:07:27.983  1017   540   567 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-20 00:07:28.048  1000  1452  1772 I commit_sys_config_file: [package,20]
+02-20 00:07:28.078  logd  5373  5373 I logd    : start watching /data/system/packages.list ...
+02-20 00:07:28.049  1000  1452  1772 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-20 00:07:28.050  1000  1452  1772 D PackageManager: Clear ephemeral installer activity
+02-20 00:07:28.082  logd  5373  5373 I logd    : ReadPackageList, total packages: 131
+02-20 00:07:28.052  1000  1452  1772 I service_manager_stats: [100,123,39531]
+02-20 00:07:28.055  1000  1452  4063 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-20 00:07:28.061  1000  1452  1772 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=0: pkg removed
+02-20 00:07:28.062  1000  1452  1772 D OomAdjuster: Not killing cached processes
+02-20 00:07:28.069  1000  1452  1926 V StorageManagerService: Package com.android.tradefed.utils.wifi does not have legacy storage
+02-20 00:07:28.073 radio  3110  3110 D CarrierSvcBindHelper: onPackageRemoved: com.android.tradefed.utils.wifi
+02-20 00:07:28.074 radio  3110  3288 D EuiccConnector: handleMessage: E msg.what=1
+02-20 00:07:28.074 radio  3110  3110 D CarrierSvcBindHelper: No carrier app for: 0
+02-20 00:07:28.074 radio  3110  3288 D EuiccConnector: processMsg: UnavailableState
+02-20 00:07:28.074 radio  3110  3110 D CarrierSvcBindHelper: No carrier app for: 1
+02-20 00:07:28.074 radio  3110  3288 W EuiccConnector: No valid EuiccService implementation found
+02-20 00:07:28.074 radio  3110  3288 D EuiccConnector: handleMessage: X

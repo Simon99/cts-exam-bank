@@ -1,0 +1,15 @@
+02-18 01:39:48.290 10105  3526  4562 W MediaProvider: isAppCloneUserPair for user 0: false
+02-18 01:39:48.455 10105  3526  3942 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-18 01:39:48.751  1000  1483  1873 I commit_sys_config_file: [settings-0-0,11]
+02-18 01:39:48.884  1000  1483  1874 D ActivityManager: freezing 2882 com.android.permissioncontroller
+02-18 01:39:48.885  1000  1483  1874 I am_freeze: [2882,com.android.permissioncontroller]
+02-18 01:39:48.897  1000  1483  1765 I AppsFilter: interaction: PackageSetting{fbf0de6 com.android.microdroid.empty_payload/10111} -> PackageSetting{b9099a7 com.android.tradefed.utils.wifi/10126} BLOCKED
+02-18 01:39:48.898  1000  1483  1734 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-18 01:39:48.899  1000  1483  1734 D OomAdjuster: Not killing cached processes
+02-18 01:39:48.917  1017   540   572 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-18 01:39:48.953  1000  1483  1874 I am_compact: [2882,com.android.permissioncontroller,ANON,142800,78956,61900,0,-21212,-5696,-15516,15308,67,SOME,0,905,19,35356,-4840]
+02-18 01:39:49.038  logd  5149  5149 I logd    : start watching /data/system/packages.list ...
+02-18 01:39:49.008  1000  1483  1765 I commit_sys_config_file: [package,24]
+02-18 01:39:49.015  1000  1483  1765 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-18 01:39:49.015  1000  1483  1765 D PackageManager: Clear ephemeral installer activity
+02-18 01:39:49.050  logd  5149  5149 I logd    : ReadPackageList, total packages: 131

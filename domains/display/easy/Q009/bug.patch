@@ -1,12 +1,13 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
---- a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
-@@ -249,7 +249,7 @@ public final class LogicalDisplay {
-      * the data changes.
-      */
-     public DisplayInfo getDisplayInfoLocked() {
--        if (mInfo.get() == null) {
-+        if (mInfo.get() != null) {
-             DisplayInfo info = new DisplayInfo();
-             copyDisplayInfoFields(info, mBaseDisplayInfo, mOverrideDisplayInfo,
-                     WM_OVERRIDE_FIELDS);
+diff --git a/frameworks/base/core/java/android/view/Display.java b/frameworks/base/core/java/android/view/Display.java
+--- a/frameworks/base/core/java/android/view/Display.java
++++ b/frameworks/base/core/java/android/view/Display.java
+@@ -2575,7 +2575,8 @@ public final class Display implements Parcelable {
+          * @return The desired min luminance for HDR content in cd/m2.
+          */
+         public float getDesiredMinLuminance() {
+-            return mMinLuminance;
++            // Bug: 錯誤地返回比 max 還大的值，違反 min <= avg <= max 的約束
++            return mMaxLuminance + 100.0f;
+         }
+ 
+         @Override

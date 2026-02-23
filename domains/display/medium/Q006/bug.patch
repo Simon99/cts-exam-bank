@@ -1,17 +1,13 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
---- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-@@ -1832,10 +1832,8 @@ public final class DisplayManagerService extends SystemService {
-             DisplayDevice device =
-                     mVirtualDisplayAdapter.releaseVirtualDisplayLocked(appToken);
-             Slog.d(TAG, "Virtual Display: Display Device released");
--            if (device != null) {
--                // TODO: multi-display - handle virtual displays the same as other display adapters.
--                mDisplayDeviceRepo.onDisplayDeviceEvent(device,
--                        DisplayAdapter.DISPLAY_DEVICE_EVENT_REMOVED);
--            }
-+            // TODO: multi-display - handle virtual displays the same as other display adapters.
-+            mDisplayDeviceRepo.onDisplayDeviceEvent(device,
-+                    DisplayAdapter.DISPLAY_DEVICE_EVENT_REMOVED);
-         }
-     }
+diff --git a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+index abcdef1..1234567 100644
+--- a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
+@@ -471,7 +471,7 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
+                 mInfo.yDpi = mDensityDpi;
+                 mInfo.presentationDeadlineNanos = 1000000000L / (int) getRefreshRate(); // 1 frame
+                 mInfo.flags = 0;
+-                if ((mFlags & VIRTUAL_DISPLAY_FLAG_PUBLIC) == 0) {
++                if ((mFlags & VIRTUAL_DISPLAY_FLAG_PUBLIC) != 0) {
+                     mInfo.flags |= DisplayDeviceInfo.FLAG_PRIVATE
+                             | DisplayDeviceInfo.FLAG_NEVER_BLANK;
+                 }

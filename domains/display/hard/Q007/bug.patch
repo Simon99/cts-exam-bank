@@ -1,23 +1,24 @@
-# DIS-H007: Display Event Mask Mismatch Bug
+# DIS-H007: Display Event DISPLAY_ADDED Not Delivered
 # Target: frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-# CTS Test: android.display.cts.DisplayEventTest#testDisplayEvents
-# Expected Result: FAIL (DISPLAY_CHANGED events not delivered to listeners)
+# CTS Test: android.display.cts.DisplayTest#testMode
+# Expected Result: FAIL (test times out waiting for secondary display to be added)
 #
 # Bug Description:
 # This patch incorrectly checks EVENT_FLAG_DISPLAY_BRIGHTNESS instead of
-# EVENT_FLAG_DISPLAY_CHANGED in shouldSendEvent(). Since default listeners
-# don't subscribe to BRIGHTNESS events, DISPLAY_CHANGED events are silently
-# dropped. CTS verifies that display changes (e.g., resize) generate events.
+# EVENT_FLAG_DISPLAY_ADDED in shouldSendEvent(). The default listener mask only
+# includes ADDED|CHANGED|REMOVED, so BRIGHTNESS is never set. When a secondary
+# display is created, the DISPLAY_ADDED event is not delivered to listeners
+# because shouldSendEvent returns false. Tests waiting for onDisplayAdded() timeout.
 
 --- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
 +++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-@@ -3634,7 +3634,8 @@ public final class DisplayManagerService extends SystemService {
+@@ -3631,7 +3631,8 @@ public final class DisplayManagerService extends SystemService {
+             final long mask = mEventsMask.get();
+             switch (event) {
                  case DisplayManagerGlobal.EVENT_DISPLAY_ADDED:
-                     return (mask & DisplayManager.EVENT_FLAG_DISPLAY_ADDED) != 0;
-                 case DisplayManagerGlobal.EVENT_DISPLAY_CHANGED:
--                    return (mask & DisplayManager.EVENT_FLAG_DISPLAY_CHANGED) != 0;
-+                    // Bug: Check wrong flag - brightness instead of changed
+-                    return (mask & DisplayManager.EVENT_FLAG_DISPLAY_ADDED) != 0;
++                    // Bug: Check wrong flag - brightness instead of added
 +                    return (mask & DisplayManager.EVENT_FLAG_DISPLAY_BRIGHTNESS) != 0;
+                 case DisplayManagerGlobal.EVENT_DISPLAY_CHANGED:
+                     return (mask & DisplayManager.EVENT_FLAG_DISPLAY_CHANGED) != 0;
                  case DisplayManagerGlobal.EVENT_DISPLAY_BRIGHTNESS_CHANGED:
-                     return (mask & DisplayManager.EVENT_FLAG_DISPLAY_BRIGHTNESS) != 0;
-                 case DisplayManagerGlobal.EVENT_DISPLAY_REMOVED:

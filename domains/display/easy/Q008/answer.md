@@ -1,75 +1,51 @@
-# CTS 除錯練習題 DIS-E008 - 解答
+# 答案 - Display Flags 設置錯誤
+
+## 問題分析
+
+1. **錯誤訊息說明**：
+   - 期望值 36 = 0x24 = FLAG_PRESENTATION (0x04) | FLAG_TRUSTED (0x20)
+   - 實際值 32 = 0x20 = FLAG_TRUSTED
+   - 缺少了 FLAG_PRESENTATION 標誌
+
+2. **根本原因**：
+   在 `OverlayDisplayAdapter.java` 的 `getDisplayDeviceInfoLocked()` 方法中：
+   ```java
+   // 錯誤的代碼
+   mInfo.flags = 0;  // 初始化時沒有設置 FLAG_PRESENTATION
+   ```
+   
+   應該初始化為 `FLAG_PRESENTATION`，因為 overlay display 是用於 presentation 的顯示器。
 
 ## Bug 位置
 
-**檔案**: `frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java`
+**文件**: `frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java`
 
-**方法**: `generateDisplayUniqueId()`
+**方法**: `OverlayDisplayDevice.getDisplayDeviceInfoLocked()`
 
-**行數**: 約 227-230
+**行號**: 約第 352 行
 
-## 問題程式碼
-
-```java
-static String generateDisplayUniqueId(String packageName, int uid,
-        VirtualDisplayConfig config) {
-    return UNIQUE_ID_PREFIX + packageName + ((config.getUniqueId() != null)
-            ? (config.getUniqueId())  // BUG: 缺少 ":" 分隔符
-            : ("," + uid + "," + config.getName() + "," + sNextUniqueIndex.getAndIncrement()));
-}
-```
-
-## Bug 分析
-
-### 問題描述
-當 `config.getUniqueId()` 不為 null 時，缺少了冒號 (`:`) 分隔符，導致 packageName 和 uniqueId 直接連接在一起。
-
-### 字串拼接結果對比
-
-**正確結果** (有分隔符 `:`):
-```
-"virtual:" + "com.android.cts.display" + ":" + "private_test_display"
-= "virtual:com.android.cts.display:private_test_display"
-```
-
-**錯誤結果** (缺少分隔符):
-```
-"virtual:" + "com.android.cts.display" + "private_test_display"
-= "virtual:com.android.cts.displayprivate_test_display"
-```
-
-### 為什麼測試會失敗
-
-1. **格式不一致**: Virtual display unique ID 有固定格式規範，`UNIQUE_ID_PREFIX + packageName + ":" + uniqueId`
-2. **解析問題**: 其他組件可能依賴此格式來解析 packageName，缺少分隔符會導致解析失敗
-3. **唯一性問題**: 不同的 packageName + uniqueId 組合可能產生相同的最終字串
-
-## 修復方案
+## 修復方式
 
 ```java
-static String generateDisplayUniqueId(String packageName, int uid,
-        VirtualDisplayConfig config) {
-    return UNIQUE_ID_PREFIX + packageName + ((config.getUniqueId() != null)
-            ? (":" + config.getUniqueId())  // 修復: 加回 ":" 分隔符
-            : ("," + uid + "," + config.getName() + "," + sNextUniqueIndex.getAndIncrement()));
-}
+// 修復後的代碼
+mInfo.flags = DisplayDeviceInfo.FLAG_PRESENTATION;  // 正確初始化標誌
 ```
 
-## Patch
+## 驗證修復
 
-```diff
--            ? (config.getUniqueId())
-+            ? (":" + config.getUniqueId())
+執行測試確認修復有效：
+```bash
+atest CtsDisplayTestCases:DisplayTest#testFlags
 ```
 
-## 學習重點
+## 相關知識點
 
-1. **字串拼接細節**: 在多段字串拼接時，分隔符容易被遺漏
-2. **格式一致性**: ID 格式需要在不同分支保持一致的結構
-3. **三元運算符陷阱**: 複雜的三元運算符可能隱藏細微的錯誤
+1. **FLAG_PRESENTATION (0x04)**：表示這是一個 presentation display，適合顯示投影或簡報內容
+2. **FLAG_TRUSTED (0x20)**：表示這是一個受信任的顯示器，由系統創建
+3. **位運算**：使用 `|` 運算符組合多個標誌
 
-## 相關知識
+## 學習要點
 
-- **Virtual Display**: Android 的虛擬顯示功能，允許應用創建虛擬螢幕
-- **Display Unique ID**: 每個顯示設備的唯一識別碼，用於系統管理和區分不同顯示器
-- **UNIQUE_ID_PREFIX**: 虛擬顯示的 ID 前綴，通常為 "virtual:"
+- Display flags 使用位元標誌（bit flags）模式
+- 初始化時要設置正確的基礎標誌
+- 後續的 `|=` 操作是添加額外標誌，不會覆蓋已設置的

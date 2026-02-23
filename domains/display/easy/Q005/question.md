@@ -1,63 +1,41 @@
-# CTS 面試題目 DIS-E005
+# CTS 面試題 - Display xDpi 錯誤
 
-## 題目資訊
-- **難度**: Easy
-- **領域**: Display (Virtual Display)
-- **預計時間**: 15 分鐘
+## 題目背景
 
-## 情境描述
-
-你是 Android Framework Display 團隊的一員。QA 團隊回報以下 CTS 測試失敗：
+你是 Android 系統團隊的工程師。QA 團隊報告以下 CTS 測試在 overlay display 上失敗：
 
 ```
-android.hardware.display.cts.VirtualDisplayTest#testPrivateVirtualDisplay
+android.display.cts.DisplayTest#testGetMetrics
 ```
 
-錯誤訊息：
+## 失敗訊息
+
 ```
-junit.framework.AssertionFailedError: Virtual display initial state incorrect
-Expected: STATE_UNKNOWN (0)
-Actual: STATE_OFF (1)
-```
-
-## 失敗的測試
-
-測試檢查新建立的 private virtual display 初始狀態是否正確：
-
-```java
-public void testPrivateVirtualDisplay() throws Exception {
-    VirtualDisplay virtualDisplay = mDisplayManager.createVirtualDisplay(
-            NAME, WIDTH, HEIGHT, DENSITY, null /* surface */,
-            DisplayManager.VIRTUAL_DISPLAY_FLAG_PRESENTATION);
-    assertNotNull(virtualDisplay);
-    
-    Display display = virtualDisplay.getDisplay();
-    // 驗證初始狀態
-    assertEquals(Display.STATE_UNKNOWN, display.getState());
-    // ... 其他驗證 ...
-}
+junit.framework.AssertionFailedError: expected:<214.0> but was:<215.0>
+    at android.display.cts.DisplayTest.testGetMetrics(DisplayTest.java:xxx)
 ```
 
-## 相關檔案
+## 重現步驟
 
-- `frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java`
+1. 啟用 overlay display（開發者選項 → 模擬輔助顯示器 → 181x161/214）
+2. 執行 CTS 測試：
+   ```bash
+   atest CtsDisplayTestCases:DisplayTest#testGetMetrics
+   ```
 
-## 任務
+## 相關代碼路徑
 
-1. 找出導致 CTS 測試失敗的 bug
-2. 解釋為什麼這個 bug 會造成測試失敗
-3. 提供修復方案
+- `frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java`
+- `frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java`
+
+## 問題
+
+1. 這個錯誤訊息說明了什麼問題？
+2. 請找出 bug 的位置並說明根本原因
+3. 如何修復這個問題？
 
 ## 提示
 
-- 關注 VirtualDisplayDevice 的初始化邏輯
-- 注意 `mDisplayState` 的初始值設定
-- 思考 `Display.STATE_UNKNOWN` 與 `Display.STATE_OFF` 的差異
-
-## 評分標準
-
-| 項目 | 分數 |
-|------|------|
-| 正確定位 bug 位置 | 40% |
-| 解釋 bug 原因 | 30% |
-| 提供正確修復 | 30% |
+- 測試期望 xdpi 值為 214，但實際回報的是 215
+- 這是一個典型的 off-by-one 錯誤
+- 檢查 OverlayDisplayAdapter 中設置 xDpi 的代碼

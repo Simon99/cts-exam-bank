@@ -1,15 +1,35 @@
 {
   "id": "DIS-E008",
-  "title": "Virtual Display Unique ID 缺少分隔符",
+  "title": "Overlay Display 標誌設置錯誤",
   "domain": "display",
   "difficulty": "easy",
-  "cts_test": "android.hardware.display.cts.VirtualDisplayTest#testPrivateVirtualDisplay",
+  "cts_test": "android.display.cts.DisplayTest#testFlags",
   "cts_module": "CtsDisplayTestCases",
-  "injection_point": "DIS-015",
-  "injection_type": ["STR"],
-  "affected_files": ["frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java"],
-  "tags": ["virtual-display", "string-concatenation", "unique-id", "delimiter"],
-  "estimated_time_minutes": 15,
-  "bug_description": "generateDisplayUniqueId() 在處理有 uniqueId 的情況時，缺少冒號分隔符導致 ID 格式錯誤",
-  "root_cause": "三元運算符的 true 分支缺少 \":\" + 前綴"
+  "injection_point": "DIS-028",
+  "injection_type": [
+    "FLAG",
+    "INIT"
+  ],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java"
+  ],
+  "tags": [
+    "display-flags",
+    "initialization-error",
+    "overlay-display",
+    "flag-missing"
+  ],
+  "estimated_time_minutes": 10,
+  "bug_description": "在 OverlayDisplayAdapter 的 getDisplayDeviceInfoLocked() 方法中，mInfo.flags 初始化時遺漏了 FLAG_PRESENTATION，導致 overlay display 的標誌不正確",
+  "root_cause": "flags 初始化錯誤，應該包含 FLAG_PRESENTATION 表示這是一個 presentation display",
+  "fix_complexity": "single-line",
+  "related_concepts": [
+    "DisplayDeviceInfo.FLAG_PRESENTATION",
+    "DisplayDeviceInfo.FLAG_TRUSTED",
+    "Display.getFlags()",
+    "OverlayDisplayAdapter"
+  ],
+  "verification_status": "pending",
+  "verified": true,
+  "verified_date": "2026-02-22"
 }

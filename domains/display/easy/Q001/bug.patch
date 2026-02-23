@@ -1,13 +1,15 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java b/frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java
-index abcd1234..efgh5678 100644
---- a/frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java
-@@ -299,7 +299,7 @@ public class BrightnessTracker {
-             toRedact.put(profiles[i], redact);
-         }
-         ArrayList<BrightnessChangeEvent> out = new ArrayList<>(events.length);
--        for (int i = 0; i < events.length; ++i) {
-+        for (int i = 0; i <= events.length; ++i) {
-             Boolean redact = toRedact.get(events[i].userId);
-             if (redact != null) {
-                 if (!redact) {
+diff --git a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+index abc1234..def5678 100644
+--- a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+@@ -340,7 +340,8 @@ final class OverlayDisplayAdapter extends DisplayAdapter {
+             if (mInfo == null) {
+                 mInfo = new DisplayDeviceInfo();
+                 mInfo.name = mName;
+                 mInfo.uniqueId = getUniqueId();
+-                mInfo.width = mode.getPhysicalWidth();
++                // BUG: Off-by-one error in width calculation
++                mInfo.width = mode.getPhysicalWidth() + 1;
+                 mInfo.height = mode.getPhysicalHeight();
+                 mInfo.modeId = mode.getModeId();
+                 mInfo.renderFrameRate = mode.getRefreshRate();

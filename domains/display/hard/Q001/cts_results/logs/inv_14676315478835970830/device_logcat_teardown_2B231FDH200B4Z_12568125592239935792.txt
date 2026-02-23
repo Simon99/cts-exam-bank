@@ -1,0 +1,27 @@
+02-19 18:26:44.309 10119  3568  5178 W MediaProvider: isAppCloneUserPair for user 0: false
+02-19 18:26:44.375  wifi   982   982 I WifiHAL : Creating message to get link statistics; iface = 47
+02-19 18:26:44.401 10119  3568  3933 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-19 18:26:44.426  wifi   982   982 I WifiHAL : In GetLinkStatsCommand::handleResponse
+02-19 18:26:44.463  1000  1470  2814 D WifiClientModeImpl[85998:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-41 TxLinkspeed=2401 freq=5180 RxLinkSpeed=2401
+02-19 18:26:44.464  1000  1470  2814 D WifiDataStall: tx tput in kbps: 1969101
+02-19 18:26:44.464  1000  1470  2814 D WifiDataStall: rx tput in kbps: 2072738
+02-19 18:26:44.464  1000  1470  2814 D WifiChannelUtilization:  freq: 5180 onTime: 8603 busyTime: 432 onTimeDiff: 1072 busyTimeDiff: 126 utilization: 29 utilization t0: 12
+02-19 18:26:44.464  1000  1470  2814 D WifiDataStall:  ccaLevel = 29
+02-19 18:26:44.464  1000  1470  2814 D WifiDataStall: L2 txTputKbps: 2022561, rxTputKbps: 2129011, L3 txTputKbps: 0, rxTputKbps: 0, TxTrafficHigh: false, RxTrafficHigh: false, Throughput Sufficient: true
+02-19 18:26:44.465  1000  1470  2814 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 1994588335 SSID: "TP-LINK_5G_BA98", BSSID: 24:5a:5f:cf:51:df, MAC: 4a:c1:6c:19:00:05, IP: /192.168.1.103, Security type: 2, Supplicant state: COMPLETED, Wi-Fi standard: 11ax, RSSI: -41, Link speed: 2401Mbps, Tx Link speed: 2401Mbps, Max Supported Tx Link speed: 2401Mbps, Rx Link speed: 2401Mbps, Max Supported Rx Link speed: 2401Mbps, Frequency: 5180MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"TP-LINK_5G_BA98"wpa2-pskMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+02-19 18:26:44.465  1000  1470  2814 D WifiScoreCard: txRate: 2 txSpeed: 2401
+02-19 18:26:44.465  1000  1470  2814 D WifiScoreCard: network update SIGNAL_POLL "TP-LINK_5G_BA98" ID: 1478387996 RSSI -41 txSpeed -1
+02-19 18:26:44.465  1000  1470  2814 D WifiClientModeImpl[85998:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 2 0 "TP-LINK_5G_BA98" 24:5a:5f:cf:51:df rssi=-41 f=5180 sc=60 link=2401 tx=1.0, 0.0, 0.0 rx=0.5 bcn=484 [on:251 tx:0 rx:0 period:3093] from screen [on:1004 period:31399] score=60
+02-19 18:26:44.698  1000  1470  1885 I commit_sys_config_file: [settings-0-0,11]
+02-19 18:26:44.776  1000  1470  1631 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-19 18:26:44.776  1000  1470  1766 I AppsFilter: interaction: PackageSetting{b78f627 com.android.microdroid.empty_payload/10116} -> PackageSetting{771c6ad com.android.tradefed.utils.wifi/10126} BLOCKED
+02-19 18:26:44.778  1000  1470  1631 D OomAdjuster: Not killing cached processes
+02-19 18:26:44.786  1017   546   546 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-19 18:26:44.860  1000  1470  1766 I commit_sys_config_file: [package,24]
+02-19 18:26:44.890  logd  5324  5324 I logd    : start watching /data/system/packages.list ...
+02-19 18:26:44.866  1000  1470  1766 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-19 18:26:44.867  1000  1470  1766 D PackageManager: Clear ephemeral installer activity
+02-19 18:26:44.894  logd  5324  5324 I logd    : ReadPackageList, total packages: 131
+02-19 18:26:44.869  1000  1470  4038 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-19 18:26:44.879  1000  1470  1766 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=0: pkg removed
+02-19 18:26:44.888  1000  1470  1761 I commit_sys_config_file: [package-user-0,27]

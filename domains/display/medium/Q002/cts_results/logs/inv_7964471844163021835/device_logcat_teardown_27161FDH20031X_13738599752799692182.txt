@@ -1,0 +1,19 @@
+02-18 08:02:27.026 10107  3603  3939 W MediaProvider: isAppCloneUserPair for user 0: false
+02-18 08:02:27.201 10107  3603  5083 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-18 08:02:27.451  1000  1467  1896 D ActivityManager: freezing 2917 com.android.permissioncontroller
+02-18 08:02:27.454  1000  1467  1896 I am_freeze: [2917,com.android.permissioncontroller]
+02-18 08:02:27.512  1000  1467  1896 I am_compact: [2917,com.android.permissioncontroller,ANON,137564,78884,56680,6588,-14572,-4424,-10148,10012,57,FULL,169235,905,19,41308,-2232]
+02-18 08:02:27.536  1000  1467  1895 I commit_sys_config_file: [settings-0-0,9]
+02-18 08:02:27.696  1000  1467  1776 I AppsFilter: interaction: PackageSetting{77cb469 com.android.microdroid.empty_payload/10103} -> PackageSetting{3c27faf com.android.tradefed.utils.wifi/10126} BLOCKED
+02-18 08:02:27.698  1000  1467  1601 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-18 08:02:27.700  1000  1467  1601 D OomAdjuster: Not killing cached processes
+02-18 08:02:27.709  1017   549   574 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-18 08:02:27.804  1000  1467  1776 I commit_sys_config_file: [package,29]
+02-18 08:02:27.836  logd  5241  5241 I logd    : start watching /data/system/packages.list ...
+02-18 08:02:27.841  logd  5241  5241 I logd    : ReadPackageList, total packages: 131
+02-18 08:02:27.818  1000  1467  1776 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-18 08:02:27.818  1000  1467  1776 D PackageManager: Clear ephemeral installer activity
+02-18 08:02:27.819  1000  1467  4065 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-18 08:02:27.823  1000  1467  1776 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=0: pkg removed
+02-18 08:02:27.827  1000  1467  1600 I CredManSysService: updateProvidersWhenPackageRemoved
+02-18 08:02:27.827  1000  1467  1928 V StorageManagerService: Package com.android.tradefed.utils.wifi does not have legacy storage

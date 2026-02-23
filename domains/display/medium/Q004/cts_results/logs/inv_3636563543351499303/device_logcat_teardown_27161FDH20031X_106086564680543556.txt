@@ -1,0 +1,16 @@
+02-18 00:46:05.560 10100 22857 23232 W MediaProvider: isAppCloneUserPair for user 0: false
+02-18 00:46:05.777 10100 22857 23242 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-18 00:46:05.929  1000  1478  1911 D ActivityManager: freezing 2935 com.android.permissioncontroller
+02-18 00:46:05.932  1000  1478  1911 I am_freeze: [2935,com.android.permissioncontroller]
+02-18 00:46:05.985  1000  1478  1911 I am_compact: [2935,com.android.permissioncontroller,ANON,136464,77472,57044,5728,-14616,-4304,-10312,10128,52,FULL,140441,905,19,33484,-2656]
+02-18 00:46:06.077  1000  1478  1910 I commit_sys_config_file: [settings-0-0,8]
+02-18 00:46:06.204  1000  1478  1803 I AppsFilter: interaction: PackageSetting{c01cf07 com.android.microdroid.empty_payload/10115} -> PackageSetting{b1475ce com.android.tradefed.utils.wifi/10126} BLOCKED
+02-18 00:46:06.206  1000  1478  1764 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-18 00:46:06.207  1000  1478  1764 D OomAdjuster: Not killing cached processes
+02-18 00:46:06.221  1017   546   546 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-18 00:46:06.259  1000  1478  1803 I commit_sys_config_file: [package,20]
+02-18 00:46:06.260  1000  1478  1803 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-18 00:46:06.260  1000  1478  1803 D PackageManager: Clear ephemeral installer activity
+02-18 00:46:06.264  1000  1478 23398 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-18 00:46:06.264  1000  1478 23398 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-18 00:46:06.274  1000  1478  1803 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=0: pkg removed

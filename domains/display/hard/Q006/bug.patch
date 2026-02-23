@@ -1,14 +1,22 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-index abcd1234..efgh5678 100644
+# DIS-H006: System Decoration Flag Bypass Bug
+# Target: frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+# CTS Test: android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay
+# Expected Result: FAIL (Display.FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS not cleared for untrusted displays)
+#
+# Bug Description:
+# This patch inverts the condition for clearing SHOULD_SHOW_SYSTEM_DECORATIONS flag.
+# The original code correctly strips this flag from untrusted displays for security.
+# The bug incorrectly strips it from TRUSTED displays instead, allowing untrusted
+# apps to create displays that show system decorations (security vulnerability).
+
 --- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
 +++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-@@ -3666,7 +3666,8 @@ public final class DisplayManagerService extends SystemService {
-         public void addDisplayEvent(int displayId, int event) {
-             // Ignore redundant events. Further optimization is possible by merging adjacent events.
-             Pair<Integer, Integer> last = mDisplayEvents.get(mDisplayEvents.size() - 1);
--            if (last.first == displayId && last.second == event) {
-+            // Optimization: skip duplicate event types across all displays
-+            if (last.second == event) {
-                 Slog.d(TAG,
-                         "Ignore redundant display event " + displayId + "/" + event + " to "
-                                 + mCallbackRecord.mUid + "/" + mCallbackRecord.mPid);
+@@ -1593,7 +1593,8 @@ public final class DisplayManagerService extends SystemService {
+         }
+ 
+-        if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) == 0) {
++        // Bug: Inverted condition - strips flag from trusted instead of untrusted
++        if ((flags & VIRTUAL_DISPLAY_FLAG_TRUSTED) != 0) {
+             flags &= ~VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;
+         }
+ 

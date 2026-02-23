@@ -1,12 +1,14 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
---- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-@@ -4201,7 +4201,7 @@ public final class DisplayManagerService extends SystemService {
-             final long token = Binder.clearCallingIdentity();
-             try {
-                 synchronized (mSyncRoot) {
--                    return mDisplayPowerControllers.get(Display.DEFAULT_DISPLAY)
-+                    return mDisplayPowerControllers.get(-1)
-                             .getDefaultBrightnessConfiguration();
-                 }
-             } finally {
+diff --git a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+index abc1234..def5678 100644
+--- a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+@@ -344,7 +344,8 @@ final class OverlayDisplayAdapter extends DisplayAdapter {
+                 mInfo.height = mode.getPhysicalHeight();
+                 mInfo.modeId = mode.getModeId();
+                 mInfo.renderFrameRate = mode.getRefreshRate();
+-                mInfo.defaultModeId = mModes[0].getModeId();
++                // BUG: Using invalid mode ID instead of first supported mode
++                mInfo.defaultModeId = -1;
+                 mInfo.supportedModes = mModes;
+                 mInfo.densityDpi = rawMode.mDensityDpi;
+                 mInfo.xDpi = rawMode.mDensityDpi;

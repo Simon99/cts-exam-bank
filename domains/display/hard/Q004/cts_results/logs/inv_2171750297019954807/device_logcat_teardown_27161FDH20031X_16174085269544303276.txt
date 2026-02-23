@@ -1,0 +1,20 @@
+02-20 00:14:13.751 10103  3547  3883 W MediaProvider: isAppCloneUserPair for user 0: false
+02-20 00:14:13.785  root  1110  1110 I logbuffer_pcie1: [  150] D state: 0, LTSSM: 0
+02-20 00:14:13.785  root  1110  1110 I logbuffer_pcie1: [  151] L0(0x11)
+02-20 00:14:13.790  root  1110  1110 I pcieh 0000: 01:00.0: enabling device (0000 -> 0002)
+02-20 00:14:13.790  root  1110  1110 W [16:14:13.759121][dhd][wlan]dhd_plat_l1ss_ctrl: Control L1ss RC side 1
+02-20 00:14:13.866  root   951   951 I s3c2410-wdt 10070000.watchdog_cl1: Watchdog cluster 1 keepalive!, old_wtcnt = 7751, wtcnt = cc8c
+02-20 00:14:13.934 10103  3547  3890 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-20 00:14:14.240  1000  1492  1867 I commit_sys_config_file: [settings-0-0,14]
+02-20 00:14:14.328  1000  1492  1738 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-20 00:14:14.329  1000  1492  1772 I AppsFilter: interaction: PackageSetting{9369db2 com.android.microdroid.empty_payload/10111} -> PackageSetting{d1321df com.android.tradefed.utils.wifi/10126} BLOCKED
+02-20 00:14:14.331  1000  1492  1738 D OomAdjuster: Not killing cached processes
+02-20 00:14:14.340  1017   539  4469 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-20 00:14:14.411  1000  1492  1772 I commit_sys_config_file: [package,27]
+02-20 00:14:14.442  logd  5354  5354 I logd    : start watching /data/system/packages.list ...
+02-20 00:14:14.445  logd  5354  5354 I logd    : ReadPackageList, total packages: 131
+02-20 00:14:14.413  1000  1492  1772 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-20 00:14:14.413  1000  1492  1772 D PackageManager: Clear ephemeral installer activity
+02-20 00:14:14.417  1000  1492  4023 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-20 00:14:14.425  1000  1492  1769 I commit_sys_config_file: [package-user-0,14]
+02-20 00:14:14.427  1000  1492  1772 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=0: pkg removed

@@ -1,25 +1,23 @@
-# DIS-H009: Refresh Rate Switching Type Setting Ignored Bug
+# DIS-H009: Mode Request Setting Return Value Inverted
 # Target: frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
 # CTS Test: android.display.cts.DisplayTest#testModeSwitchOnPrimaryDisplay
-# Expected Result: FAIL (mode switch verification may fail due to unexpected refresh rate changes)
+# Expected Result: FAIL (assertTrue fails because getter returns false after setter(true))
 #
 # Bug Description:
-# This patch ignores SWITCHING_TYPE_NONE when setting refresh rate switching type,
-# defaulting to WITHIN_GROUPS instead. This allows the system to automatically
-# switch refresh rates during the test, potentially causing mode verification failures.
-# The test expects stable mode IDs when SWITCHING_TYPE_NONE is set.
+# This patch negates the return value of shouldAlwaysRespectAppRequestedModeInternal().
+# The test calls setShouldAlwaysRespectAppRequestedMode(true) then immediately
+# verifies with assertTrue(shouldAlwaysRespectAppRequestedMode()). With this bug,
+# the getter always returns the opposite of the actual state, causing assertion failure.
 
 --- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
 +++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-@@ -2498,6 +2498,11 @@ public final class DisplayManagerService extends SystemService {
+@@ -2494,7 +2494,8 @@ public final class DisplayManagerService extends SystemService {
+     }
+ 
+     boolean shouldAlwaysRespectAppRequestedModeInternal() {
+-        return mDisplayModeDirector.shouldAlwaysRespectAppRequestedMode();
++        // Bug: Inverted return value - getter returns opposite of actual state
++        return !mDisplayModeDirector.shouldAlwaysRespectAppRequestedMode();
      }
  
      void setRefreshRateSwitchingTypeInternal(@DisplayManager.SwitchingType int newValue) {
-+        // Bug: Ignore SWITCHING_TYPE_NONE, use WITHIN_GROUPS instead
-+        // This allows system to switch refresh rates even when app expects no switching
-+        if (newValue == DisplayManager.SWITCHING_TYPE_NONE) {
-+            newValue = DisplayManager.SWITCHING_TYPE_WITHIN_GROUPS;
-+        }
-         mDisplayModeDirector.setModeSwitchingType(newValue);
-     }
- 

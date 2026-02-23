@@ -1,24 +1,35 @@
 {
   "id": "DIS-E007",
-  "title": "VirtualDisplayAdapter resizeLocked() 條件判斷錯誤",
+  "title": "Overlay Display 類型設置錯誤",
   "domain": "display",
   "difficulty": "easy",
-  "cts_test": "android.hardware.display.cts.VirtualDisplayTest#testVirtualDisplayRotatesWithContent",
+  "cts_test": "android.display.cts.DisplayTest#testGetDisplays",
   "cts_module": "CtsDisplayTestCases",
-  "injection_point": "DIS-012",
-  "injection_type": ["CALC", "BOUND"],
-  "affected_files": ["frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java"],
-  "tags": [
-    "virtual-display",
-    "resize",
-    "logical-operator",
-    "condition-check",
-    "rotation",
-    "screen-mirroring"
+  "injection_point": "DIS-027",
+  "injection_type": [
+    "CONST",
+    "SEMANTIC"
   ],
-  "estimated_time_minutes": 15,
-  "bug_description": "使用 && 替代 || 導致只有所有參數都變化才觸發 resize",
-  "root_cause": "邏輯運算符選擇錯誤",
-  "fix_complexity": "simple",
-  "created_at": "2025-01-21"
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java"
+  ],
+  "tags": [
+    "display-type",
+    "constant-error",
+    "overlay-display",
+    "semantic-error"
+  ],
+  "estimated_time_minutes": 10,
+  "bug_description": "在 OverlayDisplayAdapter 的 getDisplayDeviceInfoLocked() 方法中，顯示器類型被錯誤設置為 TYPE_VIRTUAL 而非 TYPE_OVERLAY，導致 CTS 測試無法正確識別 overlay display",
+  "root_cause": "使用了錯誤的顯示器類型常量，TYPE_VIRTUAL 和 TYPE_OVERLAY 是不同的顯示器類別",
+  "fix_complexity": "single-line",
+  "related_concepts": [
+    "Display.TYPE_OVERLAY",
+    "Display.TYPE_VIRTUAL",
+    "DisplayDeviceInfo.type",
+    "OverlayDisplayAdapter"
+  ],
+  "verification_status": "pending",
+  "verified": true,
+  "verified_date": "2026-02-22"
 }

@@ -1,0 +1,37 @@
+02-22 02:08:19.661 10106  3512  5095 W MediaProvider: isAppCloneUserPair for user 0: false
+02-22 02:08:19.817 10106  3512  3831 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-22 02:08:20.124  1000  1450  1834 I commit_sys_config_file: [settings-0-0,18]
+02-22 02:08:20.241  1000  1450  1504 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-22 02:08:20.242  1000  1450  1564 I AppsFilter: interaction: PackageSetting{5f95841 com.android.microdroid.empty_payload/10115} -> PackageSetting{8eeb21 com.android.tradefed.utils.wifi/10126} BLOCKED
+02-22 02:08:20.253  1017   540   540 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-22 02:08:20.366  logd  5211  5211 I logd    : start watching /data/system/packages.list ...
+02-22 02:08:20.337  1000  1450  1564 I commit_sys_config_file: [package,17]
+02-22 02:08:20.370  logd  5211  5211 I logd    : ReadPackageList, total packages: 131
+02-22 02:08:20.347  1000  1450  1564 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-22 02:08:20.347  1000  1450  1564 D PackageManager: Clear ephemeral installer activity
+02-22 02:08:20.354  1000  1450  1564 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=0: pkg removed
+02-22 02:08:20.354  1000  1450  4003 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-22 02:08:20.359  1000  1450  1557 I commit_sys_config_file: [package-user-0,22]
+02-22 02:08:20.363  1000  1450  1868 V StorageManagerService: Package com.android.tradefed.utils.wifi does not have legacy storage
+02-22 02:08:20.367  1000  1450  2773 W WifiService: Couldn't get PackageInfo for package:com.android.tradefed.utils.wifi
+02-22 02:08:20.367  1000  1450  2773 D WifiService: Remove settings for package:com.android.tradefed.utils.wifi
+02-22 02:08:20.367  1000  1450  2773 D WifiConfigManager: Remove all networks for app ApplicationInfo{d18d1f com.android.tradefed.utils.wifi}
+02-22 02:08:20.367  1000  1450  2773 V WifiScanRequestProxy: Clearing scan request timestamps for uid=10126, packageName=com.android.tradefed.utils.wifi
+02-22 02:08:20.368 radio  3065  3065 D CarrierSvcBindHelper: onPackageRemoved: com.android.tradefed.utils.wifi
+02-22 02:08:20.369 radio  3065  3270 D EuiccConnector: handleMessage: E msg.what=1
+02-22 02:08:20.369 radio  3065  3270 D EuiccConnector: processMsg: UnavailableState
+02-22 02:08:20.370  1000  1450  1849 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS
+02-22 02:08:20.370 radio  3065  3270 W EuiccConnector: No valid EuiccService implementation found
+02-22 02:08:20.370 radio  3065  3270 D EuiccConnector: handleMessage: X
+02-22 02:08:20.371   nfc  3520  3520 I RegisteredComponentCache: New Components => 
+02-22 02:08:20.371   nfc  3520  3520 I RegisteredComponentCache: ComponentInfo: ResolveInfo{aa2ae98 com.android.apps.tag/.TagViewer m=0x108000 userHandle=UserHandle{0}}, techs: android.nfc.tech.Ndef, 
+02-22 02:08:20.371   nfc  3520  3520 I RegisteredComponentCache: Removed Components => 
+02-22 02:08:20.371   nfc  3520  3520 I RegisteredComponentCache: ComponentInfo: ResolveInfo{fcaa8a1 com.android.apps.tag/.TagViewer m=0x108000 userHandle=UserHandle{0}}, techs: android.nfc.tech.Ndef, 
+02-22 02:08:20.373  1000  1450  1503 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+02-22 02:08:20.374 radio  3065  3065 D CarrierSvcBindHelper: No carrier app for: 0
+02-22 02:08:20.375 radio  3065  3065 D CarrierSvcBindHelper: No carrier app for: 1
+02-22 02:08:20.379 10106  3512  3512 W MediaProvider: WorkProfileOwnerApps cache is empty
+02-22 02:08:20.379 10106  3512  3512 D PickerSyncLockManager: Trying to acquire lock com.android.providers.media.photopicker.sync.CloseableReentrantLock@9a4f15b[Unlocked]. Lock Name = CLOUD_PROVIDER_LOCK. Threads that may be waiting to acquire this lock = []
+02-22 02:08:20.379 10106  3512  3512 D CloseableReentrantLock: Successfully acquired lock com.android.providers.media.photopicker.sync.CloseableReentrantLock@9a4f15b[Locked by thread main]. Lock Name = CLOUD_PROVIDER_LOCK. Threads that may be waiting to acquire this lock = []
+02-22 02:08:20.379 10106  3512  3512 D CloseableReentrantLock: Successfully released lock com.android.providers.media.photopicker.sync.CloseableReentrantLock@9a4f15b[Unlocked]. Lock Name = CLOUD_PROVIDER_LOCK. Threads that may be waiting to acquire this lock = []
+02-22 02:08:20.380  1000  1450  2912 W JobInfo : Job 'com.android.providers.media.module/com.android.providers.media.MediaService#-300' has a deadline with no functional constraints. The deadline won't improve job execution latency. Consider removing the deadline.

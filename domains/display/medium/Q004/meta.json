@@ -1,25 +1,42 @@
 {
   "id": "DIS-M004",
-  "title": "Per-Display Brightness Configuration 條件判斷反轉",
+  "title": "Display Access 存取權限 FLAG_PRIVATE 條件反轉",
   "domain": "display",
   "difficulty": "medium",
-  "cts_test": "android.hardware.display.cts.BrightnessTest#testSetAndGetPerDisplay",
+  "verified": true,
+  "cts_test": "android.display.cts.DisplayTest#testGetDisplays",
   "cts_module": "CtsDisplayTestCases",
-  "injection_point": "DIS-008",
-  "injection_type": ["COND"],
-  "affected_files": ["frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"],
-  "tags": [
-    "brightness",
-    "per-display",
-    "null-check",
-    "condition-inversion",
-    "early-return",
-    "guard-clause"
+  "injection_point": "Display.hasAccess",
+  "injection_type": [
+    "COND"
   ],
-  "estimated_time_minutes": 25,
-  "bug_pattern": "null_check_inversion",
-  "root_cause": "displayDevice null check 條件反轉，導致找到設備時反而 return",
-  "fix_complexity": "single_character",
+  "affected_files": [
+    "frameworks/base/core/java/android/view/Display.java"
+  ],
+  "tags": [
+    "display-access",
+    "flag-private",
+    "condition-inversion",
+    "bitwise-operation",
+    "multi-display",
+    "permission"
+  ],
+  "estimated_time_minutes": 20,
+  "bug_pattern": "bitwise_condition_inversion",
+  "root_cause": "FLAG_PRIVATE 檢查條件從 == 0 改為 != 0，導致 public display 無法被存取",
+  "fix_complexity": "single_operator",
   "created_at": "2025-06-17",
-  "version": "1.0"
+  "version": "2.0",
+  "verified_at": "2025-06-18T00:45:46+08:00",
+  "verification_result": "PASS",
+  "verification_error": "NullPointerException: Display.getDisplayId() on null - 符合預期",
+  "verification_device": "27161FDH20031X",
+  "verification_status": "complete",
+  "verification_date": "2026-02-21",
+  "verification_issues": [],
+  "cts_summary": {
+    "passed": 0,
+    "failed": 2,
+    "total": 2
+  }
 }

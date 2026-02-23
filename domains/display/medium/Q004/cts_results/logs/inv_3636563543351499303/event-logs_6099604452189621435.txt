@@ -1,0 +1,165 @@
+[invocation started]
+[    log: tradefed-expanded-config | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/tradefed-expanded-config_5745531780846895396.xml]
+[    log: ConfigurationDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/ConfigurationDeviceInfo.deviceinfo.json_6621731172095923678.txt.gz]
+[    log: CpuDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/CpuDeviceInfo.deviceinfo.json_3791536437701665920.txt.gz]
+[    log: ClientIdDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/ClientIdDeviceInfo.deviceinfo.json_8633071114418187382.txt.gz]
+[    log: DefaultAppDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/DefaultAppDeviceInfo.deviceinfo.json_8399549651253159743.txt.gz]
+[    log: GenericDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/GenericDeviceInfo.deviceinfo.json_1207087350448542902.txt.gz]
+[    log: DeviceIdleDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/DeviceIdleDeviceInfo.deviceinfo.json_17412603253339696017.txt.gz]
+[    log: ConnectivityDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/ConnectivityDeviceInfo.deviceinfo.json_8722104952593224735.txt.gz]
+[    log: BiometricsDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/BiometricsDeviceInfo.deviceinfo.json_7151255911685447416.txt.gz]
+[    log: GraphicsDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/GraphicsDeviceInfo.deviceinfo.json_928281860402584221.txt.gz]
+[    log: AppStandbyDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/AppStandbyDeviceInfo.deviceinfo.json_876813388211105662.txt.gz]
+[    log: FeatureDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/FeatureDeviceInfo.deviceinfo.json_5193511799800560285.txt.gz]
+[    log: GnssDeviceInfo.deviceinfo.json | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/GnssDeviceInfo.deviceinfo.json_16102878594144472099.txt.gz]
+[    log: device_logcat_setup_27161FDH20031X | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/device_logcat_setup_27161FDH20031X_17851285008970934870.txt]
+[    log: suite-exclude-filters14398134383369896421.txt | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/suite-exclude-filters14398134383369896421.txt_16460960256085544450.txt.gz]
+  [module arm64-v8a CtsDisplayTestCases[instant] started]
+[    log: module-configuration | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/module-configuration_10424956245040248674.xml]
+[    log: filter-arm64-v8a%20CtsDisplayTestCases%5Binstant%5D.include | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/filter-arm64-v8a%20CtsDisplayTestCases%5Binstant%5D.include_11253796943955513316.txt.gz]
+    [run arm64-v8a CtsDisplayTestCases[instant] (testCount: 1,attempt: 0) started]
+      - test: android.display.cts.DisplayTest#testGetDisplays (status=FAILURE)
+        [run failed with Instrumentation run failed due to 'Process crashed.'
+Java Crash Messages sorted from most recent:
+Unable to start activity ComponentInfo{android.display.cts/android.display.cts.ScreenOnActivity}: java.lang.NullPointerException: Attempt to invoke virtual method 'int android.view.Display.getDisplayId()' on a null object reference
+java.lang.RuntimeException: Unable to start activity ComponentInfo{android.display.cts/android.display.cts.ScreenOnActivity}: java.lang.NullPointerException: Attempt to invoke virtual method 'int android.view.Display.getDisplayId()' on a null object reference
+	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3993)
+	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:4173)
+	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:114)
+	at android.app.servertransaction.TransactionExecutor.executeNonLifecycleItem(TransactionExecutor.java:231)
+	at android.app.servertransaction.TransactionExecutor.executeTransactionItems(TransactionExecutor.java:152)
+	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:93)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2595)
+	at android.os.Handler.dispatchMessage(Handler.java:107)
+	at android.os.Looper.loopOnce(Looper.java:232)
+	at android.os.Looper.loop(Looper.java:317)
+	at android.app.ActivityThread.main(ActivityThread.java:8592)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:878)
+Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'int android.view.Display.getDisplayId()' on a null object reference
+	at com.android.internal.policy.DecorContext.<init>(DecorContext.java:55)
+	at com.android.internal.policy.PhoneWindow.generateDecor(PhoneWindow.java:2445)
+	at com.android.internal.policy.PhoneWindow.installDecor(PhoneWindow.java:2824)
+	at com.android.internal.policy.PhoneWindow.getDecorView(PhoneWindow.java:2202)
+	at android.app.ActivityTransitionState.setEnterSceneTransitionInfo(ActivityTransitionState.java:175)
+	at android.app.Activity.performCreate(Activity.java:8970)
+	at android.app.Activity.performCreate(Activity.java:8938)
+	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1526)
+	at androidx.test.runner.MonitoringInstrumentation.callActivityOnCreate(MonitoringInstrumentation.java:779)
+	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3975)
+Unable to start activity ComponentInfo{com.android.compatibility.common.deviceinfo/com.android.compatibility.common.deviceinfo.GlesStubActivity}: java.lang.NullPointerException: Attempt to invoke virtual method 'int android.view.Display.getDisplayId()' on a null object reference
+java.lang.RuntimeException: Unable to start activity ComponentInfo{com.android.compatibility.common.deviceinfo/com.android.compatibility.common.deviceinfo.GlesStubActivity}: java.lang.NullPointerException: Attempt to invoke virtual method 'int android.view.Display.getDisplayId()' on a null object reference
+	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3993)
+	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:4173)
+	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:114)
+	at android.app.servertransaction.TransactionExecutor.executeNonLifecycleItem(TransactionExecutor.java:231)
+	at android.app.servertransaction.TransactionExecutor.executeTransactionItems(TransactionExecutor.java:152)
+	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:93)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2595)
+	at android.os.Handler.dispatchMessage(Handler.java:107)
+	at android.os.Looper.loopOnce(Looper.java:232)
+	at android.os.Looper.loop(Looper.java:317)
+	at android.app.ActivityThread.main(ActivityThread.java:8592)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:878)
+Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'int android.view.Display.getDisplayId()' on a null object reference
+	at com.android.internal.policy.DecorContext.<init>(DecorContext.java:55)
+	at com.android.internal.policy.PhoneWindow.generateDecor(PhoneWindow.java:2445)
+	at com.android.internal.policy.PhoneWindow.installDecor(PhoneWindow.java:2824)
+	at com.android.internal.policy.PhoneWindow.getDecorView(PhoneWindow.java:2202)
+	at android.app.ActivityTransitionState.setEnterSceneTransitionInfo(ActivityTransitionState.java:175)
+	at android.app.Activity.performCreate(Activity.java:8970)
+	at android.app.Activity.performCreate(Activity.java:8938)
+	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1526)
+	at androidx.test.runner.MonitoringInstrumentation.callActivityOnCreate(MonitoringInstrumentation.java:779)
+	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3975)
+Unable to get provider androidx.startup.InitializationProvider: androidx.startup.StartupException: java.lang.NullPointerException: Attempt to invoke virtual method 'float android.view.DisplayInfo.getRefreshRate()' on a null object reference
+java.lang.RuntimeException: Unable to get provider androidx.startup.InitializationProvider: androidx.startup.StartupException: java.lang.NullPointerException: Attempt to invoke virtual method 'float android.view.DisplayInfo.getRefreshRate()' on a null object reference
+	at android.app.ActivityThread.installProvider(ActivityThread.java:8184)
+	at android.app.ActivityThread.installContentProviders(ActivityThread.java:7694)
+	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:7383)
+	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2379)
+	at android.os.Handler.dispatchMessage(Handler.java:107)
+	at android.os.Looper.loopOnce(Looper.java:232)
+	at android.os.Looper.loop(Looper.java:317)
+	at android.app.ActivityThread.main(ActivityThread.java:8592)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:878)
+Caused by: androidx.startup.StartupException: java.lang.NullPointerException: Attempt to invoke virtual method 'float android.view.DisplayInfo.getRefreshRate()' on a null object reference
+	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:187)
+	at androidx.startup.AppInitializer.discoverAndInitialize(AppInitializer.java:239)
+	at androidx.startup.AppInitializer.discoverAndInitialize(AppInitializer.java:207)
+	at androidx.startup.InitializationProvider.onCreate(InitializationProvider.java:49)
+	at android.content.ContentProvider.attachInfo(ContentProvider.java:2644)
+	at android.content.ContentProvider.attachInfo(ContentProvider.java:2613)
+	at android.app.ActivityThread.installProvider(ActivityThread.java:8179)|TEST_FAILURE|INSTRUMENTATION_CRASH]
+    [run ended]
+  [module ended]
+  [module arm64-v8a CtsDisplayTestCases started]
+[    log: module-configuration | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/module-configuration_17078871881614762349.xml]
+[    log: filter-arm64-v8a%20CtsDisplayTestCases.include | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/filter-arm64-v8a%20CtsDisplayTestCases.include_7101734727067445856.txt.gz]
+[    log: filter-arm64-v8a%20CtsDisplayTestCases.exclude | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/filter-arm64-v8a%20CtsDisplayTestCases.exclude_11261860320594548215.txt.gz]
+    [run arm64-v8a CtsDisplayTestCases (testCount: 1,attempt: 0) started]
+      - test: android.display.cts.DisplayTest#testGetDisplays (status=FAILURE)
+        [run failed with Instrumentation run failed due to 'Process crashed.'
+Java Crash Messages sorted from most recent:
+Unable to start activity ComponentInfo{android.display.cts/android.display.cts.ScreenOnActivity}: java.lang.NullPointerException: Attempt to invoke virtual method 'int android.view.Display.getDisplayId()' on a null object reference
+java.lang.RuntimeException: Unable to start activity ComponentInfo{android.display.cts/android.display.cts.ScreenOnActivity}: java.lang.NullPointerException: Attempt to invoke virtual method 'int android.view.Display.getDisplayId()' on a null object reference
+	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3993)
+	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:4173)
+	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:114)
+	at android.app.servertransaction.TransactionExecutor.executeNonLifecycleItem(TransactionExecutor.java:231)
+	at android.app.servertransaction.TransactionExecutor.executeTransactionItems(TransactionExecutor.java:152)
+	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:93)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2595)
+	at android.os.Handler.dispatchMessage(Handler.java:107)
+	at android.os.Looper.loopOnce(Looper.java:232)
+	at android.os.Looper.loop(Looper.java:317)
+	at android.app.ActivityThread.main(ActivityThread.java:8592)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:878)
+Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'int android.view.Display.getDisplayId()' on a null object reference
+	at com.android.internal.policy.DecorContext.<init>(DecorContext.java:55)
+	at com.android.internal.policy.PhoneWindow.generateDecor(PhoneWindow.java:2445)
+	at com.android.internal.policy.PhoneWindow.installDecor(PhoneWindow.java:2824)
+	at com.android.internal.policy.PhoneWindow.getDecorView(PhoneWindow.java:2202)
+	at android.app.ActivityTransitionState.setEnterSceneTransitionInfo(ActivityTransitionState.java:175)
+	at android.app.Activity.performCreate(Activity.java:8970)
+	at android.app.Activity.performCreate(Activity.java:8938)
+	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1526)
+	at androidx.test.runner.MonitoringInstrumentation.callActivityOnCreate(MonitoringInstrumentation.java:779)
+	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3975)
+Unable to get provider androidx.startup.InitializationProvider: androidx.startup.StartupException: java.lang.NullPointerException: Attempt to invoke virtual method 'float android.view.DisplayInfo.getRefreshRate()' on a null object reference
+java.lang.RuntimeException: Unable to get provider androidx.startup.InitializationProvider: androidx.startup.StartupException: java.lang.NullPointerException: Attempt to invoke virtual method 'float android.view.DisplayInfo.getRefreshRate()' on a null object reference
+	at android.app.ActivityThread.installProvider(ActivityThread.java:8184)
+	at android.app.ActivityThread.installContentProviders(ActivityThread.java:7694)
+	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:7383)
+	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2379)
+	at android.os.Handler.dispatchMessage(Handler.java:107)
+	at android.os.Looper.loopOnce(Looper.java:232)
+	at android.os.Looper.loop(Looper.java:317)
+	at android.app.ActivityThread.main(ActivityThread.java:8592)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:878)
+Caused by: androidx.startup.StartupException: java.lang.NullPointerException: Attempt to invoke virtual method 'float android.view.DisplayInfo.getRefreshRate()' on a null object reference
+	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:187)
+	at androidx.startup.AppInitializer.discoverAndInitialize(AppInitializer.java:239)
+	at androidx.startup.AppInitializer.discoverAndInitialize(AppInitializer.java:207)
+	at androidx.startup.InitializationProvider.onCreate(InitializationProvider.java:49)
+	at android.content.ContentProvider.attachInfo(ContentProvider.java:2644)
+	at android.content.ContentProvider.attachInfo(ContentProvider.java:2613)
+	at android.app.ActivityThread.installProvider(ActivityThread.java:8179)|TEST_FAILURE|INSTRUMENTATION_CRASH]
+    [run ended]
+  [module ended]
+[    log: device_logcat_test_27161FDH20031X | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/device_logcat_test_27161FDH20031X_7963870206180511750.txt]
+[    log: executeShellCommandLog_27161FDH20031X | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/executeShellCommandLog_27161FDH20031X_10161167094436411321.txt.gz]
+[    log: host_adb_log | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/host_adb_log_561983239449243348.txt]
+[    log: device_logcat_teardown_27161FDH20031X | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/device_logcat_teardown_27161FDH20031X_2590448279477941160.txt]
+[    log: host_log | path: /tmp/13033356/cts/inv_10069646482297902131/inv_4176111916625069366/host_log_4060957456930467621.txt]

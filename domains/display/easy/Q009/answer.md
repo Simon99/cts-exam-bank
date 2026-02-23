@@ -1,89 +1,44 @@
-# Q009 解答：getDisplayInfoLocked() 條件判斷反轉錯誤
+# DIS-E009: 解答
 
 ## Bug 位置
 
-**檔案**：`frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java`  
-**方法**：`getDisplayInfoLocked()`（約第 252 行）
+**檔案**: `frameworks/base/core/java/android/view/Display.java`
+**方法**: `HdrCapabilities.getDesiredMinLuminance()`
+**行號**: 約 2577
 
-## 問題程式碼
+## 錯誤程式碼
 
 ```java
-public DisplayInfo getDisplayInfoLocked() {
-    if (mInfo.get() != null) {  // ← BUG: 條件反轉
-        DisplayInfo info = new DisplayInfo();
-        copyDisplayInfoFields(info, mBaseDisplayInfo, mOverrideDisplayInfo,
-                WM_OVERRIDE_FIELDS);
-        mInfo.set(info);
-    }
-    return mInfo.get();
+public float getDesiredMinLuminance() {
+    // Bug: 錯誤地返回比 max 還大的值
+    return mMaxLuminance + 100.0f;
 }
 ```
 
-## Bug 分析
-
-### 問題類型
-**條件判斷反轉 (Condition Inversion)**
-
-### 錯誤行為
-
-| 情境 | 正確行為 | 錯誤行為 |
-|------|---------|---------|
-| 首次呼叫 (mInfo == null) | 創建並快取 DisplayInfo | **跳過創建，返回 null** |
-| 後續呼叫 (mInfo != null) | 直接返回快取值 | **重新創建，浪費資源** |
-
-### 為什麼導致 NullPointerException
-
-1. 系統啟動時首次呼叫 `getDisplayInfoLocked()`
-2. 此時 `mInfo.get()` 返回 `null`
-3. 錯誤的條件 `!= null` 為 false，不進入 if 區塊
-4. 直接返回 `mInfo.get()`，即 `null`
-5. 呼叫端對 null 進行操作，觸發 NPE
-
-## 正確程式碼
+## 修復方式
 
 ```java
-public DisplayInfo getDisplayInfoLocked() {
-    if (mInfo.get() == null) {  // ✓ 正確：快取為空時初始化
-        DisplayInfo info = new DisplayInfo();
-        copyDisplayInfoFields(info, mBaseDisplayInfo, mOverrideDisplayInfo,
-                WM_OVERRIDE_FIELDS);
-        mInfo.set(info);
-    }
-    return mInfo.get();
+public float getDesiredMinLuminance() {
+    return mMinLuminance;
 }
 ```
 
-## 修復 Patch
+## 問題分析
 
-```diff
--        if (mInfo.get() != null) {
-+        if (mInfo.get() == null) {
+1. **根本原因**: `getDesiredMinLuminance()` 方法錯誤地返回了 `mMaxLuminance + 100.0f`
+2. **影響**: 返回值違反了 `min <= avg <= max` 的約束條件
+3. **CTS 失敗原因**: 測試驗證 `cap.getDesiredMinLuminance() <= cap.getDesiredMaxAverageLuminance()` 失敗
+
+## 修復驗證
+
+修復後重新執行 CTS 測試：
+```bash
+adb shell am compat enable OVERRIDE_MIN_ASPECT_RATIO_LARGE <package>
+cts-tradefed run cts -m CtsDisplayTestCases -t android.display.cts.DisplayTest#testDefaultDisplayHdrCapability
 ```
 
-## 快取模式解析
+## 學習要點
 
-這是一個典型的 **Lazy Initialization（延遲初始化）** 模式：
-
-```
-檢查快取是否為空？
-   ↓ 是（== null）
-創建新物件，存入快取
-   ↓
-返回快取的物件
-```
-
-條件反轉會破壞整個模式：
-- 該初始化時不初始化 → 返回 null
-- 不該初始化時反覆初始化 → 浪費記憶體
-
-## 影響範圍
-
-- 所有依賴 `Display.getDisplayInfo()` 的上層 API
-- `Display.getName()`, `Display.getRefreshRate()`, `Display.getSize()` 等
-- 任何需要獲取顯示屬性的應用程式
-
-## 學習重點
-
-1. **條件判斷要仔細**：`==` 和 `!=` 的混淆是常見錯誤
-2. **Lazy Initialization 模式**：理解「為空才初始化」的邏輯
-3. **快取邏輯**：首次呼叫與後續呼叫應該有不同的行為路徑
+1. Getter 方法應該返回對應的成員變數
+2. HDR luminance 值有嚴格的大小關係約束
+3. CTS 測試會驗證這些物理約束是否被遵守

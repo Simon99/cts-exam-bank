@@ -21,7 +21,17 @@
     "condition-logic"
   ],
   "estimated_time_minutes": 35,
-  "needs_revalidation": true,
-  "revalidation_requested": "2026-02-17",
-  "revalidation_reason": "Hard 難度全數重新驗證"
+  "needs_revalidation": false,
+  "verified": true,
+  "verified_date": "2026-02-18",
+  "cts_result": "FAIL",
+  "device": "27161FDH20031X",
+  "verification_status": "complete",
+  "verification_date": "2026-02-21",
+  "verification_issues": [],
+  "cts_summary": {
+    "passed": 0,
+    "failed": 2,
+    "total": 2
+  }
 }

@@ -1,39 +1,62 @@
 {
   "id": "DIS-M003",
-  "title": "White Balance Brightness Adjustment Not Applied",
+  "title": "Virtual Display Private Flag Not Set Correctly",
   "domain": "display",
   "difficulty": "medium",
-  "cts_test": "android.hardware.display.cts.BrightnessTest#testSliderEventsReflectCurves",
+  "cts_test": "android.display.cts.VirtualDisplayTest",
   "cts_module": "CtsDisplayTestCases",
-  "injection_point": "DIS-007",
-  "injection_type": ["CALC"],
-  "bug_type": "missing_assignment",
+  "injection_point": "DIS-009",
+  "injection_type": [
+    "COND"
+  ],
+  "bug_type": "condition_inversion",
   "affected_files": [
-    "frameworks/base/services/core/java/com/android/server/display/BrightnessMappingStrategy.java"
+    "frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java"
   ],
   "affected_methods": [
-    "PhysicalMappingStrategy.getBrightness"
+    "VirtualDisplayDevice.getDisplayDeviceInfoLocked"
   ],
   "tags": [
-    "brightness",
-    "white-balance",
-    "spline-interpolation",
-    "auto-brightness",
-    "missing-assignment",
-    "return-value-ignored"
+    "virtual-display",
+    "flag-handling",
+    "condition-logic",
+    "security",
+    "display-privacy",
+    "bitwise-operation"
   ],
   "estimated_time_minutes": 20,
   "skills_tested": [
-    "java-return-value-handling",
-    "data-flow-analysis",
-    "display-brightness-mapping",
-    "code-review"
+    "condition-logic-analysis",
+    "flag-bitwise-operations",
+    "android-display-system",
+    "security-implications"
   ],
   "hints": [
-    "檢查方法的返回值是否被正確使用",
-    "追蹤 nits 變數在 getBrightness() 中的完整資料流",
-    "白平衡調整方法的名稱暗示它會返回計算結果"
+    "仔細檢查條件判斷中的比較運算符",
+    "思考「沒有設置 PUBLIC」與「有設置 PUBLIC」的邏輯差異",
+    "FLAG_PRIVATE 應該在什麼情況下被設置？"
   ],
   "created_at": "2025-01-21",
-  "version": "1.0"
+  "updated_at": "2026-02-18",
+  "version": "2.1",
+  "verified": true,
+  "verification_date": "2026-02-21",
+  "cts_results": {
+    "total_tests": 10,
+    "passed": 6,
+    "failed": 4,
+    "failed_tests": [
+      "testUntrustedSysDecorVirtualDisplay",
+      "testVirtualDisplayWithRequestedRefreshRate"
+    ],
+    "failure_message": "display must have correct flags expected:<4> but was:<0>",
+    "result_backup": "cts-results/cts-result-with-bug.zip"
+  },
+  "verification_status": "complete",
+  "verification_issues": [],
+  "cts_summary": {
+    "passed": 6,
+    "failed": 4,
+    "total": 10
+  }
 }

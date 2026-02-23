@@ -1,0 +1,32 @@
+{
+  "media_drm_info": [
+    {
+      "scheme_uuid ": "edef8ba9-79d6-4ace-a3c8-27dcd51d21ed",
+      "vendor": "com.google.android.widevine",
+      "version": "18.0.0@341113000",
+      "description": "Widevine CDM"
+    },
+    {
+      "scheme_uuid ": "29701fe4-3cc7-4a34-8c5b-ae90c7439a47",
+      "vendor": "com.google.android.widevine",
+      "version": "18.0.0@341113000",
+      "description": "Widevine CDM"
+    },
+    {
+      "scheme_uuid ": "1077efec-c0b2-4d02-ace3-3c1e52e2fb4b",
+      "vendor": "Google",
+      "version": "14",
+      "description": "ClearKey CDM"
+    },
+    {
+      "scheme_uuid ": "e2719d58-a985-b3c9-781a-b030af78d30e",
+      "vendor": "Google",
+      "version": "14",
+      "description": "ClearKey CDM"
+    }
+  ],
+  "media_drm_hal": [
+    "/apex/com.google.android.widevine/bin/hw/android.hardware.drm-service.widevine",
+    "/vendor/bin/hw/android.hardware.drm-service.clearkey"
+  ]
+}

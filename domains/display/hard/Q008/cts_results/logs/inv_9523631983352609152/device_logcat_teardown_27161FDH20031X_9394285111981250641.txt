@@ -1,0 +1,13 @@
+02-19 23:24:13.162 10123  3540  3892 W MediaProvider: isAppCloneUserPair for user 0: false
+02-19 23:24:13.293 10123  3540  5221 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-19 23:24:13.592  1000  1480  1882 I commit_sys_config_file: [settings-0-0,18]
+02-19 23:24:13.627  1000  1480  1741 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-19 23:24:13.627  1000  1480  1776 I AppsFilter: interaction: PackageSetting{c3b8ec8 com.android.microdroid.empty_payload/10110} -> PackageSetting{23dbb3a com.android.tradefed.utils.wifi/10126} BLOCKED
+02-19 23:24:13.634  1017   551   597 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-19 23:24:13.714  1000  1480  1776 I commit_sys_config_file: [package,26]
+02-19 23:24:13.716  1000  1480  1776 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-19 23:24:13.716  1000  1480  1776 D PackageManager: Clear ephemeral installer activity
+02-19 23:24:13.744  logd  5338  5338 I logd    : start watching /data/system/packages.list ...
+02-19 23:24:13.719  1000  1480  4021 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-19 23:24:13.751  logd  5338  5338 I logd    : ReadPackageList, total packages: 131
+02-19 23:24:13.731  1000  1480  1776 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=0: pkg removed

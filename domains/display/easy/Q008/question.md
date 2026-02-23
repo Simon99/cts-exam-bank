@@ -1,50 +1,42 @@
-# CTS 除錯練習題 DIS-E008
+# CTS 面試題 - Display Flags 錯誤
 
-## 題目資訊
-- **難度**: Easy
-- **預計時間**: 15 分鐘
-- **領域**: Display (虛擬顯示)
+## 題目背景
 
-## 失敗的 CTS 測試
+你是 Android 系統團隊的工程師。QA 團隊報告以下 CTS 測試在 overlay display 上失敗：
 
 ```
-android.hardware.display.cts.VirtualDisplayTest#testPrivateVirtualDisplay
+android.display.cts.DisplayTest#testFlags
 ```
 
-### 測試失敗訊息
+## 失敗訊息
 
 ```
-junit.framework.AssertionFailedError: Private virtual display should have expected unique ID format
-Expected: <virtual:com.android.cts.display:private_test_display>
-Actual:   <virtual:com.android.cts.displayprivate_test_display>
-    at android.hardware.display.cts.VirtualDisplayTest.testPrivateVirtualDisplay(VirtualDisplayTest.java:234)
+junit.framework.AssertionFailedError: expected:<36> but was:<32>
+    at android.display.cts.DisplayTest.testFlags(DisplayTest.java:xxx)
 ```
 
-## 背景說明
+## 重現步驟
 
-`VirtualDisplayTest#testPrivateVirtualDisplay` 測試驗證當應用程式創建私有虛擬顯示時，系統會生成正確格式的唯一識別碼 (unique ID)。
+1. 啟用 overlay display（開發者選項 → 模擬輔助顯示器 → 181x161/214）
+2. 執行 CTS 測試：
+   ```bash
+   atest CtsDisplayTestCases:DisplayTest#testFlags
+   ```
 
-測試流程：
-1. 創建一個指定 uniqueId 的 VirtualDisplayConfig
-2. 使用該配置創建私有虛擬顯示
-3. 驗證生成的 display unique ID 符合預期格式
+## 相關代碼路徑
 
-## 相關程式碼區域
-
-請檢查以下檔案中的 `generateDisplayUniqueId()` 方法：
-
-```
-frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
-```
+- `frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java`
+- `frameworks/base/core/java/android/view/Display.java`
 
 ## 問題
 
-1. 找出導致 unique ID 格式錯誤的 bug
-2. 說明為什麼這個 bug 會導致測試失敗
-3. 提供修復方案
+1. 這個錯誤訊息說明了什麼問題？（提示：36 = 0x24, 32 = 0x20）
+2. 請找出 bug 的位置並說明根本原因
+3. 如何修復這個問題？
 
 ## 提示
 
-- 觀察 Expected 和 Actual 的差異
-- 檢查字串拼接邏輯中的分隔符處理
-- 注意當 `config.getUniqueId() != null` 時的處理方式
+- `Display.FLAG_PRESENTATION = 0x04`
+- `Display.FLAG_TRUSTED = 0x20`
+- 測試期望的值是 `FLAG_PRESENTATION | FLAG_TRUSTED = 0x24 = 36`
+- 實際回報的值是 32，缺少了 FLAG_PRESENTATION

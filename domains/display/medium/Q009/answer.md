@@ -1,111 +1,142 @@
-# 解答：HDR 轉換模式設定邏輯錯誤
+# Q009: 答案與解析
+
+## 正確答案
+
+**B. VirtualDisplayAdapter 中的重複檢查條件被反轉**
+
+---
+
+## CTS 測試路徑
+
+**測試方法**：`android.display.cts.VirtualDisplayTest#testPrivateVirtualDisplay`
+
+**呼叫鏈**：
+1. `VirtualDisplayTest.testPrivateVirtualDisplay()`
+   - 呼叫 `mDisplayManager.createVirtualDisplay(NAME, WIDTH, HEIGHT, DENSITY, mSurface, 0)`
+2. → `DisplayManager.createVirtualDisplay(String, int, int, int, Surface, int)`
+   - 轉發到多參數版本
+3. → `DisplayManager.createVirtualDisplay(String, int, int, int, Surface, int, Callback, Handler)`
+   - 建構 `VirtualDisplayConfig.Builder` 並呼叫下一層
+4. → `DisplayManager.createVirtualDisplay(MediaProjection, VirtualDisplayConfig, Callback, Handler)`
+   - 呼叫 `mGlobal.createVirtualDisplay()`
+5. → `DisplayManagerGlobal.createVirtualDisplay(Context, MediaProjection, VirtualDisplayConfig, Callback, Executor)`
+   - 呼叫 `mDm.createVirtualDisplay()` (Binder 呼叫到 IDisplayManager)
+6. → `DisplayManagerService.BinderService.createVirtualDisplay()`
+   - 呼叫 `createVirtualDisplayInternal()`
+7. → `DisplayManagerService.createVirtualDisplayInternal()`
+   - 進行權限檢查和 flag 驗證，然後呼叫 `createVirtualDisplayLocked()`
+8. → `DisplayManagerService.createVirtualDisplayLocked()`
+   - 呼叫 `mVirtualDisplayAdapter.createVirtualDisplayLocked()`
+9. → **`VirtualDisplayAdapter.createVirtualDisplayLocked()`** ← Bug 注入點
+
+---
 
 ## Bug 位置
 
-**檔案**: `frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java`  
-**方法**: `setHdrConversionModeInternal()`  
-**行號**: 2439
+**檔案**：`frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java`
 
-## Bug 描述
+**函數**：`createVirtualDisplayLocked()`
 
-條件判斷 `mOverrideHdrConversionMode == null` 被錯誤地寫成 `mOverrideHdrConversionMode != null`，導致覆蓋邏輯完全反轉。
+**行號**：120
 
-### 錯誤代碼
+---
+
+## Bug 分析
+
+### 錯誤程式碼
 
 ```java
-// If the HDR conversion is disabled by an app through WindowManager.LayoutParams, then
-// set HDR conversion mode to HDR_CONVERSION_PASSTHROUGH.
-if (mOverrideHdrConversionMode != null) {  // ❌ 錯誤：條件反轉
-    // HDR_CONVERSION_FORCE with HDR_TYPE_INVALID is used to represent forcing SDR type.
-    // But, internally SDR is selected by using passthrough mode.
-    if (conversionMode == HdrConversionMode.HDR_CONVERSION_FORCE
-            && preferredHdrType == Display.HdrCapabilities.HDR_TYPE_INVALID) {
-        conversionMode = HdrConversionMode.HDR_CONVERSION_PASSTHROUGH;
+public DisplayDevice createVirtualDisplayLocked(IVirtualDisplayCallback callback,
+        IMediaProjection projection, int ownerUid, String ownerPackageName, String uniqueId,
+        Surface surface, int flags, VirtualDisplayConfig virtualDisplayConfig) {
+    IBinder appToken = callback.asBinder();
+    if (!mVirtualDisplayDevices.containsKey(appToken)) {  // ← BUG：條件被反轉
+        Slog.wtfStack(TAG,
+                "Can't create virtual display, display with same appToken already exists");
+        return null;
     }
-} else {
-    conversionMode = mOverrideHdrConversionMode.getConversionMode();  // ❌ NPE!
-    preferredHdrType = mOverrideHdrConversionMode.getPreferredHdrOutputType();
-    autoHdrOutputTypes = null;
+    // ...
 }
 ```
 
-### 正確代碼
+### 正確程式碼
 
 ```java
-// If the HDR conversion is disabled by an app through WindowManager.LayoutParams, then
-// set HDR conversion mode to HDR_CONVERSION_PASSTHROUGH.
-if (mOverrideHdrConversionMode == null) {  // ✅ 正確
-    // HDR_CONVERSION_FORCE with HDR_TYPE_INVALID is used to represent forcing SDR type.
-    // But, internally SDR is selected by using passthrough mode.
-    if (conversionMode == HdrConversionMode.HDR_CONVERSION_FORCE
-            && preferredHdrType == Display.HdrCapabilities.HDR_TYPE_INVALID) {
-        conversionMode = HdrConversionMode.HDR_CONVERSION_PASSTHROUGH;
+public DisplayDevice createVirtualDisplayLocked(IVirtualDisplayCallback callback,
+        IMediaProjection projection, int ownerUid, String ownerPackageName, String uniqueId,
+        Surface surface, int flags, VirtualDisplayConfig virtualDisplayConfig) {
+    IBinder appToken = callback.asBinder();
+    if (mVirtualDisplayDevices.containsKey(appToken)) {  // ← 正確：已存在才返回 null
+        Slog.wtfStack(TAG,
+                "Can't create virtual display, display with same appToken already exists");
+        return null;
     }
-} else {
-    conversionMode = mOverrideHdrConversionMode.getConversionMode();
-    preferredHdrType = mOverrideHdrConversionMode.getPreferredHdrOutputType();
-    autoHdrOutputTypes = null;
+    // ...
 }
 ```
 
-## 問題分析
+### 問題本質
 
-### 預期行為
+條件判斷運算符被意外反轉（`containsKey` → `!containsKey`）。
 
-1. **無覆蓋時** (`mOverrideHdrConversionMode == null`)：
-   - 使用用戶設定的 `hdrConversionMode`
-   - 若為 `HDR_CONVERSION_FORCE` 且目標為 SDR (`HDR_TYPE_INVALID`)，轉換為 `PASSTHROUGH` 模式
+原始邏輯：**如果 appToken 已存在**，表示這是重複建立，應該返回 null 並記錄錯誤。
 
-2. **有覆蓋時** (`mOverrideHdrConversionMode != null`)：
-   - 忽略用戶設定
-   - 使用應用程式指定的覆蓋模式
+錯誤邏輯：**如果 appToken 不存在**（即正常的首次建立），就返回 null 並記錄錯誤。
 
-### 實際行為（Bug）
+### 影響
 
-條件反轉導致：
+- **正常建立請求**：首次建立 VirtualDisplay 時，appToken 尚未存在於 `mVirtualDisplayDevices` map 中，但錯誤的條件會將其判定為「已存在」並拒絕建立。
+- **CTS 測試**：所有需要建立 VirtualDisplay 的測試都會失敗，因為 `createVirtualDisplay()` 總是返回 null。
+- **日誌誤導**：錯誤訊息宣稱「display with same appToken already exists」，但實際上是首次建立。
 
-1. **無覆蓋時** → 執行 else 分支 → 存取 null 的 `mOverrideHdrConversionMode` → **NullPointerException** 或錯誤行為
+---
 
-2. **有覆蓋時** → 執行 if 分支 → 使用用戶設定而非覆蓋設定 → **覆蓋功能失效**
+## 選項分析
 
-### CTS 測試失敗原因
+### A. DisplayManager 的 Binder 連線失敗 ❌
 
-`HdrConversionEnabledTest#testSetHdrConversionMode` 測試驗證：
-- 設定 `HDR_CONVERSION_FORCE` 模式後，系統應正確套用
-- 當指定 `HDR_TYPE_INVALID` 時，應內部轉換為 `PASSTHROUGH`
+錯誤。如果是 Binder 通訊問題，會拋出 `RemoteException` 或類似的異常，而不是返回 null 並記錄「appToken already exists」的訊息。
 
-Bug 導致無覆蓋情況下進入錯誤分支，無法正確處理 `HDR_CONVERSION_FORCE` + `HDR_TYPE_INVALID` 的轉換邏輯。
+### B. VirtualDisplayAdapter 中的重複檢查條件被反轉 ✅
 
-## 修復 Patch
+正確。日誌訊息「display with same appToken already exists」來自 `VirtualDisplayAdapter.createVirtualDisplayLocked()`。但這是首次建立，appToken 不應該已存在，說明條件檢查邏輯有誤。
+
+### C. Surface 物件未正確初始化 ❌
+
+錯誤。Surface 驗證發生在更早的階段（`createVirtualDisplayInternal()`），且會有不同的錯誤訊息。日誌明確指向 appToken 重複問題，與 Surface 無關。
+
+### D. VirtualDisplayConfig 參數驗證失敗 ❌
+
+錯誤。VirtualDisplayConfig 的參數驗證也在 `createVirtualDisplayInternal()` 中進行，且會拋出 `IllegalArgumentException`，不會產生「appToken already exists」的訊息。
+
+---
+
+## 修復方式
+
+將條件從 `!mVirtualDisplayDevices.containsKey(appToken)` 改回 `mVirtualDisplayDevices.containsKey(appToken)`：
 
 ```diff
---- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-@@ -2436,7 +2436,7 @@ public final class DisplayManagerService extends SystemService {
-             int conversionMode = hdrConversionMode.getConversionMode();
-             int preferredHdrType = hdrConversionMode.getPreferredHdrOutputType();
-             // If the HDR conversion is disabled by an app through WindowManager.LayoutParams, then
-             // set HDR conversion mode to HDR_CONVERSION_PASSTHROUGH.
--            if (mOverrideHdrConversionMode != null) {
-+            if (mOverrideHdrConversionMode == null) {
-                 // HDR_CONVERSION_FORCE with HDR_TYPE_INVALID is used to represent forcing SDR type.
-                 // But, internally SDR is selected by using passthrough mode.
-                 if (conversionMode == HdrConversionMode.HDR_CONVERSION_FORCE
+-        if (!mVirtualDisplayDevices.containsKey(appToken)) {
++        if (mVirtualDisplayDevices.containsKey(appToken)) {
 ```
 
-## 學習要點
+---
 
-1. **條件判斷要與分支邏輯一致**：仔細閱讀 if/else 兩個分支的實際操作，確保條件判斷正確
+## 相關知識點
 
-2. **Null 檢查的方向性**：
-   - `== null` 表示「如果不存在則...」
-   - `!= null` 表示「如果存在則...」
+1. **VirtualDisplay 生命週期**：VirtualDisplay 透過 appToken（IBinder）作為唯一識別符，用於追蹤和管理虛擬顯示器的生命週期。
 
-3. **註解與代碼一致性**：註解說明「If the HDR conversion is disabled by an app」應對應有覆蓋的情況，但 else 分支才是處理覆蓋的代碼
+2. **防止重複建立**：同一個 callback 不應該被用於建立多個 VirtualDisplay，因此需要檢查 appToken 是否已存在。
 
-4. **覆蓋模式的設計模式**：先檢查是否有覆蓋，沒有覆蓋時才執行正常邏輯，這是常見的狀態管理模式
+3. **條件反轉 Bug 模式**：這是開發中常見的邏輯錯誤，可能因為：
+   - 複製貼上時忘記修改
+   - 重構時意外引入
+   - 誤解原始邏輯意圖
 
-## 相關知識
+---
 
-- **HDR 轉換模式**：Android 支援多種 HDR 標準（HDR10、HDR10+、Dolby Vision、HLG），系統需要根據顯示器能力進行適當轉換
-- **WindowManager 覆蓋機制**：應用可以請求特定的顯示設定，系統會暫時覆蓋用戶偏好
+## 延伸閱讀
+
+- `DisplayManagerService.createVirtualDisplayInternal()` - 處理權限和 flag 驗證
+- `VirtualDisplayAdapter.VirtualDisplayDevice` - VirtualDisplay 的設備抽象層
+- `DisplayManagerGlobal` - 客戶端與服務端的橋樑

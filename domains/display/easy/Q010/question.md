@@ -1,12 +1,16 @@
-# Q010: Display Flag 條件判斷錯誤
+# Q010: Overlay Display 信任標記遺失
 
 ## 問題描述
 
-在 Android Display 子系統中，`DisplayDeviceInfo` 類別負責描述物理顯示設備的特性，包括各種 FLAG 常數來表示顯示器的功能。
+在 Android Display 子系統中，`OverlayDisplayAdapter` 負責建立用於開發測試的 overlay 顯示設備。這些設備由系統建立，應該被標記為「受信任」的顯示器。
 
-某位開發者回報：使用圓形顯示器（如智慧手錶）的設備在調試輸出中，`FLAG_ROUND` 的顯示行為異常：
-- 當顯示器**實際是圓形**時，調試輸出**沒有**顯示 `FLAG_ROUND`
-- 當顯示器**不是圓形**時，調試輸出**反而顯示** `FLAG_ROUND`
+某位開發者回報：在進行 overlay display 相關的功能測試時，發現測試失敗。測試預期 overlay display 應該同時具有 `FLAG_PRESENTATION` 和 `FLAG_TRUSTED` 標記，但實際上只檢測到 `FLAG_PRESENTATION`。
+
+錯誤訊息：
+```
+expected: <8256> but was: <64>
+```
+（8256 = FLAG_PRESENTATION | FLAG_TRUSTED，64 = FLAG_PRESENTATION）
 
 ## CTS 測試
 
@@ -22,19 +26,19 @@ atest CtsDisplayTestCases:DisplayTest#testFlags
 
 ## 相關檔案
 
-- `frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java`
+- `frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java`
 
 ## 任務
 
-1. 找出導致 `FLAG_ROUND` 狀態報告錯誤的 bug
+1. 找出導致 `FLAG_TRUSTED` 遺失的原因
 2. 說明這個 bug 的根本原因
 3. 提供修復方案
 
 ## 提示
 
-- 問題出在 flag 的條件判斷邏輯
-- 檢查 `flagsToString()` 方法中的位元運算條件
-- 比較其他 flag 的檢查方式
+- 問題出在 `OverlayDisplayDevice` 類別的 `getDisplayDeviceInfoLocked()` 方法
+- 檢查 flags 的設置流程
+- 看看是否有關鍵的 flag 設置被註解掉了
 
 ## 預計時間
 

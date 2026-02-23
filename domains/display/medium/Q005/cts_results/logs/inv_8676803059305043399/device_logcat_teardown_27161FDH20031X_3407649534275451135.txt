@@ -1,0 +1,36 @@
+02-17 17:20:44.049 10111  3526  3904 W MediaProvider: isAppCloneUserPair for user 0: false
+02-17 17:20:44.232 10111  3526  3905 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-17 17:20:44.331  1000  1449  1864 D ActivityManager: freezing 2868 com.android.permissioncontroller
+02-17 17:20:44.334  1000  1449  1864 I am_freeze: [2868,com.android.permissioncontroller]
+02-17 17:20:44.404  1000  1449  1864 I am_compact: [2868,com.android.permissioncontroller,ANON,137484,79352,56188,5968,-13928,-4532,-9396,9220,69,FULL,813049,905,19,27420,-1564]
+02-17 17:20:44.548  1000  1449  1863 I commit_sys_config_file: [settings-0-0,24]
+02-17 17:20:44.642  1000  1449  1755 I AppsFilter: interaction: PackageSetting{475c0ad com.android.microdroid.empty_payload/10121} -> PackageSetting{61fce0 com.android.tradefed.utils.wifi/10126} BLOCKED
+02-17 17:20:44.643  1000  1449  1716 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-17 17:20:44.645  1000  1449  1716 I ActivityManager: Killing 4248:com.android.messaging/u0a78 (adj 985): empty #17
+02-17 17:20:44.646  1000  1449  1716 I am_kill : [0,4248,com.android.messaging,985,empty #17,111480]
+02-17 17:20:44.671  1017   541   541 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-17 17:20:44.697  1000  1449  3698 I am_proc_died: [0,4248,com.android.messaging,985,19]
+02-17 17:20:44.697  1000  1449  3698 I am_uid_stopped: 10078
+02-17 17:20:44.698  1000  1449  1703 D DisplayManagerService: Drop pending events for gone uid 10078
+02-17 17:20:44.698  1000  1449  1726 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_10078/pid_4248
+02-17 17:20:44.699  root   865   865 I Zygote  : Process 4248 exited due to signal 9 (Killed)
+02-17 17:20:44.727  root  7260  7260 I binder  : undelivered transaction 146361, process died.
+02-17 17:20:44.727  root  7260  7260 I binder  : undelivered transaction 146818, process died.
+02-17 17:20:44.727  root  7260  7260 I binder  : undelivered transaction 177499, process died.
+02-17 17:20:44.727  root  7260  7260 I binder  : undelivered transaction 178127, process died.
+02-17 17:20:44.727  root  7260  7260 I binder  : undelivered transaction 193511, process died.
+02-17 17:20:44.727  root  7260  7260 I binder  : undelivered transaction 194009, process died.
+02-17 17:20:44.727  root  7260  7260 I binder  : undelivered transaction 212018, process died.
+02-17 17:20:44.727  root  7260  7260 I binder  : undelivered transaction 212747, process died.
+02-17 17:20:44.727  root  7260  7260 I binder  : undelivered transaction 213551, process died.
+02-17 17:20:44.727  root  7260  7260 I binder  : undelivered transaction 120703, process died.
+02-17 17:20:44.769  logd  6073  6073 I logd    : start watching /data/system/packages.list ...
+02-17 17:20:44.740  1000  1449  1755 I commit_sys_config_file: [package,26]
+02-17 17:20:44.778  logd  6073  6073 I logd    : ReadPackageList, total packages: 131
+02-17 17:20:44.758  1000  1449  1755 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-17 17:20:44.758  1000  1449  1755 D PackageManager: Clear ephemeral installer activity
+02-17 17:20:44.766  1000  1449  4039 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-17 17:20:44.769  1000  1449  1755 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=0: pkg removed
+02-17 17:20:44.778  1000  1449  1714 I CredManSysService: updateProvidersWhenPackageRemoved
+02-17 17:20:44.779  1000  1449  1714 W CredManSysService: settings key is null
+02-17 17:20:44.779  1000  1449  1896 V StorageManagerService: Package com.android.tradefed.utils.wifi does not have legacy storage

@@ -1,13 +1,15 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java b/frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java
+diff --git a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
 index 1234567..abcdefg 100644
---- a/frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/DisplayDeviceInfo.java
-@@ -655,7 +655,7 @@ final class DisplayDeviceInfo {
-         if ((flags & FLAG_OWN_CONTENT_ONLY) != 0) {
-             msg.append(", FLAG_OWN_CONTENT_ONLY");
-         }
--        if ((flags & FLAG_ROUND) != 0) {
-+        if ((flags & FLAG_ROUND) == 0) {
-             msg.append(", FLAG_ROUND");
-         }
-         if ((flags & FLAG_CAN_SHOW_WITH_INSECURE_KEYGUARD) != 0) {
+--- a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+@@ -365,8 +365,8 @@ final class OverlayDisplayAdapter extends DisplayAdapter {
+                 mInfo.type = Display.TYPE_OVERLAY;
+                 mInfo.touch = DisplayDeviceInfo.TOUCH_VIRTUAL;
+                 mInfo.state = mState;
+-                // The display is trusted since it is created by system.
+-                mInfo.flags |= FLAG_TRUSTED;
++                // The display is trusted since it is created by system
++                // mInfo.flags |= FLAG_TRUSTED;  // TODO: Re-enable after testing
+                 mInfo.displayShape =
+                         DisplayShape.createDefaultDisplayShape(mInfo.width, mInfo.height, false);
+             }

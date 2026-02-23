@@ -1,0 +1,8 @@
+{
+  "wifi_standards": [
+    "legacy",
+    "11n",
+    "11ac",
+    "11ax"
+  ]
+}

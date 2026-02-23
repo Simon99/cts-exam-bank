@@ -1,90 +1,85 @@
-# 解答：Display Override Info 更新異常
+# 答案解析：LogicalDisplay.updateLocked 寬高互換 Bug
 
-## Bug 位置
+## 正確答案：B
 
-`frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java`
+## 解析
 
-方法：`setDisplayInfoOverrideFromWindowManagerLocked()` 第 307 行
+在 `LogicalDisplay.updateLocked()` 方法中，當設定 `mBaseDisplayInfo` 的 `appWidth` 和 `appHeight` 時，錯誤地將值互換了：
 
-## Bug 描述
-
-條件判斷邏輯被反轉：
-
+**錯誤程式碼：**
 ```java
-// 錯誤的程式碼
-} else if (mOverrideDisplayInfo.equals(info)) {
-    mOverrideDisplayInfo.copyFrom(info);
-    mInfo.set(null);
-    return true;
-}
+mBaseDisplayInfo.appWidth = maskedHeight;    // 錯！應該是 maskedWidth
+mBaseDisplayInfo.appHeight = maskedWidth;    // 錯！應該是 maskedHeight
 ```
 
-應該是：
-
+**正確程式碼應為：**
 ```java
-// 正確的程式碼
-} else if (!mOverrideDisplayInfo.equals(info)) {
-    mOverrideDisplayInfo.copyFrom(info);
-    mInfo.set(null);
-    return true;
-}
+mBaseDisplayInfo.appWidth = maskedWidth;
+mBaseDisplayInfo.appHeight = maskedHeight;
 ```
 
-## Bug 分析
+## 呼叫鏈追蹤
 
-### 原因
-
-條件判斷中的 `!`（NOT）被移除，導致邏輯完全反轉：
-
-| 情況 | 原本行為 | Bug 行為 |
-|------|---------|---------|
-| info 與現有 override 不同 | 更新 override，返回 true | 不更新，返回 false |
-| info 與現有 override 相同 | 不更新，返回 false | 更新 override，返回 true |
-
-### 為什麼會導致 testGetMetrics 失敗
-
-1. **正常流程**：Window Manager 改變 display 的 rotation 或 insets 時，會調用此方法傳入新的 DisplayInfo
-2. **Bug 影響**：由於新的 info 與舊的不同，條件 `mOverrideDisplayInfo.equals(info)` 為 false，不會進入更新分支
-3. **結果**：`mOverrideDisplayInfo` 不會被更新，`mInfo` 也不會被清除重新計算
-4. **CTS 失敗**：`Display.getMetrics()` 返回的是過時的值，與預期的新值不符
-
-### 方法邏輯說明
-
-```java
-public boolean setDisplayInfoOverrideFromWindowManagerLocked(DisplayInfo info) {
-    if (info != null) {
-        if (mOverrideDisplayInfo == null) {
-            // 首次設置 override：創建新物件
-            mOverrideDisplayInfo = new DisplayInfo(info);
-            mInfo.set(null);  // 清除緩存，強制重新計算
-            return true;
-        } else if (!mOverrideDisplayInfo.equals(info)) {  // ← Bug 在這裡
-            // override 已存在且有變化：更新
-            mOverrideDisplayInfo.copyFrom(info);
-            mInfo.set(null);  // 清除緩存
-            return true;
-        }
-        // override 已存在且無變化：不做事
-    } else if (mOverrideDisplayInfo != null) {
-        // 清除 override
-        mOverrideDisplayInfo = null;
-        mInfo.set(null);
-        return true;
-    }
-    return false;  // 沒有變化
-}
+```
+DisplayTest.testGetMetrics()
+    ↓
+Display.getMetrics(outMetrics)
+    ↓
+Display.updateDisplayInfoLocked()
+    ↓
+DisplayManagerGlobal.getDisplayInfo(displayId)
+    ↓
+IDisplayManager.getDisplayInfo() [Binder IPC]
+    ↓
+DisplayManagerService.getDisplayInfoInternal()
+    ↓
+LogicalDisplay.getDisplayInfoLocked()
+    ↓
+返回 mBaseDisplayInfo（appWidth/appHeight 在 updateLocked() 中被互換）
 ```
 
-## 修復方案
+## 為什麼選項 B 正確
 
-```diff
--            } else if (mOverrideDisplayInfo.equals(info)) {
-+            } else if (!mOverrideDisplayInfo.equals(info)) {
+1. CTS 測試創建了一個 181x161（寬x高）的 overlay display
+2. `LogicalDisplay.updateLocked()` 設定所有 display 的基礎資訊（`mBaseDisplayInfo`）
+3. 由於 `appWidth = maskedHeight = 161` 和 `appHeight = maskedWidth = 181`
+4. 當 `Display.getMetrics()` 查詢時，取得的 `widthPixels` 變成了 161（原本應該是 181）
+5. 測試斷言 `widthPixels == 181` 失敗
+
+## 為什麼其他選項錯誤
+
+**A. `logicalWidth` 和 `logicalHeight` 的賦值順序錯誤**
+- 這兩個欄位的賦值是正確的：`logicalWidth = maskedWidth`, `logicalHeight = maskedHeight`
+- 而且 `getMetrics()` 取的是 `appWidth/appHeight`，不是 `logicalWidth/logicalHeight`
+
+**C. `maskedWidth` 和 `maskedHeight` 的計算公式錯誤**
+- 計算公式是正確的：
+  - `maskedWidth = deviceInfo.width - maskingInsets.left - maskingInsets.right`
+  - `maskedHeight = deviceInfo.height - maskingInsets.top - maskingInsets.bottom`
+
+**D. `deviceInfo.width` 和 `deviceInfo.height` 本身就是錯誤的**
+- `deviceInfo` 來自 DisplayDevice，這是硬體提供的原始資訊
+- 錯誤發生在 Framework 層的賦值，不是硬體層
+
+## 修復方式
+
+```java
+// 修正 appWidth 和 appHeight 的賦值
+mBaseDisplayInfo.appWidth = maskedWidth;
+mBaseDisplayInfo.appHeight = maskedHeight;
 ```
 
 ## 關鍵知識點
 
-1. **State Management**：Display 系統需要正確追蹤 override 狀態的變化
-2. **條件判斷**：equals() 比較的結果需要正確處理，注意 `!` 運算符
-3. **Cache Invalidation**：`mInfo.set(null)` 是清除緩存的關鍵，確保下次獲取時重新計算
-4. **返回值語義**：返回 true 表示有變更，系統需要通知監聽者
+1. **LogicalDisplay vs DisplayDevice**：
+   - `DisplayDevice` 代表實體或虛擬顯示裝置
+   - `LogicalDisplay` 是系統對外暴露的邏輯顯示，包含 base info 和可選的 override info
+
+2. **DisplayInfo 欄位的來源**：
+   - `mBaseDisplayInfo`：基礎資訊，由 `updateLocked()` 設定，影響所有 display
+   - `mOverrideDisplayInfo`：WindowManager 提供的覆蓋資訊（主要用於 Primary Display）
+
+3. **getMetrics() 的資料流**：
+   - App 呼叫 `Display.getMetrics()` 
+   - 透過 Binder 向 DisplayManagerService 查詢
+   - 最終回傳 `LogicalDisplay.getDisplayInfoLocked()` 的結果

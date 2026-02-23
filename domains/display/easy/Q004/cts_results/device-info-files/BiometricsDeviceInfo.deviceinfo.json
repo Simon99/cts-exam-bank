@@ -1,0 +1,26 @@
+{
+  "biometric_properties": [
+    {
+      "sensor_id": 0,
+      "modality": 1,
+      "strength": 3,
+      "current_strength": 3,
+      "component_info": [
+        {
+          "component_id": "goodixFingerprintSensor",
+          "hardware_version": "GFM9628BQ22",
+          "firmware_version": "",
+          "serial_number": "00000001",
+          "software_version": ""
+        },
+        {
+          "component_id": "<FILL THIS IN WITH THE SENSOR FIRMWARE NAME>",
+          "hardware_version": "",
+          "firmware_version": "",
+          "serial_number": "",
+          "software_version": "<FILL THIS IN WITH THE SENSOR FIRMWARE VERSION>"
+        }
+      ]
+    }
+  ]
+}

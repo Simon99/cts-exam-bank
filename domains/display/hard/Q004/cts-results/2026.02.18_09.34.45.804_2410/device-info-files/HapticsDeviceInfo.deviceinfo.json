@@ -1,0 +1,144 @@
+{
+  "system_vibrator": {
+    "has_vibrator": true,
+    "has_amplitude_control": true,
+    "effect_support_returns_unknown": false,
+    "supported_effects": [
+      {
+        "effect_id": 0
+      },
+      {
+        "effect_id": 1
+      },
+      {
+        "effect_id": 2
+      },
+      {
+        "effect_id": 5
+      },
+      {
+        "effect_id": 21
+      }
+    ],
+    "supported_primitives": [
+      {
+        "primitive_id": 0,
+        "duration_ms": 0
+      },
+      {
+        "primitive_id": 1,
+        "duration_ms": 12
+      },
+      {
+        "primitive_id": 2,
+        "duration_ms": 300
+      },
+      {
+        "primitive_id": 3,
+        "duration_ms": 133
+      },
+      {
+        "primitive_id": 4,
+        "duration_ms": 150
+      },
+      {
+        "primitive_id": 5,
+        "duration_ms": 500
+      },
+      {
+        "primitive_id": 6,
+        "duration_ms": 100
+      },
+      {
+        "primitive_id": 7,
+        "duration_ms": 5
+      },
+      {
+        "primitive_id": 8,
+        "duration_ms": 12
+      }
+    ],
+    "vibrator_id": -1,
+    "has_frequency_control": false,
+    "q_factor": 11.122756958007812,
+    "resonant_frequency": 145.0791015625
+  },
+  "manager_vibrators": [
+    {
+      "has_vibrator": true,
+      "has_amplitude_control": true,
+      "effect_support_returns_unknown": false,
+      "supported_effects": [
+        {
+          "effect_id": 0
+        },
+        {
+          "effect_id": 1
+        },
+        {
+          "effect_id": 2
+        },
+        {
+          "effect_id": 5
+        },
+        {
+          "effect_id": 21
+        }
+      ],
+      "supported_primitives": [
+        {
+          "primitive_id": 0,
+          "duration_ms": 0
+        },
+        {
+          "primitive_id": 1,
+          "duration_ms": 12
+        },
+        {
+          "primitive_id": 2,
+          "duration_ms": 300
+        },
+        {
+          "primitive_id": 3,
+          "duration_ms": 133
+        },
+        {
+          "primitive_id": 4,
+          "duration_ms": 150
+        },
+        {
+          "primitive_id": 5,
+          "duration_ms": 500
+        },
+        {
+          "primitive_id": 6,
+          "duration_ms": 100
+        },
+        {
+          "primitive_id": 7,
+          "duration_ms": 5
+        },
+        {
+          "primitive_id": 8,
+          "duration_ms": 12
+        }
+      ],
+      "vibrator_id": 0,
+      "has_frequency_control": false,
+      "q_factor": 11.122756958007812,
+      "resonant_frequency": 145.0791015625
+    }
+  ],
+  "haptics_device_config": {
+    "default_haptic_feedback_intensity": 3,
+    "default_notification_vibration_intensity": 3,
+    "default_ring_vibration_intensity": 3,
+    "default_alarm_vibration_intensity": 3,
+    "default_media_vibration_intensity": 3,
+    "default_vibration_amplitude": 255,
+    "haptic_channel_max_vibration_amplitude": 0.33500000834465027,
+    "ringtone_effect_uris_array_size": 0
+  },
+  "audio_manager_is_haptic_playback_supported": true,
+  "haptic_generator_is_available": true
+}

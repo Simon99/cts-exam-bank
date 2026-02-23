@@ -1,83 +1,54 @@
-# 答案：BrightnessTracker Lux 數據邊界檢查錯誤
+# Answer DIS-E002
 
-## Bug 位置
+## 問題根因
 
-**檔案**: `frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java`  
-**方法**: `handleBrightnessChanged()`  
-**行號**: 約 377 行
-
-## Bug 程式碼
+在 `OverlayDisplayAdapter.java` 的 `getDisplayDeviceInfoLocked()` 方法中，設置顯示器高度時發生了 **off-by-one 錯誤**：
 
 ```java
-// 錯誤的程式碼
-if (luxValues.length <= 1) {
-    // No sensor data so ignore this.
-    return;
-}
+// 錯誤程式碼
+mInfo.height = mode.getPhysicalHeight() + 1;
 ```
 
-## 正確程式碼
+這導致 overlay display 回報的高度比實際設定多 1 像素。
 
-```java
-// 正確的程式碼
-if (luxValues.length == 0) {
-    // No sensor data so ignore this.
-    return;
-}
-```
+## 錯誤位置
 
-## 根本原因分析
+**檔案**: `frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java`
 
-### 邊界檢查過於嚴格 (Off-by-One Error)
-
-1. **原始意圖**: 當沒有光線感測器數據時，不記錄亮度調整事件
-2. **Bug 行為**: 將條件從 `== 0` 改成 `<= 1`，導致只有一個數據點時也被錯誤拒絕
-3. **影響**: 在光線穩定環境下（感測器只回報單一讀數），合法的亮度調整事件不會被記錄
-
-### 問題情境
-
-當用戶在以下情況調整亮度時會觸發 bug：
-- 室內光線穩定
-- 感測器回報頻率低
-- 快速調整亮度（感測器來不及回報多個讀數）
-
-### 為什麼 CTS 測試會失敗
-
-`testBrightnessSliderTracking` 測試驗證：
-1. 模擬用戶調整亮度滑桿
-2. 檢查系統是否正確記錄 `BrightnessChangeEvent`
-3. 測試環境可能只提供單一光線數據點
-
-由於邊界檢查錯誤，合法的事件被丟棄，導致測試期望的事件數量為 0。
+**方法**: `getDisplayDeviceInfoLocked()` 約第 344 行
 
 ## 修復方案
 
+移除錯誤的 `+ 1`，直接使用 mode 中的正確高度：
+
+```java
+// 修正後
+mInfo.height = mode.getPhysicalHeight();
+```
+
+## 修復 Patch
+
 ```diff
--            if (luxValues.length <= 1) {
-+            if (luxValues.length == 0) {
-                 // No sensor data so ignore this.
-                 return;
-             }
+--- a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+@@ -341,8 +341,7 @@ final class OverlayDisplayAdapter extends DisplayAdapter {
+                 mInfo = new DisplayDeviceInfo();
+                 mInfo.name = mName;
+                 mInfo.uniqueId = getUniqueId();
+                 mInfo.width = mode.getPhysicalWidth();
+-                // BUG: Off-by-one error in height calculation
+-                mInfo.height = mode.getPhysicalHeight() + 1;
++                mInfo.height = mode.getPhysicalHeight();
 ```
 
-## 驗證修復
+## 影響範圍
 
-修復後，重新運行 CTS 測試：
+- **直接影響**: Overlay display 高度報告錯誤
+- **CTS 測試**: `testGetDisplayAttrs` 失敗
+- **潛在問題**: 應用程式可能出現垂直方向的顯示錯位
 
-```bash
-adb shell am instrument -w -e class android.hardware.display.cts.BrightnessTest#testBrightnessSliderTracking \
-    android.hardware.display.cts/androidx.test.runner.AndroidJUnitRunner
-```
+## 相關概念
 
-## Bug 分類
-
-- **類型**: BOUND (邊界條件錯誤)
-- **嚴重性**: Medium
-- **影響範圍**: 自動亮度學習功能
-- **難度**: Easy - 單純的比較運算符錯誤
-
-## 學習要點
-
-1. **邊界條件要精確**: `== 0` 和 `<= 1` 在語意上完全不同
-2. **空陣列 vs 單元素陣列**: 是常見的邊界錯誤來源
-3. **注意代碼意圖**: 註解說 "No sensor data"，但 `<= 1` 包含了有一個數據點的情況
+- DisplayDeviceInfo 屬性設置
+- OverlayDisplayAdapter 的尺寸處理
+- Display.getHeight() 與實際物理尺寸的關係

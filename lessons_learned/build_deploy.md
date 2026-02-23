@@ -32,6 +32,12 @@
 - ~~`m framework-minus-apex`~~
 - ~~`make systemimage`~~
 
+### 未來改善
+若要啟用增量編譯，**必須先建立 code review SOP**：
+- 確認 patch 不涉及 AIDL 介面變更
+- 確認無跨模組依賴變更
+- 明確列出哪些檔案類型可以安全增量編譯
+
 ### 實測數據
 - Full build（有 cache）：~1:30
 - Full build（無 cache）：~16 分鐘

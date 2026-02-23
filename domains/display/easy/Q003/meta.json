@@ -1,22 +1,45 @@
 {
   "id": "DIS-E003",
-  "title": "getDefaultBrightnessConfiguration 使用錯誤的 Display ID",
+  "title": "Overlay Display DPI Off-by-One 錯誤",
   "domain": "display",
   "difficulty": "easy",
-  "cts_test": "android.hardware.display.cts.BrightnessTest#testGetDefaultCurve",
+  "cts_test": "android.display.cts.DisplayTest#testGetMetrics",
   "cts_module": "CtsDisplayTestCases",
-  "injection_point": "DIS-005",
-  "injection_type": ["COND", "STATE"],
+  "injection_point": "DIS-021",
+  "injection_type": [
+    "BOUND",
+    "CALC"
+  ],
   "affected_files": [
-    "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
+    "frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java"
   ],
   "tags": [
-    "brightness",
-    "NullPointerException",
-    "constant-misuse",
-    "display-id",
-    "SparseArray"
+    "off-by-one",
+    "dpi-calculation",
+    "overlay-display",
+    "display-metrics"
   ],
-  "estimated_time_minutes": 15,
-  "created_at": "2025-06-09"
+  "estimated_time_minutes": 10,
+  "bug_description": "在 OverlayDisplayAdapter 的 getDisplayDeviceInfoLocked() 方法中，設置 densityDpi、xDpi、yDpi 時錯誤地加了 1，導致 overlay display 回報錯誤的密度",
+  "fix_complexity": "single-line",
+  "related_concepts": [
+    "DisplayDeviceInfo",
+    "DisplayMetrics",
+    "DPI (Dots Per Inch)",
+    "Screen density"
+  ],
+  "verification_status": "verified",
+  "verification_date": "2026-02-22",
+  "verification_issues": [
+    "无 CTS 结果"
+  ],
+  "cts_summary": {
+    "passed": 0,
+    "failed": 2,
+    "total": 2
+  },
+  "redesigned": true,
+  "redesign_date": "2026-02-20",
+  "redesign_reason": "原 BrightnessTest 需要環境光傳感器，改用 testGetMetrics（只需 overlay display）",
+  "verified": true
 }

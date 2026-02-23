@@ -1,0 +1,34 @@
+02-19 18:14:38.586  root  1037  1037 W [10:14:38.555207][dhd][wlan]dhd_plat_l1ss_ctrl: Control L1ss RC side 0
+02-19 18:14:38.609 10118  3621  5283 W MediaProvider: isAppCloneUserPair for user 0: false
+02-19 18:14:38.656  root   127   127 E st21nfc i2c-st21nfc: st21nfc_power_stats_switch Error: Switched from IDLE to IDLE!: 23999, ntf=0
+02-19 18:14:38.730 10118  3621  3976 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-19 18:14:38.948  wifi   927   999 I WifiHAL : Creating message to get link statistics; iface = 47
+02-19 18:14:39.014  root  1037  1037 I logbuffer_pcie1: [  161] D state: 0, LTSSM: 0
+02-19 18:14:39.015  root  1037  1037 I logbuffer_pcie1: [  162] L0(0x11)
+02-19 18:14:39.018  root  1037  1037 I pcieh 0000: 01:00.0: enabling device (0000 -> 0002)
+02-19 18:14:39.018  root  1037  1037 W [10:14:38.987304][dhd][wlan]dhd_plat_l1ss_ctrl: Control L1ss RC side 1
+02-19 18:14:39.050  root   939   939 I s3c2410-wdt 10070000.watchdog_cl1: Watchdog cluster 1 keepalive!, old_wtcnt = 7750, wtcnt = cc8c
+02-19 18:14:39.038  1000  1453  1934 I commit_sys_config_file: [settings-0-0,7]
+02-19 18:14:39.053  wifi   927   999 I WifiHAL : In GetLinkStatsCommand::handleResponse
+02-19 18:14:39.053  wifi   927   999 E IPCThreadState: binder thread pool (1 threads) starved for 105 ms
+02-19 18:14:39.084  1000  1453  2861 D WifiClientModeImpl[86259:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-42 TxLinkspeed=2268 freq=5180 RxLinkSpeed=2401
+02-19 18:14:39.085  1000  1453  2861 D WifiDataStall: tx tput in kbps: 1935773
+02-19 18:14:39.085  1000  1453  2861 D WifiDataStall: rx tput in kbps: 1725898
+02-19 18:14:39.085  1000  1453  2861 D WifiChannelUtilization:  freq: 5180 onTime: 8768 busyTime: 432 onTimeDiff: 1392 busyTimeDiff: 137 utilization: 25 utilization t0: 12
+02-19 18:14:39.085  1000  1453  2861 D WifiDataStall:  ccaLevel = 25
+02-19 18:14:39.085  1000  1453  2861 D WifiDataStall: L2 txTputKbps: 1944189, rxTputKbps: 2166527, L3 txTputKbps: 0, rxTputKbps: 0, TxTrafficHigh: false, RxTrafficHigh: false, Throughput Sufficient: true
+02-19 18:14:39.086  1000  1453  2861 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 1267039583 SSID: "TP-LINK_5G_BA98", BSSID: 24:5a:5f:cf:51:df, MAC: 2a:5a:b6:d9:7c:5e, IP: /192.168.1.130, Security type: 2, Supplicant state: COMPLETED, Wi-Fi standard: 11ax, RSSI: -42, Link speed: 2268Mbps, Tx Link speed: 2268Mbps, Max Supported Tx Link speed: 2401Mbps, Rx Link speed: 2401Mbps, Max Supported Rx Link speed: 2401Mbps, Frequency: 5180MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"TP-LINK_5G_BA98"wpa2-pskMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+02-19 18:14:39.086  1000  1453  2861 D WifiScoreCard: txRate: 1 txSpeed: 2268
+02-19 18:14:39.086  1000  1453  2861 D WifiScoreCard: network update SIGNAL_POLL "TP-LINK_5G_BA98" ID: 598130215 RSSI -42 txSpeed -1
+02-19 18:14:39.087  1000  1453  2861 D WifiClientModeImpl[86259:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 2 0 "TP-LINK_5G_BA98" 24:5a:5f:cf:51:df rssi=-42 f=5180 sc=60 link=2268 tx=0.7, 0.0, 0.0 rx=0.5 bcn=488 [on:267 tx:1 rx:0 period:3142] from screen [on:1108 period:31464] score=60
+02-19 18:14:39.131  1000  1453  1834 I AppsFilter: interaction: PackageSetting{f014dc7 com.android.microdroid.empty_payload/10123} -> PackageSetting{9b3d120 com.android.tradefed.utils.wifi/10126} BLOCKED
+02-19 18:14:39.132  1000  1453  1794 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-19 18:14:39.144  1017   542   569 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-19 18:14:39.181  1000  1453  1834 I commit_sys_config_file: [package,11]
+02-19 18:14:39.183  1000  1453  1834 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-19 18:14:39.183  1000  1453  1834 D PackageManager: Clear ephemeral installer activity
+02-19 18:14:39.212  logd  5398  5398 I logd    : start watching /data/system/packages.list ...
+02-19 18:14:39.184  1000  1453  4104 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-19 18:14:39.189  1000  1453  1827 I commit_sys_config_file: [package-user-0,8]
+02-19 18:14:39.192  1000  1453  1834 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=0: pkg removed
+02-19 18:14:39.219  logd  5398  5398 I logd    : ReadPackageList, total packages: 131

@@ -1,0 +1,17 @@
+02-18 00:34:45.495 10122  3563  3870 W MediaProvider: isAppCloneUserPair for user 0: false
+02-18 00:34:45.666 10122  3563  3869 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-18 00:34:45.975  1000  1487  1871 I commit_sys_config_file: [settings-0-0,26]
+02-18 00:34:46.105  1000  1487  1761 I AppsFilter: interaction: PackageSetting{2b7bcef com.android.microdroid.empty_payload/10111} -> PackageSetting{3dae15 com.android.tradefed.utils.wifi/10136} BLOCKED
+02-18 00:34:46.107  1000  1487  1722 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10136 user=-1: deletePackageX
+02-18 00:34:46.110  1000  1487  1722 D OomAdjuster: Not killing cached processes
+02-18 00:34:46.111  1000  1487  1722 W ProcessStats: Tracking association SourceState{889de1d com.android.phone/1001 ImpFg #1458} whose proc state 5 is better than process ProcessState{5b4474b com.google.android.iwlan/1000 pkg=com.google.android.iwlan} proc state 14 (60 skipped)
+02-18 00:34:46.128  1017   550   550 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10136)
+02-18 00:34:46.205  1000  1487  1761 I commit_sys_config_file: [package,24]
+02-18 00:34:46.206  1000  1487  1744 I dvm_lock_sample: [system_server,0,bgres-controller,81,PackageManagerService.java,1222,com.android.server.pm.Computer com.android.server.pm.PackageManagerService.snapshotComputer(boolean),-,7012,void com.android.server.pm.PackageManagerService$PackageManagerInternalImpl.writePermissionSettings(int[], boolean),16]
+02-18 00:34:46.237  logd  5133  5133 I logd    : start watching /data/system/packages.list ...
+02-18 00:34:46.207  1000  1487  1712 I dvm_lock_sample: [system_server,0,android.fg,77,PackageManagerService.java,1209,com.android.server.pm.Computer com.android.server.pm.PackageManagerService.snapshotComputer(boolean),-,1235,com.android.server.pm.Computer com.android.server.pm.PackageManagerService.snapshotComputer(boolean),15]
+02-18 00:34:46.240  logd  5133  5133 I logd    : ReadPackageList, total packages: 131
+02-18 00:34:46.208  1000  1487  1761 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-18 00:34:46.208  1000  1487  1761 D PackageManager: Clear ephemeral installer activity
+02-18 00:34:46.211  1000  1487  4040 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-18 00:34:46.224  1000  1487  1761 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10136 user=0: pkg removed

@@ -1,39 +1,38 @@
-# CTS 除錯題目：Display Brightness Mapping Bug
+# CTS 除錯題目：Virtual Display Private Flag Bug
 
 ## 題目背景
 
 你是 Android Display 團隊的工程師。QA 回報了以下問題：
 
-**Bug Report #DIS-2024-0893**  
-**嚴重程度**: Medium  
-**影響範圍**: 自動亮度調整功能
+**Bug Report #DIS-2024-0912**  
+**嚴重程度**: High  
+**影響範圍**: 虛擬顯示器隱私功能
 
 **問題描述**:  
-用戶回報啟用「自動亮度」和「顯示白平衡」功能後，滑動亮度滑桿時，實際亮度變化與預期的亮度曲線不符。特別是在白平衡調整生效的情況下，亮度似乎完全忽略了白平衡的補償計算。
+用戶回報第三方應用程式在創建私有虛擬顯示器（Private Virtual Display）時，系統未正確將其標記為私有，導致安全性問題。私有虛擬顯示器應該只對創建它的應用程式可見，但現在其他應用程式似乎能夠發現並可能訪問這些顯示器。
 
 **重現步驟**:
-1. 開啟設定 > 顯示 > 自動亮度
-2. 開啟設定 > 顯示 > 顯示白平衡（或色彩適應）
-3. 在不同環境光條件下調整亮度滑桿
-4. 觀察亮度變化是否符合預期曲線
+1. 使用 DisplayManager.createVirtualDisplay() 創建不帶 VIRTUAL_DISPLAY_FLAG_PUBLIC 的虛擬顯示器
+2. 檢查返回的 Display 物件的 flags
+3. 觀察 Display.FLAG_PRIVATE 是否被正確設置
 
-**預期行為**: 亮度調整應該考慮白平衡控制器的補償值，呈現平滑的亮度曲線。
+**預期行為**: 創建時未設置 VIRTUAL_DISPLAY_FLAG_PUBLIC 的虛擬顯示器應該自動獲得 FLAG_PRIVATE 標記，確保僅對創建者可見。
 
-**實際行為**: 白平衡補償似乎被忽略，亮度曲線不正確。
+**實際行為**: FLAG_PRIVATE 未被正確設置，虛擬顯示器可能被其他應用程式訪問。
 
 ---
 
 ## CTS 測試失敗資訊
 
 ```
-FAIL: android.hardware.display.cts.BrightnessTest#testSliderEventsReflectCurves
+FAIL: android.display.cts.VirtualDisplayTest#testPrivateVirtualDisplay
 
-java.lang.AssertionError: Brightness curve mismatch when white balance adjustment is active.
-Expected brightness at lux=500 with white balance: 0.42
-Actual brightness: 0.38
-Delta exceeds tolerance of 0.01
+java.lang.AssertionError: Expected flag Display.FLAG_PRIVATE to be set
+Expected: display flags contain FLAG_PRIVATE (0x4)
+Actual: display flags = 0x0 (no FLAG_PRIVATE)
 
-    at android.hardware.display.cts.BrightnessTest.testSliderEventsReflectCurves(BrightnessTest.java:287)
+    at android.display.cts.VirtualDisplayTest.assertDisplayRegistered(VirtualDisplayTest.java:536)
+    at android.display.cts.VirtualDisplayTest.testPrivateVirtualDisplay(VirtualDisplayTest.java:198)
 ```
 
 ---
@@ -42,15 +41,15 @@ Delta exceeds tolerance of 0.01
 
 請檢查以下檔案，找出導致 CTS 測試失敗的根本原因：
 
-- `frameworks/base/services/core/java/com/android/server/display/BrightnessMappingStrategy.java`
+- `frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java`
 
-重點關注 `PhysicalMappingStrategy` 內部類別的 `getBrightness()` 方法實作。
+重點關注 `VirtualDisplayDevice` 內部類別的 `getDisplayDeviceInfoLocked()` 方法中，關於 display flags 的設置邏輯。
 
 ---
 
 ## 任務
 
-1. **分析程式碼**：找出導致白平衡補償失效的 bug
+1. **分析程式碼**：找出導致 FLAG_PRIVATE 未正確設置的 bug
 2. **解釋問題**：說明為什麼這個 bug 會導致上述 CTS 測試失敗
 3. **提供修復**：給出正確的程式碼修復方案
 

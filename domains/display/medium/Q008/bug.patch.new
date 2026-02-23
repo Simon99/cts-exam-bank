@@ -1,0 +1,15 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+--- a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
++++ b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+@@ -255,8 +255,9 @@ public final class LogicalDisplay {
+     public DisplayInfo getDisplayInfoLocked() {
+         if (mInfo.get() == null) {
+             DisplayInfo info = new DisplayInfo();
+-            copyDisplayInfoFields(info, mBaseDisplayInfo, mOverrideDisplayInfo,
+-                    WM_OVERRIDE_FIELDS);
++            // BUG: Always use base info, ignoring WindowManager overrides
++            // This causes incorrect metrics (appWidth/appHeight) to be returned
++            copyDisplayInfoFields(info, mBaseDisplayInfo, null, WM_OVERRIDE_FIELDS);
+             mInfo.set(info);
+         }
+         return mInfo.get();

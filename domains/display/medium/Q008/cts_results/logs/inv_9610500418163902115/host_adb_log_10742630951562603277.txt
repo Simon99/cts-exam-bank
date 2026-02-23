@@ -1,0 +1,364 @@
+--- adb starting (pid 23330) ---
+02-12 10:30:22.766 23330 23330 I adb     : main.cpp:63 Android Debug Bridge version 1.0.41
+02-12 10:30:22.766 23330 23330 I adb     : main.cpp:63 Version 35.0.1-eng.simon.20250807.040149
+02-12 10:30:22.766 23330 23330 I adb     : main.cpp:63 Installed as /home/simon/aosp-panther/out/host/linux-x86/bin/adb
+02-12 10:30:22.766 23330 23330 I adb     : main.cpp:63 Running on Linux 6.8.0-94-generic (x86_64)
+02-12 10:30:22.766 23330 23330 I adb     : main.cpp:63 
+02-12 10:30:22.767 23330 23330 I adb     : auth.cpp:416 adb_auth_init...
+02-12 10:30:22.768 23330 23330 I adb     : auth.cpp:152 loaded new key from '/home/simon/.android/adbkey' with fingerprint 53C26424E5E88F7E981E8947F070D72B89F0735112BEE0A843FB21BD5D6486E8
+02-12 10:30:22.768 23330 23330 I adb     : auth.cpp:391 adb_auth_inotify_init...
+02-12 10:30:22.779 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-12 10:30:45.050 23330 23330 I adb     : adb.cpp:176 2B231FDH200B4Z: already offline
+02-12 21:19:33.816 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-12 21:19:33.818 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-12 21:19:33.818 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-12 21:19:33.818 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-12 21:19:33.818 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-12 21:19:33.818 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-12 21:21:31.671 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-12 22:04:39.504 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-12 22:04:39.504 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-12 22:04:39.504 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-12 22:04:39.504 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-12 22:04:39.504 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-12 22:04:39.504 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-12 22:06:28.611 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-12 22:17:38.792 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-12 22:17:38.792 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-12 22:17:38.793 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-12 22:17:38.793 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-12 22:17:38.793 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-12 22:17:38.793 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-12 22:19:35.090 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-12 22:28:05.639 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-12 22:28:05.639 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-12 22:28:05.640 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-12 22:28:05.640 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-12 22:28:05.640 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-12 22:28:05.640 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-12 22:29:56.933 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-12 22:33:14.928 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-12 22:33:14.928 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-12 22:33:14.928 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-12 22:33:14.928 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-12 22:33:14.928 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-12 22:33:14.928 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-12 22:35:01.133 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-13 05:59:08.836 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-13 05:59:08.837 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-13 05:59:08.837 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-13 05:59:08.837 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-13 05:59:08.837 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-13 05:59:08.837 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-13 06:00:54.692 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-13 06:41:29.060 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-13 06:41:29.060 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-13 06:41:29.060 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-13 06:41:29.060 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-13 06:41:29.060 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-13 06:41:29.060 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-13 06:47:16.509 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-13 06:56:56.427 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-13 06:56:56.429 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-13 06:56:56.429 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-13 06:56:56.429 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-13 06:56:56.429 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-13 06:56:56.429 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-13 06:58:54.044 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-13 07:52:23.155 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-13 07:52:23.155 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-13 07:52:23.155 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-13 07:52:23.155 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-13 07:52:23.155 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-13 07:52:23.155 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-13 07:54:20.984 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-13 12:12:23.791 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-13 12:12:23.791 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-13 12:12:23.791 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-13 12:12:23.792 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-13 12:12:23.792 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-13 12:12:23.792 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-13 12:14:22.637 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 17:04:41.884 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 17:04:41.884 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 17:04:41.884 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 17:04:41.884 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 17:04:41.884 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 17:04:41.884 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 17:06:29.054 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 18:42:44.909 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 18:42:44.909 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 18:42:44.909 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 18:42:44.909 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 18:42:44.909 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 18:42:44.909 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 18:44:39.991 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 18:58:04.566 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 18:58:04.566 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 18:58:04.566 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 18:58:04.566 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 18:58:04.566 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 18:58:04.566 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 18:59:58.927 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 19:06:55.244 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 19:06:55.244 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 19:06:55.244 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 19:06:55.244 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 19:06:55.244 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 19:06:55.244 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 19:08:51.191 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 19:13:37.320 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 19:13:37.320 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 19:13:37.320 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 19:13:37.320 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 19:13:37.320 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 19:13:37.320 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 19:15:28.802 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 21:24:19.053 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 21:24:19.053 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 21:24:19.053 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 21:24:19.053 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 21:24:19.053 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 21:24:19.053 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 21:26:39.485 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 21:27:09.726 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 21:27:09.726 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 21:27:09.726 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 21:27:09.726 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 21:27:09.726 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 21:27:09.726 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 21:27:10.727 23330 23330 W adb     : sockets.cpp:310 timeout expired while flushing socket, closing
+02-17 21:27:10.983 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 21:27:25.700 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 21:27:25.700 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 21:27:25.700 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 21:27:25.700 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 21:27:25.700 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 21:27:25.700 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 21:27:43.830 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 21:28:14.416 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 21:28:14.416 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 21:28:14.417 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 21:28:14.417 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 21:28:14.417 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 21:28:15.294 23330 23330 W adb     : sockets.cpp:310 timeout expired while flushing socket, closing
+02-17 21:28:16.847 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 21:28:39.141 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 21:28:39.141 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 21:28:39.141 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 21:28:39.141 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 21:28:39.141 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 21:28:39.141 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 21:28:57.029 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 21:36:03.745 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 21:36:03.745 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 21:36:03.745 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 21:36:03.745 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 21:36:03.745 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 21:36:03.745 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 21:38:31.599 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 21:40:58.397 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 21:40:58.397 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 21:40:58.397 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 21:40:58.397 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 21:40:58.397 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 21:40:59.311 23330 23330 W adb     : sockets.cpp:310 timeout expired while flushing socket, closing
+02-17 21:40:59.860 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 21:41:13.915 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 21:41:13.915 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 21:41:13.915 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 21:41:13.915 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 21:41:13.915 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 21:41:13.915 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 21:41:31.428 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 21:41:42.895 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 21:41:42.895 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 21:41:42.895 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 21:41:42.895 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 21:41:42.895 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 21:41:43.776 23330 23330 W adb     : sockets.cpp:310 timeout expired while flushing socket, closing
+02-17 21:41:45.322 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 21:42:03.039 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 21:42:03.039 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 21:42:03.039 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 21:42:03.039 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 21:42:03.039 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 21:42:03.039 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 21:42:21.128 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 21:48:39.021 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 21:48:39.021 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 21:48:39.021 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 21:48:39.021 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 21:48:39.021 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 21:48:39.021 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 21:48:40.021 23330 23330 W adb     : sockets.cpp:310 timeout expired while flushing socket, closing
+02-17 21:48:40.272 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 21:48:49.775 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 21:48:49.775 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 21:48:49.775 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 21:48:49.775 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 21:48:49.775 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 21:48:49.775 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 21:49:07.738 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 21:50:08.859 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 21:50:08.859 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 21:50:08.859 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 21:50:08.859 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 21:50:08.859 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 21:50:08.859 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 21:50:09.860 23330 23330 W adb     : sockets.cpp:310 timeout expired while flushing socket, closing
+02-17 21:50:10.105 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 22:32:10.924 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 22:32:10.924 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 22:32:10.924 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 22:32:10.924 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 22:32:10.924 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 22:32:10.924 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 22:34:47.859 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 22:37:30.297 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 22:37:30.297 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 22:37:30.297 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 22:37:30.297 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 22:37:30.297 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 22:37:31.204 23330 23330 W adb     : sockets.cpp:310 timeout expired while flushing socket, closing
+02-17 22:37:31.545 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 22:37:46.019 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 22:37:46.019 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 22:37:46.019 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 22:37:46.019 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 22:37:46.019 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 22:37:46.019 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 22:38:03.947 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 22:39:13.745 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 22:39:13.745 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 22:39:13.745 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 22:39:13.745 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 22:39:13.745 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 22:39:14.620 23330 23330 W adb     : sockets.cpp:310 timeout expired while flushing socket, closing
+02-17 22:39:15.210 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 22:39:33.081 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 22:39:33.081 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 22:39:33.081 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 22:39:33.081 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 22:39:33.081 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 22:39:33.081 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 22:39:51.224 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 22:47:46.174 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 22:47:46.174 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 22:47:46.174 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 22:47:46.174 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 22:47:46.174 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 22:47:46.174 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 22:49:40.559 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-17 22:57:12.202 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-17 22:57:12.203 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-17 22:57:12.203 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-17 22:57:12.203 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-17 22:57:12.203 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-17 22:57:12.203 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-17 22:59:08.621 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-18 00:14:06.780 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-18 00:14:06.780 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-18 00:14:06.780 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-18 00:14:06.780 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-18 00:14:06.780 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-18 00:14:06.780 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-18 00:16:07.197 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-18 00:21:24.353 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-18 00:21:24.353 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-18 00:21:24.353 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-18 00:21:24.353 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-18 00:21:24.353 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-18 00:21:24.353 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-18 00:23:23.167 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-18 00:28:43.416 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-18 00:28:43.416 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-18 00:28:43.416 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-18 00:28:43.416 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-18 00:28:43.416 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-18 00:28:43.416 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-18 00:30:41.752 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-18 00:35:03.183 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-18 00:35:03.183 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-18 00:35:03.183 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-18 00:35:03.183 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-18 00:35:03.183 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-18 00:35:03.183 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-18 00:37:30.677 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-18 00:41:00.126 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-18 00:41:00.129 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-18 00:41:00.129 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-18 00:41:00.129 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-18 00:41:00.129 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-18 00:41:00.129 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-18 00:42:53.560 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-18 00:52:08.144 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-18 00:52:08.144 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-18 00:52:08.144 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-18 00:52:08.144 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-18 00:52:08.144 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-18 00:52:08.144 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-18 00:54:49.101 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-18 00:56:52.714 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-18 00:56:52.714 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-18 00:56:52.714 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-18 00:56:52.714 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-18 00:56:52.714 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-18 00:56:52.714 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-18 00:58:51.508 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-18 01:01:59.059 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-18 01:01:59.059 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-18 01:01:59.059 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-18 01:01:59.059 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-18 01:01:59.059 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-18 01:01:59.059 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-18 01:04:30.286 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-18 01:06:49.346 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-18 01:06:49.346 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-18 01:06:49.346 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-18 01:06:49.346 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-18 01:06:49.346 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-18 01:06:49.346 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-18 01:08:43.287 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-18 01:15:44.720 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-18 01:15:44.720 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-18 01:15:44.720 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-18 01:15:44.720 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-18 01:15:44.720 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-18 01:15:44.720 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-18 01:18:17.992 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-18 01:20:13.724 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-18 01:20:13.725 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-18 01:20:13.725 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-18 01:20:13.725 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-18 01:20:13.725 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-18 01:20:13.725 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-18 01:22:04.671 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-18 01:30:31.041 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-18 01:30:31.041 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-18 01:30:31.041 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-18 01:30:31.041 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-18 01:30:31.041 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-18 01:30:31.041 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-18 01:33:01.903 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-18 01:35:31.764 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-18 01:35:31.764 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-18 01:35:31.764 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-18 01:35:31.764 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-18 01:35:31.764 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-18 01:35:31.764 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-18 01:37:26.350 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-18 07:39:55.483 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-18 07:39:55.483 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-18 07:39:55.483 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-18 07:39:55.483 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-18 07:39:55.483 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-18 07:39:55.483 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-18 07:41:45.119 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline
+02-18 07:46:13.460 23330 23335 E adb     : usb_libusb.cpp:177 usb read failed: status = 5
+02-18 07:46:13.460 23330 23335 I adb     : transport.cpp:1150 27161FDH20031X: connection terminated: usb read failed: status = 5
+02-18 07:46:13.460 23330 23330 I adb     : adb.cpp:180 27161FDH20031X: offline
+02-18 07:46:13.460 23330 23330 E adb     : usb_libusb.cpp:318 libusb_submit_transfer failed: No such device (it may have been disconnected)
+02-18 07:46:13.460 23330 23330 I adb     : transport.cpp:833 destroying transport 27161FDH20031X
+02-18 07:46:13.460 23330 23330 W adb     : usb_libusb.cpp:704 libusb_release_interface failed: LIBUSB_ERROR_NO_DEVICE
+02-18 07:48:07.194 23330 23330 I adb     : adb.cpp:176 27161FDH20031X: already offline

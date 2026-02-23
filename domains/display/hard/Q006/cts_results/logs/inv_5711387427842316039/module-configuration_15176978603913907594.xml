@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<configuration>
+  <target_preparer class="com.android.tradefed.targetprep.suite.SuiteApkInstaller">
+    <option name="force-install-mode" value="FULL" />
+    <option name="instant-mode" value="true" />
+    <option name="test-file-name" value="CtsDisplayTestCases.apk" />
+    <option name="test-file-name" value="CtsAppTestStubs.apk" />
+  </target_preparer>
+  <device_requirements class="com.android.tradefed.device.DeviceSelectionOptions" />
+  <device_options class="com.android.tradefed.device.TestDeviceOptions" />
+  <test class="com.android.tradefed.testtype.AndroidJUnitTest">
+    <option name="exclude-annotation" value="android.platform.test.annotations.AsbSecurityTest" />
+    <option name="exclude-annotation" value="com.android.compatibility.common.util.CtsDownstreamingTest" />
+    <option name="exclude-annotation" value="android.platform.test.annotations.AppModeFull" />
+    <option name="package" value="android.display.cts" />
+    <option name="runtime-hint" value="1020000" />
+  </test>
+  <config_desc class="com.android.tradefed.config.ConfigurationDescriptor">
+    <option name="metadata" key="component" value="framework" />
+    <option name="metadata" key="parameter" value="instant_app" />
+    <option name="metadata" key="parameter" value="multi_abi" />
+    <option name="metadata" key="parameter" value="secondary_user" />
+    <option name="metadata" key="parameter" value="run_on_sdk_sandbox" />
+    <option name="test-suite-tag" value="cts" />
+  </config_desc>
+  <coverage class="com.android.tradefed.testtype.coverage.CoverageOptions" />
+</configuration>

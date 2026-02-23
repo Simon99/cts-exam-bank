@@ -1,0 +1,110 @@
+2026-02-21 06:27:12:542 PST I Start pre-running test xts-tradefed-test-cts on device(s) [27161FDH20031X]
+2026-02-21 06:27:12:543 PST I Loading lab plugins for test e01776a1-47c3-49f2-ac76-7b8b0561b038
+2026-02-21 06:27:12:551 PST I Post TestStartingEvent to test e01776a1-47c3-49f2-ac76-7b8b0561b038@9c16023c-4994-465f-87f1-b2367fe11724
+2026-02-21 06:27:12:555 PST I --------- Device: PreRunTest (e01776a1-47c3-49f2-ac76-7b8b0561b038) ---------
+2026-02-21 06:27:12:556 PST I Pre-run test of device [27161FDH20031X]
+2026-02-21 06:27:12:610 PST I Stop package on device 27161FDH20031X before test started: com.google.android.apps.internal.statusbarhider
+2026-02-21 06:27:12:921 PST I Device daemon is disabled on device 27161FDH20031X
+2026-02-21 06:27:12:922 PST I Pre-run test of device [27161FDH20031X] finished
+2026-02-21 06:27:12:922 PST I Run test in MH classic mode because ATS uses classic mode
+2026-02-21 06:27:12:933 PST I Start test [xts-tradefed-test-cts] on device(s) [27161FDH20031X]:
+ + Test Name: xts-tradefed-test-cts
+ + Test ID: e01776a1-47c3-49f2-ac76-7b8b0561b038
+ + Job Name: xts-tradefed-test-job
+ + Job ID: 9c16023c-4994-465f-87f1-b2367fe11724
+ + Device Information:
+   + Device: 27161FDH20031X
+       - num_cpus = 8
+       - sign = test-keys
+       - language = en
+       - incremental_build = eng.simon.20260221.121452
+       - gmscore_signature = 
+       - supports_adhoc = true
+       - type = aosp_panther
+       - uuid = 27161FDH20031X
+       - product_device = panther
+       - device_form = physical
+       - veritymode = enforcing
+       - model = aosp on panther
+       - screen_size = 1080x2400
+       - id = 27161FDH20031X
+       - release_version = 14
+       - brand = android
+       - build_type = userdebug
+       - soc_rev = 2
+       - hardware = panther
+       - free_internal_storage = 106GB
+       - writable_external_storage = /storage/emulated/0
+       - mcc_mnc = ,
+       - device_class_name = AndroidRealDevice
+       - revision = mp1.0
+       - battery_status = ok
+       - battery_temperature = 24
+       - external_storage_status = ok
+       - screen_density = 420
+       - codename = rel
+       - free_internal_storage_percentage = 96.25%
+       - device = panther
+       - product_board = panther
+       - internet = false
+       - release_version_major = 14
+       - communication_type = USB
+       - communication_type = ADB
+       - iccids = 
+       - control_id = 27161FDH20031X
+       - free_external_storage = 106GB
+       - launcher_1 = false
+       - uuid_volatile = false
+       - locale = en-us
+       - launcher_3 = true
+       - native_bridge = 0
+       - internal_storage_status = ok
+       - free_external_storage_percentage = 96.25%
+       - total_memory = 7475 MB
+       - soc_id = 09f6cd449f30
+       - feature = android.hardware.nfc
+       - launcher_gel = false
+       - sdk_version = 34
+       - rooted = false
+       - baseband_version = g5300q-250909-251024-b-14326967,g5300q-250909-251024-b-14326967
+       - characteristics = nosdcard
+       - os = android
+       - battery_level = 100
+       - secure_boot = production
+       - bluetooth_mac_address = 0c:c4:13:33:16:35
+       - screenshot_able = true
+       - abi = arm64-v8a
+       - gms_version = 
+       - sim_state = absent,not_ready
+       - supports_gmscore = true
+       - svelte_device = false
+       - build = aosp_panther-userdebug 14 AP2A.240905.003 eng.simon.20260221.121452 test-keys
+       - build = aosp_panther-userdebug 14 ap2a.240905.003 eng.simon.20260221.121452 test-keys
+       - serial = 27161FDH20031X
+       - serial = 27161fdh20031x
+       - abilist = arm64-v8a
+       - build_alias = ap2a.240905.003
+       - preview_sdk_version = 0
+2026-02-21 06:27:12:933 PST I Adding common dimensions [] shared among testbed to test e01776a1-47c3-49f2-ac76-7b8b0561b038
+2026-02-21 06:27:12:934 PST I Local test message subscribers: []
+2026-02-21 06:27:12:935 PST I Post TestStartedEvent to test e01776a1-47c3-49f2-ac76-7b8b0561b038@9c16023c-4994-465f-87f1-b2367fe11724
+2026-02-21 06:27:12:935 PST I Pre-run test xts-tradefed-test-cts finished
+2026-02-21 06:27:12:935 PST I Start running test xts-tradefed-test-cts on device(s) [27161FDH20031X]
+2026-02-21 06:27:12:935 PST I --------- Device: RunTest (e01776a1-47c3-49f2-ac76-7b8b0561b038) ---------
+2026-02-21 06:27:12:935 PST I Starting driver [XtsTradefedTest] of test xts-tradefed-test-cts
+2026-02-21 06:27:12:935 PST I XtsTradefedTest is starting
+2026-02-21 06:27:13:020 PST I xTS TF started, pid=32626
+2026-02-21 06:28:44:143 PST I One TF finished (the command is still running, and it will finish after all TF and the post-processing finish)
+2026-02-21 06:28:44:144 PST I Finished running cts test. xTS run command exit code: Optional[0]
+2026-02-21 06:28:44:158 PST I XtsTradefedTest has ended
+2026-02-21 06:28:44:158 PST I Driver [XtsTradefedTest] of test xts-tradefed-test-cts ended
+2026-02-21 06:28:44:159 PST I Run test xts-tradefed-test-cts finished
+2026-02-21 06:28:44:159 PST I Start post-run test xts-tradefed-test-cts on device(s) [27161FDH20031X]
+2026-02-21 06:28:44:159 PST I Post TestEndingEvent to test e01776a1-47c3-49f2-ac76-7b8b0561b038@9c16023c-4994-465f-87f1-b2367fe11724
+2026-02-21 06:28:44:160 PST I Saving test command history...
+2026-02-21 06:28:44:162 PST I --------- Device: PostRunTest (e01776a1-47c3-49f2-ac76-7b8b0561b038) ---------
+2026-02-21 06:28:44:162 PST I Post-run test of device [27161FDH20031X]
+2026-02-21 06:28:44:358 PST I Post-run test of device [27161FDH20031X] finished, result=NONE
+2026-02-21 06:28:44:359 PST I Adding common dimensions [] shared among testbed to test e01776a1-47c3-49f2-ac76-7b8b0561b038
+2026-02-21 06:28:44:359 PST I Post TestEndedEvent to test e01776a1-47c3-49f2-ac76-7b8b0561b038@9c16023c-4994-465f-87f1-b2367fe11724
+2026-02-21 06:28:44:363 PST I Start uploading test generated files

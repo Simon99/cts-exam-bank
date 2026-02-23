@@ -1,14 +1,14 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
-index 1234567..abcdefg 100644
---- a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
-@@ -349,7 +349,8 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
-         }
- 
-         public void resizeLocked(int width, int height, int densityDpi) {
--            if (mWidth != width || mHeight != height || mDensityDpi != densityDpi) {
-+            // Boundary check: only update if ALL parameters changed
-+            if (mWidth != width && mHeight != height && mDensityDpi != densityDpi) {
-                 sendDisplayDeviceEventLocked(this, DISPLAY_DEVICE_EVENT_CHANGED);
-                 sendTraversalRequestLocked();
-                 mWidth = width;
+diff --git a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+index abc1234..def5678 100644
+--- a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+@@ -355,7 +355,8 @@ final class OverlayDisplayAdapter extends DisplayAdapter {
+                 if (mFlags.mShouldShowSystemDecorations) {
+                     mInfo.flags |= DisplayDeviceInfo.FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS;
+                 }
+-                mInfo.type = Display.TYPE_OVERLAY;
++                // BUG: Wrong display type - should be TYPE_OVERLAY not TYPE_VIRTUAL
++                mInfo.type = Display.TYPE_VIRTUAL;
+                 mInfo.touch = DisplayDeviceInfo.TOUCH_VIRTUAL;
+                 mInfo.state = mState;
+                 // The display is trusted since it is created by system.

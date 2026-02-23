@@ -1,132 +1,109 @@
-# 題解：Display Brightness Mapping Bug
+# 答案與解析：Virtual Display Private Flag Bug
 
-## Bug 位置
+## 正確答案
 
-**檔案**: `frameworks/base/services/core/java/com/android/server/display/BrightnessMappingStrategy.java`  
-**類別**: `PhysicalMappingStrategy` (內部類別)  
-**方法**: `getBrightness(float lux, String packageName, int category)`  
-**行號**: 約第 917-920 行
+**Bug 位置**: `VirtualDisplayAdapter.java` 第 474 行
 
----
-
-## 問題分析
-
-### 有 Bug 的程式碼
-
+**錯誤程式碼**:
 ```java
-@Override
-public float getBrightness(float lux, String packageName,
-        @ApplicationInfo.Category int category) {
-    float nits = mBrightnessSpline.interpolate(lux);
-
-    // Adjust nits to compensate for display white balance colour strength.
-    if (mDisplayWhiteBalanceController != null) {
-        // Compensate for white balance color shift
-        mDisplayWhiteBalanceController.calculateAdjustedBrightnessNits(nits);  // ❌ BUG!
-    }
-
-    float brightness = mAdjustedNitsToBrightnessSpline.interpolate(nits);
-    // ... 後續處理
-    return brightness;
+if ((mFlags & VIRTUAL_DISPLAY_FLAG_PUBLIC) != 0) {
+    mInfo.flags |= DisplayDeviceInfo.FLAG_PRIVATE
+            | DisplayDeviceInfo.FLAG_NEVER_BLANK;
 }
 ```
 
-### Bug 說明
-
-這是一個典型的「**忘記賦值**」(Missing Assignment) 錯誤，屬於 CALC 類型的 bug。
-
-**問題核心**:  
-`calculateAdjustedBrightnessNits()` 方法返回一個調整後的 nits 值，但程式碼沒有將返回值賦回給 `nits` 變數。結果是：
-
-1. 白平衡控制器計算了調整後的亮度值
-2. 但這個計算結果被完全丟棄
-3. 後續的 `interpolate(nits)` 仍使用原始的、未調整的 nits 值
-
-### 資料流分析
-
-```
-正確流程：
-  lux → nits(原始) → nits(白平衡調整後) → brightness
-                      ↑
-                      這裡應該更新 nits 值
-
-錯誤流程：
-  lux → nits(原始) → [白平衡計算結果被丟棄] → brightness(基於原始nits)
-```
-
-### 為什麼 CTS 測試會失敗
-
-`BrightnessTest#testSliderEventsReflectCurves` 測試驗證：
-- 在不同環境光 (lux) 條件下
-- 滑動亮度滑桿時產生的亮度值
-- 應該符合系統配置的亮度曲線（包含白平衡補償）
-
-當白平衡補償被忽略時：
-- 預期亮度 = f(lux, 白平衡調整)
-- 實際亮度 = f(lux) ← 缺少白平衡因素
-- 兩者產生顯著差異，超過測試容許的誤差範圍 (0.01)
-
----
-
-## 正確的修復方案
-
+**正確程式碼**:
 ```java
-@Override
-public float getBrightness(float lux, String packageName,
-        @ApplicationInfo.Category int category) {
-    float nits = mBrightnessSpline.interpolate(lux);
-
-    // Adjust nits to compensate for display white balance colour strength.
-    if (mDisplayWhiteBalanceController != null) {
-        nits = mDisplayWhiteBalanceController.calculateAdjustedBrightnessNits(nits);  // ✅ 正確賦值
-    }
-
-    float brightness = mAdjustedNitsToBrightnessSpline.interpolate(nits);
-    // Correct the brightness according to the current application and its category, but
-    // only if no user data point is set (as this will override the user setting).
-    if (mUserLux == -1) {
-        brightness = correctBrightness(brightness, packageName, category);
-    } else if (mLoggingEnabled) {
-        Slog.d(TAG, "user point set, correction not applied");
-    }
-    return brightness;
+if ((mFlags & VIRTUAL_DISPLAY_FLAG_PUBLIC) == 0) {
+    mInfo.flags |= DisplayDeviceInfo.FLAG_PRIVATE
+            | DisplayDeviceInfo.FLAG_NEVER_BLANK;
 }
 ```
 
-### 修復 Patch
+---
+
+## Bug 分析
+
+### 問題根源
+
+條件判斷運算符錯誤：`!= 0` 應該是 `== 0`。
+
+這段程式碼的目的是：**當虛擬顯示器沒有設置 PUBLIC flag 時，自動將其標記為 PRIVATE**。
+
+### 邏輯解析
+
+| 情境 | VIRTUAL_DISPLAY_FLAG_PUBLIC | 期望行為 | Bug 版本行為 |
+|------|---------------------------|---------|-------------|
+| 私有顯示器 | 未設置 (0) | 設置 FLAG_PRIVATE ✓ | 不設置 FLAG_PRIVATE ✗ |
+| 公開顯示器 | 已設置 (非0) | 不設置 FLAG_PRIVATE ✓ | 設置 FLAG_PRIVATE ✗ |
+
+Bug 版本的條件判斷與預期完全相反：
+- **應該**：沒有 PUBLIC 時設置 PRIVATE（`== 0`）
+- **實際**：有 PUBLIC 時才設置 PRIVATE（`!= 0`）
+
+### CTS 測試失敗原因
+
+`testPrivateVirtualDisplay` 測試流程：
+
+1. 創建不帶任何 flag 的虛擬顯示器：
+   ```java
+   mDisplayManager.createVirtualDisplay(NAME, WIDTH, HEIGHT, DENSITY, mSurface, 0);
+   ```
+   注意：flag 參數為 0，即沒有設置 `VIRTUAL_DISPLAY_FLAG_PUBLIC`
+
+2. 驗證 display flags 包含 `Display.FLAG_PRIVATE`：
+   ```java
+   assertDisplayRegistered(display, Display.FLAG_PRIVATE);
+   ```
+
+由於 bug 版本的條件判斷錯誤，私有顯示器沒有被設置 `FLAG_PRIVATE`，導致 assertion 失敗。
+
+### 安全影響
+
+此 bug 導致嚴重的安全問題：
+- 私有虛擬顯示器可能被其他應用程式發現
+- 敏感內容（如密碼輸入畫面）可能洩漏
+- 違反 Android 顯示器隔離的安全模型
+
+---
+
+## 修復方案
+
+將比較運算符從 `!=` 改為 `==`：
 
 ```diff
-             // Adjust nits to compensate for display white balance colour strength.
-             if (mDisplayWhiteBalanceController != null) {
--                // Compensate for white balance color shift
--                mDisplayWhiteBalanceController.calculateAdjustedBrightnessNits(nits);
-+                nits = mDisplayWhiteBalanceController.calculateAdjustedBrightnessNits(nits);
-             }
+- if ((mFlags & VIRTUAL_DISPLAY_FLAG_PUBLIC) != 0) {
++ if ((mFlags & VIRTUAL_DISPLAY_FLAG_PUBLIC) == 0) {
+      mInfo.flags |= DisplayDeviceInfo.FLAG_PRIVATE
+              | DisplayDeviceInfo.FLAG_NEVER_BLANK;
+  }
 ```
-
----
-
-## 教訓與最佳實踐
-
-### 1. 返回值必須被使用
-Java 允許忽略方法返回值，但對於計算型方法（非 setter/void），返回值通常有意義。現代 IDE 和 Lint 工具會對此發出警告。
-
-### 2. 方法命名暗示返回值
-`calculateAdjustedBrightnessNits()` 這個方法名：
-- `calculate` → 表示有計算
-- 返回類型是 `float` → 計算結果需要被使用
-
-### 3. Code Review 重點
-在審查亮度/顯示相關程式碼時，注意：
-- 資料流是否完整（輸入 → 處理 → 輸出）
-- 中間計算結果是否正確傳遞
-- 邊界條件檢查（nits, brightness 的有效範圍）
 
 ---
 
 ## 相關知識點
 
-- **Android Display Subsystem**: 亮度映射策略 (BrightnessMappingStrategy)
-- **Spline Interpolation**: 用於亮度曲線的平滑插值
-- **Display White Balance**: 根據環境色溫調整顯示色彩的功能
-- **CTS (Compatibility Test Suite)**: Android 相容性測試套件
+### Virtual Display Flags
+
+| Flag | 用途 |
+|------|------|
+| `VIRTUAL_DISPLAY_FLAG_PUBLIC` | 顯示器對所有應用程式可見 |
+| `VIRTUAL_DISPLAY_FLAG_PRIVATE` (隱含) | 顯示器僅對創建者可見 |
+| `VIRTUAL_DISPLAY_FLAG_SECURE` | 顯示器支援安全內容 |
+| `VIRTUAL_DISPLAY_FLAG_PRESENTATION` | 顯示器用於 Presentation |
+
+### 位元運算邏輯
+
+```java
+// 檢查 flag 是否已設置
+(flags & FLAG_TO_CHECK) != 0  // flag 已設置
+(flags & FLAG_TO_CHECK) == 0  // flag 未設置
+```
+
+---
+
+## 教訓
+
+1. **比較運算符容易出錯**：`==` 和 `!=` 的混淆是常見的 bug 模式
+2. **條件邏輯需要仔細審查**：特別是否定條件（「沒有設置 X 時做 Y」）
+3. **安全相關代碼需要額外關注**：FLAG_PRIVATE 影響顯示器的可見性和安全性

@@ -1,0 +1,814 @@
+02-20 00:06:39 D/Configuration: Resolve and download remote files from @Option
+02-20 00:06:39 I/TestInvocation: Invocation was started with cmd: cts -m CtsDisplayTestCases -t android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay -s 27161FDH20031X
+02-20 00:06:39 D/InvocationExecution: Skip linking external directory as FileProperty was set.
+02-20 00:06:39 D/RunUtil: Running command [adb, version] with timeout: 2m 0s
+02-20 00:06:39 D/TestInvocation: Fetch build duration: 7 ms
+02-20 00:06:39 D/ArtifactsAnalyzer: Build analysis report: BuildAnalysis [mDeviceImageChanged=true, mHasTestsArtifacts=true, mHasChangesInTests=false, imageDigests={}]
+02-20 00:06:39 D/ArtifactsAnalyzer: Analysis report after test analysis: BuildAnalysis [mDeviceImageChanged=true, mHasTestsArtifacts=true, mHasChangesInTests=true, imageDigests={}]
+02-20 00:06:39 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.build.version.sdk] with timeout: 45s
+02-20 00:06:39 D/GlobalTestFilter: Setting up global filters
+02-20 00:06:39 D/InvocationExecution: IShardHelper selected: com.android.tradefed.invoker.shard.StrictShardHelper@6d70d05c
+02-20 00:06:39 D/BackgroundDeviceAction: Waiting for device 27161FDH20031X online before starting.
+02-20 00:06:39 D/BackgroundDeviceAction: Device 27161FDH20031X now online.
+02-20 00:06:39 D/BackgroundDeviceAction: Starting logcat for 27161FDH20031X.
+02-20 00:06:39 I/TestInvocation: Starting invocation for 'cts' with '[ DeviceBuildInfo{bid=13033356, serial=27161FDH20031X} on device '27161FDH20031X'] 
+02-20 00:06:39 D/FileUtil: Creating temp directory at /tmp/13033356/cts with prefix "inv_"
+02-20 00:06:39 D/RunUtil: Running command [chmod, ug+rwx, /tmp/13033356/cts/inv_7008709497299498440] with timeout: 10s
+02-20 00:06:39 D/FileSystemLogSaver: Using log file directory /tmp/13033356/cts/inv_7008709497299498440
+02-20 00:06:39 D/FileUtil: Creating temp directory at /tmp/13033356/cts/inv_7008709497299498440 with prefix "inv_"
+02-20 00:06:39 I/LogFileSaver: Using log file directory /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799
+02-20 00:06:39 D/CompatibilityProtoResultReporter: Proto Results Directory: /home/simon/android-cts/tools/../../android-cts/results/2026.02.20_00.06.39/proto
+02-20 00:06:39 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/results/2026.02.20_00.06.39/proto with prefix "tmp-proto" suffix ""
+02-20 00:06:39 D/CompatibilityProtoResultReporter: Proto Results Directory: /home/simon/android-cts/tools/../../android-cts/results/2026.02.20_00.06.39/proto
+02-20 00:06:39 D/CertificationSuiteResultReporter: Initializing result directory
+02-20 00:06:39 D/CertificationSuiteResultReporter: Results Directory: /home/simon/android-cts/tools/../../android-cts/results/2026.02.20_00.06.39
+02-20 00:06:39 D/CertificationSuiteResultReporter: Created log dir /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39
+02-20 00:06:39 D/FileUtil: Creating temp directory at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39 with prefix "inv_"
+02-20 00:06:39 I/LogFileSaver: Using log file directory /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264
+02-20 00:06:39 D/LogFileSaver: Log data for tradefed-expanded-config is already compressed, skipping compression
+02-20 00:06:39 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264 with prefix "tradefed-expanded-config_" suffix ".xml"
+02-20 00:06:39 I/LogFileSaver: Saved log file /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/tradefed-expanded-config_5293405969786334095.xml. [size=58786, elapsed=0ms]
+02-20 00:06:39 D/CertificationSuiteResultReporter: Saved logs for tradefed-expanded-config in /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/tradefed-expanded-config_5293405969786334095.xml
+02-20 00:06:39 D/LogFileSaver: Log data for tradefed-expanded-config is already compressed, skipping compression
+02-20 00:06:39 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "tradefed-expanded-config_" suffix ".xml"
+02-20 00:06:39 I/LogFileSaver: Saved log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/tradefed-expanded-config_14321647082825973951.xml. [size=58786, elapsed=0ms]
+02-20 00:06:39 D/InvocationExecution: Starting device pre invocation setup for : '27161FDH20031X'
+02-20 00:06:39 D/DefaultConnection: Instance type for connection: GCE
+02-20 00:06:39 D/DefaultConnection: Instance type for connection: GCE
+02-20 00:06:39 D/NativeDevice: Using connection: com.android.tradefed.device.connection.DefaultConnection@c7eea6f (27161FDH20031X)
+02-20 00:06:39 I/CommandInterrupter: Interrupt allowed
+02-20 00:06:39 D/InvocationExecution: Starting setup for device: '27161FDH20031X'
+02-20 00:06:39 D/InvocationExecution: starting preparer 'com.android.compatibility.common.tradefed.targetprep.DeviceFileCollector@63845e4e' on device: '27161FDH20031X'
+02-20 00:06:39 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.treble.enabled] with timeout: 45s
+02-20 00:06:39 D/NativeDevice: Using 'ls' to check doesFileExist(/sys/fs/selinux/policy)
+02-20 00:06:39 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, ls, '/sys/fs/selinux/policy'] with timeout: 2m 0s
+02-20 00:06:39 D/InvocationExecution: done with preparer 'com.android.compatibility.common.tradefed.targetprep.DeviceFileCollector@63845e4e' on device: '27161FDH20031X' in 130 ms
+02-20 00:06:39 D/InvocationExecution: starting preparer 'com.android.compatibility.common.tradefed.targetprep.DeviceFileCollector@29fd5607' on device: '27161FDH20031X'
+02-20 00:06:39 D/NativeDevice: Using property ro.treble.enabled=true from cache.
+02-20 00:06:39 D/NativeDevice: Using 'ls' to check doesFileExist(/proc/config.gz)
+02-20 00:06:39 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, ls, '/proc/config.gz'] with timeout: 2m 0s
+02-20 00:06:39 D/InvocationExecution: done with preparer 'com.android.compatibility.common.tradefed.targetprep.DeviceFileCollector@29fd5607' on device: '27161FDH20031X' in 55 ms
+02-20 00:06:39 D/InvocationExecution: starting preparer 'com.android.compatibility.common.tradefed.targetprep.DynamicConfigPusher@666f140f' on device: '27161FDH20031X'
+02-20 00:06:39 I/UrlReplacement: UrlReplacement file [/home/simon/android-cts/tools/UrlReplacement.xml] does not exist
+02-20 00:06:39 D/InvocationExecution: done with preparer 'com.android.compatibility.common.tradefed.targetprep.DynamicConfigPusher@666f140f' on device: '27161FDH20031X' in 185 ms
+02-20 00:06:39 D/InvocationExecution: starting preparer 'com.android.compatibility.common.tradefed.targetprep.StayAwakePreparer@5702121c' on device: '27161FDH20031X'
+02-20 00:06:39 D/SettingsPreparer: Changing value for stay_on_while_plugged_in from 0 to 7
+02-20 00:06:40 D/InvocationExecution: done with preparer 'com.android.compatibility.common.tradefed.targetprep.StayAwakePreparer@5702121c' on device: '27161FDH20031X' in 198 ms
+02-20 00:06:40 D/InvocationExecution: starting preparer 'com.android.compatibility.common.tradefed.targetprep.PackageDisabler@582a8770' on device: '27161FDH20031X'
+02-20 00:06:40 D/InvocationExecution: done with preparer 'com.android.compatibility.common.tradefed.targetprep.PackageDisabler@582a8770' on device: '27161FDH20031X' in 161 ms
+02-20 00:06:40 D/InvocationExecution: starting preparer 'com.android.compatibility.common.tradefed.targetprep.SettingsPreparer@43757df0' on device: '27161FDH20031X'
+02-20 00:06:40 D/SettingsPreparer: Setting verifier_verify_adb_installs to value 0
+02-20 00:06:40 D/InvocationExecution: done with preparer 'com.android.compatibility.common.tradefed.targetprep.SettingsPreparer@43757df0' on device: '27161FDH20031X' in 96 ms
+02-20 00:06:40 D/InvocationExecution: starting preparer 'com.android.compatibility.common.tradefed.targetprep.SettingsPreparer@4e71b651' on device: '27161FDH20031X'
+02-20 00:06:40 D/SettingsPreparer: Setting hide_error_dialogs to value 1
+02-20 00:06:40 D/InvocationExecution: done with preparer 'com.android.compatibility.common.tradefed.targetprep.SettingsPreparer@4e71b651' on device: '27161FDH20031X' in 92 ms
+02-20 00:06:40 D/InvocationExecution: starting preparer 'com.android.compatibility.common.tradefed.targetprep.ApkPreconditionCheck@72dce6c3' on device: '27161FDH20031X'
+02-20 00:06:40 I/NativeDeviceStateMonitor: Device 27161FDH20031X is already ONLINE
+02-20 00:06:40 I/NativeDeviceStateMonitor: Waiting 360000 ms for device 27161FDH20031X boot complete
+02-20 00:06:40 I/DeviceStateMonitor: Waiting 359929 ms for device 27161FDH20031X package manager
+02-20 00:06:40 I/NativeDeviceStateMonitor: Waiting 359808 ms for device 27161FDH20031X external store
+02-20 00:06:41 I/ApkInstrumentationPreparer: Instrumenting package: com.android.preconditions.cts
+02-20 00:06:41 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:41 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:41 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.build.version.codename] with timeout: 45s
+02-20 00:06:41 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop] with timeout: 45s
+02-20 00:06:41 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:41 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, pm, list, features] with timeout: 2m 0s
+02-20 00:06:41 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:41 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:06:41 D/RunUtil: Running command [aapt2, dump, badging, /tmp/services3151523758234188072.apk] with timeout: 1m 0s
+02-20 00:06:41 D/RunUtil: Running command [aapt2, dump, xmltree, /tmp/services3151523758234188072.apk, --file, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:06:41 D/TestAppInstallSetup: Installing apk androidx.test.services with [/tmp/services3151523758234188072.apk] ...
+02-20 00:06:41 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:41 D/RunUtil: Running command [aapt, dump, badging, /tmp/services3151523758234188072.apk] with timeout: 1m 0s
+02-20 00:06:41 D/RunUtil: Running command [aapt, dump, xmltree, /tmp/services3151523758234188072.apk, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:06:41 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:41 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, appops, set, --user, 0, --uid, androidx.test.services, MANAGE_EXTERNAL_STORAGE, 0] with timeout: 2m 0s
+02-20 00:06:41 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, appops, write-settings] with timeout: 2m 0s
+02-20 00:06:41 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, dumpsys, deviceidle, whitelist, +androidx.test.services] with timeout: 2m 0s
+02-20 00:06:41 D/AndroidJUnitTest: stdout: Added: androidx.test.services
+
+stderr: 
+02-20 00:06:41 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:41 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:06:41 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:42 D/RunUtil: Running command [aapt, dump, badging, /home/simon/android-cts/tools/../../android-cts/testcases/CtsPreconditions/arm64/CtsPreconditions.apk] with timeout: 1m 0s
+02-20 00:06:42 D/RunUtil: Running command [aapt, dump, xmltree, /home/simon/android-cts/tools/../../android-cts/testcases/CtsPreconditions/arm64/CtsPreconditions.apk, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:06:42 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, appops, write-settings] with timeout: 2m 0s
+02-20 00:06:42 D/ListInstrumentationParser: instrumentation:com.android.preconditions.cts/androidx.test.runner.AndroidJUnitRunner (target=com.android.preconditions.cts)
+02-20 00:06:42 D/ListInstrumentationParser: 
+02-20 00:06:42 I/InstrumentationTest: No runner name specified. Using: androidx.test.runner.AndroidJUnitRunner.
+02-20 00:06:42 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:42 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:42 D/InstrumentationTest: Initializing com.android.tradefed.device.metric.CountTestCasesCollector for instrumentation.
+02-20 00:06:42 I/RemoteAndroidTestRunner: Running am instrument -w -r --no-isolated-storage  -e useTestStorageService true -e newRunListenerMode true -e timeout_msec 300000 com.android.preconditions.cts/androidx.test.runner.AndroidJUnitRunner on google-aosp_on_panther-27161FDH20031X
+02-20 00:06:43 D/TestDevice: Uninstalling com.android.preconditions.cts with extra args 
+02-20 00:06:43 D/TestDevice: Uninstalling androidx.test.services with extra args 
+02-20 00:06:43 D/ApkInstrumentationPreparer: Target preparation successful
+02-20 00:06:43 D/InvocationExecution: done with preparer 'com.android.compatibility.common.tradefed.targetprep.ApkPreconditionCheck@72dce6c3' on device: '27161FDH20031X' in 3s
+02-20 00:06:43 D/InvocationExecution: starting preparer 'com.android.compatibility.common.tradefed.targetprep.WifiCheck@1936ba10' on device: '27161FDH20031X'
+02-20 00:06:43 I/NativeDeviceStateMonitor: Device 27161FDH20031X is already ONLINE
+02-20 00:06:43 I/NativeDeviceStateMonitor: Waiting 360000 ms for device 27161FDH20031X boot complete
+02-20 00:06:43 I/DeviceStateMonitor: Waiting 359969 ms for device 27161FDH20031X package manager
+02-20 00:06:43 I/NativeDeviceStateMonitor: Waiting 359909 ms for device 27161FDH20031X external store
+02-20 00:06:43 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:43 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:06:43 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:44 D/RunUtil: Running command [aapt, dump, badging, /tmp/WifiUtil.apk55270593343070652.apk] with timeout: 1m 0s
+02-20 00:06:44 D/RunUtil: Running command [aapt, dump, xmltree, /tmp/WifiUtil.apk55270593343070652.apk, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:06:44 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, appops, write-settings] with timeout: 2m 0s
+02-20 00:06:44 I/WifiCheck: Wifi is connected
+02-20 00:06:44 D/InvocationExecution: done with preparer 'com.android.compatibility.common.tradefed.targetprep.WifiCheck@1936ba10' on device: '27161FDH20031X' in 1s
+02-20 00:06:44 D/InvocationExecution: starting preparer 'com.android.tradefed.targetprep.RunCommandTargetPreparer@491388fb' on device: '27161FDH20031X'
+02-20 00:06:44 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, rm, -rf, /sdcard/device-info-files] with timeout: 2m 0s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, rm, -rf, /sdcard/report-log-files] with timeout: 2m 0s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, locksettings, set-disabled, true] with timeout: 2m 0s
+02-20 00:06:45 D/InvocationExecution: done with preparer 'com.android.tradefed.targetprep.RunCommandTargetPreparer@491388fb' on device: '27161FDH20031X' in 180 ms
+02-20 00:06:45 D/InvocationExecution: starting preparer 'com.android.compatibility.common.tradefed.targetprep.DeviceInfoCollector@3f43762d' on device: '27161FDH20031X'
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.product.model] with timeout: 45s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.product.device] with timeout: 45s
+02-20 00:06:45 D/NativeDevice: Using property ro.build.id=AP2A.240905.003 from cache.
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.bootimage.build.fingerprint] with timeout: 45s
+02-20 00:06:45 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.product.manufacturer] with timeout: 45s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.serialno] with timeout: 45s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.build.version.security_patch] with timeout: 45s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.product.cpu.abilist32] with timeout: 45s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.build.reference.fingerprint] with timeout: 45s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.product.cpu.abi] with timeout: 45s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.product.cpu.abilist64] with timeout: 45s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.product.name] with timeout: 45s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.build.tags] with timeout: 45s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.build.version.incremental] with timeout: 45s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.product.brand] with timeout: 45s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.build.fingerprint] with timeout: 45s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.vendor.build.fingerprint] with timeout: 45s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.build.version.base_os] with timeout: 45s
+02-20 00:06:45 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.product.cpu.abilist] with timeout: 45s
+02-20 00:06:46 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.product.board] with timeout: 45s
+02-20 00:06:46 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.build.type] with timeout: 45s
+02-20 00:06:46 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.build.version.release] with timeout: 45s
+02-20 00:06:46 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.product.cpu.abi2] with timeout: 45s
+02-20 00:06:46 I/NativeDeviceStateMonitor: Device 27161FDH20031X is already ONLINE
+02-20 00:06:46 I/NativeDeviceStateMonitor: Waiting 360000 ms for device 27161FDH20031X boot complete
+02-20 00:06:46 I/DeviceStateMonitor: Waiting 359929 ms for device 27161FDH20031X package manager
+02-20 00:06:46 I/NativeDeviceStateMonitor: Waiting 359828 ms for device 27161FDH20031X external store
+02-20 00:06:46 I/ApkInstrumentationPreparer: Instrumenting package: com.android.compatibility.common.deviceinfo
+02-20 00:06:46 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:46 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:46 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:06:46 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:46 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, pm, list, features] with timeout: 2m 0s
+02-20 00:06:46 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:46 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:06:46 D/RunUtil: Running command [aapt2, dump, badging, /tmp/services16708354049246764669.apk] with timeout: 1m 0s
+02-20 00:06:46 D/RunUtil: Running command [aapt2, dump, xmltree, /tmp/services16708354049246764669.apk, --file, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:06:46 D/TestAppInstallSetup: Installing apk androidx.test.services with [/tmp/services16708354049246764669.apk] ...
+02-20 00:06:46 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:47 D/RunUtil: Running command [aapt, dump, badging, /tmp/services16708354049246764669.apk] with timeout: 1m 0s
+02-20 00:06:47 D/RunUtil: Running command [aapt, dump, xmltree, /tmp/services16708354049246764669.apk, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:06:47 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:47 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, appops, set, --user, 0, --uid, androidx.test.services, MANAGE_EXTERNAL_STORAGE, 0] with timeout: 2m 0s
+02-20 00:06:47 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, appops, write-settings] with timeout: 2m 0s
+02-20 00:06:47 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, dumpsys, deviceidle, whitelist, +androidx.test.services] with timeout: 2m 0s
+02-20 00:06:47 D/AndroidJUnitTest: stdout: Added: androidx.test.services
+
+stderr: 
+02-20 00:06:47 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:47 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:06:47 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:48 D/RunUtil: Running command [aapt, dump, badging, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDeviceInfo/arm64/CtsDeviceInfo.apk] with timeout: 1m 0s
+02-20 00:06:48 D/RunUtil: Running command [aapt, dump, xmltree, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDeviceInfo/arm64/CtsDeviceInfo.apk, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:06:48 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, appops, write-settings] with timeout: 2m 0s
+02-20 00:06:48 D/ListInstrumentationParser: instrumentation:com.android.compatibility.common.deviceinfo/androidx.test.runner.AndroidJUnitRunner (target=com.android.compatibility.common.deviceinfo)
+02-20 00:06:48 D/ListInstrumentationParser: instrumentation:com.android.tradefed.utils.wifi/.WifiUtil (target=com.android.tradefed.utils.wifi)
+02-20 00:06:48 D/ListInstrumentationParser: 
+02-20 00:06:48 I/InstrumentationTest: No runner name specified. Using: androidx.test.runner.AndroidJUnitRunner.
+02-20 00:06:48 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:48 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:06:48 D/InstrumentationTest: Initializing com.android.tradefed.device.metric.CountTestCasesCollector for instrumentation.
+02-20 00:06:48 I/RemoteAndroidTestRunner: Running am instrument -w -r --no-isolated-storage  -e useTestStorageService true -e newRunListenerMode true -e timeout_msec 300000 com.android.compatibility.common.deviceinfo/androidx.test.runner.AndroidJUnitRunner on google-aosp_on_panther-27161FDH20031X
+02-20 00:07:01 D/TestDevice: Uninstalling com.android.compatibility.common.deviceinfo with extra args 
+02-20 00:07:01 D/TestDevice: Uninstalling androidx.test.services with extra args 
+02-20 00:07:02 W/ApkInstrumentationPreparer: Target preparation step com.android.compatibility.common.deviceinfo.KeystoreAttestationDeviceInfo#testCollectDeviceInfo failed.
+junit.framework.AssertionFailedError: KeystoreAttestationDeviceInfo collection completed. expected:<COMPLETED> but was:<FAILED>
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.failNotEquals(Assert.java:287)
+	at junit.framework.Assert.assertEquals(Assert.java:67)
+	at com.android.compatibility.common.deviceinfo.DeviceInfo.testCollectDeviceInfo(DeviceInfo.java:112)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:220)
+	at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:205)
+
+02-20 00:07:02 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:02 D/NativeDevice: Using 'ls' to check doesFileExist(/storage/emulated/0/device-info-files/)
+02-20 00:07:02 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, ls, '/storage/emulated/0/device-info-files/'] with timeout: 2m 0s
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "ConfigurationDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/ConfigurationDeviceInfo.deviceinfo.json_10450762655222256738.txt.gz. [size=10, elapsed=3ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "StorageDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/StorageDeviceInfo.deviceinfo.json_7238881962879497107.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264 with prefix "framework_manifest.xml_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/framework_manifest.xml_1585896268091340572.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/CertificationSuiteResultReporter: Saved logs for framework_manifest.xml in /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/framework_manifest.xml_1585896268091340572.txt.gz
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "framework_manifest.xml_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/framework_manifest.xml_2204736131429412890.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264 with prefix "device_compatibility_matrix.xml_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/device_compatibility_matrix.xml_6085396751776571671.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/CertificationSuiteResultReporter: Saved logs for device_compatibility_matrix.xml in /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/device_compatibility_matrix.xml_6085396751776571671.txt.gz
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "device_compatibility_matrix.xml_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/device_compatibility_matrix.xml_13119872469834547608.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "UserDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/UserDeviceInfo.deviceinfo.json_5565847651586837264.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "MediaDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/MediaDeviceInfo.deviceinfo.json_16593819597539472699.txt.gz. [size=10, elapsed=1ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264 with prefix "device_manifest.xml_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/device_manifest.xml_5010493750303837344.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/CertificationSuiteResultReporter: Saved logs for device_manifest.xml in /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/device_manifest.xml_5010493750303837344.txt.gz
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "device_manifest.xml_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/device_manifest.xml_1830531074333330189.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "KeystoreAttestationDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/KeystoreAttestationDeviceInfo.deviceinfo.json_300208209164394760.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "MediaDrmDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/MediaDrmDeviceInfo.deviceinfo.json_9678356809456438941.txt.gz. [size=10, elapsed=1ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "CpuDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/CpuDeviceInfo.deviceinfo.json_3752815986564412135.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "ClientIdDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/ClientIdDeviceInfo.deviceinfo.json_11786002970900236652.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "VulkanDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/VulkanDeviceInfo.deviceinfo.json_17594136759407014001.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "ScreenDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/ScreenDeviceInfo.deviceinfo.json_2466515722298640934.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "DefaultAppDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/DefaultAppDeviceInfo.deviceinfo.json_7581069355524207575.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "HapticsDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/HapticsDeviceInfo.deviceinfo.json_6437054874688598756.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "GenericDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/GenericDeviceInfo.deviceinfo.json_13213557245075198570.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "PackageDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/PackageDeviceInfo.deviceinfo.json_15670451859563912891.txt.gz. [size=23661, elapsed=2ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "VintfDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/VintfDeviceInfo.deviceinfo.json_3015318710472745640.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "DeviceIdleDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/DeviceIdleDeviceInfo.deviceinfo.json_14245864681107480270.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "SensorDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/SensorDeviceInfo.deviceinfo.json_13310108100033979999.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "MemoryDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/MemoryDeviceInfo.deviceinfo.json_10305617845127175235.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "ConnectivityDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/ConnectivityDeviceInfo.deviceinfo.json_15515266290834395201.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "BiometricsDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/BiometricsDeviceInfo.deviceinfo.json_7665885436696542624.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "LocaleDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/LocaleDeviceInfo.deviceinfo.json_2129514838667813176.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "GraphicsDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/GraphicsDeviceInfo.deviceinfo.json_17631796775928532118.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "AppStandbyDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/AppStandbyDeviceInfo.deviceinfo.json_18270545434844369878.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264 with prefix "framework_compatibility_matrix.xml_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/framework_compatibility_matrix.xml_8821285004360869755.txt.gz. [size=10, elapsed=1ms]
+02-20 00:07:02 D/CertificationSuiteResultReporter: Saved logs for framework_compatibility_matrix.xml in /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/framework_compatibility_matrix.xml_8821285004360869755.txt.gz
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "framework_compatibility_matrix.xml_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/framework_compatibility_matrix.xml_10229058789210231539.txt.gz. [size=10, elapsed=1ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "FeatureDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/FeatureDeviceInfo.deviceinfo.json_10701874896623508889.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "InputDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/InputDeviceInfo.deviceinfo.json_11387582357348601493.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "MediaOutputDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/MediaOutputDeviceInfo.deviceinfo.json_16004260160956527042.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "GnssDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/GnssDeviceInfo.deviceinfo.json_14294631677542921345.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:02 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "CameraDeviceInfo.deviceinfo.json_" suffix ".txt.gz"
+02-20 00:07:02 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/CameraDeviceInfo.deviceinfo.json_5762026137118082988.txt.gz. [size=10, elapsed=1ms]
+02-20 00:07:02 D/InvocationExecution: done with preparer 'com.android.compatibility.common.tradefed.targetprep.DeviceInfoCollector@3f43762d' on device: '27161FDH20031X' in 17s
+02-20 00:07:02 D/InvocationExecution: starting preparer 'com.android.compatibility.common.tradefed.targetprep.ReportLogCollector@2f4612af' on device: '27161FDH20031X'
+02-20 00:07:02 D/InvocationExecution: done with preparer 'com.android.compatibility.common.tradefed.targetprep.ReportLogCollector@2f4612af' on device: '27161FDH20031X' in 0 ms
+02-20 00:07:02 D/InvocationExecution: starting preparer 'com.android.tradefed.targetprep.RunCommandTargetPreparer@24f132d2' on device: '27161FDH20031X'
+02-20 00:07:02 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, settings, put, global, package_verifier_enable, 0] with timeout: 2m 0s
+02-20 00:07:03 D/InvocationExecution: done with preparer 'com.android.tradefed.targetprep.RunCommandTargetPreparer@24f132d2' on device: '27161FDH20031X' in 68 ms
+02-20 00:07:03 D/InvocationExecution: starting preparer 'com.android.tradefed.targetprep.RunCommandTargetPreparer@78eb8a53' on device: '27161FDH20031X'
+02-20 00:07:03 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, settings, put, global, verifier_engprod, 1] with timeout: 2m 0s
+02-20 00:07:03 D/InvocationExecution: done with preparer 'com.android.tradefed.targetprep.RunCommandTargetPreparer@78eb8a53' on device: '27161FDH20031X' in 48 ms
+02-20 00:07:03 D/InvocationExecution: starting preparer 'com.android.compatibility.common.tradefed.targetprep.PropertyCheck@62932963' on device: '27161FDH20031X'
+02-20 00:07:03 D/NativeDevice: Using property ro.build.type=userdebug from cache.
+02-20 00:07:03 W/PropertyCheck: Expected "user" but found "userdebug" for property: ro.build.type
+02-20 00:07:03 D/InvocationExecution: done with preparer 'com.android.compatibility.common.tradefed.targetprep.PropertyCheck@62932963' on device: '27161FDH20031X' in 0 ms
+02-20 00:07:03 D/InvocationExecution: starting preparer 'com.android.compatibility.common.tradefed.targetprep.PropertyCheck@51858d13' on device: '27161FDH20031X'
+02-20 00:07:03 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.product.locale] with timeout: 45s
+02-20 00:07:03 D/InvocationExecution: done with preparer 'com.android.compatibility.common.tradefed.targetprep.PropertyCheck@51858d13' on device: '27161FDH20031X' in 31 ms
+02-20 00:07:03 D/InvocationExecution: starting preparer 'com.android.compatibility.common.tradefed.targetprep.PropertyCheck@189f4e42' on device: '27161FDH20031X'
+02-20 00:07:03 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, persist.sys.test_harness] with timeout: 45s
+02-20 00:07:03 W/PropertyCheck: Property "persist.sys.test_harness" not found on device, cannot verify value "false" 
+02-20 00:07:03 D/InvocationExecution: done with preparer 'com.android.compatibility.common.tradefed.targetprep.PropertyCheck@189f4e42' on device: '27161FDH20031X' in 26 ms
+02-20 00:07:03 D/InvocationExecution: Done with setup of device: '27161FDH20031X'
+02-20 00:07:03 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, uname, -a] with timeout: 2m 0s
+02-20 00:07:03 I/InvocationExecution: Device 27161FDH20031X kernel information: 'Linux localhost 5.10.198-android13-4-00050-g12f3388846c3-ab11920634 #1 SMP PREEMPT Mon Jun 3 20:51:42 UTC 2024 aarch64 Toybox'
+02-20 00:07:03 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.system.build.fingerprint] with timeout: 45s
+02-20 00:07:03 I/InvocationExecution: Device 27161FDH20031X system image build information: 'Android/aosp_panther/panther:14/AP2A.240905.003/eng.simon.20260220:userdebug/test-keys'
+02-20 00:07:03 D/NativeDevice: Using property ro.vendor.build.fingerprint=Android/aosp_panther/panther:14/AP2A.240905.003/12231197:userdebug/test-keys from cache.
+02-20 00:07:03 I/InvocationExecution: Device 27161FDH20031X vendor image build information: 'Android/aosp_panther/panther:14/AP2A.240905.003/12231197:userdebug/test-keys'
+02-20 00:07:03 D/InvocationExecution: Total setup duration: 23s'
+02-20 00:07:03 D/LogFileSaver: Log data for device_logcat_setup_27161FDH20031X is already compressed, skipping compression
+02-20 00:07:03 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264 with prefix "device_logcat_setup_27161FDH20031X_" suffix ".txt"
+02-20 00:07:03 I/LogFileSaver: Saved log file /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/device_logcat_setup_27161FDH20031X_248984896027812367.txt. [size=5158876, elapsed=2ms]
+02-20 00:07:03 D/CertificationSuiteResultReporter: Saved logs for device_logcat_setup_27161FDH20031X in /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/device_logcat_setup_27161FDH20031X_248984896027812367.txt
+02-20 00:07:03 D/LogFileSaver: Log data for device_logcat_setup_27161FDH20031X is already compressed, skipping compression
+02-20 00:07:03 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "device_logcat_setup_27161FDH20031X_" suffix ".txt"
+02-20 00:07:03 I/LogFileSaver: Saved log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/device_logcat_setup_27161FDH20031X_9329360533331607227.txt. [size=5158876, elapsed=2ms]
+02-20 00:07:03 D/TestDevice: No snapuserd notification in progress for BLOCK_BEFORE_TEST
+02-20 00:07:03 D/PrettyPrintDelimiter: 
+===============================
+===== TEST PHASE STARTING =====
+===============================
+02-20 00:07:03 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, cmd, device_state, print-states] with timeout: 2m 0s
+02-20 00:07:03 D/NativeDevice: Using property ro.product.cpu.abilist=arm64-v8a from cache.
+02-20 00:07:03 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264 with prefix "suite-exclude-filters5169287197919335283.txt_" suffix ".txt.gz"
+02-20 00:07:03 I/LogFileSaver: Saved gzip log file /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/suite-exclude-filters5169287197919335283.txt_6295747435437570489.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:03 D/CertificationSuiteResultReporter: Saved logs for suite-exclude-filters5169287197919335283.txt in /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/suite-exclude-filters5169287197919335283.txt_6295747435437570489.txt.gz
+02-20 00:07:03 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "suite-exclude-filters5169287197919335283.txt_" suffix ".txt.gz"
+02-20 00:07:03 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/suite-exclude-filters5169287197919335283.txt_8516368013632829.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:03 D/BaseTestSuite: Initializing ModuleRepo
+ABIs:[{arm64-v8a, bitness=64}]
+Test Args:[com.android.tradefed.testtype.AndroidJUnitTest:exclude-annotation:com.android.compatibility.common.util.CtsDownstreamingTest, com.android.compatibility.common.tradefed.testtype.JarHostTest:exclude-annotation:com.android.compatibility.common.util.CtsDownstreamingTest, com.android.tradefed.testtype.HostTest:exclude-annotation:com.android.compatibility.common.util.CtsDownstreamingTest, com.android.tradefed.testtype.AndroidJUnitTest:exclude-annotation:android.platform.test.annotations.AsbSecurityTest, com.android.compatibility.common.tradefed.testtype.JarHostTest:exclude-annotation:android.platform.test.annotations.AsbSecurityTest, com.android.tradefed.testtype.AndroidJUnitTest:exclude-annotation:android.platform.test.annotations.AppModeInstant, com.android.compatibility.common.tradefed.testtype.JarHostTest:exclude-annotation:android.platform.test.annotations.AppModeInstant, com.android.tradefed.testtype.HostTest:exclude-annotation:android.platform.test.annotations.AppModeInstant]
+Module Args:[]
+Includes: {arm64-v8a CtsDisplayTestCases=[CtsDisplayTestCases android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay], arm64-v8a CtsDisplayTestCases[instant]=[CtsDisplayTestCases[instant] android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay], arm64-v8a CtsDisplayTestCases[run-on-clone-profile]=[CtsDisplayTestCases[run-on-clone-profile] android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay], arm64-v8a CtsDisplayTestCases[run-on-private-profile]=[CtsDisplayTestCases[run-on-private-profile] android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay], arm64-v8a CtsDisplayTestCases[run-on-work-profile]=[CtsDisplayTestCases[run-on-work-profile] android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay], arm64-v8a CtsDisplayTestCases[run-on-secondary-user]=[CtsDisplayTestCases[run-on-secondary-user] android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay]}
+Excludes: See suite-exclude-filters5169287197919335283.txt
+02-20 00:07:03 D/BaseTestSuite: Foldable states: [foldable:0:DEFAULT]
+02-20 00:07:03 D/BaseTestSuite: Loading tests from [/home/simon/android-cts/tools/../../android-cts/testcases]
+02-20 00:07:04 D/ITestSuite: No remote build info, skipping stageTestArtifacts
+02-20 00:07:04 D/ITestSuite: Resource not found for allowed preparers: /suite/google-allowed-preparers.txt
+02-20 00:07:04 D/ITestSuite: [Total Unique Modules = 2]
+02-20 00:07:04 I/ITestSuite: 27161FDH20031X running 2 modules: [arm64-v8a CtsDisplayTestCases[instant], arm64-v8a CtsDisplayTestCases]
+02-20 00:07:04 D/TradefedFeatureClient: invoking feature 'skipFeature'
+02-20 00:07:04 D/TradefedFeatureClient: Using reference id from metrics.
+02-20 00:07:04 D/TradefedFeatureClient: name: "skipFeature"
+reference_id: "38f7fffe-2bb2-494a-b80e-c33730c6dc83"
+
+02-20 00:07:04 D/TradefedFeatureServer: Executing com.android.tradefed.result.skipped.SkipFeature@4fbb43e5 with [name: "skipFeature"
+reference_id: "38f7fffe-2bb2-494a-b80e-c33730c6dc83"
+]
+02-20 00:07:04 D/TradefedFeatureClient: Feature name: skipFeature. response: multi_part_response {
+  response_part {
+    key: "delimiter"
+    value: "\\+,"
+  }
+  response_part {
+    key: "presubmit"
+    value: "false"
+  }
+  response_part {
+    key: "skipModules"
+  }
+  response_part {
+    key: "imageDigests"
+  }
+}
+
+02-20 00:07:04 D/BaseTestSuite: Filters for 'arm64-v8a CtsDisplayTestCases[instant]': []
+02-20 00:07:04 D/FileUtil: Creating temp file at /tmp/tf-workfolder17147123915829451608 with prefix "CtsDisplayTestCases" suffix ".xml"
+02-20 00:07:04 D/LogFileSaver: Log data for module-configuration is already compressed, skipping compression
+02-20 00:07:04 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264 with prefix "module-configuration_" suffix ".xml"
+02-20 00:07:04 I/LogFileSaver: Saved log file /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/module-configuration_8581307132602937507.xml. [size=1645, elapsed=0ms]
+02-20 00:07:04 D/CertificationSuiteResultReporter: Saved logs for module-configuration in /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/module-configuration_8581307132602937507.xml
+02-20 00:07:04 D/LogFileSaver: Log data for module-configuration is already compressed, skipping compression
+02-20 00:07:04 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "module-configuration_" suffix ".xml"
+02-20 00:07:04 I/LogFileSaver: Saved log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/module-configuration_890013302744132457.xml. [size=1645, elapsed=0ms]
+02-20 00:07:04 I/ITestSuite: Running system status checker before module execution: arm64-v8a CtsDisplayTestCases[instant]
+02-20 00:07:04 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:04 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:04 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:04 I/UserChecker: Current user 0 is already user type CURRENT, no action.
+02-20 00:07:04 I/NativeDevice: adb unroot on device 27161FDH20031X
+02-20 00:07:04 D/RunUtil: Running command [adb, -s, 27161FDH20031X, unroot] with timeout: 2m 0s
+02-20 00:07:04 D/BackgroundDeviceAction: Waiting for device 27161FDH20031X online before starting.
+02-20 00:07:06 I/NativeDeviceStateMonitor: Waiting for device 27161FDH20031X to be in NOT_AVAILABLE mode for '5s'; it is currently in ONLINE mode...
+02-20 00:07:11 W/NativeDevice: Did not detect device 27161FDH20031X becoming unavailable after unroot
+02-20 00:07:11 I/NativeDeviceStateMonitor: Device 27161FDH20031X is already ONLINE
+02-20 00:07:11 W/ShellStatusChecker: This module unexpectedly started in a root shell. Leaked from earlier module?
+02-20 00:07:11 W/ITestSuite: System status checker [com.android.tradefed.suite.checker.ShellStatusChecker] failed.
+02-20 00:07:11 D/DeviceSettingChecker: Begin preExecutionCheck for checking device setting
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.type=userdebug from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:11 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, locksettings, get-disabled] with timeout: 2m 0s
+02-20 00:07:11 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, locksettings, get-disabled] with timeout: 2m 0s
+02-20 00:07:11 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, input, keyevent, KEYCODE_MENU] with timeout: 2m 0s
+02-20 00:07:11 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, input, keyevent, KEYCODE_HOME] with timeout: 2m 0s
+02-20 00:07:12 I/DeviceBaselineChecker: Enable device baselines keep_engprod_mode_on,disable_os_auto_update,hide_error_dialogs,keep_screen_on,disable_usb_app_verification,clear_lock_screen,keep_location_mode_on,keep_setup_complete_on in 214 millis.
+02-20 00:07:12 W/ITestSuite: There are failed system status checkers: {com.android.tradefed.suite.checker.ShellStatusChecker=This module unexpectedly started in a root shell. Leaked from earlier module?}
+02-20 00:07:12 D/ModuleDefinition: Running module arm64-v8a CtsDisplayTestCases[instant]
+02-20 00:07:12 D/ModuleDefinition: Running setup preparer: SuiteApkInstaller
+02-20 00:07:12 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:12 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:12 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:07:12 D/NativeDevice: Using property ro.build.id=AP2A.240905.003 from cache.
+02-20 00:07:12 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:12 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:07:12 D/SearchArtifactUtil: Searching the module dir: /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases
+02-20 00:07:12 D/RunUtil: Running command [aapt2, dump, badging, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/arm64/CtsDisplayTestCases.apk] with timeout: 1m 0s
+02-20 00:07:12 D/RunUtil: Running command [aapt2, dump, xmltree, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/arm64/CtsDisplayTestCases.apk, --file, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:07:12 D/TestAppInstallSetup: Installing apk android.display.cts with [/home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/arm64/CtsDisplayTestCases.apk] ...
+02-20 00:07:12 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:12 D/RunUtil: Running command [aapt, dump, badging, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/arm64/CtsDisplayTestCases.apk] with timeout: 1m 0s
+02-20 00:07:12 D/RunUtil: Running command [aapt, dump, xmltree, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/arm64/CtsDisplayTestCases.apk, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:07:12 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, appops, write-settings] with timeout: 2m 0s
+02-20 00:07:12 D/SearchArtifactUtil: Searching the module dir: /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases
+02-20 00:07:12 D/RunUtil: Running command [aapt2, dump, badging, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/CtsAppTestStubs.apk] with timeout: 1m 0s
+02-20 00:07:12 D/RunUtil: Running command [aapt2, dump, xmltree, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/CtsAppTestStubs.apk, --file, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:07:12 D/TestAppInstallSetup: Installing apk android.app.stubs with [/home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/CtsAppTestStubs.apk] ...
+02-20 00:07:12 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:14 D/RunUtil: Running command [aapt, dump, badging, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/CtsAppTestStubs.apk] with timeout: 1m 0s
+02-20 00:07:14 D/RunUtil: Running command [aapt, dump, xmltree, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/CtsAppTestStubs.apk, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:07:14 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, appops, write-settings] with timeout: 2m 0s
+02-20 00:07:14 D/AndroidJUnitTest: Disable test storage on instant app module.
+02-20 00:07:14 D/AndroidJUnitTest: Attempting to push filters to /data/local/tmp/ajur/includes.txt
+02-20 00:07:14 D/NativeDevice: Using 'ls' to check doesFileExist(/data/local/tmp/ajur)
+02-20 00:07:14 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, ls, '/data/local/tmp/ajur'] with timeout: 2m 0s
+02-20 00:07:14 D/NativeDevice: File /data/local/tmp/ajur does not exist.
+stdout: 
+stderr: ls: /data/local/tmp/ajur: No such file or directory
+
+02-20 00:07:14 D/NativeDevice: Using 'ls' to check doesFileExist(/data/local/tmp/ajur/includes.txt)
+02-20 00:07:14 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, ls, '/data/local/tmp/ajur/includes.txt'] with timeout: 2m 0s
+02-20 00:07:14 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264 with prefix "filter-arm64-v8a%20CtsDisplayTestCases%5Binstant%5D.include_" suffix ".txt.gz"
+02-20 00:07:14 I/LogFileSaver: Saved gzip log file /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/filter-arm64-v8a%20CtsDisplayTestCases%5Binstant%5D.include_2837335215361146541.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:14 D/CertificationSuiteResultReporter: Saved logs for filter-arm64-v8a%20CtsDisplayTestCases%5Binstant%5D.include in /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/filter-arm64-v8a%20CtsDisplayTestCases%5Binstant%5D.include_2837335215361146541.txt.gz
+02-20 00:07:14 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "filter-arm64-v8a%20CtsDisplayTestCases%5Binstant%5D.include_" suffix ".txt.gz"
+02-20 00:07:14 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/filter-arm64-v8a%20CtsDisplayTestCases%5Binstant%5D.include_9005619042707676941.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:14 D/ListInstrumentationParser: instrumentation:android.display.cts/androidx.test.runner.AndroidJUnitRunner (target=android.display.cts)
+02-20 00:07:14 D/ListInstrumentationParser: instrumentation:com.android.tradefed.utils.wifi/.WifiUtil (target=com.android.tradefed.utils.wifi)
+02-20 00:07:14 D/ListInstrumentationParser: 
+02-20 00:07:14 I/InstrumentationTest: No runner name specified. Using: androidx.test.runner.AndroidJUnitRunner.
+02-20 00:07:14 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:14 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:14 D/InstrumentationTest: Collecting test info for android.display.cts on device 27161FDH20031X
+02-20 00:07:14 I/RemoteAndroidTestRunner: Running am instrument -w -r --abi arm64-v8a  -e testFile /data/local/tmp/ajur/includes.txt -e debug false -e newRunListenerMode true -e log true -e notAnnotation android.platform.test.annotations.AsbSecurityTest,com.android.compatibility.common.util.CtsDownstreamingTest,android.platform.test.annotations.AppModeFull -e timeout_msec 300000 android.display.cts/androidx.test.runner.AndroidJUnitRunner on google-aosp_on_panther-27161FDH20031X
+02-20 00:07:14 D/InstrumentationTest: Initializing com.android.tradefed.device.metric.CountTestCasesCollector for instrumentation.
+02-20 00:07:14 I/RemoteAndroidTestRunner: Running am instrument -w -r --abi arm64-v8a  -e testFile /data/local/tmp/ajur/includes.txt -e debug false -e newRunListenerMode true -e log false -e notAnnotation android.platform.test.annotations.AsbSecurityTest,com.android.compatibility.common.util.CtsDownstreamingTest,android.platform.test.annotations.AppModeFull -e timeout_msec 300000 android.display.cts/androidx.test.runner.AndroidJUnitRunner on google-aosp_on_panther-27161FDH20031X
+02-20 00:07:14 D/BackgroundDeviceAction: Device 27161FDH20031X now online.
+02-20 00:07:14 D/BackgroundDeviceAction: Starting logcat for 27161FDH20031X.
+02-20 00:07:15 D/ModuleListener: ModuleListener.testRunStarted(android.display.cts, 1, 0) on 27161FDH20031X
+02-20 00:07:15 D/ModuleListener: ModuleListener.testStarted(android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay) on 27161FDH20031X
+02-20 00:07:15 I/ModuleListener: [1/1] 27161FDH20031X android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay FAILURE: java.lang.SecurityException: Requires INTERNAL_SYSTEM_WINDOW permission
+	at android.os.Parcel.createExceptionOrNull(Parcel.java:3183)
+	at android.os.Parcel.createException(Parcel.java:3167)
+	at android.os.Parcel.readException(Parcel.java:3150)
+	at android.os.Parcel.readException(Parcel.java:3092)
+	at android.hardware.display.IDisplayManager$Stub$Proxy.createVirtualDisplay(IDisplayManager.java:1467)
+	at android.hardware.display.DisplayManagerGlobal.createVirtualDisplay(DisplayManagerGlobal.java:729)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1180)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1141)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1089)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1029)
+	at android.display.cts.VirtualDisplayTest.testUntrustedSysDecorVirtualDisplay(VirtualDisplayTest.java:258)
+
+02-20 00:07:15 D/ModuleListener: ModuleListener.testRunEnded(152) on 27161FDH20031X
+02-20 00:07:15 D/TestDevice: Uninstalling android.display.cts with extra args 
+02-20 00:07:15 D/TestDevice: Uninstalling android.app.stubs with extra args 
+02-20 00:07:15 I/NativeDeviceStateMonitor: Device 27161FDH20031X is already ONLINE
+02-20 00:07:15 I/NativeDeviceStateMonitor: Waiting 360000 ms for device 27161FDH20031X boot complete
+02-20 00:07:15 I/DeviceStateMonitor: Waiting 359964 ms for device 27161FDH20031X package manager
+02-20 00:07:15 I/NativeDeviceStateMonitor: Waiting 359934 ms for device 27161FDH20031X external store
+02-20 00:07:16 I/ConsoleReporter: [27161FDH20031X] Starting arm64-v8a CtsDisplayTestCases[instant] with 1 test
+02-20 00:07:16 I/ConsoleReporter: [1/1 arm64-v8a CtsDisplayTestCases[instant] 27161FDH20031X] android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay fail: java.lang.SecurityException: Requires INTERNAL_SYSTEM_WINDOW permission
+	at android.os.Parcel.createExceptionOrNull(Parcel.java:3183)
+	at android.os.Parcel.createException(Parcel.java:3167)
+	at android.os.Parcel.readException(Parcel.java:3150)
+	at android.os.Parcel.readException(Parcel.java:3092)
+	at android.hardware.display.IDisplayManager$Stub$Proxy.createVirtualDisplay(IDisplayManager.java:1467)
+	at android.hardware.display.DisplayManagerGlobal.createVirtualDisplay(DisplayManagerGlobal.java:729)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1180)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1141)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1089)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1029)
+	at android.display.cts.VirtualDisplayTest.testUntrustedSysDecorVirtualDisplay(VirtualDisplayTest.java:258)
+
+02-20 00:07:16 I/ConsoleReporter: [27161FDH20031X] arm64-v8a CtsDisplayTestCases[instant] completed in 1s. 0 passed, 1 failed, 0 not executed
+02-20 00:07:16 I/ITestSuite: Running system status checker after module execution: arm64-v8a CtsDisplayTestCases[instant]
+02-20 00:07:16 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:16 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:16 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:16 I/NativeDeviceStateMonitor: Device 27161FDH20031X is already ONLINE
+02-20 00:07:16 I/NativeDeviceStateMonitor: Waiting 360000 ms for device 27161FDH20031X boot complete
+02-20 00:07:16 I/DeviceStateMonitor: Waiting 359939 ms for device 27161FDH20031X package manager
+02-20 00:07:16 I/NativeDeviceStateMonitor: Waiting 359812 ms for device 27161FDH20031X external store
+02-20 00:07:17 I/MonitoringUtils: Wifi Connectivity: passed check.
+02-20 00:07:17 D/TestDevice: Output from KeyguardController:   KeyguardController:
+    mKeyguardShowing=false
+    mAodShowing=false
+    mKeyguardGoingAway=false
+
+02-20 00:07:17 E/LeakedThreadStatusChecker: We have 4 threads instead of 1. List: [Thread[Invocation-27161FDH20031X,5,Invocation-27161FDH20031X], Thread[BackgroundDeviceAction-logcat -b all -v threadtime,uid,5,Invocation-27161FDH20031X], Thread[Timer-1,5,Invocation-27161FDH20031X], Thread[grpc-default-worker-ELG-3-1,5,Invocation-27161FDH20031X]]
+02-20 00:07:17 W/ITestSuite: System status checker [com.android.tradefed.suite.checker.LeakedThreadStatusChecker] failed
+02-20 00:07:17 D/NativeDevice: Time offset = -544 ms
+02-20 00:07:17 D/DeviceSettingChecker: Begin postExecution for checking device setting
+02-20 00:07:17 W/DeviceSettingChecker: Setting in namespace global fails:
+ ota_disable_automatic_update is not found before module run
+
+02-20 00:07:17 W/ITestSuite: System status checker [com.android.tradefed.suite.checker.DeviceSettingChecker] failed
+02-20 00:07:17 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 W/ITestSuite: There are failed system status checkers: {com.android.tradefed.suite.checker.LeakedThreadStatusChecker=We have 4 threads instead of 1. List: [Thread[Invocation-27161FDH20031X,5,Invocation-27161FDH20031X], Thread[BackgroundDeviceAction-logcat -b all -v threadtime,uid,5,Invocation-27161FDH20031X], Thread[Timer-1,5,Invocation-27161FDH20031X], Thread[grpc-default-worker-ELG-3-1,5,Invocation-27161FDH20031X]], com.android.tradefed.suite.checker.DeviceSettingChecker=Setting in namespace global fails:
+ ota_disable_automatic_update is not found before module run
+}
+02-20 00:07:18 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/results/2026.02.20_00.06.39/proto with prefix "tmp-proto" suffix ""
+02-20 00:07:18 D/BaseTestSuite: Filters for 'arm64-v8a CtsDisplayTestCases': [CtsDisplayTestCases android.display.cts.DisplayTest#testActivityContextGetMetrics]
+02-20 00:07:18 D/FileUtil: Creating temp file at /tmp/tf-workfolder17147123915829451608 with prefix "CtsDisplayTestCases" suffix ".xml"
+02-20 00:07:18 D/LogFileSaver: Log data for module-configuration is already compressed, skipping compression
+02-20 00:07:18 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264 with prefix "module-configuration_" suffix ".xml"
+02-20 00:07:18 I/LogFileSaver: Saved log file /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/module-configuration_17689160919714582688.xml. [size=1599, elapsed=0ms]
+02-20 00:07:18 D/CertificationSuiteResultReporter: Saved logs for module-configuration in /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/module-configuration_17689160919714582688.xml
+02-20 00:07:18 D/LogFileSaver: Log data for module-configuration is already compressed, skipping compression
+02-20 00:07:18 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "module-configuration_" suffix ".xml"
+02-20 00:07:18 I/LogFileSaver: Saved log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/module-configuration_2592144494888604519.xml. [size=1599, elapsed=0ms]
+02-20 00:07:18 I/ITestSuite: Running system status checker before module execution: arm64-v8a CtsDisplayTestCases
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 I/UserChecker: Current user 0 is already user type CURRENT, no action.
+02-20 00:07:18 D/DeviceSettingChecker: Begin preExecutionCheck for checking device setting
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, locksettings, get-disabled] with timeout: 2m 0s
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:18 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:19 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, locksettings, get-disabled] with timeout: 2m 0s
+02-20 00:07:19 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, input, keyevent, KEYCODE_MENU] with timeout: 2m 0s
+02-20 00:07:19 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, input, keyevent, KEYCODE_HOME] with timeout: 2m 0s
+02-20 00:07:19 I/DeviceBaselineChecker: Enable device baselines keep_engprod_mode_on,disable_os_auto_update,hide_error_dialogs,keep_screen_on,disable_usb_app_verification,clear_lock_screen,keep_location_mode_on,keep_setup_complete_on in 172 millis.
+02-20 00:07:19 D/ModuleDefinition: Running module arm64-v8a CtsDisplayTestCases
+02-20 00:07:19 D/ModuleDefinition: Running setup preparer: SuiteApkInstaller
+02-20 00:07:19 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:19 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:19 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:07:19 D/NativeDevice: Using property ro.build.id=AP2A.240905.003 from cache.
+02-20 00:07:19 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:19 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:07:19 D/SearchArtifactUtil: Searching the module dir: /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases
+02-20 00:07:19 D/RunUtil: Running command [aapt2, dump, badging, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/arm64/CtsDisplayTestCases.apk] with timeout: 1m 0s
+02-20 00:07:19 D/RunUtil: Running command [aapt2, dump, xmltree, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/arm64/CtsDisplayTestCases.apk, --file, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:07:19 D/TestAppInstallSetup: Installing apk android.display.cts with [/home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/arm64/CtsDisplayTestCases.apk] ...
+02-20 00:07:19 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:20 D/RunUtil: Running command [aapt, dump, badging, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/arm64/CtsDisplayTestCases.apk] with timeout: 1m 0s
+02-20 00:07:20 D/RunUtil: Running command [aapt, dump, xmltree, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/arm64/CtsDisplayTestCases.apk, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:07:20 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, appops, write-settings] with timeout: 2m 0s
+02-20 00:07:20 D/SearchArtifactUtil: Searching the module dir: /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases
+02-20 00:07:20 D/RunUtil: Running command [aapt2, dump, badging, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/CtsAppTestStubs.apk] with timeout: 1m 0s
+02-20 00:07:20 D/RunUtil: Running command [aapt2, dump, xmltree, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/CtsAppTestStubs.apk, --file, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:07:20 D/TestAppInstallSetup: Installing apk android.app.stubs with [/home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/CtsAppTestStubs.apk] ...
+02-20 00:07:20 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:21 D/RunUtil: Running command [aapt, dump, badging, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/CtsAppTestStubs.apk] with timeout: 1m 0s
+02-20 00:07:21 D/RunUtil: Running command [aapt, dump, xmltree, /home/simon/android-cts/tools/../../android-cts/testcases/CtsDisplayTestCases/CtsAppTestStubs.apk, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:07:21 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, appops, write-settings] with timeout: 2m 0s
+02-20 00:07:21 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:21 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:21 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:07:21 D/AndroidJUnitTest: Attempting to push filters to /data/local/tmp/ajur/includes.txt
+02-20 00:07:21 D/NativeDevice: Using 'ls' to check doesFileExist(/data/local/tmp/ajur)
+02-20 00:07:21 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, ls, '/data/local/tmp/ajur'] with timeout: 2m 0s
+02-20 00:07:21 D/NativeDevice: File /data/local/tmp/ajur does not exist.
+stdout: 
+stderr: ls: /data/local/tmp/ajur: No such file or directory
+
+02-20 00:07:21 D/NativeDevice: Using 'ls' to check doesFileExist(/data/local/tmp/ajur/includes.txt)
+02-20 00:07:21 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, ls, '/data/local/tmp/ajur/includes.txt'] with timeout: 2m 0s
+02-20 00:07:21 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264 with prefix "filter-arm64-v8a%20CtsDisplayTestCases.include_" suffix ".txt.gz"
+02-20 00:07:21 I/LogFileSaver: Saved gzip log file /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/filter-arm64-v8a%20CtsDisplayTestCases.include_15611848408439720191.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:21 D/CertificationSuiteResultReporter: Saved logs for filter-arm64-v8a%20CtsDisplayTestCases.include in /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/filter-arm64-v8a%20CtsDisplayTestCases.include_15611848408439720191.txt.gz
+02-20 00:07:21 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "filter-arm64-v8a%20CtsDisplayTestCases.include_" suffix ".txt.gz"
+02-20 00:07:21 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/filter-arm64-v8a%20CtsDisplayTestCases.include_262294531108459270.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:21 D/AndroidJUnitTest: Attempting to push filters to /sdcard/googletest/test_runfiles/data/local/tmp/ajur/includes.txt
+02-20 00:07:21 D/NativeDevice: Using 'ls' to check doesFileExist(/data/local/tmp/ajur)
+02-20 00:07:21 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, ls, '/data/local/tmp/ajur'] with timeout: 2m 0s
+02-20 00:07:21 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:21 D/AndroidJUnitTest: Attempting to push filters to /data/local/tmp/ajur/excludes.txt
+02-20 00:07:21 D/NativeDevice: Using 'ls' to check doesFileExist(/data/local/tmp/ajur)
+02-20 00:07:21 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, ls, '/data/local/tmp/ajur'] with timeout: 2m 0s
+02-20 00:07:21 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264 with prefix "filter-arm64-v8a%20CtsDisplayTestCases.exclude_" suffix ".txt.gz"
+02-20 00:07:21 I/LogFileSaver: Saved gzip log file /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/filter-arm64-v8a%20CtsDisplayTestCases.exclude_10807275340732352705.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:21 D/CertificationSuiteResultReporter: Saved logs for filter-arm64-v8a%20CtsDisplayTestCases.exclude in /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/filter-arm64-v8a%20CtsDisplayTestCases.exclude_10807275340732352705.txt.gz
+02-20 00:07:21 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "filter-arm64-v8a%20CtsDisplayTestCases.exclude_" suffix ".txt.gz"
+02-20 00:07:21 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/filter-arm64-v8a%20CtsDisplayTestCases.exclude_15869530776819957876.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:21 D/AndroidJUnitTest: Attempting to push filters to /sdcard/googletest/test_runfiles/data/local/tmp/ajur/excludes.txt
+02-20 00:07:21 D/NativeDevice: Using 'ls' to check doesFileExist(/data/local/tmp/ajur)
+02-20 00:07:21 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, ls, '/data/local/tmp/ajur'] with timeout: 2m 0s
+02-20 00:07:21 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:21 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:21 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, pm, list, features] with timeout: 2m 0s
+02-20 00:07:22 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:22 D/NativeDevice: Using property ro.build.version.codename=REL from cache.
+02-20 00:07:22 D/RunUtil: Running command [aapt2, dump, badging, /tmp/services2131514077547442031.apk] with timeout: 1m 0s
+02-20 00:07:22 D/RunUtil: Running command [aapt2, dump, xmltree, /tmp/services2131514077547442031.apk, --file, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:07:22 D/TestAppInstallSetup: Installing apk androidx.test.services with [/tmp/services2131514077547442031.apk] ...
+02-20 00:07:22 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:22 D/RunUtil: Running command [aapt, dump, badging, /tmp/services2131514077547442031.apk] with timeout: 1m 0s
+02-20 00:07:22 D/RunUtil: Running command [aapt, dump, xmltree, /tmp/services2131514077547442031.apk, AndroidManifest.xml] with timeout: 1m 0s
+02-20 00:07:22 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:22 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, appops, set, --user, 0, --uid, androidx.test.services, MANAGE_EXTERNAL_STORAGE, 0] with timeout: 2m 0s
+02-20 00:07:22 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, appops, write-settings] with timeout: 2m 0s
+02-20 00:07:22 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, dumpsys, deviceidle, whitelist, +androidx.test.services] with timeout: 2m 0s
+02-20 00:07:22 D/AndroidJUnitTest: stdout: Added: androidx.test.services
+
+stderr: 
+02-20 00:07:22 D/ListInstrumentationParser: instrumentation:android.display.cts/androidx.test.runner.AndroidJUnitRunner (target=android.display.cts)
+02-20 00:07:22 D/ListInstrumentationParser: instrumentation:com.android.tradefed.utils.wifi/.WifiUtil (target=com.android.tradefed.utils.wifi)
+02-20 00:07:22 D/ListInstrumentationParser: 
+02-20 00:07:22 I/InstrumentationTest: No runner name specified. Using: androidx.test.runner.AndroidJUnitRunner.
+02-20 00:07:22 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:22 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:22 D/InstrumentationTest: Collecting test info for android.display.cts on device 27161FDH20031X
+02-20 00:07:22 I/RemoteAndroidTestRunner: Running am instrument -w -r --abi arm64-v8a  -e testFile /data/local/tmp/ajur/includes.txt -e debug false -e useTestStorageService true -e newRunListenerMode true -e log true -e notAnnotation com.android.compatibility.common.util.CtsDownstreamingTest,android.platform.test.annotations.AsbSecurityTest,android.platform.test.annotations.AppModeInstant -e notTestFile /data/local/tmp/ajur/excludes.txt -e timeout_msec 300000 android.display.cts/androidx.test.runner.AndroidJUnitRunner on google-aosp_on_panther-27161FDH20031X
+02-20 00:07:23 D/InstrumentationTest: Initializing com.android.tradefed.device.metric.CountTestCasesCollector for instrumentation.
+02-20 00:07:23 I/RemoteAndroidTestRunner: Running am instrument -w -r --abi arm64-v8a  -e testFile /data/local/tmp/ajur/includes.txt -e debug false -e useTestStorageService true -e newRunListenerMode true -e log false -e notAnnotation com.android.compatibility.common.util.CtsDownstreamingTest,android.platform.test.annotations.AsbSecurityTest,android.platform.test.annotations.AppModeInstant -e notTestFile /data/local/tmp/ajur/excludes.txt -e timeout_msec 300000 android.display.cts/androidx.test.runner.AndroidJUnitRunner on google-aosp_on_panther-27161FDH20031X
+02-20 00:07:23 D/ModuleListener: ModuleListener.testRunStarted(android.display.cts, 1, 0) on 27161FDH20031X
+02-20 00:07:23 D/ModuleListener: ModuleListener.testStarted(android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay) on 27161FDH20031X
+02-20 00:07:23 I/ModuleListener: [1/1] 27161FDH20031X android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay FAILURE: java.lang.SecurityException: Requires INTERNAL_SYSTEM_WINDOW permission
+	at android.os.Parcel.createExceptionOrNull(Parcel.java:3183)
+	at android.os.Parcel.createException(Parcel.java:3167)
+	at android.os.Parcel.readException(Parcel.java:3150)
+	at android.os.Parcel.readException(Parcel.java:3092)
+	at android.hardware.display.IDisplayManager$Stub$Proxy.createVirtualDisplay(IDisplayManager.java:1467)
+	at android.hardware.display.DisplayManagerGlobal.createVirtualDisplay(DisplayManagerGlobal.java:729)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1180)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1141)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1089)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1029)
+	at android.display.cts.VirtualDisplayTest.testUntrustedSysDecorVirtualDisplay(VirtualDisplayTest.java:258)
+
+02-20 00:07:23 D/ModuleListener: ModuleListener.testRunEnded(77) on 27161FDH20031X
+02-20 00:07:23 D/TestDevice: Uninstalling androidx.test.services with extra args 
+02-20 00:07:23 D/TestDevice: Uninstalling android.display.cts with extra args 
+02-20 00:07:24 D/TestDevice: Uninstalling android.app.stubs with extra args 
+02-20 00:07:24 I/NativeDeviceStateMonitor: Device 27161FDH20031X is already ONLINE
+02-20 00:07:24 I/NativeDeviceStateMonitor: Waiting 360000 ms for device 27161FDH20031X boot complete
+02-20 00:07:24 I/DeviceStateMonitor: Waiting 359965 ms for device 27161FDH20031X package manager
+02-20 00:07:24 I/NativeDeviceStateMonitor: Waiting 359930 ms for device 27161FDH20031X external store
+02-20 00:07:24 I/ConsoleReporter: [27161FDH20031X] Starting arm64-v8a CtsDisplayTestCases with 1 test
+02-20 00:07:24 I/ConsoleReporter: [1/1 arm64-v8a CtsDisplayTestCases 27161FDH20031X] android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay fail: java.lang.SecurityException: Requires INTERNAL_SYSTEM_WINDOW permission
+	at android.os.Parcel.createExceptionOrNull(Parcel.java:3183)
+	at android.os.Parcel.createException(Parcel.java:3167)
+	at android.os.Parcel.readException(Parcel.java:3150)
+	at android.os.Parcel.readException(Parcel.java:3092)
+	at android.hardware.display.IDisplayManager$Stub$Proxy.createVirtualDisplay(IDisplayManager.java:1467)
+	at android.hardware.display.DisplayManagerGlobal.createVirtualDisplay(DisplayManagerGlobal.java:729)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1180)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1141)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1089)
+	at android.hardware.display.DisplayManager.createVirtualDisplay(DisplayManager.java:1029)
+	at android.display.cts.VirtualDisplayTest.testUntrustedSysDecorVirtualDisplay(VirtualDisplayTest.java:258)
+
+02-20 00:07:24 I/ConsoleReporter: [27161FDH20031X] arm64-v8a CtsDisplayTestCases completed in 3s. 0 passed, 1 failed, 0 not executed
+02-20 00:07:24 I/ITestSuite: Running system status checker after module execution: arm64-v8a CtsDisplayTestCases
+02-20 00:07:24 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:24 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:24 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:24 I/NativeDeviceStateMonitor: Device 27161FDH20031X is already ONLINE
+02-20 00:07:24 I/NativeDeviceStateMonitor: Waiting 360000 ms for device 27161FDH20031X boot complete
+02-20 00:07:24 I/DeviceStateMonitor: Waiting 359930 ms for device 27161FDH20031X package manager
+02-20 00:07:24 I/NativeDeviceStateMonitor: Waiting 359834 ms for device 27161FDH20031X external store
+02-20 00:07:25 I/MonitoringUtils: Wifi Connectivity: passed check.
+02-20 00:07:25 D/TestDevice: Output from KeyguardController:   KeyguardController:
+    mKeyguardShowing=false
+    mAodShowing=false
+    mKeyguardGoingAway=false
+
+02-20 00:07:25 E/LeakedThreadStatusChecker: We have 4 threads instead of 1. List: [Thread[Invocation-27161FDH20031X,5,Invocation-27161FDH20031X], Thread[BackgroundDeviceAction-logcat -b all -v threadtime,uid,5,Invocation-27161FDH20031X], Thread[Timer-1,5,Invocation-27161FDH20031X], Thread[grpc-default-worker-ELG-3-1,5,Invocation-27161FDH20031X]]
+02-20 00:07:25 W/ITestSuite: System status checker [com.android.tradefed.suite.checker.LeakedThreadStatusChecker] failed
+02-20 00:07:25 D/NativeDevice: Time offset = -325 ms
+02-20 00:07:25 D/DeviceSettingChecker: Begin postExecution for checking device setting
+02-20 00:07:26 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:26 W/ITestSuite: There are failed system status checkers: {com.android.tradefed.suite.checker.LeakedThreadStatusChecker=We have 4 threads instead of 1. List: [Thread[Invocation-27161FDH20031X,5,Invocation-27161FDH20031X], Thread[BackgroundDeviceAction-logcat -b all -v threadtime,uid,5,Invocation-27161FDH20031X], Thread[Timer-1,5,Invocation-27161FDH20031X], Thread[grpc-default-worker-ELG-3-1,5,Invocation-27161FDH20031X]]}
+02-20 00:07:26 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/results/2026.02.20_00.06.39/proto with prefix "tmp-proto" suffix ""
+02-20 00:07:26 D/PrettyPrintDelimiter: 
+=============================
+===== TEST PHASE ENDING =====
+=============================
+02-20 00:07:26 D/LogFileSaver: Log data for device_logcat_test_27161FDH20031X is already compressed, skipping compression
+02-20 00:07:26 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264 with prefix "device_logcat_test_27161FDH20031X_" suffix ".txt"
+02-20 00:07:26 I/LogFileSaver: Saved log file /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/device_logcat_test_27161FDH20031X_6420103074977821869.txt. [size=4917878, elapsed=2ms]
+02-20 00:07:26 D/CertificationSuiteResultReporter: Saved logs for device_logcat_test_27161FDH20031X in /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/device_logcat_test_27161FDH20031X_6420103074977821869.txt
+02-20 00:07:26 D/LogFileSaver: Log data for device_logcat_test_27161FDH20031X is already compressed, skipping compression
+02-20 00:07:26 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "device_logcat_test_27161FDH20031X_" suffix ".txt"
+02-20 00:07:26 I/LogFileSaver: Saved log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/device_logcat_test_27161FDH20031X_9628841330288192914.txt. [size=4917878, elapsed=3ms]
+02-20 00:07:26 I/CommandInterrupter: Interrupt blocked
+02-20 00:07:26 D/TestInvocation: Testing minimum responsiveness.
+02-20 00:07:26 I/NativeDeviceStateMonitor: Device 27161FDH20031X is already ONLINE
+02-20 00:07:26 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, getprop, ro.build.version.sdk] with timeout: 45s
+02-20 00:07:26 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264 with prefix "executeShellCommandLog_27161FDH20031X_" suffix ".txt.gz"
+02-20 00:07:26 I/LogFileSaver: Saved gzip log file /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/executeShellCommandLog_27161FDH20031X_14356070771091855252.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:26 D/CertificationSuiteResultReporter: Saved logs for executeShellCommandLog_27161FDH20031X in /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/executeShellCommandLog_27161FDH20031X_14356070771091855252.txt.gz
+02-20 00:07:26 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "executeShellCommandLog_27161FDH20031X_" suffix ".txt.gz"
+02-20 00:07:26 I/LogFileSaver: Saved gzip log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/executeShellCommandLog_27161FDH20031X_17622652144617229351.txt.gz. [size=10, elapsed=0ms]
+02-20 00:07:26 D/TestInvocation: Checking that devices are online.
+02-20 00:07:26 I/NativeDeviceStateMonitor: Device 27161FDH20031X is already ONLINE
+02-20 00:07:26 I/NativeDeviceStateMonitor: Waiting 180000 ms for device 27161FDH20031X boot complete
+02-20 00:07:26 I/DeviceStateMonitor: Waiting 179924 ms for device 27161FDH20031X package manager
+02-20 00:07:26 I/NativeDeviceStateMonitor: Waiting 179823 ms for device 27161FDH20031X external store
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.compatibility.common.tradefed.targetprep.PropertyCheck@189f4e42' on device: '27161FDH20031X'
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.compatibility.common.tradefed.targetprep.PropertyCheck@189f4e42' on device: '27161FDH20031X' in 0 ms
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.compatibility.common.tradefed.targetprep.PropertyCheck@51858d13' on device: '27161FDH20031X'
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.compatibility.common.tradefed.targetprep.PropertyCheck@51858d13' on device: '27161FDH20031X' in 0 ms
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.compatibility.common.tradefed.targetprep.PropertyCheck@62932963' on device: '27161FDH20031X'
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.compatibility.common.tradefed.targetprep.PropertyCheck@62932963' on device: '27161FDH20031X' in 0 ms
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.tradefed.targetprep.RunCommandTargetPreparer@78eb8a53' on device: '27161FDH20031X'
+02-20 00:07:27 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, settings, put, global, verifier_engprod, 0] with timeout: 2m 0s
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.tradefed.targetprep.RunCommandTargetPreparer@78eb8a53' on device: '27161FDH20031X' in 78 ms
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.tradefed.targetprep.RunCommandTargetPreparer@24f132d2' on device: '27161FDH20031X'
+02-20 00:07:27 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, settings, put, global, package_verifier_enable, 1] with timeout: 2m 0s
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.tradefed.targetprep.RunCommandTargetPreparer@24f132d2' on device: '27161FDH20031X' in 70 ms
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.compatibility.common.tradefed.targetprep.ReportLogCollector@2f4612af' on device: '27161FDH20031X'
+02-20 00:07:27 D/NativeDevice: Using property ro.build.version.sdk=34 from cache.
+02-20 00:07:27 D/NativeDevice: Using 'ls' to check doesFileExist(/storage/emulated/0/report-log-files/)
+02-20 00:07:27 D/RunUtil: Running command [adb, -s, 27161FDH20031X, shell, ls, '/storage/emulated/0/report-log-files/'] with timeout: 2m 0s
+02-20 00:07:27 D/NativeDevice: File /storage/emulated/0/report-log-files/ does not exist.
+stdout: 
+stderr: ls: /storage/emulated/0/report-log-files/: No such file or directory
+
+02-20 00:07:27 E/NativeDevice: Device path /sdcard/report-log-files/ does not exist to be pulled.
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.compatibility.common.tradefed.targetprep.ReportLogCollector@2f4612af' on device: '27161FDH20031X' in 108 ms
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.compatibility.common.tradefed.targetprep.DeviceInfoCollector@3f43762d' on device: '27161FDH20031X'
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.compatibility.common.tradefed.targetprep.DeviceInfoCollector@3f43762d' on device: '27161FDH20031X' in 0 ms
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.tradefed.targetprep.RunCommandTargetPreparer@491388fb' on device: '27161FDH20031X'
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.tradefed.targetprep.RunCommandTargetPreparer@491388fb' on device: '27161FDH20031X' in 0 ms
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.compatibility.common.tradefed.targetprep.WifiCheck@1936ba10' on device: '27161FDH20031X'
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.compatibility.common.tradefed.targetprep.WifiCheck@1936ba10' on device: '27161FDH20031X' in 0 ms
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.compatibility.common.tradefed.targetprep.ApkPreconditionCheck@72dce6c3' on device: '27161FDH20031X'
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.compatibility.common.tradefed.targetprep.ApkPreconditionCheck@72dce6c3' on device: '27161FDH20031X' in 0 ms
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.compatibility.common.tradefed.targetprep.SettingsPreparer@4e71b651' on device: '27161FDH20031X'
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.compatibility.common.tradefed.targetprep.SettingsPreparer@4e71b651' on device: '27161FDH20031X' in 0 ms
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.compatibility.common.tradefed.targetprep.SettingsPreparer@43757df0' on device: '27161FDH20031X'
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.compatibility.common.tradefed.targetprep.SettingsPreparer@43757df0' on device: '27161FDH20031X' in 0 ms
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.compatibility.common.tradefed.targetprep.PackageDisabler@582a8770' on device: '27161FDH20031X'
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.compatibility.common.tradefed.targetprep.PackageDisabler@582a8770' on device: '27161FDH20031X' in 0 ms
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.compatibility.common.tradefed.targetprep.StayAwakePreparer@5702121c' on device: '27161FDH20031X'
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.compatibility.common.tradefed.targetprep.StayAwakePreparer@5702121c' on device: '27161FDH20031X' in 0 ms
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.compatibility.common.tradefed.targetprep.DynamicConfigPusher@666f140f' on device: '27161FDH20031X'
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.compatibility.common.tradefed.targetprep.DynamicConfigPusher@666f140f' on device: '27161FDH20031X' in 0 ms
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.compatibility.common.tradefed.targetprep.DeviceFileCollector@29fd5607' on device: '27161FDH20031X'
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.compatibility.common.tradefed.targetprep.DeviceFileCollector@29fd5607' on device: '27161FDH20031X' in 0 ms
+02-20 00:07:27 D/InvocationExecution: starting tearDown 'com.android.compatibility.common.tradefed.targetprep.DeviceFileCollector@63845e4e' on device: '27161FDH20031X'
+02-20 00:07:27 D/InvocationExecution: done with tearDown 'com.android.compatibility.common.tradefed.targetprep.DeviceFileCollector@63845e4e' on device: '27161FDH20031X' in 0 ms
+02-20 00:07:27 D/TestDevice: Uninstalling com.android.tradefed.utils.wifi with extra args 
+02-20 00:07:27 D/WifiHelper: Successfully clean up WifiHelper.
+02-20 00:07:27 D/RunUtil: Running command [id, -u, simon] with timeout: 1m 0s
+02-20 00:07:27 D/RunUtil: Running command [tail, -c, 10MB, /tmp/adb.1000.log] with timeout: 1m 0s
+02-20 00:07:27 D/LogFileSaver: Log data for host_adb_log is already compressed, skipping compression
+02-20 00:07:27 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264 with prefix "host_adb_log_" suffix ".txt"
+02-20 00:07:27 I/LogFileSaver: Saved log file /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/host_adb_log_6374358232490588926.txt. [size=108006, elapsed=0ms]
+02-20 00:07:27 D/CertificationSuiteResultReporter: Saved logs for host_adb_log in /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/host_adb_log_6374358232490588926.txt
+02-20 00:07:27 D/LogFileSaver: Log data for host_adb_log is already compressed, skipping compression
+02-20 00:07:27 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "host_adb_log_" suffix ".txt"
+02-20 00:07:27 I/LogFileSaver: Saved log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/host_adb_log_15926400808296448332.txt. [size=108006, elapsed=0ms]
+02-20 00:07:27 D/LogFileSaver: Log data for device_logcat_teardown_27161FDH20031X is already compressed, skipping compression
+02-20 00:07:27 D/FileUtil: Creating temp file at /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264 with prefix "device_logcat_teardown_27161FDH20031X_" suffix ".txt"
+02-20 00:07:27 I/LogFileSaver: Saved log file /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/device_logcat_teardown_27161FDH20031X_8991332547615849825.txt. [size=2425, elapsed=0ms]
+02-20 00:07:27 D/CertificationSuiteResultReporter: Saved logs for device_logcat_teardown_27161FDH20031X in /home/simon/android-cts/tools/../../android-cts/logs/2026.02.20_00.06.39/inv_1187110658838068264/device_logcat_teardown_27161FDH20031X_8991332547615849825.txt
+02-20 00:07:27 D/LogFileSaver: Log data for device_logcat_teardown_27161FDH20031X is already compressed, skipping compression
+02-20 00:07:27 D/FileUtil: Creating temp file at /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799 with prefix "device_logcat_teardown_27161FDH20031X_" suffix ".txt"
+02-20 00:07:27 I/LogFileSaver: Saved log file /tmp/13033356/cts/inv_7008709497299498440/inv_2989306999300582799/device_logcat_teardown_27161FDH20031X_14160745311098417741.txt. [size=2425, elapsed=0ms]
+02-20 00:07:27 I/TestInvocation: Done stopping logcat for 27161FDH20031X
+02-20 00:07:27 D/BackgroundDeviceAction: com.android.ddmlib.TimeoutException while running logcat on 27161FDH20031X. May see duplicated content in log.
+02-20 00:07:27 D/BackgroundDeviceAction: Waiting for device 27161FDH20031X online before starting.
+02-20 00:07:27 D/CommandScheduler: TestDeviceState for releasing '27161FDH20031X(class com.android.tradefed.device.TestDevice)' is 'ONLINE'
+02-20 00:07:27 I/NativeDeviceStateMonitor: Waiting 30000 ms for device 27161FDH20031X shell to be responsive
+02-20 00:07:27 I/NativeDeviceStateMonitor: shell ready. id output: uid=2000(shell) gid=2000(shell) groups=2000(shell),1004(input),1007(log),1011(adb),1015(sdcard_rw),1028(sdcard_r),1078(ext_data_rw),1079(ext_obb_rw),3001(net_bt_admin),3002(net_bt),3003(inet),3006(net_bw_stats),3009(readproc),3011(uhid),3012(readtracefs) context=u:r:shell:s0
+
+02-20 00:07:27 D/CommandScheduler: Release map of the devices: {com.android.tradefed.device.TestDevice@60b3c7ab=AVAILABLE}
+02-20 00:07:27 W/NativeDevice: Attempting to stop logcat when not capturing for 27161FDH20031X
+02-20 00:07:27 D/TestDevice: No snapuserd notification in progress for BLOCK_BEFORE_RELEASING

@@ -1,14 +1,14 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
-index 1234567..abcdefg 100644
---- a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
-@@ -224,7 +224,7 @@ final class VirtualDisplayAdapter extends DisplayAdapter {
-     static String generateDisplayUniqueId(String packageName, int uid,
-             VirtualDisplayConfig config) {
-         return UNIQUE_ID_PREFIX + packageName + ((config.getUniqueId() != null)
--                ? (":" + config.getUniqueId())
--                : ("," + uid + "," + config.getName() + "," + sNextUniqueIndex.getAndIncrement()));
-+                ? (config.getUniqueId())
-+                : ("," + uid + "," + config.getName() + "," + sNextUniqueIndex.getAndIncrement()));
-     }
- 
+diff --git a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+index abc1234..def5678 100644
+--- a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+@@ -350,7 +350,8 @@ final class OverlayDisplayAdapter extends DisplayAdapter {
+                 mInfo.yDpi = rawMode.mDensityDpi;
+                 mInfo.presentationDeadlineNanos = mDisplayPresentationDeadlineNanos +
+                         1000000000L / (int) mRefreshRate;   // display's deadline + 1 frame
+-                mInfo.flags = DisplayDeviceInfo.FLAG_PRESENTATION;
++                // BUG: Missing FLAG_PRESENTATION - using 0 instead
++                mInfo.flags = 0;
+                 if (mFlags.mSecure) {
+                     mInfo.flags |= DisplayDeviceInfo.FLAG_SECURE;
+                 }

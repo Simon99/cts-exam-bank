@@ -1,0 +1,25 @@
+02-19 22:56:55.344 10110  3662  5308 W MediaProvider: isAppCloneUserPair for user 0: false
+02-19 22:56:55.410  root   959   959 I s3c2410-wdt 10070000.watchdog_cl1: Watchdog cluster 1 keepalive!, old_wtcnt = 7751, wtcnt = cc8c
+02-19 22:56:55.475 10110  3662  3992 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-19 22:56:55.513  root  1085  1085 W [14:56:55.482318][dhd][wlan]dhd_plat_l1ss_ctrl: Control L1ss RC side 0
+02-19 22:56:55.793  1000  1476  1967 I commit_sys_config_file: [settings-0-0,15]
+02-19 22:56:55.867  1000  1476  1825 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-19 22:56:55.868  1000  1476  1870 I AppsFilter: interaction: PackageSetting{5655619 com.android.microdroid.empty_payload/10112} -> PackageSetting{29601e8 com.android.tradefed.utils.wifi/10126} BLOCKED
+02-19 22:56:55.870  1000  1476  1825 D OomAdjuster: Not killing cached processes
+02-19 22:56:55.878  1017   548   577 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-19 22:56:55.933  1000  1476  1870 I commit_sys_config_file: [package,23]
+02-19 22:56:55.964  logd  5448  5448 I logd    : start watching /data/system/packages.list ...
+02-19 22:56:55.935  1000  1476  1870 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-19 22:56:55.935  1000  1476  1870 D PackageManager: Clear ephemeral installer activity
+02-19 22:56:55.937  1000  1476  4104 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-19 22:56:55.972  logd  5448  5448 I logd    : ReadPackageList, total packages: 131
+02-19 22:56:55.948  1000  1476  1863 I commit_sys_config_file: [package-user-0,15]
+02-19 22:56:55.951  1000  1476  1870 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=0: pkg removed
+02-19 22:56:55.956  1000  1476  2000 V StorageManagerService: Package com.android.tradefed.utils.wifi does not have legacy storage
+02-19 22:56:55.958  1000  1476  1824 I CredManSysService: updateProvidersWhenPackageRemoved
+02-19 22:56:55.958  1000  1476  1824 W CredManSysService: settings key is null
+02-19 22:56:55.962  1000  1476  2896 W WifiService: Couldn't get PackageInfo for package:com.android.tradefed.utils.wifi
+02-19 22:56:55.962  1000  1476  2896 D WifiService: Remove settings for package:com.android.tradefed.utils.wifi
+02-19 22:56:55.962  1000  1476  2896 D WifiConfigManager: Remove all networks for app ApplicationInfo{32c0c4 com.android.tradefed.utils.wifi}
+02-19 22:56:55.962  1000  1476  2896 V WifiScanRequestProxy: Clearing scan request timestamps for uid=10126, packageName=com.android.tradefed.utils.wifi
+02-19 22:56:55.962 radio  3167  3167 D CarrierSvcBindHelper: onPackageRemoved: com.android.tradefed.utils.wifi

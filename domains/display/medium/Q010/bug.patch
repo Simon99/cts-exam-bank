@@ -1,20 +1,12 @@
 diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
 --- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
 +++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-@@ -1326,13 +1326,12 @@ public final class DisplayManagerService extends SystemService {
-             if (Arrays.equals(mUserDisabledHdrTypes, userDisabledHdrTypes)) {
-                 return;
+@@ -1328,7 +1328,7 @@ public final class DisplayManagerService extends SystemService {
              }
--            String userDisabledFormatsString = "";
+             String userDisabledFormatsString = "";
              if (userDisabledHdrTypes.length != 0) {
 -                userDisabledFormatsString = TextUtils.join(",",
-+                String userDisabledFormatsString = TextUtils.join(",",
++                TextUtils.join(",",
                          Arrays.stream(userDisabledHdrTypes).boxed().toArray());
-+                Settings.Global.putString(mContext.getContentResolver(),
-+                        Settings.Global.USER_DISABLED_HDR_FORMATS, userDisabledFormatsString);
              }
--            Settings.Global.putString(mContext.getContentResolver(),
--                    Settings.Global.USER_DISABLED_HDR_FORMATS, userDisabledFormatsString);
-             mUserDisabledHdrTypes = userDisabledHdrTypes;
-             if (!mAreUserDisabledHdrTypesAllowed) {
-                 mLogicalDisplayMapper.forEachLocked(
+             Settings.Global.putString(mContext.getContentResolver(),

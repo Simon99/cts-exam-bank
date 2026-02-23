@@ -1,68 +1,34 @@
-# CTS 除錯練習題 DIS-E004
+# Question DIS-E004
 
-## 題目資訊
-- **難度**: Easy
-- **預估時間**: 15 分鐘
-- **領域**: Display / Brightness
+## CTS 測試資訊
+- **Module**: CtsDisplayTestCases
+- **Test**: android.display.cts.DisplayTest#testMode
+- **失敗類型**: AssertionError
 
-## 失敗的 CTS 測試
-
-```
-android.hardware.display.cts.BrightnessTest#testGetDefaultCurve
-```
-
-### 測試輸出
+## 測試失敗訊息
 
 ```
-java.lang.NullPointerException: Attempt to invoke interface method 
-'android.hardware.display.BrightnessConfiguration 
-com.android.server.display.DisplayPowerControllerInterface.getDefaultBrightnessConfiguration()' 
-on a null object reference
-    at com.android.server.display.DisplayManagerService$BinderService.getDefaultBrightnessConfiguration(DisplayManagerService.java:4205)
-    at android.hardware.display.IDisplayManager$Stub.onTransact(IDisplayManager.java:1247)
-    at android.os.Binder.execTransactInternal(Binder.java:1344)
-    at android.os.Binder.execTransact(Binder.java:1275)
+junit.framework.AssertionFailedError: expected:<1> but was:<-1>
+	at android.display.cts.DisplayTest.testMode(DisplayTest.java:XXX)
 ```
 
-### 測試代碼參考
+## 相關日誌
 
-```java
-@Test
-public void testGetDefaultCurve() {
-    assumeTrue(numberOfSystemAppsWithPermission(
-            Manifest.permission.CONFIGURE_DISPLAY_BRIGHTNESS) > 0);
-    grantPermission(Manifest.permission.CONFIGURE_DISPLAY_BRIGHTNESS);
-
-    BrightnessConfiguration defaultConfig = mDisplayManager.getDefaultBrightnessConfiguration();
-    assumeNotNull(defaultConfig);
-
-    Pair<float[], float[]> curve = defaultConfig.getCurve();
-    assertTrue(curve.first.length > 0);
-    assertEquals(curve.first.length, curve.second.length);
-    // ... 更多驗證
-}
+```
+02-20 10:45:45.123 D/DisplayManagerService: Creating overlay display device: 181x161/214
+02-20 10:45:45.125 D/OverlayDisplayAdapter: getDisplayDeviceInfoLocked: defaultModeId=-1
+02-20 10:45:45.130 I/DisplayTest: Default mode ID: -1, expected first supported mode
+02-20 10:45:45.132 W/DisplayTest: Display.getMode() returned mode with invalid ID
 ```
 
 ## 問題描述
 
-系統嘗試獲取預設的亮度配置曲線（brightness curve）時發生了 NullPointerException。
+CTS 測試 `testMode` 驗證 overlay display 的顯示模式設定是否正確。測試預期預設模式 ID 應該是第一個支援的模式，但實際回報的 defaultModeId 為 -1（無效值）。
 
-`getDefaultBrightnessConfiguration()` 是一個 Binder 服務方法，應該返回系統預設的亮度自動調整曲線配置。
-
-## 需要檢查的檔案
-
-```
-frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
-```
-
-## 提示
-
-1. 這是一個 Binder 服務調用，看看方法是如何取得 DisplayPowerController 的
-2. `Display.DEFAULT_DISPLAY` 的值是什麼？
-3. 為什麼 `mDisplayPowerControllers.get()` 會返回 null？
+這表示在設置 defaultModeId 時使用了錯誤的值。
 
 ## 任務
 
-1. 找出導致 NullPointerException 的根本原因
-2. 說明為什麼取得的 controller 是 null
-3. 提供修復方案
+1. 找出導致 defaultModeId 被設為 -1 的程式碼錯誤
+2. 修復該錯誤，使 defaultModeId 正確設為第一個支援的模式
+3. 確認修改符合 Display.Mode 的設計規範

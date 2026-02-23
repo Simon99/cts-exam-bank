@@ -1,70 +1,52 @@
-# 答案：VirtualDisplayAdapter resizeLocked() Bug
+# 答案 - Display Type 設置錯誤
+
+## 問題分析
+
+1. **錯誤原因**：
+   - CTS 測試 `testGetDisplays` 使用 `display.getType() == Display.TYPE_OVERLAY` 來識別 overlay display
+   - 如果 display type 設置錯誤，測試就無法找到 secondary display
+   - 測試會認為沒有 overlay display 存在
+
+2. **根本原因**：
+   在 `OverlayDisplayAdapter.java` 的 `getDisplayDeviceInfoLocked()` 方法中：
+   ```java
+   // 錯誤的代碼
+   mInfo.type = Display.TYPE_VIRTUAL;  // 應該是 TYPE_OVERLAY
+   ```
+   
+   使用了錯誤的顯示器類型常量。
 
 ## Bug 位置
 
-`VirtualDisplayAdapter.java` 第 352 行，`resizeLocked()` 方法中的條件判斷。
+**文件**: `frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java`
 
-## Bug 描述
+**方法**: `OverlayDisplayDevice.getDisplayDeviceInfoLocked()`
 
-**錯誤程式碼：**
-```java
-if (mWidth != width && mHeight != height && mDensityDpi != densityDpi) {
-```
+**行號**: 約第 358 行
 
-**問題：** 使用了 `&&`（AND）邏輯運算符，導致只有當「寬度、高度、密度三個參數全部都改變」時，才會執行 resize 邏輯。
-
-## 為什麼這會導致測試失敗
-
-### 螢幕旋轉時的實際情況：
-
-當虛擬顯示從**縱屏 (1080x1920)** 旋轉到**橫屏 (1920x1080)** 時：
-- `width`: 1080 → 1920 ✅ 改變
-- `height`: 1920 → 1080 ✅ 改變  
-- `densityDpi`: 420 → 420 ❌ **不變**
-
-由於 `densityDpi` 沒有改變，`mDensityDpi != densityDpi` 為 `false`。
-
-使用 `&&` 時：`true && true && false = false`
-
-**結果：** 整個條件為 `false`，resize 邏輯不會執行，虛擬顯示的尺寸不會更新。
-
-### CTS 測試預期行為
-
-`testVirtualDisplayRotatesWithContent` 測試會：
-1. 創建一個帶有 `VIRTUAL_DISPLAY_FLAG_ROTATES_WITH_CONTENT` 標誌的虛擬顯示
-2. 旋轉內容
-3. 驗證虛擬顯示的尺寸正確地跟隨內容旋轉更新
-
-由於 bug 導致 resize 被跳過，測試驗證尺寸時會失敗。
-
-## 正確的修復
+## 修復方式
 
 ```java
-public void resizeLocked(int width, int height, int densityDpi) {
-    if (mWidth != width || mHeight != height || mDensityDpi != densityDpi) {
-        sendDisplayDeviceEventLocked(this, DISPLAY_DEVICE_EVENT_CHANGED);
-        sendTraversalRequestLocked();
-        mWidth = width;
-        mHeight = height;
-        mMode = createMode(width, height, getRefreshRate());
-        mDensityDpi = densityDpi;
-        mInfo = null;
-        mPendingChanges |= PENDING_RESIZE;
-    }
-}
+// 修復後的代碼
+mInfo.type = Display.TYPE_OVERLAY;  // 正確的類型
 ```
 
-**修復：** 將 `&&` 改為 `||`（OR），這樣「任一參數改變」時都會執行 resize 邏輯。
+## 驗證修復
 
-## 知識點總結
-
-1. **邏輯運算符選擇**：當需要「任一條件成立就執行」時，使用 `||`；當需要「所有條件都成立才執行」時，使用 `&&`
-2. **螢幕旋轉特性**：旋轉通常只改變寬高，不改變 DPI
-3. **變更檢測邏輯**：檢測「是否需要更新」通常應該用 `||`，因為任何一個屬性變化都應觸發更新
-
-## 修復驗證
-
-修復後重新運行 CTS 測試：
+執行測試確認修復有效：
 ```bash
-atest android.hardware.display.cts.VirtualDisplayTest#testVirtualDisplayRotatesWithContent
+atest CtsDisplayTestCases:DisplayTest#testGetDisplays
 ```
+
+## 相關知識點
+
+1. **Display.TYPE_OVERLAY**：用於開發測試的模擬顯示器，通過 overlay window 實現
+2. **Display.TYPE_VIRTUAL**：應用程式創建的虛擬顯示器
+3. **Display.TYPE_INTERNAL**：內建顯示器（如手機螢幕）
+4. **Display.TYPE_EXTERNAL**：外接顯示器（如 HDMI）
+
+## 學習要點
+
+- 不同類型的顯示器有不同的用途和行為
+- CTS 測試會驗證顯示器類型的正確性
+- 選擇正確的常量對於系統行為很重要

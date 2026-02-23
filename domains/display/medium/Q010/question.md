@@ -1,10 +1,10 @@
-# Q010: HDR 類型禁用設定無法清除
+# Q010: HDR 類型禁用設定未正確儲存
 
 ## 背景
 
 Android 系統允許使用者禁用特定的 HDR 類型（如 HDR10、Dolby Vision 等）。`DisplayManagerService` 負責管理這些設定，並將使用者的選擇儲存到 `Settings.Global.USER_DISABLED_HDR_FORMATS`。
 
-一位使用者回報：「我在設定中禁用了 HDR10 和 Dolby Vision，之後又把它們全部取消（清空列表），但重啟後這些 HDR 類型還是被禁用。」
+一位 QA 工程師回報：「我在測試 HDR 禁用功能時，明明呼叫 API 設定了要禁用 Dolby Vision 和 HLG，但讀取 Settings 時卻是空的。」
 
 ## 問題描述
 
@@ -15,12 +15,23 @@ android.display.cts.DisplayTest#testSetUserDisabledHdrTypesStoresDisabledFormats
 ```
 
 測試流程：
-1. 呼叫 `setUserDisabledHdrTypes([HDR10, DOLBY_VISION])` 禁用特定 HDR 類型
-2. 驗證 Settings 中儲存了正確的值
-3. 呼叫 `setUserDisabledHdrTypes([])` 清除所有禁用類型
-4. 驗證 Settings 中的值已被清空（應為空字串）
+1. 設定環境，覆蓋顯示器的 HDR 支援類型
+2. 呼叫 `setUserDisabledHdrTypes([DOLBY_VISION, HLG])` 禁用特定 HDR 類型
+3. 從 `Settings.Global.USER_DISABLED_HDR_FORMATS` 讀取儲存的值
+4. 驗證值正確（應包含 DOLBY_VISION=1 和 HLG=3）
 
-測試在步驟 4 失敗：Settings 仍包含之前禁用的 HDR 類型。
+測試在步驟 4 失敗：Settings 中的值是空的，沒有正確儲存禁用的 HDR 類型。
+
+## 呼叫鏈
+
+```
+CTS Test
+  └─ DisplayManager.setUserDisabledHdrTypes(int[])
+      └─ DisplayManagerGlobal.setUserDisabledHdrTypes(int[])
+          └─ IDisplayManager.Stub (Binder IPC)
+              └─ DisplayManagerService.setUserDisabledHdrTypesInternal(int[])
+                  └─ TextUtils.join() → Settings.Global.putString()
+```
 
 ## 程式碼片段
 
@@ -45,12 +56,13 @@ private void setUserDisabledHdrTypesInternal(int[] userDisabledHdrTypes) {
         if (Arrays.equals(mUserDisabledHdrTypes, userDisabledHdrTypes)) {
             return;
         }
+        String userDisabledFormatsString = "";
         if (userDisabledHdrTypes.length != 0) {
-            String userDisabledFormatsString = TextUtils.join(",",
+            TextUtils.join(",",
                     Arrays.stream(userDisabledHdrTypes).boxed().toArray());
-            Settings.Global.putString(mContext.getContentResolver(),
-                    Settings.Global.USER_DISABLED_HDR_FORMATS, userDisabledFormatsString);
         }
+        Settings.Global.putString(mContext.getContentResolver(),
+                Settings.Global.USER_DISABLED_HDR_FORMATS, userDisabledFormatsString);
         mUserDisabledHdrTypes = userDisabledHdrTypes;
         if (!mAreUserDisabledHdrTypesAllowed) {
             mLogicalDisplayMapper.forEachLocked(
@@ -66,11 +78,11 @@ private void setUserDisabledHdrTypesInternal(int[] userDisabledHdrTypes) {
 ## 任務
 
 1. 找出導致測試失敗的 bug
-2. 解釋為什麼這個 bug 會導致「清除 HDR 禁用設定」功能失效
+2. 解釋為什麼這個 bug 會導致「Settings 儲存值為空」
 3. 提供修復方案
 
 ## 提示
 
-- 仔細觀察空陣列（`[]`）和非空陣列的處理邏輯差異
-- 思考 Settings 應該在什麼情況下被更新
-- 考慮使用者操作的完整流程：禁用 → 清除 → 重啟
+- 仔細觀察 `TextUtils.join()` 的呼叫方式
+- 思考函數回傳值的用途
+- Java 中沒有使用的回傳值會發生什麼事？

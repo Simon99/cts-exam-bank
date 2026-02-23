@@ -1,0 +1,15 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+--- a/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java
+@@ -1329,8 +1329,9 @@ public final class DisplayManagerService extends SystemService {
+             }
+             String userDisabledFormatsString = "";
+             if (userDisabledHdrTypes.length != 0) {
+-                userDisabledFormatsString = TextUtils.join(",",
+-                        Arrays.stream(userDisabledHdrTypes).boxed().toArray());
++                // BUG: Only save the first HDR type, ignoring the rest
++                // This causes incomplete HDR settings to be persisted
++                userDisabledFormatsString = String.valueOf(userDisabledHdrTypes[0]);
+             }
+             Settings.Global.putString(mContext.getContentResolver(),
+                     Settings.Global.USER_DISABLED_HDR_FORMATS, userDisabledFormatsString);

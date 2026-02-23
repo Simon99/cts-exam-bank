@@ -1,0 +1,116 @@
+02-17 17:18:54 D/ConfigurationFactory: Searching the 'config/' config path
+==================
+Notice:
+We collect anonymous usage statistics in accordance with our Content Licenses (https://source.android.com/setup/start/licenses), Contributor License Agreement (https://opensource.google.com/docs/cla/), Privacy Policy (https://policies.google.com/privacy) and Terms of Service (https://policies.google.com/terms).
+==================
+02-17 17:18:54 D/TradefedFeatureServer: Starting feature server.
+02-17 17:18:54 D/GlobalConfiguration: Resolve and remote files from @Option
+Android Compatibility Test Suite 14_r7 (13033356)
+Use "help" or "help all" to get more information on running commands.
+Non-interactive mode: Running initial command then exiting.
+Using commandline arguments as starting command: [run, commandAndExit, cts, -m, CtsDisplayTestCases, -t, android.display.cts.VirtualDisplayTest, --shard-count, 1, -s, 27161FDH20031X]
+02-17 17:18:54 I/DeviceManager: Detected new device 27161FDH20031X
+02-17 17:18:54 I/TradefedInvocationAgent: Runtime info file path: /tmp/olc_server_gen_files/session_fb6a75e1-ba4b-40d3-924a-42068325a711/job_gen_xts-tradefed-test-job_03b0a512-ab53-4124-ad86-ce8c99f1819e/test_f2a6329e-4868-435b-a00c-d8026d16795a/tf_runtime_info
+02-17 17:18:54 I/DeviceManager: Detected new device 2B231FDH200B4Z
+02-17 17:18:55 I/CommandScheduler: Received shutdown request.
+02-17 17:18:55 I/TestInvocation: Starting invocation for 'cts' with '[ DeviceBuildInfo{bid=13033356, serial=27161FDH20031X} on device '27161FDH20031X'] 
+05:18:55 W/BatteryFetcher: Multiple lines matched with different value; Original: 80, Current: 77 (keeping original)
+02-17 17:19:01 E/WifiCheck: Device has no network connection, no ssid provided, some modules of CTS require an active network connection
+02-17 17:19:19 W/ApkInstrumentationPreparer: Target preparation step com.android.compatibility.common.deviceinfo.KeystoreAttestationDeviceInfo#testCollectDeviceInfo failed.
+junit.framework.AssertionFailedError: KeystoreAttestationDeviceInfo collection completed. expected:<COMPLETED> but was:<FAILED>
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.failNotEquals(Assert.java:287)
+	at junit.framework.Assert.assertEquals(Assert.java:67)
+	at com.android.compatibility.common.deviceinfo.DeviceInfo.testCollectDeviceInfo(DeviceInfo.java:112)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:220)
+	at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:205)
+02-17 17:19:20 W/PropertyCheck: Expected "user" but found "userdebug" for property: ro.build.type
+02-17 17:19:20 W/PropertyCheck: Property "persist.sys.test_harness" not found on device, cannot verify value "false" 
+02-17 17:19:21 D/ITestSuite: [Total Unique Modules = 2]
+02-17 17:19:21 I/ITestSuite: 27161FDH20031X running 2 modules: [arm64-v8a CtsDisplayTestCases[instant], arm64-v8a CtsDisplayTestCases]
+02-17 17:19:22 D/ModuleDefinition: Running module arm64-v8a CtsDisplayTestCases[instant]
+02-17 17:19:26 I/ModuleListener: [1/5] 27161FDH20031X android.display.cts.VirtualDisplayTest#testHdrApiMethods FAILURE: java.lang.NullPointerException: Attempt to invoke virtual method 'void android.hardware.display.VirtualDisplay.release()' on a null object reference
+	at android.display.cts.VirtualDisplayTest.testHdrApiMethods(VirtualDisplayTest.java:328)
+02-17 17:19:26 I/ModuleListener: [3/5] 27161FDH20031X android.display.cts.VirtualDisplayTest#testGetHdrCapabilitiesWithUserDisabledFormats FAILURE: java.lang.NullPointerException: Attempt to invoke virtual method 'void android.hardware.display.VirtualDisplay.release()' on a null object reference
+	at android.display.cts.VirtualDisplayTest.testGetHdrCapabilitiesWithUserDisabledFormats(VirtualDisplayTest.java:346)
+02-17 17:19:26 I/ModuleListener: [4/5] 27161FDH20031X android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay FAILURE: java.lang.AssertionError: virtual display must not be null
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at android.display.cts.VirtualDisplayTest.testUntrustedSysDecorVirtualDisplay(VirtualDisplayTest.java:261)
+02-17 17:19:26 I/ModuleListener: [5/5] 27161FDH20031X android.display.cts.VirtualDisplayTest#testVirtualDisplayWithRequestedRefreshRate FAILURE: java.lang.AssertionError: virtual display must not be null
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at android.display.cts.VirtualDisplayTest.testVirtualDisplayWithRequestedRefreshRate(VirtualDisplayTest.java:307)
+02-17 17:19:28 I/MonitoringUtils: Wifi Connectivity check failed on 27161FDH20031X. (Is your device connected to Wifi?), retrying in 5000ms
+02-17 17:19:34 I/MonitoringUtils: Wifi Connectivity check failed on 27161FDH20031X. (Is your device connected to Wifi?), retrying in 5000ms
+02-17 17:19:40 I/MonitoringUtils: Wifi Connectivity check failed on 27161FDH20031X. (Is your device connected to Wifi?), retrying in 5000ms
+02-17 17:19:46 I/MonitoringUtils: Wifi Connectivity check failed on 27161FDH20031X. (Is your device connected to Wifi?), retrying in 5000ms
+02-17 17:19:51 W/ITestSuite: System status checker [com.android.compatibility.common.tradefed.targetprep.NetworkConnectivityChecker] failed
+02-17 17:19:51 E/LeakedThreadStatusChecker: We have 4 threads instead of 1. List: [Thread[Invocation-27161FDH20031X,5,Invocation-27161FDH20031X], Thread[BackgroundDeviceAction-logcat -b all -v threadtime,uid,5,Invocation-27161FDH20031X], Thread[Timer-1,5,Invocation-27161FDH20031X], Thread[grpc-default-worker-ELG-3-1,5,Invocation-27161FDH20031X]]
+02-17 17:19:51 W/ITestSuite: System status checker [com.android.tradefed.suite.checker.LeakedThreadStatusChecker] failed
+02-17 17:19:51 W/DeviceSettingChecker: Setting in namespace global fails:
+ ota_disable_automatic_update is not found before module run
+02-17 17:19:51 W/ITestSuite: System status checker [com.android.tradefed.suite.checker.DeviceSettingChecker] failed
+02-17 17:19:52 W/ITestSuite: There are failed system status checkers: {com.android.compatibility.common.tradefed.targetprep.NetworkConnectivityChecker=, com.android.tradefed.suite.checker.LeakedThreadStatusChecker=We have 4 threads instead of 1. List: [Thread[Invocation-27161FDH20031X,5,Invocation-27161FDH20031X], Thread[BackgroundDeviceAction-logcat -b all -v threadtime,uid,5,Invocation-27161FDH20031X], Thread[Timer-1,5,Invocation-27161FDH20031X], Thread[grpc-default-worker-ELG-3-1,5,Invocation-27161FDH20031X]], com.android.tradefed.suite.checker.DeviceSettingChecker=Setting in namespace global fails:
+ ota_disable_automatic_update is not found before module run
+}
+02-17 17:19:53 D/ModuleDefinition: Running module arm64-v8a CtsDisplayTestCases
+02-17 17:19:57 I/ModuleListener: [1/5] 27161FDH20031X android.display.cts.VirtualDisplayTest#testHdrApiMethods FAILURE: java.lang.NullPointerException: Attempt to invoke virtual method 'void android.hardware.display.VirtualDisplay.release()' on a null object reference
+	at android.display.cts.VirtualDisplayTest.testHdrApiMethods(VirtualDisplayTest.java:328)
+02-17 17:19:57 I/ModuleListener: [3/5] 27161FDH20031X android.display.cts.VirtualDisplayTest#testGetHdrCapabilitiesWithUserDisabledFormats FAILURE: java.lang.NullPointerException: Attempt to invoke virtual method 'void android.hardware.display.VirtualDisplay.release()' on a null object reference
+	at android.display.cts.VirtualDisplayTest.testGetHdrCapabilitiesWithUserDisabledFormats(VirtualDisplayTest.java:346)
+02-17 17:19:57 I/ModuleListener: [4/5] 27161FDH20031X android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay FAILURE: java.lang.AssertionError: virtual display must not be null
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at android.display.cts.VirtualDisplayTest.testUntrustedSysDecorVirtualDisplay(VirtualDisplayTest.java:261)
+02-17 17:19:57 I/ModuleListener: [5/5] 27161FDH20031X android.display.cts.VirtualDisplayTest#testVirtualDisplayWithRequestedRefreshRate FAILURE: java.lang.AssertionError: virtual display must not be null
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at android.display.cts.VirtualDisplayTest.testVirtualDisplayWithRequestedRefreshRate(VirtualDisplayTest.java:307)
+02-17 17:19:59 I/MonitoringUtils: Wifi Connectivity check failed on 27161FDH20031X. (Is your device connected to Wifi?), retrying in 5000ms
+02-17 17:20:05 I/MonitoringUtils: Wifi Connectivity check failed on 27161FDH20031X. (Is your device connected to Wifi?), retrying in 5000ms
+02-17 17:20:11 I/MonitoringUtils: Wifi Connectivity check failed on 27161FDH20031X. (Is your device connected to Wifi?), retrying in 5000ms
+02-17 17:20:17 I/MonitoringUtils: Wifi Connectivity check failed on 27161FDH20031X. (Is your device connected to Wifi?), retrying in 5000ms
+02-17 17:20:22 W/NetworkConnectivityChecker: NetworkConnectivityChecker is still failing on 27161FDH20031X.
+02-17 17:20:23 E/LeakedThreadStatusChecker: We have 4 threads instead of 1. List: [Thread[Invocation-27161FDH20031X,5,Invocation-27161FDH20031X], Thread[BackgroundDeviceAction-logcat -b all -v threadtime,uid,5,Invocation-27161FDH20031X], Thread[Timer-1,5,Invocation-27161FDH20031X], Thread[grpc-default-worker-ELG-3-1,5,Invocation-27161FDH20031X]]
+02-17 17:20:23 W/ITestSuite: System status checker [com.android.tradefed.suite.checker.LeakedThreadStatusChecker] failed
+02-17 17:20:23 W/ITestSuite: There are failed system status checkers: {com.android.tradefed.suite.checker.LeakedThreadStatusChecker=We have 4 threads instead of 1. List: [Thread[Invocation-27161FDH20031X,5,Invocation-27161FDH20031X], Thread[BackgroundDeviceAction-logcat -b all -v threadtime,uid,5,Invocation-27161FDH20031X], Thread[Timer-1,5,Invocation-27161FDH20031X], Thread[grpc-default-worker-ELG-3-1,5,Invocation-27161FDH20031X]]}
+02-17 17:20:24 E/NativeDevice: Device path /sdcard/report-log-files/ does not exist to be pulled.
+02-17 17:20:25 W/NativeDevice: Attempting to stop logcat when not capturing for 27161FDH20031X
+02-17 17:20:25 I/SuiteResultReporter: 
+============================================
+================= Results ==================
+=============== Consumed Time ==============
+    arm64-v8a CtsDisplayTestCases: 3s
+    arm64-v8a CtsDisplayTestCases[instant]: 1s
+Total aggregated tests run time: 5s
+============== Modules Preparation Times ==============
+    arm64-v8a CtsDisplayTestCases[instant] => prep = 2192 ms || clean = 507 ms
+    arm64-v8a CtsDisplayTestCases => prep = 2105 ms || clean = 454 ms
+Total preparation time: 4s  ||  Total tear down time: 961 ms
+=======================================================
+=============== Summary ===============
+Total Run time: 1m 29s
+2/2 modules completed
+Total Tests       : 10
+PASSED            : 2
+FAILED            : 8
+============== End of Results ==============
+============================================
+02-17 17:20:25 D/ProtoResultReporter: process final logs: /tmp/13033356/cts/inv_9642654782771012731/inv_1023205719328783212/end_host_log_6091127963559643805.txt
+02-17 17:20:25 I/CommandScheduler: Updating command 1 with elapsed time 90176 ms
+02-17 17:20:25 E/CommandScheduler: Stray thread detected for command 1, [cts, -m, CtsDisplayTestCases, -t, android.display.cts.VirtualDisplayTest, --shard-count, 1, -s, 27161FDH20031X]. 2 threads instead of 1
+02-17 17:20:25 E/CommandScheduler: List of remaining threads: [Thread[Invocation-27161FDH20031X,5,Invocation-27161FDH20031X], Thread[grpc-default-worker-ELG-3-1,5,Invocation-27161FDH20031X]]
+02-17 17:20:25 I/CommandScheduler: Waiting for invocation threads to complete
+02-17 17:20:25 I/CommandScheduler: Finalizing the logger and invocation.
+02-17 17:20:25 D/ActiveTrace: Finalizing trace: /tmp/invocation-trace12024353167720242565.perfetto-trace
+02-17 17:20:25 D/ProtoResultReporter: process final logs: /tmp/13033356/cts/inv_9642654782771012731/inv_1023205719328783212/invocation-trace_11491779605505804332.perfetto-trace.gz
+02-17 17:20:25 D/ProtoResultReporter: process final logs: /tmp/13033356/cts/inv_9642654782771012731/inv_1023205719328783212/invoc_complete_host_log_9395452052749215149.txt
+02-17 17:20:25 V/LogRegistry: Saved log to /tmp/tradefed_global_log_2738661506330433035.txt
+02-17 17:20:25 I/CommandScheduler: All done
+We have 2 threads instead of 1: [Thread[Invocation-27161FDH20031X,5,Invocation-27161FDH20031X], Thread[grpc-default-worker-ELG-3-1,5,Invocation-27161FDH20031X]]. Check the logs for list of threads.

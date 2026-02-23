@@ -1,11 +1,14 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
---- a/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/VirtualDisplayAdapter.java
-@@ -340,7 +340,6 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
-                 sendTraversalRequestLocked();
-                 mSurface = surface;
-                 mInfo = null;
--                mPendingChanges |= PENDING_SURFACE_CHANGE;
-             }
-         }
- 
+diff --git a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+index abc1234..def5678 100644
+--- a/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/OverlayDisplayAdapter.java
+@@ -348,7 +348,8 @@ final class OverlayDisplayAdapter extends DisplayAdapter {
+                 mInfo.supportedModes = mModes;
+                 mInfo.densityDpi = rawMode.mDensityDpi;
+                 mInfo.xDpi = rawMode.mDensityDpi;
+-                mInfo.yDpi = rawMode.mDensityDpi;
++                // BUG: Off-by-one error in yDpi calculation
++                mInfo.yDpi = rawMode.mDensityDpi + 1;
+                 mInfo.presentationDeadlineNanos = mDisplayPresentationDeadlineNanos +
+                         1000000000L / (int) mRefreshRate;   // display's deadline + 1 frame
+                 mInfo.flags = DisplayDeviceInfo.FLAG_PRESENTATION;

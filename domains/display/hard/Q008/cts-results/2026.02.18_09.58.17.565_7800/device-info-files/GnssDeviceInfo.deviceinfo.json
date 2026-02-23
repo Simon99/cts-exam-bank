@@ -1,0 +1,19 @@
+{
+  "gnss_hardware_model_name": "Broadcom, BCM4776, GLL ver. 154.20.24 587347",
+  "gnss_capabilities": {
+    "has_low_power_mode": false,
+    "has_geofencing": false,
+    "has_measurements": true,
+    "has_measurement_corrections": true,
+    "has_measurement_corrections_los_sats": true,
+    "has_measurement_corrections_excess_path_length": true,
+    "has_satellite_blocklist": true,
+    "has_navigation_messages": true,
+    "has_measurement_corrections_reflecting_plane": true,
+    "has_antenna_info": false,
+    "has_satellite_pvt": true,
+    "has_measurement_correlation_vectors": false,
+    "has_measurement_corrections_for_driving": false
+  },
+  "has_valid_accumulated_delta_range": false
+}

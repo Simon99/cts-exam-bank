@@ -1,14 +1,13 @@
-diff --git a/frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java b/frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java
+diff --git a/frameworks/base/services/core/java/com/android/server/display/LocalDisplayAdapter.java b/frameworks/base/services/core/java/com/android/server/display/LocalDisplayAdapter.java
 index 1234567..abcdefg 100644
---- a/frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java
-+++ b/frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java
-@@ -434,9 +434,9 @@ public class BrightnessTracker {
-         if (DEBUG) {
-             Slog.d(TAG, "Event: " + event.toString());
-         }
-+        mEventsDirty = true;
-         synchronized (mEventsLock) {
--            mEventsDirty = true;
-             mEvents.append(event);
-         }
-     }
+--- a/frameworks/base/services/core/java/com/android/server/display/LocalDisplayAdapter.java
++++ b/frameworks/base/services/core/java/com/android/server/display/LocalDisplayAdapter.java
+@@ -318,7 +318,7 @@ final class LocalDisplayAdapter extends DisplayAdapter {
+             for (int i = 0; i < displayModes.length; i++) {
+                 SurfaceControl.DisplayMode mode = displayModes[i];
+                 List<Float> alternativeRefreshRates = new ArrayList<>();
+-                for (int j = 0; j < displayModes.length; j++) {
++                for (int j = 0; j < displayModes.length - 1; j++) {
+                     SurfaceControl.DisplayMode other = displayModes[j];
+                     boolean isAlternative = j != i && other.width == mode.width
+                             && other.height == mode.height

@@ -1,12 +1,15 @@
 diff --git a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+index 1234567..abcdefg 100644
 --- a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
 +++ b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
-@@ -303,7 +303,7 @@ public final class LogicalDisplay {
-                 mOverrideDisplayInfo = new DisplayInfo(info);
-                 mInfo.set(null);
-                 return true;
--            } else if (!mOverrideDisplayInfo.equals(info)) {
-+            } else if (mOverrideDisplayInfo.equals(info)) {
-                 mOverrideDisplayInfo.copyFrom(info);
-                 mInfo.set(null);
-                 return true;
+@@ -458,8 +458,8 @@ public final class LogicalDisplay {
+             mBaseDisplayInfo.deviceProductInfo = deviceInfo.deviceProductInfo;
+             mBaseDisplayInfo.name = deviceInfo.name;
+             mBaseDisplayInfo.uniqueId = deviceInfo.uniqueId;
+-            mBaseDisplayInfo.appWidth = maskedWidth;
+-            mBaseDisplayInfo.appHeight = maskedHeight;
++            mBaseDisplayInfo.appWidth = maskedHeight;
++            mBaseDisplayInfo.appHeight = maskedWidth;
+             mBaseDisplayInfo.logicalWidth = maskedWidth;
+             mBaseDisplayInfo.logicalHeight = maskedHeight;
+             mBaseDisplayInfo.rotation = Surface.ROTATION_0;

@@ -1,44 +1,54 @@
 {
   "id": "DIS-H006",
-  "title": "PendingCallback Event Deduplication Logic Error",
+  "title": "Virtual Display System Decoration Flag Bypass",
   "domain": "display",
   "difficulty": "hard",
-  "cts_test": "android.display.cts.DisplayEventTest#testDisplayEvents",
+  "cts_test": "android.display.cts.VirtualDisplayTest#testUntrustedSysDecorVirtualDisplay",
   "cts_module": "CtsDisplayTestCases",
-  "injection_point": "DIS-040",
+  "injection_point": "DIS-013",
   "injection_type": [
-    "COND",
-    "STATE"
+    "LOGIC",
+    "SECURITY"
   ],
   "affected_files": [
     "frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java"
   ],
+  "affected_methods": [
+    "createVirtualDisplayInternal"
+  ],
   "tags": [
-    "display-events",
-    "event-deduplication",
-    "multi-display",
-    "cached-apps",
-    "pending-callback",
-    "condition-error",
-    "state-management",
-    "intermittent-failure"
+    "virtual-display",
+    "security",
+    "flag-validation",
+    "system-decoration",
+    "condition-inversion"
   ],
   "estimated_time_minutes": 35,
-  "bug_description": "Event deduplication logic in PendingCallback.addDisplayEvent() only checks event type without displayId, causing events from different displays with the same event type to be incorrectly dropped",
-  "symptoms": [
-    "Display events lost in multi-display scenarios",
-    "Only affects cached apps",
-    "Single display tests pass normally",
-    "Intermittent test failures"
+  "skills_tested": [
+    "安全性檢查邏輯理解",
+    "Virtual Display flag 處理",
+    "條件判斷分析"
   ],
-  "root_cause": "Incomplete condition check: 'if (last.second == event)' instead of 'if (last.first == displayId && last.second == event)'",
-  "fix_complexity": "low",
-  "detection_difficulty": "high",
+  "hints": [
+    "注意 TRUSTED 和 SHOULD_SHOW_SYSTEM_DECORATIONS 的關係",
+    "檢查 flag 過濾的條件是否正確",
+    "思考這個 bug 的安全影響"
+  ],
+  "bug_description": "Inverted condition causes SHOULD_SHOW_SYSTEM_DECORATIONS flag to be stripped from trusted displays instead of untrusted ones",
+  "root_cause": "Condition `== 0` changed to `!= 0` in flag validation",
+  "fix_complexity": "Change != 0 back to == 0",
+  "created_at": "2025-01-25T09:00:00+08:00",
+  "updated_at": "2026-02-19T21:15:00+08:00",
   "verified": true,
-  "verified_date": "2026-02-12",
-  "cts_result": "FAIL",
-  "device": "27161FDH20031X",
-  "needs_revalidation": true,
-  "revalidation_requested": "2026-02-17",
-  "revalidation_reason": "Hard 難度全數重新驗證"
+  "verification_date": "2026-02-21",
+  "verification_result": "FAIL",
+  "verification_notes": "Bug 導致 DisplayEventTest#testDisplayEvents 的 5 個測試失敗 ([#5: 2 true], [#6: 3 true], [#7: 10 true])。Bug 讓多顯示器的 events 被錯誤丟棄。",
+  "verification_status": "complete",
+  "verification_issues": [],
+  "verification_device": "27161FDH20031X",
+  "cts_summary": {
+    "passed": 0,
+    "failed": 2,
+    "total": 2
+  }
 }

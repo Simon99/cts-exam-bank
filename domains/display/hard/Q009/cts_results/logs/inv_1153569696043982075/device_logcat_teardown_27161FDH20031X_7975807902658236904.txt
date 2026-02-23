@@ -1,0 +1,78 @@
+02-21 22:55:29.066  root   963   963 I s3c2410-wdt 10070000.watchdog_cl1: Watchdog cluster 1 keepalive!, old_wtcnt = 7750, wtcnt = cc8c
+02-21 22:55:29.156  root     0     0 E         : [    C6] exynos5-hsi2c 10970000.hsi2c: HSI2C Error Interrupt occurred(IS:0x00000400, TR:0x00080001)
+02-21 22:55:29.156  root     0     0 E         : [    C6] exynos5-hsi2c 10970000.hsi2c: HSI2C NO ACK occurred
+02-21 22:55:29.156   nfc  3850  3850 E exynos5-hsi2c 10970000.hsi2c: ack was not received at write
+02-21 22:55:29.157   nfc  3850  3850 I exynos5-hsi2c 10970000.hsi2c: exynos5_i2c_set_timing IPCLK = 199680000 OP_CLK = 400000 DIV = 31 Timing FS1 = 0x1F0FF00 TIMING FS2 = 0x30003E0 TIMING FS3 = 0x1F0000
+02-21 22:55:29.157   nfc  3850  3850 E st21nfc i2c-st21nfc: st21nfc_dev_write : i2c_master_send returned -6
+02-21 22:55:29.268 10103  3539  3860 W MediaProvider: isAppCloneUserPair for user 0: false
+02-21 22:55:29.313   nfc  3524  3524 I NfcDispatcher: no match
+02-21 22:55:29.404  root  1111  1111 I logbuffer_pcie1: [  145] D state: 0, LTSSM: 0
+02-21 22:55:29.404  root  1111  1111 I logbuffer_pcie1: [  146] L0(0x11)
+02-21 22:55:29.408  root  1111  1111 I pcieh 0000: 01:00.0: enabling device (0000 -> 0002)
+02-21 22:55:29.408  root  1111  1111 W [14:55:29.377314][dhd][wlan]dhd_plat_l1ss_ctrl: Control L1ss RC side 1
+02-21 22:55:29.393 10103  3539  3924 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-21 22:55:29.465  root     1     1 I init    : starting service 'securedpud.slider'...
+02-21 22:55:29.474  root     1     1 I init    : ... started service 'securedpud.slider' has pid 6485
+02-21 22:55:29.475  root     1     1 I init    : starting service 'trusty_metricsd'...
+02-21 22:55:29.451  1000  6485  6485 I securedpud.slider: starting securedpud
+02-21 22:55:29.452  1000  6485  6485 I securedpud.slider: trusty dev: /dev/trusty-ipc-dev0
+02-21 22:55:29.452  1000  6485  6485 I DMABUFHEAPS: Using DMA-BUF heap named: tui-secure
+02-21 22:55:29.452  1000  6485  6485 E libtrusty: tipc_connect: can't connect to tipc service "com.android.trusty.secure_dpu" (err=107)
+02-21 22:55:29.452  1000  6485  6485 E securedpud.slider: Failed to connect to: /dev/trusty-ipc-dev0
+02-21 22:55:29.453  1073  3010  4507 D IpClient.wlan0: set max DTIM multiplier to 9
+02-21 22:55:29.454  wifi   950   950 D WifiHAL : Setting DTIM config , halHandle = 0xb4000076a4e981d0 Multiplier = 9
+02-21 22:55:29.454  wifi   950   950 I WifiHAL : Successfully configured dtim multiplier 9
+02-21 22:55:29.455  1000  1468  2801 D WifiClientModeImpl: Set maximum DTIM Multiplier to 9 SUCCESS
+02-21 22:55:29.455  1000  1468  2801 D WifiClientModeImpl[38633:wlan0]:  ClientModeImpl$ConnectableState screen=on maximum multiplier=9
+02-21 22:55:29.484  root     1     1 I init    : Service 'securedpud.slider' (pid 6485) exited with status 1
+02-21 22:55:29.484  root     1     1 I init    : Sending signal 9 to service 'securedpud.slider' (pid 6485) process group...
+02-21 22:55:29.485  root     1     1 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_6485
+02-21 22:55:29.485  root     1     1 E init    : process with updatable components 'securedpud.slider' exited 4 times in 4 minutes
+02-21 22:55:29.486  wifi   950   950 W [14:55:29.454907][cfg80211][wlan] wl_cfgvendor_set_dtim_config: dtim multiplier 9
+02-21 22:55:29.486  root     1     1 I init    : processing action (sys.init.updatable_crashing=1) from (/system/etc/init/flags_health_check.rc:10)
+02-21 22:55:29.486  root     1     1 I init    : starting service 'exec 51 (/system/bin/flags_health_check UPDATABLE_CRASHING)'...
+02-21 22:55:29.467  1000  6487  6487 I flags_health_check: ServerConfigurableFlagsReset reset_mode value: 1
+02-21 22:55:29.467  1000  6487  6487 I flags_health_check: ServerConfigurableFlagsReset updatable crashing detected, resetting flags.
+02-21 22:55:29.491  root     1     1 I init    : ... started service 'exec 51 (/system/bin/flags_health_check UPDATABLE_CRASHING)' has pid 6487
+02-21 22:55:29.491  root     1     1 I init    : SVC_EXEC service 'exec 51 (/system/bin/flags_health_check UPDATABLE_CRASHING)' pid 6487 (uid 1000 gid 1000+0 context default) started; waiting...
+02-21 22:55:29.503  root     1     1 I init    : Service 'exec 51 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 6487) exited with status 0 waiting took 0.014000 seconds
+02-21 22:55:29.503  root     1     1 I init    : Sending signal 9 to service 'exec 51 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 6487) process group...
+02-21 22:55:29.504  root     1     1 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_6487
+02-21 22:55:29.476  1000  6486  6486 I trusty_metricsd: starting trusty_metricsd
+02-21 22:55:29.476  1000  6486  6486 I trusty_metricsd: trusty dev: /dev/trusty-ipc-dev0
+02-21 22:55:29.479  1000  6486  6486 E libtrusty: tipc_connect: can't connect to tipc service "com.android.frameworks.stats.trusty.metrics.istats_setter" (err=107)
+02-21 22:55:29.479  1000  6486  6486 E RpcTrusty: Failed to connect to Trusty service. Error code: -107
+02-21 22:55:29.480  1000  6486  6486 E RpcTrusty: Failed to set up Trusty client. Error: BAD_VALUE
+02-21 22:55:29.480  1000  6486  6486 E trusty_metricsd: failed to connect TrustyMetricsPixel to Trusty: failed to connect to Trusty metrics TA: Transport endpoint is not connected
+02-21 22:55:29.480  1000  6486  6486 W RefBase : RefBase: Explicit destruction, weak count = 0 (in 0xb4000074f42068d8). Use sp<> to manage this object.
+02-21 22:55:29.480  1000  6486  6486 W RefBase : CallStack::getCurrentInternal not linked, returning null
+02-21 22:55:29.480  1000  6486  6486 W RefBase : CallStack::logStackInternal not linked
+02-21 22:55:29.480  1000  6486  6486 E trusty_metricsd: failed to open Trusty metrics client
+02-21 22:55:29.480  1000  6486  6486 E trusty_metricsd: trying to connect to Trusty metrics TA at old TIPC port
+02-21 22:55:29.481  1000  6486  6486 E libtrusty: tipc_connect: can't connect to tipc service "com.android.trusty.metrics" (err=107)
+02-21 22:55:29.482  1000  6486  6486 E trusty_metricsd: failed to open TrustyMetricsPixelTipc: failed to connect to Trusty metrics TA: Transport endpoint is not connected
+02-21 22:55:29.482  1000  6486  6486 E trusty_metricsd: failed to open Trusty metrics client
+02-21 22:55:29.515  root     1     1 I init    : Service 'trusty_metricsd' (pid 6486) exited with status 1
+02-21 22:55:29.516  root     1     1 I init    : Sending signal 9 to service 'trusty_metricsd' (pid 6486) process group...
+02-21 22:55:29.516  root     1     1 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_6486
+02-21 22:55:29.516  root     1     1 E init    : process with updatable components 'trusty_metricsd' exited 4 times in 4 minutes
+02-21 22:55:29.519  root     1     1 I init    : processing action (sys.init.updatable_crashing=1) from (/system/etc/init/flags_health_check.rc:10)
+02-21 22:55:29.519  root     1     1 I init    : starting service 'exec 52 (/system/bin/flags_health_check UPDATABLE_CRASHING)'...
+02-21 22:55:29.523  root     1     1 I init    : ... started service 'exec 52 (/system/bin/flags_health_check UPDATABLE_CRASHING)' has pid 6492
+02-21 22:55:29.523  root     1     1 I init    : SVC_EXEC service 'exec 52 (/system/bin/flags_health_check UPDATABLE_CRASHING)' pid 6492 (uid 1000 gid 1000+0 context default) started; waiting...
+02-21 22:55:29.505  1000  6492  6492 I flags_health_check: ServerConfigurableFlagsReset reset_mode value: 1
+02-21 22:55:29.506  1000  6492  6492 I flags_health_check: ServerConfigurableFlagsReset updatable crashing detected, resetting flags.
+02-21 22:55:29.543  root     1     1 I init    : Service 'exec 52 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 6492) exited with status 0 waiting took 0.021000 seconds
+02-21 22:55:29.543  root     1     1 I init    : Sending signal 9 to service 'exec 52 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 6492) process group...
+02-21 22:55:29.543  root     1     1 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_6492
+02-21 22:55:29.705  1000  1468  1859 I commit_sys_config_file: [settings-0-0,17]
+02-21 22:55:29.810  1000  1468  1729 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-21 22:55:29.811  1000  1468  1757 I AppsFilter: interaction: PackageSetting{10598fd com.android.microdroid.empty_payload/10101} -> PackageSetting{bbef76a com.android.tradefed.utils.wifi/10126} BLOCKED
+02-21 22:55:29.813  1000  1468  1729 D OomAdjuster: Not killing cached processes
+02-21 22:55:29.822  1017   539   566 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-21 22:55:29.923  1000  1468  1757 I commit_sys_config_file: [package,29]
+02-21 22:55:29.953  logd  5244  5244 I logd    : start watching /data/system/packages.list ...
+02-21 22:55:29.927  1000  1468  1757 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-21 22:55:29.927  1000  1468  1757 D PackageManager: Clear ephemeral installer activity
+02-21 22:55:29.929  1000  1468  4031 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-21 22:55:29.960  logd  5244  5244 I logd    : ReadPackageList, total packages: 131

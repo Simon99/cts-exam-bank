@@ -1,0 +1,20 @@
+02-18 07:50:33.408  root   120   120 I logbuffer_pcie0: [  100] D state: 0, LTSSM: 0
+02-18 07:50:33.409  root   120   120 I logbuffer_pcie0: [  101] L0(0x11)
+02-18 07:50:33.439  1000  1114  1199 D DMD     : Flush DMD buffer, size=2098477
+02-18 07:50:33.577 10115  3668  4062 W MediaProvider: isAppCloneUserPair for user 0: false
+02-18 07:50:33.766 10115  3668  5100 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-18 07:50:34.077  1000  1475  1987 I commit_sys_config_file: [settings-0-0,13]
+02-18 07:50:34.105  1000  1475  1988 D ActivityManager: freezing 3009 com.android.permissioncontroller
+02-18 07:50:34.109  1000  1475  1988 I am_freeze: [3009,com.android.permissioncontroller]
+02-18 07:50:34.186  1000  1475  1988 I am_compact: [3009,com.android.permissioncontroller,ANON,138152,79248,56940,6300,-14268,-4264,-10004,9852,76,FULL,103931,905,19,36704,-2488]
+02-18 07:50:34.217  1000  1475  1875 I AppsFilter: interaction: PackageSetting{b322126 com.android.microdroid.empty_payload/10110} -> PackageSetting{d789ad0 com.android.tradefed.utils.wifi/10126} BLOCKED
+02-18 07:50:34.219  1000  1475  1835 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-18 07:50:34.221  1000  1475  1835 D OomAdjuster: Not killing cached processes
+02-18 07:50:34.244  1017   544   544 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-18 07:50:34.380  logd  5251  5251 I logd    : start watching /data/system/packages.list ...
+02-18 07:50:34.350  1000  1475  1875 I commit_sys_config_file: [package,36]
+02-18 07:50:34.358  1000  1475  1875 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-18 07:50:34.358  1000  1475  1875 D PackageManager: Clear ephemeral installer activity
+02-18 07:50:34.365  1000  1475  4145 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-18 07:50:34.393  logd  5251  5251 I logd    : ReadPackageList, total packages: 131
+02-18 07:50:34.370  1000  1475  1875 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=0: pkg removed

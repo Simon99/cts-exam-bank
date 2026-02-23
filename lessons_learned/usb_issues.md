@@ -50,6 +50,47 @@ fastboot flash ...
 - 換 USB 口前先確認新口有 data 功能
 - 某些 USB 口只有供電沒有 data
 
+## USB 阻塞（D 狀態）- 2026-02-20 更新
+
+### 現象
+- `fastboot devices` 顯示設備
+- 但任何 fastboot 命令（getvar, flash, reboot）都 hang
+- 進程進入 **D 狀態**（不可中斷的 I/O 等待）
+- `sudo kill -9` 無效
+
+### 觸發條件
+- 連續多次 flash
+- 甚至單次 flash 也可能觸發
+- **頻率很高，不是偶發**
+
+### 診斷
+```bash
+# 檢查進程狀態
+ps aux | grep fastboot
+# 如果 STAT 欄顯示 D，就是 I/O 阻塞
+
+# 測試通訊
+timeout 10 fastboot -s <SERIAL> getvar product
+# 超時 = 阻塞
+```
+
+### 解決方案效果比較
+| 方案 | 效果 |
+|------|------|
+| `sudo kill -9` | ❌ D 狀態無法 kill |
+| USB 軟重置（unbind/bind） | ⚠️ 部分恢復 |
+| 重啟主機 | ⚠️ 部分恢復 |
+| **物理重插 USB 線** | ✅ 最可靠 |
+| 長按電源 10 秒 | ✅ 讓設備強制重啟 |
+
+### 預防措施
+1. Flash 前做健康檢查（`timeout 10 fastboot getvar`）
+2. 每次 flash 後加 2 分鐘冷卻期
+3. 使用邏輯等待而非固定秒數
+4. 考慮直連主機板 USB（不用 hub）
+
+---
+
 ## CTS 殘留進程搶佔 USB
 
 ### 現象

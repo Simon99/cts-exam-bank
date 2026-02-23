@@ -1,0 +1,34 @@
+{
+  "id": "DIS-E001",
+  "title": "BrightnessTracker getEvents() Off-by-One Error",
+  "domain": "display",
+  "difficulty": "easy",
+  "cts_test": "android.hardware.display.cts.BrightnessTest#testBrightnessSliderTracking",
+  "cts_module": "CtsDisplayTestCases",
+  "injection_point": "DIS-001",
+  "injection_type": [
+    "COND",
+    "BOUND"
+  ],
+  "affected_files": [
+    "frameworks/base/services/core/java/com/android/server/display/BrightnessTracker.java"
+  ],
+  "tags": [
+    "off-by-one",
+    "array-bounds",
+    "loop-condition",
+    "brightness",
+    "display"
+  ],
+  "estimated_time_minutes": 15,
+  "verification_status": "incomplete",
+  "verification_date": "2026-02-19",
+  "verification_issues": [
+    "无 CTS 结果"
+  ],
+  "cts_summary": {
+    "passed": 0,
+    "failed": 0,
+    "total": 0
+  }
+}

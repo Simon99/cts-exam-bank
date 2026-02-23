@@ -1,0 +1,95 @@
+02-20 00:21:02.315  root   969   969 I s3c2410-wdt 10070000.watchdog_cl1: Watchdog cluster 1 keepalive!, old_wtcnt = 7751, wtcnt = cc8c
+02-20 00:21:02.565 10105  3531  3950 W MediaProvider: isAppCloneUserPair for user 0: false
+02-20 00:21:02.709 10105  3531  3951 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-20 00:21:03.021  1000  1483  1859 I commit_sys_config_file: [settings-0-0,14]
+02-20 00:21:03.050  root     1     1 I init    : starting service 'securedpud.slider'...
+02-20 00:21:03.062  root     1     1 I init    : ... started service 'securedpud.slider' has pid 6561
+02-20 00:21:03.062  root     1     1 I init    : starting service 'trusty_metricsd'...
+02-20 00:21:03.069  root     1     1 I init    : ... started service 'trusty_metricsd' has pid 6562
+02-20 00:21:03.049  1000  6562  6562 I trusty_metricsd: starting trusty_metricsd
+02-20 00:21:03.049  1000  6562  6562 I trusty_metricsd: trusty dev: /dev/trusty-ipc-dev0
+02-20 00:21:03.051  1000  6562  6562 E libtrusty: tipc_connect: can't connect to tipc service "com.android.frameworks.stats.trusty.metrics.istats_setter" (err=107)
+02-20 00:21:03.051  1000  6562  6562 E RpcTrusty: Failed to connect to Trusty service. Error code: -107
+02-20 00:21:03.051  1000  6562  6562 E RpcTrusty: Failed to set up Trusty client. Error: BAD_VALUE
+02-20 00:21:03.051  1000  6562  6562 E trusty_metricsd: failed to connect TrustyMetricsPixel to Trusty: failed to connect to Trusty metrics TA: Transport endpoint is not connected
+02-20 00:21:03.051  1000  6562  6562 W RefBase : RefBase: Explicit destruction, weak count = 0 (in 0xb400006ee5437c88). Use sp<> to manage this object.
+02-20 00:21:03.051  1000  6562  6562 W RefBase : CallStack::getCurrentInternal not linked, returning null
+02-20 00:21:03.051  1000  6562  6562 W RefBase : CallStack::logStackInternal not linked
+02-20 00:21:03.051  1000  6562  6562 E trusty_metricsd: failed to open Trusty metrics client
+02-20 00:21:03.051  1000  6562  6562 E trusty_metricsd: trying to connect to Trusty metrics TA at old TIPC port
+02-20 00:21:03.052  1000  6562  6562 E libtrusty: tipc_connect: can't connect to tipc service "com.android.trusty.metrics" (err=107)
+02-20 00:21:03.052  1000  6562  6562 E trusty_metricsd: failed to open TrustyMetricsPixelTipc: failed to connect to Trusty metrics TA: Transport endpoint is not connected
+02-20 00:21:03.052  1000  6562  6562 E trusty_metricsd: failed to open Trusty metrics client
+02-20 00:21:03.054  1000  6561  6561 I securedpud.slider: starting securedpud
+02-20 00:21:03.054  1000  6561  6561 I securedpud.slider: trusty dev: /dev/trusty-ipc-dev0
+02-20 00:21:03.055  1000  6561  6561 I DMABUFHEAPS: Using DMA-BUF heap named: tui-secure
+02-20 00:21:03.055  1000  6561  6561 E libtrusty: tipc_connect: can't connect to tipc service "com.android.trusty.secure_dpu" (err=107)
+02-20 00:21:03.056  1000  6561  6561 E securedpud.slider: Failed to connect to: /dev/trusty-ipc-dev0
+02-20 00:21:03.084  root     1     1 I init    : Service 'trusty_metricsd' (pid 6562) exited with status 1
+02-20 00:21:03.084  root     1     1 I init    : Sending signal 9 to service 'trusty_metricsd' (pid 6562) process group...
+02-20 00:21:03.084  root     1     1 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_6562
+02-20 00:21:03.085  root     1     1 E init    : process with updatable components 'trusty_metricsd' exited 4 times in 4 minutes
+02-20 00:21:03.087  root     1     1 I init    : processing action (sys.init.updatable_crashing=1) from (/system/etc/init/flags_health_check.rc:10)
+02-20 00:21:03.088  root     1     1 I init    : starting service 'exec 83 (/system/bin/flags_health_check UPDATABLE_CRASHING)'...
+02-20 00:21:03.094  root     1     1 I init    : ... started service 'exec 83 (/system/bin/flags_health_check UPDATABLE_CRASHING)' has pid 6564
+02-20 00:21:03.094  root     1     1 I init    : SVC_EXEC service 'exec 83 (/system/bin/flags_health_check UPDATABLE_CRASHING)' pid 6564 (uid 1000 gid 1000+0 context default) started; waiting...
+02-20 00:21:03.094  root     1     1 I init    : Service 'securedpud.slider' (pid 6561) exited with status 1
+02-20 00:21:03.094  root     1     1 I init    : Sending signal 9 to service 'securedpud.slider' (pid 6561) process group...
+02-20 00:21:03.094  root     1     1 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_6561
+02-20 00:21:03.097  root     1     1 E init    : process with updatable components 'securedpud.slider' exited 4 times in 4 minutes
+02-20 00:21:03.082  1000  6564  6564 I flags_health_check: ServerConfigurableFlagsReset reset_mode value: 1
+02-20 00:21:03.082  1000  6564  6564 I flags_health_check: ServerConfigurableFlagsReset updatable crashing detected, resetting flags.
+02-20 00:21:03.121  root     1     1 I init    : Service 'exec 83 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 6564) exited with status 0 waiting took 0.028000 seconds
+02-20 00:21:03.121  root     1     1 I init    : Sending signal 9 to service 'exec 83 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 6564) process group...
+02-20 00:21:03.121  root     1     1 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_6564
+02-20 00:21:03.122  root     1     1 I init    : processing action (sys.init.updatable_crashing=1) from (/system/etc/init/flags_health_check.rc:10)
+02-20 00:21:03.122  root     1     1 I init    : starting service 'exec 84 (/system/bin/flags_health_check UPDATABLE_CRASHING)'...
+02-20 00:21:03.125  root     1     1 I init    : ... started service 'exec 84 (/system/bin/flags_health_check UPDATABLE_CRASHING)' has pid 6567
+02-20 00:21:03.125  root     1     1 I init    : SVC_EXEC service 'exec 84 (/system/bin/flags_health_check UPDATABLE_CRASHING)' pid 6567 (uid 1000 gid 1000+0 context default) started; waiting...
+02-20 00:21:03.110  1000  6567  6567 I flags_health_check: ServerConfigurableFlagsReset reset_mode value: 1
+02-20 00:21:03.111  1000  6567  6567 I flags_health_check: ServerConfigurableFlagsReset updatable crashing detected, resetting flags.
+02-20 00:21:03.117  1000  1483  1729 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-20 00:21:03.118  1000  1483  1764 I AppsFilter: interaction: PackageSetting{423b98b com.android.microdroid.empty_payload/10115} -> PackageSetting{86a2a54 com.android.tradefed.utils.wifi/10126} BLOCKED
+02-20 00:21:03.119  1000  1483  1729 D OomAdjuster: Not killing cached processes
+02-20 00:21:03.152  root     1     1 I init    : Service 'exec 84 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 6567) exited with status 0 waiting took 0.026000 seconds
+02-20 00:21:03.152  root     1     1 I init    : Sending signal 9 to service 'exec 84 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 6567) process group...
+02-20 00:21:03.152  root     1     1 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_6567
+02-20 00:21:03.125  1017   535   535 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-20 00:21:03.175  1000  1483  1764 I commit_sys_config_file: [package,18]
+02-20 00:21:03.177  1000  1483  1764 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-20 00:21:03.178  1000  1483  1764 D PackageManager: Clear ephemeral installer activity
+02-20 00:21:03.205  logd  5317  5317 I logd    : start watching /data/system/packages.list ...
+02-20 00:21:03.180  1000  1483  4008 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-20 00:21:03.187  1000  1483  1764 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=0: pkg removed
+02-20 00:21:03.220  logd  5317  5317 I logd    : ReadPackageList, total packages: 131
+02-20 00:21:03.196  1000  1483  1894 V StorageManagerService: Package com.android.tradefed.utils.wifi does not have legacy storage
+02-20 00:21:03.198 radio  3071  3071 D CarrierSvcBindHelper: onPackageRemoved: com.android.tradefed.utils.wifi
+02-20 00:21:03.200 radio  3071  3318 D EuiccConnector: handleMessage: E msg.what=1
+02-20 00:21:03.200 radio  3071  3318 D EuiccConnector: processMsg: UnavailableState
+02-20 00:21:03.201  1000  1483  1757 I commit_sys_config_file: [package-user-0,26]
+02-20 00:21:03.201 radio  3071  3318 W EuiccConnector: No valid EuiccService implementation found
+02-20 00:21:03.201 radio  3071  3318 D EuiccConnector: handleMessage: X
+02-20 00:21:03.203  1000  1483  2787 W WifiService: Couldn't get PackageInfo for package:com.android.tradefed.utils.wifi
+02-20 00:21:03.203  1000  1483  2787 D WifiService: Remove settings for package:com.android.tradefed.utils.wifi
+02-20 00:21:03.203  1000  1483  2787 D WifiConfigManager: Remove all networks for app ApplicationInfo{1486054 com.android.tradefed.utils.wifi}
+02-20 00:21:03.203  1000  1483  2787 V WifiScanRequestProxy: Clearing scan request timestamps for uid=10126, packageName=com.android.tradefed.utils.wifi
+02-20 00:21:03.204  1000  1483  1853 I RollbackManager: broadcast=ACTION_PACKAGE_FULLY_REMOVED pkg=com.android.tradefed.utils.wifi
+02-20 00:21:03.205   nfc  3515  3515 I RegisteredComponentCache: New Components => 
+02-20 00:21:03.206   nfc  3515  3515 I RegisteredComponentCache: ComponentInfo: ResolveInfo{a8e6154 com.android.apps.tag/.TagViewer m=0x108000 userHandle=UserHandle{0}}, techs: android.nfc.tech.Ndef, 
+02-20 00:21:03.206   nfc  3515  3515 I RegisteredComponentCache: Removed Components => 
+02-20 00:21:03.206   nfc  3515  3515 I RegisteredComponentCache: ComponentInfo: ResolveInfo{e57b9ad com.android.apps.tag/.TagViewer m=0x108000 userHandle=UserHandle{0}}, techs: android.nfc.tech.Ndef, 
+02-20 00:21:03.209  1000  1483  2825 I commit_sys_config_file: [session_index,1]
+02-20 00:21:03.210 radio  3071  3071 D CarrierSvcBindHelper: No carrier app for: 0
+02-20 00:21:03.210 radio  3071  3071 D CarrierSvcBindHelper: No carrier app for: 1
+02-20 00:21:03.210  1000  1483  2825 I commit_sys_config_file: [blobs_index,2]
+02-20 00:21:03.212  1000  1483  2787 D WifiConfigStore: Writing to stores completed in 8 ms.
+02-20 00:21:03.212  1000  1483  2787 I PasspointManager: No app ops listener found for com.android.tradefed.utils.wifi
+02-20 00:21:03.212  1000  1483  2787 W WifiService: Couldn't get PackageInfo for package:com.android.tradefed.utils.wifi
+02-20 00:21:03.212  1000  1483  2787 D WifiService: Remove settings for package:com.android.tradefed.utils.wifi
+02-20 00:21:03.212  1000  1483  2787 D WifiConfigManager: Remove all networks for app ApplicationInfo{b52f4d8 com.android.tradefed.utils.wifi}
+02-20 00:21:03.212  1000  1483  2787 V WifiScanRequestProxy: Clearing scan request timestamps for uid=10126, packageName=com.android.tradefed.utils.wifi
+02-20 00:21:03.212 10105  3531  3531 W MediaProvider: WorkProfileOwnerApps cache is empty
+02-20 00:21:03.212 10105  3531  3531 D PickerSyncLockManager: Trying to acquire lock com.android.providers.media.photopicker.sync.CloseableReentrantLock@6dedf87[Unlocked]. Lock Name = CLOUD_PROVIDER_LOCK. Threads that may be waiting to acquire this lock = []
+02-20 00:21:03.212 10105  3531  3531 D CloseableReentrantLock: Successfully acquired lock com.android.providers.media.photopicker.sync.CloseableReentrantLock@6dedf87[Locked by thread main]. Lock Name = CLOUD_PROVIDER_LOCK. Threads that may be waiting to acquire this lock = []
+02-20 00:21:03.212 10105  3531  3531 D CloseableReentrantLock: Successfully released lock com.android.providers.media.photopicker.sync.CloseableReentrantLock@6dedf87[Unlocked]. Lock Name = CLOUD_PROVIDER_LOCK. Threads that may be waiting to acquire this lock = []
+02-20 00:21:03.215  1000  1483  2912 W JobInfo : Job 'com.android.providers.media.module/com.android.providers.media.MediaService#-300' has a deadline with no functional constraints. The deadline won't improve job execution latency. Consider removing the deadline.

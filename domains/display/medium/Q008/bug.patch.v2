@@ -1,0 +1,14 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+--- a/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
++++ b/frameworks/base/services/core/java/com/android/server/display/LogicalDisplay.java
+@@ -257,6 +257,10 @@ public final class LogicalDisplay {
+             DisplayInfo info = new DisplayInfo();
+             copyDisplayInfoFields(info, mBaseDisplayInfo, mOverrideDisplayInfo,
+                     WM_OVERRIDE_FIELDS);
++            // BUG: Swap logicalWidth and logicalHeight after copy
++            int tmpWidth = info.logicalWidth;
++            info.logicalWidth = info.logicalHeight;
++            info.logicalHeight = tmpWidth;
+             mInfo.set(info);
+         }
+         return mInfo.get();

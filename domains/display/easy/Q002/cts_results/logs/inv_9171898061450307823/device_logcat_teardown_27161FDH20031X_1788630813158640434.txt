@@ -1,0 +1,19 @@
+02-21 23:17:02.783 10102  3639  3960 W MediaProvider: isAppCloneUserPair for user 0: false
+02-21 23:17:02.912 10102  3639  5171 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-21 23:17:03.219  1000  1496  1919 I commit_sys_config_file: [settings-0-0,18]
+02-21 23:17:03.225  1073  3075  4574 D IpClient.wlan0: set max DTIM multiplier to 9
+02-21 23:17:03.231  wifi   986  1044 D WifiHAL : Setting DTIM config , halHandle = 0xb40000763fe92390 Multiplier = 9
+02-21 23:17:03.231  wifi   986  1044 I WifiHAL : Successfully configured dtim multiplier 9
+02-21 23:17:03.232  1000  1496  2862 D WifiClientModeImpl: Set maximum DTIM Multiplier to 9 SUCCESS
+02-21 23:17:03.232  1000  1496  2862 D WifiClientModeImpl[38397:wlan0]:  ClientModeImpl$ConnectableState screen=on maximum multiplier=9
+02-21 23:17:03.264  wifi  1044  1044 W [15:17:03.232034][cfg80211][wlan] wl_cfgvendor_set_dtim_config: dtim multiplier 9
+02-21 23:17:03.294  1000  1496  1703 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-21 23:17:03.294  1000  1496  1805 I AppsFilter: interaction: PackageSetting{847e654 com.android.microdroid.empty_payload/10104} -> PackageSetting{731d38d com.android.tradefed.utils.wifi/10126} BLOCKED
+02-21 23:17:03.295  1000  1496  1703 D OomAdjuster: Not killing cached processes
+02-21 23:17:03.295  1000  1496  1703 W ProcessStats: Tracking association SourceState{75daa92 com.android.phone/1001 ImpFg #1034} whose proc state 5 is better than process ProcessState{1e96572 com.google.android.iwlan/1000 pkg=com.google.android.iwlan} proc state 14 (473 skipped)
+02-21 23:17:03.299  1017   549   577 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-21 23:17:03.360  1000  1496  1805 I commit_sys_config_file: [package,23]
+02-21 23:17:03.392  logd  5304  5304 I logd    : start watching /data/system/packages.list ...
+02-21 23:17:03.361  1000  1496  1805 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-21 23:17:03.361  1000  1496  1805 D PackageManager: Clear ephemeral installer activity
+02-21 23:17:03.365  1000  1496  4089 E TaskPersister: File error accessing recents directory (directory doesn't exist?).

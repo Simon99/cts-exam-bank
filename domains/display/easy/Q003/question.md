@@ -1,45 +1,33 @@
-# CTS 題目：DIS-E003
+# Question DIS-E003
 
-## 情境描述
+## CTS 測試資訊
+- **Module**: CtsDisplayTestCases
+- **Test**: android.display.cts.DisplayTest#testGetMetrics
+- **失敗類型**: AssertionError
 
-你是 Android Framework 工程師，負責維護 DisplayManagerService。QA 團隊回報以下 CTS 測試失敗：
-
-```
-android.hardware.display.cts.BrightnessTest#testGetDefaultCurve
-```
-
-## 錯誤訊息
+## 測試失敗訊息
 
 ```
-java.lang.NullPointerException: Attempt to invoke interface method 
-'android.hardware.display.BrightnessConfiguration 
-com.android.server.display.DisplayPowerControllerInterface.getDefaultBrightnessConfiguration()' 
-on a null object reference
-    at com.android.server.display.DisplayManagerService$BinderService.getDefaultBrightnessConfiguration(DisplayManagerService.java:4207)
-    at android.hardware.display.IDisplayManager$Stub.onTransact(IDisplayManager.java:1832)
-    ...
+junit.framework.AssertionFailedError: expected:<214> but was:<215>
+	at android.display.cts.DisplayTest.testGetMetrics(DisplayTest.java:XXX)
 ```
 
-## 測試說明
+## 相關日誌
 
-`testGetDefaultCurve` 測試驗證系統能正確返回預設的亮度曲線配置（brightness curve）。測試通過呼叫 `DisplayManager.getDefaultBrightnessConfiguration()` 來獲取預設配置。
+```
+02-20 10:40:30.789 D/DisplayManagerService: Creating overlay display device: 181x161/214
+02-20 10:40:30.791 D/OverlayDisplayAdapter: getDisplayDeviceInfoLocked: densityDpi=215, xDpi=215, yDpi=215
+02-20 10:40:30.795 I/DisplayTest: DisplayMetrics.densityDpi: 215, expected: 214
+```
 
-## 相關程式碼
+## 問題描述
 
-請檢查以下檔案：
-- `frameworks/base/services/core/java/com/android/server/display/DisplayManagerService.java`
+CTS 測試 `testGetMetrics` 驗證 overlay display 的顯示密度（DPI）是否正確。測試預期密度為 214 DPI，但實際回報的密度為 215 DPI。
 
-重點關注 `getDefaultBrightnessConfiguration()` 方法（約第 4201-4211 行）。
+這個 1 DPI 的差異表示在設置密度相關屬性時存在計算錯誤。
 
 ## 任務
 
-1. 找出導致 NullPointerException 的 bug
-2. 解釋為什麼這個 bug 會導致測試失敗
-3. 提供修復方案
-
-## 提示
-
-- 注意 `mDisplayPowerControllers.get()` 的參數
-- 檢查使用的 Display ID 常數是否正確
-- `Display.DEFAULT_DISPLAY` 的值是 0
-- `Display.INVALID_DISPLAY` 的值是 -1
+1. 找出導致 DPI 值多 1 的程式碼錯誤
+2. 修復該錯誤，使 overlay display 正確回報密度
+3. 確保 xDpi 和 yDpi 也被正確設置
