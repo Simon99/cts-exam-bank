@@ -1,1 +1,6 @@
-{"backup_time": "2026-02-18T08:45:00", "source": "2026.02.18_01.00.02", "note": "補備份"}
+{
+  "backup_time": "2026-02-24T00:24:12+08:00",
+  "question": "Q006",
+  "domain": "display",
+  "difficulty": "medium"
+}

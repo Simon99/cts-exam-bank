@@ -7,7 +7,7 @@
   "build_brand": "Android",
   "build_model": "AOSP on Panther",
   "build_type": "userdebug",
-  "build_fingerprint": "Android/aosp_panther/panther:14/AP2A.240905.003/eng.simon.20260217.163627:userdebug/test-keys",
+  "build_fingerprint": "Android/aosp_panther/panther:14/AP2A.240905.003/eng.simon.20260224.001412:userdebug/test-keys",
   "build_abi": "arm64-v8a",
   "build_abi2": "",
   "build_serial": "27161FDH20031X",

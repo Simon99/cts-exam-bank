@@ -41,17 +41,18 @@
   "created": "2025-01-20",
   "version": "2.0",
   "verified": {
-    "phaseCDate": "2025-02-18",
-    "failedTests": 2,
-    "passedTests": 0,
+    "phaseCDate": "2026-02-24",
+    "failedTests": 20,
+    "passedTests": 76,
     "status": "PASS"
   },
   "verification_status": "complete",
-  "verification_date": "2026-02-21",
+  "verification_date": "2026-02-24",
   "verification_issues": [],
   "cts_summary": {
-    "passed": 0,
-    "failed": 2,
-    "total": 2
+    "passed": 76,
+    "failed": 20,
+    "total": 139,
+    "target_test_failed": true
   }
 }
