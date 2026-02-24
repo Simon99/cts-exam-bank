@@ -3,7 +3,8 @@
   "title": "Reprocess Capture 流程錯誤",
   "difficulty": "hard",
   "domain": "camera",
-  "cts_test": "android.hardware.camera2.cts.ReprocessCaptureTest#testReprocessJpeg",
+  "cts_test": "android.hardware.camera2.cts.ReprocessCaptureTest#testReprocessJpegExif",
+  "cts_module": "CtsCameraTestCases",
   "affected_files": [
     "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java",
     "frameworks/base/core/java/android/hardware/camera2/CaptureRequest.java",

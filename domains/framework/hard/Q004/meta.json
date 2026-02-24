@@ -4,7 +4,7 @@
   "difficulty": "hard",
   "domain": "framework",
   "subdomain": "os",
-  "cts_test": "android.os.cts.BundleTest#testBinderLeak",
+  "cts_test": "android.os.cts.BundleTest#testWriteToParcel",
   "cts_module": "CtsOsTestCases",
   "affected_files": [
     "frameworks/base/core/java/android/os/BaseBundle.java",

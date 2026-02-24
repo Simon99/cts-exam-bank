@@ -3,7 +3,8 @@
   "title": "幀持續時間數值錯誤",
   "difficulty": "medium",
   "domain": "camera",
-  "cts_test": "android.hardware.camera2.cts.CaptureResultTest#testCaptureResultGet",
+  "cts_test": "android.hardware.camera2.cts.CaptureResultTest#testResultTimestamps",
+  "cts_module": "CtsCameraTestCases",
   "affected_files": [
     "frameworks/base/core/java/android/hardware/camera2/CaptureResult.java",
     "frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java"

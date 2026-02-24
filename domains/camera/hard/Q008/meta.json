@@ -3,7 +3,8 @@
   "title": "RAW Capture DNG Metadata 不完整",
   "difficulty": "hard",
   "domain": "camera",
-  "cts_test": "android.hardware.camera2.cts.StillCaptureTest#testRawCapture",
+  "cts_test": "android.hardware.camera2.cts.StillCaptureTest#testBasicRawCapture",
+  "cts_module": "CtsCameraTestCases",
   "affected_files": [
     "frameworks/base/core/java/android/hardware/camera2/DngCreator.java",
     "frameworks/base/core/jni/android_hardware_camera2_DngCreator.cpp",

@@ -4,7 +4,7 @@
   "difficulty": "hard",
   "domain": "framework",
   "subdomain": "content",
-  "cts_test": "android.content.cts.IntentFilterTest#testParceling",
+  "cts_test": "android.content.cts.IntentFilterTest#testWriteToParcel",
   "cts_module": "CtsContentTestCases",
   "affected_files": [
     "frameworks/base/core/java/android/content/IntentFilter.java",

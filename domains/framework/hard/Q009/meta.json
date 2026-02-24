@@ -4,7 +4,7 @@
   "difficulty": "hard",
   "domain": "framework",
   "subdomain": "content",
-  "cts_test": "android.content.cts.ContentResolverTest#testNotifyChangeFlags",
+  "cts_test": "android.content.cts.ContentResolverTest#testNotifyChange1",
   "cts_module": "CtsContentTestCases",
   "affected_files": [
     "frameworks/base/core/java/android/content/ContentResolver.java",

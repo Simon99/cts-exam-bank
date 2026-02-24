@@ -3,7 +3,8 @@
   "title": "自動曝光模式被覆蓋",
   "difficulty": "medium",
   "domain": "camera",
-  "cts_test": "android.hardware.camera2.cts.CaptureRequestTest#testAeModes",
+  "cts_test": "android.hardware.camera2.cts.CaptureRequestTest#testAeModeAndLock",
+  "cts_module": "CtsCameraTestCases",
   "affected_files": [
     "frameworks/base/core/java/android/hardware/camera2/CaptureRequest.java",
     "frameworks/base/core/java/android/hardware/camera2/impl/CameraMetadataNative.java"

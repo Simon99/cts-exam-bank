@@ -4,7 +4,7 @@
   "difficulty": "hard",
   "domain": "framework",
   "subdomain": "os",
-  "cts_test": "android.os.cts.BundleTest#testNestedBundleParcel",
+  "cts_test": "android.os.cts.BundleTest#testDeepCopy_withNestedBundleAndLazyValues",
   "cts_module": "CtsOsTestCases",
   "affected_files": [
     "frameworks/base/core/java/android/os/BaseBundle.java",

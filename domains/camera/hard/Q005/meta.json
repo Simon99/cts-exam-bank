@@ -3,7 +3,8 @@
   "title": "Multi-Camera Logical Stream 配置失敗",
   "difficulty": "hard",
   "domain": "camera",
-  "cts_test": "android.hardware.camera2.cts.CameraDeviceTest#testMultiCameraLogicalStreaming",
+  "cts_test": "android.hardware.camera2.cts.CameraDeviceTest#testCameraDeviceLogicalPhysicalStreaming",
+  "cts_module": "CtsCameraTestCases",
   "affected_files": [
     "frameworks/av/services/camera/libcameraservice/device3/Camera3Device.cpp",
     "frameworks/av/services/camera/libcameraservice/api2/CameraDeviceClient.cpp",

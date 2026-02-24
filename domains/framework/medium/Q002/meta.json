@@ -4,7 +4,7 @@
   "difficulty": "medium",
   "domain": "framework",
   "subdomain": "content",
-  "cts_test": "android.content.cts.IntentTest#testParcelableExtras",
+  "cts_test": "android.content.cts.IntentTest#testGetParcelableExtra",
   "cts_module": "CtsContentTestCases",
   "affected_files": [
     "frameworks/base/core/java/android/content/Intent.java",

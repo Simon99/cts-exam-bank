@@ -4,7 +4,7 @@
   "difficulty": "hard",
   "domain": "framework",
   "subdomain": "windowmanager",
-  "cts_test": "android.server.wm.lifecycle.ActivityLifecycleTests#testResumedActivityProcessPriority",
+  "cts_test": "android.server.wm.lifecycle.ActivityLifecycleTests#testLaunchAndDestroy",
   "cts_module": "CtsWindowManagerDeviceTestCases",
   "injection_point": "FW-001",
   "affected_files": [

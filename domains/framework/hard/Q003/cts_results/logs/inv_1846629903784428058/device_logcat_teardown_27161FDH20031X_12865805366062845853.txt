@@ -1,0 +1,22 @@
+02-24 07:54:14.540  root   265   265 I logbuffer_pcie0: [  231] D state: 0, LTSSM: 0
+02-24 07:54:14.541  root   265   265 I logbuffer_pcie0: [  232] L0(0x11)
+02-24 07:54:14.566  1000  1097  1172 D DMD     : Flush DMD buffer, size=2098866
+02-24 07:54:14.608  root  1203  1203 W [23:54:14.577339][dhd][wlan]dhd_plat_l1ss_ctrl: Control L1ss RC side 0
+02-24 07:54:14.618  1000   556   691 D DisplayDevice: setDesiredMode 4619827677550801152 {mode=60.00 Hz (60.00 Hz(60.00 Hz)), emitEvent=false, force=false}
+02-24 07:54:14.626  1000   558   694 D hwc-display: setActiveConfigWithConstraints:: PrimaryDisplay config(36) test(0)
+02-24 07:54:14.627  1000   558   694 I hwc-display: [PrimaryDisplay] setActiveConfigWithConstraints: config(36)
+02-24 07:54:14.659  root   242   242 I gtd     : FTS_TS: refresh rate(Hz) changed to 60 from 90
+02-24 07:54:14.695 10108  3716  5286 W MediaProvider: isAppCloneUserPair for user 0: false
+02-24 07:54:14.851 10108  3716  4062 I MediaProvider: Deleted 1 0 0 0 0 0 0 items on external_primary due to com.android.shell
+02-24 07:54:15.174  1000  1518  2036 I commit_sys_config_file: [settings-0-0,21]
+02-24 07:54:15.325  1000  1518  1936 I AppsFilter: interaction: PackageSetting{44c24f com.android.microdroid.empty_payload/10102} -> PackageSetting{f2d5045 com.android.tradefed.utils.wifi/10126} BLOCKED
+02-24 07:54:15.326  1000  1518  1901 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=-1: deletePackageX
+02-24 07:54:15.336  1017   541  4885 I keystore2: system/security/keystore2/src/maintenance.rs:347 - clearNamespace(r#APP, nspace=10126)
+02-24 07:54:15.448  logd  5429  5429 I logd    : start watching /data/system/packages.list ...
+02-24 07:54:15.418  1000  1518  1936 I commit_sys_config_file: [package,18]
+02-24 07:54:15.423  1000  1518  1936 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+02-24 07:54:15.423  1000  1518  1936 D PackageManager: Clear ephemeral installer activity
+02-24 07:54:15.453  logd  5429  5429 I logd    : ReadPackageList, total packages: 131
+02-24 07:54:15.428  1000  1518  4186 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+02-24 07:54:15.431  1000  1518  1936 I ActivityManager: Force stopping com.android.tradefed.utils.wifi appid=10126 user=0: pkg removed
+02-24 07:54:15.440  1000  1518  1933 I commit_sys_config_file: [package-user-0,22]

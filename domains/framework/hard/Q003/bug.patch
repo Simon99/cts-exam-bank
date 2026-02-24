@@ -2,13 +2,14 @@ diff --git a/frameworks/base/core/java/android/content/Intent.java b/frameworks/
 index abc1234..def5678 100644
 --- a/frameworks/base/core/java/android/content/Intent.java
 +++ b/frameworks/base/core/java/android/content/Intent.java
-@@ -12188,7 +12188,7 @@ public class Intent implements Parcelable, Cloneable {
-             mClipData.writeToParcel(out, flags);
-         } else {
-             out.writeInt(0);
-         }
--        out.writeInt(mContentUserHint);
-+        // out.writeInt(mContentUserHint);  // BUG: 用戶提示沒有被序列化
-         out.writeBundle(mExtras);
-
-         if (mOriginalIntent != null) {
+@@ -12155,7 +12155,8 @@ public class Intent implements Parcelable, Cloneable {
+         out.writeString8(mAction);
+         Uri.writeToParcel(out, mData);
+         out.writeString8(mType);
+         out.writeString8(mIdentifier);
+-        out.writeInt(mFlags);
++        // BUG: 寫入時 flags XOR 1，導致序列化/反序列化後 flags 值不一致
++        out.writeInt(mFlags ^ 1);
+         out.writeInt(mExtendedFlags);
+         out.writeString8(mPackage);
+         ComponentName.writeToParcel(mComponent, out);

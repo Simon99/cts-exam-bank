@@ -3,7 +3,8 @@
   "title": "Extension Session 初始化失敗",
   "difficulty": "hard",
   "domain": "camera",
-  "cts_test": "android.hardware.camera2.cts.CameraExtensionSessionTest#testExtensionSession",
+  "cts_test": "android.hardware.camera2.cts.CameraExtensionSessionTest#testBasicExtensionLifecycle",
+  "cts_module": "CtsCameraTestCases",
   "affected_files": [
     "frameworks/base/core/java/android/hardware/camera2/impl/CameraExtensionSessionImpl.java",
     "frameworks/base/core/java/android/hardware/camera2/CameraExtensionCharacteristics.java",

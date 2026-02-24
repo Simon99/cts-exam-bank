@@ -4,7 +4,7 @@
   "difficulty": "hard",
   "domain": "framework",
   "subdomain": "os",
-  "cts_test": "android.content.cts.IntentTest#testParcelableAcrossProcesses",
+  "cts_test": "android.content.cts.IntentTest#testReadFromParcel",
   "cts_module": "CtsContentTestCases",
   "affected_files": [
     "frameworks/base/core/java/android/os/Parcel.java",

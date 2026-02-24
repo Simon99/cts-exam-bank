@@ -3,7 +3,8 @@
   "title": "Multi-Camera 邏輯/物理相機交互錯誤",
   "difficulty": "hard",
   "domain": "camera",
-  "cts_test": "android.hardware.camera2.cts.LogicalCameraDeviceTest#testLogicalCameraPhysicalIds",
+  "cts_test": "android.hardware.camera2.cts.LogicalCameraDeviceTest#testBasicPhysicalRequests",
+  "cts_module": "CtsCameraTestCases",
   "affected_files": [
     "frameworks/base/core/java/android/hardware/camera2/impl/CameraDeviceImpl.java",
     "frameworks/base/core/java/android/hardware/camera2/impl/PhysicalCaptureResultInfo.java",

@@ -4,7 +4,7 @@
   "difficulty": "hard",
   "domain": "framework",
   "subdomain": "os",
-  "cts_test": "android.os.cts.BundleTest#testSparseArrayParcel",
+  "cts_test": "android.os.cts.BundleTest#testGetSparseParcelableArray",
   "cts_module": "CtsOsTestCases",
   "affected_files": [
     "frameworks/base/core/java/android/os/Parcel.java",

@@ -4,7 +4,7 @@
   "difficulty": "medium",
   "domain": "framework",
   "subdomain": "os",
-  "cts_test": "android.os.cts.BundleTest#testLazyUnparcel",
+  "cts_test": "android.os.cts.BundleTest#testLazyValueReserialization",
   "cts_module": "CtsOsTestCases",
   "affected_files": [
     "frameworks/base/core/java/android/os/BaseBundle.java",

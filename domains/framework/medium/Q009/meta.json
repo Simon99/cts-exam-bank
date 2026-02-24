@@ -4,7 +4,7 @@
   "difficulty": "medium",
   "domain": "framework",
   "subdomain": "content",
-  "cts_test": "android.content.cts.IntentTest#testResolveType",
+  "cts_test": "android.content.cts.IntentTest#testResolveType1",
   "cts_module": "CtsContentTestCases",
   "affected_files": [
     "frameworks/base/core/java/android/content/Intent.java",

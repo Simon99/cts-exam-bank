@@ -4,7 +4,7 @@
   "difficulty": "hard",
   "domain": "framework",
   "subdomain": "app",
-  "cts_test": "android.content.cts.PendingIntentTest#testPendingIntentSecurity",
+  "cts_test": "android.app.cts.PendingIntentTest#testWriteToParcel",
   "cts_module": "CtsAppTestCases",
   "affected_files": [
     "frameworks/base/core/java/android/app/PendingIntent.java",

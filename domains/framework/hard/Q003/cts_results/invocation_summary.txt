@@ -1,0 +1,23 @@
+TEXT: 
+============================================
+================= Results ==================
+=============== Consumed Time ==============
+    arm64-v8a CtsContentTestCases: 11s
+    arm64-v8a CtsContentTestCases[instant]: 11s
+Total aggregated tests run time: 23s
+============== TOP 2 Slow Modules ==============
+    arm64-v8a CtsContentTestCases: 0.08 tests/sec [1 tests / 11946 msec]
+    arm64-v8a CtsContentTestCases[instant]: 0.09 tests/sec [1 tests / 11573 msec]
+============== Modules Preparation Times ==============
+    arm64-v8a CtsContentTestCases[instant] => prep = 28861 ms || clean = 9616 ms
+    arm64-v8a CtsContentTestCases => prep = 31039 ms || clean = 9414 ms
+Total preparation time: 59s  ||  Total tear down time: 19s
+=======================================================
+=============== Summary ===============
+Total Run time: 2m 3s
+2/2 modules completed
+Total Tests       : 2
+PASSED            : 0
+FAILED            : 2
+============== End of Results ==============
+============================================
